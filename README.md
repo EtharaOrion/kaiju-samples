@@ -1,23 +1,3 @@
----
-pretty_name: Kaiju
-language:
-- en
-license: cc-by-nc-nd-4.0
-size_categories:
-- n<1K
-task_categories:
-- text-generation
-tags:
-- code-generation
-- library-generation
-- software-engineering
-- agentic-coding
-- multilingual
-- harbor
-- rl-environments
-- evaluation
-viewer: false
----
 
 <p align="center">
   <img src="images/hero.png" alt="Kaiju: 20 tasks, 8 languages, 1 frontier model, 3 stages (draft, lint, and test)" width="880">
