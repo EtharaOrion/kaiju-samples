@@ -1,0 +1,17 @@
+go.opentelemetry.io/collector/internal/grpccompression/snappy/TestRegisteredCompression
+go.opentelemetry.io/collector/internal/grpccompression/snappy/TestInitRegistration
+go.opentelemetry.io/collector/internal/grpccompression/snappy/TestRegisterCompressor
+go.opentelemetry.io/collector/internal/grpccompression/snappy/TestConcurrentWriterReuseDoesNotPanic
+go.opentelemetry.io/collector/internal/grpccompression/snappy/TestConcurrentReaderReuseDoesNotPanic
+go.opentelemetry.io/collector/internal/grpccompression/zstd/TestRegisteredCompression
+go.opentelemetry.io/collector/internal/grpccompression/zstd/TestInitRegistration
+go.opentelemetry.io/collector/internal/grpccompression/zstd/TestRegisterCompressor
+go.opentelemetry.io/collector/internal/grpccompression/zstd/TestCompressReusesPooledEncoder
+go.opentelemetry.io/collector/internal/grpccompression/zstd/TestDecompressReusesPooledDecoder
+go.opentelemetry.io/collector/internal/grpccompression/zstd/TestCompressReturnsEncoderCreationError
+go.opentelemetry.io/collector/internal/grpccompression/zstd/TestEncoderWrapperFinalizeReturnsEncoderToPool
+go.opentelemetry.io/collector/internal/grpccompression/zstd/TestDecompressReturnsDecoderCreationError
+go.opentelemetry.io/collector/internal/grpccompression/zstd/TestDecompressReturnsDecoderResetError
+go.opentelemetry.io/collector/internal/grpccompression/zstd/TestDecoderWrapperFinalizeReturnsDecoderToPool
+go.opentelemetry.io/collector/internal/statusutil/Test_ErrorMsgAndHTTPCodeToStatus
+go.opentelemetry.io/collector/internal/statusutil/TestGetRetryInfo

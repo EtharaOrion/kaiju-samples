@@ -1,0 +1,34 @@
+schema_version = "1.3"
+source = "commit0"
+
+[task]
+name = "commit-0/str0m"
+description = "commit0 from-scratch implementation task for algesten/str0m."
+keywords = ["commit0", "code-generation", "rust", "swe"]
+
+[metadata]
+category = "code-generation"
+difficulty = "hard"
+original_repo = "algesten/str0m"
+instance_id = "commit-0/str0m"
+base_commit = "ee73d9c92af6e632c57f01c0637292cfe98de96b"
+reference_commit = "92fac41e9a97414cd0efa5eb8613354a63230b09"
+src_dir = "src"
+rust_version = "1.85.0"
+test_mode = "official_test_ids"
+n_test_ids = 857
+
+[agent]
+timeout_sec = 1800.0
+
+[verifier]
+timeout_sec = 1800.0
+
+[environment]
+docker_image = "426628337772.dkr.ecr.ap-south-1.amazonaws.com/kaiju_q2:rust_algesten_str0m"
+build_timeout_sec = 1800.0
+os = "linux"
+cpus = 2
+memory_mb = 4096
+network_mode = "public"
+workdir = "/testbed"

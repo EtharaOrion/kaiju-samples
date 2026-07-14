@@ -1,0 +1,34 @@
+schema_version = "1.3"
+source = "commit0"
+
+[task]
+name = "commit-0/erg"
+description = "commit0 from-scratch implementation task for erg-lang/erg."
+keywords = ["commit0", "code-generation", "rust", "swe"]
+
+[metadata]
+category = "code-generation"
+difficulty = "hard"
+original_repo = "erg-lang/erg"
+instance_id = "commit-0/erg"
+base_commit = "9cb0809dd19c673a4cc61f24b929e20a6401b322"
+reference_commit = "b8bc4e33eb23246566f08c9efd3916ebd41c1f3f"
+src_dir = "src"
+rust_version = "stable"
+test_mode = "official_test_ids"
+n_test_ids = 215
+
+[agent]
+timeout_sec = 1800.0
+
+[verifier]
+timeout_sec = 1800.0
+
+[environment]
+docker_image = "426628337772.dkr.ecr.ap-south-1.amazonaws.com/kaiju_q2:rust_erg_lang_erg"
+build_timeout_sec = 1800.0
+os = "linux"
+cpus = 2
+memory_mb = 4096
+network_mode = "public"
+workdir = "/testbed"

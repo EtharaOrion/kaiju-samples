@@ -1,0 +1,34 @@
+schema_version = "1.3"
+source = "commit0"
+
+[task]
+name = "go-acme/lego_go"
+description = "commit0 from-scratch implementation task for go-acme/lego."
+keywords = ["commit0", "code-generation", "go", "swe"]
+
+[metadata]
+category = "code-generation"
+difficulty = "hard"
+original_repo = "go-acme/lego"
+instance_id = "go-acme_lego_go"
+base_commit = "e04925d149abe5558f7a41d775db43e315f32b9c"
+reference_commit = "2cbb0ab36abe206da3cce3d5c40641acc5f4132b"
+src_dir = "."
+go_version = "1.25.0"
+test_mode = "official_test_ids"
+n_test_ids = 2155
+
+[agent]
+timeout_sec = 1800.0
+
+[verifier]
+timeout_sec = 1800.0
+
+[environment]
+docker_image = "426628337772.dkr.ecr.ap-south-1.amazonaws.com/kaiju_q2:lego"
+build_timeout_sec = 1800.0
+os = "linux"
+cpus = 2
+memory_mb = 4096
+network_mode = "public"
+workdir = "/testbed"

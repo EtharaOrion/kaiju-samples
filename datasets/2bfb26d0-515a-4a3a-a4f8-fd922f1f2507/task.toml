@@ -1,0 +1,34 @@
+schema_version = "1.3"
+source = "commit0"
+
+[task]
+name = "grpc/grpc-go_go"
+description = "commit0 from-scratch implementation task for grpc/grpc-go."
+keywords = ["commit0", "code-generation", "go", "swe"]
+
+[metadata]
+category = "code-generation"
+difficulty = "hard"
+original_repo = "grpc/grpc-go"
+instance_id = "grpc_grpc-go_go"
+base_commit = "4bd45e6476999e673def5fefd1bffb9fe57b7c15"
+reference_commit = "b07d146bf8477ff83edcc1429ba720ad06943688"
+src_dir = "."
+go_version = "1.25.0"
+test_mode = "official_test_ids"
+n_test_ids = 68
+
+[agent]
+timeout_sec = 1800.0
+
+[verifier]
+timeout_sec = 1800.0
+
+[environment]
+docker_image = "426628337772.dkr.ecr.ap-south-1.amazonaws.com/kaiju_q2:grpc-go"
+build_timeout_sec = 1800.0
+os = "linux"
+cpus = 2
+memory_mb = 4096
+network_mode = "public"
+workdir = "/testbed"
