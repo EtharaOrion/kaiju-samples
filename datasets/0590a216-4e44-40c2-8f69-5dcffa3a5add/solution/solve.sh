@@ -5,7 +5,7 @@
 set -euo pipefail
 cd /testbed
 if ! git cat-file -e a37e959793a6b7750c0e85a1bb70e632a57b4c75^{commit} 2>/dev/null; then
-  git fetch --depth 1 https://github.com/zahgon/mdns-sd a37e959793a6b7750c0e85a1bb70e632a57b4c75
+  git fetch --depth 1 https://github.com/Zahgon/mdns-sd a37e959793a6b7750c0e85a1bb70e632a57b4c75
 fi
 git reset --hard a37e959793a6b7750c0e85a1bb70e632a57b4c75
 echo "Reset to reference commit a37e959793a6b7750c0e85a1bb70e632a57b4c75"

@@ -5,7 +5,7 @@
 set -euo pipefail
 cd /testbed
 if ! git cat-file -e 15371d5a3a0ce19572d5a5a647a936eb190cac06^{commit} 2>/dev/null; then
-  git fetch --depth 1 https://github.com/zahgon/little-raft 15371d5a3a0ce19572d5a5a647a936eb190cac06
+  git fetch --depth 1 https://github.com/Zahgon/little-raft 15371d5a3a0ce19572d5a5a647a936eb190cac06
 fi
 git reset --hard 15371d5a3a0ce19572d5a5a647a936eb190cac06
 echo "Reset to reference commit 15371d5a3a0ce19572d5a5a647a936eb190cac06"
