@@ -45,16 +45,14 @@ module, **1,278 traces** in total.
 | :------------------ | :--------------------------------------------------------------------------------- |
 | Tasks               | **20** from-scratch library implementation instances                               |
 | Languages           | **Rust (10) · Go (3) · Python (6) · TypeScript (1)**                                                 |
-| Difficulty          | all 20 tasks are **Hard** tier                                                     |
+| Difficulty          | 5 tiers — **Trivial (2) · Easy (3) · Medium (1) · Hard (4) · Expert (10)**         |
 | Model evaluated     | **Claude Opus 4.8** (`claude-opus-4.8`)                                            |
 | Pipeline            | 3 sequential stages — Draft (no feedback) → Lint refine → Test refine              |
 | Agent traces        | **1,278** ATIF v1.7 trajectories (per stage × module), 8–240 per task            |
-| Held-out tests      | **9,249** official test IDs total (17–2,155 per task)                              |
+| Held-out tests      | **11,189** official test IDs total (2–3,191 per task)                              |
 | Reward              | continuous `passed / total ∈ [0, 1]`, written by `tests/test.sh` at grading time   |
 | Task format         | [Harbor](https://github.com/laude-institute/harbor) `task.toml` schema 1.3         |
 | Execution           | pre-built per-task Docker images, 4 CPUs / 8 GB, `workdir /testbed`                |
-
-<!-- TODO(next drop): add aggregate reward tables + figures (per-tier bars, per-language split, cost chart) when verifier result bundles and graphs are added -->
 
 ## Repository layout
 
@@ -63,7 +61,7 @@ kaiju-samples/
 ├── README.md                          # this document
 ├── images/
 │   └── hero.png                       # README banner
-├── datasets/                          # task definitions, one directory per UUID (16)
+├── datasets/                          # task definitions, one directory per UUID (20)
 │   └── <uuid>/
 │       ├── task.toml                  # Harbor schema 1.3 metadata
 │       ├── instruction.md             # the prompt presented to the agent
@@ -72,7 +70,7 @@ kaiju-samples/
 │       └── tests/
 │           ├── test_ids.txt           # official test IDs, one per line
 │           └── test.sh                # verifier entrypoint: run suite, score IDs, write reward
-└── trajectory/                        # Claude Opus 4.8 runs, one directory per UUID (16)
+└── trajectory/                        # Claude Opus 4.8 runs, one directory per UUID (20)
     └── <uuid>/
         ├── <uuid>_v2_report.json      # trace conversion & validation report
         └── <uuid>/<uuid>/agent/
@@ -80,7 +78,7 @@ kaiju-samples/
                 └── trajectory.json    # ATIF v1.7 structured trace of that agent session
 ```
 
-Task UUIDs map **1:1** between `datasets/` and `trajectory/` (16 each). A task's repository,
+Task UUIDs map **1:1** between `datasets/` and `trajectory/` (20 each). A task's repository,
 language, and difficulty are recorded in its `task.toml` (`[metadata]` and `[task].keywords`).
 One-liners to list tasks by language:
 
@@ -117,9 +115,16 @@ grep -l '"python"' datasets/*/task.toml | xargs -n1 dirname | xargs -n1 basename
 
 
 Trace counts scale with the number of modules in the source directory, not with test count — a
-task with a wide module tree (e.g. `opentelemetry-collector`, `gonum`) yields a draft and lint
-trace for nearly every module, while a compact crate (e.g. `remoc`) needs only a handful of
-sessions per stage.
+task with a wide module tree (e.g. `Clarabel.rs`, `etherparse`) yields a draft and lint trace
+for nearly every module, while a compact crate (e.g. `little-raft`, `remoc`) needs only a
+handful of sessions per stage.
+
+<p align="center">
+  <picture>
+    <source media="(prefers-color-scheme: dark)" srcset="images/kaiju_tasks_by_language-dark.png">
+    <img src="images/kaiju_tasks_by_language-light.png" alt="Task distribution by language" width="880">
+  </picture>
+</p>
 
 ## Task design
 
@@ -143,9 +148,9 @@ Each instance is:
 
 The agent receives `instruction.md` (task brief + repository details + embedded specification)
 and works inside `/testbed`. It must implement only the library source under `src_dir` and must
-not modify test files. All 16 tasks in this release are **Hard** tier: large official test-ID
-sets, wide module trees, and non-trivial domain logic (cryptography, network protocols, numeric
-solvers, observability pipelines).
+not modify test files. Tasks span five measured difficulty tiers (Trivial → Expert) and
+non-trivial domain logic: cryptography, network protocols, numeric solvers, state machines,
+and parsers.
 
 ## Three-stage evaluation pipeline
 
@@ -177,6 +182,26 @@ Agent traces are captured **per stage and per module**: a task whose source dire
 modules yields up to `3 × k` trajectory files (`draft__*`, `lint__*`, `test__*`), each a complete
 ATIF v1.7 record of that stage's agent session. Test-refine traces can be very large (up to
 ~430 MB for the `erg` task) because they embed full test-run feedback.
+
+## Results
+
+Mean Stage-3 pass rate for Claude Opus 4.8 across the corpus, by difficulty tier and by
+language. Performance falls off steeply with tier — from saturation on Trivial tasks to
+near-zero on Expert — confirming the difficulty signal is real, not claimed.
+
+<p align="center">
+  <picture>
+    <source media="(prefers-color-scheme: dark)" srcset="images/kaiju_pass_rate_per_tier-dark.png">
+    <img src="images/kaiju_pass_rate_per_tier-light.png" alt="Pass rate by difficulty tier" width="880">
+  </picture>
+</p>
+
+<p align="center">
+  <picture>
+    <source media="(prefers-color-scheme: dark)" srcset="images/kaiju_pass_rate_per_language-dark.png">
+    <img src="images/kaiju_pass_rate_per_language-light.png" alt="Pass rate by language" width="880">
+  </picture>
+</p>
 
 ## Dataset structure
 
@@ -344,24 +369,24 @@ import json, glob, tomllib, collections
 langs, tests = collections.Counter(), 0
 for p in glob.glob("datasets/*/task.toml"):
     m = tomllib.load(open(p, "rb"))
-    kw = [k for k in m["task"]["keywords"] if k in ("rust", "go", "python")]
+    kw = [k for k in m["task"]["keywords"] if k in ("rust", "go", "python", "typescript")]
     langs[kw[0]] += 1
     tests += int(m["metadata"]["n_test_ids"])
 
 traces = len(glob.glob("trajectory/*/*/*/agent/*/trajectory.json"))
 print(dict(langs), "| test IDs:", tests, "| traces:", traces)
-# -> {'rust': 9, 'go': 5, 'python': 2} | test IDs: 9249 | traces: 4306
+# -> {'rust': 10, 'go': 3, 'python': 6, 'typescript': 1} | test IDs: 11189 | traces: 1278
 ```
 
 ## Verification and quality assurance
 
 Every instance passed a 24-criterion QC protocol prior to inclusion:
 
-- **Structure.** `datasets/` and `trajectory/` match **1:1 by UUID** (16 each); `task.toml`,
+- **Structure.** `datasets/` and `trajectory/` match **1:1 by UUID** (20 each); `task.toml`,
   `instruction.md`, `solution/solve.sh`, `tests/test.sh`, `tests/test_ids.txt` present in every
   task; every trajectory directory carries its `<uuid>_v2_report.json` and per-module ATIF traces.
 - **Trace fidelity.** Each `_v2_report.json` records the conversion from the harness's native
-  logs: all 4,306 discovered sessions converted (`converted == units` on every task, zero
+  logs: all 1,278 discovered sessions converted (`converted == units` on every task, zero
   `with_errors`), with edit parse rates of 0.91–1.00 where search-replace edits were present.
 - **Oracle ceiling.** `solution/solve.sh` restores `reference_commit`, which passes the full
   official ID set — `reward = 1.0` is attainable on every task.
@@ -374,8 +399,8 @@ Every instance passed a 24-criterion QC protocol prior to inclusion:
     tier calibration.
   - **Verifier outputs not bundled.** Per-stage rewards must be reproduced by running
     `tests/test.sh` against a stage's submission; they are not shipped as files in this drop.
-  - **All-Hard composition.** This release contains only Hard-tier tasks; Easy/Medium tiers are
-    not represented.
+  - **Expert-heavy composition.** Half the corpus (10 of 20) sits in the Expert tier, where
+    mean pass rate is near zero; per-tier means on small n carry real variance.
   - **Trace size skew.** Test-stage traces embed full test feedback and can reach ~430 MB
     (`erg`); plan storage accordingly (~32 GB for the full clone via Git LFS).
   - **Contamination.** The underlying repositories are public; whether specific code appeared in
