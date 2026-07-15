@@ -382,24 +382,7 @@ Every instance passed a 24-criterion QC protocol prior to inclusion:
 - **Hugging Face**: [`ethara/kaiju-samples`](https://huggingface.co/datasets/ethara/kaiju-samples)
 - **Format**: Harbor task directories (`datasets/`) + ATIF v1.7 trajectories (`trajectory/`),
   large files via Git LFS
-- **License**: MIT (this repository)
-
-## Code availability
-
-The evaluation pipeline and curation scripts are maintained at
-[github.com/Ethara-Ai/kaiju](https://github.com/Ethara-Ai/kaiju).
-
-## Citation
-
-```bibtex
-@misc{kaiju2026,
-  title={Kaiju: A Dataset for Evaluating AI Code-Generation on Library Synthesis from Specifications},
-  author={Ethara AI},
-  year={2026},
-  howpublished={\url{https://huggingface.co/datasets/ethara/kaiju-samples}},
-  note={Harbor-format library-generation tasks with full per-stage agent trajectories.}
-}
-```
+- **License**: MIT
 
 ## License
 
