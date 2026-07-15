@@ -121,7 +121,7 @@ handful of sessions per stage.
 
 <p align="center">
   <picture>
-    <source media="(prefers-color-scheme: dark)" srcset="images/kaiju_tasks_by_language-dark.png">
+    <source media="(prefers-color-scheme: light)" srcset="images/kaiju_tasks_by_language-dark.png">
     <img src="images/kaiju_tasks_by_language-light.png" alt="Task distribution by language" width="880">
   </picture>
 </p>
