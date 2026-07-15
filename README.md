@@ -29,10 +29,10 @@ benchmarks localize a fix inside a working codebase, Kaiju starts from an empty 
 the whole organism.
 
 Every instance is evaluated through a **three-stage sequential pipeline** (Draft → Lint refine →
-Test refine). This release ships **16 tasks** across **3 languages (Rust, Go, Python)** in
+Test refine). This release ships **20 tasks** across **4 languages (Rust, Go, Python, TypeScript)** in
 [Harbor](https://github.com/laude-institute/harbor) task format (schema 1.3), together with the
 **complete agent trajectories of Claude Opus 4.8** — one ATIF v1.7 trace per pipeline stage per
-module, **4,306 traces** in total.
+module, **1,278 traces** in total.
 
 > **This is a quality-controlled release of the Kaiju corpus.** The task format (Harbor
 > `task.toml` schema 1.3), the trajectory format (ATIF v1.7), and the scoring harness are
@@ -43,12 +43,12 @@ module, **4,306 traces** in total.
 
 | Property            | Value                                                                              |
 | :------------------ | :--------------------------------------------------------------------------------- |
-| Tasks               | **16** from-scratch library implementation instances                               |
-| Languages           | **Rust (9) · Go (5) · Python (2)**                                                 |
-| Difficulty          | all 16 tasks are **Hard** tier                                                     |
+| Tasks               | **20** from-scratch library implementation instances                               |
+| Languages           | **Rust (10) · Go (3) · Python (6) · TypeScript (1)**                                                 |
+| Difficulty          | all 20 tasks are **Hard** tier                                                     |
 | Model evaluated     | **Claude Opus 4.8** (`claude-opus-4.8`)                                            |
 | Pipeline            | 3 sequential stages — Draft (no feedback) → Lint refine → Test refine              |
-| Agent traces        | **4,306** ATIF v1.7 trajectories (per stage × module), 9–1,580 per task            |
+| Agent traces        | **1,278** ATIF v1.7 trajectories (per stage × module), 8–240 per task            |
 | Held-out tests      | **9,249** official test IDs total (17–2,155 per task)                              |
 | Reward              | continuous `passed / total ∈ [0, 1]`, written by `tests/test.sh` at grading time   |
 | Task format         | [Harbor](https://github.com/laude-institute/harbor) `task.toml` schema 1.3         |
@@ -85,32 +85,36 @@ language, and difficulty are recorded in its `task.toml` (`[metadata]` and `[tas
 One-liners to list tasks by language:
 
 ```bash
-grep -l '"rust"'   datasets/*/task.toml | xargs -n1 dirname | xargs -n1 basename   # 9 Rust
-grep -l '"go"'     datasets/*/task.toml | xargs -n1 dirname | xargs -n1 basename   # 5 Go
-grep -l '"python"' datasets/*/task.toml | xargs -n1 dirname | xargs -n1 basename   # 2 Python
+grep -l '"rust"'   datasets/*/task.toml | xargs -n1 dirname | xargs -n1 basename   # 10 Rust
+grep -l '"go"'     datasets/*/task.toml | xargs -n1 dirname | xargs -n1 basename   # 3 Go
+grep -l '"python"' datasets/*/task.toml | xargs -n1 dirname | xargs -n1 basename   # 6 Python
 ```
 
 ## Task inventory
 
 | Task (UUID prefix) | Upstream project | Language | Test IDs | Agent traces |
-| :----------------- | :--------------- | :------- | -------: | -----------: |
-| `70e7561f` | go-acme/lego                            | Go     | 2,155 |   103 |
-| `061e0bde` | pipefunc                                | Python | 1,441 |   132 |
-| `712a3f90` | etherparse                              | Rust   | 1,123 |   212 |
-| `36f43a03` | gonum                                   | Go     | 1,057 | 1,580 |
-| `9998e98b` | str0m                                   | Rust   |   857 |    58 |
-| `6ce3f6af` | orion                                   | Rust   |   836 |    63 |
-| `70967708` | frost-core                              | Rust   |   577 |    78 |
-| `96fc09ec` | distribution/distribution               | Go     |   309 |    11 |
-| `22975479` | erg                                     | Rust   |   215 |   150 |
-| `ba9106bd` | remoc                                   | Rust   |   200 |     9 |
-| `6ceca035` | clarabel                                | Rust   |   178 |   240 |
-| `acb7e739` | nexosim                                 | Rust   |   161 |    23 |
-| `2bfb26d0` | grpc/grpc-go                            | Go     |    68 |    47 |
-| `cce1e47b` | jsonrpc-core                            | Rust   |    32 |    18 |
-| `8e56d356` | etl-parser                              | Python |    23 |    32 |
-| `0077312e` | open-telemetry/opentelemetry-collector  | Go     |    17 | 1,550 |
-| **Total**  | **16 tasks**                            | 3 langs | **9,249** | **4,306** |
+|---|---|---|---:|---:|
+| `36e9ad11` | pytransitions/transitions                | Python | 3,191 |    29 |
+| `70e7561f` | go-acme/lego                             | Go     | 2,155 |   103 |
+| `061e0bde` | pipefunc/pipefunc                        | Python | 1,441 |   132 |
+| `712a3f90` | JulianSchmid/etherparse                  | Rust   | 1,123 |   212 |
+| `6ce3f6af` | orion-rs/orion                           | Rust   |   836 |    63 |
+| `70967708` | ZcashFoundation/frost                    | Rust   |   577 |    78 |
+| `117c2b9a` | jurismarches/luqum                       | Python |   385 |    35 |
+| `96fc09ec` | distribution/distribution                | Go     |   309 |    11 |
+| `22975479` | erg-lang/erg                             | Rust   |   215 |   150 |
+| `ba9106bd` | remoc-rs/remoc                           | Rust   |   200 |     9 |
+| `6ceca035` | oxfordcontrol/Clarabel.rs                | Rust   |   178 |   240 |
+| `acb7e739` | asynchronics/nexosim                     | Rust   |   161 |    23 |
+| `5dcec30e` | isidentical/refactor                     | Python |   139 |    17 |
+| `01c3b086` | wq2012/SpectralCluster                   | Python |    77 |    25 |
+| `2bfb26d0` | grpc/grpc-go                             | Go     |    68 |    47 |
+| `4ed62c04` | szimek/signature_pad                     | Typescript |    60 |    14 |
+| `cce1e47b` | paritytech/jsonrpc                       | Rust   |    32 |    18 |
+| `8e56d356` | airbus-cert/etl-parser                   | Python |    23 |    32 |
+| `a702d200` | b23r0/rust-raknet                        | Rust   |    17 |    32 |
+| `b193a4d1` | andreev-io/little-raft                   | Rust   |     2 |     8 |
+
 
 Trace counts scale with the number of modules in the source directory, not with test count — a
 task with a wide module tree (e.g. `opentelemetry-collector`, `gonum`) yields a draft and lint
