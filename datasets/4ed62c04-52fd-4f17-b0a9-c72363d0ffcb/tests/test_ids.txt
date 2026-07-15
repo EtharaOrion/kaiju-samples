@@ -1,0 +1,60 @@
+tests/point.test.ts > errors throws error when coords are invalid
+tests/point.test.ts > errors convert string x and y coords to number
+tests/point.test.ts > #distanceTo returns distance to other point
+tests/point.test.ts > #equals returns true if points have the same attributes
+tests/point.test.ts > #equals returns false if points have the different 'x' attributes
+tests/point.test.ts > #equals returns false if points have the different 'y' attributes
+tests/point.test.ts > #equals returns false if points have the different 'time' attributes
+tests/point.test.ts > #equals returns false if points have the different 'pressure' attributes
+tests/point.test.ts > #velocityFrom returns 0 if times are equal
+tests/point.test.ts > #velocityFrom returns velocity if times are different
+tests/bezier.test.ts > .fromPoints returns a new Bézier curve
+tests/bezier.test.ts > .fromPoints returns a new Bézier when points are equal and division by zero may occur
+tests/bezier.test.ts > #length returns approximated length
+tests/imports.test.ts > ESM relative import paths in src use .js extension all relative import/export specifiers end with .js
+tests/signature_pad.test.ts > #constructor returns an instance of SignaturePad
+tests/signature_pad.test.ts > #constructor allows to set 'throttle' to 0
+tests/signature_pad.test.ts > #constructor allows to set 'minDistance' to 0
+tests/signature_pad.test.ts > #constructor uses fallback values for options with explicit 'undefined'
+tests/signature_pad.test.ts > #constructor disables user selection and touch actions on the canvas
+tests/signature_pad.test.ts > #off resets canvas styles for touch action and user selection
+tests/signature_pad.test.ts > #redraw redraws the canvas
+tests/signature_pad.test.ts > #redraw redraws the dataurl with options
+tests/signature_pad.test.ts > #clear clears data structures
+tests/signature_pad.test.ts > #clear clear should apply erase option to the canvas context
+tests/signature_pad.test.ts > #isEmpty returns true if pad is empty
+tests/signature_pad.test.ts > #isEmpty returns false if pad is not empty
+tests/signature_pad.test.ts > #fromData clears the canvas
+tests/signature_pad.test.ts > #fromData does not clear the canvas
+tests/signature_pad.test.ts > #fromData uses point group options to calculate line
+tests/signature_pad.test.ts > #toData returns JSON with point groups
+tests/signature_pad.test.ts > #toDataURL returns PNG image by default
+tests/signature_pad.test.ts > #toDataURL returns PNG image in data URL format
+tests/signature_pad.test.ts > #toDataURL returns SVG image in data URL format
+tests/signature_pad.test.ts > #toDataURL returns SVG image in data URL format with high DPI
+tests/signature_pad.test.ts > #toDataURL returns SVG image with backgroundColor
+tests/signature_pad.test.ts > #toDataURL typescript error when not SVG with SVGoptions
+tests/signature_pad.test.ts > #toSVG returns SVG image
+tests/signature_pad.test.ts > #toSVG returns SVG image with high DPI
+tests/signature_pad.test.ts > #toSVG returns SVG image with backgroundColor
+tests/signature_pad.test.ts > user interactions allows user to paint on the pad
+tests/signature_pad.test.ts > user interactions different pointer id events are ignored
+tests/signature_pad.test.ts > user interactions different pointer id events are respected if sequential
+tests/signature_pad.test.ts > user interactions call endStroke on pointerup outside canvas
+tests/signature_pad.test.ts > user interactions call endStroke on pointerup outside canvas when in an external window
+tests/signature_pad.test.ts > user interactions calls endStroke on pointercancel
+tests/signature_pad.test.ts > user interactions allows a new stroke after pointercancel
+tests/signature_pad.test.ts > touch events. the event should not be prevented.
+tests/signature_pad.test.ts > touch events. the event should be prevented.
+tests/signature_pad.test.ts > touch events. calls endStroke on touchcancel
+tests/signature_pad.test.ts > touch events. allows a new stroke after touchcancel
+tests/signature_pad.test.ts > Signature events. beginStroke. no writing to the canvas.
+tests/signature_pad.test.ts > Signature events. beginStroke. writes to the canvas.
+tests/signature_pad.test.ts > Signature events. beforeUpdateStroke. no writing to the canvas.
+tests/signature_pad.test.ts > Signature events. beforeUpdateStroke. writes to the canvas.
+tests/signature_pad.test.ts > Signature events. afterUpdateStroke. no writing to the canvas.
+tests/signature_pad.test.ts > Signature events. afterUpdateStroke. writes to the canvas.
+tests/signature_pad.test.ts > Signature events. endStroke. no writing to the canvas.
+tests/signature_pad.test.ts > Signature events. endStroke. writes to the canvas.
+tests/signature_pad.test.ts > Signature events. use document as EventTarget. the event should be dispatched.
+tests/signature_pad.test.ts > Signature events. cancel beginStroke.
