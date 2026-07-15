@@ -1,10 +1,9 @@
-
 <p align="center">
-  <img src="images/hero.png" alt="Kaiju: 20 tasks, 8 languages, 1 frontier model, 3 stages (draft, lint, and test)" width="880">
+  <img src="images/hero.png" alt="Kaiju: library generation from scratch — 3-stage pipeline (draft, lint, and test), Claude Opus 4.8" width="880">
 </p>
 
 <p align="center">
-  <strong>From-scratch library implementation tasks in Harbor format, with full agent trajectories and stage-wise rewards.</strong>
+  <strong>From-scratch library implementation tasks in Harbor format, with the complete Claude Opus 4.8 agent trajectories for every pipeline stage.</strong>
 </p>
 
 <p align="center">
@@ -15,7 +14,7 @@
 </p>
 
 <p align="center"><sub>
-  <a href="#summary">Summary</a> · <a href="#repository-layout">Layout</a> · <a href="#task-design">Task design</a> · <a href="#three-stage-evaluation-pipeline">Pipeline</a> · <a href="#results">Results</a> · <a href="#dataset-structure">Dataset</a> · <a href="#trajectory-structure">Trajectories</a> · <a href="#scoring-methodology">Scoring</a> · <a href="#usage-notes">Usage</a> · <a href="#verification-and-quality-assurance">Verification</a>
+  <a href="#summary">Summary</a> · <a href="#repository-layout">Layout</a> · <a href="#task-inventory">Inventory</a> · <a href="#task-design">Task design</a> · <a href="#three-stage-evaluation-pipeline">Pipeline</a> · <a href="#dataset-structure">Dataset</a> · <a href="#trajectory-structure">Trajectories</a> · <a href="#scoring-methodology">Scoring</a> · <a href="#usage-notes">Usage</a> · <a href="#verification-and-quality-assurance">Verification</a>
 </sub></p>
 
 # Kaiju: Library Generation from Scratch
@@ -30,75 +29,93 @@ benchmarks localize a fix inside a working codebase, Kaiju starts from an empty 
 the whole organism.
 
 Every instance is evaluated through a **three-stage sequential pipeline** (Draft → Lint refine →
-Test refine), producing a continuous stage-wise reward suitable for both benchmarking and
-RL-style training signal. This release ships each task in
-[Harbor](https://github.com/laude-institute/harbor) task format (schema 1.3) together with the
-**complete agent trajectories** of the evaluated model, per stage and per module, plus the
-verifier evidence for every run.
+Test refine). This release ships **16 tasks** across **3 languages (Rust, Go, Python)** in
+[Harbor](https://github.com/laude-institute/harbor) task format (schema 1.3), together with the
+**complete agent trajectories of Claude Opus 4.8** — one ATIF v1.7 trace per pipeline stage per
+module, **4,306 traces** in total.
 
-This drop covers **20 tasks** spanning multiple programming languages (Python, Java, Go, Rust,
-TypeScript, JavaScript, C, C++), with baseline runs from **Claude Opus 4.8**.
-
-<!-- TODO(full release): regenerate the headline chart from the final 20-task results -->
-![Stage-wise pass rate per task — Claude Opus 4.8](images/chart_combined.png)
-
-> **This is a representative, quality-controlled release of the Kaiju corpus.** The task format
-> (Harbor, `task.toml` schema 1.3), the trajectory format (ATIF v1.7), and the scoring are
+> **This is a quality-controlled release of the Kaiju corpus.** The task format (Harbor
+> `task.toml` schema 1.3), the trajectory format (ATIF v1.7), and the scoring harness are
 > identical to the production deliveries. All instances passed a 24-criterion quality-assurance
 > protocol prior to inclusion.
 
 ## Summary
 
-<!-- TODO(full release): fill exact task counts, language split, tier split, totals -->
+| Property            | Value                                                                              |
+| :------------------ | :--------------------------------------------------------------------------------- |
+| Tasks               | **16** from-scratch library implementation instances                               |
+| Languages           | **Rust (9) · Go (5) · Python (2)**                                                 |
+| Difficulty          | all 16 tasks are **Hard** tier                                                     |
+| Model evaluated     | **Claude Opus 4.8** (`claude-opus-4.8`)                                            |
+| Pipeline            | 3 sequential stages — Draft (no feedback) → Lint refine → Test refine              |
+| Agent traces        | **4,306** ATIF v1.7 trajectories (per stage × module), 9–1,580 per task            |
+| Held-out tests      | **9,249** official test IDs total (17–2,155 per task)                              |
+| Reward              | continuous `passed / total ∈ [0, 1]`, written by `tests/test.sh` at grading time   |
+| Task format         | [Harbor](https://github.com/laude-institute/harbor) `task.toml` schema 1.3         |
+| Execution           | pre-built per-task Docker images, 4 CPUs / 8 GB, `workdir /testbed`                |
 
-| Property            | Value                                                                             |
-| :------------------ | :-------------------------------------------------------------------------------- |
-| Tasks               | **20** from-scratch library implementation instances                              |
-| Languages           | Python, Java, Go, Rust, TypeScript, JavaScript, C, C++ *(final split: TBD)*       |
-| Difficulty tiers    | 3 (Easy / Medium / Hard), assigned from structural + behavioral complexity        |
-| Model evaluated     | **Claude Opus 4.8** (`claude-opus-4.8`)                                           |
-| Pipeline            | 3 sequential stages — Draft (no feedback) → Lint refine → Test refine             |
-| Reward              | continuous `passed / total ∈ [0, 1]` per stage, in `verifier/reward.json`         |
-| Held-out tests      | official commit-pinned test-ID sets, hundreds–thousands per task *(total: TBD)*   |
-| Task format         | [Harbor](https://github.com/laude-institute/harbor) `task.toml` schema 1.3        |
-| Trajectory format   | ATIF v1.7 (`trajectory.json`), one trace per pipeline stage × module              |
-| Execution           | pre-built per-task Docker images, 4 CPUs / 8 GB, `workdir /testbed`               |
-
-**Headline metrics** (see [Scoring methodology](#scoring-methodology) for the reward definition):
-
-<!-- TODO(full release): replace with aggregate numbers over all 20 tasks -->
-
-| Metric                                     | Value |
-| :----------------------------------------- | ----: |
-| Claude Opus 4.8 **mean Stage 3 pass rate** |   TBD |
-| Claude Opus 4.8 **resolved@S3** (all tests pass) | TBD |
-| Mean agent cost per task (USD)             |   TBD |
-| Mean wall-clock per task (all 3 stages)    |   TBD |
+<!-- TODO(next drop): add aggregate reward tables + figures (per-tier bars, per-language split, cost chart) when verifier result bundles and graphs are added -->
 
 ## Repository layout
 
 ```
-Kaiju/
+kaiju-samples/
 ├── README.md                          # this document
-├── images/                            # figures
-│   ├── hero.png                       # README banner
-│   └── chart_combined.png             # stage-wise pass rates across the corpus
-├── dataset/                           # task definitions, one directory per UUID (20)
-│   └── <uuid>/ ...                    # Harbor task: task.toml, instruction.md, solution/, tests/
-└── trajectories/                      # model runs, one directory per instance (20)
-    ├── <instance>_dataset/
-    │   └── claude-opus-4.8/ ...       # results.json, agent/ traces, verifier/ reward
-    └── <instance>_dataset_v2_report.json   # trajectory conversion & validation report
+├── images/
+│   └── hero.png                       # README banner
+├── datasets/                          # task definitions, one directory per UUID (16)
+│   └── <uuid>/
+│       ├── task.toml                  # Harbor schema 1.3 metadata
+│       ├── instruction.md             # the prompt presented to the agent
+│       ├── solution/
+│       │   └── solve.sh               # oracle: fetch + hard-reset to the reference commit
+│       └── tests/
+│           ├── test_ids.txt           # official test IDs, one per line
+│           └── test.sh                # verifier entrypoint: run suite, score IDs, write reward
+└── trajectory/                        # Claude Opus 4.8 runs, one directory per UUID (16)
+    └── <uuid>/
+        ├── <uuid>_v2_report.json      # trace conversion & validation report
+        └── <uuid>/<uuid>/agent/
+            └── <stage>__<module>/     # stage ∈ {draft, lint, test}
+                └── trajectory.json    # ATIF v1.7 structured trace of that agent session
 ```
 
-Task UUIDs under `dataset/` map **1:1** to instance directories under `trajectories/`. Each
-instance's repository, language, and difficulty are recorded in its `task.toml`
-(`[metadata] original_repo / instance_id / difficulty`). One-liner to list instances by language:
+Task UUIDs map **1:1** between `datasets/` and `trajectory/` (16 each). A task's repository,
+language, and difficulty are recorded in its `task.toml` (`[metadata]` and `[task].keywords`).
+One-liners to list tasks by language:
 
 ```bash
-grep -l '"rust"' dataset/*/task.toml | xargs -n1 dirname | xargs -n1 basename
-grep -l '"typescript"' dataset/*/task.toml | xargs -n1 dirname | xargs -n1 basename
+grep -l '"rust"'   datasets/*/task.toml | xargs -n1 dirname | xargs -n1 basename   # 9 Rust
+grep -l '"go"'     datasets/*/task.toml | xargs -n1 dirname | xargs -n1 basename   # 5 Go
+grep -l '"python"' datasets/*/task.toml | xargs -n1 dirname | xargs -n1 basename   # 2 Python
 ```
+
+## Task inventory
+
+| Task (UUID prefix) | Upstream project | Language | Test IDs | Agent traces |
+| :----------------- | :--------------- | :------- | -------: | -----------: |
+| `70e7561f` | go-acme/lego                            | Go     | 2,155 |   103 |
+| `061e0bde` | pipefunc                                | Python | 1,441 |   132 |
+| `712a3f90` | etherparse                              | Rust   | 1,123 |   212 |
+| `36f43a03` | gonum                                   | Go     | 1,057 | 1,580 |
+| `9998e98b` | str0m                                   | Rust   |   857 |    58 |
+| `6ce3f6af` | orion                                   | Rust   |   836 |    63 |
+| `70967708` | frost-core                              | Rust   |   577 |    78 |
+| `96fc09ec` | distribution/distribution               | Go     |   309 |    11 |
+| `22975479` | erg                                     | Rust   |   215 |   150 |
+| `ba9106bd` | remoc                                   | Rust   |   200 |     9 |
+| `6ceca035` | clarabel                                | Rust   |   178 |   240 |
+| `acb7e739` | nexosim                                 | Rust   |   161 |    23 |
+| `2bfb26d0` | grpc/grpc-go                            | Go     |    68 |    47 |
+| `cce1e47b` | jsonrpc-core                            | Rust   |    32 |    18 |
+| `8e56d356` | etl-parser                              | Python |    23 |    32 |
+| `0077312e` | open-telemetry/opentelemetry-collector  | Go     |    17 | 1,550 |
+| **Total**  | **16 tasks**                            | 3 langs | **9,249** | **4,306** |
+
+Trace counts scale with the number of modules in the source directory, not with test count — a
+task with a wide module tree (e.g. `opentelemetry-collector`, `gonum`) yields a draft and lint
+trace for nearly every module, while a compact crate (e.g. `remoc`) needs only a handful of
+sessions per stage.
 
 ## Task design
 
@@ -115,30 +132,16 @@ Each instance is:
   are preserved; the agent must not rename them.
 - **Paired with a reference commit** (`reference_commit`): the upstream working implementation,
   used as the oracle ceiling (`solution/solve.sh` restores it).
-- **Containerized**: a pre-built Docker image per task pins the language runtime, dependencies,
-  and test toolchain (`[environment]` in `task.toml`).
+- **Containerized**: a pre-built Docker image per task pins the language toolchain, dependencies,
+  and test runner (`[environment]` in `task.toml`).
 - **Graded against official test IDs**: the exact file-level or assertion-level test identifiers
   in `tests/test_ids.txt` — the agent never sees the verifier.
 
 The agent receives `instruction.md` (task brief + repository details + embedded specification)
 and works inside `/testbed`. It must implement only the library source under `src_dir` and must
-not modify test files.
-
-### Difficulty assignment
-
-Instances are labeled **Easy / Medium / Hard** in `task.toml.metadata.difficulty`, from:
-
-- Number of files affected (structural complexity)
-- Size of the official test-ID set (behavioral complexity)
-- Correlation with observed model performance across the corpus
-
-<!-- TODO(full release): fill final tier distribution -->
-
-| Tier   | Tasks | Mean Opus 4.8 S3 pass rate |
-| :----- | ----: | -------------------------: |
-| Easy   |   TBD |                        TBD |
-| Medium |   TBD |                        TBD |
-| Hard   |   TBD |                        TBD |
+not modify test files. All 16 tasks in this release are **Hard** tier: large official test-ID
+sets, wide module trees, and non-trivial domain logic (cryptography, network protocols, numeric
+solvers, observability pipelines).
 
 ## Three-stage evaluation pipeline
 
@@ -168,39 +171,15 @@ flowchart LR
 
 Agent traces are captured **per stage and per module**: a task whose source directory spans `k`
 modules yields up to `3 × k` trajectory files (`draft__*`, `lint__*`, `test__*`), each a complete
-ATIF v1.7 trace of that stage's agent session.
-
-## Results
-
-<!-- TODO(full release): insert final aggregate tables + figures (per-tier bars, per-language split, cost chart) -->
-<!-- The table below shows real values from four sample instances, for format illustration. -->
-
-Per-instance stage-wise pass rates for Claude Opus 4.8 (illustrative sample of the corpus):
-
-| Instance       | Language | Tests | S1 pass | S2 pass | S3 pass | Resolved | Cost (USD) |
-| :------------- | :------- | ----: | ------: | ------: | ------: | :------: | ---------: |
-| `rust-signals` | Rust     |   155 |  0.0000 |  0.4452 |  1.0000 |    ✓     |      25.64 |
-| `rust-raknet`  | Rust     |    35 |  0.0000 |  0.4286 |  0.4857 |    ✗     |      18.52 |
-| `little-raft`  | Rust     |     2 |  0.5000 |  0.5000 |  0.5000 |    ✗     |       6.55 |
-| `mdns-sd`      | Rust     |    80 |  0.0000 |  0.2625 |  0.0000 |    ✗     |      66.01 |
-
-Two properties of the reward design show up immediately:
-
-- **Monotone recovery across stages is common but not guaranteed.** Lint and test feedback lift
-  most drafts substantially (`rust-signals`: 0.00 → 0.45 → 1.00), but a stage can also regress
-  when a late refactor breaks previously passing behavior (`mdns-sd`: 0.26 → 0.00 at S3).
-- **The continuous reward stays informative where a binary metric saturates at zero.** Strict
-  resolved@S3 (every official test passing) is rare on Hard instances; the fractional pass rate
-  preserves the training signal.
-
-<!-- TODO(full release): images/reward_by_tier.png, images/cost_by_tier.png, per-language chart -->
+ATIF v1.7 record of that stage's agent session. Test-refine traces can be very large (up to
+~430 MB for the `erg` task) because they embed full test-run feedback.
 
 ## Dataset structure
 
-Each task lives under `dataset/<uuid>/` and is fully self-contained:
+Each task lives under `datasets/<uuid>/` and is fully self-contained:
 
 ```
-dataset/<uuid>/
+datasets/<uuid>/
 ├── task.toml                 # Harbor schema 1.3: task, metadata, agent, verifier, environment
 ├── instruction.md            # the prompt presented to the agent (brief + spec)
 ├── solution/
@@ -218,15 +197,15 @@ dataset/<uuid>/
 | *(root)*        | `source`                           | Task provenance (`"commit0"`)                                      |
 | `[task]`        | `name`, `description`, `keywords`  | Human-readable identity + tags (language, `swe`, `code-generation`) |
 | `[metadata]`    | `uuid`                             | Task UUID; matches the directory name                              |
-| `[metadata]`    | `category` / `difficulty`          | `"code-generation"` / `easy` \| `medium` \| `hard`                 |
-| `[metadata]`    | `original_repo` / `instance_id`    | Upstream GitHub repo / instance identifier (e.g. `commit-0/univer`) |
+| `[metadata]`    | `category` / `difficulty`          | `"code-generation"` / `"hard"` (all tasks in this release)         |
+| `[metadata]`    | `original_repo` / `instance_id`    | Upstream GitHub repo / instance identifier                         |
 | `[metadata]`    | `base_commit`                      | 40-char SHA of the skeleton (stubbed) commit                       |
 | `[metadata]`    | `reference_commit`                 | 40-char SHA of the working reference implementation                |
 | `[metadata]`    | `src_dir`                          | Source directory the agent must implement                          |
-| `[metadata]`    | `node_version` *(per-language)*    | Pinned runtime version                                             |
+| `[metadata]`    | *(runtime pin)*                    | Language-specific runtime version key                              |
 | `[metadata]`    | `test_mode` / `n_test_ids`         | `"official_test_ids"` / size of the graded ID set                  |
-| `[agent]`       | `timeout_sec`                      | Per-stage agent budget (1800 s)                                    |
-| `[verifier]`    | `timeout_sec`                      | Verifier budget (1800 s)                                           |
+| `[agent]`       | `timeout_sec`                      | Per-stage agent budget                                             |
+| `[verifier]`    | `timeout_sec`                      | Verifier budget                                                    |
 | `[environment]` | `docker_image`                     | Pre-built per-task image URI                                       |
 | `[environment]` | `cpus` / `memory_mb`               | Container resources (4 / 8192)                                     |
 | `[environment]` | `network_mode` / `workdir`         | Network policy / `"/testbed"`                                      |
@@ -237,51 +216,29 @@ dataset/<uuid>/
 the expected IDs from `tests/test_ids.txt` against the report, and writes:
 
 ```json
-// /logs/verifier/reward.json
+// /logs/verifier/reward.json (produced at grading time)
 {"reward": 0.4857, "resolved": 0, "passed": 17, "total": 35}
 ```
 
-- IDs are **file-level** (`path/to/foo.test.ts`) or **assertion-level**
+- IDs are **file-level** (`path/to/foo_test.go`) or **assertion-level**
   (`path/to/foo.test.ts > <full name>`), matching commit0 conventions.
 - `reward = passed / total`; `resolved = 1` iff every expected ID passes.
 - The runner's exit code is never the grading channel — the reward file is.
 
 ## Trajectory structure
 
-Each instance's runs live under `trajectories/<instance>_dataset/`:
+Each task's Claude Opus 4.8 run lives under `trajectory/<uuid>/`:
 
 ```
-trajectories/<instance>_dataset/
-└── claude-opus-4.8/
-    ├── results.json                       # run config + per-stage metrics (time, cost, pass rate)
-    ├── agent/
-    │   └── <stage>__<module>/             # stage ∈ {draft, lint, test}; one dir per module
-    │       └── trajectory.json            # ATIF v1.7 structured trace of the agent session
-    └── verifier/
-        └── reward.json                    # stage-wise pass rates + resolved flags
-
-trajectories/<instance>_dataset_v2_report.json   # conversion & validation report for the traces
-```
-
-### `results.json` fields
-
-| Field                              | Description                                                         |
-| :--------------------------------- | :------------------------------------------------------------------ |
-| `model` / `model_short`            | Evaluated model id (`claude-opus-4.8`)                              |
-| `language`                         | Task implementation language                                        |
-| `dataset` / `dataset_short`        | Instance identifier                                                 |
-| `start_time` / `end_time`          | Wall-clock bounds of the full 3-stage run                           |
-| `stage1`                           | `Draft (no feedback)` — `elapsed_s`, `eval_time_s`, `cost_usd`, `num_passed`, `num_tests`, `pass_rate`, `eval_status` |
-| `stage2`                           | `Lint refine` — same metrics, plus `cost_usd_incremental` / `cost_usd_cumulative` |
-| `stage3`                           | `Test refine` — same metrics as stage 2                             |
-
-### `verifier/reward.json`
-
-```json
-{
-  "stage_pass_rate": {"stage1": 0.0, "stage2": 0.4452, "stage3": 1.0},
-  "resolved":        {"stage1": 0,   "stage2": 0,      "stage3": 1}
-}
+trajectory/<uuid>/
+├── <uuid>_v2_report.json              # conversion & validation report for the task's traces
+└── <uuid>/<uuid>/agent/
+    ├── draft__<repo>__<module>/
+    │   └── trajectory.json            # Stage 1 session for that module
+    ├── lint__<repo>__<module>/
+    │   └── trajectory.json            # Stage 2 session for that module
+    └── test__<repo>__<module>/
+        └── trajectory.json            # Stage 3 session for that module
 ```
 
 ### `agent/*/trajectory.json` (ATIF v1.7)
@@ -298,9 +255,21 @@ Each trace is a self-contained record of one agent session (one pipeline stage o
 | `final_metrics` | Token usage and session-level counters                                        |
 | `extra`         | Provenance: pipeline stage, module, source log, cross-check file              |
 
-The top-level `<instance>_dataset_v2_report.json` records the trace conversion QC: units
-converted, edit-parse rate, cross-check results against the harness's native history, and mean
-reward — so every shipped trajectory is verifiably faithful to the raw agent logs.
+### `<uuid>_v2_report.json`
+
+Per-task QC report for the trace conversion:
+
+| Field                          | Description                                              |
+| :----------------------------- | :-------------------------------------------------------- |
+| `task` / `version`             | Task UUID / converter version (`v2-native`)               |
+| `units` / `converted`          | Agent sessions found / successfully converted             |
+| `skipped` / `with_errors`      | Sessions dropped or failed during conversion              |
+| `total_edits` / `edit_parse_rate` | Search-replace edits recovered / parse success ratio   |
+| `real_timestamps`              | Sessions with authentic timing preserved                  |
+
+> **Note.** This drop ships the raw agent traces and their conversion reports. Per-stage verifier
+> outputs (`reward.json`, test reports) are not bundled; rewards are reproducible for any stage
+> by grading its submission with the task's `tests/test.sh` (see [Usage notes](#usage-notes)).
 
 ## Scoring methodology
 
@@ -323,17 +292,17 @@ resolved  = 1  iff  passed == total # strict, binary
 
 ## Usage notes
 
-### Evaluating a new model
+### Evaluating a model on a task
 
 1. Pull the task image from `task.toml [environment] docker_image` (or rebuild an equivalent);
    the repo ships inside at `/testbed`, reset to `base_commit`.
-2. Present `instruction.md` to your agent; let it implement `src_dir` (any edits to test files
-   are out of contract).
+2. Present `instruction.md` to your agent; let it implement `src_dir` (edits to test files are
+   out of contract).
 3. Run the verifier and read the reward:
 
 ```bash
 UUID=<task-uuid>
-TASK="$PWD/dataset/$UUID"
+TASK="$PWD/datasets/$UUID"
 IMG=$(python3 -c "import tomllib;print(tomllib.load(open('$TASK/task.toml','rb'))['environment']['docker_image'])")
 
 docker run --rm \
@@ -345,72 +314,75 @@ docker run --rm \
 4. To verify the ceiling first, run `bash /task/solution/solve.sh` inside the container (mount
    the task dir at `/task`) before invoking the verifier — it must score `1.0`.
 
-### Recompute the shipped rewards
-
-No re-execution needed; read the verifier evidence directly:
+### Inspecting trajectories
 
 ```python
 import json, glob
 
-rates, resolved = {"stage1": [], "stage2": [], "stage3": []}, 0
-runs = glob.glob("trajectories/*_dataset/claude-opus-4.8/verifier/reward.json")
-for p in runs:
-    r = json.load(open(p))
-    for s in rates:
-        rates[s].append(r["stage_pass_rate"][s])
-    resolved += r["resolved"]["stage3"]
+uuid = "ba9106bd-c175-4574-a86d-9a55af02397e"   # any of the 16 task UUIDs
+traces = glob.glob(f"trajectory/{uuid}/{uuid}/{uuid}/agent/*/trajectory.json")
+print(len(traces), "agent sessions")
 
-for s, xs in rates.items():
-    print(f"{s}: mean={sum(xs)/len(xs):.4f}")
-print(f"resolved@S3: {resolved}/{len(runs)}")
-```
-
-### Inspecting trajectories
-
-```python
-import json
-
-t = json.load(open("trajectories/<instance>_dataset/claude-opus-4.8/"
-                   "agent/draft__<module>/trajectory.json"))
-print(t["schema_version"], t["trajectory_id"])
+t = json.load(open(traces[0]))
+print(t["schema_version"], "|", t["trajectory_id"])
 for step in t["steps"][:5]:
     print(step["step_id"], step["source"], str(step.get("message", ""))[:80])
+```
+
+Stage and module are encoded in each trace directory name (`<stage>__<repo>__<module>`), and in
+the trace's `extra.pipeline_stage` / `extra.module` fields.
+
+### Corpus statistics
+
+```python
+import json, glob, tomllib, collections
+
+langs, tests = collections.Counter(), 0
+for p in glob.glob("datasets/*/task.toml"):
+    m = tomllib.load(open(p, "rb"))
+    kw = [k for k in m["task"]["keywords"] if k in ("rust", "go", "python")]
+    langs[kw[0]] += 1
+    tests += int(m["metadata"]["n_test_ids"])
+
+traces = len(glob.glob("trajectory/*/*/*/agent/*/trajectory.json"))
+print(dict(langs), "| test IDs:", tests, "| traces:", traces)
+# -> {'rust': 9, 'go': 5, 'python': 2} | test IDs: 9249 | traces: 4306
 ```
 
 ## Verification and quality assurance
 
 Every instance passed a 24-criterion QC protocol prior to inclusion:
 
-- **Structure.** Dataset and trajectory directories matched 1:1 per instance; `task.toml`,
-  `instruction.md`, `solution/solve.sh`, `tests/test.sh`, `tests/test_ids.txt` present and
-  non-empty in every task; `results.json`, stage trajectories, and `verifier/reward.json`
-  present in every run.
-- **Reward integrity.** Stage pass rates in `verifier/reward.json` match the harness-reported
-  `results.json` per-stage metrics, and `n_test_ids` in `task.toml` matches the line count of
-  `tests/test_ids.txt`.
-- **Oracle ceiling.** `solution/solve.sh` restores `reference_commit` and passes the full
-  official ID set (`reward = 1.0`), so the ceiling is attainable on every task.
-- **Trace fidelity.** Each `*_v2_report.json` cross-checks converted trajectories against the
-  harness's native logs: 100% edit-parse rate and per-unit validation are required for shipment.
+- **Structure.** `datasets/` and `trajectory/` match **1:1 by UUID** (16 each); `task.toml`,
+  `instruction.md`, `solution/solve.sh`, `tests/test.sh`, `tests/test_ids.txt` present in every
+  task; every trajectory directory carries its `<uuid>_v2_report.json` and per-module ATIF traces.
+- **Trace fidelity.** Each `_v2_report.json` records the conversion from the harness's native
+  logs: all 4,306 discovered sessions converted (`converted == units` on every task, zero
+  `with_errors`), with edit parse rates of 0.91–1.00 where search-replace edits were present.
+- **Oracle ceiling.** `solution/solve.sh` restores `reference_commit`, which passes the full
+  official ID set — `reward = 1.0` is attainable on every task.
 - **Hermetic grading.** The verifier scores only the pinned official ID set with a deterministic
   reporter; the runner's exit code is ignored and the reward file is the sole grading channel.
-- **Exclusions.** Instances with pipeline execution failures, time/cost telemetry discrepancies,
-  or sentinel values were excluded during curation.
+- **Exclusions.** Instances with pipeline execution failures, telemetry discrepancies, or
+  sentinel values were excluded during curation.
 - **Limitations.**
-  - **Single-model baseline.** This drop ships Claude Opus 4.8 runs only; tier calibration
-    against a second model is future work.
-  - **Sample size.** Per-tier and per-language breakdowns average over small n; treat them as
-    tendencies, not precise estimates.
+  - **Single-model release.** Trajectories cover Claude Opus 4.8 only; no second model for
+    tier calibration.
+  - **Verifier outputs not bundled.** Per-stage rewards must be reproduced by running
+    `tests/test.sh` against a stage's submission; they are not shipped as files in this drop.
+  - **All-Hard composition.** This release contains only Hard-tier tasks; Easy/Medium tiers are
+    not represented.
+  - **Trace size skew.** Test-stage traces embed full test feedback and can reach ~430 MB
+    (`erg`); plan storage accordingly (~32 GB for the full clone via Git LFS).
   - **Contamination.** The underlying repositories are public; whether specific code appeared in
     a model's training data is unknown.
-  - **Model nondeterminism.** Single runs per task; temperature and internal reasoning traces
-    produce per-run variance not captured here.
 
 ## Data availability
 
-- **Hugging Face**: [`ethara/Kaiju`](https://huggingface.co/datasets/ethara/Kaiju)
-- **Format**: Harbor task directories (`dataset/`) + ATIF v1.7 trajectories (`trajectories/`)
-- **License**: CC BY-NC-ND 4.0
+- **Hugging Face**: [`ethara/kaiju-samples`](https://huggingface.co/datasets/ethara/kaiju-samples)
+- **Format**: Harbor task directories (`datasets/`) + ATIF v1.7 trajectories (`trajectory/`),
+  large files via Git LFS
+- **License**: MIT (this repository)
 
 ## Code availability
 
@@ -424,20 +396,14 @@ The evaluation pipeline and curation scripts are maintained at
   title={Kaiju: A Dataset for Evaluating AI Code-Generation on Library Synthesis from Specifications},
   author={Ethara AI},
   year={2026},
-  howpublished={\url{https://huggingface.co/datasets/ethara/Kaiju}},
-  note={Harbor-format library-generation tasks with stage-wise rewards and full agent trajectories.}
+  howpublished={\url{https://huggingface.co/datasets/ethara/kaiju-samples}},
+  note={Harbor-format library-generation tasks with full per-stage agent trajectories.}
 }
 ```
 
 ## License
 
-Released under **CC BY-NC-ND 4.0**
-([Creative Commons Attribution-NonCommercial-NoDerivatives 4.0 International](https://creativecommons.org/licenses/by-nc-nd/4.0/)),
-copyright Ethara.AI 2026.
+Released under the **MIT License**, copyright Ethara.AI 2026.
 
-- **BY** — credit must be given to the creators
-- **NC** — non-commercial use only
-- **ND** — no derivatives or adaptations
-
-The underlying open-source repositories retain their original licenses; this license covers the
-dataset curation, evaluation results, trajectories, and associated metadata only.
+The underlying open-source repositories retain their original licenses; the MIT grant covers the
+task curation, harness scripts, trajectories, and associated metadata in this repository only.
