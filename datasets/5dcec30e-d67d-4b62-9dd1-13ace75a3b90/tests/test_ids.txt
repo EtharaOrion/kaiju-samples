@@ -1,0 +1,139 @@
+tests/test_actions.py::test_erase_invalid[invalid_node0]
+tests/test_actions.py::test_erase_invalid[invalid_node1]
+tests/test_actions.py::test_erase_invalid[invalid_node2]
+tests/test_actions.py::test_erase_invalid[invalid_node3]
+tests/test_actions.py::test_erase_invalid[invalid_node4]
+tests/test_actions.py::test_erase_invalid[invalid_node5]
+tests/test_actions.py::test_erase_invalid[invalid_node6]
+tests/test_actions.py::test_erase_invalid[invalid_node7]
+tests/test_actions.py::test_erase_invalid[invalid_node8]
+tests/test_actions.py::test_erase_invalid[invalid_node9]
+tests/test_actions.py::test_erase_invalid[invalid_node10]
+tests/test_actions.py::test_erase_invalid[invalid_node11]
+tests/test_actions.py::test_rules[TestInsertAfterBottom]
+tests/test_actions.py::test_rules[TestInsertBeforeTop]
+tests/test_actions.py::test_rules[TestInsertAfter]
+tests/test_actions.py::test_rules[TestInsertBefore]
+tests/test_actions.py::test_rules[TestInsertAfterThenBefore]
+tests/test_actions.py::test_rules[TestInsertBeforeThenAfterBothReversed]
+tests/test_actions.py::test_rules[TestInsertAfterBeforeRepeat]
+tests/test_ast.py::test_split_lines
+tests/test_ast.py::test_split_lines_with_encoding[\n            print(normal)\n            print('\U0001f680 \U0001f680 \U0001f680')\n            print(\n                '\U0001f680 \U0001f680 \U0001f680 $$ '\n                ' $$ \U0001f680 \U0001f680 \U0001f680'\n            )\n            print('\u5929 \u5c0f \u672b')\n            \u672b = '\U0001f680 \U0001f680 \U0001f680' * 4\n        ]
+tests/test_ast.py::test_split_lines_variations[]
+tests/test_ast.py::test_split_lines_variations[\n]
+tests/test_ast.py::test_split_lines_variations[\n\n]
+tests/test_ast.py::test_split_lines_variations[\n\n\n]
+tests/test_ast.py::test_split_lines_variations[\t\n \n \n]
+tests/test_ast.py::test_split_lines_variations[x]
+tests/test_ast.py::test_split_lines_variations[x\n]
+tests/test_ast.py::test_split_lines_variations[x\n\n]
+tests/test_ast.py::test_split_lines_variations[x\n\n\n]
+tests/test_ast.py::test_split_lines_variations[x\n\nxx\n\n]
+tests/test_ast.py::test_split_lines_variations[x\n\r\nxx\r\n\r\n]
+tests/test_ast.py::test_split_lines_variations[x\n\r\n\nx\r\n\r\n\r\n]
+tests/test_ast.py::test_split_lines_variations[x\n\r\n\nx\r\n\r\r]
+tests/test_ast.py::test_unparser_base
+tests/test_ast.py::test_unparser_functions
+tests/test_ast.py::test_precise_unparser
+tests/test_ast.py::test_precise_unparser_indented_literals
+tests/test_ast.py::test_precise_unparser_comments
+tests/test_ast_delta.py::test_full_node_change
+tests/test_ast_delta.py::test_nested_full_node
+tests/test_ast_delta.py::test_double_nested_full_node
+tests/test_ast_delta.py::test_field_addition
+tests/test_ast_delta.py::test_double_field_addition
+tests/test_ast_delta.py::test_field_removal
+tests/test_ast_delta.py::test_double_field_removal
+tests/test_ast_delta.py::test_field_change
+tests/test_ast_delta.py::test_multiple_field_change
+tests/test_ast_delta.py::test_sequence_diff
+tests/test_ast_delta.py::test_nested_sequence_diff
+tests/test_ast_delta.py::test_sequence_size_reduction
+tests/test_ast_delta.py::test_sequence_size_increase
+tests/test_ast_delta.py::test_sequence_weird
+tests/test_ast_delta.py::test_sequence_str
+tests/test_ast_delta.py::test_no_delta
+tests/test_change.py::test_change_compute_diff
+tests/test_common.py::test_negate
+tests/test_common.py::test_apply_condition[True-foo]
+tests/test_common.py::test_apply_condition[False-not foo]
+tests/test_common.py::test_is_truthy[operator0-True]
+tests/test_common.py::test_is_truthy[operator1-False]
+tests/test_common.py::test_is_truthy[operator2-True]
+tests/test_common.py::test_is_truthy[operator3-False]
+tests/test_common.py::test_is_truthy[operator4-True]
+tests/test_common.py::test_is_truthy[operator5-False]
+tests/test_common.py::test_is_truthy[operator6-None]
+tests/test_common.py::test_is_truthy[operator7-None]
+tests/test_common.py::test_is_truthy[operator8-None]
+tests/test_common.py::test_is_truthy[operator9-None]
+tests/test_common.py::test_is_contextful[node0-True]
+tests/test_common.py::test_is_contextful[node1-True]
+tests/test_common.py::test_is_contextful[node2-True]
+tests/test_common.py::test_is_contextful[node3-True]
+tests/test_common.py::test_is_contextful[node4-True]
+tests/test_common.py::test_is_contextful[node5-False]
+tests/test_common.py::test_is_contextful[node6-False]
+tests/test_common.py::test_is_contextful[node7-False]
+tests/test_common.py::test_pascal_to_snake[-]
+tests/test_common.py::test_pascal_to_snake[rule-rule]
+tests/test_common.py::test_pascal_to_snake[Rule-rule]
+tests/test_common.py::test_pascal_to_snake[SomeRule-some_rule]
+tests/test_common.py::test_pascal_to_snake[LiteralToConstantRule-literal_to_constant_rule]
+tests/test_common.py::test_find_indent[--]
+tests/test_common.py::test_find_indent[ - -]
+tests/test_common.py::test_find_indent[x--x]
+tests/test_common.py::test_find_indent[ x- -x]
+tests/test_common.py::test_find_indent[  x-  -x]
+tests/test_common.py::test_find_indent[   x-   -x]
+tests/test_common.py::test_find_indent[    -    -]
+tests/test_common.py::test_find_indent[x    --x    ]
+tests/test_common.py::test_find_indent[  x    -  -x    ]
+tests/test_common.py::test_find_closest
+tests/test_common.py::test_get_positions
+tests/test_common.py::test_singleton
+tests/test_complete_rules.py::test_complete_rules[ReplaceNexts]
+tests/test_complete_rules.py::test_complete_rules[ReplacePlaceholders]
+tests/test_complete_rules.py::test_complete_rules[PropagateConstants]
+tests/test_complete_rules.py::test_complete_rules[TypingAutoImporter]
+tests/test_complete_rules.py::test_complete_rules[TypingAutoImporterBefore]
+tests/test_complete_rules.py::test_complete_rules[MakeFunctionAsync]
+tests/test_complete_rules.py::test_complete_rules[OnlyKeywordArgumentDefaultNotSetCheckRule]
+tests/test_complete_rules.py::test_complete_rules[InternalizeFunctions]
+tests/test_complete_rules.py::test_complete_rules[RemoveDeadCode]
+tests/test_complete_rules.py::test_complete_rules[RenameImportAndDownstream]
+tests/test_complete_rules.py::test_complete_rules[AssertEncoder]
+tests/test_complete_rules.py::test_complete_rules[PropagateAndDelete]
+tests/test_complete_rules.py::test_complete_rules[FoldMyConstants]
+tests/test_complete_rules.py::test_complete_rules[AtomicTryBlock]
+tests/test_context.py::test_representative
+tests/test_context.py::test_ancestry
+tests/test_context.py::test_scope
+tests/test_context.py::test_scope_definitions
+tests/test_context.py::test_custom_unparser
+tests/test_context.py::test_dependency_resolver
+tests/test_context.py::test_dependency_resolver_recursion
+tests/test_core.py::test_apply_simple[2 + 2 == 4-2 + 2 == 5-<lambda>-replacement0]
+tests/test_core.py::test_apply_simple[2       + 2 == 4-2       + 2 == 5-<lambda>-replacement1]
+tests/test_core.py::test_apply_simple[2 + 2 == 4 # :)-2 + 2 == 5 # :)-<lambda>-replacement2]
+tests/test_core.py::test_apply_new_statement[\n                import x # comments\n                print(x.y) # comments here\n                def something(x, y):\n                    return x + y # comments\n            -\n                import x # comments\n                import x\n                print(x.y) # comments here\n                def something(x, y):\n                    return x + y # comments\n            -<lambda>]
+tests/test_core.py::test_session_simple[1+1-1 - 1-PlusToMinusRule]
+tests/test_core.py::test_session_simple[print(1 + 1)-print(1 - 1)-PlusToMinusRule]
+tests/test_core.py::test_session_simple[print(1 + 1, some_other_stuff) and 2 + 2-print(1 - 1, some_other_stuff) and 2 - 2-PlusToMinusRule]
+tests/test_core.py::test_session_simple[\n                print(\n                    1 +\n                    2\n                )\n            -\n                print(\n                    1 - 2\n                )\n            -PlusToMinusRule]
+tests/test_core.py::test_session_simple[print(x, y, placeholder, z)-print(x, y, 42, z)-PlaceholderReplacer]
+tests/test_core.py::test_session_simple[1*1-1*1-PlusToMinusRule]
+tests/test_core.py::test_session_simple[print(no,change,style)-print(no,change,style)-PlusToMinusRule]
+tests/test_core.py::test_session_run_file
+tests/test_core.py::test_session_run_deterministic
+tests/test_core.py::test_session_run_invalid_code
+tests/test_core.py::test_session_run_invalid_generated_code
+tests/test_core.py::test_session_run_invalid_generated_code_debug_mode
+tests/test_core.py::test_session_run_deterministic_for_on_off_rules
+tests/test_position_provider.py::test_position_provider_for_definitions
+tests/test_validation.py::test_valid_inputs
+tests/test_validation.py::test_invalid_inputs[invalid_options0]
+tests/test_validation.py::test_invalid_inputs[invalid_options1]
+tests/test_warning.py::test_import_warning[1-1]
+tests/test_warning.py::test_import_warning[2-1]
+tests/test_warning.py::test_import_no_warning[0]
