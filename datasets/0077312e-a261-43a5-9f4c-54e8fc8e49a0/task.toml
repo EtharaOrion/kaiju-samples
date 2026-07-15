@@ -25,7 +25,7 @@ timeout_sec = 1800.0
 timeout_sec = 1800.0
 
 [environment]
-docker_image = "426628337772.dkr.ecr.ap-south-1.amazonaws.com/kaiju_q2:opentelemetry-collector"
+docker_image = "426628337772.dkr.ecr.ap-south-1.amazonaws.com/kaiju_q2:go_open_telemetry_opentelemetry_collector"
 build_timeout_sec = 1800.0
 os = "linux"
 cpus = 2
