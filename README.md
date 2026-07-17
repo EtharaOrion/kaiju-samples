@@ -45,14 +45,14 @@ module, **1,278 traces** in total.
 | :------------------ | :--------------------------------------------------------------------------------- |
 | Tasks               | **20** from-scratch library implementation instances                               |
 | Languages           | **Rust (10) · Go (3) · Python (6) · TypeScript (1)**                                                 |
-| Difficulty          | 5 tiers — **Trivial (2) · Easy (3) · Medium (1) · Hard (4) · Expert (10)**         |
+| Difficulty          | All **Hard** (20 tasks)                                                             |
 | Model evaluated     | **Claude Opus 4.8** (`claude-opus-4.8`)                                            |
 | Pipeline            | 3 sequential stages — Draft (no feedback) → Lint refine → Test refine              |
 | Agent traces        | **1,278** ATIF v1.7 trajectories (per stage × module), 8–240 per task            |
 | Held-out tests      | **11,189** official test IDs total (2–3,191 per task)                              |
 | Reward              | continuous `passed / total ∈ [0, 1]`, written by `tests/test.sh` at grading time   |
 | Task format         | [Harbor](https://github.com/laude-institute/harbor) `task.toml` schema 1.3         |
-| Execution           | pre-built per-task Docker images, 4 CPUs / 8 GB, `workdir /testbed`                |
+| Execution           | pre-built per-task Docker images, 2 CPUs / 4 GB, `workdir /testbed`                |
 
 ## Repository layout
 
@@ -72,9 +72,11 @@ kaiju-samples/
 │           └── test.sh                # verifier entrypoint: run suite, score IDs, write reward
 └── trajectory/                        # Claude Opus 4.8 runs, one directory per UUID (20)
     └── <uuid>/
-        ├── <uuid>_v2_report.json      # trace conversion & validation report
-        └── <uuid>/<uuid>/agent/
-            └── <stage>__<module>/     # stage ∈ {draft, lint, test}
+        ├── results.json               # per-stage run metrics (model, timing, cost, pass rates)
+        ├── verifier/
+        │   └── reward.json            # per-stage verifier scores
+        └── agent/
+            └── <stage>__<repo>__<module>/  # stage ∈ {draft, lint, test}
                 └── trajectory.json    # ATIF v1.7 structured trace of that agent session
 ```
 
@@ -186,8 +188,8 @@ ATIF v1.7 record of that stage's agent session. Test-refine traces can be very l
 ## Results
 
 Mean Stage-3 pass rate for Claude Opus 4.8 across the corpus, by difficulty tier and by
-language. Performance falls off steeply with tier — from saturation on Trivial tasks to
-near-zero on Expert — confirming the difficulty signal is real, not claimed.
+language. All 20 tasks share the Hard difficulty tier; language is the primary performance
+differentiator across the corpus.
 
 <p align="center">
   <picture>
@@ -236,7 +238,7 @@ datasets/<uuid>/
 | `[agent]`       | `timeout_sec`                      | Per-stage agent budget                                             |
 | `[verifier]`    | `timeout_sec`                      | Verifier budget                                                    |
 | `[environment]` | `docker_image`                     | Pre-built per-task image URI                                       |
-| `[environment]` | `cpus` / `memory_mb`               | Container resources (4 / 8192)                                     |
+| `[environment]` | `cpus` / `memory_mb`               | Container resources (2 / 4096)                                     |
 | `[environment]` | `network_mode` / `workdir`         | Network policy / `"/testbed"`                                      |
 
 ### Verifier contract
@@ -260,8 +262,10 @@ Each task's Claude Opus 4.8 run lives under `trajectory/<uuid>/`:
 
 ```
 trajectory/<uuid>/
-├── <uuid>_v2_report.json              # conversion & validation report for the task's traces
-└── <uuid>/<uuid>/agent/
+├── results.json                       # per-stage run metrics (model, timing, cost, pass rates)
+├── verifier/
+│   └── reward.json                    # per-stage verifier scores (pass_rate, num_passed, num_tests)
+└── agent/
     ├── draft__<repo>__<module>/
     │   └── trajectory.json            # Stage 1 session for that module
     ├── lint__<repo>__<module>/
@@ -284,21 +288,24 @@ Each trace is a self-contained record of one agent session (one pipeline stage o
 | `final_metrics` | Token usage and session-level counters                                        |
 | `extra`         | Provenance: pipeline stage, module, source log, cross-check file              |
 
-### `<uuid>_v2_report.json`
+### `results.json`
 
-Per-task QC report for the trace conversion:
+Per-task run summary with model metadata and per-stage performance:
+
+| Field                          | Description                                                                         |
+| :----------------------------- | :---------------------------------------------------------------------------------- |
+| `model` / `language`           | Model evaluated / task language                                                     |
+| `start_time` / `end_time`      | Wall-clock run window                                                               |
+| `stage1` / `stage2` / `stage3` | Per-stage metrics: `elapsed_s`, `cost_usd`, `num_passed`, `num_tests`, `pass_rate`  |
+
+### `verifier/reward.json`
+
+Per-stage verifier scores produced at grading time:
 
 | Field                          | Description                                              |
-| :----------------------------- | :-------------------------------------------------------- |
-| `task` / `version`             | Task UUID / converter version (`v2-native`)               |
-| `units` / `converted`          | Agent sessions found / successfully converted             |
-| `skipped` / `with_errors`      | Sessions dropped or failed during conversion              |
-| `total_edits` / `edit_parse_rate` | Search-replace edits recovered / parse success ratio   |
-| `real_timestamps`              | Sessions with authentic timing preserved                  |
-
-> **Note.** This drop ships the raw agent traces and their conversion reports. Per-stage verifier
-> outputs (`reward.json`, test reports) are not bundled; rewards are reproducible for any stage
-> by grading its submission with the task's `tests/test.sh` (see [Usage notes](#usage-notes)).
+| :----------------------------- | :------------------------------------------------------- |
+| `stage1` / `stage2` / `stage3` | `pass_rate`, `num_passed`, `num_tests`, `eval_status`    |
+| `final_pass_rate`              | Stage 3 pass rate (primary metric)                       |
 
 ## Scoring methodology
 
@@ -348,8 +355,8 @@ docker run --rm \
 ```python
 import json, glob
 
-uuid = "ba9106bd-c175-4574-a86d-9a55af02397e"   # any of the 16 task UUIDs
-traces = glob.glob(f"trajectory/{uuid}/{uuid}/{uuid}/agent/*/trajectory.json")
+uuid = "ba9106bd-c175-4506-86d5-2412127c8a4e"   # any of the 20 task UUIDs
+traces = glob.glob(f"trajectory/{uuid}/agent/*/trajectory.json")
 print(len(traces), "agent sessions")
 
 t = json.load(open(traces[0]))
@@ -373,7 +380,7 @@ for p in glob.glob("datasets/*/task.toml"):
     langs[kw[0]] += 1
     tests += int(m["metadata"]["n_test_ids"])
 
-traces = len(glob.glob("trajectory/*/*/*/agent/*/trajectory.json"))
+traces = len(glob.glob("trajectory/*/agent/*/trajectory.json"))
 print(dict(langs), "| test IDs:", tests, "| traces:", traces)
 # -> {'rust': 10, 'go': 3, 'python': 6, 'typescript': 1} | test IDs: 11189 | traces: 1278
 ```
@@ -384,10 +391,10 @@ Every instance passed a 24-criterion QC protocol prior to inclusion:
 
 - **Structure.** `datasets/` and `trajectory/` match **1:1 by UUID** (20 each); `task.toml`,
   `instruction.md`, `solution/solve.sh`, `tests/test.sh`, `tests/test_ids.txt` present in every
-  task; every trajectory directory carries its `<uuid>_v2_report.json` and per-module ATIF traces.
-- **Trace fidelity.** Each `_v2_report.json` records the conversion from the harness's native
-  logs: all 1,278 discovered sessions converted (`converted == units` on every task, zero
-  `with_errors`), with edit parse rates of 0.91–1.00 where search-replace edits were present.
+  task; every trajectory directory carries its `results.json`, `verifier/reward.json`, and
+  per-module ATIF traces under `agent/`.
+- **Trace fidelity.** All 1,278 agent sessions are present across 20 tasks, with `results.json`
+  recording per-stage pass rates, elapsed time, and cost for each run.
 - **Oracle ceiling.** `solution/solve.sh` restores `reference_commit`, which passes the full
   official ID set — `reward = 1.0` is attainable on every task.
 - **Hermetic grading.** The verifier scores only the pinned official ID set with a deterministic
@@ -397,10 +404,6 @@ Every instance passed a 24-criterion QC protocol prior to inclusion:
 - **Limitations.**
   - **Single-model release.** Trajectories cover Claude Opus 4.8 only; no second model for
     tier calibration.
-  - **Verifier outputs not bundled.** Per-stage rewards must be reproduced by running
-    `tests/test.sh` against a stage's submission; they are not shipped as files in this drop.
-  - **Expert-heavy composition.** Half the corpus (10 of 20) sits in the Expert tier, where
-    mean pass rate is near zero; per-tier means on small n carry real variance.
   - **Trace size skew.** Test-stage traces embed full test feedback and can reach ~430 MB
     (`erg`); plan storage accordingly (~32 GB for the full clone via Git LFS).
   - **Contamination.** The underlying repositories are public; whether specific code appeared in
