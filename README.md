@@ -49,7 +49,7 @@ module, **1,278 traces** in total.
 | Model evaluated     | **Claude Opus 4.8** (`claude-opus-4.8`)                                            |
 | Pipeline            | 3 sequential stages — Draft (no feedback) → Lint refine → Test refine              |
 | Agent traces        | **1,278** ATIF v1.7 trajectories (per stage × module), 8–240 per task            |
-| Held-out tests      | **11,189** official test IDs total (2–3,191 per task)                              |
+| Held-out tests      | **11,189** official test IDs total (2–3,191 per task )                                    |
 | Reward              | continuous `passed / total ∈ [0, 1]`, written by `tests/test.sh` at grading time   |
 | Task format         | [Harbor](https://github.com/laude-institute/harbor) `task.toml` schema 1.3         |
 | Execution           | pre-built per-task Docker images, 2 CPUs / 4 GB, `workdir /testbed`                |
