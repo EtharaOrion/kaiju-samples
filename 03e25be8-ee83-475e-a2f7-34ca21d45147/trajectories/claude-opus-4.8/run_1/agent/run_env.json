@@ -1,0 +1,6 @@
+{
+  "repo": "Zahgon/tryalgo",
+  "base_commit": "ee032b235e7af28b6cc56b95c0aa093551353d9d",
+  "reference_commit": "79adeb9983ae784b73ef9dea10aa0c852fc39718",
+  "docker_image": "426628337772.dkr.ecr.ap-south-1.amazonaws.com/kaiju_q2:python_jilljenn_tryalgo"
+}

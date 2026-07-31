@@ -1,0 +1,28 @@
+{
+  "instance_id": "commit-0/pymonad",
+  "id": "2375c835-c409-412e-91a2-99f6c0fea87e",
+  "repo": "Shivansh9411/pymonad",
+  "base_commit": "f76f7e5f6dbeac2fec463ff6b36870544fbae3ba",
+  "reference_commit": "9681c15da2321dc29d093d796b8f5c7a85153339",
+  "setup": {
+    "install": "pip install -e \".\"",
+    "packages": "",
+    "pip_packages": [
+      "pytest",
+      "pytest-json-report"
+    ],
+    "pre_install": [],
+    "python": "3.7",
+    "specification": "https://jasondelaat.github.io/pymonad_docs/",
+    "version_source": "setup.py:python_requires",
+    "version_conflicts": [],
+    "system_deps_hint": []
+  },
+  "test": {
+    "test_cmd": "pytest",
+    "test_dir": "tests"
+  },
+  "src_dir": "pymonad",
+  "base_compiles": true,
+  "language": "python"
+}

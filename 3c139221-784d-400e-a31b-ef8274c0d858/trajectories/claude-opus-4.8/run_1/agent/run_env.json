@@ -1,0 +1,6 @@
+{
+  "repo": "Zahgon/async-h1",
+  "base_commit": "5054a44f41a6341c3962e692f9a8cca934a7e4a0",
+  "reference_commit": "4de64c18de36d63e3f422e0c88187534a7e11e2e",
+  "docker_image": "426628337772.dkr.ecr.ap-south-1.amazonaws.com/kaiju_q2:rust_http_rs_async_h1"
+}

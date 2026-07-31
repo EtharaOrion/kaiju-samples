@@ -1,0 +1,6 @@
+{
+  "repo": "Shivansh9411/bigcache",
+  "base_commit": "e035633471d066a1d005b5f474f74f20a490c7a6",
+  "reference_commit": "532eb6410aefb749509084c74f56b8313e200f4a",
+  "docker_image": "426628337772.dkr.ecr.ap-south-1.amazonaws.com/kaiju_q2:go_allegro_bigcache"
+}

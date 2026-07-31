@@ -1,0 +1,9 @@
+{"ImportPath":"github.com/google/uuid [github.com/google/uuid.test]","Action":"build-output","Output":"# github.com/google/uuid [github.com/google/uuid.test]\n"}
+{"ImportPath":"github.com/google/uuid [github.com/google/uuid.test]","Action":"build-output","Output":"./uuid.go:327:5: xvalues redeclared in this block\n"}
+{"ImportPath":"github.com/google/uuid [github.com/google/uuid.test]","Action":"build-output","Output":"\t./util.go:14:5: other declaration of xvalues\n"}
+{"ImportPath":"github.com/google/uuid [github.com/google/uuid.test]","Action":"build-output","Output":"./uuid.go:347:6: xtob redeclared in this block\n"}
+{"ImportPath":"github.com/google/uuid [github.com/google/uuid.test]","Action":"build-output","Output":"\t./util.go:33:6: other declaration of xtob\n"}
+{"ImportPath":"github.com/google/uuid [github.com/google/uuid.test]","Action":"build-fail"}
+{"Time":"2026-07-28T12:58:05.494423416Z","Action":"start","Package":"github.com/google/uuid"}
+{"Time":"2026-07-28T12:58:05.494482397Z","Action":"output","Package":"github.com/google/uuid","Output":"FAIL\tgithub.com/google/uuid [build failed]\n"}
+{"Time":"2026-07-28T12:58:05.49448903Z","Action":"fail","Package":"github.com/google/uuid","Elapsed":0,"FailedBuild":"github.com/google/uuid [github.com/google/uuid.test]"}

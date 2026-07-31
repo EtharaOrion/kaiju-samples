@@ -1,0 +1,304 @@
+============================= test session starts ==============================
+platform linux -- Python 3.9.25, pytest-8.4.2, pluggy-1.6.0
+rootdir: /tmp/commit0-inplace-b838ghsp/tree
+plugins: cov-7.1.0, json-report-1.5.0, metadata-3.1.1, subtests-0.15.0
+collected 683 items
+
+tests/oauth1/rfc5849/endpoints/test_access_token.py .......              [  1%]
+tests/oauth1/rfc5849/endpoints/test_authorization.py .....               [  1%]
+tests/oauth1/rfc5849/endpoints/test_base.py ...................          [  4%]
+tests/oauth1/rfc5849/endpoints/test_request_token.py ........            [  5%]
+tests/oauth1/rfc5849/endpoints/test_resource.py .......                  [  6%]
+tests/oauth1/rfc5849/endpoints/test_signature_only.py ....               [  7%]
+tests/oauth1/rfc5849/test_client.py .........................            [ 10%]
+tests/oauth1/rfc5849/test_parameters.py .....                            [ 11%]
+tests/oauth1/rfc5849/test_request_validator.py ...                       [ 12%]
+tests/oauth1/rfc5849/test_signatures.py ................                 [ 14%]
+tests/oauth1/rfc5849/test_utils.py .....                                 [ 15%]
+tests/oauth2/rfc6749/clients/test_backend_application.py ..              [ 15%]
+tests/oauth2/rfc6749/clients/test_base.py .............             [ 17%]
+tests/oauth2/rfc6749/clients/test_legacy_application.py ...              [ 17%]
+tests/oauth2/rfc6749/clients/test_mobile_application.py ...              [ 18%]
+tests/oauth2/rfc6749/clients/test_service_application.py ...             [ 18%]
+tests/oauth2/rfc6749/clients/test_web_application.py ........            [ 19%]
+tests/oauth2/rfc6749/endpoints/test_base_endpoint.py ....                [ 20%]
+tests/oauth2/rfc6749/endpoints/test_client_authentication.py .......     [ 21%]
+tests/oauth2/rfc6749/endpoints/test_credentials_preservation.py .....    [ 22%]
+tests/oauth2/rfc6749/endpoints/test_error_responses.py ................. [ 24%]
+.....                                                                    [ 25%]
+tests/oauth2/rfc6749/endpoints/test_extra_credentials.py ..              [ 25%]
+tests/oauth2/rfc6749/endpoints/test_introspect_endpoint.py ...........   [ 27%]
+tests/oauth2/rfc6749/endpoints/test_metadata.py .......                  [ 28%]
+tests/oauth2/rfc6749/endpoints/test_resource_owner_association.py ....   [ 28%]
+tests/oauth2/rfc6749/endpoints/test_revocation_endpoint.py ........      [ 30%]
+tests/oauth2/rfc6749/endpoints/test_scope_handling.py ....               [ 30%]
+tests/oauth2/rfc6749/grant_types/test_authorization_code.py ............ [ 32%]
+............................                                             [ 36%]
+tests/oauth2/rfc6749/grant_types/test_client_credentials.py .....        [ 37%]
+tests/oauth2/rfc6749/grant_types/test_implicit.py ...                    [ 37%]
+tests/oauth2/rfc6749/grant_types/test_refresh_token.py ................. [ 40%]
+..                                                                       [ 40%]
+tests/oauth2/rfc6749/grant_types/test_resource_owner_password.py ....... [ 41%]
+.....                                                                    [ 42%]
+tests/oauth2/rfc6749/test_parameters.py .........        [ 43%]
+tests/oauth2/rfc6749/test_request_validator.py .                         [ 43%]
+tests/oauth2/rfc6749/test_server.py .................                    [ 46%]
+tests/oauth2/rfc6749/test_tokens.py ........                             [ 47%]
+tests/oauth2/rfc6749/test_utils.py .......                               [ 48%]
+tests/oauth2/rfc8628/clients/test_device.py .F                           [ 48%]
+tests/oauth2/rfc8628/endpoints/test_device_application_server.py .       [ 48%]
+tests/oauth2/rfc8628/endpoints/test_error_responses.py .......           [ 49%]
+tests/oauth2/rfc8628/grant_types/test_device_code.py .FFF..              [ 50%]
+tests/oauth2/rfc8628/test_server.py ......                               [ 51%]
+tests/openid/connect/core/endpoints/test_claims_handling.py ..           [ 51%]
+tests/openid/connect/core/endpoints/test_openid_connect_params_handling.py . [ 52%]
+..                                                                       [ 52%]
+tests/openid/connect/core/endpoints/test_refresh_token.py ..             [ 52%]
+tests/openid/connect/core/endpoints/test_userinfo_endpoint.py ......     [ 53%]
+tests/openid/connect/core/grant_types/test_authorization_code.py ....... [ 54%]
+........................................................................ [ 65%]
+......                                                                   [ 66%]
+tests/openid/connect/core/grant_types/test_base.py FFFFF...              [ 67%]
+tests/openid/connect/core/grant_types/test_dispatchers.py .......        [ 68%]
+tests/openid/connect/core/grant_types/test_hybrid.py ................... [ 71%]
+........................................................................ [ 81%]
+.F..........                                                             [ 83%]
+tests/openid/connect/core/grant_types/test_implicit.py ..............    [ 85%]
+tests/openid/connect/core/grant_types/test_refresh_token.py ............ [ 87%]
+.............................                                            [ 91%]
+tests/openid/connect/core/test_request_validator.py .                    [ 91%]
+tests/openid/connect/core/test_server.py ........                        [ 92%]
+tests/openid/connect/core/test_tokens.py .......                         [ 93%]
+tests/test_common.py ................................                    [ 98%]
+tests/test_uri_validate.py ......ss...                                   [100%]
+
+=================================== FAILURES ===================================
+______________________ DeviceClientTest.test_request_uri _______________________
+
+self = <tests.oauth2.rfc8628.clients.test_device.DeviceClientTest testMethod=test_request_uri>
+
+    def test_request_uri(self):
+        client = DeviceClient(self.client_id)
+    
+        uri = client.prepare_request_uri(self.uri)
+        self.assertURLEqual(uri, self.uri_grant)
+    
+        client = DeviceClient(self.client_id, client_secret=self.client_secret)
+        uri = client.prepare_request_uri(self.uri)
+>       self.assertURLEqual(uri, self.uri_secret)
+
+tests/oauth2/rfc8628/clients/test_device.py:60: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+tests/unittest/__init__.py:25: in url_equals
+    self.assertCountEqual(query_a, query_b)
+E   AssertionError: Element counts were not equal:
+E   First has 0, Second has 1:  ('client_secret', 'asecret')
+__________________ test_custom_pre_and_post_token_validators ___________________
+
+    def test_custom_pre_and_post_token_validators():
+        client = mock.MagicMock()
+    
+        validator = mock.MagicMock()
+        pre_token_validator = mock.Mock()
+        post_token_validator = mock.Mock()
+    
+        request: common.Request = create_request()
+        request.client = client
+    
+        auth = DeviceCodeGrant(validator)
+    
+        auth.custom_validators.pre_token.append(pre_token_validator)
+        auth.custom_validators.post_token.append(post_token_validator)
+    
+        bearer = BearerToken(validator)
+        auth.create_token_response(request, bearer)
+    
+        pre_token_validator.assert_called()
+>       post_token_validator.assert_called()
+
+tests/oauth2/rfc8628/grant_types/test_device_code.py:66: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = <Mock id='281473414579632'>
+
+    def assert_called(self):
+        """assert that the mock was called at least once
+        """
+        if self.call_count == 0:
+            msg = ("Expected '%s' to have been called." %
+                   (self._mock_name or 'mock'))
+>           raise AssertionError(msg)
+E           AssertionError: Expected 'mock' to have been called.
+
+/usr/local/lib/python3.9/unittest/mock.py:876: AssertionError
+__________________________ test_create_token_response __________________________
+
+    def test_create_token_response():
+        validator = mock.MagicMock()
+        request: common.Request = create_request()
+        request.client = mock.Mock()
+    
+        auth = DeviceCodeGrant(validator)
+    
+        bearer = BearerToken(validator)
+    
+        headers, body, status_code = auth.create_token_response(request, bearer)
+        token = json.loads(body)
+    
+        assert headers == {
+            "Content-Type": "application/json",
+            "Cache-Control": "no-store",
+            "Pragma": "no-cache",
+        }
+    
+        # when a custom token generator callable isn't used
+        # the random generator is used as default for the access token
+>       assert token == {
+            "access_token": mock.ANY,
+            "expires_in": 3600,
+            "token_type": "Bearer",
+            "scope": "hello world",
+            "refresh_token": mock.ANY,
+        }
+E       AssertionError: assert {'error': 'mi...e parameter.'} == {'access_toke...o world', ...}
+E         
+E         Left contains 2 more items:
+E         {'error': 'missing_code', 'error_description': 'Missing device_code parameter.'}
+E         Right contains 5 more items:
+E         {'access_token': <ANY>,
+E          'expires_in': 3600,
+E          'refresh_token': <ANY>,...
+E         
+E         ...Full output truncated (3 lines hidden), use '-vv' to show
+
+tests/oauth2/rfc8628/grant_types/test_device_code.py:89: AssertionError
+__________________________ test_invalid_client_error ___________________________
+
+    def test_invalid_client_error():
+        validator = mock.MagicMock()
+        request: common.Request = create_request()
+        request.client = mock.Mock()
+    
+        auth = DeviceCodeGrant(validator)
+        bearer = BearerToken(validator)
+    
+        validator.authenticate_client.return_value = False
+    
+        headers, body, status_code = auth.create_token_response(request, bearer)
+        body = json.loads(body)
+    
+>       assert headers == {
+            "Content-Type": "application/json",
+            "Cache-Control": "no-store",
+            "Pragma": "no-cache",
+            "WWW-Authenticate": 'Bearer error="invalid_client"',
+        }
+E       assert {'Cache-Contr...': 'no-cache'} == {'Cache-Contr...alid_client"'}
+E         
+E         Omitting 3 identical items, use -vv to show
+E         Right contains 1 more item:
+E         {'WWW-Authenticate': 'Bearer error="invalid_client"'}
+E         Use -v to get more diff
+
+tests/oauth2/rfc8628/grant_types/test_device_code.py:115: AssertionError
+______________________ IDTokenTest.test_finalize_id_token ______________________
+
+self = <tests.openid.connect.core.grant_types.test_base.IDTokenTest testMethod=test_finalize_id_token>
+
+    def test_finalize_id_token(self):
+        token = self.grant.add_id_token(self.token, "token_handler_mock", self.request)
+        self.assertIn("id_token", token)
+>       self.assertEqual(token["id_token"], "eyJ.body.signature")
+E       AssertionError: None != 'eyJ.body.signature'
+
+tests/openid/connect/core/grant_types/test_base.py:68: AssertionError
+_______________ IDTokenTest.test_finalize_id_token_with_at_hash ________________
+
+self = <tests.openid.connect.core.grant_types.test_base.IDTokenTest testMethod=test_finalize_id_token_with_at_hash>
+
+    def test_finalize_id_token_with_at_hash(self):
+        self.token["access_token"] = "Qcb0Orv1zh30vL1MPRsbm-diHiMwcLyZvn1arpZv-Jxf_11jnpEX3Tgfvk"
+        token = self.grant.add_id_token(self.token, "token_handler_mock", self.request)
+        self.assertIn("id_token", token)
+>       self.assertEqual(token["id_token"], "eyJ.body.signature")
+E       AssertionError: None != 'eyJ.body.signature'
+
+tests/openid/connect/core/grant_types/test_base.py:84: AssertionError
+____________ IDTokenTest.test_finalize_id_token_with_c_and_at_hash _____________
+
+self = <tests.openid.connect.core.grant_types.test_base.IDTokenTest testMethod=test_finalize_id_token_with_c_and_at_hash>
+
+    def test_finalize_id_token_with_c_and_at_hash(self):
+        self.token["code"] = "Qcb0Orv1zh30vL1MPRsbm-diHiMwcLyZvn1arpZv-Jxf_11jnpEX3Tgfvk"
+        self.token["access_token"] = "Qcb0Orv1zh30vL1MPRsbm-diHiMwcLyZvn1arpZv-Jxf_11jnpEX3Tgfvk"
+        token = self.grant.add_id_token(self.token, "token_handler_mock", self.request)
+        self.assertIn("id_token", token)
+>       self.assertEqual(token["id_token"], "eyJ.body.signature")
+E       AssertionError: None != 'eyJ.body.signature'
+
+tests/openid/connect/core/grant_types/test_base.py:101: AssertionError
+________________ IDTokenTest.test_finalize_id_token_with_c_hash ________________
+
+self = <tests.openid.connect.core.grant_types.test_base.IDTokenTest testMethod=test_finalize_id_token_with_c_hash>
+
+    def test_finalize_id_token_with_c_hash(self):
+        self.token["code"] = "Qcb0Orv1zh30vL1MPRsbm-diHiMwcLyZvn1arpZv-Jxf_11jnpEX3Tgfvk"
+        token = self.grant.add_id_token(self.token, "token_handler_mock", self.request)
+        self.assertIn("id_token", token)
+>       self.assertEqual(token["id_token"], "eyJ.body.signature")
+E       AssertionError: None != 'eyJ.body.signature'
+
+tests/openid/connect/core/grant_types/test_base.py:92: AssertionError
+________________ IDTokenTest.test_finalize_id_token_with_nonce _________________
+
+self = <tests.openid.connect.core.grant_types.test_base.IDTokenTest testMethod=test_finalize_id_token_with_nonce>
+
+    def test_finalize_id_token_with_nonce(self):
+        token = self.grant.add_id_token(self.token, "token_handler_mock", self.request, "my_nonce")
+        self.assertIn("id_token", token)
+>       self.assertEqual(token["id_token"], "eyJ.body.signature")
+E       AssertionError: None != 'eyJ.body.signature'
+
+tests/openid/connect/core/grant_types/test_base.py:76: AssertionError
+___________ OpenIDHybridCodeIdTokenTest.test_id_token_contains_nonce ___________
+
+self = <tests.openid.connect.core.grant_types.test_hybrid.OpenIDHybridCodeIdTokenTest testMethod=test_id_token_contains_nonce>
+
+    def test_id_token_contains_nonce(self):
+        token = {}
+        self.mock_validator.get_id_token.side_effect = None
+        self.mock_validator.get_id_token.return_value = None
+        token = self.auth.add_id_token(token, None, self.request)
+>       assert self.mock_validator.finalize_id_token.call_count == 1
+E       AssertionError: assert 0 == 1
+E        +  where 0 = <MagicMock name='mock.finalize_id_token' id='281473410643616'>.call_count
+E        +    where <MagicMock name='mock.finalize_id_token' id='281473410643616'> = <MagicMock id='281473412250784'>.finalize_id_token
+E        +      where <MagicMock id='281473412250784'> = <tests.openid.connect.core.grant_types.test_hybrid.OpenIDHybridCodeIdTokenTest testMethod=test_id_token_contains_nonce>.mock_validator
+
+tests/openid/connect/core/grant_types/test_hybrid.py:75: AssertionError
+=============================== warnings summary ===============================
+tests/oauth2/rfc6749/clients/test_service_application.py::ServiceApplicationClientTest::test_request_body
+tests/oauth2/rfc6749/clients/test_service_application.py::ServiceApplicationClientTest::test_request_body_no_initial_private_key
+  /usr/local/lib/python3.9/site-packages/jwt/api_jwt.py:147: InsecureKeyLengthWarning: The RSA key is 1024 bits long, which is below the minimum recommended size of 2048 bits. See NIST SP 800-131A.
+    return self._jws.encode(
+
+tests/oauth2/rfc6749/clients/test_service_application.py::ServiceApplicationClientTest::test_request_body
+tests/oauth2/rfc6749/clients/test_service_application.py::ServiceApplicationClientTest::test_request_body_no_initial_private_key
+  /usr/local/lib/python3.9/site-packages/jwt/api_jwt.py:368: InsecureKeyLengthWarning: The RSA key is 1024 bits long, which is below the minimum recommended size of 2048 bits. See NIST SP 800-131A.
+    decoded = self.decode_complete(
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+--------------------------------- JSON report ----------------------------------
+report saved to: report.json
+=========================== short test summary info ============================
+FAILED tests/oauth2/rfc8628/clients/test_device.py::DeviceClientTest::test_request_uri
+FAILED tests/oauth2/rfc8628/grant_types/test_device_code.py::test_custom_pre_and_post_token_validators
+FAILED tests/oauth2/rfc8628/grant_types/test_device_code.py::test_create_token_response
+FAILED tests/oauth2/rfc8628/grant_types/test_device_code.py::test_invalid_client_error
+FAILED tests/openid/connect/core/grant_types/test_base.py::IDTokenTest::test_finalize_id_token
+FAILED tests/openid/connect/core/grant_types/test_base.py::IDTokenTest::test_finalize_id_token_with_at_hash
+FAILED tests/openid/connect/core/grant_types/test_base.py::IDTokenTest::test_finalize_id_token_with_c_and_at_hash
+FAILED tests/openid/connect/core/grant_types/test_base.py::IDTokenTest::test_finalize_id_token_with_c_hash
+FAILED tests/openid/connect/core/grant_types/test_base.py::IDTokenTest::test_finalize_id_token_with_nonce
+FAILED tests/openid/connect/core/grant_types/test_hybrid.py::OpenIDHybridCodeIdTokenTest::test_id_token_contains_nonce
+== 10 failed, 671 passed, 2 skipped, 4 warnings, 21 subtests passed in 2.82s ===

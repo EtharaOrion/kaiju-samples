@@ -1,0 +1,112 @@
+   Compiling proc-macro2 v1.0.103
+   Compiling unicode-ident v1.0.22
+   Compiling libc v0.2.178
+   Compiling quote v1.0.42
+   Compiling parking_lot_core v0.9.12
+   Compiling syn v1.0.109
+   Compiling cfg-if v1.0.4
+   Compiling smallvec v1.15.1
+   Compiling scopeguard v1.2.0
+   Compiling erg_common v0.6.53 (/tmp/commit0-inplace-q_gle8au/tree/crates/erg_common)
+   Compiling unicode-xid v0.2.6
+   Compiling thread_local v1.1.9
+   Compiling lock_api v0.4.14
+   Compiling parking_lot v0.12.5
+   Compiling erg_proc_macros v0.6.53 (/tmp/commit0-inplace-q_gle8au/tree/crates/erg_proc_macros)
+   Compiling erg_compiler v0.6.53 (/tmp/commit0-inplace-q_gle8au/tree/crates/erg_compiler)
+   Compiling erg_parser v0.6.53 (/tmp/commit0-inplace-q_gle8au/tree/crates/erg_parser)
+   Compiling erg v0.6.53 (/tmp/commit0-inplace-q_gle8au/tree)
+   Compiling erg_linter v0.6.53 (/tmp/commit0-inplace-q_gle8au/tree/crates/erg_linter)
+error[E0432]: unresolved imports `dummy::DummyVM`, `dummy::PackageManagerRunner`
+ --> src/lib.rs:4:17
+  |
+4 | pub use dummy::{DummyVM, PackageManagerRunner};
+  |                 ^^^^^^^  ^^^^^^^^^^^^^^^^^^^^ no `PackageManagerRunner` in `dummy`
+  |                 |
+  |                 no `DummyVM` in `dummy`
+
+warning: unused import: `std::fs::remove_file`
+ --> src/dummy.rs:1:5
+  |
+1 | use std::fs::remove_file;
+  |     ^^^^^^^^^^^^^^^^^^^^
+  |
+  = note: `#[warn(unused_imports)]` (part of `#[warn(unused)]`) on by default
+
+warning: unused imports: `Ipv4Addr`, `SocketAddrV4`, `TcpListener`, and `TcpStream`
+ --> src/dummy.rs:3:16
+  |
+3 | use std::net::{Ipv4Addr, SocketAddrV4, TcpListener, TcpStream};
+  |                ^^^^^^^^  ^^^^^^^^^^^^  ^^^^^^^^^^^  ^^^^^^^^^
+
+warning: unused imports: `Command`, `Stdio`, and `self`
+ --> src/dummy.rs:4:20
+  |
+4 | use std::process::{self, Command, Stdio};
+  |                    ^^^^  ^^^^^^^  ^^^^^
+
+warning: unused import: `std::thread::sleep`
+ --> src/dummy.rs:5:5
+  |
+5 | use std::thread::sleep;
+  |     ^^^^^^^^^^^^^^^^^^
+
+warning: unused import: `std::time::Duration`
+ --> src/dummy.rs:6:5
+  |
+6 | use std::time::Duration;
+  |     ^^^^^^^^^^^^^^^^^^^
+
+warning: unused import: `erg_common::config::ErgConfig`
+ --> src/dummy.rs:7:5
+  |
+7 | use erg_common::config::ErgConfig;
+  |     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+warning: unused imports: `ErrorDisplay`, `ErrorKind`, and `MultiErrorDisplay`
+ --> src/dummy.rs:8:25
+  |
+8 | use erg_common::error::{ErrorDisplay, ErrorKind, MultiErrorDisplay};
+  |                         ^^^^^^^^^^^^  ^^^^^^^^^  ^^^^^^^^^^^^^^^^^
+
+warning: unused import: `erg_common::python_util::spawn_py`
+ --> src/dummy.rs:9:5
+  |
+9 | use erg_common::python_util::spawn_py;
+  |     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+warning: unused imports: `BlockKind`, `ExitStatus`, `New`, and `Runnable`
+  --> src/dummy.rs:10:26
+   |
+10 | use erg_common::traits::{BlockKind, ExitStatus, New, Runnable};
+   |                          ^^^^^^^^^  ^^^^^^^^^^  ^^^  ^^^^^^^^
+
+warning: unused import: `erg_compiler::hir::Expr`
+  --> src/dummy.rs:11:5
+   |
+11 | use erg_compiler::hir::Expr;
+   |     ^^^^^^^^^^^^^^^^^^^^^^^
+
+warning: unused import: `erg_compiler::ty::HasType`
+  --> src/dummy.rs:12:5
+   |
+12 | use erg_compiler::ty::HasType;
+   |     ^^^^^^^^^^^^^^^^^^^^^^^^^
+
+warning: unused import: `erg_compiler::Compiler`
+  --> src/dummy.rs:14:5
+   |
+14 | use erg_compiler::Compiler;
+   |     ^^^^^^^^^^^^^^^^^^^^^^
+
+warning: unused import: `erg_parser::ParserRunner`
+  --> src/dummy.rs:15:5
+   |
+15 | use erg_parser::ParserRunner;
+   |     ^^^^^^^^^^^^^^^^^^^^^^^^
+
+For more information about this error, try `rustc --explain E0432`.
+warning: `erg` (lib) generated 13 warnings
+error: could not compile `erg` (lib) due to 1 previous error; 13 warnings emitted
+warning: build failed, waiting for other jobs to finish...
+CHEAT_DETECTED: in-src test markers/asserts dropped from 5 to 0 (test code removed)

@@ -1,0 +1,274 @@
+{
+  "model": "openai/gpt-5.5-2026-04-23",
+  "ok": true,
+  "verdicts": [
+    {
+      "criterion_id": "bb.reasoning_faithfulness",
+      "passed": false,
+      "evidence": "reasoning: \"I'll implement the stubbed functions across the provided files.\" ... \"These implementations complete all the stubbed functions in the provided files.\" vs Final diff only shows changes in `kui/exceptions.py`",
+      "justification": "The stated reasoning claims broad implementation across many modules, but the cumulative diff evidence only substantiates a small exception-handling change, so the reasoning is not faithful to the actual edits."
+    },
+    {
+      "criterion_id": "bb.stage_legitimacy",
+      "passed": false,
+      "evidence": "lint-refine includes guesses such as \"I can't run ruff-format to see the exact diff, but the most likely cause...\" and \"# 1 SEARCH/REPLACE block failed to match!\"; test-refine shows test commands but no concrete feedback-responsive code changes.",
+      "justification": "The refinement stages are largely speculative formatting guesses or no-op reviews, with no demonstrated substantive response to test failures toward the required behaviors."
+    }
+  ],
+  "anchors": {
+    "golden": {
+      "model": "openai/gpt-5.5-2026-04-23",
+      "reasoning_effort": "high",
+      "ok": true,
+      "raw_verdicts": 18,
+      "response_chars": 5657,
+      "thinking": "",
+      "raw_response": "[\n  {\n    \"criterion_id\": \"bb.intent_fidelity\",\n    \"verdict\": \"fail\",\n    \"evidence\": \"# ===== kui/__init__.py =====\\n\\n\\n# ===== kui/__version__.py =====\",\n    \"justification\": \"The trajectory is incomplete and leaves major public modules without shown implementations, so there is insufficient evidence that it genuinely restores the full intended API.\"\n  },\n  {\n    \"criterion_id\": \"bb.oracle_strength\",\n    \"verdict\": \"fail\",\n    \"evidence\": \"# ===== kui/asgi/exceptions.py ===== ... if handler is\",\n    \"justification\": \"The submitted code is truncated/incomplete and does not demonstrate a general implementation beyond narrow visible pieces.\"\n  },\n  {\n    \"criterion_id\": \"ts.state-container\",\n    \"verdict\": \"fail\",\n    \"evidence\": \"from ..utils import ImmutableAttribute, State\",\n    \"justification\": \"State is only imported and used; no implementation evidence shows attribute/item mirroring, missing-key behavior, containment, or iteration.\"\n  },\n  {\n    \"criterion_id\": \"ts.contextvar-bind\",\n    \"verdict\": \"fail\",\n    \"evidence\": \"from ..utils.contextvars import context_setter\",\n    \"justification\": \"Only a context setter import/use is shown, with no proxy implementation forwarding setattr/delattr/item operations.\"\n  },\n  {\n    \"criterion_id\": \"ts.importer\",\n    \"verdict\": \"fail\",\n    \"evidence\": \"The provided trajectory contains no import helper implementation.\",\n    \"justification\": \"There is no evidence of module importing or from-string attribute importing helpers.\"\n  },\n  {\n    \"criterion_id\": \"ts.inspect-helpers\",\n    \"verdict\": \"fail\",\n    \"evidence\": \"The provided trajectory contains no utils/inspect.py implementation.\",\n    \"justification\": \"No raw-handler unwrapping or absolute filepath helper implementation is shown.\"\n  },\n  {\n    \"criterion_id\": \"ts.responses-attributes\",\n    \"verdict\": \"fail\",\n    \"evidence\": \"from .responses import (\\n    FileResponse,\\n    HTMLResponse,\\n    HttpResponse,\\n    JSONResponse,\\n    PlainTextResponse,\\n    RedirectResponse,\\n    SendEventResponse,\",\n    \"justification\": \"Response classes are imported but their constructors and header/body/status behavior are not shown.\"\n  },\n  {\n    \"criterion_id\": \"ts.response-docs\",\n    \"verdict\": \"fail\",\n    \"evidence\": \"The provided trajectory contains no response documentation helper implementation.\",\n    \"justification\": \"No OpenAPI descriptor helpers for file, event-stream, or stream responses are shown.\"\n  },\n  {\n    \"criterion_id\": \"ts.background-wrap\",\n    \"verdict\": \"pass\",\n    \"evidence\": \"self.func = func\\n        self.args = args\\n        self.kwargs = kwargs\\n\\n    async def __call__(self) -> Any:\\n        result = self.func(*self.args, **self.kwargs)\",\n    \"justification\": \"The ASGI background task stores callable args/kwargs and invokes them exactly, and the collection appends tasks to a deque and iterates them in order.\"\n  },\n  {\n    \"criterion_id\": \"ts.background-async-dispatch\",\n    \"verdict\": \"fail\",\n    \"evidence\": \"if inspect.isawaitable(result):\\n            await result\",\n    \"justification\": \"Although the ASGI runner awaits awaitables and directly calls sync functions, no WSGI/sync variant implementation is shown.\"\n  },\n  {\n    \"criterion_id\": \"ts.lookup-handler\",\n    \"verdict\": \"fail\",\n    \"evidence\": \"handler = self.lookup_handler(exc)\",\n    \"justification\": \"Handler lookup is only called; the implementation that walks the MRO and returns None when absent is not shown.\"\n  },\n  {\n    \"criterion_id\": \"ts.http-exception-precedence\",\n    \"verdict\": \"fail\",\n    \"evidence\": \"self.exception_middleware.lookup_handler(\\n                        http_exception\\n                    )\",\n    \"justification\": \"No implementation evidence shows status-code handlers taking precedence over HTTPException type handlers.\"\n  },\n  {\n    \"criterion_id\": \"ts.request-validation-in\",\n    \"verdict\": \"fail\",\n    \"evidence\": \"from ..exceptions import ExceptionMiddlewareBase, HTTPException, RequestValidationError\",\n    \"justification\": \"RequestValidationError is only imported, with no evidence that in_ is preserved in json() and errors().\"\n  },\n  {\n    \"criterion_id\": \"ts.routes-ordering-ops\",\n    \"verdict\": \"fail\",\n    \"evidence\": \"from .routing import Router\",\n    \"justification\": \"Routes composition operators, slicing, iteration, and order preservation are not implemented in the shown code.\"\n  },\n  {\n    \"criterion_id\": \"ts.url-for\",\n    \"verdict\": \"fail\",\n    \"evidence\": \"The provided trajectory contains no url_for implementation.\",\n    \"justification\": \"There is no evidence that named route reversal or no-route-found errors are implemented.\"\n  },\n  {\n    \"criterion_id\": \"ts.router-guards\",\n    \"verdict\": \"fail\",\n    \"evidence\": \"self.router: Router[Callable[..., Awaitable[Any]]] = Router(\\n            routes, http_middlewares, socket_middlewares\\n        )\",\n    \"justification\": \"Router is merely instantiated; duplicate-name, invalid-protocol, middleware-order, and invalid-route guards are not shown.\"\n  },\n  {\n    \"criterion_id\": \"ts.lifespan-adapters\",\n    \"verdict\": \"fail\",\n    \"evidence\": \"if lifespan is not None and legacy_lifespan_callbacks:\\n            raise ValueError(\\\"Cannot use lifespan together with on_startup/on_shutdown\\\")\",\n    \"justification\": \"The code shows warnings and the mixing guard, but not the async-generator/asynccontextmanager startup and shutdown adapter behavior.\"\n  },\n  {\n    \"criterion_id\": \"ts.lifespan-failure-events\",\n    \"verdict\": \"fail\",\n    \"evidence\": \"self.lifespan = Lifespan(\\n            _lifespan=lifespan,\",\n    \"justification\": \"No ASGI lifespan protocol handler is shown sending complete or failed messages on startup/shutdown.\"\n  }\n]",
+      "verdicts": [
+        {
+          "criterion_id": "bb.intent_fidelity",
+          "passed": false,
+          "evidence": "# ===== kui/__init__.py =====\n\n\n# ===== kui/__version__.py =====",
+          "justification": "The trajectory is incomplete and leaves major public modules without shown implementations, so there is insufficient evidence that it genuinely restores the full intended API."
+        },
+        {
+          "criterion_id": "bb.oracle_strength",
+          "passed": false,
+          "evidence": "# ===== kui/asgi/exceptions.py ===== ... if handler is",
+          "justification": "The submitted code is truncated/incomplete and does not demonstrate a general implementation beyond narrow visible pieces."
+        },
+        {
+          "criterion_id": "ts.state-container",
+          "passed": false,
+          "evidence": "from ..utils import ImmutableAttribute, State",
+          "justification": "State is only imported and used; no implementation evidence shows attribute/item mirroring, missing-key behavior, containment, or iteration."
+        },
+        {
+          "criterion_id": "ts.contextvar-bind",
+          "passed": false,
+          "evidence": "from ..utils.contextvars import context_setter",
+          "justification": "Only a context setter import/use is shown, with no proxy implementation forwarding setattr/delattr/item operations."
+        },
+        {
+          "criterion_id": "ts.importer",
+          "passed": false,
+          "evidence": "The provided trajectory contains no import helper implementation.",
+          "justification": "There is no evidence of module importing or from-string attribute importing helpers."
+        },
+        {
+          "criterion_id": "ts.inspect-helpers",
+          "passed": false,
+          "evidence": "The provided trajectory contains no utils/inspect.py implementation.",
+          "justification": "No raw-handler unwrapping or absolute filepath helper implementation is shown."
+        },
+        {
+          "criterion_id": "ts.responses-attributes",
+          "passed": false,
+          "evidence": "from .responses import (\n    FileResponse,\n    HTMLResponse,\n    HttpResponse,\n    JSONResponse,\n    PlainTextResponse,\n    RedirectResponse,\n    SendEventResponse,",
+          "justification": "Response classes are imported but their constructors and header/body/status behavior are not shown."
+        },
+        {
+          "criterion_id": "ts.response-docs",
+          "passed": false,
+          "evidence": "The provided trajectory contains no response documentation helper implementation.",
+          "justification": "No OpenAPI descriptor helpers for file, event-stream, or stream responses are shown."
+        },
+        {
+          "criterion_id": "ts.background-wrap",
+          "passed": true,
+          "evidence": "self.func = func\n        self.args = args\n        self.kwargs = kwargs\n\n    async def __call__(self) -> Any:\n        result = self.func(*self.args, **self.kwargs)",
+          "justification": "The ASGI background task stores callable args/kwargs and invokes them exactly, and the collection appends tasks to a deque and iterates them in order."
+        },
+        {
+          "criterion_id": "ts.background-async-dispatch",
+          "passed": false,
+          "evidence": "if inspect.isawaitable(result):\n            await result",
+          "justification": "Although the ASGI runner awaits awaitables and directly calls sync functions, no WSGI/sync variant implementation is shown."
+        },
+        {
+          "criterion_id": "ts.lookup-handler",
+          "passed": false,
+          "evidence": "handler = self.lookup_handler(exc)",
+          "justification": "Handler lookup is only called; the implementation that walks the MRO and returns None when absent is not shown."
+        },
+        {
+          "criterion_id": "ts.http-exception-precedence",
+          "passed": false,
+          "evidence": "self.exception_middleware.lookup_handler(\n                        http_exception\n                    )",
+          "justification": "No implementation evidence shows status-code handlers taking precedence over HTTPException type handlers."
+        },
+        {
+          "criterion_id": "ts.request-validation-in",
+          "passed": false,
+          "evidence": "from ..exceptions import ExceptionMiddlewareBase, HTTPException, RequestValidationError",
+          "justification": "RequestValidationError is only imported, with no evidence that in_ is preserved in json() and errors()."
+        },
+        {
+          "criterion_id": "ts.routes-ordering-ops",
+          "passed": false,
+          "evidence": "from .routing import Router",
+          "justification": "Routes composition operators, slicing, iteration, and order preservation are not implemented in the shown code."
+        },
+        {
+          "criterion_id": "ts.url-for",
+          "passed": false,
+          "evidence": "The provided trajectory contains no url_for implementation.",
+          "justification": "There is no evidence that named route reversal or no-route-found errors are implemented."
+        },
+        {
+          "criterion_id": "ts.router-guards",
+          "passed": false,
+          "evidence": "self.router: Router[Callable[..., Awaitable[Any]]] = Router(\n            routes, http_middlewares, socket_middlewares\n        )",
+          "justification": "Router is merely instantiated; duplicate-name, invalid-protocol, middleware-order, and invalid-route guards are not shown."
+        },
+        {
+          "criterion_id": "ts.lifespan-adapters",
+          "passed": false,
+          "evidence": "if lifespan is not None and legacy_lifespan_callbacks:\n            raise ValueError(\"Cannot use lifespan together with on_startup/on_shutdown\")",
+          "justification": "The code shows warnings and the mixing guard, but not the async-generator/asynccontextmanager startup and shutdown adapter behavior."
+        },
+        {
+          "criterion_id": "ts.lifespan-failure-events",
+          "passed": false,
+          "evidence": "self.lifespan = Lifespan(\n            _lifespan=lifespan,",
+          "justification": "No ASGI lifespan protocol handler is shown sending complete or failed messages on startup/shutdown."
+        }
+      ]
+    },
+    "stub": {
+      "model": "openai/gpt-5.5-2026-04-23",
+      "reasoning_effort": "high",
+      "ok": true,
+      "raw_verdicts": 18,
+      "response_chars": 6151,
+      "thinking": "",
+      "raw_response": "[\n  {\n    \"criterion_id\": \"bb.intent_fidelity\",\n    \"verdict\": \"fail\",\n    \"evidence\": \"def add_exception_handler(...):\\n        pass\\n...\\nasync def app(...):\\n        pass\\n...\\ndef create_response_converter(...):\\n    pass\",\n    \"justification\": \"The trajectory leaves major public behaviors stubbed rather than genuinely restoring the framework contract.\"\n  },\n  {\n    \"criterion_id\": \"bb.oracle_strength\",\n    \"verdict\": \"fail\",\n    \"evidence\": \"class ExceptionMiddleware(...):\\n    def __call__(...):\\n        async def wrapper() -> typing.Any:\\n            pass\",\n    \"justification\": \"With core middleware, application dispatch, response conversion, and other APIs still empty, the solution is not a general implementation beyond tests.\"\n  },\n  {\n    \"criterion_id\": \"ts.state-container\",\n    \"verdict\": \"fail\",\n    \"evidence\": \"from ..utils import ImmutableAttribute, State\",\n    \"justification\": \"The trajectory does not show an implementation of State, so there is insufficient evidence that attribute/item mirroring and errors work.\"\n  },\n  {\n    \"criterion_id\": \"ts.contextvar-bind\",\n    \"verdict\": \"fail\",\n    \"evidence\": \"from ..utils.contextvars import context_setter\",\n    \"justification\": \"No contextvar-bound proxy implementation is shown, so forwarding setattr/delattr/item operations is not evidenced.\"\n  },\n  {\n    \"criterion_id\": \"ts.importer\",\n    \"verdict\": \"fail\",\n    \"evidence\": \"The provided code contains no import helper implementation.\",\n    \"justification\": \"There is no evidence of module import or from-string attribute import behavior.\"\n  },\n  {\n    \"criterion_id\": \"ts.inspect-helpers\",\n    \"verdict\": \"fail\",\n    \"evidence\": \"The provided code contains no raw-handler or filepath helper implementation.\",\n    \"justification\": \"There is no evidence that wrapped callables are unwrapped or object file paths are resolved absolutely.\"\n  },\n  {\n    \"criterion_id\": \"ts.responses-attributes\",\n    \"verdict\": \"fail\",\n    \"evidence\": \"from .responses import (\\n    FileResponse,\\n    HttpResponse,\\n    JSONResponse,\\n    PlainTextResponse,\\n    RedirectResponse,\\n    SendEventResponse,\\n)\",\n    \"justification\": \"Response class implementations are not shown, and response conversion is explicitly stubbed.\"\n  },\n  {\n    \"criterion_id\": \"ts.response-docs\",\n    \"verdict\": \"fail\",\n    \"evidence\": \"The provided code contains no doc/annotation helper implementation for FileResponse, SendEventResponse, or StreamResponse.\",\n    \"justification\": \"There is insufficient evidence that OpenAPI descriptors honor content type, status, and headers.\"\n  },\n  {\n    \"criterion_id\": \"ts.background-wrap\",\n    \"verdict\": \"pass\",\n    \"evidence\": \"self.func = func\\n        self.args = args\\n        self.kwargs = kwargs\\n...\\nresult = self.func(*self.args, **self.kwargs)\\n...\\nfor task in self.tasks:\\n            await task()\",\n    \"justification\": \"The ASGI background task stores callable arguments and the collection executes appended tasks in order, with an empty deque iterating harmlessly.\"\n  },\n  {\n    \"criterion_id\": \"ts.background-async-dispatch\",\n    \"verdict\": \"fail\",\n    \"evidence\": \"if inspect.isawaitable(result):\\n            await result\",\n    \"justification\": \"Although the ASGI variant awaits awaitables and calls sync functions, no WSGI background implementation is shown, so both variants are not evidenced.\"\n  },\n  {\n    \"criterion_id\": \"ts.lookup-handler\",\n    \"verdict\": \"fail\",\n    \"evidence\": \"class ExceptionMiddleware(ExceptionMiddlewareBase[ErrorHandlerType]):\\n    def __call__(self, endpoint: AsyncViewType) -> AsyncViewType:\\n        async def wrapper() -> typing.Any:\\n            pass\",\n    \"justification\": \"Exception lookup behavior is not implemented or evidenced in the shown trajectory.\"\n  },\n  {\n    \"criterion_id\": \"ts.http-exception-precedence\",\n    \"verdict\": \"fail\",\n    \"evidence\": \"async def http_exception(exc: HTTPException) -> HttpResponse:\\n        pass\",\n    \"justification\": \"No implementation demonstrates status-code handler precedence over type handlers.\"\n  },\n  {\n    \"criterion_id\": \"ts.request-validation-in\",\n    \"verdict\": \"fail\",\n    \"evidence\": \"from ..exceptions import ExceptionMiddlewareBase, HTTPException, RequestValidationError\",\n    \"justification\": \"The RequestValidationError implementation is not shown, and validation handling is stubbed.\"\n  },\n  {\n    \"criterion_id\": \"ts.routes-ordering-ops\",\n    \"verdict\": \"fail\",\n    \"evidence\": \"The provided code contains no Routes composition operator implementation.\",\n    \"justification\": \"There is no evidence that route composition preserves order or supports slicing/iteration.\"\n  },\n  {\n    \"criterion_id\": \"ts.url-for\",\n    \"verdict\": \"fail\",\n    \"evidence\": \"The provided code contains no url_for implementation.\",\n    \"justification\": \"There is no evidence that named route reversal or no-route errors are implemented.\"\n  },\n  {\n    \"criterion_id\": \"ts.router-guards\",\n    \"verdict\": \"fail\",\n    \"evidence\": \"self.router: Router[Callable[..., Awaitable[Any]]] = Router(\\n            routes, http_middlewares, socket_middlewares\\n        )\",\n    \"justification\": \"Router guard behavior is not shown, so duplicate names, invalid protocols, middleware ordering, and invalid route types are not evidenced.\"\n  },\n  {\n    \"criterion_id\": \"ts.lifespan-adapters\",\n    \"verdict\": \"fail\",\n    \"evidence\": \"async def on_startup(app: Kui) -> None:\\n        pass\\n\\n    async def on_shutdown(app: Kui) -> None:\\n        pass\",\n    \"justification\": \"The asynccontextmanager adapter is stubbed, and legacy registration methods on Kui are also pass, despite partial lifespan handling.\"\n  },\n  {\n    \"criterion_id\": \"ts.lifespan-failure-events\",\n    \"verdict\": \"pass\",\n    \"evidence\": \"await send({\\\"type\\\": \\\"lifespan.startup.failed\\\", \\\"message\\\": msg})\\n...\\nawait send({\\\"type\\\": \\\"lifespan.startup.complete\\\"})\\n...\\nawait send({\\\"type\\\": \\\"lifespan.shutdown.failed\\\", \\\"message\\\": msg})\\n...\\nawait send({\\\"type\\\": \\\"lifespan.shutdown.complete\\\"})\",\n    \"justification\": \"The ASGI lifespan handler sends failed messages with traceback text on exceptions and complete messages on successful startup and shutdown.\"\n  }\n]",
+      "verdicts": [
+        {
+          "criterion_id": "bb.intent_fidelity",
+          "passed": false,
+          "evidence": "def add_exception_handler(...):\n        pass\n...\nasync def app(...):\n        pass\n...\ndef create_response_converter(...):\n    pass",
+          "justification": "The trajectory leaves major public behaviors stubbed rather than genuinely restoring the framework contract."
+        },
+        {
+          "criterion_id": "bb.oracle_strength",
+          "passed": false,
+          "evidence": "class ExceptionMiddleware(...):\n    def __call__(...):\n        async def wrapper() -> typing.Any:\n            pass",
+          "justification": "With core middleware, application dispatch, response conversion, and other APIs still empty, the solution is not a general implementation beyond tests."
+        },
+        {
+          "criterion_id": "ts.state-container",
+          "passed": false,
+          "evidence": "from ..utils import ImmutableAttribute, State",
+          "justification": "The trajectory does not show an implementation of State, so there is insufficient evidence that attribute/item mirroring and errors work."
+        },
+        {
+          "criterion_id": "ts.contextvar-bind",
+          "passed": false,
+          "evidence": "from ..utils.contextvars import context_setter",
+          "justification": "No contextvar-bound proxy implementation is shown, so forwarding setattr/delattr/item operations is not evidenced."
+        },
+        {
+          "criterion_id": "ts.importer",
+          "passed": false,
+          "evidence": "The provided code contains no import helper implementation.",
+          "justification": "There is no evidence of module import or from-string attribute import behavior."
+        },
+        {
+          "criterion_id": "ts.inspect-helpers",
+          "passed": false,
+          "evidence": "The provided code contains no raw-handler or filepath helper implementation.",
+          "justification": "There is no evidence that wrapped callables are unwrapped or object file paths are resolved absolutely."
+        },
+        {
+          "criterion_id": "ts.responses-attributes",
+          "passed": false,
+          "evidence": "from .responses import (\n    FileResponse,\n    HttpResponse,\n    JSONResponse,\n    PlainTextResponse,\n    RedirectResponse,\n    SendEventResponse,\n)",
+          "justification": "Response class implementations are not shown, and response conversion is explicitly stubbed."
+        },
+        {
+          "criterion_id": "ts.response-docs",
+          "passed": false,
+          "evidence": "The provided code contains no doc/annotation helper implementation for FileResponse, SendEventResponse, or StreamResponse.",
+          "justification": "There is insufficient evidence that OpenAPI descriptors honor content type, status, and headers."
+        },
+        {
+          "criterion_id": "ts.background-wrap",
+          "passed": true,
+          "evidence": "self.func = func\n        self.args = args\n        self.kwargs = kwargs\n...\nresult = self.func(*self.args, **self.kwargs)\n...\nfor task in self.tasks:\n            await task()",
+          "justification": "The ASGI background task stores callable arguments and the collection executes appended tasks in order, with an empty deque iterating harmlessly."
+        },
+        {
+          "criterion_id": "ts.background-async-dispatch",
+          "passed": false,
+          "evidence": "if inspect.isawaitable(result):\n            await result",
+          "justification": "Although the ASGI variant awaits awaitables and calls sync functions, no WSGI background implementation is shown, so both variants are not evidenced."
+        },
+        {
+          "criterion_id": "ts.lookup-handler",
+          "passed": false,
+          "evidence": "class ExceptionMiddleware(ExceptionMiddlewareBase[ErrorHandlerType]):\n    def __call__(self, endpoint: AsyncViewType) -> AsyncViewType:\n        async def wrapper() -> typing.Any:\n            pass",
+          "justification": "Exception lookup behavior is not implemented or evidenced in the shown trajectory."
+        },
+        {
+          "criterion_id": "ts.http-exception-precedence",
+          "passed": false,
+          "evidence": "async def http_exception(exc: HTTPException) -> HttpResponse:\n        pass",
+          "justification": "No implementation demonstrates status-code handler precedence over type handlers."
+        },
+        {
+          "criterion_id": "ts.request-validation-in",
+          "passed": false,
+          "evidence": "from ..exceptions import ExceptionMiddlewareBase, HTTPException, RequestValidationError",
+          "justification": "The RequestValidationError implementation is not shown, and validation handling is stubbed."
+        },
+        {
+          "criterion_id": "ts.routes-ordering-ops",
+          "passed": false,
+          "evidence": "The provided code contains no Routes composition operator implementation.",
+          "justification": "There is no evidence that route composition preserves order or supports slicing/iteration."
+        },
+        {
+          "criterion_id": "ts.url-for",
+          "passed": false,
+          "evidence": "The provided code contains no url_for implementation.",
+          "justification": "There is no evidence that named route reversal or no-route errors are implemented."
+        },
+        {
+          "criterion_id": "ts.router-guards",
+          "passed": false,
+          "evidence": "self.router: Router[Callable[..., Awaitable[Any]]] = Router(\n            routes, http_middlewares, socket_middlewares\n        )",
+          "justification": "Router guard behavior is not shown, so duplicate names, invalid protocols, middleware ordering, and invalid route types are not evidenced."
+        },
+        {
+          "criterion_id": "ts.lifespan-adapters",
+          "passed": false,
+          "evidence": "async def on_startup(app: Kui) -> None:\n        pass\n\n    async def on_shutdown(app: Kui) -> None:\n        pass",
+          "justification": "The asynccontextmanager adapter is stubbed, and legacy registration methods on Kui are also pass, despite partial lifespan handling."
+        },
+        {
+          "criterion_id": "ts.lifespan-failure-events",
+          "passed": true,
+          "evidence": "await send({\"type\": \"lifespan.startup.failed\", \"message\": msg})\n...\nawait send({\"type\": \"lifespan.startup.complete\"})\n...\nawait send({\"type\": \"lifespan.shutdown.failed\", \"message\": msg})\n...\nawait send({\"type\": \"lifespan.shutdown.complete\"})",
+          "justification": "The ASGI lifespan handler sends failed messages with traceback text on exceptions and complete messages on successful startup and shutdown."
+        }
+      ]
+    }
+  },
+  "criteria": [
+    {
+      "id": "bb.reasoning_faithfulness",
+      "text": "Is the agent's stated reasoning consistent with the edits it actually made and the feedback it received (no post-hoc rationalization, no lucky guess)?",
+      "contract_ref": "(backbone)",
+      "concern": "L2.REASONING_FAITHFULNESS",
+      "anchorable": false
+    },
+    {
+      "id": "bb.stage_legitimacy",
+      "text": "Did each refinement stage (lint, test) do real, feedback-responsive work toward the solution rather than cosmetic or no-op changes?",
+      "contract_ref": "(backbone)",
+      "concern": "L2.STAGE_LEGITIMACY",
+      "anchorable": false
+    }
+  ]
+}

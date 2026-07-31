@@ -1,0 +1,202 @@
+[1m============================= test session starts ==============================[0m
+platform linux -- Python 3.9.25, pytest-8.4.2, pluggy-1.6.0
+rootdir: /tmp/commit0-inplace-27hf8dkt/tree
+configfile: pyproject.toml
+plugins: asyncio-1.2.0, cov-7.1.0, json-report-1.5.0, metadata-3.1.1, rerunfailures-16.0.1
+asyncio: mode=auto, debug=False, asyncio_default_fixture_loop_scope=None, asyncio_default_test_loop_scope=function
+collected 324 items
+
+test/aio/test_lsh.py [33ms[0m[33ms[0m[33ms[0m[33ms[0m[33ms[0m[33ms[0m[33ms[0m[33ms[0m[33ms[0m[33ms[0m[33ms[0m[33ms[0m[33ms[0m[33ms[0m[33ms[0m[33ms[0m[33ms[0m[33ms[0m[33ms[0m[33ms[0m[33ms[0m[33ms[0m[33ms[0m[33ms[0m[33ms[0m[33ms[0m[33ms[0m[33ms[0m[33ms[0m[33ms[0m[33ms[0m[33ms[0m[33ms[0m[33ms[0m[33ms[0m[33ms[0m[33ms[0m[33ms[0m[33ms[0m[33ms[0m[33ms[0m[33ms[0m[33ms[0m[33ms[0m[33ms[0m[33ms[0m[33ms[0m[33ms[0m[33ms[0m[33ms[0m[33ms[0m[32m [ 15%]
+[0m[33ms[0m[33ms[0m[33ms[0m[33ms[0m[33ms[0m[33ms[0m[33ms[0m[33ms[0m[33ms[0m[33ms[0m[33ms[0m[32m                                                              [ 19%][0m
+test/test_hnsw.py [32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[33m           [ 32%][0m
+test/test_hyperloglog.py [32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[33m                      [ 40%][0m
+test/test_integration.py [33ms[0m[33ms[0m[33ms[0m[33ms[0m[33ms[0m[33ms[0m[33ms[0m[33ms[0m[33ms[0m[33ms[0m[33ms[0m[33ms[0m[33ms[0m[33ms[0m[33ms[0m[33ms[0m[33ms[0m[33ms[0m[33ms[0m[33ms[0m[33ms[0m[33ms[0m[33ms[0m[33ms[0m[33ms[0m[33ms[0m[33ms[0m[33ms[0m[33ms[0m[33ms[0m[33ms[0m[33ms[0m[33m                [ 50%][0m
+test/test_lean_minhash.py [32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[33m                                 [ 54%][0m
+test/test_lsh.py [32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[31mF[0m[32m.[0m[32m.[0m[31mF[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[31m                                [ 62%][0m
+test/test_lshbloom.py [33ms[0m[33ms[0m[33ms[0m[33ms[0m[33ms[0m[33ms[0m[33ms[0m[33ms[0m[33ms[0m[31m                                          [ 65%][0m
+test/test_lshensemble.py [32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[31mF[0m[31m                                          [ 66%][0m
+test/test_lshforest.py [32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[31m                                         [ 69%][0m
+test/test_minhash.py [32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[31mF[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[31m                                   [ 75%][0m
+test/test_minhash_gpu.py [32m.[0m[33ms[0m[32m.[0m[33ms[0m[32m.[0m[31mF[0m[31m                                          [ 76%][0m
+test/test_minhash_schemes.py [32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[31mF[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[31m [ 90%]
+[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[31m                                                   [ 96%][0m
+test/test_weighted_minhash.py [32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[31m                                 [100%][0m
+
+=================================== FAILURES ===================================
+[31m[1m__________ TestMinHashLSH.test_query_buffer_matches_query_candidates ___________[0m
+
+self = <test.test_lsh.TestMinHashLSH testMethod=test_query_buffer_matches_query_candidates>
+
+    [0m[94mdef[39;49;00m[90m [39;49;00m[92mtest_query_buffer_matches_query_candidates[39;49;00m([96mself[39;49;00m):[90m[39;49;00m
+        lsh = MinHashLSH(threshold=[94m0.5[39;49;00m, num_perm=[94m32[39;49;00m)[90m[39;49;00m
+        docs = [][90m[39;49;00m
+        [94mfor[39;49;00m tokens [95min[39;49;00m ([[33mb[39;49;00m[33m"[39;49;00m[33ma[39;49;00m[33m"[39;49;00m, [33mb[39;49;00m[33m"[39;49;00m[33mb[39;49;00m[33m"[39;49;00m, [33mb[39;49;00m[33m"[39;49;00m[33mc[39;49;00m[33m"[39;49;00m], [[33mb[39;49;00m[33m"[39;49;00m[33ma[39;49;00m[33m"[39;49;00m, [33mb[39;49;00m[33m"[39;49;00m[33mb[39;49;00m[33m"[39;49;00m, [33mb[39;49;00m[33m"[39;49;00m[33md[39;49;00m[33m"[39;49;00m], [[33mb[39;49;00m[33m"[39;49;00m[33mx[39;49;00m[33m"[39;49;00m, [33mb[39;49;00m[33m"[39;49;00m[33my[39;49;00m[33m"[39;49;00m, [33mb[39;49;00m[33m"[39;49;00m[33mz[39;49;00m[33m"[39;49;00m]):[90m[39;49;00m
+            minhash = MinHash(num_perm=[94m32[39;49;00m)[90m[39;49;00m
+            [94mfor[39;49;00m token [95min[39;49;00m tokens:[90m[39;49;00m
+                minhash.update(token)[90m[39;49;00m
+            docs.append(minhash)[90m[39;49;00m
+        [94mfor[39;49;00m key, minhash [95min[39;49;00m [96menumerate[39;49;00m(docs):[90m[39;49;00m
+            lsh.insert(key, minhash)[90m[39;49;00m
+    [90m[39;49;00m
+        lsh.add_to_query_buffer(docs[[94m0[39;49;00m])[90m[39;49;00m
+        buffered_result = [96mset[39;49;00m(lsh.collect_query_buffer())[90m[39;49;00m
+        direct_result = [96mset[39;49;00m(lsh.query(docs[[94m0[39;49;00m]))[90m[39;49;00m
+    [90m[39;49;00m
+>       [96mself[39;49;00m.assertEqual(buffered_result, direct_result)[90m[39;49;00m
+[1m[31mE       AssertionError: Items in the second set but not the first:[0m
+[1m[31mE       1[0m
+
+[1m[31mtest/test_lsh.py[0m:124: AssertionError
+[31m[1m__________________ TestMinHashLSH.test_redis_deletion_session __________________[0m
+
+self = <test.test_lsh.TestMinHashLSH testMethod=test_redis_deletion_session>
+
+    [0m[94mdef[39;49;00m[90m [39;49;00m[92mtest_redis_deletion_session[39;49;00m([96mself[39;49;00m):[90m[39;49;00m
+        [94mwith[39;49;00m patch([33m"[39;49;00m[33mredis.Redis[39;49;00m[33m"[39;49;00m, fake_redis):[90m[39;49;00m
+            lsh = MinHashLSH([90m[39;49;00m
+                threshold=[94m0.5[39;49;00m,[90m[39;49;00m
+                num_perm=[94m16[39;49;00m,[90m[39;49;00m
+                storage_config={[33m"[39;49;00m[33mtype[39;49;00m[33m"[39;49;00m: [33m"[39;49;00m[33mredis[39;49;00m[33m"[39;49;00m, [33m"[39;49;00m[33mredis[39;49;00m[33m"[39;49;00m: {[33m"[39;49;00m[33mhost[39;49;00m[33m"[39;49;00m: [33m"[39;49;00m[33mlocalhost[39;49;00m[33m"[39;49;00m, [33m"[39;49;00m[33mport[39;49;00m[33m"[39;49;00m: [94m6379[39;49;00m}},[90m[39;49;00m
+            )[90m[39;49;00m
+    [90m[39;49;00m
+            [90m# The library's RedisBuffer is not completely compatible with mockredis.[39;49;00m[90m[39;49;00m
+            [90m# In order to account for this, we:[39;49;00m[90m[39;49;00m
+            [90m# 1. Replace the buffer with mockredis's own simple pipeline, which can execute.[39;49;00m[90m[39;49;00m
+            [90m# 2. Patch __init__ to prevent the buffer flush from resetting the storage object[39;49;00m[90m[39;49;00m
+            [90m#    and wiping mock data.[39;49;00m[90m[39;49;00m
+            storage_objects = [lsh.keys, *lsh.hashtables][90m[39;49;00m
+            [94mfor[39;49;00m storage [95min[39;49;00m storage_objects:[90m[39;49;00m
+                storage._buffer = storage._redis.pipeline()[90m[39;49;00m
+    [90m[39;49;00m
+            m1 = MinHash([94m16[39;49;00m)[90m[39;49;00m
+            m1.update([33mb[39;49;00m[33m"[39;49;00m[33ma[39;49;00m[33m"[39;49;00m)[90m[39;49;00m
+            m2 = MinHash([94m16[39;49;00m)[90m[39;49;00m
+            m2.update([33mb[39;49;00m[33m"[39;49;00m[33mb[39;49;00m[33m"[39;49;00m)[90m[39;49;00m
+            m3 = MinHash([94m16[39;49;00m)[90m[39;49;00m
+            m3.update([33mb[39;49;00m[33m"[39;49;00m[33mc[39;49;00m[33m"[39;49;00m)[90m[39;49;00m
+            lsh.insert([33m"[39;49;00m[33ma[39;49;00m[33m"[39;49;00m, m1)[90m[39;49;00m
+            lsh.insert([33m"[39;49;00m[33mb[39;49;00m[33m"[39;49;00m, m2)[90m[39;49;00m
+            lsh.insert([33m"[39;49;00m[33mc[39;49;00m[33m"[39;49;00m, m3)[90m[39;49;00m
+    [90m[39;49;00m
+            keys_to_delete = [[33m"[39;49;00m[33ma[39;49;00m[33m"[39;49;00m, [33m"[39;49;00m[33mb[39;49;00m[33m"[39;49;00m][90m[39;49;00m
+    [90m[39;49;00m
+            [94mwith[39;49;00m ([90m[39;49;00m
+                patch.object([96mtype[39;49;00m(lsh.keys), [33m"[39;49;00m[33m__init__[39;49;00m[33m"[39;49;00m, [94mlambda[39;49;00m [96mself[39;49;00m, config, name: [94mNone[39;49;00m),[90m[39;49;00m
+                lsh.deletion_session() [94mas[39;49;00m session,[90m[39;49;00m
+            ):[90m[39;49;00m
+                [94mfor[39;49;00m key [95min[39;49;00m keys_to_delete:[90m[39;49;00m
+>                   session.remove(key)[90m[39;49;00m
+
+[1m[31mtest/test_lsh.py[0m:446: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+[1m[31mdatasketch/lsh.py[0m:453: in __exit__
+    [0m[96mself[39;49;00m.close()[90m[39;49;00m
+[1m[31mdatasketch/lsh.py[0m:456: in close
+    [0m[96mself[39;49;00m.lsh.keys.empty_buffer()[90m[39;49;00m
+[1m[31mdatasketch/storage.py[0m:929: in empty_buffer
+    [0m[96mself[39;49;00m._buffer.reset()[90m[39;49;00m
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = <mockredis.pipeline.MockRedisPipeline object at 0xffff7351c3d0>
+name = 'reset'
+
+    [0m[94mdef[39;49;00m[90m [39;49;00m[92m__getattr__[39;49;00m([96mself[39;49;00m, name):[90m[39;49;00m
+    [90m    [39;49;00m[33m"""[39;49;00m
+    [33m    Handle all unfound attributes by adding a deferred function call that[39;49;00m
+    [33m    delegates to the underlying mock redis instance.[39;49;00m
+    [33m    """[39;49;00m[90m[39;49;00m
+>       command = [96mgetattr[39;49;00m([96mself[39;49;00m.mock_redis, name)[90m[39;49;00m
+[1m[31mE       AttributeError: 'MockRedis' object has no attribute 'reset'[0m
+
+[1m[31m/usr/local/lib/python3.9/site-packages/mockredis/pipeline.py[0m:20: AttributeError
+[31m[1m___________________ TestMinHashLSHEnsemble.test_query_redis ____________________[0m
+
+self = <test.test_lshensemble.TestMinHashLSHEnsemble testMethod=test_query_redis>
+
+    [0m[94mdef[39;49;00m[90m [39;49;00m[92mtest_query_redis[39;49;00m([96mself[39;49;00m):[90m[39;49;00m
+        storage_config = {[90m[39;49;00m
+            [33m"[39;49;00m[33mtype[39;49;00m[33m"[39;49;00m: [33m"[39;49;00m[33mredis[39;49;00m[33m"[39;49;00m,[90m[39;49;00m
+            [33m"[39;49;00m[33mredis[39;49;00m[33m"[39;49;00m: {[90m[39;49;00m
+                [33m"[39;49;00m[33mhost[39;49;00m[33m"[39;49;00m: [33m"[39;49;00m[33mlocalhost[39;49;00m[33m"[39;49;00m,[90m[39;49;00m
+                [33m"[39;49;00m[33mport[39;49;00m[33m"[39;49;00m: [94m6379[39;49;00m,[90m[39;49;00m
+            },[90m[39;49;00m
+        }[90m[39;49;00m
+        [94mwith[39;49;00m patch([33m"[39;49;00m[33mredis.Redis[39;49;00m[33m"[39;49;00m, fake_redis):[90m[39;49;00m
+            lsh = MinHashLSHEnsemble(threshold=[94m0.9[39;49;00m, storage_config=storage_config)[90m[39;49;00m
+            data = [96mlist[39;49;00m([96mself[39;49;00m._data([94m64[39;49;00m))[90m[39;49;00m
+            lsh.index(data)[90m[39;49;00m
+            [94mfor[39;49;00m key, minhash, size [95min[39;49;00m data:[90m[39;49;00m
+                keys = lsh.query(minhash, size)[90m[39;49;00m
+>               [96mself[39;49;00m.assertTrue(key [95min[39;49;00m keys)[90m[39;49;00m
+[1m[31mE               AssertionError: False is not true[0m
+
+[1m[31mtest/test_lshensemble.py[0m:85: AssertionError
+[31m[1m____________________________ TestMinHash.test_union ____________________________[0m
+
+self = <test.test_minhash.TestMinHash testMethod=test_union>
+
+    [0m[94mdef[39;49;00m[90m [39;49;00m[92mtest_union[39;49;00m([96mself[39;49;00m):[90m[39;49;00m
+        m1 = minhash.MinHash([94m4[39;49;00m, [94m1[39;49;00m, gpu_mode=[33m"[39;49;00m[33mdetect[39;49;00m[33m"[39;49;00m, hashfunc=fake_hash_func)[90m[39;49;00m
+        m2 = minhash.MinHash([94m4[39;49;00m, [94m1[39;49;00m, gpu_mode=[33m"[39;49;00m[33mdetect[39;49;00m[33m"[39;49;00m, hashfunc=fake_hash_func)[90m[39;49;00m
+        m2.update([94m12[39;49;00m)[90m[39;49;00m
+        u = minhash.MinHash.union(m1, m2)[90m[39;49;00m
+        [96mself[39;49;00m.assertTrue(u.jaccard(m2) == [94m1.0[39;49;00m)[90m[39;49;00m
+        [96mself[39;49;00m.assertIs(u.hashfunc, fake_hash_func)[90m[39;49;00m
+>       [96mself[39;49;00m.assertEqual(u._gpu_mode, [33m"[39;49;00m[33mdetect[39;49;00m[33m"[39;49;00m)[90m[39;49;00m
+[1m[31mE       AssertionError: 'disable' != 'detect'[0m
+[1m[31mE       - disable[0m
+[1m[31mE       + detect[0m
+
+[1m[31mtest/test_minhash.py[0m:66: AssertionError
+[31m[1m_____________ TestGPUPathOnCPU.test_shim_catches_wrong_cache_dtype _____________[0m
+
+self = <test.test_minhash_gpu.TestGPUPathOnCPU testMethod=test_shim_catches_wrong_cache_dtype>
+
+    [0m[94mdef[39;49;00m[90m [39;49;00m[92mtest_shim_catches_wrong_cache_dtype[39;49;00m([96mself[39;49;00m):[90m[39;49;00m
+        [90m# Mutation guard: forcing uint64 caches for affine32 changes the[39;49;00m[90m[39;49;00m
+        [90m# pre-truncation minimum ordering, so the result must differ from CPU.[39;49;00m[90m[39;49;00m
+        bad = [96mself[39;49;00m._shim()[90m[39;49;00m
+        bad.uint32 = np.uint64  [90m# affine32 caches wrongly built as uint64[39;49;00m[90m[39;49;00m
+        gpu = [96mself[39;49;00m._run_with_shim(bad, [94mTrue[39;49;00m)[90m[39;49;00m
+        m_cpu = MinHash(num_perm=[94m128[39;49;00m, seed=[94m3[39;49;00m, scheme=[33m"[39;49;00m[33maffine32[39;49;00m[33m"[39;49;00m, gpu_mode=[33m"[39;49;00m[33mdisable[39;49;00m[33m"[39;49;00m)[90m[39;49;00m
+        m_cpu.update_batch(_make_data([94m500[39;49;00m))[90m[39;49;00m
+>       [96mself[39;49;00m.assertFalse(np.array_equal(m_cpu.hashvalues, gpu[[33m"[39;49;00m[33maffine32[39;49;00m[33m"[39;49;00m]))[90m[39;49;00m
+[1m[31mE       AssertionError: True is not false[0m
+
+[1m[31mtest/test_minhash_gpu.py[0m:148: AssertionError
+[31m[1m_______ TestLSHSchemeGuards.test_lsh_insert_and_query_mixed_scheme_raise _______[0m
+
+self = <test.test_minhash_schemes.TestLSHSchemeGuards testMethod=test_lsh_insert_and_query_mixed_scheme_raise>
+
+    [0m[94mdef[39;49;00m[90m [39;49;00m[92mtest_lsh_insert_and_query_mixed_scheme_raise[39;49;00m([96mself[39;49;00m):[90m[39;49;00m
+        lsh = MinHashLSH(threshold=[94m0.5[39;49;00m, num_perm=[94m128[39;49;00m)[90m[39;49;00m
+        lsh.insert([33m"[39;49;00m[33mk32[39;49;00m[33m"[39;49;00m, [96mself[39;49;00m._mh([33m"[39;49;00m[33maffine32[39;49;00m[33m"[39;49;00m))[90m[39;49;00m
+        [94mwith[39;49;00m [96mself[39;49;00m.assertRaises([96mValueError[39;49;00m):[90m[39;49;00m
+            lsh.insert([33m"[39;49;00m[33mkleg[39;49;00m[33m"[39;49;00m, [96mself[39;49;00m._mh([33m"[39;49;00m[33mlegacy[39;49;00m[33m"[39;49;00m))[90m[39;49;00m
+        [94mwith[39;49;00m [96mself[39;49;00m.assertRaises([96mValueError[39;49;00m):[90m[39;49;00m
+            lsh.query([96mself[39;49;00m._mh([33m"[39;49;00m[33maffine64[39;49;00m[33m"[39;49;00m))[90m[39;49;00m
+        [94mwith[39;49;00m [96mself[39;49;00m.assertRaises([96mValueError[39;49;00m):[90m[39;49;00m
+>           lsh.add_to_query_buffer([96mself[39;49;00m._mh([33m"[39;49;00m[33maffine64[39;49;00m[33m"[39;49;00m))[90m[39;49;00m
+[1m[31mE           AssertionError: ValueError not raised[0m
+
+[1m[31mtest/test_minhash_schemes.py[0m:325: AssertionError
+[33m=============================== warnings summary ===============================[0m
+test/test_hnsw.py::TestHNSW::test_soft_remove_and_pop_and_clean
+  /usr/local/lib/python3.9/unittest/case.py:550: UserWarning: Issue encountered at i=58 during soft remove unit test: expected 10 results, got 1 results. Potential graph connectivity issue.
+    method()
+
+test/test_hnsw.py::TestHNSWLayerWithReversedEdges::test_soft_remove_and_pop_and_clean
+  /usr/local/lib/python3.9/unittest/case.py:550: UserWarning: Issue encountered at i=92 during soft remove unit test: expected 7 results, got 3 results. Potential graph connectivity issue.
+    method()
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+--------------------------------- JSON report ----------------------------------
+report saved to: report.json
+[36m[1m=========================== short test summary info ============================[0m
+[31mFAILED[0m test/test_lsh.py::[1mTestMinHashLSH::test_query_buffer_matches_query_candidates[0m - AssertionError: Items in the second set but not the first:
+[31mFAILED[0m test/test_lsh.py::[1mTestMinHashLSH::test_redis_deletion_session[0m - AttributeError: 'MockRedis' object has no attribute 'reset'
+[31mFAILED[0m test/test_lshensemble.py::[1mTestMinHashLSHEnsemble::test_query_redis[0m - AssertionError: False is not true
+[31mFAILED[0m test/test_minhash.py::[1mTestMinHash::test_union[0m - AssertionError: 'disable' != 'detect'
+[31mFAILED[0m test/test_minhash_gpu.py::[1mTestGPUPathOnCPU::test_shim_catches_wrong_cache_dtype[0m - AssertionError: True is not false
+[31mFAILED[0m test/test_minhash_schemes.py::[1mTestLSHSchemeGuards::test_lsh_insert_and_query_mixed_scheme_raise[0m - AssertionError: ValueError not raised
+[31m=========== [31m[1m6 failed[0m, [32m213 passed[0m, [33m105 skipped[0m, [33m2 warnings[0m[31m in 26.30s[0m[31m ============[0m

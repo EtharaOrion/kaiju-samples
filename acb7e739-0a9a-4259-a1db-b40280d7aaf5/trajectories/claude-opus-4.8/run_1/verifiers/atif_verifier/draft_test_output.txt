@@ -1,0 +1,4876 @@
+    Updating crates.io index
+     Locking 166 packages to latest Rust 1.88.0 compatible versions
+      Adding bincode v2.0.1 (available: v3.0.0)
+      Adding matchit v0.8.4 (available: v0.8.6)
+      Adding rand v0.8.6 (available: v0.10.2)
+      Adding smol_str v0.3.2 (available: v0.3.6, requires Rust 1.89)
+ Downloading crates ...
+  Downloaded bytes v1.12.1
+  Downloaded memchr v2.8.3
+  Downloaded crossbeam-utils v0.8.22
+  Downloaded regex-automata v0.4.15
+   Compiling proc-macro2 v1.0.106
+   Compiling quote v1.0.46
+   Compiling unicode-ident v1.0.24
+   Compiling pin-project-lite v0.2.17
+   Compiling libc v0.2.186
+   Compiling futures-core v0.3.32
+   Compiling bytes v1.12.1
+   Compiling itoa v1.0.18
+   Compiling once_cell v1.21.4
+   Compiling serde_core v1.0.228
+   Compiling slab v0.4.12
+   Compiling equivalent v1.0.2
+   Compiling serde v1.0.228
+   Compiling hashbrown v0.17.1
+   Compiling futures-sink v0.3.32
+   Compiling futures-task v0.3.32
+   Compiling zmij v1.0.21
+   Compiling httparse v1.10.1
+   Compiling fnv v1.0.7
+   Compiling atomic-waker v1.1.2
+   Compiling smallvec v1.15.2
+   Compiling try-lock v0.2.5
+   Compiling ref-cast v1.0.25
+   Compiling serde_json v1.0.150
+   Compiling tower-service v0.3.3
+   Compiling memchr v2.8.3
+   Compiling crossbeam-utils v0.8.22
+   Compiling regex-syntax v0.8.11
+   Compiling virtue v0.0.18
+   Compiling dyn-clone v1.0.20
+   Compiling nexosim v1.0.0 (/tmp/commit0-inplace-mv5inzf2/tree/nexosim)
+   Compiling unty v0.0.4
+   Compiling log v0.4.33
+   Compiling tower-layer v0.3.3
+   Compiling cfg-if v1.0.4
+   Compiling lazy_static v1.5.0
+   Compiling sync_wrapper v1.0.2
+   Compiling multishot v0.3.2
+   Compiling diatomic-waker v0.2.3
+   Compiling spin_sleep v1.3.3
+   Compiling nu-ansi-term v0.50.3
+   Compiling parking v2.2.1
+   Compiling base64 v0.22.1
+   Compiling recycle-box v0.2.0
+   Compiling percent-encoding v2.3.2
+   Compiling pollster v0.4.0
+   Compiling async-event v0.2.1
+   Compiling futures-channel v0.3.32
+   Compiling tracing-core v0.1.36
+   Compiling http v1.4.2
+   Compiling indexmap v2.14.0
+   Compiling thread_local v1.1.9
+   Compiling tracing-log v0.2.0
+   Compiling syn v2.0.118
+   Compiling mio v1.2.1
+   Compiling socket2 v0.6.4
+   Compiling num_cpus v1.17.0
+   Compiling bincode_derive v2.0.1
+   Compiling http-body v1.0.1
+   Compiling http-body-util v0.1.3
+   Compiling st3 v0.4.1
+   Compiling sharded-slab v0.1.7
+   Compiling tokio v1.52.3
+   Compiling want v0.3.1
+   Compiling regex-automata v0.4.15
+   Compiling matchers v0.2.0
+   Compiling serde_derive_internals v0.29.1
+   Compiling tracing-attributes v0.1.31
+   Compiling futures-macro v0.3.32
+   Compiling serde_derive v1.0.228
+   Compiling ref-cast-impl v1.0.25
+   Compiling pin-project-internal v1.1.13
+   Compiling nexosim-macros v1.0.0 (/tmp/commit0-inplace-mv5inzf2/tree/nexosim-macros)
+   Compiling schemars_derive v1.2.1
+   Compiling tokio-util v0.7.18
+   Compiling tokio-stream v0.1.18
+   Compiling futures-util v0.3.32
+   Compiling pin-project v1.1.13
+   Compiling tracing v0.1.44
+   Compiling h2 v0.4.15
+   Compiling tracing-subscriber v0.3.23
+   Compiling tower v0.5.3
+   Compiling futures-executor v0.3.32
+   Compiling schemars v1.2.1
+   Compiling smol_str v0.3.2
+   Compiling bincode v2.0.1
+   Compiling hyper v1.10.1
+   Compiling tai-time v1.0.0
+error[E0532]: expected unit struct, unit variant or constant, found tuple variant `PushError::Full`
+   --> nexosim/src/channel.rs:177:25
+    |
+177 |                     Err(PushError::Full) => None,
+    |                         ^^^^^^^^^^^^^^^ help: use the tuple variant pattern syntax instead: `PushError::Full(_)`
+    |
+   ::: nexosim/src/channel/queue.rs:306:5
+    |
+306 |     Full(F),
+    |     ------- `PushError::Full` defined here
+
+warning: unused import: `std::cmp`
+ --> nexosim/src/channel/queue.rs:5:5
+  |
+5 | use std::cmp;
+  |     ^^^^^^^^
+  |
+  = note: `#[warn(unused_imports)]` (part of `#[warn(unused)]`) on by default
+
+warning: unused import: `crate::loom_exports::debug_or_loom_assert_eq`
+  --> nexosim/src/channel/queue.rs:14:5
+   |
+14 | use crate::loom_exports::debug_or_loom_assert_eq;
+   |     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+warning: unused import: `std::marker::PhantomData`
+ --> nexosim/src/endpoints/event_source_registry.rs:6:5
+  |
+6 | use std::marker::PhantomData;
+  |     ^^^^^^^^^^^^^^^^^^^^^^^^
+
+warning: unused import: `std::marker::PhantomData`
+ --> nexosim/src/endpoints/query_source_registry.rs:6:5
+  |
+6 | use std::marker::PhantomData;
+  |     ^^^^^^^^^^^^^^^^^^^^^^^^
+
+warning: unused import: `Instant`
+  --> nexosim/src/executor/mt_executor.rs:52:27
+   |
+52 | use std::time::{Duration, Instant};
+   |                           ^^^^^^^
+
+warning: unused import: `crate::channel`
+  --> nexosim/src/executor/mt_executor.rs:55:5
+   |
+55 | use crate::channel;
+   |     ^^^^^^^^^^^^^^
+
+warning: unused import: `crate::simulation::CURRENT_MODEL_ID`
+  --> nexosim/src/executor/mt_executor.rs:61:5
+   |
+61 | use crate::simulation::CURRENT_MODEL_ID;
+   |     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+warning: unused import: `crate::channel`
+  --> nexosim/src/executor/st_executor.rs:11:5
+   |
+11 | use crate::channel;
+   |     ^^^^^^^^^^^^^^
+
+warning: unused imports: `Layout`, `alloc`, `dealloc`, and `handle_alloc_error`
+ --> nexosim/src/executor/task.rs:2:18
+  |
+2 | use std::alloc::{Layout, alloc, dealloc, handle_alloc_error};
+  |                  ^^^^^^  ^^^^^  ^^^^^^^  ^^^^^^^^^^^^^^^^^^
+
+warning: unused import: `self`
+ --> nexosim/src/executor/task.rs:4:16
+  |
+4 | use std::mem::{self, ManuallyDrop};
+  |                ^^^^
+
+warning: unused imports: `Ordering` and `self`
+ --> nexosim/src/executor/task.rs:7:41
+  |
+7 | use crate::loom_exports::sync::atomic::{self, AtomicU64, Ordering};
+  |                                         ^^^^             ^^^^^^^^
+
+warning: unused imports: `Layout` and `dealloc`
+ --> nexosim/src/executor/task/cancel_token.rs:2:18
+  |
+2 | use std::alloc::{Layout, dealloc};
+  |                  ^^^^^^  ^^^^^^^
+
+warning: unused import: `std::mem::ManuallyDrop`
+ --> nexosim/src/executor/task/cancel_token.rs:4:5
+  |
+4 | use std::mem::ManuallyDrop;
+  |     ^^^^^^^^^^^^^^^^^^^^^^
+
+warning: unused imports: `Ordering` and `self`
+ --> nexosim/src/executor/task/cancel_token.rs:6:41
+  |
+6 | use crate::loom_exports::sync::atomic::{self, Ordering};
+  |                                         ^^^^  ^^^^^^^^
+
+warning: unused imports: `RunOnDrop` and `runnable_exists`
+ --> nexosim/src/executor/task/cancel_token.rs:9:19
+  |
+9 | use super::util::{RunOnDrop, runnable_exists};
+  |                   ^^^^^^^^^  ^^^^^^^^^^^^^^^
+
+warning: unused imports: `CLOSED`, `POLLING`, `REF_INC`, and `REF_MASK`
+  --> nexosim/src/executor/task/cancel_token.rs:10:13
+   |
+10 | use super::{CLOSED, POLLING, REF_INC, REF_MASK};
+   |             ^^^^^^  ^^^^^^^  ^^^^^^^  ^^^^^^^^
+
+warning: unused imports: `Layout` and `dealloc`
+ --> nexosim/src/executor/task/promise.rs:2:18
+  |
+2 | use std::alloc::{Layout, dealloc};
+  |                  ^^^^^^  ^^^^^^^
+
+warning: unused import: `std::mem::ManuallyDrop`
+ --> nexosim/src/executor/task/promise.rs:4:5
+  |
+4 | use std::mem::ManuallyDrop;
+  |     ^^^^^^^^^^^^^^^^^^^^^^
+
+warning: unused imports: `Ordering` and `self`
+ --> nexosim/src/executor/task/promise.rs:6:41
+  |
+6 | use crate::loom_exports::sync::atomic::{self, Ordering};
+  |                                         ^^^^  ^^^^^^^^
+
+warning: unused imports: `RunOnDrop` and `runnable_exists`
+ --> nexosim/src/executor/task/promise.rs:9:19
+  |
+9 | use super::util::{RunOnDrop, runnable_exists};
+  |                   ^^^^^^^^^  ^^^^^^^^^^^^^^^
+
+warning: unused imports: `CLOSED`, `POLLING`, `REF_INC`, and `REF_MASK`
+  --> nexosim/src/executor/task/promise.rs:10:13
+   |
+10 | use super::{CLOSED, POLLING, REF_INC, REF_MASK};
+   |             ^^^^^^  ^^^^^^^  ^^^^^^^  ^^^^^^^^
+
+warning: unused imports: `Layout` and `dealloc`
+ --> nexosim/src/executor/task/runnable.rs:2:18
+  |
+2 | use std::alloc::{Layout, dealloc};
+  |                  ^^^^^^  ^^^^^^^
+
+warning: unused imports: `ManuallyDrop` and `self`
+ --> nexosim/src/executor/task/runnable.rs:4:16
+  |
+4 | use std::mem::{self, ManuallyDrop};
+  |                ^^^^  ^^^^^^^^^^^^
+
+warning: unused import: `std::pin::Pin`
+ --> nexosim/src/executor/task/runnable.rs:6:5
+  |
+6 | use std::pin::Pin;
+  |     ^^^^^^^^^^^^^
+
+warning: unused imports: `Context`, `Poll`, `RawWaker`, and `Waker`
+ --> nexosim/src/executor/task/runnable.rs:7:17
+  |
+7 | use std::task::{Context, Poll, RawWaker, Waker};
+  |                 ^^^^^^^  ^^^^  ^^^^^^^^  ^^^^^
+
+warning: unused import: `crate::loom_exports::debug_or_loom_assert`
+ --> nexosim/src/executor/task/runnable.rs:8:5
+  |
+8 | use crate::loom_exports::debug_or_loom_assert;
+  |     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+warning: unused imports: `AtomicU64`, `Ordering`, and `self`
+ --> nexosim/src/executor/task/runnable.rs:9:41
+  |
+9 | use crate::loom_exports::sync::atomic::{self, AtomicU64, Ordering};
+  |                                         ^^^^  ^^^^^^^^^  ^^^^^^^^
+
+warning: unused import: `super::util::RunOnDrop`
+  --> nexosim/src/executor/task/runnable.rs:10:5
+   |
+10 | use super::util::RunOnDrop;
+   |     ^^^^^^^^^^^^^^^^^^^^^^
+
+warning: unused imports: `CLOSED`, `POLLING`, `REF_MASK`, and `WAKE_MASK`
+  --> nexosim/src/executor/task/runnable.rs:11:13
+   |
+11 | use super::{CLOSED, POLLING, REF_MASK, WAKE_MASK};
+   |             ^^^^^^  ^^^^^^^  ^^^^^^^^  ^^^^^^^^^
+
+warning: unused import: `raw_waker_vtable`
+  --> nexosim/src/executor/task/runnable.rs:12:19
+   |
+12 | use super::{Task, raw_waker_vtable};
+   |                   ^^^^^^^^^^^^^^^^
+
+warning: unused imports: `CLOSED`, `POLLING`, and `WAKE_MASK`
+ --> nexosim/src/executor/task/util.rs:1:13
+  |
+1 | use super::{CLOSED, POLLING, WAKE_MASK};
+  |             ^^^^^^  ^^^^^^^  ^^^^^^^^^
+
+warning: unused imports: `RunOnDrop` and `runnable_exists`
+  --> nexosim/src/executor/task.rs:17:18
+   |
+17 | use self::util::{RunOnDrop, runnable_exists};
+   |                  ^^^^^^^^^  ^^^^^^^^^^^^^^^
+
+warning: unused import: `std::ptr`
+ --> nexosim/src/macros/scoped_thread_local.rs:4:5
+  |
+4 | use std::ptr;
+  |     ^^^^^^^^
+
+warning: unused import: `std::any::type_name`
+   --> nexosim/src/model.rs:331:5
+    |
+331 | use std::any::type_name;
+    |     ^^^^^^^^^^^^^^^^^^^
+
+warning: unused import: `std::collections::VecDeque`
+   --> nexosim/src/model.rs:332:5
+    |
+332 | use std::collections::VecDeque;
+    |     ^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+warning: unused import: `std::sync::Mutex`
+   --> nexosim/src/model.rs:334:5
+    |
+334 | use std::sync::Mutex;
+    |     ^^^^^^^^^^^^^^^^
+
+warning: unused import: `crate::ports::PORT_REG`
+   --> nexosim/src/model.rs:337:5
+    |
+337 | use crate::ports::PORT_REG;
+    |     ^^^^^^^^^^^^^^^^^^^^^^
+
+warning: unused imports: `EVENT_KEY_REG`, `RestoreError`, and `SaveError`
+   --> nexosim/src/model.rs:339:14
+    |
+339 |     Address, EVENT_KEY_REG, EventKeyReg, ExecutionError, RestoreError, SaveError,
+    |              ^^^^^^^^^^^^^                               ^^^^^^^^^^^^  ^^^^^^^^^
+
+warning: unused import: `crate::util::serialization::serialization_config`
+   --> nexosim/src/model.rs:342:5
+    |
+342 | use crate::util::serialization::serialization_config;
+    |     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+warning: unused imports: `InputSource` and `self`
+  --> nexosim/src/model/context.rs:11:5
+   |
+11 |     self, Address, EventId, EventIdErased, EventInjector, EventKey, GlobalScheduler,
+   |     ^^^^
+12 |     InjectorQueue, InputSource, Mailbox, ModelInjector, SchedulerRegistry,
+   |                    ^^^^^^^^^^^
+
+warning: unused import: `Bound`
+ --> nexosim/src/path.rs:7:16
+  |
+7 | use std::ops::{Bound, Index, RangeBounds};
+  |                ^^^^^
+
+warning: unused import: `ready`
+ --> nexosim/src/ports/input/model_fn.rs:2:34
+  |
+2 | use std::future::{Future, Ready, ready};
+  |                                  ^^^^^
+
+warning: unused import: `coerce_box`
+ --> nexosim/src/ports/output/sender.rs:8:31
+  |
+8 | use recycle_box::{RecycleBox, coerce_box};
+  |                               ^^^^^^^^^^
+
+warning: unused import: `FilterMapReplierSender`
+  --> nexosim/src/ports/output.rs:17:14
+   |
+17 | use sender::{FilterMapReplierSender, InfallibleSender};
+   |              ^^^^^^^^^^^^^^^^^^^^^^
+
+warning: unused imports: `EventSinkSender`, `FilterMapEventSinkSender`, `FilterMapInputSender`, `InputSender`, `MapEventSinkSender`, `MapInputSender`, `MapReplierSender`, and `ReplierSender`
+  --> nexosim/src/ports/output.rs:19:5
+   |
+19 |     EventSinkSender, FilterMapEventSinkSender, FilterMapInputSender, InputSender,
+   |     ^^^^^^^^^^^^^^^  ^^^^^^^^^^^^^^^^^^^^^^^^  ^^^^^^^^^^^^^^^^^^^^  ^^^^^^^^^^^
+20 |     MapEventSinkSender, MapInputSender, MapReplierSender, ReplierSender,
+   |     ^^^^^^^^^^^^^^^^^^  ^^^^^^^^^^^^^^  ^^^^^^^^^^^^^^^^  ^^^^^^^^^^^^^
+
+warning: unused import: `Ordering`
+ --> nexosim/src/ports/sink/event_queue.rs:4:37
+  |
+4 | use std::sync::atomic::{AtomicBool, Ordering};
+  |                                     ^^^^^^^^
+
+warning: unused import: `Ordering`
+ --> nexosim/src/ports/sink/event_slot.rs:4:50
+  |
+4 | use std::sync::atomic::{AtomicBool, AtomicUsize, Ordering};
+  |                                                  ^^^^^^^^
+
+warning: unused import: `std::mem`
+ --> nexosim/src/ports/source/broadcaster.rs:2:5
+  |
+2 | use std::mem;
+  |     ^^^^^^^^
+
+warning: unused import: `futures_channel::oneshot`
+ --> nexosim/src/ports/source/sender.rs:5:5
+  |
+5 | use futures_channel::oneshot;
+  |     ^^^^^^^^^^^^^^^^^^^^^^^^
+
+warning: unused imports: `RecycleBox` and `coerce_box`
+ --> nexosim/src/ports/source/sender.rs:6:19
+  |
+6 | use recycle_box::{RecycleBox, coerce_box};
+  |                   ^^^^^^^^^^  ^^^^^^^^^^
+
+warning: unused imports: `FilterMapInputSender`, `FilterMapReplierSender`, `InputSender`, `MapInputSender`, `MapReplierSender`, and `ReplierSender`
+  --> nexosim/src/ports/source.rs:20:5
+   |
+20 |     FilterMapInputSender, FilterMapReplierSender, InputSender, MapInputSender,
+   |     ^^^^^^^^^^^^^^^^^^^^  ^^^^^^^^^^^^^^^^^^^^^^  ^^^^^^^^^^^  ^^^^^^^^^^^^^^
+21 |     MapReplierSender, ReplierSender,
+   |     ^^^^^^^^^^^^^^^^  ^^^^^^^^^^^^^
+
+warning: unused imports: `RecycleBox` and `coerce_box`
+ --> nexosim/src/simulation/injector.rs:5:19
+  |
+5 | use recycle_box::{RecycleBox, coerce_box};
+  |                   ^^^^^^^^^^  ^^^^^^^^^^
+
+warning: unused import: `super::GLOBAL_ORIGIN_ID`
+  --> nexosim/src/simulation/injector.rs:11:5
+   |
+11 | use super::GLOBAL_ORIGIN_ID;
+   |     ^^^^^^^^^^^^^^^^^^^^^^^
+
+warning: unused import: `type_name`
+ --> nexosim/src/simulation/queue_items.rs:1:21
+  |
+1 | use std::any::{Any, type_name};
+  |                     ^^^^^^^^^
+
+warning: unused import: `std::ptr`
+ --> nexosim/src/simulation/queue_items.rs:7:5
+  |
+7 | use std::ptr;
+  |     ^^^^^^^^
+
+warning: unused import: `Ordering`
+ --> nexosim/src/simulation/queue_items.rs:8:37
+  |
+8 | use std::sync::atomic::{AtomicBool, Ordering};
+  |                                     ^^^^^^^^
+
+warning: unused imports: `RecycleBox` and `coerce_box`
+  --> nexosim/src/simulation/queue_items.rs:11:19
+   |
+11 | use recycle_box::{RecycleBox, coerce_box};
+   |                   ^^^^^^^^^^  ^^^^^^^^^^
+
+warning: unused import: `serde::de::Visitor`
+  --> nexosim/src/simulation/queue_items.rs:12:5
+   |
+12 | use serde::de::Visitor;
+   |     ^^^^^^^^^^^^^^^^^^
+
+warning: unused import: `serde::ser::SerializeTuple`
+  --> nexosim/src/simulation/queue_items.rs:13:5
+   |
+13 | use serde::ser::SerializeTuple;
+   |     ^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+warning: unused imports: `ReplyWriter` and `query_replier`
+  --> nexosim/src/simulation/queue_items.rs:19:53
+   |
+19 |     EventSource, InputFn, QuerySource, ReplyReader, ReplyWriter, query_replier,
+   |                                                     ^^^^^^^^^^^  ^^^^^^^^^^^^^
+
+warning: unused imports: `RestoreError` and `SaveError`
+  --> nexosim/src/simulation/queue_items.rs:21:34
+   |
+21 | use crate::simulation::{Address, RestoreError, SaveError};
+   |                                  ^^^^^^^^^^^^  ^^^^^^^^^
+
+warning: unused import: `crate::util::serialization::serialization_config`
+  --> nexosim/src/simulation/queue_items.rs:22:5
+   |
+22 | use crate::util::serialization::serialization_config;
+   |     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+warning: unused import: `crate::util::unwrap_or_throw::UnwrapOrThrow`
+  --> nexosim/src/simulation/queue_items.rs:23:5
+   |
+23 | use crate::util::unwrap_or_throw::UnwrapOrThrow;
+   |     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+warning: unused import: `Ordering`
+ --> nexosim/src/simulation/scheduler.rs:4:37
+  |
+4 | use std::sync::atomic::{AtomicBool, Ordering};
+  |                                     ^^^^^^^^
+
+warning: unused imports: `Event` and `Query`
+ --> nexosim/src/simulation/scheduler.rs:9:5
+  |
+9 |     Event, EventId, EventKey, Query, QueryId, QueueItem,
+  |     ^^^^^                     ^^^^^
+
+warning: unused import: `super::GLOBAL_ORIGIN_ID`
+  --> nexosim/src/simulation/scheduler.rs:15:5
+   |
+15 | use super::GLOBAL_ORIGIN_ID;
+   |     ^^^^^^^^^^^^^^^^^^^^^^^
+
+warning: unused import: `Ordering`
+ --> nexosim/src/simulation/sim_init.rs:2:37
+  |
+2 | use std::sync::atomic::{AtomicBool, Ordering};
+  |                                     ^^^^^^^^
+
+warning: unused import: `mem`
+ --> nexosim/src/simulation/sim_init.rs:5:16
+  |
+5 | use std::{fmt, mem};
+  |                ^^^
+
+warning: unused import: `SimulationContext`
+  --> nexosim/src/simulation/sim_init.rs:12:33
+   |
+12 | use crate::executor::{Executor, SimulationContext};
+   |                                 ^^^^^^^^^^^^^^^^^
+
+warning: unused imports: `NoClock`, `SyncStatus`, and `TearableAtomicTime`
+  --> nexosim/src/simulation/sim_init.rs:19:52
+   |
+19 |     AtomicTime, Clock, ClockReader, MonotonicTime, NoClock, SyncStatus,
+   |                                                    ^^^^^^^  ^^^^^^^^^^
+20 |     TearableAtomicTime, Ticker,
+   |     ^^^^^^^^^^^^^^^^^^
+
+warning: unused import: `crate::util::sync_cell::SyncCell`
+  --> nexosim/src/simulation/sim_init.rs:22:5
+   |
+22 | use crate::util::sync_cell::SyncCell;
+   |     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+warning: unused imports: `ExecutionError`, `GlobalScheduler`, and `add_model`
+  --> nexosim/src/simulation/sim_init.rs:24:14
+   |
+24 |     EventId, ExecutionError, GlobalScheduler, Mailbox, QueryId, SchedulerQueue,
+   |              ^^^^^^^^^^^^^^  ^^^^^^^^^^^^^^^
+25 |     SchedulerRegistry, Signal, Simulation, SimulationError, add_model,
+   |                                                             ^^^^^^^^^
+
+warning: unused import: `QueueItem`
+   --> nexosim/src/simulation.rs:120:76
+    |
+120 |     EVENT_KEY_REG, EventIdErased, EventKeyReg, InputSource, QueryIdErased, QueueItem,
+    |                                                                            ^^^^^^^^^
+
+warning: unused import: `TypeId`
+   --> nexosim/src/simulation.rs:126:21
+    |
+126 | use std::any::{Any, TypeId};
+    |                     ^^^^^^
+
+warning: unused import: `std::collections::HashMap`
+   --> nexosim/src/simulation.rs:128:5
+    |
+128 | use std::collections::HashMap;
+    |     ^^^^^^^^^^^^^^^^^^^^^^^^^
+
+warning: unused import: `Ordering`
+   --> nexosim/src/simulation.rs:133:37
+    |
+133 | use std::sync::atomic::{AtomicBool, Ordering};
+    |                                     ^^^^^^^^
+
+warning: unused imports: `RecycleBox` and `coerce_box`
+   --> nexosim/src/simulation.rs:139:19
+    |
+139 | use recycle_box::{RecycleBox, coerce_box};
+    |                   ^^^^^^^^^^  ^^^^^^^^^^
+
+warning: unused import: `SchedulerKey`
+   --> nexosim/src/simulation.rs:142:17
+    |
+142 | use scheduler::{SchedulerKey, SchedulerQueue};
+    |                 ^^^^^^^^^^^^
+
+warning: unused import: `SendError`
+   --> nexosim/src/simulation.rs:143:39
+    |
+143 | use crate::channel::{ChannelObserver, SendError};
+    |                                       ^^^^^^^^^
+
+warning: unused import: `ExecutorError`
+   --> nexosim/src/simulation.rs:146:33
+    |
+146 | use crate::executor::{Executor, ExecutorError, Signal};
+    |                                 ^^^^^^^^^^^^^
+
+warning: unused imports: `BuildContext` and `Context`
+   --> nexosim/src/simulation.rs:147:20
+    |
+147 | use crate::model::{BuildContext, Context, Model, ProtoModel, RegisteredModel};
+    |                    ^^^^^^^^^^^^  ^^^^^^^
+
+warning: unused import: `query_replier`
+   --> nexosim/src/simulation.rs:149:31
+    |
+149 | use crate::ports::{ReplierFn, query_replier};
+    |                               ^^^^^^^^^^^^^
+
+warning: unused import: `crate::simulation::injector::InjectorItem`
+   --> nexosim/src/simulation.rs:150:5
+    |
+150 | use crate::simulation::injector::InjectorItem;
+    |     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+warning: unused import: `SyncStatus`
+   --> nexosim/src/simulation.rs:151:63
+    |
+151 | use crate::time::{AtomicTime, Clock, Deadline, MonotonicTime, SyncStatus, Ticker};
+    |                                                               ^^^^^^^^^^
+
+warning: unused import: `crate::util::seq_futures::SeqFuture`
+   --> nexosim/src/simulation.rs:152:5
+    |
+152 | use crate::util::seq_futures::SeqFuture;
+    |     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+warning: unused import: `crate::util::serialization::serialization_config`
+   --> nexosim/src/simulation.rs:153:5
+    |
+153 | use crate::util::serialization::serialization_config;
+    |     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+warning: unused import: `crate::util::slot`
+   --> nexosim/src/simulation.rs:154:5
+    |
+154 | use crate::util::slot;
+    |     ^^^^^^^^^^^^^^^^^
+
+warning: unused import: `Ordering`
+ --> nexosim/src/time/monotonic_time.rs:2:47
+  |
+2 | use std::sync::atomic::{AtomicI64, AtomicU32, Ordering};
+  |                                               ^^^^^^^^
+
+warning: unused import: `Ordering`
+ --> nexosim/src/util/cached_rw_lock.rs:3:54
+  |
+3 | use crate::loom_exports::sync::atomic::{AtomicUsize, Ordering};
+  |                                                      ^^^^^^^^
+
+warning: unused import: `PoisonError`
+ --> nexosim/src/util/cached_rw_lock.rs:4:69
+  |
+4 | use crate::loom_exports::sync::{Arc, LockResult, Mutex, MutexGuard, PoisonError};
+  |                                                                     ^^^^^^^^^^^
+
+warning: unused import: `std::sync::atomic::Ordering`
+  --> nexosim/src/util/shared_cell.rs:15:5
+   |
+15 | use std::sync::atomic::Ordering;
+   |     ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+warning: unused import: `ManuallyDrop`
+ --> nexosim/src/util/slot.rs:6:16
+  |
+6 | use std::mem::{ManuallyDrop, MaybeUninit};
+  |                ^^^^^^^^^^^^
+
+warning: unused import: `self`
+ --> nexosim/src/util/slot.rs:8:16
+  |
+8 | use std::ptr::{self, NonNull};
+  |                ^^^^
+
+warning: unused import: `std::sync::atomic::Ordering`
+ --> nexosim/src/util/slot.rs:9:5
+  |
+9 | use std::sync::atomic::Ordering;
+  |     ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+warning: unused import: `self`
+  --> nexosim/src/util/slot.rs:11:41
+   |
+11 | use crate::loom_exports::sync::atomic::{self, AtomicUsize};
+   |                                         ^^^^
+
+warning: unused import: `std::sync::atomic::Ordering`
+ --> nexosim/src/util/task_set.rs:3:5
+  |
+3 | use std::sync::atomic::Ordering;
+  |     ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+warning: unused import: `waker_ref`
+ --> nexosim/src/util/task_set.rs:5:39
+  |
+5 | use futures_task::{ArcWake, WakerRef, waker_ref};
+  |                                       ^^^^^^^^^
+
+error[E0283]: type annotations needed
+   --> nexosim/src/ports/output/broadcaster.rs:130:58
+    |
+130 |       ) -> Result<impl Iterator<Item = R> + '_, SendError> {
+    |  __________________________________________________________^
+131 | |         panic!("STUB: not implemented");
+132 | |     }
+    | |     ^
+    | |     |
+    | |_____cannot infer type
+    |       return type was inferred to be `!` here
+    |
+    = note: the type must implement `Iterator`
+
+error[E0283]: type annotations needed
+   --> nexosim/src/ports/source.rs:338:42
+    |
+338 |     pub fn try_read(&mut self) -> Option<impl Iterator<Item = R>> {
+    |                                          ^^^^^^^^^^^^^^^^^^^^^^^ cannot infer type
+    |
+    = note: the type must implement `Iterator`
+
+error[E0283]: type annotations needed
+   --> nexosim/src/ports/source.rs:344:33
+    |
+344 |     pub fn read(self) -> Option<impl Iterator<Item = R>> {
+    |                                 ^^^^^^^^^^^^^^^^^^^^^^^ cannot infer type
+    |
+    = note: the type must implement `Iterator`
+
+error[E0599]: no variant, associated function, or constant named `SinkNotFound` found for enum `EndpointError` in the current scope
+   --> nexosim/src/endpoints/event_sink_info_registry.rs:61:43
+    |
+ 61 |             .ok_or_else(|| EndpointError::SinkNotFound(path.clone()))
+    |                                           ^^^^^^^^^^^^ variant, associated function, or constant not found in `EndpointError`
+    |
+   ::: nexosim/src/endpoints.rs:147:1
+    |
+147 | pub enum EndpointError {
+    | ---------------------- variant, associated function, or constant `SinkNotFound` not found for this enum
+
+error[E0533]: expected value, found struct variant `EndpointError::EventSinkNotFound`
+  --> nexosim/src/endpoints/event_sink_registry.rs:60:20
+   |
+60 |             .ok_or(EndpointError::EventSinkNotFound)?;
+   |                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ not a value
+   |
+help: you might have meant to create a new value of the struct
+   |
+60 |             .ok_or(EndpointError::EventSinkNotFound { path: /* value */ })?;
+   |                                                     +++++++++++++++++++++
+
+error[E0533]: expected value, found struct variant `EndpointError::EventSinkNotFound`
+  --> nexosim/src/endpoints/event_sink_registry.rs:66:26
+   |
+66 |             .map_err(|_| EndpointError::EventSinkNotFound)
+   |                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ not a value
+   |
+help: you might have meant to create a new value of the struct
+   |
+66 |             .map_err(|_| EndpointError::EventSinkNotFound { path: /* value */ })
+   |                                                           +++++++++++++++++++++
+
+error[E0533]: expected value, found struct variant `EndpointError::EventSourceNotFound`
+  --> nexosim/src/endpoints/event_source_registry.rs:86:20
+   |
+86 |             .ok_or(EndpointError::EventSourceNotFound)
+   |                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ not a value
+   |
+help: you might have meant to create a new value of the struct
+   |
+86 |             .ok_or(EndpointError::EventSourceNotFound { path: /* value */ })
+   |                                                       +++++++++++++++++++++
+
+error[E0599]: no method named `downcast` found for struct `EventIdErased` in the current scope
+  --> nexosim/src/endpoints/event_source_registry.rs:99:14
+   |
+97 | /         self.get(path)?
+98 | |             .get_event_id()
+99 | |             .downcast::<T>()
+   | |             -^^^^^^^^ method not found in `EventIdErased`
+   | |_____________|
+   |
+   |
+  ::: nexosim/src/simulation/queue_items.rs:39:1
+   |
+39 |   pub(crate) struct EventIdErased(pub(crate) usize);
+   |   ------------------------------- method `downcast` not found for this struct
+
+error[E0599]: no variant, associated function, or constant named `InvalidEventType` found for enum `EndpointError` in the current scope
+   --> nexosim/src/endpoints/event_source_registry.rs:100:35
+    |
+100 |             .ok_or(EndpointError::InvalidEventType)
+    |                                   ^^^^^^^^^^^^^^^^ variant, associated function, or constant not found in `EndpointError`
+    |
+   ::: nexosim/src/endpoints.rs:147:1
+    |
+147 | pub enum EndpointError {
+    | ---------------------- variant, associated function, or constant `InvalidEventType` not found for this enum
+    |
+help: there is a variant with a similar name
+    |
+100 -             .ok_or(EndpointError::InvalidEventType)
+100 +             .ok_or(EndpointError::InvalidEventSinkType { path: /* value */, found_event_type: /* value */, expected_event_type: /* value */ })
+    |
+
+error[E0599]: no method named `erase` found for struct `EventId<T>` in the current scope
+   --> nexosim/src/endpoints/event_source_registry.rs:246:20
+    |
+246 |         self.inner.erase()
+    |                    ^^^^^ method not found in `EventId<T>`
+    |
+   ::: nexosim/src/simulation/queue_items.rs:30:1
+    |
+ 30 | pub struct EventId<T>(pub(crate) usize, pub(crate) PhantomData<fn(T)>);
+    | --------------------- method `erase` not found for this struct
+
+error[E0308]: mismatched types
+   --> nexosim/src/endpoints/query_source_registry.rs:84:45
+    |
+ 84 |                 let inner = source.register(registry);
+    |                                    -------- ^^^^^^^^ expected `&mut SimInit`, found `&mut SchedulerRegistry`
+    |                                    |
+    |                                    arguments to this method are incorrect
+    |
+    = note: expected mutable reference `&mut SimInit`
+               found mutable reference `&mut SchedulerRegistry`
+note: method defined here
+   --> nexosim/src/ports/source.rs:264:12
+    |
+264 |     pub fn register(self, sim_init: &mut SimInit) -> QueryId<T, R> {
+    |            ^^^^^^^^       ----------------------
+
+error[E0599]: no variant, associated function, or constant named `SourceNotFound` found for enum `EndpointError` in the current scope
+   --> nexosim/src/endpoints/query_source_registry.rs:99:43
+    |
+ 99 |             .ok_or_else(|| EndpointError::SourceNotFound(path.clone()))
+    |                                           ^^^^^^^^^^^^^^ variant, associated function, or constant not found in `EndpointError`
+    |
+   ::: nexosim/src/endpoints.rs:147:1
+    |
+147 | pub enum EndpointError {
+    | ---------------------- variant, associated function, or constant `SourceNotFound` not found for this enum
+
+error[E0599]: no method named `downcast` found for struct `QueryIdErased` in the current scope
+   --> nexosim/src/endpoints/query_source_registry.rs:113:14
+    |
+111 | /         self.get(path)?
+112 | |             .get_query_id()
+113 | |             .downcast::<T, R>()
+    | |             -^^^^^^^^ method not found in `QueryIdErased`
+    | |_____________|
+    |
+    |
+   ::: nexosim/src/simulation/queue_items.rs:61:1
+    |
+ 61 |   pub(crate) struct QueryIdErased(pub(crate) usize);
+    |   ------------------------------- method `downcast` not found for this struct
+
+error[E0599]: no variant, associated function, or constant named `InvalidType` found for enum `EndpointError` in the current scope
+   --> nexosim/src/endpoints/query_source_registry.rs:114:35
+    |
+114 |             .ok_or(EndpointError::InvalidType)
+    |                                   ^^^^^^^^^^^ variant, associated function, or constant not found in `EndpointError`
+    |
+   ::: nexosim/src/endpoints.rs:147:1
+    |
+147 | pub enum EndpointError {
+    | ---------------------- variant, associated function, or constant `InvalidType` not found for this enum
+
+error[E0599]: no method named `erase` found for struct `QueryId<T, R>` in the current scope
+   --> nexosim/src/endpoints/query_source_registry.rs:240:28
+    |
+240 |         self.inner.clone().erase()
+    |                            ^^^^^ method not found in `QueryId<T, R>`
+    |
+   ::: nexosim/src/simulation/queue_items.rs:52:1
+    |
+ 52 | pub struct QueryId<T, R>(pub(crate) usize, pub(crate) PhantomData<fn(T, R)>);
+    | ------------------------ method `erase` not found for this struct
+
+error[E0599]: no method named `gen_bounded` found for reference `&Rng` in the current scope
+   --> nexosim/src/executor/mt_executor/pool_manager.rs:259:29
+    |
+259 |             let mut n = rng.gen_bounded(candidates.count_ones() as u64) as usize;
+    |                             ^^^^^^^^^^^
+    |
+help: there is a method `rand_bounded` with a similar name
+    |
+259 -             let mut n = rng.gen_bounded(candidates.count_ones() as u64) as usize;
+259 +             let mut n = rng.rand_bounded(candidates.count_ones() as u64) as usize;
+    |
+
+error[E0061]: this enum variant takes 2 arguments but 1 argument was supplied
+   --> nexosim/src/executor/mt_executor.rs:235:28
+    |
+235 |                 return Err(ExecutorError::Panic(worker_panic));
+    |                            ^^^^^^^^^^^^^^^^^^^^-------------- argument #2 of type `Box<(dyn std::any::Any + Send + 'static)>` is missing
+    |
+note: expected `ModelId`, found `(ModelId, Box<dyn Any + Send>)`
+   --> nexosim/src/executor/mt_executor.rs:235:49
+    |
+235 |                 return Err(ExecutorError::Panic(worker_panic));
+    |                                                 ^^^^^^^^^^^^
+    = note: expected struct `ModelId`
+                found tuple `(ModelId, Box<dyn std::any::Any + Send>)`
+note: tuple variant defined here
+   --> nexosim/src/executor.rs:26:5
+    |
+ 26 |     Panic(ModelId, Box<dyn Any + Send + 'static>),
+    |     ^^^^^
+help: provide the argument
+    |
+235 -                 return Err(ExecutorError::Panic(worker_panic));
+235 +                 return Err(ExecutorError::Panic(/* ModelId */, /* Box<(dyn std::any::Any + Send + 'static)> */));
+    |
+
+error[E0599]: no method named `trigger_termination` found for struct `PoolManager` in the current scope
+   --> nexosim/src/executor/mt_executor.rs:249:43
+    |
+249 |                 self.context.pool_manager.trigger_termination();
+    |                                           ^^^^^^^^^^^^^^^^^^^ method not found in `PoolManager`
+    |
+   ::: nexosim/src/executor/mt_executor/pool_manager.rs:11:1
+    |
+ 11 | pub(super) struct PoolManager {
+    | ----------------------------- method `trigger_termination` not found for this struct
+
+error[E0599]: no method named `trigger_termination` found for struct `PoolManager` in the current scope
+   --> nexosim/src/executor/mt_executor.rs:276:35
+    |
+276 |         self.context.pool_manager.trigger_termination();
+    |                                   ^^^^^^^^^^^^^^^^^^^ method not found in `PoolManager`
+    |
+   ::: nexosim/src/executor/mt_executor/pool_manager.rs:11:1
+    |
+ 11 | pub(super) struct PoolManager {
+    | ----------------------------- method `trigger_termination` not found for this struct
+
+error[E0599]: no method named `termination_is_triggered` found for reference `&PoolManager` in the current scope
+   --> nexosim/src/executor/mt_executor.rs:477:29
+    |
+477 |             if pool_manager.termination_is_triggered() || abort_signal.is_set() {
+    |                             ^^^^^^^^^^^^^^^^^^^^^^^^ method not found in `&PoolManager`
+
+   Compiling hyper-util v0.1.20
+error[E0599]: no method named `termination_is_triggered` found for reference `&PoolManager` in the current scope
+   --> nexosim/src/executor/mt_executor.rs:502:37
+    |
+502 |                     if pool_manager.termination_is_triggered() || abort_signal.is_set() {
+    |                                     ^^^^^^^^^^^^^^^^^^^^^^^^ method not found in `&PoolManager`
+
+error[E0061]: this method takes 2 arguments but 1 argument was supplied
+   --> nexosim/src/executor/mt_executor.rs:528:22
+    |
+528 |         pool_manager.register_panic(panic);
+    |                      ^^^^^^^^^^^^^^ ----- argument #1 of type `ModelId` is missing
+    |
+note: method defined here
+   --> nexosim/src/executor/mt_executor/pool_manager.rs:209:19
+    |
+209 |     pub(super) fn register_panic(
+    |                   ^^^^^^^^^^^^^^
+210 |         &self,
+211 |         model_id: ModelId,
+    |         -----------------
+help: provide the argument
+    |
+528 |         pool_manager.register_panic(/* ModelId */, panic);
+    |                                     ++++++++++++++
+
+error[E0599]: no method named `is_set` found for struct `ScopedLocalKey<T>` in the current scope
+   --> nexosim/src/executor/st_executor.rs:270:25
+    |
+270 |         if ACTIVE_TASKS.is_set() {
+    |                         ^^^^^^
+    |
+   ::: nexosim/src/macros/scoped_thread_local.rs:23:1
+    |
+ 23 | pub(crate) struct ScopedLocalKey<T> {
+    | ----------------------------------- method `is_set` not found for this struct
+    |
+help: there is a method `set` with a similar name, but with different arguments
+   --> nexosim/src/macros/scoped_thread_local.rs:41:5
+    |
+ 41 | /     pub(crate) fn set<F, R>(&'static self, t: &T, f: F) -> R
+ 42 | |     where
+ 43 | |         F: FnOnce() -> R,
+    | |_________________________^
+
+error[E0599]: no method named `with` found for struct `ScopedLocalKey<T>` in the current scope
+   --> nexosim/src/executor/st_executor.rs:271:26
+    |
+271 |             ACTIVE_TASKS.with(|active_tasks| {
+    |             -------------^^^^ method not found in `ScopedLocalKey<RefCell<Slab<CancelToken>>>`
+    |
+   ::: nexosim/src/macros/scoped_thread_local.rs:23:1
+    |
+ 23 | pub(crate) struct ScopedLocalKey<T> {
+    | ----------------------------------- method `with` not found for this struct
+
+error[E0599]: no method named `with` found for struct `ScopedLocalKey<T>` in the current scope
+   --> nexosim/src/executor/st_executor.rs:286:22
+    |
+286 |     EXECUTOR_CONTEXT.with(|context| {
+    |     -----------------^^^^ method not found in `ScopedLocalKey<st_executor::ExecutorContext>`
+    |
+   ::: nexosim/src/macros/scoped_thread_local.rs:23:1
+    |
+ 23 | pub(crate) struct ScopedLocalKey<T> {
+    | ----------------------------------- method `with` not found for this struct
+
+error[E0061]: this function takes 3 arguments but 4 arguments were supplied
+  --> nexosim/src/executor.rs:64:26
+   |
+64 |         Self::MtExecutor(mt_executor::Executor::new(
+   |                          ^^^^^^^^^^^^^^^^^^^^^^^^^^
+65 |             num_threads,
+66 |             executor_id,
+   |             ----------- unexpected argument #2 of type `usize`
+   |
+note: associated function defined here
+  --> nexosim/src/executor/mt_executor.rs:94:19
+   |
+94 |     pub(crate) fn new(
+   |                   ^^^
+help: remove the extra argument
+   |
+65 -             num_threads,
+66 -             executor_id,
+65 +             num_threads,
+   |
+
+warning: unused import: `futures_util::stream::StreamExt`
+ --> nexosim/src/ports/sink/event_queue.rs:8:5
+  |
+8 | use futures_util::stream::StreamExt;
+  |     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+warning: unused import: `futures_util::stream::StreamExt`
+ --> nexosim/src/ports/sink/event_slot.rs:8:5
+  |
+8 | use futures_util::stream::StreamExt;
+  |     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+warning: unused import: `Write`
+ --> nexosim/src/path.rs:5:22
+  |
+5 | use std::fmt::{self, Write};
+  |                      ^^^^^
+
+warning: unused import: `crate::util::unwrap_or_throw::UnwrapOrThrow`
+  --> nexosim/src/ports/source.rs:16:5
+   |
+16 | use crate::util::unwrap_or_throw::UnwrapOrThrow;
+   |     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+warning: unused import: `crate::util::unwrap_or_throw::UnwrapOrThrow`
+  --> nexosim/src/ports/output.rs:15:5
+   |
+15 | use crate::util::unwrap_or_throw::UnwrapOrThrow;
+   |     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+warning: unused variable: `ptr`
+  --> nexosim/src/executor/task/cancel_token.rs:23:27
+   |
+23 | unsafe fn cancel<F, S, T>(ptr: *const ())
+   |                           ^^^ help: if this is intentional, prefix it with an underscore: `_ptr`
+   |
+   = note: `#[warn(unused_variables)]` (part of `#[warn(unused)]`) on by default
+
+warning: unused variable: `ptr`
+  --> nexosim/src/executor/task/cancel_token.rs:33:25
+   |
+33 | unsafe fn drop<F, S, T>(ptr: *const ())
+   |                         ^^^ help: if this is intentional, prefix it with an underscore: `_ptr`
+
+warning: unused variable: `task`
+  --> nexosim/src/executor/task/cancel_token.rs:57:49
+   |
+57 |     pub(super) unsafe fn new_unchecked<F, S, T>(task: *const Task<F, S, T>) -> Self
+   |                                                 ^^^^ help: if this is intentional, prefix it with an underscore: `_task`
+
+warning: unused variable: `ptr`
+  --> nexosim/src/executor/task/promise.rs:18:25
+   |
+18 | unsafe fn poll<F, S, T>(ptr: *const ()) -> Stage<F::Output>
+   |                         ^^^ help: if this is intentional, prefix it with an underscore: `_ptr`
+
+warning: unused variable: `ptr`
+  --> nexosim/src/executor/task/promise.rs:28:25
+   |
+28 | unsafe fn drop<F, S, T>(ptr: *const ())
+   |                         ^^^ help: if this is intentional, prefix it with an underscore: `_ptr`
+
+warning: unused variable: `task`
+  --> nexosim/src/executor/task/promise.rs:93:49
+   |
+93 |     pub(super) unsafe fn new_unchecked<F, S, T>(task: *const Task<F, S, T>) -> Self
+   |                                                 ^^^^ help: if this is intentional, prefix it with an underscore: `_task`
+
+warning: unused variable: `ptr`
+  --> nexosim/src/executor/task/runnable.rs:20:24
+   |
+20 | unsafe fn run<F, S, T>(ptr: *const ())
+   |                        ^^^ help: if this is intentional, prefix it with an underscore: `_ptr`
+
+warning: unused variable: `ptr`
+  --> nexosim/src/executor/task/runnable.rs:30:27
+   |
+30 | unsafe fn cancel<F, S, T>(ptr: *const ())
+   |                           ^^^ help: if this is intentional, prefix it with an underscore: `_ptr`
+
+warning: unused variable: `task`
+  --> nexosim/src/executor/task/runnable.rs:58:49
+   |
+58 |     pub(super) unsafe fn new_unchecked<F, S, T>(task: *const Task<F, S, T>) -> Self
+   |                                                 ^^^^ help: if this is intentional, prefix it with an underscore: `_task`
+
+warning: unused variable: `drop_fn`
+ --> nexosim/src/executor/task/util.rs:8:23
+  |
+8 |     pub(crate) fn new(drop_fn: F) -> Self {
+  |                       ^^^^^^^ help: if this is intentional, prefix it with an underscore: `_drop_fn`
+
+warning: unused variable: `state`
+  --> nexosim/src/executor/task/util.rs:19:31
+   |
+19 | pub(crate) fn runnable_exists(state: u64) -> bool {
+   |                               ^^^^^ help: if this is intentional, prefix it with an underscore: `_state`
+
+warning: unused variable: `ptr`
+   --> nexosim/src/executor/task.rs:115:27
+    |
+115 |     unsafe fn clone_waker(ptr: *const ()) -> RawWaker {
+    |                           ^^^ help: if this is intentional, prefix it with an underscore: `_ptr`
+
+warning: unused variable: `ptr`
+   --> nexosim/src/executor/task.rs:119:27
+    |
+119 |     unsafe fn wake_by_val(ptr: *const ()) {
+    |                           ^^^ help: if this is intentional, prefix it with an underscore: `_ptr`
+
+warning: unused variable: `ptr`
+   --> nexosim/src/executor/task.rs:123:27
+    |
+123 |     unsafe fn wake_by_ref(ptr: *const ()) {
+    |                           ^^^ help: if this is intentional, prefix it with an underscore: `_ptr`
+
+warning: unused variable: `ptr`
+   --> nexosim/src/executor/task.rs:128:20
+    |
+128 |     unsafe fn wake(ptr: *const (), state_delta: u64) -> u64 {
+    |                    ^^^ help: if this is intentional, prefix it with an underscore: `_ptr`
+
+warning: unused variable: `state_delta`
+   --> nexosim/src/executor/task.rs:128:36
+    |
+128 |     unsafe fn wake(ptr: *const (), state_delta: u64) -> u64 {
+    |                                    ^^^^^^^^^^^ help: if this is intentional, prefix it with an underscore: `_state_delta`
+
+warning: unused variable: `ptr`
+   --> nexosim/src/executor/task.rs:132:26
+    |
+132 |     unsafe fn drop_waker(ptr: *const ()) {
+    |                          ^^^ help: if this is intentional, prefix it with an underscore: `_ptr`
+
+warning: unused variable: `future`
+   --> nexosim/src/executor/task.rs:168:5
+    |
+168 |     future: F,
+    |     ^^^^^^ help: if this is intentional, prefix it with an underscore: `_future`
+
+warning: unused variable: `schedule_fn`
+   --> nexosim/src/executor/task.rs:169:5
+    |
+169 |     schedule_fn: S,
+    |     ^^^^^^^^^^^ help: if this is intentional, prefix it with an underscore: `_schedule_fn`
+
+warning: unused variable: `tag`
+   --> nexosim/src/executor/task.rs:170:5
+    |
+170 |     tag: T,
+    |     ^^^ help: if this is intentional, prefix it with an underscore: `_tag`
+
+warning: unused variable: `future`
+   --> nexosim/src/executor/task.rs:190:5
+    |
+190 |     future: F,
+    |     ^^^^^^ help: if this is intentional, prefix it with an underscore: `_future`
+
+warning: unused variable: `schedule_fn`
+   --> nexosim/src/executor/task.rs:191:5
+    |
+191 |     schedule_fn: S,
+    |     ^^^^^^^^^^^ help: if this is intentional, prefix it with an underscore: `_schedule_fn`
+
+warning: unused variable: `tag`
+   --> nexosim/src/executor/task.rs:192:5
+    |
+192 |     tag: T,
+    |     ^^^ help: if this is intentional, prefix it with an underscore: `_tag`
+
+warning: unused variable: `t`
+  --> nexosim/src/macros/scoped_thread_local.rs:41:44
+   |
+41 |     pub(crate) fn set<F, R>(&'static self, t: &T, f: F) -> R
+   |                                            ^ help: if this is intentional, prefix it with an underscore: `_t`
+
+warning: unused variable: `f`
+  --> nexosim/src/macros/scoped_thread_local.rs:41:51
+   |
+41 |     pub(crate) fn set<F, R>(&'static self, t: &T, f: F) -> R
+   |                                                   ^ help: if this is intentional, prefix it with an underscore: `_f`
+
+warning: unused variable: `f`
+  --> nexosim/src/macros/scoped_thread_local.rs:49:46
+   |
+49 |     pub(crate) fn unset<F, R>(&'static self, f: F) -> R
+   |                                              ^ help: if this is intentional, prefix it with an underscore: `_f`
+
+warning: unused variable: `f`
+  --> nexosim/src/macros/scoped_thread_local.rs:57:44
+   |
+57 |     pub(crate) fn map<F, R>(&'static self, f: F) -> Option<R>
+   |                                            ^ help: if this is intentional, prefix it with an underscore: `_f`
+
+warning: unused variable: `path`
+  --> nexosim/src/model/context.rs:71:9
+   |
+71 |         path: Path,
+   |         ^^^^ help: if this is intentional, prefix it with an underscore: `_path`
+
+warning: unused variable: `scheduler`
+  --> nexosim/src/model/context.rs:72:9
+   |
+72 |         scheduler: GlobalScheduler,
+   |         ^^^^^^^^^ help: if this is intentional, prefix it with an underscore: `_scheduler`
+
+warning: unused variable: `address`
+  --> nexosim/src/model/context.rs:73:9
+   |
+73 |         address: Address<M>,
+   |         ^^^^^^^ help: if this is intentional, prefix it with an underscore: `_address`
+
+warning: unused variable: `origin_id`
+  --> nexosim/src/model/context.rs:74:9
+   |
+74 |         origin_id: usize,
+   |         ^^^^^^^^^ help: if this is intentional, prefix it with an underscore: `_origin_id`
+
+warning: unused variable: `model_registry`
+  --> nexosim/src/model/context.rs:75:9
+   |
+75 |         model_registry: Arc<ModelRegistry>,
+   |         ^^^^^^^^^^^^^^ help: if this is intentional, prefix it with an underscore: `_model_registry`
+
+warning: unused variable: `deadline`
+   --> nexosim/src/model/context.rs:121:9
+    |
+121 |         deadline: impl Deadline,
+    |         ^^^^^^^^ help: if this is intentional, prefix it with an underscore: `_deadline`
+
+warning: unused variable: `schedulable_id`
+   --> nexosim/src/model/context.rs:122:9
+    |
+122 |         schedulable_id: &SchedulableId<M, T>,
+    |         ^^^^^^^^^^^^^^ help: if this is intentional, prefix it with an underscore: `_schedulable_id`
+
+warning: unused variable: `arg`
+   --> nexosim/src/model/context.rs:123:9
+    |
+123 |         arg: T,
+    |         ^^^ help: if this is intentional, prefix it with an underscore: `_arg`
+
+warning: unused variable: `deadline`
+   --> nexosim/src/model/context.rs:175:9
+    |
+175 |         deadline: impl Deadline,
+    |         ^^^^^^^^ help: if this is intentional, prefix it with an underscore: `_deadline`
+
+warning: unused variable: `schedulable_id`
+   --> nexosim/src/model/context.rs:176:9
+    |
+176 |         schedulable_id: &SchedulableId<M, T>,
+    |         ^^^^^^^^^^^^^^ help: if this is intentional, prefix it with an underscore: `_schedulable_id`
+
+warning: unused variable: `arg`
+   --> nexosim/src/model/context.rs:177:9
+    |
+177 |         arg: T,
+    |         ^^^ help: if this is intentional, prefix it with an underscore: `_arg`
+
+warning: unused variable: `deadline`
+   --> nexosim/src/model/context.rs:224:9
+    |
+224 |         deadline: impl Deadline,
+    |         ^^^^^^^^ help: if this is intentional, prefix it with an underscore: `_deadline`
+
+warning: unused variable: `period`
+   --> nexosim/src/model/context.rs:225:9
+    |
+225 |         period: Duration,
+    |         ^^^^^^ help: if this is intentional, prefix it with an underscore: `_period`
+
+warning: unused variable: `schedulable_id`
+   --> nexosim/src/model/context.rs:226:9
+    |
+226 |         schedulable_id: &SchedulableId<M, T>,
+    |         ^^^^^^^^^^^^^^ help: if this is intentional, prefix it with an underscore: `_schedulable_id`
+
+warning: unused variable: `arg`
+   --> nexosim/src/model/context.rs:227:9
+    |
+227 |         arg: T,
+    |         ^^^ help: if this is intentional, prefix it with an underscore: `_arg`
+
+warning: unused variable: `deadline`
+   --> nexosim/src/model/context.rs:286:9
+    |
+286 |         deadline: impl Deadline,
+    |         ^^^^^^^^ help: if this is intentional, prefix it with an underscore: `_deadline`
+
+warning: unused variable: `period`
+   --> nexosim/src/model/context.rs:287:9
+    |
+287 |         period: Duration,
+    |         ^^^^^^ help: if this is intentional, prefix it with an underscore: `_period`
+
+warning: unused variable: `schedulable_id`
+   --> nexosim/src/model/context.rs:288:9
+    |
+288 |         schedulable_id: &SchedulableId<M, T>,
+    |         ^^^^^^^^^^^^^^ help: if this is intentional, prefix it with an underscore: `_schedulable_id`
+
+warning: unused variable: `arg`
+   --> nexosim/src/model/context.rs:289:9
+    |
+289 |         arg: T,
+    |         ^^^ help: if this is intentional, prefix it with an underscore: `_arg`
+
+warning: unused variable: `f`
+   --> nexosim/src/model/context.rs:305:19
+    |
+305 |     fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
+    |                   ^ help: if this is intentional, prefix it with an underscore: `_f`
+
+warning: unused variable: `mailbox`
+   --> nexosim/src/model/context.rs:419:9
+    |
+419 |         mailbox: &'a Mailbox<P::Model>,
+    |         ^^^^^^^ help: if this is intentional, prefix it with an underscore: `_mailbox`
+
+warning: unused variable: `path`
+   --> nexosim/src/model/context.rs:420:9
+    |
+420 |         path: &'a Path,
+    |         ^^^^ help: if this is intentional, prefix it with an underscore: `_path`
+
+warning: unused variable: `scheduler`
+   --> nexosim/src/model/context.rs:421:9
+    |
+421 |         scheduler: &'a GlobalScheduler,
+    |         ^^^^^^^^^ help: if this is intentional, prefix it with an underscore: `_scheduler`
+
+warning: unused variable: `scheduler_registry`
+   --> nexosim/src/model/context.rs:422:9
+    |
+422 |         scheduler_registry: &'a mut SchedulerRegistry,
+    |         ^^^^^^^^^^^^^^^^^^ help: if this is intentional, prefix it with an underscore: `_scheduler_registry`
+
+warning: unused variable: `injector`
+   --> nexosim/src/model/context.rs:423:9
+    |
+423 |         injector: &'a Arc<Mutex<InjectorQueue>>,
+    |         ^^^^^^^^ help: if this is intentional, prefix it with an underscore: `_injector`
+
+warning: unused variable: `origin_id`
+   --> nexosim/src/model/context.rs:424:9
+    |
+424 |         origin_id: usize,
+    |         ^^^^^^^^^ help: if this is intentional, prefix it with an underscore: `_origin_id`
+
+warning: unused variable: `executor`
+   --> nexosim/src/model/context.rs:425:9
+    |
+425 |         executor: &'a Executor,
+    |         ^^^^^^^^ help: if this is intentional, prefix it with an underscore: `_executor`
+
+warning: unused variable: `abort_signal`
+   --> nexosim/src/model/context.rs:426:9
+    |
+426 |         abort_signal: &'a Signal,
+    |         ^^^^^^^^^^^^ help: if this is intentional, prefix it with an underscore: `_abort_signal`
+
+warning: unused variable: `registered_models`
+   --> nexosim/src/model/context.rs:427:9
+    |
+427 |         registered_models: &'a mut Vec<RegisteredModel>,
+    |         ^^^^^^^^^^^^^^^^^ help: if this is intentional, prefix it with an underscore: `_registered_models`
+
+warning: unused variable: `is_resumed`
+   --> nexosim/src/model/context.rs:428:9
+    |
+428 |         is_resumed: Arc<AtomicBool>,
+    |         ^^^^^^^^^^ help: if this is intentional, prefix it with an underscore: `_is_resumed`
+
+warning: unused variable: `func`
+   --> nexosim/src/model/context.rs:456:9
+    |
+456 |         func: F,
+    |         ^^^^ help: if this is intentional, prefix it with an underscore: `_func`
+
+warning: unused variable: `model`
+   --> nexosim/src/model/context.rs:471:39
+    |
+471 |     pub fn add_submodel<S>(&mut self, model: S, mailbox: Mailbox<S::Model>, name: &str)
+    |                                       ^^^^^ help: if this is intentional, prefix it with an underscore: `_model`
+
+warning: unused variable: `mailbox`
+   --> nexosim/src/model/context.rs:471:49
+    |
+471 |     pub fn add_submodel<S>(&mut self, model: S, mailbox: Mailbox<S::Model>, name: &str)
+    |                                                 ^^^^^^^ help: if this is intentional, prefix it with an underscore: `_mailbox`
+
+warning: unused variable: `name`
+   --> nexosim/src/model/context.rs:471:77
+    |
+471 |     pub fn add_submodel<S>(&mut self, model: S, mailbox: Mailbox<S::Model>, name: &str)
+    |                                                                             ^^^^ help: if this is intentional, prefix it with an underscore: `_name`
+
+warning: unused variable: `func`
+   --> nexosim/src/model/context.rs:493:43
+    |
+493 |     pub fn event_injector<F, T, S>(&self, func: F) -> EventInjector<T>
+    |                                           ^^^^ help: if this is intentional, prefix it with an underscore: `_func`
+
+warning: unused variable: `model_registry`
+   --> nexosim/src/model/context.rs:505:49
+    |
+505 |     pub(crate) fn set_model_registry(&mut self, model_registry: &'a Arc<ModelRegistry>) {
+    |                                                 ^^^^^^^^^^^^^^ help: if this is intentional, prefix it with an underscore: `_model_registry`
+
+warning: unused variable: `f`
+   --> nexosim/src/model/context.rs:510:19
+    |
+510 |     fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
+    |                   ^ help: if this is intentional, prefix it with an underscore: `_f`
+
+warning: unused variable: `schedulable_id`
+   --> nexosim/src/model/context.rs:524:40
+    |
+524 |     pub fn add<M: Model, T>(&mut self, schedulable_id: SchedulableId<M, T>) {
+    |                                        ^^^^^^^^^^^^^^ help: if this is intentional, prefix it with an underscore: `_schedulable_id`
+
+warning: unused variable: `idx`
+   --> nexosim/src/model/context.rs:527:43
+    |
+527 |     pub(crate) fn get<M: Model, T>(&self, idx: usize) -> SchedulableId<M, T> {
+    |                                           ^^^ help: if this is intentional, prefix it with an underscore: `_idx`
+
+warning: unused variable: `registry`
+   --> nexosim/src/model/context.rs:549:36
+    |
+549 |     pub(crate) fn source_id(&self, registry: &ModelRegistry) -> EventId<T> {
+    |                                    ^^^^^^^^ help: if this is intentional, prefix it with an underscore: `_registry`
+
+warning: unused variable: `model`
+   --> nexosim/src/model.rs:550:13
+    |
+550 |     fn from(model: M) -> Self {
+    |             ^^^^^ help: if this is intentional, prefix it with an underscore: `_model`
+
+warning: unused variable: `path`
+   --> nexosim/src/model.rs:603:33
+    |
+603 |     pub(crate) fn new<M: Model>(path: Path, address: Address<M>) -> Self {
+    |                                 ^^^^ help: if this is intentional, prefix it with an underscore: `_path`
+
+warning: unused variable: `address`
+   --> nexosim/src/model.rs:603:45
+    |
+603 |     pub(crate) fn new<M: Model>(path: Path, address: Address<M>) -> Self {
+    |                                             ^^^^^^^ help: if this is intentional, prefix it with an underscore: `_address`
+
+warning: unused variable: `f`
+   --> nexosim/src/model.rs:608:19
+    |
+608 |     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+    |                   ^ help: if this is intentional, prefix it with an underscore: `_f`
+
+warning: unused variable: `model`
+   --> nexosim/src/model.rs:613:5
+    |
+613 |     model: &mut M,
+    |     ^^^^^ help: if this is intentional, prefix it with an underscore: `_model`
+
+warning: unused variable: `path`
+   --> nexosim/src/model.rs:614:5
+    |
+614 |     path: Path,
+    |     ^^^^ help: if this is intentional, prefix it with an underscore: `_path`
+
+warning: unused variable: `model`
+   --> nexosim/src/model.rs:619:5
+    |
+619 |     model: &mut M,
+    |     ^^^^^ help: if this is intentional, prefix it with an underscore: `_model`
+
+warning: unused variable: `state`
+   --> nexosim/src/model.rs:620:5
+    |
+620 |     state: (Vec<u8>, EventKeyReg, Path),
+    |     ^^^^^ help: if this is intentional, prefix it with an underscore: `_state`
+
+warning: unused variable: `other`
+  --> nexosim/src/path.rs:48:24
+   |
+48 |     pub fn join(&self, other: impl Into<Path>) -> Self {
+   |                        ^^^^^ help: if this is intentional, prefix it with an underscore: `_other`
+
+warning: unused variable: `segment`
+  --> nexosim/src/path.rs:52:32
+   |
+52 |     pub fn join_segment(&self, segment: &str) -> Self {
+   |                                ^^^^^^^ help: if this is intentional, prefix it with an underscore: `_segment`
+
+warning: unused variable: `index`
+  --> nexosim/src/path.rs:68:23
+   |
+68 |     pub fn get(&self, index: usize) -> Option<&str> {
+   |                       ^^^^^ help: if this is intentional, prefix it with an underscore: `_index`
+
+warning: unused variable: `range`
+  --> nexosim/src/path.rs:72:30
+   |
+72 |     pub fn subpath<R>(&self, range: R) -> Option<Self>
+   |                              ^^^^^ help: if this is intentional, prefix it with an underscore: `_range`
+
+warning: unused variable: `index`
+  --> nexosim/src/path.rs:86:21
+   |
+86 |     fn index(&self, index: usize) -> &Self::Output {
+   |                     ^^^^^ help: if this is intentional, prefix it with an underscore: `_index`
+
+warning: unused variable: `f`
+  --> nexosim/src/path.rs:91:19
+   |
+91 |     fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
+   |                   ^ help: if this is intentional, prefix it with an underscore: `_f`
+
+warning: unused variable: `f`
+  --> nexosim/src/path.rs:96:19
+   |
+96 |     fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
+   |                   ^ help: if this is intentional, prefix it with an underscore: `_f`
+
+warning: unused variable: `iter`
+   --> nexosim/src/path.rs:153:50
+    |
+153 |     fn from_iter<T: IntoIterator<Item = String>>(iter: T) -> Self {
+    |                                                  ^^^^ help: if this is intentional, prefix it with an underscore: `_iter`
+
+warning: unused variable: `iter`
+   --> nexosim/src/path.rs:158:51
+    |
+158 |     fn from_iter<T: IntoIterator<Item = &'a str>>(iter: T) -> Self {
+    |                                                   ^^^^ help: if this is intentional, prefix it with an underscore: `_iter`
+
+warning: unused variable: `p`
+   --> nexosim/src/path.rs:163:13
+    |
+163 |     fn from(p: &Path) -> Self {
+    |             ^ help: if this is intentional, prefix it with an underscore: `_p`
+
+warning: unused variable: `s`
+   --> nexosim/src/path.rs:168:13
+    |
+168 |     fn from(s: String) -> Self {
+    |             ^ help: if this is intentional, prefix it with an underscore: `_s`
+
+warning: unused variable: `s`
+   --> nexosim/src/path.rs:173:13
+    |
+173 |     fn from(s: &str) -> Self {
+    |             ^ help: if this is intentional, prefix it with an underscore: `_s`
+
+warning: unused variable: `s`
+   --> nexosim/src/path.rs:178:13
+    |
+178 |     fn from(s: &mut str) -> Self {
+    |             ^ help: if this is intentional, prefix it with an underscore: `_s`
+
+warning: unused variable: `arr`
+   --> nexosim/src/path.rs:183:13
+    |
+183 |     fn from(arr: [String; N]) -> Self {
+    |             ^^^ help: if this is intentional, prefix it with an underscore: `_arr`
+
+warning: unused variable: `arr`
+   --> nexosim/src/path.rs:188:13
+    |
+188 |     fn from(arr: [&str; N]) -> Self {
+    |             ^^^ help: if this is intentional, prefix it with an underscore: `_arr`
+
+warning: unused variable: `arr`
+   --> nexosim/src/path.rs:193:13
+    |
+193 |     fn from(arr: [&mut str; N]) -> Self {
+    |             ^^^ help: if this is intentional, prefix it with an underscore: `_arr`
+
+warning: unused variable: `slice`
+   --> nexosim/src/path.rs:198:13
+    |
+198 |     fn from(slice: &[String]) -> Self {
+    |             ^^^^^ help: if this is intentional, prefix it with an underscore: `_slice`
+
+warning: unused variable: `slice`
+   --> nexosim/src/path.rs:203:13
+    |
+203 |     fn from(slice: &[&str]) -> Self {
+    |             ^^^^^ help: if this is intentional, prefix it with an underscore: `_slice`
+
+warning: unused variable: `slice`
+   --> nexosim/src/path.rs:208:13
+    |
+208 |     fn from(slice: &[&mut str]) -> Self {
+    |             ^^^^^ help: if this is intentional, prefix it with an underscore: `_slice`
+
+warning: unused variable: `segments`
+   --> nexosim/src/path.rs:213:13
+    |
+213 |     fn from(segments: Vec<String>) -> Self {
+    |             ^^^^^^^^ help: if this is intentional, prefix it with an underscore: `_segments`
+
+warning: unused variable: `segments`
+   --> nexosim/src/path.rs:218:13
+    |
+218 |     fn from(segments: Vec<&str>) -> Self {
+    |             ^^^^^^^^ help: if this is intentional, prefix it with an underscore: `_segments`
+
+warning: unused variable: `segments`
+   --> nexosim/src/path.rs:223:13
+    |
+223 |     fn from(segments: Vec<&mut str>) -> Self {
+    |             ^^^^^^^^ help: if this is intentional, prefix it with an underscore: `_segments`
+
+warning: unused variable: `model`
+  --> nexosim/src/ports/input/model_fn.rs:49:9
+   |
+49 |         model: &'a mut M,
+   |         ^^^^^ help: if this is intentional, prefix it with an underscore: `_model`
+
+warning: unused variable: `model`
+  --> nexosim/src/ports/input/model_fn.rs:65:9
+   |
+65 |         model: &'a mut M,
+   |         ^^^^^ help: if this is intentional, prefix it with an underscore: `_model`
+
+warning: unused variable: `arg`
+  --> nexosim/src/ports/input/model_fn.rs:66:9
+   |
+66 |         arg: T,
+   |         ^^^ help: if this is intentional, prefix it with an underscore: `_arg`
+
+warning: unused variable: `model`
+  --> nexosim/src/ports/input/model_fn.rs:81:9
+   |
+81 |         model: &'a mut M,
+   |         ^^^^^ help: if this is intentional, prefix it with an underscore: `_model`
+
+warning: unused variable: `arg`
+  --> nexosim/src/ports/input/model_fn.rs:82:9
+   |
+82 |         arg: T,
+   |         ^^^ help: if this is intentional, prefix it with an underscore: `_arg`
+
+warning: unused variable: `cx`
+  --> nexosim/src/ports/input/model_fn.rs:83:9
+   |
+83 |         cx: &'a Context<M>,
+   |         ^^ help: if this is intentional, prefix it with an underscore: `_cx`
+
+warning: unused variable: `model`
+  --> nexosim/src/ports/input/model_fn.rs:97:9
+   |
+97 |         model: &'a mut M,
+   |         ^^^^^ help: if this is intentional, prefix it with an underscore: `_model`
+
+warning: unused variable: `arg`
+  --> nexosim/src/ports/input/model_fn.rs:98:9
+   |
+98 |         arg: T,
+   |         ^^^ help: if this is intentional, prefix it with an underscore: `_arg`
+
+warning: unused variable: `cx`
+  --> nexosim/src/ports/input/model_fn.rs:99:9
+   |
+99 |         cx: &'a Context<M>,
+   |         ^^ help: if this is intentional, prefix it with an underscore: `_cx`
+
+warning: unused variable: `env`
+   --> nexosim/src/ports/input/model_fn.rs:100:9
+    |
+100 |         env: &'a mut M::Env,
+    |         ^^^ help: if this is intentional, prefix it with an underscore: `_env`
+
+warning: unused variable: `model`
+   --> nexosim/src/ports/input/model_fn.rs:114:9
+    |
+114 |         model: &'a mut M,
+    |         ^^^^^ help: if this is intentional, prefix it with an underscore: `_model`
+
+warning: unused variable: `model`
+   --> nexosim/src/ports/input/model_fn.rs:131:9
+    |
+131 |         model: &'a mut M,
+    |         ^^^^^ help: if this is intentional, prefix it with an underscore: `_model`
+
+warning: unused variable: `arg`
+   --> nexosim/src/ports/input/model_fn.rs:132:9
+    |
+132 |         arg: T,
+    |         ^^^ help: if this is intentional, prefix it with an underscore: `_arg`
+
+warning: unused variable: `model`
+   --> nexosim/src/ports/input/model_fn.rs:148:9
+    |
+148 |         model: &'a mut M,
+    |         ^^^^^ help: if this is intentional, prefix it with an underscore: `_model`
+
+warning: unused variable: `arg`
+   --> nexosim/src/ports/input/model_fn.rs:149:9
+    |
+149 |         arg: T,
+    |         ^^^ help: if this is intentional, prefix it with an underscore: `_arg`
+
+warning: unused variable: `cx`
+   --> nexosim/src/ports/input/model_fn.rs:150:9
+    |
+150 |         cx: &'a Context<M>,
+    |         ^^ help: if this is intentional, prefix it with an underscore: `_cx`
+
+warning: unused variable: `model`
+   --> nexosim/src/ports/input/model_fn.rs:165:9
+    |
+165 |         model: &'a mut M,
+    |         ^^^^^ help: if this is intentional, prefix it with an underscore: `_model`
+
+warning: unused variable: `arg`
+   --> nexosim/src/ports/input/model_fn.rs:166:9
+    |
+166 |         arg: T,
+    |         ^^^ help: if this is intentional, prefix it with an underscore: `_arg`
+
+warning: unused variable: `cx`
+   --> nexosim/src/ports/input/model_fn.rs:167:9
+    |
+167 |         cx: &'a Context<M>,
+    |         ^^ help: if this is intentional, prefix it with an underscore: `_cx`
+
+warning: unused variable: `env`
+   --> nexosim/src/ports/input/model_fn.rs:168:9
+    |
+168 |         env: &'a mut M::Env,
+    |         ^^^ help: if this is intentional, prefix it with an underscore: `_env`
+
+warning: unused variable: `model`
+   --> nexosim/src/ports/input/model_fn.rs:213:9
+    |
+213 |         model: &'a mut M,
+    |         ^^^^^ help: if this is intentional, prefix it with an underscore: `_model`
+
+warning: unused variable: `model`
+   --> nexosim/src/ports/input/model_fn.rs:230:9
+    |
+230 |         model: &'a mut M,
+    |         ^^^^^ help: if this is intentional, prefix it with an underscore: `_model`
+
+warning: unused variable: `arg`
+   --> nexosim/src/ports/input/model_fn.rs:231:9
+    |
+231 |         arg: T,
+    |         ^^^ help: if this is intentional, prefix it with an underscore: `_arg`
+
+warning: unused variable: `model`
+   --> nexosim/src/ports/input/model_fn.rs:247:9
+    |
+247 |         model: &'a mut M,
+    |         ^^^^^ help: if this is intentional, prefix it with an underscore: `_model`
+
+warning: unused variable: `arg`
+   --> nexosim/src/ports/input/model_fn.rs:248:9
+    |
+248 |         arg: T,
+    |         ^^^ help: if this is intentional, prefix it with an underscore: `_arg`
+
+warning: unused variable: `cx`
+   --> nexosim/src/ports/input/model_fn.rs:249:9
+    |
+249 |         cx: &'a Context<M>,
+    |         ^^ help: if this is intentional, prefix it with an underscore: `_cx`
+
+warning: unused variable: `model`
+   --> nexosim/src/ports/input/model_fn.rs:264:9
+    |
+264 |         model: &'a mut M,
+    |         ^^^^^ help: if this is intentional, prefix it with an underscore: `_model`
+
+warning: unused variable: `arg`
+   --> nexosim/src/ports/input/model_fn.rs:265:9
+    |
+265 |         arg: T,
+    |         ^^^ help: if this is intentional, prefix it with an underscore: `_arg`
+
+warning: unused variable: `cx`
+   --> nexosim/src/ports/input/model_fn.rs:266:9
+    |
+266 |         cx: &'a Context<M>,
+    |         ^^ help: if this is intentional, prefix it with an underscore: `_cx`
+
+warning: unused variable: `env`
+   --> nexosim/src/ports/input/model_fn.rs:267:9
+    |
+267 |         env: &'a mut M::Env,
+    |         ^^^ help: if this is intentional, prefix it with an underscore: `_env`
+
+warning: unused variable: `sender`
+  --> nexosim/src/ports/output/broadcaster.rs:37:34
+   |
+37 |     pub(super) fn add(&mut self, sender: Box<dyn Sender<T, R>>) {
+   |                                  ^^^^^^ help: if this is intentional, prefix it with an underscore: `_sender`
+
+warning: unused variable: `arg`
+  --> nexosim/src/ports/output/broadcaster.rs:49:9
+   |
+49 |         arg: T,
+   |         ^^^ help: if this is intentional, prefix it with an underscore: `_arg`
+
+warning: unused variable: `sender`
+  --> nexosim/src/ports/output/broadcaster.rs:84:34
+   |
+84 |     pub(super) fn add(&mut self, sender: Box<dyn Sender<T, ()>>) {
+   |                                  ^^^^^^ help: if this is intentional, prefix it with an underscore: `_sender`
+
+warning: unused variable: `arg`
+  --> nexosim/src/ports/output/broadcaster.rs:92:46
+   |
+92 |     pub(super) async fn broadcast(&mut self, arg: T) -> Result<(), SendError> {
+   |                                              ^^^ help: if this is intentional, prefix it with an underscore: `_arg`
+
+warning: unused variable: `sender`
+   --> nexosim/src/ports/output/broadcaster.rs:119:34
+    |
+119 |     pub(super) fn add(&mut self, sender: Box<dyn Sender<T, R>>) {
+    |                                  ^^^^^^ help: if this is intentional, prefix it with an underscore: `_sender`
+
+warning: unused variable: `shared`
+   --> nexosim/src/ports/output/broadcaster.rs:186:9
+    |
+186 |         shared: &'a mut Shared<R>,
+    |         ^^^^^^ help: if this is intentional, prefix it with an underscore: `_shared`
+
+warning: unused variable: `futures`
+   --> nexosim/src/ports/output/broadcaster.rs:187:9
+    |
+187 |         futures: Vec<RecycledFuture<'a, Result<R, SendError>>>,
+    |         ^^^^^^^ help: if this is intentional, prefix it with an underscore: `_futures`
+
+warning: variable does not need to be mutable
+   --> nexosim/src/ports/output/broadcaster.rs:199:13
+    |
+199 |     fn poll(mut self: Pin<&mut Self>, cx: &mut Context<'_>) -> Poll<Self::Output> {
+    |             ----^^^^
+    |             |
+    |             help: remove this `mut`
+    |
+    = note: `#[warn(unused_mut)]` (part of `#[warn(unused)]`) on by default
+
+warning: unused variable: `cx`
+   --> nexosim/src/ports/output/broadcaster.rs:199:39
+    |
+199 |     fn poll(mut self: Pin<&mut Self>, cx: &mut Context<'_>) -> Poll<Self::Output> {
+    |                                       ^^ help: if this is intentional, prefix it with an underscore: `_cx`
+
+warning: variable does not need to be mutable
+   --> nexosim/src/ports/output/broadcaster.rs:216:22
+    |
+216 | fn recycle_vec<T, U>(mut v: Vec<T>) -> Vec<U> {
+    |                      ----^
+    |                      |
+    |                      help: remove this `mut`
+
+warning: unused variable: `v`
+   --> nexosim/src/ports/output/broadcaster.rs:216:22
+    |
+216 | fn recycle_vec<T, U>(mut v: Vec<T>) -> Vec<U> {
+    |                      ^^^^^ help: if this is intentional, prefix it with an underscore: `_v`
+
+warning: unused variable: `arg`
+  --> nexosim/src/ports/output/sender.rs:44:24
+   |
+44 |     fn send(&mut self, arg: &T) -> Option<RecycledFuture<'_, Result<R, SendError>>> {
+   |                        ^^^ help: if this is intentional, prefix it with an underscore: `_arg`
+
+warning: unused variable: `arg`
+  --> nexosim/src/ports/output/sender.rs:50:9
+   |
+50 |         arg: T,
+   |         ^^^ help: if this is intentional, prefix it with an underscore: `_arg`
+
+warning: unused variable: `func`
+  --> nexosim/src/ports/output/sender.rs:71:23
+   |
+71 |     pub(super) fn new(func: F, sender: channel::Sender<M>) -> Self {
+   |                       ^^^^ help: if this is intentional, prefix it with an underscore: `_func`
+
+warning: unused variable: `sender`
+  --> nexosim/src/ports/output/sender.rs:71:32
+   |
+71 |     pub(super) fn new(func: F, sender: channel::Sender<M>) -> Self {
+   |                                ^^^^^^ help: if this is intentional, prefix it with an underscore: `_sender`
+
+warning: unused variable: `arg`
+  --> nexosim/src/ports/output/sender.rs:82:24
+   |
+82 |     fn send(&mut self, arg: &T) -> RecycledFuture<'_, Result<(), SendError>> {
+   |                        ^^^ help: if this is intentional, prefix it with an underscore: `_arg`
+
+warning: unused variable: `arg`
+  --> nexosim/src/ports/output/sender.rs:85:30
+   |
+85 |     fn send_owned(&mut self, arg: T) -> RecycledFuture<'_, Result<(), SendError>> {
+   |                              ^^^ help: if this is intentional, prefix it with an underscore: `_arg`
+
+warning: unused variable: `map`
+   --> nexosim/src/ports/output/sender.rs:115:23
+    |
+115 |     pub(super) fn new(map: C, func: F, sender: channel::Sender<M>) -> Self {
+    |                       ^^^ help: if this is intentional, prefix it with an underscore: `_map`
+
+warning: unused variable: `func`
+   --> nexosim/src/ports/output/sender.rs:115:31
+    |
+115 |     pub(super) fn new(map: C, func: F, sender: channel::Sender<M>) -> Self {
+    |                               ^^^^ help: if this is intentional, prefix it with an underscore: `_func`
+
+warning: unused variable: `sender`
+   --> nexosim/src/ports/output/sender.rs:115:40
+    |
+115 |     pub(super) fn new(map: C, func: F, sender: channel::Sender<M>) -> Self {
+    |                                        ^^^^^^ help: if this is intentional, prefix it with an underscore: `_sender`
+
+warning: unused variable: `arg`
+   --> nexosim/src/ports/output/sender.rs:129:24
+    |
+129 |     fn send(&mut self, arg: &T) -> RecycledFuture<'_, Result<(), SendError>> {
+    |                        ^^^ help: if this is intentional, prefix it with an underscore: `_arg`
+
+warning: unused variable: `filter_map`
+   --> nexosim/src/ports/output/sender.rs:159:23
+    |
+159 |     pub(super) fn new(filter_map: C, func: F, sender: channel::Sender<M>) -> Self {
+    |                       ^^^^^^^^^^ help: if this is intentional, prefix it with an underscore: `_filter_map`
+
+warning: unused variable: `func`
+   --> nexosim/src/ports/output/sender.rs:159:38
+    |
+159 |     pub(super) fn new(filter_map: C, func: F, sender: channel::Sender<M>) -> Self {
+    |                                      ^^^^ help: if this is intentional, prefix it with an underscore: `_func`
+
+warning: unused variable: `sender`
+   --> nexosim/src/ports/output/sender.rs:159:47
+    |
+159 |     pub(super) fn new(filter_map: C, func: F, sender: channel::Sender<M>) -> Self {
+    |                                               ^^^^^^ help: if this is intentional, prefix it with an underscore: `_sender`
+
+warning: unused variable: `arg`
+   --> nexosim/src/ports/output/sender.rs:172:24
+    |
+172 |     fn send(&mut self, arg: &T) -> Option<RecycledFuture<'_, Result<(), SendError>>> {
+    |                        ^^^ help: if this is intentional, prefix it with an underscore: `_arg`
+
+warning: unused variable: `writer`
+   --> nexosim/src/ports/output/sender.rs:192:23
+    |
+192 |     pub(super) fn new(writer: W) -> Self {
+    |                       ^^^^^^ help: if this is intentional, prefix it with an underscore: `_writer`
+
+warning: unused variable: `arg`
+   --> nexosim/src/ports/output/sender.rs:202:24
+    |
+202 |     fn send(&mut self, arg: &T) -> RecycledFuture<'_, Result<(), SendError>> {
+    |                        ^^^ help: if this is intentional, prefix it with an underscore: `_arg`
+
+warning: unused variable: `arg`
+   --> nexosim/src/ports/output/sender.rs:205:30
+    |
+205 |     fn send_owned(&mut self, arg: T) -> RecycledFuture<'_, Result<(), SendError>> {
+    |                              ^^^ help: if this is intentional, prefix it with an underscore: `_arg`
+
+warning: unused variable: `map`
+   --> nexosim/src/ports/output/sender.rs:228:23
+    |
+228 |     pub(super) fn new(map: C, writer: W) -> Self {
+    |                       ^^^ help: if this is intentional, prefix it with an underscore: `_map`
+
+warning: unused variable: `writer`
+   --> nexosim/src/ports/output/sender.rs:228:31
+    |
+228 |     pub(super) fn new(map: C, writer: W) -> Self {
+    |                               ^^^^^^ help: if this is intentional, prefix it with an underscore: `_writer`
+
+warning: unused variable: `arg`
+   --> nexosim/src/ports/output/sender.rs:240:24
+    |
+240 |     fn send(&mut self, arg: &T) -> RecycledFuture<'_, Result<(), SendError>> {
+    |                        ^^^ help: if this is intentional, prefix it with an underscore: `_arg`
+
+warning: unused variable: `filter_map`
+   --> nexosim/src/ports/output/sender.rs:267:23
+    |
+267 |     pub(super) fn new(filter_map: C, writer: W) -> Self {
+    |                       ^^^^^^^^^^ help: if this is intentional, prefix it with an underscore: `_filter_map`
+
+warning: unused variable: `writer`
+   --> nexosim/src/ports/output/sender.rs:267:38
+    |
+267 |     pub(super) fn new(filter_map: C, writer: W) -> Self {
+    |                                      ^^^^^^ help: if this is intentional, prefix it with an underscore: `_writer`
+
+warning: unused variable: `arg`
+   --> nexosim/src/ports/output/sender.rs:278:24
+    |
+278 |     fn send(&mut self, arg: &T) -> Option<RecycledFuture<'_, Result<(), SendError>>> {
+    |                        ^^^ help: if this is intentional, prefix it with an underscore: `_arg`
+
+warning: unused variable: `func`
+   --> nexosim/src/ports/output/sender.rs:307:23
+    |
+307 |     pub(super) fn new(func: F, sender: channel::Sender<M>) -> Self {
+    |                       ^^^^ help: if this is intentional, prefix it with an underscore: `_func`
+
+warning: unused variable: `sender`
+   --> nexosim/src/ports/output/sender.rs:307:32
+    |
+307 |     pub(super) fn new(func: F, sender: channel::Sender<M>) -> Self {
+    |                                ^^^^^^ help: if this is intentional, prefix it with an underscore: `_sender`
+
+warning: unused variable: `arg`
+   --> nexosim/src/ports/output/sender.rs:320:24
+    |
+320 |     fn send(&mut self, arg: &T) -> RecycledFuture<'_, Result<R, SendError>> {
+    |                        ^^^ help: if this is intentional, prefix it with an underscore: `_arg`
+
+warning: unused variable: `arg`
+   --> nexosim/src/ports/output/sender.rs:323:30
+    |
+323 |     fn send_owned(&mut self, arg: T) -> RecycledFuture<'_, Result<R, SendError>> {
+    |                              ^^^ help: if this is intentional, prefix it with an underscore: `_arg`
+
+warning: unused variable: `query_map`
+   --> nexosim/src/ports/output/sender.rs:358:9
+    |
+358 |         query_map: C,
+    |         ^^^^^^^^^ help: if this is intentional, prefix it with an underscore: `_query_map`
+
+warning: unused variable: `reply_map`
+   --> nexosim/src/ports/output/sender.rs:359:9
+    |
+359 |         reply_map: D,
+    |         ^^^^^^^^^ help: if this is intentional, prefix it with an underscore: `_reply_map`
+
+warning: unused variable: `func`
+   --> nexosim/src/ports/output/sender.rs:360:9
+    |
+360 |         func: F,
+    |         ^^^^ help: if this is intentional, prefix it with an underscore: `_func`
+
+warning: unused variable: `sender`
+   --> nexosim/src/ports/output/sender.rs:361:9
+    |
+361 |         sender: channel::Sender<M>,
+    |         ^^^^^^ help: if this is intentional, prefix it with an underscore: `_sender`
+
+warning: unused variable: `arg`
+   --> nexosim/src/ports/output/sender.rs:381:24
+    |
+381 |     fn send(&mut self, arg: &T) -> RecycledFuture<'_, Result<R, SendError>> {
+    |                        ^^^ help: if this is intentional, prefix it with an underscore: `_arg`
+
+warning: unused variable: `query_filter_map`
+   --> nexosim/src/ports/output/sender.rs:416:9
+    |
+416 |         query_filter_map: C,
+    |         ^^^^^^^^^^^^^^^^ help: if this is intentional, prefix it with an underscore: `_query_filter_map`
+
+warning: unused variable: `reply_map`
+   --> nexosim/src/ports/output/sender.rs:417:9
+    |
+417 |         reply_map: D,
+    |         ^^^^^^^^^ help: if this is intentional, prefix it with an underscore: `_reply_map`
+
+warning: unused variable: `func`
+   --> nexosim/src/ports/output/sender.rs:418:9
+    |
+418 |         func: F,
+    |         ^^^^ help: if this is intentional, prefix it with an underscore: `_func`
+
+warning: unused variable: `sender`
+   --> nexosim/src/ports/output/sender.rs:419:9
+    |
+419 |         sender: channel::Sender<M>,
+    |         ^^^^^^ help: if this is intentional, prefix it with an underscore: `_sender`
+
+warning: unused variable: `arg`
+   --> nexosim/src/ports/output/sender.rs:437:24
+    |
+437 |     fn send(&mut self, arg: &T) -> Option<RecycledFuture<'_, Result<R, SendError>>> {
+    |                        ^^^ help: if this is intentional, prefix it with an underscore: `_arg`
+
+warning: unused variable: `lender_box`
+   --> nexosim/src/ports/output/sender.rs:457:9
+    |
+457 |         lender_box: &'a mut Option<RecycleBox<()>>,
+    |         ^^^^^^^^^^ help: if this is intentional, prefix it with an underscore: `_lender_box`
+
+warning: unused variable: `fut`
+   --> nexosim/src/ports/output/sender.rs:458:9
+    |
+458 |         fut: F,
+    |         ^^^ help: if this is intentional, prefix it with an underscore: `_fut`
+
+warning: variable does not need to be mutable
+   --> nexosim/src/ports/output/sender.rs:470:13
+    |
+470 |     fn poll(mut self: Pin<&mut Self>, cx: &mut Context<'_>) -> Poll<Self::Output> {
+    |             ----^^^^
+    |             |
+    |             help: remove this `mut`
+
+warning: unused variable: `cx`
+   --> nexosim/src/ports/output/sender.rs:470:39
+    |
+470 |     fn poll(mut self: Pin<&mut Self>, cx: &mut Context<'_>) -> Poll<Self::Output> {
+    |                                       ^^ help: if this is intentional, prefix it with an underscore: `_cx`
+
+warning: unused variable: `input`
+  --> nexosim/src/ports/output.rs:54:40
+   |
+54 |     pub fn connect<M, F, S>(&mut self, input: F, address: impl Into<Address<M>>)
+   |                                        ^^^^^ help: if this is intentional, prefix it with an underscore: `_input`
+
+warning: unused variable: `address`
+  --> nexosim/src/ports/output.rs:54:50
+   |
+54 |     pub fn connect<M, F, S>(&mut self, input: F, address: impl Into<Address<M>>)
+   |                                                  ^^^^^^^ help: if this is intentional, prefix it with an underscore: `_address`
+
+warning: unused variable: `sink`
+  --> nexosim/src/ports/output.rs:64:59
+   |
+64 |     pub fn connect_sink<S: EventSinkWriter<T>>(&mut self, sink: S) {
+   |                                                           ^^^^ help: if this is intentional, prefix it with an underscore: `_sink`
+
+warning: unused variable: `map`
+  --> nexosim/src/ports/output.rs:78:9
+   |
+78 |         map: C,
+   |         ^^^ help: if this is intentional, prefix it with an underscore: `_map`
+
+warning: unused variable: `input`
+  --> nexosim/src/ports/output.rs:79:9
+   |
+79 |         input: F,
+   |         ^^^^^ help: if this is intentional, prefix it with an underscore: `_input`
+
+warning: unused variable: `address`
+  --> nexosim/src/ports/output.rs:80:9
+   |
+80 |         address: impl Into<Address<M>>,
+   |         ^^^^^^^ help: if this is intentional, prefix it with an underscore: `_address`
+
+warning: unused variable: `map`
+  --> nexosim/src/ports/output.rs:96:49
+   |
+96 |     pub fn map_connect_sink<C, U, S>(&mut self, map: C, sink: S)
+   |                                                 ^^^ help: if this is intentional, prefix it with an underscore: `_map`
+
+warning: unused variable: `sink`
+  --> nexosim/src/ports/output.rs:96:57
+   |
+96 |     pub fn map_connect_sink<C, U, S>(&mut self, map: C, sink: S)
+   |                                                         ^^^^ help: if this is intentional, prefix it with an underscore: `_sink`
+
+warning: unused variable: `filter_map`
+   --> nexosim/src/ports/output.rs:115:9
+    |
+115 |         filter_map: C,
+    |         ^^^^^^^^^^ help: if this is intentional, prefix it with an underscore: `_filter_map`
+
+warning: unused variable: `input`
+   --> nexosim/src/ports/output.rs:116:9
+    |
+116 |         input: F,
+    |         ^^^^^ help: if this is intentional, prefix it with an underscore: `_input`
+
+warning: unused variable: `address`
+   --> nexosim/src/ports/output.rs:117:9
+    |
+117 |         address: impl Into<Address<M>>,
+    |         ^^^^^^^ help: if this is intentional, prefix it with an underscore: `_address`
+
+warning: unused variable: `filter_map`
+   --> nexosim/src/ports/output.rs:133:56
+    |
+133 |     pub fn filter_map_connect_sink<C, U, S>(&mut self, filter_map: C, sink: S)
+    |                                                        ^^^^^^^^^^ help: if this is intentional, prefix it with an underscore: `_filter_map`
+
+warning: unused variable: `sink`
+   --> nexosim/src/ports/output.rs:133:71
+    |
+133 |     pub fn filter_map_connect_sink<C, U, S>(&mut self, filter_map: C, sink: S)
+    |                                                                       ^^^^ help: if this is intentional, prefix it with an underscore: `_sink`
+
+warning: unused variable: `arg`
+   --> nexosim/src/ports/output.rs:142:34
+    |
+142 |     pub async fn send(&mut self, arg: T) {
+    |                                  ^^^ help: if this is intentional, prefix it with an underscore: `_arg`
+
+warning: unused variable: `f`
+   --> nexosim/src/ports/output.rs:152:19
+    |
+152 |     fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
+    |                   ^ help: if this is intentional, prefix it with an underscore: `_f`
+
+warning: unused variable: `serializer`
+   --> nexosim/src/ports/output.rs:157:28
+    |
+157 |     fn serialize<S>(&self, serializer: S) -> Result<S::Ok, S::Error>
+    |                            ^^^^^^^^^^ help: if this is intentional, prefix it with an underscore: `_serializer`
+
+warning: unused variable: `replier`
+   --> nexosim/src/ports/output.rs:202:40
+    |
+202 |     pub fn connect<M, F, S>(&mut self, replier: F, address: impl Into<Address<M>>)
+    |                                        ^^^^^^^ help: if this is intentional, prefix it with an underscore: `_replier`
+
+warning: unused variable: `address`
+   --> nexosim/src/ports/output.rs:202:52
+    |
+202 |     pub fn connect<M, F, S>(&mut self, replier: F, address: impl Into<Address<M>>)
+    |                                                    ^^^^^^^ help: if this is intentional, prefix it with an underscore: `_address`
+
+warning: unused variable: `query_map`
+   --> nexosim/src/ports/output.rs:222:9
+    |
+222 |         query_map: C,
+    |         ^^^^^^^^^ help: if this is intentional, prefix it with an underscore: `_query_map`
+
+warning: unused variable: `reply_map`
+   --> nexosim/src/ports/output.rs:223:9
+    |
+223 |         reply_map: D,
+    |         ^^^^^^^^^ help: if this is intentional, prefix it with an underscore: `_reply_map`
+
+warning: unused variable: `replier`
+   --> nexosim/src/ports/output.rs:224:9
+    |
+224 |         replier: F,
+    |         ^^^^^^^ help: if this is intentional, prefix it with an underscore: `_replier`
+
+warning: unused variable: `address`
+   --> nexosim/src/ports/output.rs:225:9
+    |
+225 |         address: impl Into<Address<M>>,
+    |         ^^^^^^^ help: if this is intentional, prefix it with an underscore: `_address`
+
+warning: unused variable: `query_filter_map`
+   --> nexosim/src/ports/output.rs:250:9
+    |
+250 |         query_filter_map: C,
+    |         ^^^^^^^^^^^^^^^^ help: if this is intentional, prefix it with an underscore: `_query_filter_map`
+
+warning: unused variable: `reply_map`
+   --> nexosim/src/ports/output.rs:251:9
+    |
+251 |         reply_map: D,
+    |         ^^^^^^^^^ help: if this is intentional, prefix it with an underscore: `_reply_map`
+
+warning: unused variable: `replier`
+   --> nexosim/src/ports/output.rs:252:9
+    |
+252 |         replier: F,
+    |         ^^^^^^^ help: if this is intentional, prefix it with an underscore: `_replier`
+
+warning: unused variable: `address`
+   --> nexosim/src/ports/output.rs:253:9
+    |
+253 |         address: impl Into<Address<M>>,
+    |         ^^^^^^^ help: if this is intentional, prefix it with an underscore: `_address`
+
+warning: unused variable: `arg`
+   --> nexosim/src/ports/output.rs:267:34
+    |
+267 |     pub async fn send(&mut self, arg: T) -> impl Iterator<Item = R> + '_ {
+    |                                  ^^^ help: if this is intentional, prefix it with an underscore: `_arg`
+
+warning: unused variable: `f`
+   --> nexosim/src/ports/output.rs:283:19
+    |
+283 |     fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
+    |                   ^ help: if this is intentional, prefix it with an underscore: `_f`
+
+warning: unused variable: `serializer`
+   --> nexosim/src/ports/output.rs:288:28
+    |
+288 |     fn serialize<S>(&self, serializer: S) -> Result<S::Ok, S::Error>
+    |                            ^^^^^^^^^^ help: if this is intentional, prefix it with an underscore: `_serializer`
+
+warning: unused variable: `replier`
+   --> nexosim/src/ports/output.rs:324:25
+    |
+324 |     pub fn new<M, F, S>(replier: F, address: impl Into<Address<M>>) -> Self
+    |                         ^^^^^^^ help: if this is intentional, prefix it with an underscore: `_replier`
+
+warning: unused variable: `address`
+   --> nexosim/src/ports/output.rs:324:37
+    |
+324 |     pub fn new<M, F, S>(replier: F, address: impl Into<Address<M>>) -> Self
+    |                                     ^^^^^^^ help: if this is intentional, prefix it with an underscore: `_address`
+
+warning: unused variable: `query_map`
+   --> nexosim/src/ports/output.rs:343:9
+    |
+343 |         query_map: C,
+    |         ^^^^^^^^^ help: if this is intentional, prefix it with an underscore: `_query_map`
+
+warning: unused variable: `reply_map`
+   --> nexosim/src/ports/output.rs:344:9
+    |
+344 |         reply_map: D,
+    |         ^^^^^^^^^ help: if this is intentional, prefix it with an underscore: `_reply_map`
+
+warning: unused variable: `replier`
+   --> nexosim/src/ports/output.rs:345:9
+    |
+345 |         replier: F,
+    |         ^^^^^^^ help: if this is intentional, prefix it with an underscore: `_replier`
+
+warning: unused variable: `address`
+   --> nexosim/src/ports/output.rs:346:9
+    |
+346 |         address: impl Into<Address<M>>,
+    |         ^^^^^^^ help: if this is intentional, prefix it with an underscore: `_address`
+
+warning: unused variable: `arg`
+   --> nexosim/src/ports/output.rs:360:34
+    |
+360 |     pub async fn send(&mut self, arg: T) -> R {
+    |                                  ^^^ help: if this is intentional, prefix it with an underscore: `_arg`
+
+warning: unused variable: `f`
+   --> nexosim/src/ports/output.rs:370:19
+    |
+370 |     fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
+    |                   ^ help: if this is intentional, prefix it with an underscore: `_f`
+
+warning: unused variable: `serializer`
+   --> nexosim/src/ports/output.rs:375:28
+    |
+375 |     fn serialize<S>(&self, serializer: S) -> Result<S::Ok, S::Error>
+    |                            ^^^^^^^^^^ help: if this is intentional, prefix it with an underscore: `_serializer`
+
+warning: unused variable: `state`
+  --> nexosim/src/ports/sink/event_queue.rs:20:5
+   |
+20 |     state: SinkState,
+   |     ^^^^^ help: if this is intentional, prefix it with an underscore: `_state`
+
+warning: unused variable: `sim_init`
+  --> nexosim/src/ports/sink/event_queue.rs:31:5
+   |
+31 |     sim_init: &mut SimInit,
+   |     ^^^^^^^^ help: if this is intentional, prefix it with an underscore: `_sim_init`
+
+warning: unused variable: `state`
+  --> nexosim/src/ports/sink/event_queue.rs:32:5
+   |
+32 |     state: SinkState,
+   |     ^^^^^ help: if this is intentional, prefix it with an underscore: `_state`
+
+warning: unused variable: `path`
+  --> nexosim/src/ports/sink/event_queue.rs:33:5
+   |
+33 |     path: impl Into<Path>,
+   |     ^^^^ help: if this is intentional, prefix it with an underscore: `_path`
+
+warning: unused variable: `sim_init`
+  --> nexosim/src/ports/sink/event_queue.rs:45:5
+   |
+45 |     sim_init: &mut SimInit,
+   |     ^^^^^^^^ help: if this is intentional, prefix it with an underscore: `_sim_init`
+
+warning: unused variable: `state`
+  --> nexosim/src/ports/sink/event_queue.rs:46:5
+   |
+46 |     state: SinkState,
+   |     ^^^^^ help: if this is intentional, prefix it with an underscore: `_state`
+
+warning: unused variable: `path`
+  --> nexosim/src/ports/sink/event_queue.rs:47:5
+   |
+47 |     path: impl Into<Path>,
+   |     ^^^^ help: if this is intentional, prefix it with an underscore: `_path`
+
+warning: unused variable: `cx`
+  --> nexosim/src/ports/sink/event_queue.rs:64:9
+   |
+64 |         cx: &mut Context<'_>,
+   |         ^^ help: if this is intentional, prefix it with an underscore: `_cx`
+
+warning: unused variable: `f`
+  --> nexosim/src/ports/sink/event_queue.rs:87:19
+   |
+87 |     fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
+   |                   ^ help: if this is intentional, prefix it with an underscore: `_f`
+
+warning: unused variable: `event`
+  --> nexosim/src/ports/sink/event_queue.rs:97:21
+   |
+97 |     fn write(&self, event: T) {
+   |                     ^^^^^ help: if this is intentional, prefix it with an underscore: `_event`
+
+warning: unused variable: `f`
+   --> nexosim/src/ports/sink/event_queue.rs:107:19
+    |
+107 |     fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
+    |                   ^ help: if this is intentional, prefix it with an underscore: `_f`
+
+warning: unused variable: `state`
+  --> nexosim/src/ports/sink/event_slot.rs:20:5
+   |
+20 |     state: SinkState,
+   |     ^^^^^ help: if this is intentional, prefix it with an underscore: `_state`
+
+warning: unused variable: `sim_init`
+  --> nexosim/src/ports/sink/event_slot.rs:31:5
+   |
+31 |     sim_init: &mut SimInit,
+   |     ^^^^^^^^ help: if this is intentional, prefix it with an underscore: `_sim_init`
+
+warning: unused variable: `state`
+  --> nexosim/src/ports/sink/event_slot.rs:32:5
+   |
+32 |     state: SinkState,
+   |     ^^^^^ help: if this is intentional, prefix it with an underscore: `_state`
+
+warning: unused variable: `path`
+  --> nexosim/src/ports/sink/event_slot.rs:33:5
+   |
+33 |     path: impl Into<Path>,
+   |     ^^^^ help: if this is intentional, prefix it with an underscore: `_path`
+
+warning: unused variable: `sim_init`
+  --> nexosim/src/ports/sink/event_slot.rs:45:5
+   |
+45 |     sim_init: &mut SimInit,
+   |     ^^^^^^^^ help: if this is intentional, prefix it with an underscore: `_sim_init`
+
+warning: unused variable: `state`
+  --> nexosim/src/ports/sink/event_slot.rs:46:5
+   |
+46 |     state: SinkState,
+   |     ^^^^^ help: if this is intentional, prefix it with an underscore: `_state`
+
+warning: unused variable: `path`
+  --> nexosim/src/ports/sink/event_slot.rs:47:5
+   |
+47 |     path: impl Into<Path>,
+   |     ^^^^ help: if this is intentional, prefix it with an underscore: `_path`
+
+warning: unused variable: `f`
+  --> nexosim/src/ports/sink/event_slot.rs:59:19
+   |
+59 |     fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
+   |                   ^ help: if this is intentional, prefix it with an underscore: `_f`
+
+warning: variable does not need to be mutable
+  --> nexosim/src/ports/sink/event_slot.rs:73:9
+   |
+73 |         mut self: Pin<&mut Self>,
+   |         ----^^^^
+   |         |
+   |         help: remove this `mut`
+
+warning: unused variable: `cx`
+  --> nexosim/src/ports/sink/event_slot.rs:74:9
+   |
+74 |         cx: &mut Context<'_>,
+   |         ^^ help: if this is intentional, prefix it with an underscore: `_cx`
+
+warning: unused variable: `f`
+  --> nexosim/src/ports/sink/event_slot.rs:94:19
+   |
+94 |     fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
+   |                   ^ help: if this is intentional, prefix it with an underscore: `_f`
+
+warning: unused variable: `event`
+   --> nexosim/src/ports/sink/event_slot.rs:104:21
+    |
+104 |     fn write(&self, event: T) {
+    |                     ^^^^^ help: if this is intentional, prefix it with an underscore: `_event`
+
+warning: unused variable: `f`
+   --> nexosim/src/ports/sink/event_slot.rs:119:19
+    |
+119 |     fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
+    |                   ^ help: if this is intentional, prefix it with an underscore: `_f`
+
+warning: unused variable: `f`
+  --> nexosim/src/ports/sink.rs:38:19
+   |
+38 |     fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
+   |                   ^ help: if this is intentional, prefix it with an underscore: `_f`
+
+warning: unused variable: `sender`
+  --> nexosim/src/ports/source/broadcaster.rs:33:34
+   |
+33 |     pub(super) fn add(&mut self, sender: Box<dyn Sender<T, R>>) {
+   |                                  ^^^^^^ help: if this is intentional, prefix it with an underscore: `_sender`
+
+warning: unused variable: `arg`
+  --> nexosim/src/ports/source/broadcaster.rs:42:23
+   |
+42 |     fn futures(&self, arg: T) -> Vec<SenderFutureState<R>> {
+   |                       ^^^ help: if this is intentional, prefix it with an underscore: `_arg`
+
+warning: unused variable: `sender`
+  --> nexosim/src/ports/source/broadcaster.rs:69:34
+   |
+69 |     pub(super) fn add(&mut self, sender: Box<dyn Sender<T, ()>>) {
+   |                                  ^^^^^^ help: if this is intentional, prefix it with an underscore: `_sender`
+
+warning: unused variable: `arg`
+  --> nexosim/src/ports/source/broadcaster.rs:79:9
+   |
+79 |         arg: T,
+   |         ^^^ help: if this is intentional, prefix it with an underscore: `_arg`
+
+warning: unused variable: `sender`
+   --> nexosim/src/ports/source/broadcaster.rs:108:34
+    |
+108 |     pub(super) fn add(&mut self, sender: Box<dyn Sender<T, R>>) {
+    |                                  ^^^^^^ help: if this is intentional, prefix it with an underscore: `_sender`
+
+warning: unused variable: `arg`
+   --> nexosim/src/ports/source/broadcaster.rs:118:9
+    |
+118 |         arg: T,
+    |         ^^^ help: if this is intentional, prefix it with an underscore: `_arg`
+
+warning: unused variable: `future_states`
+   --> nexosim/src/ports/source/broadcaster.rs:147:12
+    |
+147 |     fn new(future_states: Vec<SenderFutureState<R>>) -> Self {
+    |            ^^^^^^^^^^^^^ help: if this is intentional, prefix it with an underscore: `_future_states`
+
+warning: variable does not need to be mutable
+   --> nexosim/src/ports/source/broadcaster.rs:153:13
+    |
+153 |     fn poll(mut self: Pin<&mut Self>, cx: &mut Context<'_>) -> Poll<Self::Output> {
+    |             ----^^^^
+    |             |
+    |             help: remove this `mut`
+
+warning: unused variable: `cx`
+   --> nexosim/src/ports/source/broadcaster.rs:153:39
+    |
+153 |     fn poll(mut self: Pin<&mut Self>, cx: &mut Context<'_>) -> Poll<Self::Output> {
+    |                                       ^^ help: if this is intentional, prefix it with an underscore: `_cx`
+
+warning: unused variable: `f`
+   --> nexosim/src/ports/source/broadcaster.rs:180:19
+    |
+180 |     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+    |                   ^ help: if this is intentional, prefix it with an underscore: `_f`
+
+warning: unused variable: `func`
+  --> nexosim/src/ports/source/sender.rs:37:23
+   |
+37 |     pub(super) fn new(func: F, sender: channel::Sender<M>) -> Self {
+   |                       ^^^^ help: if this is intentional, prefix it with an underscore: `_func`
+
+warning: unused variable: `sender`
+  --> nexosim/src/ports/source/sender.rs:37:32
+   |
+37 |     pub(super) fn new(func: F, sender: channel::Sender<M>) -> Self {
+   |                                ^^^^^^ help: if this is intentional, prefix it with an underscore: `_sender`
+
+warning: unused variable: `arg`
+  --> nexosim/src/ports/source/sender.rs:48:20
+   |
+48 |     fn send(&self, arg: &T) -> Option<SenderFuture<()>> {
+   |                    ^^^ help: if this is intentional, prefix it with an underscore: `_arg`
+
+warning: unused variable: `arg`
+  --> nexosim/src/ports/source/sender.rs:51:26
+   |
+51 |     fn send_owned(&self, arg: T) -> Option<SenderFuture<()>> {
+   |                          ^^^ help: if this is intentional, prefix it with an underscore: `_arg`
+
+warning: unused variable: `map`
+  --> nexosim/src/ports/source/sender.rs:71:23
+   |
+71 |     pub(super) fn new(map: C, func: F, sender: channel::Sender<M>) -> Self {
+   |                       ^^^ help: if this is intentional, prefix it with an underscore: `_map`
+
+warning: unused variable: `func`
+  --> nexosim/src/ports/source/sender.rs:71:31
+   |
+71 |     pub(super) fn new(map: C, func: F, sender: channel::Sender<M>) -> Self {
+   |                               ^^^^ help: if this is intentional, prefix it with an underscore: `_func`
+
+warning: unused variable: `sender`
+  --> nexosim/src/ports/source/sender.rs:71:40
+   |
+71 |     pub(super) fn new(map: C, func: F, sender: channel::Sender<M>) -> Self {
+   |                                        ^^^^^^ help: if this is intentional, prefix it with an underscore: `_sender`
+
+warning: unused variable: `arg`
+  --> nexosim/src/ports/source/sender.rs:84:20
+   |
+84 |     fn send(&self, arg: &T) -> Option<SenderFuture<()>> {
+   |                    ^^^ help: if this is intentional, prefix it with an underscore: `_arg`
+
+warning: unused variable: `filter_map`
+   --> nexosim/src/ports/source/sender.rs:104:23
+    |
+104 |     pub(super) fn new(filter_map: C, func: F, sender: channel::Sender<M>) -> Self {
+    |                       ^^^^^^^^^^ help: if this is intentional, prefix it with an underscore: `_filter_map`
+
+warning: unused variable: `func`
+   --> nexosim/src/ports/source/sender.rs:104:38
+    |
+104 |     pub(super) fn new(filter_map: C, func: F, sender: channel::Sender<M>) -> Self {
+    |                                      ^^^^ help: if this is intentional, prefix it with an underscore: `_func`
+
+warning: unused variable: `sender`
+   --> nexosim/src/ports/source/sender.rs:104:47
+    |
+104 |     pub(super) fn new(filter_map: C, func: F, sender: channel::Sender<M>) -> Self {
+    |                                               ^^^^^^ help: if this is intentional, prefix it with an underscore: `_sender`
+
+warning: unused variable: `arg`
+   --> nexosim/src/ports/source/sender.rs:117:20
+    |
+117 |     fn send(&self, arg: &T) -> Option<SenderFuture<()>> {
+    |                    ^^^ help: if this is intentional, prefix it with an underscore: `_arg`
+
+warning: unused variable: `func`
+   --> nexosim/src/ports/source/sender.rs:135:23
+    |
+135 |     pub(super) fn new(func: F, sender: channel::Sender<M>) -> Self {
+    |                       ^^^^ help: if this is intentional, prefix it with an underscore: `_func`
+
+warning: unused variable: `sender`
+   --> nexosim/src/ports/source/sender.rs:135:32
+    |
+135 |     pub(super) fn new(func: F, sender: channel::Sender<M>) -> Self {
+    |                                ^^^^^^ help: if this is intentional, prefix it with an underscore: `_sender`
+
+warning: unused variable: `arg`
+   --> nexosim/src/ports/source/sender.rs:147:20
+    |
+147 |     fn send(&self, arg: &T) -> Option<SenderFuture<R>> {
+    |                    ^^^ help: if this is intentional, prefix it with an underscore: `_arg`
+
+warning: unused variable: `arg`
+   --> nexosim/src/ports/source/sender.rs:150:26
+    |
+150 |     fn send_owned(&self, arg: T) -> Option<SenderFuture<R>> {
+    |                          ^^^ help: if this is intentional, prefix it with an underscore: `_arg`
+
+warning: unused variable: `query_map`
+   --> nexosim/src/ports/source/sender.rs:174:9
+    |
+174 |         query_map: C,
+    |         ^^^^^^^^^ help: if this is intentional, prefix it with an underscore: `_query_map`
+
+warning: unused variable: `reply_map`
+   --> nexosim/src/ports/source/sender.rs:175:9
+    |
+175 |         reply_map: D,
+    |         ^^^^^^^^^ help: if this is intentional, prefix it with an underscore: `_reply_map`
+
+warning: unused variable: `func`
+   --> nexosim/src/ports/source/sender.rs:176:9
+    |
+176 |         func: F,
+    |         ^^^^ help: if this is intentional, prefix it with an underscore: `_func`
+
+warning: unused variable: `sender`
+   --> nexosim/src/ports/source/sender.rs:177:9
+    |
+177 |         sender: channel::Sender<M>,
+    |         ^^^^^^ help: if this is intentional, prefix it with an underscore: `_sender`
+
+warning: unused variable: `arg`
+   --> nexosim/src/ports/source/sender.rs:195:20
+    |
+195 |     fn send(&self, arg: &T) -> Option<SenderFuture<R>> {
+    |                    ^^^ help: if this is intentional, prefix it with an underscore: `_arg`
+
+warning: unused variable: `query_filter_map`
+   --> nexosim/src/ports/source/sender.rs:219:9
+    |
+219 |         query_filter_map: C,
+    |         ^^^^^^^^^^^^^^^^ help: if this is intentional, prefix it with an underscore: `_query_filter_map`
+
+warning: unused variable: `reply_map`
+   --> nexosim/src/ports/source/sender.rs:220:9
+    |
+220 |         reply_map: D,
+    |         ^^^^^^^^^ help: if this is intentional, prefix it with an underscore: `_reply_map`
+
+warning: unused variable: `func`
+   --> nexosim/src/ports/source/sender.rs:221:9
+    |
+221 |         func: F,
+    |         ^^^^ help: if this is intentional, prefix it with an underscore: `_func`
+
+warning: unused variable: `sender`
+   --> nexosim/src/ports/source/sender.rs:222:9
+    |
+222 |         sender: channel::Sender<M>,
+    |         ^^^^^^ help: if this is intentional, prefix it with an underscore: `_sender`
+
+warning: unused variable: `arg`
+   --> nexosim/src/ports/source/sender.rs:240:20
+    |
+240 |     fn send(&self, arg: &T) -> Option<SenderFuture<R>> {
+    |                    ^^^ help: if this is intentional, prefix it with an underscore: `_arg`
+
+warning: variable does not need to be mutable
+  --> nexosim/src/ports/source.rs:44:29
+   |
+44 |     pub fn connect<M, F, S>(mut self, input: F, address: impl Into<Address<M>>) -> Self
+   |                             ----^^^^
+   |                             |
+   |                             help: remove this `mut`
+
+warning: unused variable: `input`
+  --> nexosim/src/ports/source.rs:44:39
+   |
+44 |     pub fn connect<M, F, S>(mut self, input: F, address: impl Into<Address<M>>) -> Self
+   |                                       ^^^^^ help: if this is intentional, prefix it with an underscore: `_input`
+
+warning: unused variable: `address`
+  --> nexosim/src/ports/source.rs:44:49
+   |
+44 |     pub fn connect<M, F, S>(mut self, input: F, address: impl Into<Address<M>>) -> Self
+   |                                                 ^^^^^^^ help: if this is intentional, prefix it with an underscore: `_address`
+
+warning: variable does not need to be mutable
+  --> nexosim/src/ports/source.rs:62:9
+   |
+62 |         mut self,
+   |         ----^^^^
+   |         |
+   |         help: remove this `mut`
+
+warning: unused variable: `map`
+  --> nexosim/src/ports/source.rs:63:9
+   |
+63 |         map: C,
+   |         ^^^ help: if this is intentional, prefix it with an underscore: `_map`
+
+warning: unused variable: `input`
+  --> nexosim/src/ports/source.rs:64:9
+   |
+64 |         input: F,
+   |         ^^^^^ help: if this is intentional, prefix it with an underscore: `_input`
+
+warning: unused variable: `address`
+  --> nexosim/src/ports/source.rs:65:9
+   |
+65 |         address: impl Into<Address<M>>,
+   |         ^^^^^^^ help: if this is intentional, prefix it with an underscore: `_address`
+
+warning: variable does not need to be mutable
+  --> nexosim/src/ports/source.rs:86:9
+   |
+86 |         mut self,
+   |         ----^^^^
+   |         |
+   |         help: remove this `mut`
+
+warning: unused variable: `map`
+  --> nexosim/src/ports/source.rs:87:9
+   |
+87 |         map: C,
+   |         ^^^ help: if this is intentional, prefix it with an underscore: `_map`
+
+warning: unused variable: `input`
+  --> nexosim/src/ports/source.rs:88:9
+   |
+88 |         input: F,
+   |         ^^^^^ help: if this is intentional, prefix it with an underscore: `_input`
+
+warning: unused variable: `address`
+  --> nexosim/src/ports/source.rs:89:9
+   |
+89 |         address: impl Into<Address<M>>,
+   |         ^^^^^^^ help: if this is intentional, prefix it with an underscore: `_address`
+
+warning: unused variable: `sim_init`
+   --> nexosim/src/ports/source.rs:106:27
+    |
+106 |     pub fn register(self, sim_init: &mut SimInit) -> EventId<T> {
+    |                           ^^^^^^^^ help: if this is intentional, prefix it with an underscore: `_sim_init`
+
+warning: unused variable: `arg`
+   --> nexosim/src/ports/source.rs:113:39
+    |
+113 |     pub(crate) fn event_future(&self, arg: T) -> impl Future<Output = ()> + use<T> {
+    |                                       ^^^ help: if this is intentional, prefix it with an underscore: `_arg`
+
+warning: unused variable: `sim_init`
+   --> nexosim/src/ports/source.rs:130:9
+    |
+130 |         sim_init: &mut SimInit,
+    |         ^^^^^^^^ help: if this is intentional, prefix it with an underscore: `_sim_init`
+
+warning: unused variable: `path`
+   --> nexosim/src/ports/source.rs:131:9
+    |
+131 |         path: impl Into<Path>,
+    |         ^^^^ help: if this is intentional, prefix it with an underscore: `_path`
+
+warning: unused variable: `sim_init`
+   --> nexosim/src/ports/source.rs:149:9
+    |
+149 |         sim_init: &mut SimInit,
+    |         ^^^^^^^^ help: if this is intentional, prefix it with an underscore: `_sim_init`
+
+warning: unused variable: `path`
+   --> nexosim/src/ports/source.rs:150:9
+    |
+150 |         path: impl Into<Path>,
+    |         ^^^^ help: if this is intentional, prefix it with an underscore: `_path`
+
+warning: unused variable: `f`
+   --> nexosim/src/ports/source.rs:163:19
+    |
+163 |     fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
+    |                   ^ help: if this is intentional, prefix it with an underscore: `_f`
+
+warning: variable does not need to be mutable
+   --> nexosim/src/ports/source.rs:194:29
+    |
+194 |     pub fn connect<M, F, S>(mut self, replier: F, address: impl Into<Address<M>>) -> Self
+    |                             ----^^^^
+    |                             |
+    |                             help: remove this `mut`
+
+warning: unused variable: `replier`
+   --> nexosim/src/ports/source.rs:194:39
+    |
+194 |     pub fn connect<M, F, S>(mut self, replier: F, address: impl Into<Address<M>>) -> Self
+    |                                       ^^^^^^^ help: if this is intentional, prefix it with an underscore: `_replier`
+
+warning: unused variable: `address`
+   --> nexosim/src/ports/source.rs:194:51
+    |
+194 |     pub fn connect<M, F, S>(mut self, replier: F, address: impl Into<Address<M>>) -> Self
+    |                                                   ^^^^^^^ help: if this is intentional, prefix it with an underscore: `_address`
+
+warning: variable does not need to be mutable
+   --> nexosim/src/ports/source.rs:213:9
+    |
+213 |         mut self,
+    |         ----^^^^
+    |         |
+    |         help: remove this `mut`
+
+warning: unused variable: `query_map`
+   --> nexosim/src/ports/source.rs:214:9
+    |
+214 |         query_map: C,
+    |         ^^^^^^^^^ help: if this is intentional, prefix it with an underscore: `_query_map`
+
+warning: unused variable: `reply_map`
+   --> nexosim/src/ports/source.rs:215:9
+    |
+215 |         reply_map: D,
+    |         ^^^^^^^^^ help: if this is intentional, prefix it with an underscore: `_reply_map`
+
+warning: unused variable: `replier`
+   --> nexosim/src/ports/source.rs:216:9
+    |
+216 |         replier: F,
+    |         ^^^^^^^ help: if this is intentional, prefix it with an underscore: `_replier`
+
+warning: unused variable: `address`
+   --> nexosim/src/ports/source.rs:217:9
+    |
+217 |         address: impl Into<Address<M>>,
+    |         ^^^^^^^ help: if this is intentional, prefix it with an underscore: `_address`
+
+warning: variable does not need to be mutable
+   --> nexosim/src/ports/source.rs:241:9
+    |
+241 |         mut self,
+    |         ----^^^^
+    |         |
+    |         help: remove this `mut`
+
+warning: unused variable: `query_filter_map`
+   --> nexosim/src/ports/source.rs:242:9
+    |
+242 |         query_filter_map: C,
+    |         ^^^^^^^^^^^^^^^^ help: if this is intentional, prefix it with an underscore: `_query_filter_map`
+
+warning: unused variable: `reply_map`
+   --> nexosim/src/ports/source.rs:243:9
+    |
+243 |         reply_map: D,
+    |         ^^^^^^^^^ help: if this is intentional, prefix it with an underscore: `_reply_map`
+
+warning: unused variable: `replier`
+   --> nexosim/src/ports/source.rs:244:9
+    |
+244 |         replier: F,
+    |         ^^^^^^^ help: if this is intentional, prefix it with an underscore: `_replier`
+
+warning: unused variable: `address`
+   --> nexosim/src/ports/source.rs:245:9
+    |
+245 |         address: impl Into<Address<M>>,
+    |         ^^^^^^^ help: if this is intentional, prefix it with an underscore: `_address`
+
+warning: unused variable: `sim_init`
+   --> nexosim/src/ports/source.rs:264:27
+    |
+264 |     pub fn register(self, sim_init: &mut SimInit) -> QueryId<T, R> {
+    |                           ^^^^^^^^ help: if this is intentional, prefix it with an underscore: `_sim_init`
+
+warning: unused variable: `arg`
+   --> nexosim/src/ports/source.rs:269:9
+    |
+269 |         arg: T,
+    |         ^^^ help: if this is intentional, prefix it with an underscore: `_arg`
+
+warning: unused variable: `replier`
+   --> nexosim/src/ports/source.rs:270:9
+    |
+270 |         replier: Option<ReplyWriter<R>>,
+    |         ^^^^^^^ help: if this is intentional, prefix it with an underscore: `_replier`
+
+warning: unused variable: `sim_init`
+   --> nexosim/src/ports/source.rs:290:9
+    |
+290 |         sim_init: &mut SimInit,
+    |         ^^^^^^^^ help: if this is intentional, prefix it with an underscore: `_sim_init`
+
+warning: unused variable: `path`
+   --> nexosim/src/ports/source.rs:291:9
+    |
+291 |         path: impl Into<Path>,
+    |         ^^^^ help: if this is intentional, prefix it with an underscore: `_path`
+
+warning: unused variable: `path`
+   --> nexosim/src/ports/source.rs:312:9
+    |
+312 |         path: impl Into<Path>,
+    |         ^^^^ help: if this is intentional, prefix it with an underscore: `_path`
+
+warning: unused variable: `sim_init`
+   --> nexosim/src/ports/source.rs:313:9
+    |
+313 |         sim_init: &mut SimInit,
+    |         ^^^^^^^^ help: if this is intentional, prefix it with an underscore: `_sim_init`
+
+warning: unused variable: `f`
+   --> nexosim/src/ports/source.rs:328:19
+    |
+328 |     fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
+    |                   ^ help: if this is intentional, prefix it with an underscore: `_f`
+
+warning: unused variable: `cx`
+   --> nexosim/src/ports/source.rs:352:9
+    |
+352 |         cx: &mut std::task::Context<'_>,
+    |         ^^ help: if this is intentional, prefix it with an underscore: `_cx`
+
+warning: unused variable: `reply`
+   --> nexosim/src/ports/source.rs:359:30
+    |
+359 |     pub(crate) fn send(self, reply: ReplyIterator<R>) {
+    |                              ^^^^^ help: if this is intentional, prefix it with an underscore: `_reply`
+
+warning: unused variable: `func`
+  --> nexosim/src/simulation/injector.rs:43:9
+   |
+43 |         func: F,
+   |         ^^^^ help: if this is intentional, prefix it with an underscore: `_func`
+
+warning: unused variable: `address`
+  --> nexosim/src/simulation/injector.rs:44:9
+   |
+44 |         address: impl Into<Address<M>>,
+   |         ^^^^^^^ help: if this is intentional, prefix it with an underscore: `_address`
+
+warning: unused variable: `queue`
+  --> nexosim/src/simulation/injector.rs:45:9
+   |
+45 |         queue: Arc<Mutex<InjectorQueue>>,
+   |         ^^^^^ help: if this is intentional, prefix it with an underscore: `_queue`
+
+warning: unused variable: `origin_id`
+  --> nexosim/src/simulation/injector.rs:46:9
+   |
+46 |         origin_id: usize,
+   |         ^^^^^^^^^ help: if this is intentional, prefix it with an underscore: `_origin_id`
+
+warning: unused variable: `map`
+  --> nexosim/src/simulation/injector.rs:58:36
+   |
+58 |     pub fn into_mapped<M, U>(self, map: M) -> EventInjector<U>
+   |                                    ^^^ help: if this is intentional, prefix it with an underscore: `_map`
+
+warning: unused variable: `arg`
+  --> nexosim/src/simulation/injector.rs:77:26
+   |
+77 |     pub fn inject(&self, arg: T) {
+   |                          ^^^ help: if this is intentional, prefix it with an underscore: `_arg`
+
+warning: unused variable: `f`
+  --> nexosim/src/simulation/injector.rs:82:19
+   |
+82 |     fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
+   |                   ^ help: if this is intentional, prefix it with an underscore: `_f`
+
+warning: unused variable: `queue`
+   --> nexosim/src/simulation/injector.rs:106:9
+    |
+106 |         queue: Arc<Mutex<InjectorQueue>>,
+    |         ^^^^^ help: if this is intentional, prefix it with an underscore: `_queue`
+
+warning: unused variable: `origin_id`
+   --> nexosim/src/simulation/injector.rs:107:9
+    |
+107 |         origin_id: usize,
+    |         ^^^^^^^^^ help: if this is intentional, prefix it with an underscore: `_origin_id`
+
+warning: unused variable: `model_registry`
+   --> nexosim/src/simulation/injector.rs:108:9
+    |
+108 |         model_registry: Arc<ModelRegistry>,
+    |         ^^^^^^^^^^^^^^ help: if this is intentional, prefix it with an underscore: `_model_registry`
+
+warning: unused variable: `schedulable_id`
+   --> nexosim/src/simulation/injector.rs:124:35
+    |
+124 |     pub fn inject_event<T>(&self, schedulable_id: &SchedulableId<M, T>, arg: T)
+    |                                   ^^^^^^^^^^^^^^ help: if this is intentional, prefix it with an underscore: `_schedulable_id`
+
+warning: unused variable: `arg`
+   --> nexosim/src/simulation/injector.rs:124:73
+    |
+124 |     pub fn inject_event<T>(&self, schedulable_id: &SchedulableId<M, T>, arg: T)
+    |                                                                         ^^^ help: if this is intentional, prefix it with an underscore: `_arg`
+
+warning: unused variable: `f`
+   --> nexosim/src/simulation/injector.rs:132:19
+    |
+132 |     fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
+    |                   ^ help: if this is intentional, prefix it with an underscore: `_f`
+
+warning: unused variable: `queue`
+   --> nexosim/src/simulation/injector.rs:151:23
+    |
+151 |     pub(crate) fn new(queue: Arc<Mutex<InjectorQueue>>) -> Self {
+    |                       ^^^^^ help: if this is intentional, prefix it with an underscore: `_queue`
+
+warning: unused variable: `event_id`
+   --> nexosim/src/simulation/injector.rs:166:35
+    |
+166 |     pub fn inject_event<T>(&self, event_id: &EventId<T>, arg: T)
+    |                                   ^^^^^^^^ help: if this is intentional, prefix it with an underscore: `_event_id`
+
+warning: unused variable: `arg`
+   --> nexosim/src/simulation/injector.rs:166:58
+    |
+166 |     pub fn inject_event<T>(&self, event_id: &EventId<T>, arg: T)
+    |                                                          ^^^ help: if this is intentional, prefix it with an underscore: `_arg`
+
+warning: unused variable: `event`
+   --> nexosim/src/simulation/injector.rs:173:45
+    |
+173 |     pub(crate) fn inject_built_event(&self, event: Event) {
+    |                                             ^^^^^ help: if this is intentional, prefix it with an underscore: `_event`
+
+warning: unused variable: `query_id`
+   --> nexosim/src/simulation/injector.rs:188:38
+    |
+188 |     pub fn inject_query<T, R>(&self, query_id: &QueryId<T, R>, arg: T) -> ReplyReader<R>
+    |                                      ^^^^^^^^ help: if this is intentional, prefix it with an underscore: `_query_id`
+
+warning: unused variable: `arg`
+   --> nexosim/src/simulation/injector.rs:188:64
+    |
+188 |     pub fn inject_query<T, R>(&self, query_id: &QueryId<T, R>, arg: T) -> ReplyReader<R>
+    |                                                                ^^^ help: if this is intentional, prefix it with an underscore: `_arg`
+
+warning: unused variable: `f`
+   --> nexosim/src/simulation/injector.rs:197:19
+    |
+197 |     fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
+    |                   ^ help: if this is intentional, prefix it with an underscore: `_f`
+
+warning: unused variable: `generator`
+   --> nexosim/src/simulation/injector.rs:220:12
+    |
+220 |     fn new(generator: G) -> Self {
+    |            ^^^^^^^^^ help: if this is intentional, prefix it with an underscore: `_generator`
+
+warning: unused variable: `arg`
+   --> nexosim/src/simulation/injector.rs:230:22
+    |
+230 |     fn future(&self, arg: T) -> Pin<Box<dyn Future<Output = ()> + Send + 'static>> {
+    |                      ^^^ help: if this is intentional, prefix it with an underscore: `_arg`
+
+warning: unused variable: `fut_gen`
+   --> nexosim/src/simulation/injector.rs:254:21
+    |
+254 |     fn from_fut_gen(fut_gen: Box<dyn InjectorFutGen<T> + Send>, map: M) -> Self {
+    |                     ^^^^^^^ help: if this is intentional, prefix it with an underscore: `_fut_gen`
+
+warning: unused variable: `map`
+   --> nexosim/src/simulation/injector.rs:254:65
+    |
+254 |     fn from_fut_gen(fut_gen: Box<dyn InjectorFutGen<T> + Send>, map: M) -> Self {
+    |                                                                 ^^^ help: if this is intentional, prefix it with an underscore: `_map`
+
+warning: unused variable: `arg`
+   --> nexosim/src/simulation/injector.rs:264:22
+    |
+264 |     fn future(&self, arg: U) -> Pin<Box<dyn Future<Output = ()> + Send + 'static>> {
+    |                      ^^^ help: if this is intentional, prefix it with an underscore: `_arg`
+
+warning: unused variable: `capacity`
+  --> nexosim/src/simulation/mailbox.rs:24:26
+   |
+24 |     pub fn with_capacity(capacity: usize) -> Self {
+   |                          ^^^^^^^^ help: if this is intentional, prefix it with an underscore: `_capacity`
+
+warning: unused variable: `f`
+  --> nexosim/src/simulation/mailbox.rs:38:19
+   |
+38 |     fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
+   |                   ^ help: if this is intentional, prefix it with an underscore: `_f`
+
+warning: unused variable: `s`
+  --> nexosim/src/simulation/mailbox.rs:61:13
+   |
+61 |     fn from(s: &Address<M>) -> Address<M> {
+   |             ^ help: if this is intentional, prefix it with an underscore: `_s`
+
+warning: unused variable: `s`
+  --> nexosim/src/simulation/mailbox.rs:70:13
+   |
+70 |     fn from(s: &Mailbox<M>) -> Address<M> {
+   |             ^ help: if this is intentional, prefix it with an underscore: `_s`
+
+warning: unused variable: `s`
+  --> nexosim/src/simulation/mailbox.rs:79:13
+   |
+79 |     fn from(s: &mut Address<M>) -> Address<M> {
+   |             ^ help: if this is intentional, prefix it with an underscore: `_s`
+
+warning: unused variable: `s`
+  --> nexosim/src/simulation/mailbox.rs:88:13
+   |
+88 |     fn from(s: &mut Mailbox<M>) -> Address<M> {
+   |             ^ help: if this is intentional, prefix it with an underscore: `_s`
+
+warning: unused variable: `f`
+  --> nexosim/src/simulation/mailbox.rs:93:19
+   |
+93 |     fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
+   |                   ^ help: if this is intentional, prefix it with an underscore: `_f`
+
+warning: unused variable: `value`
+  --> nexosim/src/simulation/queue_items.rs:41:13
+   |
+41 |     fn from(value: EventId<T>) -> Self {
+   |             ^^^^^ help: if this is intentional, prefix it with an underscore: `_value`
+
+warning: unused variable: `value`
+  --> nexosim/src/simulation/queue_items.rs:46:13
+   |
+46 |     fn from(value: &EventId<T>) -> Self {
+   |             ^^^^^ help: if this is intentional, prefix it with an underscore: `_value`
+
+warning: unused variable: `value`
+  --> nexosim/src/simulation/queue_items.rs:63:13
+   |
+63 |     fn from(value: QueryId<T, R>) -> Self {
+   |             ^^^^^ help: if this is intentional, prefix it with an underscore: `_value`
+
+warning: unused variable: `value`
+  --> nexosim/src/simulation/queue_items.rs:68:13
+   |
+68 |     fn from(value: &QueryId<T, R>) -> Self {
+   |             ^^^^^ help: if this is intentional, prefix it with an underscore: `_value`
+
+warning: unused variable: `source`
+  --> nexosim/src/simulation/queue_items.rs:80:9
+   |
+80 |         source: impl TypedEventSource<T>,
+   |         ^^^^^^ help: if this is intentional, prefix it with an underscore: `_source`
+
+warning: unused variable: `event_id`
+  --> nexosim/src/simulation/queue_items.rs:89:9
+   |
+89 |         event_id: &EventIdErased,
+   |         ^^^^^^^^ help: if this is intentional, prefix it with an underscore: `_event_id`
+
+warning: unused variable: `source`
+  --> nexosim/src/simulation/queue_items.rs:95:9
+   |
+95 |         source: impl TypedQuerySource<T, R>,
+   |         ^^^^^^ help: if this is intentional, prefix it with an underscore: `_source`
+
+warning: unused variable: `query_id`
+   --> nexosim/src/simulation/queue_items.rs:105:9
+    |
+105 |         query_id: &QueryIdErased,
+    |         ^^^^^^^^ help: if this is intentional, prefix it with an underscore: `_query_id`
+
+warning: unused variable: `source`
+   --> nexosim/src/simulation/queue_items.rs:120:26
+    |
+120 |     fn add<T>(&mut self, source: impl TypedEventSource<T>) -> EventId<T>
+    |                          ^^^^^^ help: if this is intentional, prefix it with an underscore: `_source`
+
+warning: unused variable: `event_id`
+   --> nexosim/src/simulation/queue_items.rs:126:19
+    |
+126 |     fn get(&self, event_id: &EventIdErased) -> Option<&dyn SchedulerEventSource> {
+    |                   ^^^^^^^^ help: if this is intentional, prefix it with an underscore: `_event_id`
+
+warning: unused variable: `source`
+   --> nexosim/src/simulation/queue_items.rs:133:29
+    |
+133 |     fn add<T, R>(&mut self, source: impl TypedQuerySource<T, R>) -> QueryId<T, R>
+    |                             ^^^^^^ help: if this is intentional, prefix it with an underscore: `_source`
+
+warning: unused variable: `query_id`
+   --> nexosim/src/simulation/queue_items.rs:140:19
+    |
+140 |     fn get(&self, query_id: &QueryIdErased) -> Option<&dyn SchedulerQuerySource> {
+    |                   ^^^^^^^^ help: if this is intentional, prefix it with an underscore: `_query_id`
+
+warning: unused variable: `func`
+   --> nexosim/src/simulation/queue_items.rs:196:23
+    |
+196 |     pub(crate) fn new(func: F, address: impl Into<Address<M>>) -> Self {
+    |                       ^^^^ help: if this is intentional, prefix it with an underscore: `_func`
+
+warning: unused variable: `address`
+   --> nexosim/src/simulation/queue_items.rs:196:32
+    |
+196 |     pub(crate) fn new(func: F, address: impl Into<Address<M>>) -> Self {
+    |                                ^^^^^^^ help: if this is intentional, prefix it with an underscore: `_address`
+
+warning: unused variable: `arg`
+   --> nexosim/src/simulation/queue_items.rs:201:9
+    |
+201 |         arg: T,
+    |         ^^^ help: if this is intentional, prefix it with an underscore: `_arg`
+
+warning: unused variable: `event_key`
+   --> nexosim/src/simulation/queue_items.rs:202:9
+    |
+202 |         event_key: Option<EventKey>,
+    |         ^^^^^^^^^ help: if this is intentional, prefix it with an underscore: `_event_key`
+
+warning: unused variable: `f`
+   --> nexosim/src/simulation/queue_items.rs:214:19
+    |
+214 |     fn fmt(&self, f: &mut std::fmt::Formatter) -> std::fmt::Result {
+    |                   ^ help: if this is intentional, prefix it with an underscore: `_f`
+
+warning: unused variable: `arg`
+   --> nexosim/src/simulation/queue_items.rs:232:29
+    |
+232 |     fn serialize_arg(&self, arg: &dyn Any) -> Result<Vec<u8>, ExecutionError> {
+    |                             ^^^ help: if this is intentional, prefix it with an underscore: `_arg`
+
+warning: unused variable: `arg`
+   --> nexosim/src/simulation/queue_items.rs:237:9
+    |
+237 |         arg: &[u8],
+    |         ^^^ help: if this is intentional, prefix it with an underscore: `_arg`
+
+warning: unused variable: `arg`
+   --> nexosim/src/simulation/queue_items.rs:243:9
+    |
+243 |         arg: &dyn Any,
+    |         ^^^ help: if this is intentional, prefix it with an underscore: `_arg`
+
+warning: unused variable: `event_key`
+   --> nexosim/src/simulation/queue_items.rs:244:9
+    |
+244 |         event_key: Option<&EventKey>,
+    |         ^^^^^^^^^ help: if this is intentional, prefix it with an underscore: `_event_key`
+
+warning: unused variable: `arg`
+   --> nexosim/src/simulation/queue_items.rs:250:9
+    |
+250 |         arg: Box<dyn Any>,
+    |         ^^^ help: if this is intentional, prefix it with an underscore: `_arg`
+
+warning: unused variable: `event_key`
+   --> nexosim/src/simulation/queue_items.rs:251:9
+    |
+251 |         event_key: Option<EventKey>,
+    |         ^^^^^^^^^ help: if this is intentional, prefix it with an underscore: `_event_key`
+
+warning: unused variable: `arg`
+   --> nexosim/src/simulation/queue_items.rs:264:29
+    |
+264 |     fn serialize_arg(&self, arg: &dyn Any) -> Result<Vec<u8>, ExecutionError> {
+    |                             ^^^ help: if this is intentional, prefix it with an underscore: `_arg`
+
+warning: unused variable: `arg`
+   --> nexosim/src/simulation/queue_items.rs:269:9
+    |
+269 |         arg: &[u8],
+    |         ^^^ help: if this is intentional, prefix it with an underscore: `_arg`
+
+warning: unused variable: `arg`
+   --> nexosim/src/simulation/queue_items.rs:275:9
+    |
+275 |         arg: &dyn Any,
+    |         ^^^ help: if this is intentional, prefix it with an underscore: `_arg`
+
+warning: unused variable: `arg`
+   --> nexosim/src/simulation/queue_items.rs:282:9
+    |
+282 |         arg: Box<dyn Any>,
+    |         ^^^ help: if this is intentional, prefix it with an underscore: `_arg`
+
+warning: unused variable: `arg`
+   --> nexosim/src/simulation/queue_items.rs:296:29
+    |
+296 |     fn serialize_arg(&self, arg: &dyn Any) -> Result<Vec<u8>, ExecutionError> {
+    |                             ^^^ help: if this is intentional, prefix it with an underscore: `_arg`
+
+warning: unused variable: `arg`
+   --> nexosim/src/simulation/queue_items.rs:301:9
+    |
+301 |         arg: &[u8],
+    |         ^^^ help: if this is intentional, prefix it with an underscore: `_arg`
+
+warning: unused variable: `arg`
+   --> nexosim/src/simulation/queue_items.rs:307:9
+    |
+307 |         arg: &dyn Any,
+    |         ^^^ help: if this is intentional, prefix it with an underscore: `_arg`
+
+warning: unused variable: `event_key`
+   --> nexosim/src/simulation/queue_items.rs:308:9
+    |
+308 |         event_key: Option<&EventKey>,
+    |         ^^^^^^^^^ help: if this is intentional, prefix it with an underscore: `_event_key`
+
+warning: unused variable: `arg`
+   --> nexosim/src/simulation/queue_items.rs:314:9
+    |
+314 |         arg: Box<dyn Any>,
+    |         ^^^ help: if this is intentional, prefix it with an underscore: `_arg`
+
+warning: unused variable: `event_key`
+   --> nexosim/src/simulation/queue_items.rs:315:9
+    |
+315 |         event_key: Option<EventKey>,
+    |         ^^^^^^^^^ help: if this is intentional, prefix it with an underscore: `_event_key`
+
+warning: unused variable: `arg`
+   --> nexosim/src/simulation/queue_items.rs:330:29
+    |
+330 |     fn serialize_arg(&self, arg: &dyn Any) -> Result<Vec<u8>, ExecutionError> {
+    |                             ^^^ help: if this is intentional, prefix it with an underscore: `_arg`
+
+warning: unused variable: `arg`
+   --> nexosim/src/simulation/queue_items.rs:335:9
+    |
+335 |         arg: &[u8],
+    |         ^^^ help: if this is intentional, prefix it with an underscore: `_arg`
+
+warning: unused variable: `arg`
+   --> nexosim/src/simulation/queue_items.rs:341:9
+    |
+341 |         arg: Box<dyn Any>,
+    |         ^^^ help: if this is intentional, prefix it with an underscore: `_arg`
+
+warning: unused variable: `replier`
+   --> nexosim/src/simulation/queue_items.rs:342:9
+    |
+342 |         replier: Option<Box<dyn Any + Send>>,
+    |         ^^^^^^^ help: if this is intentional, prefix it with an underscore: `_replier`
+
+warning: unused variable: `arg`
+   --> nexosim/src/simulation/queue_items.rs:357:29
+    |
+357 |     fn serialize_arg(&self, arg: &dyn Any) -> Result<Vec<u8>, ExecutionError> {
+    |                             ^^^ help: if this is intentional, prefix it with an underscore: `_arg`
+
+warning: unused variable: `arg`
+   --> nexosim/src/simulation/queue_items.rs:362:9
+    |
+362 |         arg: &[u8],
+    |         ^^^ help: if this is intentional, prefix it with an underscore: `_arg`
+
+warning: unused variable: `arg`
+   --> nexosim/src/simulation/queue_items.rs:368:9
+    |
+368 |         arg: Box<dyn Any>,
+    |         ^^^ help: if this is intentional, prefix it with an underscore: `_arg`
+
+warning: unused variable: `replier`
+   --> nexosim/src/simulation/queue_items.rs:369:9
+    |
+369 |         replier: Option<Box<dyn Any + Send>>,
+    |         ^^^^^^^ help: if this is intentional, prefix it with an underscore: `_replier`
+
+warning: unused variable: `registry`
+   --> nexosim/src/simulation/queue_items.rs:381:9
+    |
+381 |         registry: &SchedulerRegistry,
+    |         ^^^^^^^^ help: if this is intentional, prefix it with an underscore: `_registry`
+
+warning: unused variable: `data`
+   --> nexosim/src/simulation/queue_items.rs:386:9
+    |
+386 |         data: &[u8],
+    |         ^^^^ help: if this is intentional, prefix it with an underscore: `_data`
+
+warning: unused variable: `registry`
+   --> nexosim/src/simulation/queue_items.rs:387:9
+    |
+387 |         registry: &SchedulerRegistry,
+    |         ^^^^^^^^ help: if this is intentional, prefix it with an underscore: `_registry`
+
+warning: unused variable: `event_id`
+   --> nexosim/src/simulation/queue_items.rs:401:42
+    |
+401 |     pub(crate) fn new<T: Send + 'static>(event_id: &EventId<T>, arg: T) -> Self {
+    |                                          ^^^^^^^^ help: if this is intentional, prefix it with an underscore: `_event_id`
+
+warning: unused variable: `arg`
+   --> nexosim/src/simulation/queue_items.rs:401:65
+    |
+401 |     pub(crate) fn new<T: Send + 'static>(event_id: &EventId<T>, arg: T) -> Self {
+    |                                                                 ^^^ help: if this is intentional, prefix it with an underscore: `_arg`
+
+warning: variable does not need to be mutable
+   --> nexosim/src/simulation/queue_items.rs:404:31
+    |
+404 |     pub(crate) fn with_period(mut self, period: Duration) -> Self {
+    |                               ----^^^^
+    |                               |
+    |                               help: remove this `mut`
+
+warning: unused variable: `period`
+   --> nexosim/src/simulation/queue_items.rs:404:41
+    |
+404 |     pub(crate) fn with_period(mut self, period: Duration) -> Self {
+    |                                         ^^^^^^ help: if this is intentional, prefix it with an underscore: `_period`
+
+warning: variable does not need to be mutable
+   --> nexosim/src/simulation/queue_items.rs:407:28
+    |
+407 |     pub(crate) fn with_key(mut self, key: EventKey) -> Self {
+    |                            ----^^^^
+    |                            |
+    |                            help: remove this `mut`
+
+warning: unused variable: `key`
+   --> nexosim/src/simulation/queue_items.rs:407:38
+    |
+407 |     pub(crate) fn with_key(mut self, key: EventKey) -> Self {
+    |                                      ^^^ help: if this is intentional, prefix it with an underscore: `_key`
+
+warning: unused variable: `registry`
+   --> nexosim/src/simulation/queue_items.rs:415:9
+    |
+415 |         registry: &SchedulerEventRegistry,
+    |         ^^^^^^^^ help: if this is intentional, prefix it with an underscore: `_registry`
+
+warning: variable does not need to be mutable
+   --> nexosim/src/simulation/queue_items.rs:420:9
+    |
+420 |         mut event: SerializableEvent,
+    |         ----^^^^^
+    |         |
+    |         help: remove this `mut`
+
+warning: unused variable: `event`
+   --> nexosim/src/simulation/queue_items.rs:420:9
+    |
+420 |         mut event: SerializableEvent,
+    |         ^^^^^^^^^ help: if this is intentional, prefix it with an underscore: `_event`
+
+warning: unused variable: `registry`
+   --> nexosim/src/simulation/queue_items.rs:421:9
+    |
+421 |         registry: &SchedulerEventRegistry,
+    |         ^^^^^^^^ help: if this is intentional, prefix it with an underscore: `_registry`
+
+warning: unused variable: `query_id`
+   --> nexosim/src/simulation/queue_items.rs:433:9
+    |
+433 |         query_id: &QueryId<T, R>,
+    |         ^^^^^^^^ help: if this is intentional, prefix it with an underscore: `_query_id`
+
+warning: unused variable: `arg`
+   --> nexosim/src/simulation/queue_items.rs:434:9
+    |
+434 |         arg: T,
+    |         ^^^ help: if this is intentional, prefix it with an underscore: `_arg`
+
+warning: unused variable: `registry`
+   --> nexosim/src/simulation/queue_items.rs:440:9
+    |
+440 |         registry: &SchedulerQueryRegistry,
+    |         ^^^^^^^^ help: if this is intentional, prefix it with an underscore: `_registry`
+
+warning: unused variable: `query`
+   --> nexosim/src/simulation/queue_items.rs:445:9
+    |
+445 |         query: SerializableQuery,
+    |         ^^^^^ help: if this is intentional, prefix it with an underscore: `_query`
+
+warning: unused variable: `registry`
+   --> nexosim/src/simulation/queue_items.rs:446:9
+    |
+446 |         registry: &SchedulerQueryRegistry,
+    |         ^^^^^^^^ help: if this is intentional, prefix it with an underscore: `_registry`
+
+warning: unused variable: `arg`
+   --> nexosim/src/simulation/queue_items.rs:471:5
+    |
+471 |     arg: &dyn Any,
+    |     ^^^ help: if this is intentional, prefix it with an underscore: `_arg`
+
+warning: unused variable: `arg`
+   --> nexosim/src/simulation/queue_items.rs:476:5
+    |
+476 |     arg: &[u8],
+    |     ^^^ help: if this is intentional, prefix it with an underscore: `_arg`
+
+warning: unused variable: `value`
+   --> nexosim/src/simulation/queue_items.rs:496:13
+    |
+496 |     fn from(value: EventKey) -> Self {
+    |             ^^^^^ help: if this is intentional, prefix it with an underscore: `_value`
+
+warning: unused variable: `serializer`
+   --> nexosim/src/simulation/queue_items.rs:501:28
+    |
+501 |     fn serialize<S>(&self, serializer: S) -> Result<S::Ok, S::Error>
+    |                            ^^^^^^^^^^ help: if this is intentional, prefix it with an underscore: `_serializer`
+
+warning: unused variable: `is_cancelled`
+   --> nexosim/src/simulation/queue_items.rs:522:16
+    |
+522 |     fn restore(is_cancelled: Arc<AtomicBool>) -> Self {
+    |                ^^^^^^^^^^^^ help: if this is intentional, prefix it with an underscore: `_is_cancelled`
+
+warning: unused variable: `other`
+   --> nexosim/src/simulation/queue_items.rs:541:18
+    |
+541 |     fn eq(&self, other: &Self) -> bool {
+    |                  ^^^^^ help: if this is intentional, prefix it with an underscore: `_other`
+
+warning: unused variable: `state`
+   --> nexosim/src/simulation/queue_items.rs:549:23
+    |
+549 |     fn hash<H>(&self, state: &mut H)
+    |                       ^^^^^ help: if this is intentional, prefix it with an underscore: `_state`
+
+warning: unused variable: `serializer`
+   --> nexosim/src/simulation/queue_items.rs:557:28
+    |
+557 |     fn serialize<S>(&self, serializer: S) -> Result<S::Ok, S::Error>
+    |                            ^^^^^^^^^^ help: if this is intentional, prefix it with an underscore: `_serializer`
+
+warning: unused variable: `deserializer`
+   --> nexosim/src/simulation/queue_items.rs:565:23
+    |
+565 |     fn deserialize<D>(deserializer: D) -> Result<Self, D::Error>
+    |                       ^^^^^^^^^^^^ help: if this is intentional, prefix it with an underscore: `_deserializer`
+
+warning: unused variable: `scheduler_queue`
+  --> nexosim/src/simulation/scheduler.rs:36:9
+   |
+36 |         scheduler_queue: Arc<Mutex<SchedulerQueue>>,
+   |         ^^^^^^^^^^^^^^^ help: if this is intentional, prefix it with an underscore: `_scheduler_queue`
+
+warning: unused variable: `time`
+  --> nexosim/src/simulation/scheduler.rs:37:9
+   |
+37 |         time: AtomicTimeReader,
+   |         ^^^^ help: if this is intentional, prefix it with an underscore: `_time`
+
+warning: unused variable: `is_halted`
+  --> nexosim/src/simulation/scheduler.rs:38:9
+   |
+38 |         is_halted: Arc<AtomicBool>,
+   |         ^^^^^^^^^ help: if this is intentional, prefix it with an underscore: `_is_halted`
+
+warning: unused variable: `deadline`
+  --> nexosim/src/simulation/scheduler.rs:87:9
+   |
+87 |         deadline: impl Deadline,
+   |         ^^^^^^^^ help: if this is intentional, prefix it with an underscore: `_deadline`
+
+warning: unused variable: `event_id`
+  --> nexosim/src/simulation/scheduler.rs:88:9
+   |
+88 |         event_id: &EventId<T>,
+   |         ^^^^^^^^ help: if this is intentional, prefix it with an underscore: `_event_id`
+
+warning: unused variable: `arg`
+  --> nexosim/src/simulation/scheduler.rs:89:9
+   |
+89 |         arg: T,
+   |         ^^^ help: if this is intentional, prefix it with an underscore: `_arg`
+
+warning: unused variable: `deadline`
+   --> nexosim/src/simulation/scheduler.rs:105:9
+    |
+105 |         deadline: impl Deadline,
+    |         ^^^^^^^^ help: if this is intentional, prefix it with an underscore: `_deadline`
+
+warning: unused variable: `event_id`
+   --> nexosim/src/simulation/scheduler.rs:106:9
+    |
+106 |         event_id: &EventId<T>,
+    |         ^^^^^^^^ help: if this is intentional, prefix it with an underscore: `_event_id`
+
+warning: unused variable: `arg`
+   --> nexosim/src/simulation/scheduler.rs:107:9
+    |
+107 |         arg: T,
+    |         ^^^ help: if this is intentional, prefix it with an underscore: `_arg`
+
+warning: unused variable: `deadline`
+   --> nexosim/src/simulation/scheduler.rs:123:9
+    |
+123 |         deadline: impl Deadline,
+    |         ^^^^^^^^ help: if this is intentional, prefix it with an underscore: `_deadline`
+
+warning: unused variable: `period`
+   --> nexosim/src/simulation/scheduler.rs:124:9
+    |
+124 |         period: Duration,
+    |         ^^^^^^ help: if this is intentional, prefix it with an underscore: `_period`
+
+warning: unused variable: `event_id`
+   --> nexosim/src/simulation/scheduler.rs:125:9
+    |
+125 |         event_id: &EventId<T>,
+    |         ^^^^^^^^ help: if this is intentional, prefix it with an underscore: `_event_id`
+
+warning: unused variable: `arg`
+   --> nexosim/src/simulation/scheduler.rs:126:9
+    |
+126 |         arg: T,
+    |         ^^^ help: if this is intentional, prefix it with an underscore: `_arg`
+
+warning: unused variable: `deadline`
+   --> nexosim/src/simulation/scheduler.rs:143:9
+    |
+143 |         deadline: impl Deadline,
+    |         ^^^^^^^^ help: if this is intentional, prefix it with an underscore: `_deadline`
+
+warning: unused variable: `period`
+   --> nexosim/src/simulation/scheduler.rs:144:9
+    |
+144 |         period: Duration,
+    |         ^^^^^^ help: if this is intentional, prefix it with an underscore: `_period`
+
+warning: unused variable: `event_id`
+   --> nexosim/src/simulation/scheduler.rs:145:9
+    |
+145 |         event_id: &EventId<T>,
+    |         ^^^^^^^^ help: if this is intentional, prefix it with an underscore: `_event_id`
+
+warning: unused variable: `arg`
+   --> nexosim/src/simulation/scheduler.rs:146:9
+    |
+146 |         arg: T,
+    |         ^^^ help: if this is intentional, prefix it with an underscore: `_arg`
+
+warning: unused variable: `deadline`
+   --> nexosim/src/simulation/scheduler.rs:162:9
+    |
+162 |         deadline: impl Deadline,
+    |         ^^^^^^^^ help: if this is intentional, prefix it with an underscore: `_deadline`
+
+warning: unused variable: `query_id`
+   --> nexosim/src/simulation/scheduler.rs:163:9
+    |
+163 |         query_id: &QueryId<T, R>,
+    |         ^^^^^^^^ help: if this is intentional, prefix it with an underscore: `_query_id`
+
+warning: unused variable: `arg`
+   --> nexosim/src/simulation/scheduler.rs:164:9
+    |
+164 |         arg: T,
+    |         ^^^ help: if this is intentional, prefix it with an underscore: `_arg`
+
+warning: unused variable: `fmt`
+   --> nexosim/src/simulation/scheduler.rs:207:19
+    |
+207 |     fn fmt(&self, fmt: &mut fmt::Formatter<'_>) -> fmt::Result {
+    |                   ^^^ help: if this is intentional, prefix it with an underscore: `_fmt`
+
+warning: unused variable: `scheduler_queue`
+   --> nexosim/src/simulation/scheduler.rs:231:9
+    |
+231 |         scheduler_queue: Arc<Mutex<SchedulerQueue>>,
+    |         ^^^^^^^^^^^^^^^ help: if this is intentional, prefix it with an underscore: `_scheduler_queue`
+
+warning: unused variable: `time`
+   --> nexosim/src/simulation/scheduler.rs:232:9
+    |
+232 |         time: AtomicTimeReader,
+    |         ^^^^ help: if this is intentional, prefix it with an underscore: `_time`
+
+warning: unused variable: `is_halted`
+   --> nexosim/src/simulation/scheduler.rs:233:9
+    |
+233 |         is_halted: Arc<AtomicBool>,
+    |         ^^^^^^^^^ help: if this is intentional, prefix it with an underscore: `_is_halted`
+
+warning: unused variable: `deadline`
+   --> nexosim/src/simulation/scheduler.rs:260:9
+    |
+260 |         deadline: impl Deadline,
+    |         ^^^^^^^^ help: if this is intentional, prefix it with an underscore: `_deadline`
+
+warning: unused variable: `event_id`
+   --> nexosim/src/simulation/scheduler.rs:261:9
+    |
+261 |         event_id: &EventId<T>,
+    |         ^^^^^^^^ help: if this is intentional, prefix it with an underscore: `_event_id`
+
+warning: unused variable: `arg`
+   --> nexosim/src/simulation/scheduler.rs:262:9
+    |
+262 |         arg: T,
+    |         ^^^ help: if this is intentional, prefix it with an underscore: `_arg`
+
+warning: unused variable: `origin_id`
+   --> nexosim/src/simulation/scheduler.rs:263:9
+    |
+263 |         origin_id: usize,
+    |         ^^^^^^^^^ help: if this is intentional, prefix it with an underscore: `_origin_id`
+
+warning: unused variable: `deadline`
+   --> nexosim/src/simulation/scheduler.rs:274:9
+    |
+274 |         deadline: impl Deadline,
+    |         ^^^^^^^^ help: if this is intentional, prefix it with an underscore: `_deadline`
+
+warning: unused variable: `event_id`
+   --> nexosim/src/simulation/scheduler.rs:275:9
+    |
+275 |         event_id: &EventId<T>,
+    |         ^^^^^^^^ help: if this is intentional, prefix it with an underscore: `_event_id`
+
+warning: unused variable: `arg`
+   --> nexosim/src/simulation/scheduler.rs:276:9
+    |
+276 |         arg: T,
+    |         ^^^ help: if this is intentional, prefix it with an underscore: `_arg`
+
+warning: unused variable: `origin_id`
+   --> nexosim/src/simulation/scheduler.rs:277:9
+    |
+277 |         origin_id: usize,
+    |         ^^^^^^^^^ help: if this is intentional, prefix it with an underscore: `_origin_id`
+
+warning: unused variable: `deadline`
+   --> nexosim/src/simulation/scheduler.rs:288:9
+    |
+288 |         deadline: impl Deadline,
+    |         ^^^^^^^^ help: if this is intentional, prefix it with an underscore: `_deadline`
+
+warning: unused variable: `period`
+   --> nexosim/src/simulation/scheduler.rs:289:9
+    |
+289 |         period: Duration,
+    |         ^^^^^^ help: if this is intentional, prefix it with an underscore: `_period`
+
+warning: unused variable: `event_id`
+   --> nexosim/src/simulation/scheduler.rs:290:9
+    |
+290 |         event_id: &EventId<T>,
+    |         ^^^^^^^^ help: if this is intentional, prefix it with an underscore: `_event_id`
+
+warning: unused variable: `arg`
+   --> nexosim/src/simulation/scheduler.rs:291:9
+    |
+291 |         arg: T,
+    |         ^^^ help: if this is intentional, prefix it with an underscore: `_arg`
+
+warning: unused variable: `origin_id`
+   --> nexosim/src/simulation/scheduler.rs:292:9
+    |
+292 |         origin_id: usize,
+    |         ^^^^^^^^^ help: if this is intentional, prefix it with an underscore: `_origin_id`
+
+warning: unused variable: `deadline`
+   --> nexosim/src/simulation/scheduler.rs:303:9
+    |
+303 |         deadline: impl Deadline,
+    |         ^^^^^^^^ help: if this is intentional, prefix it with an underscore: `_deadline`
+
+warning: unused variable: `period`
+   --> nexosim/src/simulation/scheduler.rs:304:9
+    |
+304 |         period: Duration,
+    |         ^^^^^^ help: if this is intentional, prefix it with an underscore: `_period`
+
+warning: unused variable: `event_id`
+   --> nexosim/src/simulation/scheduler.rs:305:9
+    |
+305 |         event_id: &EventId<T>,
+    |         ^^^^^^^^ help: if this is intentional, prefix it with an underscore: `_event_id`
+
+warning: unused variable: `arg`
+   --> nexosim/src/simulation/scheduler.rs:306:9
+    |
+306 |         arg: T,
+    |         ^^^ help: if this is intentional, prefix it with an underscore: `_arg`
+
+warning: unused variable: `origin_id`
+   --> nexosim/src/simulation/scheduler.rs:307:9
+    |
+307 |         origin_id: usize,
+    |         ^^^^^^^^^ help: if this is intentional, prefix it with an underscore: `_origin_id`
+
+warning: unused variable: `deadline`
+   --> nexosim/src/simulation/scheduler.rs:317:9
+    |
+317 |         deadline: impl Deadline,
+    |         ^^^^^^^^ help: if this is intentional, prefix it with an underscore: `_deadline`
+
+warning: unused variable: `query_id`
+   --> nexosim/src/simulation/scheduler.rs:318:9
+    |
+318 |         query_id: &QueryId<T, R>,
+    |         ^^^^^^^^ help: if this is intentional, prefix it with an underscore: `_query_id`
+
+warning: unused variable: `arg`
+   --> nexosim/src/simulation/scheduler.rs:319:9
+    |
+319 |         arg: T,
+    |         ^^^ help: if this is intentional, prefix it with an underscore: `_arg`
+
+warning: unused variable: `origin_id`
+   --> nexosim/src/simulation/scheduler.rs:320:9
+    |
+320 |         origin_id: usize,
+    |         ^^^^^^^^^ help: if this is intentional, prefix it with an underscore: `_origin_id`
+
+warning: unused variable: `f`
+   --> nexosim/src/simulation/scheduler.rs:335:19
+    |
+335 |     fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
+    |                   ^ help: if this is intentional, prefix it with an underscore: `_f`
+
+warning: unused variable: `num_threads`
+  --> nexosim/src/simulation/sim_init.rs:69:29
+   |
+69 |     pub fn with_num_threads(num_threads: usize) -> Self {
+   |                             ^^^^^^^^^^^ help: if this is intentional, prefix it with an underscore: `_num_threads`
+
+warning: variable does not need to be mutable
+  --> nexosim/src/simulation/sim_init.rs:91:23
+   |
+91 |     pub fn with_clock(mut self, clock: impl Clock, ticker: impl Ticker) -> Self {
+   |                       ----^^^^
+   |                       |
+   |                       help: remove this `mut`
+
+warning: unused variable: `clock`
+  --> nexosim/src/simulation/sim_init.rs:91:33
+   |
+91 |     pub fn with_clock(mut self, clock: impl Clock, ticker: impl Ticker) -> Self {
+   |                                 ^^^^^ help: if this is intentional, prefix it with an underscore: `_clock`
+
+warning: unused variable: `ticker`
+  --> nexosim/src/simulation/sim_init.rs:91:52
+   |
+91 |     pub fn with_clock(mut self, clock: impl Clock, ticker: impl Ticker) -> Self {
+   |                                                    ^^^^^^ help: if this is intentional, prefix it with an underscore: `_ticker`
+
+warning: variable does not need to be mutable
+   --> nexosim/src/simulation/sim_init.rs:105:32
+    |
+105 |     pub fn with_tickless_clock(mut self, clock: impl Clock) -> Self {
+    |                                ----^^^^
+    |                                |
+    |                                help: remove this `mut`
+
+warning: unused variable: `clock`
+   --> nexosim/src/simulation/sim_init.rs:105:42
+    |
+105 |     pub fn with_tickless_clock(mut self, clock: impl Clock) -> Self {
+    |                                          ^^^^^ help: if this is intentional, prefix it with an underscore: `_clock`
+
+warning: variable does not need to be mutable
+   --> nexosim/src/simulation/sim_init.rs:113:33
+    |
+113 |     pub fn with_clock_tolerance(mut self, tolerance: Duration) -> Self {
+    |                                 ----^^^^
+    |                                 |
+    |                                 help: remove this `mut`
+
+warning: unused variable: `tolerance`
+   --> nexosim/src/simulation/sim_init.rs:113:43
+    |
+113 |     pub fn with_clock_tolerance(mut self, tolerance: Duration) -> Self {
+    |                                           ^^^^^^^^^ help: if this is intentional, prefix it with an underscore: `_tolerance`
+
+warning: variable does not need to be mutable
+   --> nexosim/src/simulation/sim_init.rs:127:25
+    |
+127 |     pub fn with_timeout(mut self, timeout: Duration) -> Self {
+    |                         ----^^^^
+    |                         |
+    |                         help: remove this `mut`
+
+warning: unused variable: `timeout`
+   --> nexosim/src/simulation/sim_init.rs:127:35
+    |
+127 |     pub fn with_timeout(mut self, timeout: Duration) -> Self {
+    |                                   ^^^^^^^ help: if this is intentional, prefix it with an underscore: `_timeout`
+
+warning: variable does not need to be mutable
+   --> nexosim/src/simulation/sim_init.rs:135:9
+    |
+135 |         mut self,
+    |         ----^^^^
+    |         |
+    |         help: remove this `mut`
+
+warning: unused variable: `callback`
+   --> nexosim/src/simulation/sim_init.rs:136:9
+    |
+136 |         callback: impl FnOnce(
+    |         ^^^^^^^^ help: if this is intentional, prefix it with an underscore: `_callback`
+
+warning: variable does not need to be mutable
+   --> nexosim/src/simulation/sim_init.rs:149:9
+    |
+149 |         mut self,
+    |         ----^^^^
+    |         |
+    |         help: remove this `mut`
+
+warning: unused variable: `callback`
+   --> nexosim/src/simulation/sim_init.rs:150:9
+    |
+150 |         callback: impl FnOnce(
+    |         ^^^^^^^^ help: if this is intentional, prefix it with an underscore: `_callback`
+
+warning: unused variable: `source`
+   --> nexosim/src/simulation/sim_init.rs:158:51
+    |
+158 |     pub(crate) fn link_event_source<T>(&mut self, source: EventSource<T>) -> EventId<T>
+    |                                                   ^^^^^^ help: if this is intentional, prefix it with an underscore: `_source`
+
+warning: unused variable: `source`
+   --> nexosim/src/simulation/sim_init.rs:168:9
+    |
+168 |         source: QuerySource<T, R>,
+    |         ^^^^^^ help: if this is intentional, prefix it with an underscore: `_source`
+
+warning: variable does not need to be mutable
+   --> nexosim/src/simulation/sim_init.rs:189:9
+    |
+189 |         mut self,
+    |         ----^^^^
+    |         |
+    |         help: remove this `mut`
+
+warning: unused variable: `model`
+   --> nexosim/src/simulation/sim_init.rs:190:9
+    |
+190 |         model: P,
+    |         ^^^^^ help: if this is intentional, prefix it with an underscore: `_model`
+
+warning: unused variable: `mailbox`
+   --> nexosim/src/simulation/sim_init.rs:191:9
+    |
+191 |         mailbox: Mailbox<P::Model>,
+    |         ^^^^^^^ help: if this is intentional, prefix it with an underscore: `_mailbox`
+
+warning: unused variable: `name`
+   --> nexosim/src/simulation/sim_init.rs:192:9
+    |
+192 |         name: &str,
+    |         ^^^^ help: if this is intentional, prefix it with an underscore: `_name`
+
+warning: unused variable: `sink`
+   --> nexosim/src/simulation/sim_init.rs:210:9
+    |
+210 |         sink: S,
+    |         ^^^^ help: if this is intentional, prefix it with an underscore: `_sink`
+
+warning: unused variable: `path`
+   --> nexosim/src/simulation/sim_init.rs:211:9
+    |
+211 |         path: impl Into<Path>,
+    |         ^^^^ help: if this is intentional, prefix it with an underscore: `_path`
+
+warning: unused variable: `sink`
+   --> nexosim/src/simulation/sim_init.rs:231:9
+    |
+231 |         sink: S,
+    |         ^^^^ help: if this is intentional, prefix it with an underscore: `_sink`
+
+warning: unused variable: `path`
+   --> nexosim/src/simulation/sim_init.rs:232:9
+    |
+232 |         path: impl Into<Path>,
+    |         ^^^^ help: if this is intentional, prefix it with an underscore: `_path`
+
+warning: variable does not need to be mutable
+   --> nexosim/src/simulation/sim_init.rs:246:9
+    |
+246 |         mut self,
+    |         ----^^^^
+    |         |
+    |         help: remove this `mut`
+
+warning: unused variable: `start_time`
+   --> nexosim/src/simulation/sim_init.rs:247:9
+    |
+247 |         start_time: MonotonicTime,
+    |         ^^^^^^^^^^ help: if this is intentional, prefix it with an underscore: `_start_time`
+
+warning: variable does not need to be mutable
+   --> nexosim/src/simulation/sim_init.rs:255:9
+    |
+255 |         mut self,
+    |         ----^^^^
+    |         |
+    |         help: remove this `mut`
+
+warning: unused variable: `state`
+   --> nexosim/src/simulation/sim_init.rs:256:9
+    |
+256 |         state: R,
+    |         ^^^^^ help: if this is intentional, prefix it with an underscore: `_state`
+
+warning: unused variable: `source`
+   --> nexosim/src/simulation/sim_init.rs:267:9
+    |
+267 |         source: EventSource<T>,
+    |         ^^^^^^ help: if this is intentional, prefix it with an underscore: `_source`
+
+warning: unused variable: `path`
+   --> nexosim/src/simulation/sim_init.rs:268:9
+    |
+268 |         path: Path,
+    |         ^^^^ help: if this is intentional, prefix it with an underscore: `_path`
+
+warning: unused variable: `source`
+   --> nexosim/src/simulation/sim_init.rs:283:9
+    |
+283 |         source: EventSource<T>,
+    |         ^^^^^^ help: if this is intentional, prefix it with an underscore: `_source`
+
+warning: unused variable: `path`
+   --> nexosim/src/simulation/sim_init.rs:284:9
+    |
+284 |         path: Path,
+    |         ^^^^ help: if this is intentional, prefix it with an underscore: `_path`
+
+warning: unused variable: `source`
+   --> nexosim/src/simulation/sim_init.rs:298:9
+    |
+298 |         source: QuerySource<T, R>,
+    |         ^^^^^^ help: if this is intentional, prefix it with an underscore: `_source`
+
+warning: unused variable: `path`
+   --> nexosim/src/simulation/sim_init.rs:299:9
+    |
+299 |         path: Path,
+    |         ^^^^ help: if this is intentional, prefix it with an underscore: `_path`
+
+warning: unused variable: `source`
+   --> nexosim/src/simulation/sim_init.rs:316:9
+    |
+316 |         source: QuerySource<T, R>,
+    |         ^^^^^^ help: if this is intentional, prefix it with an underscore: `_source`
+
+warning: unused variable: `path`
+   --> nexosim/src/simulation/sim_init.rs:317:9
+    |
+317 |         path: Path,
+    |         ^^^^ help: if this is intentional, prefix it with an underscore: `_path`
+
+warning: unused variable: `f`
+   --> nexosim/src/simulation/sim_init.rs:342:19
+    |
+342 |     fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
+    |                   ^ help: if this is intentional, prefix it with an underscore: `_f`
+
+warning: unused variable: `fmt`
+   --> nexosim/src/simulation/sim_init.rs:361:19
+    |
+361 |     fn fmt(&self, fmt: &mut fmt::Formatter<'_>) -> fmt::Result {
+    |                   ^^^ help: if this is intentional, prefix it with an underscore: `_fmt`
+
+warning: unused variable: `fmt`
+   --> nexosim/src/simulation/sim_init.rs:381:19
+    |
+381 |     fn fmt(&self, fmt: &mut fmt::Formatter<'_>) -> fmt::Result {
+    |                   ^^^ help: if this is intentional, prefix it with an underscore: `_fmt`
+
+warning: unused variable: `f`
+   --> nexosim/src/simulation/sim_init.rs:389:19
+    |
+389 |     fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
+    |                   ^ help: if this is intentional, prefix it with an underscore: `_f`
+
+warning: unused variable: `e`
+   --> nexosim/src/simulation/sim_init.rs:400:13
+    |
+400 |     fn from(e: DuplicateEventSourceError<T>) -> Self {
+    |             ^ help: if this is intentional, prefix it with an underscore: `_e`
+
+warning: unused variable: `fmt`
+   --> nexosim/src/simulation/sim_init.rs:413:19
+    |
+413 |     fn fmt(&self, fmt: &mut fmt::Formatter<'_>) -> fmt::Result {
+    |                   ^^^ help: if this is intentional, prefix it with an underscore: `_fmt`
+
+warning: unused variable: `f`
+   --> nexosim/src/simulation/sim_init.rs:418:19
+    |
+418 |     fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
+    |                   ^ help: if this is intentional, prefix it with an underscore: `_f`
+
+warning: unused variable: `e`
+   --> nexosim/src/simulation/sim_init.rs:424:13
+    |
+424 |     fn from(e: DuplicateQuerySourceError<S>) -> Self {
+    |             ^ help: if this is intentional, prefix it with an underscore: `_e`
+
+warning: unused variable: `fmt`
+   --> nexosim/src/simulation/sim_init.rs:435:19
+    |
+435 |     fn fmt(&self, fmt: &mut fmt::Formatter<'_>) -> fmt::Result {
+    |                   ^^^ help: if this is intentional, prefix it with an underscore: `_fmt`
+
+warning: unused variable: `e`
+   --> nexosim/src/simulation/sim_init.rs:441:13
+    |
+441 |     fn from(e: DuplicateEventSinkError) -> Self {
+    |             ^ help: if this is intentional, prefix it with an underscore: `_e`
+
+warning: unused variable: `executor`
+   --> nexosim/src/simulation.rs:220:9
+    |
+220 |         executor: Executor,
+    |         ^^^^^^^^ help: if this is intentional, prefix it with an underscore: `_executor`
+
+warning: unused variable: `scheduler_queue`
+   --> nexosim/src/simulation.rs:221:9
+    |
+221 |         scheduler_queue: Arc<Mutex<SchedulerQueue>>,
+    |         ^^^^^^^^^^^^^^^ help: if this is intentional, prefix it with an underscore: `_scheduler_queue`
+
+warning: unused variable: `scheduler_registry`
+   --> nexosim/src/simulation.rs:222:9
+    |
+222 |         scheduler_registry: SchedulerRegistry,
+    |         ^^^^^^^^^^^^^^^^^^ help: if this is intentional, prefix it with an underscore: `_scheduler_registry`
+
+warning: unused variable: `injector_queue`
+   --> nexosim/src/simulation.rs:223:9
+    |
+223 |         injector_queue: Arc<Mutex<InjectorQueue>>,
+    |         ^^^^^^^^^^^^^^ help: if this is intentional, prefix it with an underscore: `_injector_queue`
+
+warning: unused variable: `time`
+   --> nexosim/src/simulation.rs:224:9
+    |
+224 |         time: AtomicTime,
+    |         ^^^^ help: if this is intentional, prefix it with an underscore: `_time`
+
+warning: unused variable: `clock`
+   --> nexosim/src/simulation.rs:225:9
+    |
+225 |         clock: Box<dyn Clock>,
+    |         ^^^^^ help: if this is intentional, prefix it with an underscore: `_clock`
+
+warning: unused variable: `clock_tolerance`
+   --> nexosim/src/simulation.rs:226:9
+    |
+226 |         clock_tolerance: Option<Duration>,
+    |         ^^^^^^^^^^^^^^^ help: if this is intentional, prefix it with an underscore: `_clock_tolerance`
+
+warning: unused variable: `ticker`
+   --> nexosim/src/simulation.rs:227:9
+    |
+227 |         ticker: Option<Box<dyn Ticker>>,
+    |         ^^^^^^ help: if this is intentional, prefix it with an underscore: `_ticker`
+
+warning: unused variable: `timeout`
+   --> nexosim/src/simulation.rs:228:9
+    |
+228 |         timeout: Duration,
+    |         ^^^^^^^ help: if this is intentional, prefix it with an underscore: `_timeout`
+
+warning: unused variable: `observers`
+   --> nexosim/src/simulation.rs:229:9
+    |
+229 |         observers: Vec<(Path, Box<dyn ChannelObserver>)>,
+    |         ^^^^^^^^^ help: if this is intentional, prefix it with an underscore: `_observers`
+
+warning: unused variable: `registered_models`
+   --> nexosim/src/simulation.rs:230:9
+    |
+230 |         registered_models: Vec<RegisteredModel>,
+    |         ^^^^^^^^^^^^^^^^^ help: if this is intentional, prefix it with an underscore: `_registered_models`
+
+warning: unused variable: `is_halted`
+   --> nexosim/src/simulation.rs:231:9
+    |
+231 |         is_halted: Arc<AtomicBool>,
+    |         ^^^^^^^^^ help: if this is intentional, prefix it with an underscore: `_is_halted`
+
+warning: unused variable: `clock`
+   --> nexosim/src/simulation.rs:250:34
+    |
+250 |     pub fn with_clock(&mut self, clock: impl Clock, ticker: impl Ticker) {
+    |                                  ^^^^^ help: if this is intentional, prefix it with an underscore: `_clock`
+
+warning: unused variable: `ticker`
+   --> nexosim/src/simulation.rs:250:53
+    |
+250 |     pub fn with_clock(&mut self, clock: impl Clock, ticker: impl Ticker) {
+    |                                                     ^^^^^^ help: if this is intentional, prefix it with an underscore: `_ticker`
+
+warning: unused variable: `clock`
+   --> nexosim/src/simulation.rs:261:43
+    |
+261 |     pub fn with_tickless_clock(&mut self, clock: impl Clock) {
+    |                                           ^^^^^ help: if this is intentional, prefix it with an underscore: `_clock`
+
+warning: unused variable: `timeout`
+   --> nexosim/src/simulation.rs:274:36
+    |
+274 |     pub fn with_timeout(&mut self, timeout: Duration) {
+    |                                    ^^^^^^^ help: if this is intentional, prefix it with an underscore: `_timeout`
+
+warning: unused variable: `deadline`
+   --> nexosim/src/simulation.rs:297:34
+    |
+297 |     pub fn step_until(&mut self, deadline: impl Deadline) -> Result<(), ExecutionError> {
+    |                                  ^^^^^^^^ help: if this is intentional, prefix it with an underscore: `_deadline`
+
+warning: unused variable: `event_id`
+   --> nexosim/src/simulation.rs:318:9
+    |
+318 |         event_id: &EventId<T>,
+    |         ^^^^^^^^ help: if this is intentional, prefix it with an underscore: `_event_id`
+
+warning: unused variable: `arg`
+   --> nexosim/src/simulation.rs:319:9
+    |
+319 |         arg: T,
+    |         ^^^ help: if this is intentional, prefix it with an underscore: `_arg`
+
+warning: unused variable: `query_id`
+   --> nexosim/src/simulation.rs:333:9
+    |
+333 |         query_id: &QueryId<T, R>,
+    |         ^^^^^^^^ help: if this is intentional, prefix it with an underscore: `_query_id`
+
+warning: unused variable: `arg`
+   --> nexosim/src/simulation.rs:334:9
+    |
+334 |         arg: T,
+    |         ^^^ help: if this is intentional, prefix it with an underscore: `_arg`
+
+warning: unused variable: `fut`
+   --> nexosim/src/simulation.rs:345:9
+    |
+345 |         fut: impl Future<Output = ()> + Send + 'static,
+    |         ^^^ help: if this is intentional, prefix it with an underscore: `_fut`
+
+warning: unused variable: `func`
+   --> nexosim/src/simulation.rs:379:9
+    |
+379 |         func: F,
+    |         ^^^^ help: if this is intentional, prefix it with an underscore: `_func`
+
+warning: unused variable: `arg`
+   --> nexosim/src/simulation.rs:380:9
+    |
+380 |         arg: T,
+    |         ^^^ help: if this is intentional, prefix it with an underscore: `_arg`
+
+warning: unused variable: `address`
+   --> nexosim/src/simulation.rs:381:9
+    |
+381 |         address: impl Into<Address<M>>,
+    |         ^^^^^^^ help: if this is intentional, prefix it with an underscore: `_address`
+
+warning: unused variable: `deadline`
+   --> nexosim/src/simulation.rs:399:31
+    |
+399 |     fn synchronize(&mut self, deadline: MonotonicTime) -> Result<(), ExecutionError> {
+    |                               ^^^^^^^^ help: if this is intentional, prefix it with an underscore: `_deadline`
+
+warning: unused variable: `upper_time_bound`
+   --> nexosim/src/simulation.rs:411:9
+    |
+411 |         upper_time_bound: Option<MonotonicTime>,
+    |         ^^^^^^^^^^^^^^^^ help: if this is intentional, prefix it with an underscore: `_upper_time_bound`
+
+warning: unused variable: `target_time`
+   --> nexosim/src/simulation.rs:426:9
+    |
+426 |         target_time: Option<MonotonicTime>,
+    |         ^^^^^^^^^^^ help: if this is intentional, prefix it with an underscore: `_target_time`
+
+warning: unused variable: `model_state`
+   --> nexosim/src/simulation.rs:443:9
+    |
+443 |         model_state: Vec<Vec<u8>>,
+    |         ^^^^^^^^^^^ help: if this is intentional, prefix it with an underscore: `_model_state`
+
+warning: unused variable: `event_key_reg`
+   --> nexosim/src/simulation.rs:444:9
+    |
+444 |         event_key_reg: &EventKeyReg,
+    |         ^^^^^^^^^^^^^ help: if this is intentional, prefix it with an underscore: `_event_key_reg`
+
+warning: unused variable: `state`
+   --> nexosim/src/simulation.rs:453:33
+    |
+453 |     fn restore_queue(&mut self, state: &[u8]) -> Result<(), ExecutionError> {
+    |                                 ^^^^^ help: if this is intentional, prefix it with an underscore: `_state`
+
+warning: unused variable: `writer`
+   --> nexosim/src/simulation.rs:460:9
+    |
+460 |         writer: &mut W,
+    |         ^^^^^^ help: if this is intentional, prefix it with an underscore: `_writer`
+
+warning: variable does not need to be mutable
+   --> nexosim/src/simulation.rs:469:9
+    |
+469 |         mut state: R,
+    |         ----^^^^^
+    |         |
+    |         help: remove this `mut`
+
+warning: unused variable: `state`
+   --> nexosim/src/simulation.rs:469:9
+    |
+469 |         mut state: R,
+    |         ^^^^^^^^^ help: if this is intentional, prefix it with an underscore: `_state`
+
+warning: unused variable: `f`
+   --> nexosim/src/simulation.rs:475:19
+    |
+475 |     fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
+    |                   ^ help: if this is intentional, prefix it with an underscore: `_f`
+
+warning: unused variable: `f`
+   --> nexosim/src/simulation.rs:560:19
+    |
+560 |     fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
+    |                   ^ help: if this is intentional, prefix it with an underscore: `_f`
+
+warning: unused variable: `f`
+   --> nexosim/src/simulation.rs:627:19
+    |
+627 |     fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
+    |                   ^ help: if this is intentional, prefix it with an underscore: `_f`
+
+warning: unused variable: `f`
+   --> nexosim/src/simulation.rs:736:19
+    |
+736 |     fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
+    |                   ^ help: if this is intentional, prefix it with an underscore: `_f`
+
+warning: unused variable: `e`
+   --> nexosim/src/simulation.rs:742:13
+    |
+742 |     fn from(e: SaveError) -> Self {
+    |             ^ help: if this is intentional, prefix it with an underscore: `_e`
+
+warning: unused variable: `e`
+   --> nexosim/src/simulation.rs:747:13
+    |
+747 |     fn from(e: RestoreError) -> Self {
+    |             ^ help: if this is intentional, prefix it with an underscore: `_e`
+
+warning: unused variable: `f`
+   --> nexosim/src/simulation.rs:764:19
+    |
+764 |     fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
+    |                   ^ help: if this is intentional, prefix it with an underscore: `_f`
+
+warning: unused variable: `e`
+   --> nexosim/src/simulation.rs:774:13
+    |
+774 |     fn from(e: BenchError) -> Self {
+    |             ^ help: if this is intentional, prefix it with an underscore: `_e`
+
+warning: unused variable: `e`
+   --> nexosim/src/simulation.rs:779:13
+    |
+779 |     fn from(e: ExecutionError) -> Self {
+    |             ^ help: if this is intentional, prefix it with an underscore: `_e`
+
+warning: unused variable: `e`
+   --> nexosim/src/simulation.rs:784:13
+    |
+784 |     fn from(e: SchedulingError) -> Self {
+    |             ^ help: if this is intentional, prefix it with an underscore: `_e`
+
+warning: unused variable: `model`
+   --> nexosim/src/simulation.rs:791:5
+    |
+791 |     model: P,
+    |     ^^^^^ help: if this is intentional, prefix it with an underscore: `_model`
+
+warning: unused variable: `mailbox`
+   --> nexosim/src/simulation.rs:792:5
+    |
+792 |     mailbox: Mailbox<P::Model>,
+    |     ^^^^^^^ help: if this is intentional, prefix it with an underscore: `_mailbox`
+
+warning: unused variable: `path`
+   --> nexosim/src/simulation.rs:793:5
+    |
+793 |     path: Path,
+    |     ^^^^ help: if this is intentional, prefix it with an underscore: `_path`
+
+warning: unused variable: `scheduler`
+   --> nexosim/src/simulation.rs:794:5
+    |
+794 |     scheduler: GlobalScheduler,
+    |     ^^^^^^^^^ help: if this is intentional, prefix it with an underscore: `_scheduler`
+
+warning: unused variable: `scheduler_registry`
+   --> nexosim/src/simulation.rs:795:5
+    |
+795 |     scheduler_registry: &mut SchedulerRegistry,
+    |     ^^^^^^^^^^^^^^^^^^ help: if this is intentional, prefix it with an underscore: `_scheduler_registry`
+
+warning: unused variable: `injector`
+   --> nexosim/src/simulation.rs:796:5
+    |
+796 |     injector: &Arc<Mutex<InjectorQueue>>,
+    |     ^^^^^^^^ help: if this is intentional, prefix it with an underscore: `_injector`
+
+warning: unused variable: `executor`
+   --> nexosim/src/simulation.rs:797:5
+    |
+797 |     executor: &Executor,
+    |     ^^^^^^^^ help: if this is intentional, prefix it with an underscore: `_executor`
+
+warning: unused variable: `abort_signal`
+   --> nexosim/src/simulation.rs:798:5
+    |
+798 |     abort_signal: &Signal,
+    |     ^^^^^^^^^^^^ help: if this is intentional, prefix it with an underscore: `_abort_signal`
+
+warning: unused variable: `registered_models`
+   --> nexosim/src/simulation.rs:799:5
+    |
+799 |     registered_models: &mut Vec<RegisteredModel>,
+    |     ^^^^^^^^^^^^^^^^^ help: if this is intentional, prefix it with an underscore: `_registered_models`
+
+warning: unused variable: `is_resumed`
+   --> nexosim/src/simulation.rs:800:5
+    |
+800 |     is_resumed: Arc<AtomicBool>,
+    |     ^^^^^^^^^^ help: if this is intentional, prefix it with an underscore: `_is_resumed`
+
+warning: unused variable: `id`
+   --> nexosim/src/simulation.rs:817:12
+    |
+817 |     fn new(id: usize) -> Self {
+    |            ^^ help: if this is intentional, prefix it with an underscore: `_id`
+
+warning: unused variable: `fut`
+   --> nexosim/src/simulation.rs:839:12
+    |
+839 |     fn new(fut: F, id: ModelId) -> Self {
+    |            ^^^ help: if this is intentional, prefix it with an underscore: `_fut`
+
+warning: unused variable: `id`
+   --> nexosim/src/simulation.rs:839:20
+    |
+839 |     fn new(fut: F, id: ModelId) -> Self {
+    |                    ^^ help: if this is intentional, prefix it with an underscore: `_id`
+
+warning: unused variable: `cx`
+   --> nexosim/src/simulation.rs:849:35
+    |
+849 |     fn poll(self: Pin<&mut Self>, cx: &mut task::Context<'_>) -> Poll<Self::Output> {
+    |                                   ^^ help: if this is intentional, prefix it with an underscore: `_cx`
+
+warning: unused variable: `scheduler_queue`
+   --> nexosim/src/simulation.rs:854:5
+    |
+854 |     scheduler_queue: &mut MutexGuard<SchedulerQueue>,
+    |     ^^^^^^^^^^^^^^^ help: if this is intentional, prefix it with an underscore: `_scheduler_queue`
+
+warning: unused variable: `upper_time_bound`
+   --> nexosim/src/simulation.rs:855:5
+    |
+855 |     upper_time_bound: MonotonicTime,
+    |     ^^^^^^^^^^^^^^^^ help: if this is intentional, prefix it with an underscore: `_upper_time_bound`
+
+warning: variable does not need to be mutable
+   --> nexosim/src/simulation.rs:867:5
+    |
+867 |     mut scheduler_queue: MutexGuard<SchedulerQueue>,
+    |     ----^^^^^^^^^^^^^^^
+    |     |
+    |     help: remove this `mut`
+
+warning: variable does not need to be mutable
+   --> nexosim/src/simulation.rs:870:5
+    |
+870 |     mut next_key: Option<(MonotonicTime, usize)>,
+    |     ----^^^^^^^^
+    |     |
+    |     help: remove this `mut`
+
+warning: unused variable: `scheduler_queue`
+   --> nexosim/src/simulation.rs:867:5
+    |
+867 |     mut scheduler_queue: MutexGuard<SchedulerQueue>,
+    |     ^^^^^^^^^^^^^^^^^^^ help: if this is intentional, prefix it with an underscore: `_scheduler_queue`
+
+warning: unused variable: `executor`
+   --> nexosim/src/simulation.rs:868:5
+    |
+868 |     executor: &Executor,
+    |     ^^^^^^^^ help: if this is intentional, prefix it with an underscore: `_executor`
+
+warning: unused variable: `scheduler_registry`
+   --> nexosim/src/simulation.rs:869:5
+    |
+869 |     scheduler_registry: &SchedulerRegistry,
+    |     ^^^^^^^^^^^^^^^^^^ help: if this is intentional, prefix it with an underscore: `_scheduler_registry`
+
+warning: unused variable: `next_key`
+   --> nexosim/src/simulation.rs:870:5
+    |
+870 |     mut next_key: Option<(MonotonicTime, usize)>,
+    |     ^^^^^^^^^^^^ help: if this is intentional, prefix it with an underscore: `_next_key`
+
+warning: unused variable: `time`
+   --> nexosim/src/simulation.rs:871:5
+    |
+871 |     time: MonotonicTime,
+    |     ^^^^ help: if this is intentional, prefix it with an underscore: `_time`
+
+warning: variable does not need to be mutable
+   --> nexosim/src/simulation.rs:884:5
+    |
+884 |     mut injector_queue: MutexGuard<InjectorQueue>,
+    |     ----^^^^^^^^^^^^^^
+    |     |
+    |     help: remove this `mut`
+
+warning: unused variable: `injector_queue`
+   --> nexosim/src/simulation.rs:884:5
+    |
+884 |     mut injector_queue: MutexGuard<InjectorQueue>,
+    |     ^^^^^^^^^^^^^^^^^^ help: if this is intentional, prefix it with an underscore: `_injector_queue`
+
+warning: unused variable: `executor`
+   --> nexosim/src/simulation.rs:885:5
+    |
+885 |     executor: &Executor,
+    |     ^^^^^^^^ help: if this is intentional, prefix it with an underscore: `_executor`
+
+warning: unused variable: `scheduler_registry`
+   --> nexosim/src/simulation.rs:886:5
+    |
+886 |     scheduler_registry: &SchedulerRegistry,
+    |     ^^^^^^^^^^^^^^^^^^ help: if this is intentional, prefix it with an underscore: `_scheduler_registry`
+
+warning: unused variable: `simulation_ref`
+  --> nexosim/src/time/clock.rs:76:25
+   |
+76 |     pub fn from_instant(simulation_ref: MonotonicTime, wall_clock_ref: Instant) -> Self {
+   |                         ^^^^^^^^^^^^^^ help: if this is intentional, prefix it with an underscore: `_simulation_ref`
+
+warning: unused variable: `wall_clock_ref`
+  --> nexosim/src/time/clock.rs:76:56
+   |
+76 |     pub fn from_instant(simulation_ref: MonotonicTime, wall_clock_ref: Instant) -> Self {
+   |                                                        ^^^^^^^^^^^^^^ help: if this is intentional, prefix it with an underscore: `_wall_clock_ref`
+
+warning: unused variable: `simulation_ref`
+   --> nexosim/src/time/clock.rs:118:9
+    |
+118 |         simulation_ref: MonotonicTime,
+    |         ^^^^^^^^^^^^^^ help: if this is intentional, prefix it with an underscore: `_simulation_ref`
+
+warning: unused variable: `wall_clock_ref`
+   --> nexosim/src/time/clock.rs:119:9
+    |
+119 |         wall_clock_ref: SystemTime,
+    |         ^^^^^^^^^^^^^^ help: if this is intentional, prefix it with an underscore: `_wall_clock_ref`
+
+warning: unused variable: `deadline`
+   --> nexosim/src/time/clock.rs:127:31
+    |
+127 |     fn synchronize(&mut self, deadline: MonotonicTime) -> SyncStatus {
+    |                               ^^^^^^^^ help: if this is intentional, prefix it with an underscore: `_deadline`
+
+warning: unused variable: `deadline`
+   --> nexosim/src/time/clock.rs:152:31
+    |
+152 |     fn synchronize(&mut self, deadline: MonotonicTime) -> SyncStatus {
+    |                               ^^^^^^^^ help: if this is intentional, prefix it with an underscore: `_deadline`
+
+warning: unused variable: `time`
+  --> nexosim/src/time/monotonic_time.rs:14:23
+   |
+14 |     pub(crate) fn new(time: MonotonicTime) -> Self {
+   |                       ^^^^ help: if this is intentional, prefix it with an underscore: `_time`
+
+warning: unused variable: `value`
+  --> nexosim/src/time/monotonic_time.rs:23:30
+   |
+23 |     fn tearable_store(&self, value: MonotonicTime) {
+   |                              ^^^^^ help: if this is intentional, prefix it with an underscore: `_value`
+
+warning: unused variable: `period`
+  --> nexosim/src/time/ticker.rs:59:16
+   |
+59 |     pub fn new(period: Duration) -> Self {
+   |                ^^^^^^ help: if this is intentional, prefix it with an underscore: `_period`
+
+warning: unused variable: `period`
+  --> nexosim/src/time/ticker.rs:83:24
+   |
+83 |     pub fn anchored_at(period: Duration, reference: MonotonicTime) -> Self {
+   |                        ^^^^^^ help: if this is intentional, prefix it with an underscore: `_period`
+
+warning: unused variable: `reference`
+  --> nexosim/src/time/ticker.rs:83:42
+   |
+83 |     pub fn anchored_at(period: Duration, reference: MonotonicTime) -> Self {
+   |                                          ^^^^^^^^^ help: if this is intentional, prefix it with an underscore: `_reference`
+
+warning: unused variable: `time`
+  --> nexosim/src/time/ticker.rs:88:29
+   |
+88 |     fn next_tick(&mut self, time: MonotonicTime) -> MonotonicTime {
+   |                             ^^^^ help: if this is intentional, prefix it with an underscore: `_time`
+
+warning: unused variable: `nanos`
+  --> nexosim/src/time/ticker.rs:92:29
+   |
+92 | fn duration_from_nanos_u128(nanos: u128) -> Duration {
+   |                             ^^^^^ help: if this is intentional, prefix it with an underscore: `_nanos`
+
+warning: unused variable: `now`
+  --> nexosim/src/time.rs:79:24
+   |
+79 |     fn into_time(self, now: MonotonicTime) -> MonotonicTime {
+   |                        ^^^ help: if this is intentional, prefix it with an underscore: `_now`
+
+warning: unused variable: `reader`
+  --> nexosim/src/time.rs:93:43
+   |
+93 |     pub(crate) fn from_atomic_time_reader(reader: &AtomicTimeReader) -> Self {
+   |                                           ^^^^^^ help: if this is intentional, prefix it with an underscore: `_reader`
+
+warning: unused variable: `f`
+   --> nexosim/src/time.rs:105:19
+    |
+105 |     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+    |                   ^ help: if this is intentional, prefix it with an underscore: `_f`
+
+warning: unused variable: `value`
+  --> nexosim/src/util/bit.rs:29:51
+   |
+29 | pub(crate) fn find_bit<F: FnOnce(usize) -> usize>(value: usize, rank_fn: F) -> usize {
+   |                                                   ^^^^^ help: if this is intentional, prefix it with an underscore: `_value`
+
+warning: unused variable: `rank_fn`
+  --> nexosim/src/util/bit.rs:29:65
+   |
+29 | pub(crate) fn find_bit<F: FnOnce(usize) -> usize>(value: usize, rank_fn: F) -> usize {
+   |                                                                 ^^^^^^^ help: if this is intentional, prefix it with an underscore: `_rank_fn`
+
+warning: unused variable: `t`
+  --> nexosim/src/util/cached_rw_lock.rs:22:23
+   |
+22 |     pub(crate) fn new(t: T) -> Self {
+   |                       ^ help: if this is intentional, prefix it with an underscore: `_t`
+
+warning: unused variable: `other`
+  --> nexosim/src/util/priority_queue.rs:18:19
+   |
+18 |     fn cmp(&self, other: &Self) -> Ordering {
+   |                   ^^^^^ help: if this is intentional, prefix it with an underscore: `_other`
+
+warning: unused variable: `other`
+  --> nexosim/src/util/priority_queue.rs:26:27
+   |
+26 |     fn partial_cmp(&self, other: &Self) -> Option<Ordering> {
+   |                           ^^^^^ help: if this is intentional, prefix it with an underscore: `_other`
+
+warning: unused variable: `other`
+  --> nexosim/src/util/priority_queue.rs:38:18
+   |
+38 |     fn eq(&self, other: &Self) -> bool {
+   |                  ^^^^^ help: if this is intentional, prefix it with an underscore: `_other`
+
+warning: unused variable: `key`
+  --> nexosim/src/util/priority_queue.rs:63:37
+   |
+63 |     pub(crate) fn insert(&mut self, key: K, value: V) {
+   |                                     ^^^ help: if this is intentional, prefix it with an underscore: `_key`
+
+warning: unused variable: `value`
+  --> nexosim/src/util/priority_queue.rs:63:45
+   |
+63 |     pub(crate) fn insert(&mut self, key: K, value: V) {
+   |                                             ^^^^^ help: if this is intentional, prefix it with an underscore: `_value`
+
+warning: unused variable: `seed`
+  --> nexosim/src/util/rng.rs:12:23
+   |
+12 |     pub(crate) fn new(seed: u64) -> Self {
+   |                       ^^^^ help: if this is intentional, prefix it with an underscore: `_seed`
+
+warning: unused variable: `upper_bound`
+  --> nexosim/src/util/rng.rs:24:39
+   |
+24 |     pub(crate) fn rand_bounded(&self, upper_bound: u64) -> u64 {
+   |                                       ^^^^^^^^^^^ help: if this is intentional, prefix it with an underscore: `_upper_bound`
+
+warning: unused variable: `future`
+  --> nexosim/src/util/seq_futures.rs:22:35
+   |
+22 |     pub(crate) fn push(&mut self, future: F) {
+   |                                   ^^^^^^ help: if this is intentional, prefix it with an underscore: `_future`
+
+warning: variable does not need to be mutable
+  --> nexosim/src/util/seq_futures.rs:28:13
+   |
+28 |     fn poll(mut self: Pin<&mut Self>, cx: &mut Context<'_>) -> Poll<Self::Output> {
+   |             ----^^^^
+   |             |
+   |             help: remove this `mut`
+
+warning: unused variable: `cx`
+  --> nexosim/src/util/seq_futures.rs:28:39
+   |
+28 |     fn poll(mut self: Pin<&mut Self>, cx: &mut Context<'_>) -> Poll<Self::Output> {
+   |                                       ^^ help: if this is intentional, prefix it with an underscore: `_cx`
+
+warning: unused variable: `value`
+  --> nexosim/src/util/shared_cell.rs:42:36
+   |
+42 |     pub(crate) fn try_write(&self, value: T) -> Result<(), T> {
+   |                                    ^^^^^ help: if this is intentional, prefix it with an underscore: `_value`
+
+warning: unused variable: `t`
+  --> nexosim/src/util/slot.rs:22:34
+   |
+22 |     unsafe fn write_value(&self, t: T) {
+   |                                  ^ help: if this is intentional, prefix it with an underscore: `_t`
+
+warning: unused variable: `value`
+  --> nexosim/src/util/slot.rs:42:31
+   |
+42 |     pub(crate) fn write(self, value: T) -> Result<(), WriteError> {
+   |                               ^^^^^ help: if this is intentional, prefix it with an underscore: `_value`
+
+warning: unused variable: `fmt`
+  --> nexosim/src/util/slot.rs:87:19
+   |
+87 |     fn fmt(&self, fmt: &mut fmt::Formatter<'_>) -> fmt::Result {
+   |                   ^^^ help: if this is intentional, prefix it with an underscore: `_fmt`
+
+warning: unused variable: `fmt`
+  --> nexosim/src/util/slot.rs:96:19
+   |
+96 |     fn fmt(&self, fmt: &mut fmt::Formatter<'_>) -> fmt::Result {
+   |                   ^^^ help: if this is intentional, prefix it with an underscore: `_fmt`
+
+warning: unused variable: `notifier`
+  --> nexosim/src/util/task_set.rs:56:23
+   |
+56 |     pub(crate) fn new(notifier: WakeSource) -> Self {
+   |                       ^^^^^^^^ help: if this is intentional, prefix it with an underscore: `_notifier`
+
+warning: unused variable: `notifier`
+  --> nexosim/src/util/task_set.rs:62:28
+   |
+62 |     pub(crate) fn with_len(notifier: WakeSource, len: usize) -> Self {
+   |                            ^^^^^^^^ help: if this is intentional, prefix it with an underscore: `_notifier`
+
+warning: unused variable: `len`
+  --> nexosim/src/util/task_set.rs:62:50
+   |
+62 |     pub(crate) fn with_len(notifier: WakeSource, len: usize) -> Self {
+   |                                                  ^^^ help: if this is intentional, prefix it with an underscore: `_len`
+
+warning: unused variable: `notify_count`
+  --> nexosim/src/util/task_set.rs:82:9
+   |
+82 |         notify_count: usize,
+   |         ^^^^^^^^^^^^ help: if this is intentional, prefix it with an underscore: `_notify_count`
+
+warning: unused variable: `len`
+   --> nexosim/src/util/task_set.rs:103:37
+    |
+103 |     pub(crate) fn resize(&mut self, len: usize) {
+    |                                     ^^^ help: if this is intentional, prefix it with an underscore: `_len`
+
+warning: unused variable: `idx`
+   --> nexosim/src/util/task_set.rs:117:35
+    |
+117 |     pub(crate) fn waker_of(&self, idx: usize) -> WakerRef<'_> {
+    |                                   ^^^ help: if this is intentional, prefix it with an underscore: `_idx`
+
+warning: unused variable: `arc_self`
+   --> nexosim/src/util/task_set.rs:142:20
+    |
+142 |     fn wake_by_ref(arc_self: &Arc<Self>) {
+    |                    ^^^^^^^^ help: if this is intentional, prefix it with an underscore: `_arc_self`
+
+Some errors have detailed explanations: E0061, E0283, E0308, E0532, E0533, E0599.
+For more information about an error, try `rustc --explain E0061`.
+warning: `nexosim` (lib) generated 726 warnings
+error: could not compile `nexosim` (lib) due to 27 previous errors; 726 warnings emitted
+warning: build failed, waiting for other jobs to finish...

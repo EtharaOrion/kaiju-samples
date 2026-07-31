@@ -1,0 +1,9 @@
+{
+  "kind": "commit0-golden-ref",
+  "repo": "Zahgon/datasketch",
+  "base_commit": "b97eb128d016f10e3164857a16179f51720b2308",
+  "reference_commit": "3da96a591c954952c9dd367567db720cfdc151e0",
+  "src_dir": "datasketch",
+  "language": "python",
+  "note": "Golden solution = the repo at reference_commit; solve.sh fetches+resets to it."
+}

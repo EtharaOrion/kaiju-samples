@@ -1,0 +1,491 @@
+    Updating crates.io index
+     Locking 103 packages to latest compatible versions
+      Adding config v0.10.1 (available: v0.15.25)
+      Adding dashmap v3.11.10 (available: v6.2.1)
+      Adding rand v0.7.3 (available: v0.10.2)
+      Adding uuid v0.8.2 (available: v1.24.0)
+   Compiling cfg-if v1.0.4
+   Compiling libc v0.2.187
+   Compiling serde_core v1.0.229
+   Compiling proc-macro2 v1.0.107
+   Compiling memchr v2.8.3
+   Compiling quote v1.0.47
+   Compiling unicode-ident v1.0.24
+   Compiling autocfg v1.5.1
+   Compiling rustversion v1.0.23
+   Compiling serde v1.0.229
+   Compiling crunchy v0.2.4
+   Compiling tiny-keccak v2.0.2
+   Compiling getrandom v0.1.16
+   Compiling zerocopy v0.8.55
+   Compiling once_cell v1.21.4
+   Compiling futures-core v0.3.33
+   Compiling zmij v1.0.23
+   Compiling lazy_static v1.5.0
+   Compiling serde v0.8.23
+   Compiling futures-sink v0.3.33
+   Compiling regex-syntax v0.8.11
+   Compiling lexical-core v0.7.6
+   Compiling version_check v0.9.5
+   Compiling futures-channel v0.3.33
+   Compiling static_assertions v1.1.0
+   Compiling syn v1.0.109
+   Compiling arrayvec v0.5.2
+   Compiling ryu v1.0.23
+   Compiling aho-corasick v1.1.4
+   Compiling num-traits v0.2.19
+   Compiling serde_json v1.0.151
+   Compiling futures-io v0.3.33
+   Compiling nom v5.1.3
+   Compiling bitflags v1.3.2
+   Compiling slab v0.4.12
+   Compiling pin-project-lite v0.2.17
+   Compiling futures-task v0.3.33
+   Compiling itoa v1.0.18
+   Compiling linked-hash-map v0.5.6
+   Compiling iana-time-zone v0.1.65
+   Compiling cfg-if v0.1.10
+   Compiling rust-ini v0.13.0
+   Compiling log v0.4.33
+   Compiling pin-utils v0.1.0
+   Compiling yaml-rust v0.4.5
+   Compiling slog v2.8.2
+   Compiling arc-swap v1.9.2
+   Compiling syn v2.0.119
+   Compiling getrandom v0.2.17
+   Compiling num_cpus v1.17.0
+   Compiling num-traits v0.1.43
+   Compiling chrono v0.4.45
+   Compiling rand_core v0.5.1
+   Compiling const-random-macro v0.1.16
+   Compiling uuid v0.8.2
+   Compiling serde_test v0.8.23
+   Compiling linked-hash-map v0.3.0
+   Compiling const-random v0.1.18
+   Compiling ahash v0.3.8
+   Compiling regex-automata v0.4.16
+   Compiling dashmap v3.11.10
+   Compiling riker-testkit v0.1.0
+   Compiling erased-serde v0.3.31
+   Compiling toml v0.5.11
+   Compiling slog-scope v4.4.1
+   Compiling slog-stdlog v4.1.1
+   Compiling ppv-lite86 v0.2.21
+   Compiling regex v1.13.1
+   Compiling rand_chacha v0.2.2
+   Compiling rand v0.7.3
+   Compiling riker-macros v0.2.0 (/tmp/commit0-inplace-h8l4e27p/tree/riker-macros)
+   Compiling serde-hjson v0.9.1
+   Compiling futures-macro v0.3.33
+   Compiling config v0.10.1
+   Compiling futures-util v0.3.33
+   Compiling futures-executor v0.3.33
+   Compiling futures v0.3.33
+   Compiling riker v0.4.2 (/tmp/commit0-inplace-h8l4e27p/tree)
+error[E0425]: cannot find type `DeadLetters` in this scope
+   --> src/system.rs:738:39
+    |
+738 |     let dead_letters = sys_actor_of::<DeadLetters>(prov, sys, "dead_letters")?;
+    |                                       ^^^^^^^^^^^
+    |
+   ::: src/actor/channel.rs:184:1
+    |
+184 | pub struct DeadLetter {
+    | --------------------- similarly named struct `DeadLetter` defined here
+    |
+help: a struct with a similar name exists
+    |
+738 -     let dead_letters = sys_actor_of::<DeadLetters>(prov, sys, "dead_letters")?;
+738 +     let dead_letters = sys_actor_of::<DeadLetter>(prov, sys, "dead_letters")?;
+    |
+help: you might be missing a type parameter
+    |
+736 | fn sys_channels<DeadLetters>(prov: &Provider, sys: &ActorSystem) -> Result<SysChannels, SystemError> {
+    |                +++++++++++++
+
+warning: unused imports: `Instant`, `Ordering`, and `ops::Deref`
+ --> src/actor/actor_cell.rs:3:5
+  |
+3 |     ops::Deref,
+  |     ^^^^^^^^^^
+4 |     sync::{
+5 |         atomic::{AtomicBool, AtomicUsize, Ordering},
+  |                                           ^^^^^^^^
+...
+8 |     time::{Duration, Instant},
+  |                      ^^^^^^^
+  |
+  = note: `#[warn(unused_imports)]` (part of `#[warn(unused)]`) on by default
+
+warning: unused imports: `Job`, `OnceJob`, `RepeatJob`, `dispatch_any`, and `dispatch`
+  --> src/actor/actor_cell.rs:19:22
+   |
+19 |         kernel_ref::{dispatch, dispatch_any, KernelRef},
+   |                      ^^^^^^^^  ^^^^^^^^^^^^
+...
+23 |         timer::{Job, OnceJob, RepeatJob, ScheduleId, Timer},
+   |                 ^^^  ^^^^^^^  ^^^^^^^^^
+
+warning: unused import: `system::ActorCreated`
+  --> src/kernel/mailbox.rs:16:5
+   |
+16 |     system::ActorCreated,
+   |     ^^^^^^^^^^^^^^^^^^^^
+
+warning: unused import: `slog::trace`
+ --> src/kernel/provider.rs:2:5
+  |
+2 | use slog::trace;
+  |     ^^^^^^^^^^^
+
+warning: unused imports: `ActorCell`, `ExtendedCell`, `kernel::kernel`, `kernel::mailbox::mailbox`, and `validate::validate_name`
+  --> src/kernel/provider.rs:8:25
+   |
+ 8 |     actor::actor_cell::{ActorCell, ExtendedCell},
+   |                         ^^^^^^^^^  ^^^^^^^^^^^^
+ 9 |     actor::*,
+10 |     kernel::kernel,
+   |     ^^^^^^^^^^^^^^
+11 |     kernel::mailbox::mailbox,
+   |     ^^^^^^^^^^^^^^^^^^^^^^^^
+12 |     system::{ActorSystem, SysActors, SystemMsg},
+13 |     validate::validate_name,
+   |     ^^^^^^^^^^^^^^^^^^^^^^^
+
+warning: unused imports: `AssertUnwindSafe` and `catch_unwind`
+  --> src/kernel.rs:17:13
+   |
+17 |     panic::{catch_unwind, AssertUnwindSafe},
+   |             ^^^^^^^^^^^^  ^^^^^^^^^^^^^^^^
+
+warning: unused import: `slog::warn`
+  --> src/kernel.rs:22:5
+   |
+22 | use slog::warn;
+   |     ^^^^^^^^^^
+
+warning: unused imports: `ActorRestarted`, `ActorTerminated`, `SystemMsg`, and `flush_to_deadletters`
+  --> src/kernel.rs:29:19
+   |
+29 |         mailbox::{flush_to_deadletters, run_mailbox, Mailbox},
+   |                   ^^^^^^^^^^^^^^^^^^^^
+30 |     },
+31 |     system::{ActorRestarted, ActorTerminated, SystemMsg},
+   |              ^^^^^^^^^^^^^^  ^^^^^^^^^^^^^^^  ^^^^^^^^^
+
+warning: unused import: `debug`
+   --> src/system.rs:159:12
+    |
+159 | use slog::{debug, Logger};
+    |            ^^^^^
+
+error[E0308]: mismatched types
+   --> src/actor/actor_ref.rs:206:40
+    |
+206 |         let _ = self.cell.send_sys_msg(msg);
+    |                           ------------ ^^^ expected `Envelope<SystemMsg>`, found `SystemMsg`
+    |                           |
+    |                           arguments to this method are incorrect
+    |
+    = note: expected struct `Envelope<SystemMsg>`
+                 found enum `SystemMsg`
+note: method defined here
+   --> src/actor/actor_cell.rs:86:19
+    |
+ 86 |     pub(crate) fn send_sys_msg(&self, msg: Envelope<SystemMsg>) -> MsgResult<Envelope<SystemMsg>> { panic!("STUB: not implemented") }
+    |                   ^^^^^^^^^^^^        ------------------------
+
+error[E0308]: mismatched types
+   --> src/actor/actor_ref.rs:249:40
+    |
+249 |         let _ = self.cell.send_sys_msg(msg);
+    |                           ------------ ^^^ expected `Envelope<SystemMsg>`, found `SystemMsg`
+    |                           |
+    |                           arguments to this method are incorrect
+    |
+    = note: expected struct `Envelope<SystemMsg>`
+                 found enum `SystemMsg`
+note: method defined here
+   --> src/actor/actor_cell.rs:86:19
+    |
+ 86 |     pub(crate) fn send_sys_msg(&self, msg: Envelope<SystemMsg>) -> MsgResult<Envelope<SystemMsg>> { panic!("STUB: not implemented") }
+    |                   ^^^^^^^^^^^^        ------------------------
+
+error[E0308]: mismatched types
+   --> src/actor/actor_ref.rs:350:40
+    |
+350 |         let _ = self.cell.send_sys_msg(msg);
+    |                           ------------ ^^^ expected `Envelope<SystemMsg>`, found `SystemMsg`
+    |                           |
+    |                           arguments to this method are incorrect
+    |
+    = note: expected struct `Envelope<SystemMsg>`
+                 found enum `SystemMsg`
+note: method defined here
+   --> src/actor/actor_cell.rs:178:19
+    |
+178 |     pub(crate) fn send_sys_msg(&self, msg: Envelope<SystemMsg>) -> MsgResult<Envelope<SystemMsg>> { panic!("STUB: not implemented") }
+    |                   ^^^^^^^^^^^^        ------------------------
+
+error[E0308]: mismatched types
+   --> src/actor/actor_ref.rs:393:40
+    |
+393 |         let _ = self.cell.send_sys_msg(msg);
+    |                           ------------ ^^^ expected `Envelope<SystemMsg>`, found `SystemMsg`
+    |                           |
+    |                           arguments to this method are incorrect
+    |
+    = note: expected struct `Envelope<SystemMsg>`
+                 found enum `SystemMsg`
+note: method defined here
+   --> src/actor/actor_cell.rs:178:19
+    |
+178 |     pub(crate) fn send_sys_msg(&self, msg: Envelope<SystemMsg>) -> MsgResult<Envelope<SystemMsg>> { panic!("STUB: not implemented") }
+    |                   ^^^^^^^^^^^^        ------------------------
+
+error[E0308]: mismatched types
+   --> src/kernel/mailbox.rs:204:50
+    |
+204 |     process_sys_msgs(sentinel.mbox, &ctx, &cell, actor);
+    |     ----------------                             ^^^^^ expected `&mut Option<_>`, found `&mut Arc<Mutex<Option<A>>>`
+    |     |
+    |     arguments to this function are incorrect
+    |
+    = note: expected mutable reference `&mut Option<_>`
+               found mutable reference `&mut Arc<std::sync::Mutex<Option<A>>>`
+note: function defined here
+   --> src/kernel/mailbox.rs:235:4
+    |
+235 | fn process_sys_msgs<A>(
+    |    ^^^^^^^^^^^^^^^^
+...
+239 |     actor: &mut Option<A>,
+    |     ---------------------
+
+error[E0308]: mismatched types
+   --> src/kernel/mailbox.rs:207:50
+    |
+207 |         process_msgs(sentinel.mbox, &ctx, &cell, actor);
+    |         ------------                             ^^^^^ expected `&mut Option<_>`, found `&mut Arc<Mutex<Option<A>>>`
+    |         |
+    |         arguments to this function are incorrect
+    |
+    = note: expected mutable reference `&mut Option<_>`
+               found mutable reference `&mut Arc<std::sync::Mutex<Option<A>>>`
+note: function defined here
+   --> src/kernel/mailbox.rs:213:4
+    |
+213 | fn process_msgs<A>(
+    |    ^^^^^^^^^^^^
+...
+217 |     actor: &mut Option<A>,
+    |     ---------------------
+
+error[E0308]: mismatched types
+   --> src/system/logger.rs:54:32
+    |
+ 54 |     LoggingSystem::new(logger, guard)
+    |     ------------------         ^^^^^ expected `Option<Arc<GlobalLoggerGuard>>`, found `Arc<GlobalLoggerGuard>`
+    |     |
+    |     arguments to this function are incorrect
+    |
+    = note: expected enum `Option<Arc<_>>`
+             found struct `Arc<_>`
+note: associated function defined here
+   --> src/system.rs:233:19
+    |
+233 |     pub(crate) fn new(log: Logger, global_logger_guard: Option<GlobalLoggerGuard>) -> Self {
+    |                   ^^^              ----------------------------------------------
+help: try wrapping the expression in `Some`
+    |
+ 54 |     LoggingSystem::new(logger, Some(guard))
+    |                                +++++     +
+
+error[E0061]: this function takes 1 argument but 0 arguments were supplied
+   --> src/system.rs:297:20
+    |
+297 |         let prov = Provider::new();
+    |                    ^^^^^^^^^^^^^-- argument #1 of type `LoggingSystem` is missing
+    |
+note: associated function defined here
+   --> src/kernel/provider.rs:27:12
+    |
+ 27 |     pub fn new(log: LoggingSystem) -> Self { panic!("STUB: not implemented") }
+    |            ^^^ ------------------
+help: provide the argument
+    |
+297 |         let prov = Provider::new(/* LoggingSystem */);
+    |                                  +++++++++++++++++++
+
+error[E0277]: the trait bound `actor::channel::Topic: From<SystemEventType>` is not satisfied
+   --> src/system.rs:830:57
+    |
+830 |                 topic: SystemEventType::ActorTerminated.into(),
+    |                                                         ^^^^ unsatisfied trait bound
+    |
+help: the trait `From<SystemEventType>` is not implemented for `actor::channel::Topic`
+   --> src/actor/channel.rs:250:1
+    |
+250 | pub struct Topic(String);
+    | ^^^^^^^^^^^^^^^^
+    = help: `actor::channel::Topic` implements trait `From<T>`:
+              From<&SystemEvent>
+              From<&str>
+              From<String>
+              From<SysTopic>
+              From<actor::channel::All>
+    = note: required for `SystemEventType` to implement `Into<actor::channel::Topic>`
+
+warning: unused variable: `cell`
+   --> src/kernel/mailbox.rs:216:5
+    |
+216 |     cell: &ExtendedCell<A::Msg>,
+    |     ^^^^ help: if this is intentional, prefix it with an underscore: `_cell`
+    |
+    = note: `#[warn(unused_variables)]` (part of `#[warn(unused)]`) on by default
+
+warning: unused variable: `log`
+  --> src/kernel/provider.rs:27:16
+   |
+27 |     pub fn new(log: LoggingSystem) -> Self { panic!("STUB: not implemented") }
+   |                ^^^ help: if this is intentional, prefix it with an underscore: `_log`
+
+warning: unused variable: `props`
+  --> src/kernel/provider.rs:31:9
+   |
+31 |         props: BoxActorProd<A>,
+   |         ^^^^^ help: if this is intentional, prefix it with an underscore: `_props`
+
+warning: unused variable: `name`
+  --> src/kernel/provider.rs:32:9
+   |
+32 |         name: &str,
+   |         ^^^^ help: if this is intentional, prefix it with an underscore: `_name`
+
+warning: unused variable: `parent`
+  --> src/kernel/provider.rs:33:9
+   |
+33 |         parent: &BasicActorRef,
+   |         ^^^^^^ help: if this is intentional, prefix it with an underscore: `_parent`
+
+warning: unused variable: `sys`
+  --> src/kernel/provider.rs:34:9
+   |
+34 |         sys: &ActorSystem,
+   |         ^^^ help: if this is intentional, prefix it with an underscore: `_sys`
+
+warning: unused variable: `path`
+  --> src/kernel/provider.rs:40:24
+   |
+40 |     fn register(&self, path: &ActorPath) -> Result<(), CreateError> { panic!("STUB: not implemented") }
+   |                        ^^^^ help: if this is intentional, prefix it with an underscore: `_path`
+
+warning: unused variable: `path`
+  --> src/kernel/provider.rs:42:30
+   |
+42 |     pub fn unregister(&self, path: &ActorPath) { panic!("STUB: not implemented") }
+   |                              ^^^^ help: if this is intentional, prefix it with an underscore: `_path`
+
+warning: unused variable: `sys`
+  --> src/kernel/provider.rs:45:20
+   |
+45 | pub fn create_root(sys: &ActorSystem) -> SysActors { panic!("STUB: not implemented") }
+   |                    ^^^ help: if this is intentional, prefix it with an underscore: `_sys`
+
+warning: unused variable: `sys`
+  --> src/kernel/provider.rs:47:9
+   |
+47 | fn root(sys: &ActorSystem) -> BasicActorRef { panic!("STUB: not implemented") }
+   |         ^^^ help: if this is intentional, prefix it with an underscore: `_sys`
+
+warning: unused variable: `name`
+  --> src/kernel/provider.rs:49:13
+   |
+49 | fn guardian(name: &str, path: &str, root: &BasicActorRef, sys: &ActorSystem) -> BasicActorRef { panic!("STUB: not implemented") }
+   |             ^^^^ help: if this is intentional, prefix it with an underscore: `_name`
+
+warning: unused variable: `path`
+  --> src/kernel/provider.rs:49:25
+   |
+49 | fn guardian(name: &str, path: &str, root: &BasicActorRef, sys: &ActorSystem) -> BasicActorRef { panic!("STUB: not implemented") }
+   |                         ^^^^ help: if this is intentional, prefix it with an underscore: `_path`
+
+warning: unused variable: `root`
+  --> src/kernel/provider.rs:49:37
+   |
+49 | fn guardian(name: &str, path: &str, root: &BasicActorRef, sys: &ActorSystem) -> BasicActorRef { panic!("STUB: not implemented") }
+   |                                     ^^^^ help: if this is intentional, prefix it with an underscore: `_root`
+
+warning: unused variable: `sys`
+  --> src/kernel/provider.rs:49:59
+   |
+49 | fn guardian(name: &str, path: &str, root: &BasicActorRef, sys: &ActorSystem) -> BasicActorRef { panic!("STUB: not implemented") }
+   |                                                           ^^^ help: if this is intentional, prefix it with an underscore: `_sys`
+
+warning: unused variable: `name`
+  --> src/kernel/provider.rs:57:21
+   |
+57 |     fn create_args((name, log): (String, LoggingSystem)) -> Self { panic!("STUB: not implemented") }
+   |                     ^^^^ help: if this is intentional, prefix it with an underscore: `_name`
+
+warning: unused variable: `log`
+  --> src/kernel/provider.rs:57:27
+   |
+57 |     fn create_args((name, log): (String, LoggingSystem)) -> Self { panic!("STUB: not implemented") }
+   |                           ^^^ help: if this is intentional, prefix it with an underscore: `_log`
+
+warning: unused variable: `dock`
+  --> src/kernel.rs:99:5
+   |
+99 |     dock: &Dock<A>,
+   |     ^^^^ help: if this is intentional, prefix it with an underscore: `_dock`
+
+warning: unused variable: `actor_ref`
+   --> src/kernel.rs:100:5
+    |
+100 |     actor_ref: BasicActorRef,
+    |     ^^^^^^^^^ help: if this is intentional, prefix it with an underscore: `_actor_ref`
+
+warning: unused variable: `props`
+   --> src/kernel.rs:101:5
+    |
+101 |     props: &BoxActorProd<A>,
+    |     ^^^^^ help: if this is intentional, prefix it with an underscore: `_props`
+
+warning: unused variable: `sys`
+   --> src/kernel.rs:102:5
+    |
+102 |     sys: &ActorSystem,
+    |     ^^^ help: if this is intentional, prefix it with an underscore: `_sys`
+
+warning: unused variable: `mbox`
+   --> src/kernel.rs:107:25
+    |
+107 | fn terminate_actor<Msg>(mbox: &Mailbox<Msg>, actor_ref: BasicActorRef, sys: &ActorSystem)
+    |                         ^^^^ help: if this is intentional, prefix it with an underscore: `_mbox`
+
+warning: unused variable: `actor_ref`
+   --> src/kernel.rs:107:46
+    |
+107 | fn terminate_actor<Msg>(mbox: &Mailbox<Msg>, actor_ref: BasicActorRef, sys: &ActorSystem)
+    |                                              ^^^^^^^^^ help: if this is intentional, prefix it with an underscore: `_actor_ref`
+
+warning: unused variable: `sys`
+   --> src/kernel.rs:107:72
+    |
+107 | fn terminate_actor<Msg>(mbox: &Mailbox<Msg>, actor_ref: BasicActorRef, sys: &ActorSystem)
+    |                                                                        ^^^ help: if this is intentional, prefix it with an underscore: `_sys`
+
+warning: unused variable: `props`
+   --> src/kernel.rs:112:19
+    |
+112 | fn start_actor<A>(props: &BoxActorProd<A>) -> Result<A, CreateError>
+    |                   ^^^^^ help: if this is intentional, prefix it with an underscore: `_props`
+
+Some errors have detailed explanations: E0061, E0277, E0308, E0425.
+For more information about an error, try `rustc --explain E0061`.
+warning: `riker` (lib) generated 33 warnings
+error: could not compile `riker` (lib) due to 10 previous errors; 33 warnings emitted
+warning: build failed, waiting for other jobs to finish...
+warning: `riker` (lib test) generated 33 warnings (33 duplicates)
+error: could not compile `riker` (lib test) due to 10 previous errors; 33 warnings emitted

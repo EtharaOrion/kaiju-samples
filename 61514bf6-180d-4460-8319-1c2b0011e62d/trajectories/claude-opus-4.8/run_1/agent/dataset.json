@@ -1,0 +1,31 @@
+{
+  "instance_id": "commit-0/rollup-plugin-typescript2",
+  "id": "61514bf6-180d-4460-8319-1c2b0011e62d",
+  "repo": "Zahgon/rollup-plugin-typescript2",
+  "base_commit": "f451cc6769cb9d400d1e3de1c9eab444e0ec77c4",
+  "reference_commit": "60793113fcd326ab9e45b4f46b2956be0b2ab4b1",
+  "src_dir": "src",
+  "language": "typescript",
+  "test_framework": "jest",
+  "functions_stubbed": 73,
+  "base_compiles": true,
+  "setup": {
+    "node_version": "20",
+    "install": "npm install",
+    "packages": [
+      "@jest/globals",
+      "@types/jest",
+      "jest",
+      "ts-jest"
+    ],
+    "pre_install": [],
+    "specification": "https://github.com/ezolenko/rollup-plugin-typescript2",
+    "version_source": "default",
+    "version_conflicts": []
+  },
+  "test": {
+    "test_cmd": "npx jest",
+    "test_dir": "__tests__",
+    "test_dir_detected_by": "recursive-scan"
+  }
+}

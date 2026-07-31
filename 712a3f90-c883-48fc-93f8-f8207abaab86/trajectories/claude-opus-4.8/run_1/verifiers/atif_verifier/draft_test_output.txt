@@ -1,0 +1,3178 @@
+    Updating crates.io index
+     Locking 40 packages to latest compatible versions
+ Downloading crates ...
+  Downloaded arrayvec v0.7.8
+  Downloaded zerocopy v0.8.54
+   Compiling libc v0.2.186
+   Compiling cfg-if v1.0.4
+   Compiling getrandom v0.3.4
+   Compiling rustix v1.1.4
+   Compiling getrandom v0.4.3
+   Compiling zerocopy v0.8.54
+   Compiling autocfg v1.5.1
+   Compiling linux-raw-sys v0.12.1
+   Compiling bitflags v2.13.0
+   Compiling once_cell v1.21.4
+   Compiling fastrand v2.4.1
+   Compiling quick-error v1.2.3
+   Compiling bit-vec v0.8.0
+   Compiling fnv v1.0.7
+   Compiling unarray v0.1.4
+   Compiling arrayvec v0.7.8
+   Compiling regex-syntax v0.8.11
+   Compiling bit-set v0.8.0
+   Compiling num-traits v0.2.19
+   Compiling etherparse v0.20.2 (/tmp/commit0-inplace-dx8dh91b/tree/etherparse)
+error[E0433]: cannot find `LenSource` in `err`
+   --> etherparse/src/net/arp_packet.rs:234:34
+    |
+234 |                 len_source: err::LenSource::Slice,
+    |                                  ^^^^^^^^^ could not find `LenSource` in `err`
+    |
+help: consider importing this enum through its public re-export
+    |
+  1 + use crate::LenSource;
+    |
+help: if you import `LenSource`, refer to it directly
+    |
+234 -                 len_source: err::LenSource::Slice,
+234 +                 len_source: LenSource::Slice,
+    |
+
+error[E0433]: cannot find `LenSource` in `err`
+   --> etherparse/src/net/arp_packet.rs:253:34
+    |
+253 |                 len_source: err::LenSource::Slice,
+    |                                  ^^^^^^^^^ could not find `LenSource` in `err`
+    |
+help: consider importing this enum through its public re-export
+    |
+  1 + use crate::LenSource;
+    |
+help: if you import `LenSource`, refer to it directly
+    |
+253 -                 len_source: err::LenSource::Slice,
+253 +                 len_source: LenSource::Slice,
+    |
+
+error[E0433]: cannot find `LenSource` in `err`
+   --> etherparse/src/net/arp_packet.rs:280:30
+    |
+280 |             len_source: err::LenSource::Slice,
+    |                              ^^^^^^^^^ could not find `LenSource` in `err`
+    |
+help: consider importing this enum through its public re-export
+    |
+  1 + use crate::LenSource;
+    |
+help: if you import `LenSource`, refer to it directly
+    |
+280 -             len_source: err::LenSource::Slice,
+280 +             len_source: LenSource::Slice,
+    |
+
+error[E0433]: cannot find type `TimestampMessage` in this scope
+  --> etherparse/src/transport/icmpv4_header.rs:61:31
+   |
+61 |         let mut bytes = [0u8; TimestampMessage::LEN];
+   |                               ^^^^^^^^^^^^^^^^ use of undeclared type `TimestampMessage`
+   |
+help: consider importing this struct through its public re-export
+   |
+ 1 + use crate::icmpv4::TimestampMessage;
+   |
+
+error[E0433]: cannot find type `TimestampMessage` in this scope
+  --> etherparse/src/transport/icmpv4_header.rs:70:13
+   |
+70 |             TimestampMessage::LEN
+   |             ^^^^^^^^^^^^^^^^ use of undeclared type `TimestampMessage`
+   |
+help: consider importing this struct through its public re-export
+   |
+ 1 + use crate::icmpv4::TimestampMessage;
+   |
+
+error[E0659]: `LinuxSll` is ambiguous
+  --> etherparse/src/sliced_packet_cursor.rs:54:36
+   |
+54 |                 I::Content(err) => LinuxSll(err),
+   |                                    ^^^^^^^^ ambiguous name
+   |
+   = note: ambiguous because of multiple glob imports of a name in the same module
+note: `LinuxSll` could refer to the tuple variant imported here
+  --> etherparse/src/sliced_packet_cursor.rs:47:13
+   |
+47 |         use err::packet::SliceError::*;
+   |             ^^^^^^^^^^^^^^^^^^^^^^^^^^
+   = help: consider adding an explicit import of `LinuxSll` to disambiguate
+note: `LinuxSll` could also refer to the tuple variant imported here
+  --> etherparse/src/sliced_packet_cursor.rs:48:13
+   |
+48 |         use LinkSlice::*;
+   |             ^^^^^^^^^^^^
+   = help: consider adding an explicit import of `LinuxSll` to disambiguate
+
+error[E0659]: `LinuxSll` is ambiguous
+  --> etherparse/src/sliced_packet_cursor.rs:60:33
+   |
+60 |         self.result.link = Some(LinuxSll(result));
+   |                                 ^^^^^^^^ ambiguous name
+   |
+   = note: ambiguous because of multiple glob imports of a name in the same module
+note: `LinuxSll` could refer to the tuple variant imported here
+  --> etherparse/src/sliced_packet_cursor.rs:47:13
+   |
+47 |         use err::packet::SliceError::*;
+   |             ^^^^^^^^^^^^^^^^^^^^^^^^^^
+   = help: consider adding an explicit import of `LinuxSll` to disambiguate
+note: `LinuxSll` could also refer to the tuple variant imported here
+  --> etherparse/src/sliced_packet_cursor.rs:48:13
+   |
+48 |         use LinkSlice::*;
+   |             ^^^^^^^^^^^^
+   = help: consider adding an explicit import of `LinuxSll` to disambiguate
+
+warning: unused import: `EtherType`
+ --> etherparse/src/link/linux_sll_payload_slice.rs:1:32
+  |
+1 | use crate::{EtherPayloadSlice, EtherType, LenSource, LinuxSllProtocolType};
+  |                                ^^^^^^^^^
+  |
+  = note: `#[warn(unused_imports)]` (part of `#[warn(unused)]`) on by default
+
+warning: unused imports: `Layer` and `LenSource`
+ --> etherparse/src/link/linux_sll_slice.rs:2:17
+  |
+2 |     err::{self, Layer},
+  |                 ^^^^^
+3 |     ArpHardwareId, LenSource, LinuxSllHeader, LinuxSllHeaderSlice, LinuxSllPacketType,
+  |                    ^^^^^^^^^
+
+warning: unused imports: `Layer` and `LenError`
+ --> etherparse/src/link/macsec_header_slice.rs:2:11
+  |
+2 |     err::{Layer, LenError},
+  |           ^^^^^  ^^^^^^^^
+
+warning: unused import: `ip`
+ --> etherparse/src/net/ip_slice.rs:2:11
+  |
+2 |     err::{ip, Layer, LenError},
+  |           ^^
+
+warning: unused import: `core::slice::from_raw_parts`
+ --> etherparse/src/net/ipv6_exts_slice.rs:2:5
+  |
+2 | use core::slice::from_raw_parts;
+  |     ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+warning: unused imports: `Layer` and `LenSource`
+ --> etherparse/src/net/arp_packet_slice.rs:3:11
+  |
+3 |     err::{Layer, LenError},
+  |           ^^^^^
+4 |     ArpPacket, EtherType, LenSource,
+  |                           ^^^^^^^^^
+
+warning: unused import: `super::*`
+ --> etherparse/src/transport/icmpv4/time_exceeded_code.rs:1:5
+  |
+1 | use super::*;
+  |     ^^^^^^^^
+
+warning: unused import: `super::*`
+ --> etherparse/src/transport/icmpv6/time_exceeded_code.rs:1:5
+  |
+1 | use super::*;
+  |     ^^^^^^^^
+
+warning: unused import: `super::NDP_OPTION_HEADER_LEN`
+ --> etherparse/src/transport/icmpv6/ndp_option/target_link_layer_address_option_slice.rs:1:5
+  |
+1 | use super::NDP_OPTION_HEADER_LEN;
+  |     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+warning: unused import: `NdpOptionHeader`
+ --> etherparse/src/transport/icmpv6/ndp_option/target_link_layer_address_option_slice.rs:2:21
+  |
+2 | use crate::icmpv6::{NdpOptionHeader, NdpOptionReadError, NdpOptionType};
+  |                     ^^^^^^^^^^^^^^^
+
+warning: unused import: `NdpOptionHeader`
+ --> etherparse/src/transport/icmpv6/ndp_option/unknown_ndp_option_slice.rs:2:21
+  |
+2 | use crate::icmpv6::{NdpOptionHeader, NdpOptionReadError, NdpOptionType};
+  |                     ^^^^^^^^^^^^^^^
+
+warning: unused import: `ValueType`
+ --> etherparse/src/transport/icmpv6_type.rs:2:29
+  |
+2 |     err::{ValueTooBigError, ValueType},
+  |                             ^^^^^^^^^
+
+warning: unused import: `ValueType`
+ --> etherparse/src/transport/tcp_header.rs:2:36
+  |
+2 | use crate::err::{ValueTooBigError, ValueType};
+  |                                    ^^^^^^^^^
+
+warning: unused import: `ValueType`
+ --> etherparse/src/transport/tcp_header_slice.rs:2:29
+  |
+2 |     err::{ValueTooBigError, ValueType},
+  |                             ^^^^^^^^^
+
+warning: unused imports: `TcpHeader` and `tcp_option`
+ --> etherparse/src/transport/tcp_options.rs:2:5
+  |
+2 |     tcp_option, TcpHeader, TcpOptionElement, TcpOptionWriteError, TcpOptionsIterator,
+  |     ^^^^^^^^^^  ^^^^^^^^^
+
+warning: unused import: `ValueType`
+ --> etherparse/src/transport/tcp_slice.rs:2:29
+  |
+2 |     err::{ValueTooBigError, ValueType},
+  |                             ^^^^^^^^^
+
+warning: unused import: `core::slice::from_raw_parts`
+ --> etherparse/src/transport/udp_header_slice.rs:2:5
+  |
+2 | use core::slice::from_raw_parts;
+  |     ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+warning: unused imports: `LenError` and `packet::SliceError`
+ --> etherparse/src/lax_packet_headers.rs:2:11
+  |
+2 |     err::{packet::SliceError, Layer, LenError},
+  |           ^^^^^^^^^^^^^^^^^^         ^^^^^^^^
+
+warning: unused imports: `Layer` and `packet::SliceError`
+ --> etherparse/src/lax_sliced_packet_cursor.rs:2:11
+  |
+2 |     err::{packet::SliceError, Layer},
+  |           ^^^^^^^^^^^^^^^^^^  ^^^^^
+
+warning: unused import: `arrayvec::ArrayVec`
+ --> etherparse/src/lax_sliced_packet_cursor.rs:5:5
+  |
+5 | use arrayvec::ArrayVec;
+  |     ^^^^^^^^^^^^^^^^^^
+
+warning: unused import: `crate::err::LenError`
+ --> etherparse/src/packet_headers.rs:2:5
+  |
+2 | use crate::err::LenError;
+  |     ^^^^^^^^^^^^^^^^^^^^
+
+warning: unused import: `LinkSlice::*`
+  --> etherparse/src/sliced_packet_cursor.rs:48:13
+   |
+48 |         use LinkSlice::*;
+   |             ^^^^^^^^^^^^
+
+   Compiling wait-timeout v0.2.1
+   Compiling rand_core v0.9.5
+   Compiling rand v0.9.4
+   Compiling rand_xorshift v0.4.0
+error[E0277]: `arp_hardware_id::ArpHardwareId` doesn't implement `core::fmt::Display`
+  --> etherparse/src/err/arp/arp_eth_ipv4_from_error.rs:21:17
+   |
+20 |                 "Hardware address type is expected to have the type '{}' but is '{}'",
+   |                                                                      -- required by this formatting parameter
+21 |                 ArpHardwareId::ETHERNET,
+   |                 ^^^^^^^^^^^^^^^^^^^^^^^ `arp_hardware_id::ArpHardwareId` cannot be formatted with the default formatter
+   |
+help: the trait `core::fmt::Display` is not implemented for `arp_hardware_id::ArpHardwareId`
+  --> etherparse/src/net/arp_hardware_id.rs:22:1
+   |
+22 | pub struct ArpHardwareId(pub u16);
+   | ^^^^^^^^^^^^^^^^^^^^^^^^
+   = note: in format strings you may be able to use `{:?}` (or {:#?} for pretty-print) instead
+
+error[E0277]: `ether_type_impl::EtherType` doesn't implement `core::fmt::Display`
+  --> etherparse/src/err/arp/arp_eth_ipv4_from_error.rs:27:17
+   |
+26 |                 "Protocol address type is expected to have the type '{}' but is '{}'",
+   |                                                                      -- required by this formatting parameter
+27 |                 EtherType::IPV4,
+   |                 ^^^^^^^^^^^^^^^ `ether_type_impl::EtherType` cannot be formatted with the default formatter
+   |
+help: the trait `core::fmt::Display` is not implemented for `ether_type_impl::EtherType`
+  --> etherparse/src/link/ether_type_impl.rs:31:1
+   |
+31 | pub struct EtherType(pub u16);
+   | ^^^^^^^^^^^^^^^^^^^^
+   = note: in format strings you may be able to use `{:?}` (or {:#?} for pretty-print) instead
+
+error[E0277]: `ip_number_impl::IpNumber` doesn't implement `core::fmt::Display`
+  --> etherparse/src/err/ipv4_exts/exts_walk_error.rs:23:17
+   |
+22 |                 "IPv4 extensions '{}' is defined but is not referenced by the 'protocol' the IPv4 header.",
+   |                                   -- required by this formatting parameter
+23 |                 missing_ext
+   |                 ^^^^^^^^^^^ `ip_number_impl::IpNumber` cannot be formatted with the default formatter
+   |
+help: the trait `core::fmt::Display` is not implemented for `ip_number_impl::IpNumber`
+  --> etherparse/src/net/ip_number_impl.rs:46:1
+   |
+46 | pub struct IpNumber(pub u8);
+   | ^^^^^^^^^^^^^^^^^^^
+   = note: in format strings you may be able to use `{:?}` (or {:#?} for pretty-print) instead
+   = note: required for `&ip_number_impl::IpNumber` to implement `core::fmt::Display`
+
+error[E0277]: `ip_number_impl::IpNumber` doesn't implement `core::fmt::Display`
+  --> etherparse/src/err/ipv6_exts/exts_walk_error.rs:28:17
+   |
+27 | ...   "IPv6 extensions '{}' is defined but is not referenced by any of the 'next_header' of the other extension headers or the IPv6 ...
+   |                         -- required by this formatting parameter
+28 | ...   missing_ext
+   |       ^^^^^^^^^^^ `ip_number_impl::IpNumber` cannot be formatted with the default formatter
+   |
+help: the trait `core::fmt::Display` is not implemented for `ip_number_impl::IpNumber`
+  --> etherparse/src/net/ip_number_impl.rs:46:1
+   |
+46 | pub struct IpNumber(pub u8);
+   | ^^^^^^^^^^^^^^^^^^^
+   = note: in format strings you may be able to use `{:?}` (or {:#?} for pretty-print) instead
+   = note: required for `&ip_number_impl::IpNumber` to implement `core::fmt::Display`
+
+error[E0277]: `arp_hardware_id::ArpHardwareId` doesn't implement `core::fmt::Display`
+  --> etherparse/src/err/linux_sll/header_error.rs:22:17
+   |
+21 |                 "Linux cooked capture v1 (SLL)  Header Error:  Encountered '{}' as the ARP harware type, but its not supported.",
+   |                                                                             -- required by this formatting parameter
+22 |                 arp_hardware_type
+   |                 ^^^^^^^^^^^^^^^^^ `arp_hardware_id::ArpHardwareId` cannot be formatted with the default formatter
+   |
+help: the trait `core::fmt::Display` is not implemented for `arp_hardware_id::ArpHardwareId`
+  --> etherparse/src/net/arp_hardware_id.rs:22:1
+   |
+22 | pub struct ArpHardwareId(pub u16);
+   | ^^^^^^^^^^^^^^^^^^^^^^^^
+   = note: in format strings you may be able to use `{:?}` (or {:#?} for pretty-print) instead
+   = note: required for `&arp_hardware_id::ArpHardwareId` to implement `core::fmt::Display`
+
+error[E0599]: no method named `header_len` found for reference `&lax_macsec_slice::LaxMacsecSlice<'_>` in the current scope
+  --> etherparse/src/link/lax_link_ext_slice.rs:16:45
+   |
+16 |             LaxLinkExtSlice::Macsec(s) => s.header_len(),
+   |                                             ^^^^^^^^^^ method not found in `&lax_macsec_slice::LaxMacsecSlice<'_>`
+   |
+help: one of the expressions' fields has a method of the same name
+   |
+16 |             LaxLinkExtSlice::Macsec(s) => s.header.header_len(),
+   |                                             +++++++
+
+error[E0599]: no method named `header` found for reference `&lax_macsec_slice::LaxMacsecSlice<'_>` in the current scope
+  --> etherparse/src/link/lax_link_ext_slice.rs:23:67
+   |
+23 |             LaxLinkExtSlice::Macsec(s) => LinkExtHeader::Macsec(s.header()),
+   |                                                                   ^^^^^^-- help: remove the arguments
+   |                                                                   |
+   |                                                                   field, not a method
+
+error[E0599]: no method named `payload` found for reference `&lax_macsec_slice::LaxMacsecSlice<'_>` in the current scope
+  --> etherparse/src/link/lax_link_ext_slice.rs:38:45
+   |
+38 |             LaxLinkExtSlice::Macsec(s) => s.payload(),
+   |                                             ^^^^^^^ field, not a method
+   |
+help: remove the arguments
+   |
+38 -             LaxLinkExtSlice::Macsec(s) => s.payload(),
+38 +             LaxLinkExtSlice::Macsec(s) => s.payload,
+   |
+help: there is a method `ether_payload` with a similar name
+   |
+38 |             LaxLinkExtSlice::Macsec(s) => s.ether_payload(),
+   |                                             ++++++
+
+error[E0599]: no method named `ether_payload` found for reference `&single_vlan_slice::SingleVlanSlice<'_>` in the current scope
+  --> etherparse/src/link/link_ext_slice.rs:29:45
+   |
+29 |             LinkExtSlice::Vlan(s) => Some(s.ether_payload()),
+   |                                             ^^^^^^^^^^^^^
+   |
+help: there is a method `payload` with a similar name
+   |
+29 -             LinkExtSlice::Vlan(s) => Some(s.ether_payload()),
+29 +             LinkExtSlice::Vlan(s) => Some(s.payload()),
+   |
+
+error[E0277]: `?` couldn't convert the error to `err::macsec::header_read_error::HeaderReadError`
+   --> etherparse/src/link/macsec_header.rs:109:61
+    |
+109 |         reader.read_exact(&mut buf[..MacsecHeader::MIN_LEN])?;
+    |                ---------------------------------------------^ the trait `From<std::io::Error>` is not implemented for `err::macsec::header_read_error::HeaderReadError`
+    |                |
+    |                this can't be annotated with `?` because it has type `Result<_, std::io::Error>`
+    |
+note: `err::macsec::header_read_error::HeaderReadError` needs to implement `From<std::io::Error>`
+   --> etherparse/src/err/macsec/header_read_error.rs:6:1
+    |
+  6 | pub enum HeaderReadError {
+    | ^^^^^^^^^^^^^^^^^^^^^^^^
+    = note: the question mark operation (`?`) implicitly performs a conversion on the error value using the `From` trait
+
+error[E0277]: `?` couldn't convert the error to `err::macsec::header_read_error::HeaderReadError`
+   --> etherparse/src/link/macsec_header.rs:124:64
+    |
+124 |         reader.read_exact(&mut buf[MacsecHeader::MIN_LEN..len])?;
+    |                ------------------------------------------------^ the trait `From<std::io::Error>` is not implemented for `err::macsec::header_read_error::HeaderReadError`
+    |                |
+    |                this can't be annotated with `?` because it has type `Result<_, std::io::Error>`
+    |
+note: `err::macsec::header_read_error::HeaderReadError` needs to implement `From<std::io::Error>`
+   --> etherparse/src/err/macsec/header_read_error.rs:6:1
+    |
+  6 | pub enum HeaderReadError {
+    | ^^^^^^^^^^^^^^^^^^^^^^^^
+    = note: the question mark operation (`?`) implicitly performs a conversion on the error value using the `From` trait
+
+error[E0560]: struct `arp_eth_ipv4_packet::ArpEthIpv4Packet` has no field named `sender_hw_addr`
+   --> etherparse/src/net/arp_packet.rs:524:13
+    |
+524 |             sender_hw_addr,
+    |             ^^^^^^^^^^^^^^ `arp_eth_ipv4_packet::ArpEthIpv4Packet` does not have this field
+    |
+    = note: available fields are: `sender_mac`, `sender_ipv4`, `target_mac`, `target_ipv4`
+
+error[E0560]: struct `arp_eth_ipv4_packet::ArpEthIpv4Packet` has no field named `sender_protocol_addr`
+   --> etherparse/src/net/arp_packet.rs:525:13
+    |
+525 |             sender_protocol_addr,
+    |             ^^^^^^^^^^^^^^^^^^^^ `arp_eth_ipv4_packet::ArpEthIpv4Packet` does not have this field
+    |
+    = note: available fields are: `sender_mac`, `sender_ipv4`, `target_mac`, `target_ipv4`
+
+error[E0560]: struct `arp_eth_ipv4_packet::ArpEthIpv4Packet` has no field named `target_hw_addr`
+   --> etherparse/src/net/arp_packet.rs:526:13
+    |
+526 |             target_hw_addr,
+    |             ^^^^^^^^^^^^^^ `arp_eth_ipv4_packet::ArpEthIpv4Packet` does not have this field
+    |
+    = note: available fields are: `sender_mac`, `sender_ipv4`, `target_mac`, `target_ipv4`
+
+error[E0560]: struct `arp_eth_ipv4_packet::ArpEthIpv4Packet` has no field named `target_protocol_addr`
+   --> etherparse/src/net/arp_packet.rs:527:13
+    |
+527 |             target_protocol_addr,
+    |             ^^^^^^^^^^^^^^^^^^^^ `arp_eth_ipv4_packet::ArpEthIpv4Packet` does not have this field
+    |
+    = note: available fields are: `sender_mac`, `sender_ipv4`, `target_mac`, `target_ipv4`
+
+error[E0277]: the trait bound `err::ip::header_error::HeaderError: From<err::ipv4::header_error::HeaderError>` is not satisfied
+  --> etherparse/src/net/ip_headers.rs:98:58
+   |
+98 |                         I::Header(err) => Content(Ip(err.into())),
+   |                                                          ^^^^ unsatisfied trait bound
+   |
+help: the trait `From<err::ipv4::header_error::HeaderError>` is not implemented for `err::ip::header_error::HeaderError`
+  --> etherparse/src/err/ip/header_error.rs:3:1
+   |
+ 3 | pub enum HeaderError {
+   | ^^^^^^^^^^^^^^^^^^^^
+   = note: required for `err::ipv4::header_error::HeaderError` to implement `Into<err::ip::header_error::HeaderError>`
+
+error[E0277]: the trait bound `err::ip::header_error::HeaderError: From<err::ipv6::header_error::HeaderError>` is not satisfied
+   --> etherparse/src/net/ip_headers.rs:106:58
+    |
+106 |                         I::Header(err) => Content(Ip(err.into())),
+    |                                                          ^^^^ unsatisfied trait bound
+    |
+help: the trait `From<err::ipv6::header_error::HeaderError>` is not implemented for `err::ip::header_error::HeaderError`
+   --> etherparse/src/err/ip/header_error.rs:3:1
+    |
+  3 | pub enum HeaderError {
+    | ^^^^^^^^^^^^^^^^^^^^
+    = note: required for `err::ipv6::header_error::HeaderError` to implement `Into<err::ip::header_error::HeaderError>`
+
+error[E0277]: the trait bound `err::ip::header_error::HeaderError: From<err::ipv6::header_error::HeaderError>` is not satisfied
+   --> etherparse/src/net/ip_headers.rs:204:64
+    |
+204 | ...                   I::Content(err) => Content(err.into()),
+    |                                                      ^^^^ unsatisfied trait bound
+    |
+help: the trait `From<err::ipv6::header_error::HeaderError>` is not implemented for `err::ip::header_error::HeaderError`
+   --> etherparse/src/err/ip/header_error.rs:3:1
+    |
+  3 | pub enum HeaderError {
+    | ^^^^^^^^^^^^^^^^^^^^
+    = note: required for `err::ipv6::header_error::HeaderError` to implement `Into<err::ip::header_error::HeaderError>`
+
+error[E0277]: the trait bound `err::ip::header_error::HeaderError: From<err::ipv4::header_error::HeaderError>` is not satisfied
+   --> etherparse/src/net/ip_headers.rs:358:48
+    |
+358 |                 I::Content(err) => Content(err.into()),
+    |                                                ^^^^ unsatisfied trait bound
+    |
+help: the trait `From<err::ipv4::header_error::HeaderError>` is not implemented for `err::ip::header_error::HeaderError`
+   --> etherparse/src/err/ip/header_error.rs:3:1
+    |
+  3 | pub enum HeaderError {
+    | ^^^^^^^^^^^^^^^^^^^^
+    = note: required for `err::ipv4::header_error::HeaderError` to implement `Into<err::ip::header_error::HeaderError>`
+
+error[E0599]: no method named `to_header` found for reference `&ipv6_exts_slice::Ipv6ExtensionsSlice<'_>` in the current scope
+   --> etherparse/src/net/ip_headers.rs:517:35
+    |
+517 |                 ipv6.extensions().to_header(),
+    |                                   ^^^^^^^^^ method not found in `&ipv6_exts_slice::Ipv6ExtensionsSlice<'_>`
+
+error[E0277]: the trait bound `err::ip::header_error::HeaderError: From<err::ipv4::header_error::HeaderError>` is not satisfied
+   --> etherparse/src/net/ip_headers.rs:542:59
+    |
+542 |                         I::Content(err) => Content(Ip(err.into())),
+    |                                                           ^^^^ unsatisfied trait bound
+    |
+help: the trait `From<err::ipv4::header_error::HeaderError>` is not implemented for `err::ip::header_error::HeaderError`
+   --> etherparse/src/err/ip/header_error.rs:3:1
+    |
+  3 | pub enum HeaderError {
+    | ^^^^^^^^^^^^^^^^^^^^
+    = note: required for `err::ipv4::header_error::HeaderError` to implement `Into<err::ip::header_error::HeaderError>`
+
+error[E0277]: the trait bound `err::ip::header_error::HeaderError: From<err::ipv6::header_error::HeaderError>` is not satisfied
+   --> etherparse/src/net/ip_headers.rs:584:59
+    |
+584 |                         I::Content(err) => Content(Ip(err.into())),
+    |                                                           ^^^^ unsatisfied trait bound
+    |
+help: the trait `From<err::ipv6::header_error::HeaderError>` is not implemented for `err::ip::header_error::HeaderError`
+   --> etherparse/src/err/ip/header_error.rs:3:1
+    |
+  3 | pub enum HeaderError {
+    | ^^^^^^^^^^^^^^^^^^^^
+    = note: required for `err::ipv6::header_error::HeaderError` to implement `Into<err::ip::header_error::HeaderError>`
+
+error[E0277]: the trait bound `ip_exts::exts_walk_error::ExtsWalkError: From<err::ipv4_exts::exts_walk_error::ExtsWalkError>` is not satisfied
+   --> etherparse/src/net/ip_headers.rs:644:17
+    |
+644 |                 exts.next_header(header.protocol).map_err(Into::into)
+    |                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ unsatisfied trait bound
+    |
+help: the trait `From<err::ipv4_exts::exts_walk_error::ExtsWalkError>` is not implemented for `ip_exts::exts_walk_error::ExtsWalkError`
+   --> etherparse/src/err/ip_exts/exts_walk_error.rs:5:1
+    |
+  5 | pub enum ExtsWalkError {
+    | ^^^^^^^^^^^^^^^^^^^^^^
+    = note: required for `err::ipv4_exts::exts_walk_error::ExtsWalkError` to implement `Into<ip_exts::exts_walk_error::ExtsWalkError>`
+
+error[E0277]: the trait bound `ip_exts::exts_walk_error::ExtsWalkError: From<err::ipv4_exts::exts_walk_error::ExtsWalkError>` is not satisfied
+   --> etherparse/src/net/ip_headers.rs:644:59
+    |
+644 |                 exts.next_header(header.protocol).map_err(Into::into)
+    |                                                           ^^^^^^^^^^ unsatisfied trait bound
+    |
+help: the trait `From<err::ipv4_exts::exts_walk_error::ExtsWalkError>` is not implemented for `ip_exts::exts_walk_error::ExtsWalkError`
+   --> etherparse/src/err/ip_exts/exts_walk_error.rs:5:1
+    |
+  5 | pub enum ExtsWalkError {
+    | ^^^^^^^^^^^^^^^^^^^^^^
+    = note: required for `err::ipv4_exts::exts_walk_error::ExtsWalkError` to implement `Into<ip_exts::exts_walk_error::ExtsWalkError>`
+
+error[E0277]: the trait bound `ip_exts::exts_walk_error::ExtsWalkError: From<err::ipv6_exts::exts_walk_error::ExtsWalkError>` is not satisfied
+   --> etherparse/src/net/ip_headers.rs:647:17
+    |
+647 |                 exts.next_header(header.next_header).map_err(Into::into)
+    |                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ unsatisfied trait bound
+    |
+help: the trait `From<err::ipv6_exts::exts_walk_error::ExtsWalkError>` is not implemented for `ip_exts::exts_walk_error::ExtsWalkError`
+   --> etherparse/src/err/ip_exts/exts_walk_error.rs:5:1
+    |
+  5 | pub enum ExtsWalkError {
+    | ^^^^^^^^^^^^^^^^^^^^^^
+    = note: required for `err::ipv6_exts::exts_walk_error::ExtsWalkError` to implement `Into<ip_exts::exts_walk_error::ExtsWalkError>`
+
+error[E0277]: the trait bound `ip_exts::exts_walk_error::ExtsWalkError: From<err::ipv6_exts::exts_walk_error::ExtsWalkError>` is not satisfied
+   --> etherparse/src/net/ip_headers.rs:647:62
+    |
+647 |                 exts.next_header(header.next_header).map_err(Into::into)
+    |                                                              ^^^^^^^^^^ unsatisfied trait bound
+    |
+help: the trait `From<err::ipv6_exts::exts_walk_error::ExtsWalkError>` is not implemented for `ip_exts::exts_walk_error::ExtsWalkError`
+   --> etherparse/src/err/ip_exts/exts_walk_error.rs:5:1
+    |
+  5 | pub enum ExtsWalkError {
+    | ^^^^^^^^^^^^^^^^^^^^^^
+    = note: required for `err::ipv6_exts::exts_walk_error::ExtsWalkError` to implement `Into<ip_exts::exts_walk_error::ExtsWalkError>`
+
+error[E0308]: mismatched types
+  --> etherparse/src/net/ip_slice.rs:33:74
+   |
+33 |             IpSlice::Ipv6(slice) => IpHeadersSlice::Ipv6(slice.header(), slice.extensions()),
+   |                                     --------------------                 ^^^^^^^^^^^^^^^^^^ expected `Ipv6ExtensionsSlice<'_>`, found `&Ipv6ExtensionsSlice<'_>`
+   |                                     |
+   |                                     arguments to this enum variant are incorrect
+   |
+note: tuple variant defined here
+  --> etherparse/src/net/ip_headers_slice.rs:8:5
+   |
+ 8 |     Ipv6(Ipv6HeaderSlice<'a>, Ipv6ExtensionsSlice<'a>),
+   |     ^^^^
+
+error[E0599]: no method named `to_header` found for reference `&ipv6_exts_slice::Ipv6ExtensionsSlice<'_>` in the current scope
+  --> etherparse/src/net/ip_slice.rs:46:80
+   |
+46 |                 IpHeaders::Ipv6(slice.header().to_header(), slice.extensions().to_header())
+   |                                                                                ^^^^^^^^^ method not found in `&ipv6_exts_slice::Ipv6ExtensionsSlice<'_>`
+
+error[E0599]: no method named `is_fragmenting_payload` found for reference `&ipv4_slice::Ipv4Slice<'_>` in the current scope
+  --> etherparse/src/net/ip_slice.rs:53:43
+   |
+53 |             IpSlice::Ipv4(slice) => slice.is_fragmenting_payload(),
+   |                                           ^^^^^^^^^^^^^^^^^^^^^^ method not found in `&ipv4_slice::Ipv4Slice<'_>`
+   |
+help: one of the expressions' fields has a method of the same name
+   |
+53 |             IpSlice::Ipv4(slice) => slice.header.is_fragmenting_payload(),
+   |                                           +++++++
+
+error[E0599]: no method named `is_fragmenting_payload` found for reference `&ipv6_slice::Ipv6Slice<'_>` in the current scope
+  --> etherparse/src/net/ip_slice.rs:54:43
+   |
+54 |             IpSlice::Ipv6(slice) => slice.is_fragmenting_payload(),
+   |                                           ^^^^^^^^^^^^^^^^^^^^^^ method not found in `&ipv6_slice::Ipv6Slice<'_>`
+   |
+help: one of the expressions' fields has a method of the same name
+   |
+54 |             IpSlice::Ipv6(slice) => slice.exts.is_fragmenting_payload(),
+   |                                           +++++
+
+error[E0277]: `?` couldn't convert the error to `err::ip::slice_error::SliceError`
+   --> etherparse/src/net/ip_slice.rs:105:67
+    |
+105 |                 4 => Ok(IpSlice::Ipv4(Ipv4Slice::from_slice(slice)?)),
+    |                                       ----------------------------^ the trait `From<err::ipv4::slice_error::SliceError>` is not implemented for `err::ip::slice_error::SliceError`
+    |                                       |
+    |                                       this can't be annotated with `?` because it has type `Result<_, err::ipv4::slice_error::SliceError>`
+    |
+note: `err::ip::slice_error::SliceError` needs to implement `From<err::ipv4::slice_error::SliceError>`
+   --> etherparse/src/err/ip/slice_error.rs:4:1
+    |
+  4 | pub enum SliceError {
+    | ^^^^^^^^^^^^^^^^^^^
+    = note: the question mark operation (`?`) implicitly performs a conversion on the error value using the `From` trait
+
+error[E0277]: `?` couldn't convert the error to `err::ip::slice_error::SliceError`
+   --> etherparse/src/net/ip_slice.rs:106:67
+    |
+106 |                 6 => Ok(IpSlice::Ipv6(Ipv6Slice::from_slice(slice)?)),
+    |                                       ----------------------------^ the trait `From<err::ipv6::slice_error::SliceError>` is not implemented for `err::ip::slice_error::SliceError`
+    |                                       |
+    |                                       this can't be annotated with `?` because it has type `Result<_, err::ipv6::slice_error::SliceError>`
+    |
+note: `err::ip::slice_error::SliceError` needs to implement `From<err::ipv6::slice_error::SliceError>`
+   --> etherparse/src/err/ip/slice_error.rs:4:1
+    |
+  4 | pub enum SliceError {
+    | ^^^^^^^^^^^^^^^^^^^
+    = note: the question mark operation (`?`) implicitly performs a conversion on the error value using the `From` trait
+
+error[E0599]: no method named `write_internal` found for reference `&ip_auth_header::IpAuthHeader` in the current scope
+   --> etherparse/src/net/ipv4_exts.rs:193:22
+    |
+193 |                 auth.write_internal(writer).map_err(WriteError::Io)
+    |                      ^^^^^^^^^^^^^^ method not found in `&ip_auth_header::IpAuthHeader`
+
+error[E0277]: the trait bound `T: writer::CoreWrite` is not satisfied
+   --> etherparse/src/net/ipv4_exts.rs:212:35
+    |
+212 |         match self.write_internal(writer, start_ip_number) {
+    |                    -------------- ^^^^^^ the trait `writer::CoreWrite` is not implemented for `T`
+    |                    |
+    |                    required by a bound introduced by this call
+    |
+note: required by a bound in `net::ipv4_exts::Ipv4Extensions::write_internal`
+   --> etherparse/src/net/ipv4_exts.rs:185:37
+    |
+185 |     pub(crate) fn write_internal<T: CoreWrite + ?Sized>(
+    |                                     ^^^^^^^^^ required by this bound in `Ipv4Extensions::write_internal`
+help: consider further restricting type parameter `T` with trait `CoreWrite`
+    |
+206 |     pub fn write<T: std::io::Write + Sized + writer::CoreWrite>(
+    |                                            +++++++++++++++++++
+
+error[E0277]: the trait bound `ipv4_options::Ipv4Options: From<&[u8]>` is not satisfied
+   --> etherparse/src/net/ipv4_header_slice.rs:274:37
+    |
+274 |             options: self.options().into(),
+    |                                     ^^^^ unsatisfied trait bound
+    |
+help: the trait `From<&[u8]>` is not implemented for `ipv4_options::Ipv4Options`
+   --> etherparse/src/net/ipv4_options.rs:37:1
+    |
+ 37 | pub struct Ipv4Options {
+    | ^^^^^^^^^^^^^^^^^^^^^^
+    = help: `ipv4_options::Ipv4Options` implements trait `From<T>`:
+              From<[u8; 0]>
+              From<[u8; 12]>
+              From<[u8; 16]>
+              From<[u8; 20]>
+              From<[u8; 24]>
+              From<[u8; 28]>
+              From<[u8; 32]>
+              From<[u8; 36]>
+            and 3 others
+    = note: required for `&[u8]` to implement `Into<ipv4_options::Ipv4Options>`
+
+error[E0277]: the trait bound `T: std::io::Write` is not satisfied
+   --> etherparse/src/net/ipv6_exts.rs:589:38
+    |
+589 |                         header.write(writer).map_err(WriteError::Io)?;
+    |                                ----- ^^^^^^ the trait `std::io::Write` is not implemented for `T`
+    |                                |
+    |                                required by a bound introduced by this call
+    |
+note: required by a bound in `ipv6_raw_ext_header::Ipv6RawExtHeader::write`
+   --> etherparse/src/net/ipv6_raw_ext_header.rs:205:21
+    |
+205 |     pub fn write<W: std::io::Write + Sized>(
+    |                     ^^^^^^^^^^^^^^ required by this bound in `Ipv6RawExtHeader::write`
+help: consider further restricting type parameter `T` with trait `Write`
+    |
+560 |     pub(crate) fn write_internal<T: CoreWrite + ?Sized + std::io::Write>(
+    |                                                        ++++++++++++++++
+
+error[E0277]: the size for values of type `T` cannot be known at compilation time
+   --> etherparse/src/net/ipv6_exts.rs:589:38
+    |
+560 |     pub(crate) fn write_internal<T: CoreWrite + ?Sized>(
+    |                                  - this type parameter needs to be `Sized`
+...
+589 |                         header.write(writer).map_err(WriteError::Io)?;
+    |                                ----- ^^^^^^ doesn't have a size known at compile-time
+    |                                |
+    |                                required by a bound introduced by this call
+    |
+note: required by a bound in `ipv6_raw_ext_header::Ipv6RawExtHeader::write`
+   --> etherparse/src/net/ipv6_raw_ext_header.rs:205:38
+    |
+205 |     pub fn write<W: std::io::Write + Sized>(
+    |                                      ^^^^^ required by this bound in `Ipv6RawExtHeader::write`
+help: consider removing the `?Sized` bound to make the type parameter `Sized`
+    |
+560 -     pub(crate) fn write_internal<T: CoreWrite + ?Sized>(
+560 +     pub(crate) fn write_internal<T: CoreWrite>(
+    |
+
+error[E0277]: `?` couldn't convert the error to `WriteError<<T as CoreWrite>::Error, ExtsWalkError>`
+   --> etherparse/src/net/ipv6_exts.rs:589:69
+    |
+589 |                         header.write(writer).map_err(WriteError::Io)?;
+    |                                ------------- -----------------------^ the trait `From<writer::WriteError<std::io::Error, _>>` is not implemented for `WriteError<<T as CoreWrite>::Error, ExtsWalkError>`
+    |                                |             |
+    |                                |             this can't be annotated with `?` because it has type `Result<_, writer::WriteError<std::io::Error, _>>`
+    |                                this has type `Result<_, std::io::Error>`
+    |
+note: `writer::WriteError<<T as writer::CoreWrite>::Error, err::ipv6_exts::exts_walk_error::ExtsWalkError>` needs to implement `From<writer::WriteError<std::io::Error, _>>`
+   --> etherparse/src/writer.rs:13:1
+    |
+ 13 | pub(crate) enum WriteError<IO, Content> {
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    = note: the question mark operation (`?`) implicitly performs a conversion on the error value using the `From` trait
+    = note: the full name for the type has been written to '/tmp/commit0-inplace-dx8dh91b/tree/target/debug/deps/etherparse-d95d353dd23a699e.long-type-15965849281369128893.txt'
+    = note: consider using `--verbose` to print the full type name to the console
+
+error[E0277]: the trait bound `T: std::io::Write` is not satisfied
+   --> etherparse/src/net/ipv6_exts.rs:603:46
+    |
+603 | ...                   header.write(writer).map_err(WriteError::Io)?;
+    |                              ----- ^^^^^^ the trait `std::io::Write` is not implemented for `T`
+    |                              |
+    |                              required by a bound introduced by this call
+    |
+note: required by a bound in `ipv6_raw_ext_header::Ipv6RawExtHeader::write`
+   --> etherparse/src/net/ipv6_raw_ext_header.rs:205:21
+    |
+205 |     pub fn write<W: std::io::Write + Sized>(
+    |                     ^^^^^^^^^^^^^^ required by this bound in `Ipv6RawExtHeader::write`
+help: consider further restricting type parameter `T` with trait `Write`
+    |
+560 |     pub(crate) fn write_internal<T: CoreWrite + ?Sized + std::io::Write>(
+    |                                                        ++++++++++++++++
+
+error[E0277]: the size for values of type `T` cannot be known at compilation time
+   --> etherparse/src/net/ipv6_exts.rs:603:46
+    |
+560 |     pub(crate) fn write_internal<T: CoreWrite + ?Sized>(
+    |                                  - this type parameter needs to be `Sized`
+...
+603 |                                 header.write(writer).map_err(WriteError::Io)?;
+    |                                        ----- ^^^^^^ doesn't have a size known at compile-time
+    |                                        |
+    |                                        required by a bound introduced by this call
+    |
+note: required by a bound in `ipv6_raw_ext_header::Ipv6RawExtHeader::write`
+   --> etherparse/src/net/ipv6_raw_ext_header.rs:205:38
+    |
+205 |     pub fn write<W: std::io::Write + Sized>(
+    |                                      ^^^^^ required by this bound in `Ipv6RawExtHeader::write`
+help: consider removing the `?Sized` bound to make the type parameter `Sized`
+    |
+560 -     pub(crate) fn write_internal<T: CoreWrite + ?Sized>(
+560 +     pub(crate) fn write_internal<T: CoreWrite>(
+    |
+
+error[E0277]: `?` couldn't convert the error to `WriteError<<T as CoreWrite>::Error, ExtsWalkError>`
+   --> etherparse/src/net/ipv6_exts.rs:603:77
+    |
+603 | ...                   header.write(writer).map_err(WriteError::Io)?;
+    |                              ------------- -----------------------^ the trait `From<writer::WriteError<std::io::Error, _>>` is not implemented for `WriteError<<T as CoreWrite>::Error, ExtsWalkError>`
+    |                              |             |
+    |                              |             this can't be annotated with `?` because it has type `Result<_, writer::WriteError<std::io::Error, _>>`
+    |                              this has type `Result<_, std::io::Error>`
+    |
+note: `writer::WriteError<<T as writer::CoreWrite>::Error, err::ipv6_exts::exts_walk_error::ExtsWalkError>` needs to implement `From<writer::WriteError<std::io::Error, _>>`
+   --> etherparse/src/writer.rs:13:1
+    |
+ 13 | pub(crate) enum WriteError<IO, Content> {
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    = note: the question mark operation (`?`) implicitly performs a conversion on the error value using the `From` trait
+    = note: the full name for the type has been written to '/tmp/commit0-inplace-dx8dh91b/tree/target/debug/deps/etherparse-d95d353dd23a699e.long-type-15965849281369128893.txt'
+    = note: consider using `--verbose` to print the full type name to the console
+
+error[E0277]: the trait bound `T: std::io::Write` is not satisfied
+   --> etherparse/src/net/ipv6_exts.rs:616:38
+    |
+616 |                         header.write(writer).map_err(WriteError::Io)?;
+    |                                ----- ^^^^^^ the trait `std::io::Write` is not implemented for `T`
+    |                                |
+    |                                required by a bound introduced by this call
+    |
+note: required by a bound in `ipv6_raw_ext_header::Ipv6RawExtHeader::write`
+   --> etherparse/src/net/ipv6_raw_ext_header.rs:205:21
+    |
+205 |     pub fn write<W: std::io::Write + Sized>(
+    |                     ^^^^^^^^^^^^^^ required by this bound in `Ipv6RawExtHeader::write`
+help: consider further restricting type parameter `T` with trait `Write`
+    |
+560 |     pub(crate) fn write_internal<T: CoreWrite + ?Sized + std::io::Write>(
+    |                                                        ++++++++++++++++
+
+error[E0277]: the size for values of type `T` cannot be known at compilation time
+   --> etherparse/src/net/ipv6_exts.rs:616:38
+    |
+560 |     pub(crate) fn write_internal<T: CoreWrite + ?Sized>(
+    |                                  - this type parameter needs to be `Sized`
+...
+616 |                         header.write(writer).map_err(WriteError::Io)?;
+    |                                ----- ^^^^^^ doesn't have a size known at compile-time
+    |                                |
+    |                                required by a bound introduced by this call
+    |
+note: required by a bound in `ipv6_raw_ext_header::Ipv6RawExtHeader::write`
+   --> etherparse/src/net/ipv6_raw_ext_header.rs:205:38
+    |
+205 |     pub fn write<W: std::io::Write + Sized>(
+    |                                      ^^^^^ required by this bound in `Ipv6RawExtHeader::write`
+help: consider removing the `?Sized` bound to make the type parameter `Sized`
+    |
+560 -     pub(crate) fn write_internal<T: CoreWrite + ?Sized>(
+560 +     pub(crate) fn write_internal<T: CoreWrite>(
+    |
+
+   Compiling tempfile v3.27.0
+error[E0277]: `?` couldn't convert the error to `WriteError<<T as CoreWrite>::Error, ExtsWalkError>`
+   --> etherparse/src/net/ipv6_exts.rs:616:69
+    |
+616 |                         header.write(writer).map_err(WriteError::Io)?;
+    |                                ------------- -----------------------^ the trait `From<writer::WriteError<std::io::Error, _>>` is not implemented for `WriteError<<T as CoreWrite>::Error, ExtsWalkError>`
+    |                                |             |
+    |                                |             this can't be annotated with `?` because it has type `Result<_, writer::WriteError<std::io::Error, _>>`
+    |                                this has type `Result<_, std::io::Error>`
+    |
+note: `writer::WriteError<<T as writer::CoreWrite>::Error, err::ipv6_exts::exts_walk_error::ExtsWalkError>` needs to implement `From<writer::WriteError<std::io::Error, _>>`
+   --> etherparse/src/writer.rs:13:1
+    |
+ 13 | pub(crate) enum WriteError<IO, Content> {
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    = note: the question mark operation (`?`) implicitly performs a conversion on the error value using the `From` trait
+    = note: the full name for the type has been written to '/tmp/commit0-inplace-dx8dh91b/tree/target/debug/deps/etherparse-d95d353dd23a699e.long-type-15965849281369128893.txt'
+    = note: consider using `--verbose` to print the full type name to the console
+
+error[E0277]: the trait bound `T: std::io::Write` is not satisfied
+   --> etherparse/src/net/ipv6_exts.rs:628:47
+    |
+628 |                         routing.routing.write(writer).map_err(WriteError::Io)?;
+    |                                         ----- ^^^^^^ the trait `std::io::Write` is not implemented for `T`
+    |                                         |
+    |                                         required by a bound introduced by this call
+    |
+note: required by a bound in `ipv6_raw_ext_header::Ipv6RawExtHeader::write`
+   --> etherparse/src/net/ipv6_raw_ext_header.rs:205:21
+    |
+205 |     pub fn write<W: std::io::Write + Sized>(
+    |                     ^^^^^^^^^^^^^^ required by this bound in `Ipv6RawExtHeader::write`
+help: consider further restricting type parameter `T` with trait `Write`
+    |
+560 |     pub(crate) fn write_internal<T: CoreWrite + ?Sized + std::io::Write>(
+    |                                                        ++++++++++++++++
+
+error[E0277]: the size for values of type `T` cannot be known at compilation time
+   --> etherparse/src/net/ipv6_exts.rs:628:47
+    |
+560 |     pub(crate) fn write_internal<T: CoreWrite + ?Sized>(
+    |                                  - this type parameter needs to be `Sized`
+...
+628 |                         routing.routing.write(writer).map_err(WriteError::Io)?;
+    |                                         ----- ^^^^^^ doesn't have a size known at compile-time
+    |                                         |
+    |                                         required by a bound introduced by this call
+    |
+note: required by a bound in `ipv6_raw_ext_header::Ipv6RawExtHeader::write`
+   --> etherparse/src/net/ipv6_raw_ext_header.rs:205:38
+    |
+205 |     pub fn write<W: std::io::Write + Sized>(
+    |                                      ^^^^^ required by this bound in `Ipv6RawExtHeader::write`
+help: consider removing the `?Sized` bound to make the type parameter `Sized`
+    |
+560 -     pub(crate) fn write_internal<T: CoreWrite + ?Sized>(
+560 +     pub(crate) fn write_internal<T: CoreWrite>(
+    |
+
+error[E0277]: `?` couldn't convert the error to `WriteError<<T as CoreWrite>::Error, ExtsWalkError>`
+   --> etherparse/src/net/ipv6_exts.rs:628:78
+    |
+628 |                         routing.routing.write(writer).map_err(WriteError::Io)?;
+    |                                         ------------- -----------------------^ the trait `From<writer::WriteError<std::io::Error, _>>` is not implemented for `WriteError<<T as CoreWrite>::Error, ExtsWalkError>`
+    |                                         |             |
+    |                                         |             this can't be annotated with `?` because it has type `Result<_, writer::WriteError<std::io::Error, _>>`
+    |                                         this has type `Result<_, std::io::Error>`
+    |
+note: `writer::WriteError<<T as writer::CoreWrite>::Error, err::ipv6_exts::exts_walk_error::ExtsWalkError>` needs to implement `From<writer::WriteError<std::io::Error, _>>`
+   --> etherparse/src/writer.rs:13:1
+    |
+ 13 | pub(crate) enum WriteError<IO, Content> {
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    = note: the question mark operation (`?`) implicitly performs a conversion on the error value using the `From` trait
+    = note: the full name for the type has been written to '/tmp/commit0-inplace-dx8dh91b/tree/target/debug/deps/etherparse-d95d353dd23a699e.long-type-15965849281369128893.txt'
+    = note: consider using `--verbose` to print the full type name to the console
+
+error[E0277]: the trait bound `T: std::io::Write` is not satisfied
+   --> etherparse/src/net/ipv6_exts.rs:640:38
+    |
+640 |                         header.write(writer).map_err(WriteError::Io)?;
+    |                                ----- ^^^^^^ the trait `std::io::Write` is not implemented for `T`
+    |                                |
+    |                                required by a bound introduced by this call
+    |
+note: required by a bound in `ipv6_fragment_header::Ipv6FragmentHeader::write`
+   --> etherparse/src/net/ipv6_fragment_header.rs:93:21
+    |
+ 93 |     pub fn write<T: std::io::Write + Sized>(
+    |                     ^^^^^^^^^^^^^^ required by this bound in `Ipv6FragmentHeader::write`
+help: consider further restricting type parameter `T` with trait `Write`
+    |
+560 |     pub(crate) fn write_internal<T: CoreWrite + ?Sized + std::io::Write>(
+    |                                                        ++++++++++++++++
+
+error[E0277]: the size for values of type `T` cannot be known at compilation time
+   --> etherparse/src/net/ipv6_exts.rs:640:38
+    |
+560 |     pub(crate) fn write_internal<T: CoreWrite + ?Sized>(
+    |                                  - this type parameter needs to be `Sized`
+...
+640 |                         header.write(writer).map_err(WriteError::Io)?;
+    |                                ----- ^^^^^^ doesn't have a size known at compile-time
+    |                                |
+    |                                required by a bound introduced by this call
+    |
+note: required by a bound in `ipv6_fragment_header::Ipv6FragmentHeader::write`
+   --> etherparse/src/net/ipv6_fragment_header.rs:93:38
+    |
+ 93 |     pub fn write<T: std::io::Write + Sized>(
+    |                                      ^^^^^ required by this bound in `Ipv6FragmentHeader::write`
+help: consider removing the `?Sized` bound to make the type parameter `Sized`
+    |
+560 -     pub(crate) fn write_internal<T: CoreWrite + ?Sized>(
+560 +     pub(crate) fn write_internal<T: CoreWrite>(
+    |
+
+error[E0277]: `?` couldn't convert the error to `WriteError<<T as CoreWrite>::Error, ExtsWalkError>`
+   --> etherparse/src/net/ipv6_exts.rs:640:69
+    |
+640 |                         header.write(writer).map_err(WriteError::Io)?;
+    |                                ------------- -----------------------^ the trait `From<writer::WriteError<std::io::Error, _>>` is not implemented for `WriteError<<T as CoreWrite>::Error, ExtsWalkError>`
+    |                                |             |
+    |                                |             this can't be annotated with `?` because it has type `Result<_, writer::WriteError<std::io::Error, _>>`
+    |                                this has type `Result<_, std::io::Error>`
+    |
+note: `writer::WriteError<<T as writer::CoreWrite>::Error, err::ipv6_exts::exts_walk_error::ExtsWalkError>` needs to implement `From<writer::WriteError<std::io::Error, _>>`
+   --> etherparse/src/writer.rs:13:1
+    |
+ 13 | pub(crate) enum WriteError<IO, Content> {
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    = note: the question mark operation (`?`) implicitly performs a conversion on the error value using the `From` trait
+    = note: the full name for the type has been written to '/tmp/commit0-inplace-dx8dh91b/tree/target/debug/deps/etherparse-d95d353dd23a699e.long-type-15965849281369128893.txt'
+    = note: consider using `--verbose` to print the full type name to the console
+
+error[E0277]: the trait bound `T: std::io::Write` is not satisfied
+   --> etherparse/src/net/ipv6_exts.rs:652:38
+    |
+652 |                         header.write(writer).map_err(WriteError::Io)?;
+    |                                ----- ^^^^^^ the trait `std::io::Write` is not implemented for `T`
+    |                                |
+    |                                required by a bound introduced by this call
+    |
+note: required by a bound in `ip_auth_header::IpAuthHeader::write`
+   --> etherparse/src/net/ip_auth_header.rs:241:21
+    |
+241 |     pub fn write<T: std::io::Write + Sized>(
+    |                     ^^^^^^^^^^^^^^ required by this bound in `IpAuthHeader::write`
+help: consider further restricting type parameter `T` with trait `Write`
+    |
+560 |     pub(crate) fn write_internal<T: CoreWrite + ?Sized + std::io::Write>(
+    |                                                        ++++++++++++++++
+
+error[E0277]: the size for values of type `T` cannot be known at compilation time
+   --> etherparse/src/net/ipv6_exts.rs:652:38
+    |
+560 |     pub(crate) fn write_internal<T: CoreWrite + ?Sized>(
+    |                                  - this type parameter needs to be `Sized`
+...
+652 |                         header.write(writer).map_err(WriteError::Io)?;
+    |                                ----- ^^^^^^ doesn't have a size known at compile-time
+    |                                |
+    |                                required by a bound introduced by this call
+    |
+note: required by a bound in `ip_auth_header::IpAuthHeader::write`
+   --> etherparse/src/net/ip_auth_header.rs:241:38
+    |
+241 |     pub fn write<T: std::io::Write + Sized>(
+    |                                      ^^^^^ required by this bound in `IpAuthHeader::write`
+help: consider removing the `?Sized` bound to make the type parameter `Sized`
+    |
+560 -     pub(crate) fn write_internal<T: CoreWrite + ?Sized>(
+560 +     pub(crate) fn write_internal<T: CoreWrite>(
+    |
+
+error[E0277]: `?` couldn't convert the error to `WriteError<<T as CoreWrite>::Error, ExtsWalkError>`
+   --> etherparse/src/net/ipv6_exts.rs:652:69
+    |
+652 |                         header.write(writer).map_err(WriteError::Io)?;
+    |                                ------------- -----------------------^ the trait `From<writer::WriteError<std::io::Error, _>>` is not implemented for `WriteError<<T as CoreWrite>::Error, ExtsWalkError>`
+    |                                |             |
+    |                                |             this can't be annotated with `?` because it has type `Result<_, writer::WriteError<std::io::Error, _>>`
+    |                                this has type `Result<_, std::io::Error>`
+    |
+note: `writer::WriteError<<T as writer::CoreWrite>::Error, err::ipv6_exts::exts_walk_error::ExtsWalkError>` needs to implement `From<writer::WriteError<std::io::Error, _>>`
+   --> etherparse/src/writer.rs:13:1
+    |
+ 13 | pub(crate) enum WriteError<IO, Content> {
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    = note: the question mark operation (`?`) implicitly performs a conversion on the error value using the `From` trait
+    = note: the full name for the type has been written to '/tmp/commit0-inplace-dx8dh91b/tree/target/debug/deps/etherparse-d95d353dd23a699e.long-type-15965849281369128893.txt'
+    = note: consider using `--verbose` to print the full type name to the console
+
+error[E0277]: the trait bound `T: writer::CoreWrite` is not satisfied
+   --> etherparse/src/net/ipv6_exts.rs:713:29
+    |
+713 |         self.write_internal(writer, first_header).map_err(|err| match err {
+    |              -------------- ^^^^^^ the trait `writer::CoreWrite` is not implemented for `T`
+    |              |
+    |              required by a bound introduced by this call
+    |
+note: required by a bound in `net::ipv6_exts::Ipv6Extensions::write_internal`
+   --> etherparse/src/net/ipv6_exts.rs:560:37
+    |
+560 |     pub(crate) fn write_internal<T: CoreWrite + ?Sized>(
+    |                                     ^^^^^^^^^ required by this bound in `Ipv6Extensions::write_internal`
+help: consider further restricting type parameter `T` with trait `CoreWrite`
+    |
+708 |     pub fn write<T: std::io::Write + Sized + writer::CoreWrite>(
+    |                                            +++++++++++++++++++
+
+error[E0599]: no associated function or constant named `try_new_unchecked` found for struct `ip_frag_offset::IpFragOffset` in the current scope
+   --> etherparse/src/net/ipv6_fragment_header_slice.rs:71:27
+    |
+ 71 |             IpFragOffset::try_new_unchecked(value >> 3)
+    |                           ^^^^^^^^^^^^^^^^^ associated function or constant not found in `ip_frag_offset::IpFragOffset`
+    |
+   ::: etherparse/src/net/ip_frag_offset.rs:55:1
+    |
+ 55 | pub struct IpFragOffset(u16);
+    | ----------------------- associated function or constant `try_new_unchecked` not found for this struct
+    |
+note: if you're trying to build a new `ip_frag_offset::IpFragOffset` consider using one of the following associated functions:
+      ip_frag_offset::IpFragOffset::try_new
+      ip_frag_offset::IpFragOffset::new_unchecked
+   --> etherparse/src/net/ip_frag_offset.rs:86:5
+    |
+ 86 |     pub const fn try_new(value: u16) -> Result<IpFragOffset, ValueTooBigError<u16>> {
+    |     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+...
+108 |     pub const unsafe fn new_unchecked(value: u16) -> IpFragOffset {
+    |     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+help: there is an associated function `new_unchecked` with a similar name
+    |
+ 71 -             IpFragOffset::try_new_unchecked(value >> 3)
+ 71 +             IpFragOffset::new_unchecked(value >> 3)
+    |
+
+error[E0599]: no method named `is_fragmenting_payload` found for reference `&lax_ipv4_slice::LaxIpv4Slice<'_>` in the current scope
+  --> etherparse/src/net/lax_ip_slice.rs:41:38
+   |
+41 |             LaxIpSlice::Ipv4(s) => s.is_fragmenting_payload(),
+   |                                      ^^^^^^^^^^^^^^^^^^^^^^ method not found in `&lax_ipv4_slice::LaxIpv4Slice<'_>`
+   |
+help: one of the expressions' fields has a method of the same name
+   |
+41 |             LaxIpSlice::Ipv4(s) => s.header.is_fragmenting_payload(),
+   |                                      +++++++
+
+error[E0599]: no method named `is_fragmenting_payload` found for reference `&lax_ipv6_slice::LaxIpv6Slice<'_>` in the current scope
+  --> etherparse/src/net/lax_ip_slice.rs:42:38
+   |
+42 |             LaxIpSlice::Ipv6(s) => s.is_fragmenting_payload(),
+   |                                      ^^^^^^^^^^^^^^^^^^^^^^ method not found in `&lax_ipv6_slice::LaxIpv6Slice<'_>`
+   |
+help: one of the expressions' fields has a method of the same name
+   |
+42 |             LaxIpSlice::Ipv6(s) => s.exts.is_fragmenting_payload(),
+   |                                      +++++
+
+error[E0277]: `?` couldn't convert the error to `lax_header_slice_error::LaxHeaderSliceError`
+   --> etherparse/src/net/lax_ip_slice.rs:157:71
+    |
+157 |                 let (ipv4, stop_err) = LaxIpv4Slice::from_slice(slice)?;
+    |                                        -------------------------------^ the trait `From<err::ipv4::header_slice_error::HeaderSliceError>` is not implemented for `lax_header_slice_error::LaxHeaderSliceError`
+    |                                        |
+    |                                        this can't be annotated with `?` because it has type `Result<_, err::ipv4::header_slice_error::HeaderSliceError>`
+    |
+note: `lax_header_slice_error::LaxHeaderSliceError` needs to implement `From<err::ipv4::header_slice_error::HeaderSliceError>`
+   --> etherparse/src/err/ip/lax_header_slice_error.rs:5:1
+    |
+  5 | pub enum LaxHeaderSliceError {
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    = note: the question mark operation (`?`) implicitly performs a conversion on the error value using the `From` trait
+    = note: the full name for the type has been written to '/tmp/commit0-inplace-dx8dh91b/tree/target/debug/deps/etherparse-d95d353dd23a699e.long-type-15644542706666136241.txt'
+    = note: consider using `--verbose` to print the full type name to the console
+
+error[E0308]: mismatched types
+   --> etherparse/src/net/lax_ip_slice.rs:158:45
+    |
+158 |                 Ok((LaxIpSlice::Ipv4(ipv4), stop_err))
+    |                                             ^^^^^^^^ expected `Option<(HeaderSliceError, Layer)>`, found `Option<HeaderSliceError>`
+    |
+    = note: expected enum `Option<(err::ipv6_exts::header_slice_error::HeaderSliceError, layer::Layer)>`
+               found enum `Option<err::ip_auth::header_slice_error::HeaderSliceError>`
+
+error[E0277]: `?` couldn't convert the error to `lax_header_slice_error::LaxHeaderSliceError`
+   --> etherparse/src/net/lax_ip_slice.rs:161:71
+    |
+161 |                 let (ipv6, stop_err) = LaxIpv6Slice::from_slice(slice)?;
+    |                                        -------------------------------^ the trait `From<err::ipv6::header_slice_error::HeaderSliceError>` is not implemented for `lax_header_slice_error::LaxHeaderSliceError`
+    |                                        |
+    |                                        this can't be annotated with `?` because it has type `Result<_, err::ipv6::header_slice_error::HeaderSliceError>`
+    |
+note: `lax_header_slice_error::LaxHeaderSliceError` needs to implement `From<err::ipv6::header_slice_error::HeaderSliceError>`
+   --> etherparse/src/err/ip/lax_header_slice_error.rs:5:1
+    |
+  5 | pub enum LaxHeaderSliceError {
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    = note: the question mark operation (`?`) implicitly performs a conversion on the error value using the `From` trait
+    = note: the full name for the type has been written to '/tmp/commit0-inplace-dx8dh91b/tree/target/debug/deps/etherparse-d95d353dd23a699e.long-type-7963373939010298153.txt'
+    = note: consider using `--verbose` to print the full type name to the console
+
+error[E0609]: no field `length` on type `(ndp_option_header::NdpOptionHeader, &[u8])`
+  --> etherparse/src/transport/icmpv6/ndp_option/redirected_header_option_slice.rs:30:44
+   |
+30 |         let total_len = usize::from(header.length) * 8;
+   |                                            ^^^^^^ unknown field
+   |
+   = note: available fields are: `0`, `1`
+
+error[E0609]: no field `length` on type `ndp_option_header::NdpOptionHeader`
+  --> etherparse/src/transport/icmpv6/ndp_option/source_link_layer_address_option_slice.rs:23:44
+   |
+23 |         let total_len = usize::from(header.length) * 8;
+   |                                            ^^^^^^ unknown field
+   |
+   = note: available fields are: `option_type`, `length_units`
+
+error[E0559]: variant `ndp_option_read_error::NdpOptionReadError::UnexpectedEndOfSlice` has no field named `expected_min_len`
+  --> etherparse/src/transport/icmpv6/ndp_option/unknown_ndp_option_slice.rs:25:17
+   |
+25 |                 expected_min_len: NDP_OPTION_HEADER_LEN,
+   |                 ^^^^^^^^^^^^^^^^ unknown field
+   |
+help: a field with a similar name exists
+   |
+25 -                 expected_min_len: NDP_OPTION_HEADER_LEN,
+25 +                 expected_size: NDP_OPTION_HEADER_LEN,
+   |
+
+error[E0559]: variant `ndp_option_read_error::NdpOptionReadError::UnexpectedEndOfSlice` has no field named `actual_len`
+  --> etherparse/src/transport/icmpv6/ndp_option/unknown_ndp_option_slice.rs:26:17
+   |
+26 |                 actual_len: slice.len(),
+   |                 ^^^^^^^^^^ `ndp_option_read_error::NdpOptionReadError::UnexpectedEndOfSlice` does not have this field
+   |
+   = note: available fields are: `option_id`, `expected_size`, `actual_size`
+
+error[E0599]: no variant, associated function, or constant named `LengthOfZero` found for enum `ndp_option_read_error::NdpOptionReadError` in the current scope
+  --> etherparse/src/transport/icmpv6/ndp_option/unknown_ndp_option_slice.rs:34:44
+   |
+34 |             return Err(NdpOptionReadError::LengthOfZero);
+   |                                            ^^^^^^^^^^^^ variant, associated function, or constant not found in `ndp_option_read_error::NdpOptionReadError`
+   |
+  ::: etherparse/src/transport/icmpv6/ndp_option_read_error.rs:5:1
+   |
+ 5 | pub enum NdpOptionReadError {
+   | --------------------------- variant, associated function, or constant `LengthOfZero` not found for this enum
+
+error[E0559]: variant `ndp_option_read_error::NdpOptionReadError::UnexpectedEndOfSlice` has no field named `expected_min_len`
+  --> etherparse/src/transport/icmpv6/ndp_option/unknown_ndp_option_slice.rs:40:17
+   |
+40 |                 expected_min_len: total_len,
+   |                 ^^^^^^^^^^^^^^^^ unknown field
+   |
+help: a field with a similar name exists
+   |
+40 -                 expected_min_len: total_len,
+40 +                 expected_size: total_len,
+   |
+
+error[E0559]: variant `ndp_option_read_error::NdpOptionReadError::UnexpectedEndOfSlice` has no field named `actual_len`
+  --> etherparse/src/transport/icmpv6/ndp_option/unknown_ndp_option_slice.rs:41:17
+   |
+41 |                 actual_len: slice.len(),
+   |                 ^^^^^^^^^^ `ndp_option_read_error::NdpOptionReadError::UnexpectedEndOfSlice` does not have this field
+   |
+   = note: available fields are: `option_id`, `expected_size`, `actual_size`
+
+error[E0599]: no associated function or constant named `new` found for struct `ndp_options_iterator::NdpOptionsIterator<'a>` in the current scope
+  --> etherparse/src/transport/icmpv6/icmpv6_payload_slice/neighbor_advertisement_payload_slice.rs:69:29
+   |
+69 |         NdpOptionsIterator::new(self.options())
+   |                             ^^^ associated function or constant not found in `ndp_options_iterator::NdpOptionsIterator<'_>`
+   |
+  ::: etherparse/src/transport/icmpv6/ndp_options_iterator.rs:9:1
+   |
+ 9 | pub struct NdpOptionsIterator<'a> {
+   | --------------------------------- associated function or constant `new` not found for this struct
+   |
+note: if you're trying to build a new `ndp_options_iterator::NdpOptionsIterator<'_>`, consider using `ndp_options_iterator::NdpOptionsIterator::<'a>::from_slice` which returns `ndp_options_iterator::NdpOptionsIterator<'_>`
+  --> etherparse/src/transport/icmpv6/ndp_options_iterator.rs:14:5
+   |
+14 |     pub fn from_slice(options: &'a [u8]) -> NdpOptionsIterator<'a> {
+   |     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+error[E0599]: no associated function or constant named `new` found for struct `ndp_options_iterator::NdpOptionsIterator<'a>` in the current scope
+  --> etherparse/src/transport/icmpv6/icmpv6_payload_slice/neighbor_solicitation_payload_slice.rs:68:29
+   |
+68 |         NdpOptionsIterator::new(self.options())
+   |                             ^^^ associated function or constant not found in `ndp_options_iterator::NdpOptionsIterator<'_>`
+   |
+  ::: etherparse/src/transport/icmpv6/ndp_options_iterator.rs:9:1
+   |
+ 9 | pub struct NdpOptionsIterator<'a> {
+   | --------------------------------- associated function or constant `new` not found for this struct
+   |
+note: if you're trying to build a new `ndp_options_iterator::NdpOptionsIterator<'_>`, consider using `ndp_options_iterator::NdpOptionsIterator::<'a>::from_slice` which returns `ndp_options_iterator::NdpOptionsIterator<'_>`
+  --> etherparse/src/transport/icmpv6/ndp_options_iterator.rs:14:5
+   |
+14 |     pub fn from_slice(options: &'a [u8]) -> NdpOptionsIterator<'a> {
+   |     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+error[E0599]: no associated function or constant named `new` found for struct `ndp_options_iterator::NdpOptionsIterator<'a>` in the current scope
+  --> etherparse/src/transport/icmpv6/icmpv6_payload_slice/redirect_payload_slice.rs:88:29
+   |
+88 |         NdpOptionsIterator::new(self.options())
+   |                             ^^^ associated function or constant not found in `ndp_options_iterator::NdpOptionsIterator<'_>`
+   |
+  ::: etherparse/src/transport/icmpv6/ndp_options_iterator.rs:9:1
+   |
+ 9 | pub struct NdpOptionsIterator<'a> {
+   | --------------------------------- associated function or constant `new` not found for this struct
+   |
+note: if you're trying to build a new `ndp_options_iterator::NdpOptionsIterator<'_>`, consider using `ndp_options_iterator::NdpOptionsIterator::<'a>::from_slice` which returns `ndp_options_iterator::NdpOptionsIterator<'_>`
+  --> etherparse/src/transport/icmpv6/ndp_options_iterator.rs:14:5
+   |
+14 |     pub fn from_slice(options: &'a [u8]) -> NdpOptionsIterator<'a> {
+   |     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+error[E0599]: no associated function or constant named `new` found for struct `redirect_payload::RedirectPayload` in the current scope
+  --> etherparse/src/transport/icmpv6/icmpv6_payload_slice/redirect_payload_slice.rs:93:30
+   |
+93 |             RedirectPayload::new(self.target_address(), self.destination_address()),
+   |                              ^^^ associated function or constant not found in `redirect_payload::RedirectPayload`
+   |
+  ::: etherparse/src/transport/icmpv6/icmpv6_payload/redirect_payload.rs:38:1
+   |
+38 | pub struct RedirectPayload {
+   | -------------------------- associated function or constant `new` not found for this struct
+   |
+help: there is a method `ne` with a similar name, but with different arguments
+  --> /rustc/ac68faa20c58cbccd01ee7208bf3b6e93a7d7f96/library/core/src/cmp.rs:263:4
+
+error[E0599]: no associated function or constant named `new` found for struct `ndp_options_iterator::NdpOptionsIterator<'a>` in the current scope
+  --> etherparse/src/transport/icmpv6/icmpv6_payload_slice/router_advertisement_payload_slice.rs:80:29
+   |
+80 |         NdpOptionsIterator::new(self.options())
+   |                             ^^^ associated function or constant not found in `ndp_options_iterator::NdpOptionsIterator<'_>`
+   |
+  ::: etherparse/src/transport/icmpv6/ndp_options_iterator.rs:9:1
+   |
+ 9 | pub struct NdpOptionsIterator<'a> {
+   | --------------------------------- associated function or constant `new` not found for this struct
+   |
+note: if you're trying to build a new `ndp_options_iterator::NdpOptionsIterator<'_>`, consider using `ndp_options_iterator::NdpOptionsIterator::<'a>::from_slice` which returns `ndp_options_iterator::NdpOptionsIterator<'_>`
+  --> etherparse/src/transport/icmpv6/ndp_options_iterator.rs:14:5
+   |
+14 |     pub fn from_slice(options: &'a [u8]) -> NdpOptionsIterator<'a> {
+   |     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+   Compiling rusty-fork v0.3.1
+error[E0599]: no method named `ether_payload` found for reference `&lax_link_ext_slice::LaxLinkExtSlice<'_>` in the current scope
+   --> etherparse/src/lax_sliced_packet.rs:266:18
+    |
+266 |             last.ether_payload()
+    |                  ^^^^^^^^^^^^^
+    |
+help: there is a method `payload` with a similar name
+    |
+266 -             last.ether_payload()
+266 +             last.payload()
+    |
+
+error[E0277]: the trait bound `BuildSliceWriteError: From<ExtsWalkError>` is not satisfied
+  --> etherparse/src/packet_builder.rs:23:52
+   |
+23 |             crate::WriteError::Content(err) => err.into(),
+   |                                                    ^^^^ unsatisfied trait bound
+   |
+help: the trait `From<err::ipv4_exts::exts_walk_error::ExtsWalkError>` is not implemented for `build_slice_write_error::BuildSliceWriteError`
+  --> etherparse/src/err/packet/build_slice_write_error.rs:4:1
+   |
+ 4 | pub enum BuildSliceWriteError {
+   | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+   = help: `build_slice_write_error::BuildSliceWriteError` implements trait `From<T>`:
+             From<slice_write_space_error::SliceWriteSpaceError>
+             From<transport_checksum_error::TransportChecksumError>
+             From<value_too_big_error::ValueTooBigError<usize>>
+             From<writer::SliceCoreWriteError>
+             From<WriteError<SliceWriteSpaceError, ExtsWalkError>>
+             From<WriteError<SliceWriteSpaceError, ExtsWalkError>>
+             From<WriteError<SliceCoreWriteError, ExtsWalkError>>
+             From<WriteError<SliceCoreWriteError, ExtsWalkError>>
+   = note: required for `err::ipv4_exts::exts_walk_error::ExtsWalkError` to implement `Into<build_slice_write_error::BuildSliceWriteError>`
+   = note: the full name for the type has been written to '/tmp/commit0-inplace-dx8dh91b/tree/target/debug/deps/etherparse-d95d353dd23a699e.long-type-11259123551230340887.txt'
+   = note: consider using `--verbose` to print the full type name to the console
+
+error[E0277]: the trait bound `BuildSliceWriteError: From<ExtsWalkError>` is not satisfied
+  --> etherparse/src/packet_builder.rs:34:52
+   |
+34 |             crate::WriteError::Content(err) => err.into(),
+   |                                                    ^^^^ unsatisfied trait bound
+   |
+help: the trait `From<err::ipv6_exts::exts_walk_error::ExtsWalkError>` is not implemented for `build_slice_write_error::BuildSliceWriteError`
+  --> etherparse/src/err/packet/build_slice_write_error.rs:4:1
+   |
+ 4 | pub enum BuildSliceWriteError {
+   | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+   = help: `build_slice_write_error::BuildSliceWriteError` implements trait `From<T>`:
+             From<slice_write_space_error::SliceWriteSpaceError>
+             From<transport_checksum_error::TransportChecksumError>
+             From<value_too_big_error::ValueTooBigError<usize>>
+             From<writer::SliceCoreWriteError>
+             From<WriteError<SliceWriteSpaceError, ExtsWalkError>>
+             From<WriteError<SliceWriteSpaceError, ExtsWalkError>>
+             From<WriteError<SliceCoreWriteError, ExtsWalkError>>
+             From<WriteError<SliceCoreWriteError, ExtsWalkError>>
+   = note: required for `err::ipv6_exts::exts_walk_error::ExtsWalkError` to implement `Into<build_slice_write_error::BuildSliceWriteError>`
+   = note: the full name for the type has been written to '/tmp/commit0-inplace-dx8dh91b/tree/target/debug/deps/etherparse-d95d353dd23a699e.long-type-12577936789078185588.txt'
+   = note: consider using `--verbose` to print the full type name to the console
+
+error[E0433]: cannot find type `SliceWriter` in this scope
+  --> etherparse/src/packet_builder.rs:47:22
+   |
+47 |     let mut writer = SliceWriter::new(buffer);
+   |                      ^^^^^^^^^^^ use of undeclared type `SliceWriter`
+
+error[E0277]: the trait bound `T: writer::CoreWrite` is not satisfied
+    --> etherparse/src/packet_builder.rs:1656:13
+     |
+1653 |         write_headers_and_payload(
+     |         ------------------------- required by a bound introduced by this call
+...
+1656 |             writer,
+     |             ^^^^^^ the trait `writer::CoreWrite` is not implemented for `T`
+     |
+note: required by a bound in `write_headers_and_payload`
+    --> etherparse/src/packet_builder.rs:1968:8
+     |
+1961 | fn write_headers_and_payload<W, E>(
+     |    ------------------------- required by a bound in this function
+...
+1968 |     W: CoreWrite + Sized,
+     |        ^^^^^^^^^ required by this bound in `write_headers_and_payload`
+help: consider further restricting type parameter `T` with trait `CoreWrite`
+     |
+1647 |     pub fn write<T: std::io::Write + Sized + writer::CoreWrite>(
+     |                                            +++++++++++++++++++
+
+error[E0433]: cannot find type `SliceWriter` in this scope
+    --> etherparse/src/packet_builder.rs:1689:26
+     |
+1689 |         let mut writer = SliceWriter::new(buffer);
+     |                          ^^^^^^^^^^^ use of undeclared type `SliceWriter`
+
+error[E0277]: the trait bound `T: writer::CoreWrite` is not satisfied
+    --> etherparse/src/packet_builder.rs:1711:36
+     |
+1711 |         final_write_with_net(self, writer, payload)
+     |         --------------------       ^^^^^^ the trait `writer::CoreWrite` is not implemented for `T`
+     |         |
+     |         required by a bound introduced by this call
+     |
+note: required by a bound in `final_write_with_net`
+    --> etherparse/src/packet_builder.rs:2134:8
+     |
+2128 | fn final_write_with_net<W, B, E>(
+     |    -------------------- required by a bound in this function
+...
+2134 |     W: CoreWrite + Sized,
+     |        ^^^^^^^^^ required by this bound in `final_write_with_net`
+help: consider further restricting type parameter `T` with trait `CoreWrite`
+     |
+1706 |     pub fn write<T: std::io::Write + Sized + writer::CoreWrite>(
+     |                                            +++++++++++++++++++
+
+error[E0277]: the trait bound `T: writer::CoreWrite` is not satisfied
+    --> etherparse/src/packet_builder.rs:1746:36
+     |
+1746 |         final_write_with_net(self, writer, payload)
+     |         --------------------       ^^^^^^ the trait `writer::CoreWrite` is not implemented for `T`
+     |         |
+     |         required by a bound introduced by this call
+     |
+note: required by a bound in `final_write_with_net`
+    --> etherparse/src/packet_builder.rs:2134:8
+     |
+2128 | fn final_write_with_net<W, B, E>(
+     |    -------------------- required by a bound in this function
+...
+2134 |     W: CoreWrite + Sized,
+     |        ^^^^^^^^^ required by this bound in `final_write_with_net`
+help: consider further restricting type parameter `T` with trait `CoreWrite`
+     |
+1741 |     pub fn write<T: std::io::Write + Sized + writer::CoreWrite>(
+     |                                            +++++++++++++++++++
+
+error[E0277]: the trait bound `T: writer::CoreWrite` is not satisfied
+    --> etherparse/src/packet_builder.rs:1781:36
+     |
+1781 |         final_write_with_net(self, writer, payload)
+     |         --------------------       ^^^^^^ the trait `writer::CoreWrite` is not implemented for `T`
+     |         |
+     |         required by a bound introduced by this call
+     |
+note: required by a bound in `final_write_with_net`
+    --> etherparse/src/packet_builder.rs:2134:8
+     |
+2128 | fn final_write_with_net<W, B, E>(
+     |    -------------------- required by a bound in this function
+...
+2134 |     W: CoreWrite + Sized,
+     |        ^^^^^^^^^ required by this bound in `final_write_with_net`
+help: consider further restricting type parameter `T` with trait `CoreWrite`
+     |
+1776 |     pub fn write<T: std::io::Write + Sized + writer::CoreWrite>(
+     |                                            +++++++++++++++++++
+
+error[E0277]: the trait bound `T: writer::CoreWrite` is not satisfied
+    --> etherparse/src/packet_builder.rs:1906:36
+     |
+1906 |         final_write_with_net(self, writer, payload)
+     |         --------------------       ^^^^^^ the trait `writer::CoreWrite` is not implemented for `T`
+     |         |
+     |         required by a bound introduced by this call
+     |
+note: required by a bound in `final_write_with_net`
+    --> etherparse/src/packet_builder.rs:2134:8
+     |
+2128 | fn final_write_with_net<W, B, E>(
+     |    -------------------- required by a bound in this function
+...
+2134 |     W: CoreWrite + Sized,
+     |        ^^^^^^^^^ required by this bound in `final_write_with_net`
+help: consider further restricting type parameter `T` with trait `CoreWrite`
+     |
+1901 |     pub fn write<T: std::io::Write + Sized + writer::CoreWrite>(
+     |                                            +++++++++++++++++++
+
+error[E0277]: the trait bound `T: writer::CoreWrite` is not satisfied
+    --> etherparse/src/packet_builder.rs:1939:36
+     |
+1939 |         final_write_with_net(self, writer, &[])
+     |         --------------------       ^^^^^^ the trait `writer::CoreWrite` is not implemented for `T`
+     |         |
+     |         required by a bound introduced by this call
+     |
+note: required by a bound in `final_write_with_net`
+    --> etherparse/src/packet_builder.rs:2134:8
+     |
+2128 | fn final_write_with_net<W, B, E>(
+     |    -------------------- required by a bound in this function
+...
+2134 |     W: CoreWrite + Sized,
+     |        ^^^^^^^^^ required by this bound in `final_write_with_net`
+help: consider further restricting type parameter `T` with trait `CoreWrite`
+     |
+1935 |     pub fn write<T: std::io::Write + Sized + writer::CoreWrite>(
+     |                                            +++++++++++++++++++
+
+error[E0277]: the trait bound `W: std::io::Write` is not satisfied
+    --> etherparse/src/packet_builder.rs:2105:24
+     |
+2105 |             exts.write(writer, header.protocol)?;
+     |                  ----- ^^^^^^ the trait `std::io::Write` is not implemented for `W`
+     |                  |
+     |                  required by a bound introduced by this call
+     |
+note: required by a bound in `net::ipv4_exts::Ipv4Extensions::write`
+    --> etherparse/src/net/ipv4_exts.rs:206:21
+     |
+ 206 |     pub fn write<T: std::io::Write + Sized>(
+     |                     ^^^^^^^^^^^^^^ required by this bound in `Ipv4Extensions::write`
+help: consider further restricting type parameter `W` with trait `Write`
+     |
+1968 |     W: CoreWrite + Sized + std::io::Write,
+     |                          ++++++++++++++++
+
+error[E0277]: `?` couldn't convert the error to `E`
+    --> etherparse/src/packet_builder.rs:2105:48
+     |
+1966 | ) -> Result<(), E>
+     |      ------------- expected `E` because of this
+...
+2105 |             exts.write(writer, header.protocol)?;
+     |                  ------------------------------^ the trait `From<err::ipv4_exts::header_write_error::HeaderWriteError>` is not implemented for `E`
+     |                  |
+     |                  this can't be annotated with `?` because it has type `Result<_, err::ipv4_exts::header_write_error::HeaderWriteError>`
+     |
+note: `err::ipv4_exts::header_write_error::HeaderWriteError` needs to implement `Into<E>`
+    --> etherparse/src/err/ipv4_exts/header_write_error.rs:7:1
+     |
+   7 | pub enum HeaderWriteError {
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^
+     = note: the question mark operation (`?`) implicitly performs a conversion on the error value using the `From` trait
+
+error[E0277]: the trait bound `W: std::io::Write` is not satisfied
+    --> etherparse/src/packet_builder.rs:2109:24
+     |
+2109 |             exts.write(writer, header.next_header)?;
+     |                  ----- ^^^^^^ the trait `std::io::Write` is not implemented for `W`
+     |                  |
+     |                  required by a bound introduced by this call
+     |
+note: required by a bound in `net::ipv6_exts::Ipv6Extensions::write`
+    --> etherparse/src/net/ipv6_exts.rs:708:21
+     |
+ 708 |     pub fn write<T: std::io::Write + Sized>(
+     |                     ^^^^^^^^^^^^^^ required by this bound in `Ipv6Extensions::write`
+help: consider further restricting type parameter `W` with trait `Write`
+     |
+1968 |     W: CoreWrite + Sized + std::io::Write,
+     |                          ++++++++++++++++
+
+error[E0277]: `?` couldn't convert the error to `E`
+    --> etherparse/src/packet_builder.rs:2109:51
+     |
+1966 | ) -> Result<(), E>
+     |      ------------- expected `E` because of this
+...
+2109 |             exts.write(writer, header.next_header)?;
+     |                  ---------------------------------^ the trait `From<err::ipv6_exts::header_write_error::HeaderWriteError>` is not implemented for `E`
+     |                  |
+     |                  this can't be annotated with `?` because it has type `Result<_, err::ipv6_exts::header_write_error::HeaderWriteError>`
+     |
+note: `err::ipv6_exts::header_write_error::HeaderWriteError` needs to implement `Into<E>`
+    --> etherparse/src/err/ipv6_exts/header_write_error.rs:7:1
+     |
+   7 | pub enum HeaderWriteError {
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^
+     = note: the question mark operation (`?`) implicitly performs a conversion on the error value using the `From` trait
+
+error[E0061]: this function takes 0 arguments but 1 argument was supplied
+  --> etherparse/src/sliced_packet.rs:97:9
+   |
+97 |         SlicedPacketCursor::new(data).slice_ethernet2()
+   |         ^^^^^^^^^^^^^^^^^^^^^^^ ---- unexpected argument of type `&'a [u8]`
+   |
+note: associated function defined here
+  --> etherparse/src/sliced_packet_cursor.rs:10:12
+   |
+10 |     pub fn new() -> SlicedPacketCursor<'a> {
+   |            ^^^
+help: remove the extra argument
+   |
+97 -         SlicedPacketCursor::new(data).slice_ethernet2()
+97 +         SlicedPacketCursor::new().slice_ethernet2()
+   |
+
+error[E0061]: this method takes 1 argument but 0 arguments were supplied
+  --> etherparse/src/sliced_packet.rs:97:39
+   |
+97 |         SlicedPacketCursor::new(data).slice_ethernet2()
+   |                                       ^^^^^^^^^^^^^^^-- argument #1 of type `&[u8]` is missing
+   |
+note: method defined here
+  --> etherparse/src/sliced_packet_cursor.rs:23:12
+   |
+23 |     pub fn slice_ethernet2(
+   |            ^^^^^^^^^^^^^^^
+24 |         mut self,
+25 |         slice: &'a [u8],
+   |         ---------------
+help: provide the argument
+   |
+97 |         SlicedPacketCursor::new(data).slice_ethernet2(/* &[u8] */)
+   |                                                       +++++++++++
+
+error[E0061]: this function takes 0 arguments but 1 argument was supplied
+   --> etherparse/src/sliced_packet.rs:140:9
+    |
+140 |         SlicedPacketCursor::new(data).slice_linux_sll()
+    |         ^^^^^^^^^^^^^^^^^^^^^^^ ---- unexpected argument of type `&'a [u8]`
+    |
+note: associated function defined here
+   --> etherparse/src/sliced_packet_cursor.rs:10:12
+    |
+ 10 |     pub fn new() -> SlicedPacketCursor<'a> {
+    |            ^^^
+help: remove the extra argument
+    |
+140 -         SlicedPacketCursor::new(data).slice_linux_sll()
+140 +         SlicedPacketCursor::new().slice_linux_sll()
+    |
+
+error[E0061]: this method takes 1 argument but 0 arguments were supplied
+   --> etherparse/src/sliced_packet.rs:140:39
+    |
+140 |         SlicedPacketCursor::new(data).slice_linux_sll()
+    |                                       ^^^^^^^^^^^^^^^-- argument #1 of type `&[u8]` is missing
+    |
+note: method defined here
+   --> etherparse/src/sliced_packet_cursor.rs:43:12
+    |
+ 43 |     pub fn slice_linux_sll(
+    |            ^^^^^^^^^^^^^^^
+ 44 |         mut self,
+ 45 |         slice: &'a [u8],
+    |         ---------------
+help: provide the argument
+    |
+140 |         SlicedPacketCursor::new(data).slice_linux_sll(/* &[u8] */)
+    |                                                       +++++++++++
+
+error[E0061]: this function takes 0 arguments but 1 argument was supplied
+   --> etherparse/src/sliced_packet.rs:199:9
+    |
+199 |         SlicedPacketCursor::new(data).slice_ether_type(ether_type)
+    |         ^^^^^^^^^^^^^^^^^^^^^^^ ---- unexpected argument of type `&'a [u8]`
+    |
+note: associated function defined here
+   --> etherparse/src/sliced_packet_cursor.rs:10:12
+    |
+ 10 |     pub fn new() -> SlicedPacketCursor<'a> {
+    |            ^^^
+help: remove the extra argument
+    |
+199 -         SlicedPacketCursor::new(data).slice_ether_type(ether_type)
+199 +         SlicedPacketCursor::new().slice_ether_type(ether_type)
+    |
+
+error[E0308]: mismatched types
+   --> etherparse/src/sliced_packet.rs:199:56
+    |
+199 |         SlicedPacketCursor::new(data).slice_ether_type(ether_type)
+    |                                       ---------------- ^^^^^^^^^^ expected `EtherPayloadSlice<'_>`, found `EtherType`
+    |                                       |
+    |                                       arguments to this method are incorrect
+    |
+note: method defined here
+   --> etherparse/src/sliced_packet_cursor.rs:65:12
+    |
+ 65 |     pub fn slice_ether_type(
+    |            ^^^^^^^^^^^^^^^^
+ 66 |         mut self,
+ 67 |         mut ether_payload: EtherPayloadSlice<'a>,
+    |         ----------------------------------------
+
+error[E0061]: this function takes 0 arguments but 1 argument was supplied
+   --> etherparse/src/sliced_packet.rs:238:9
+    |
+238 |         SlicedPacketCursor::new(data).slice_ip()
+    |         ^^^^^^^^^^^^^^^^^^^^^^^ ---- unexpected argument of type `&'a [u8]`
+    |
+note: associated function defined here
+   --> etherparse/src/sliced_packet_cursor.rs:10:12
+    |
+ 10 |     pub fn new() -> SlicedPacketCursor<'a> {
+    |            ^^^
+help: remove the extra argument
+    |
+238 -         SlicedPacketCursor::new(data).slice_ip()
+238 +         SlicedPacketCursor::new().slice_ip()
+    |
+
+error[E0061]: this method takes 1 argument but 0 arguments were supplied
+   --> etherparse/src/sliced_packet.rs:238:39
+    |
+238 |         SlicedPacketCursor::new(data).slice_ip()
+    |                                       ^^^^^^^^-- argument #1 of type `&[u8]` is missing
+    |
+note: method defined here
+   --> etherparse/src/sliced_packet_cursor.rs:102:12
+    |
+102 |     pub fn slice_ip(
+    |            ^^^^^^^^
+103 |         mut self,
+104 |         slice: &'a [u8],
+    |         ---------------
+help: provide the argument
+    |
+238 |         SlicedPacketCursor::new(data).slice_ip(/* &[u8] */)
+    |                                                +++++++++++
+
+error[E0599]: no method named `vlan_id` found for reference `&single_vlan_slice::SingleVlanSlice<'_>` in the current scope
+   --> etherparse/src/sliced_packet.rs:303:40
+    |
+303 |                 let _ = ids.try_push(s.vlan_id());
+    |                                        ^^^^^^^ method not found in `&single_vlan_slice::SingleVlanSlice<'_>`
+
+error[E0308]: mismatched types
+  --> etherparse/src/sliced_packet_cursor.rs:60:42
+   |
+60 |         self.result.link = Some(LinuxSll(result));
+   |                                 -------- ^^^^^^ expected `HeaderError`, found `LinuxSllSlice<'_>`
+   |                                 |
+   |                                 arguments to this enum variant are incorrect
+   |
+note: tuple variant defined here
+  --> etherparse/src/err/packet/slice_error.rs:9:5
+   |
+ 9 |     LinuxSll(err::linux_sll::HeaderError),
+   |     ^^^^^^^^
+
+error[E0308]: mismatched types
+  --> etherparse/src/sliced_packet_cursor.rs:60:33
+   |
+60 |         self.result.link = Some(LinuxSll(result));
+   |                            ---- ^^^^^^^^^^^^^^^^ expected `LinkSlice<'_>`, found `SliceError`
+   |                            |
+   |                            arguments to this enum variant are incorrect
+   |
+help: the type constructed contains `err::packet::slice_error::SliceError` due to the type of the argument passed
+  --> etherparse/src/sliced_packet_cursor.rs:60:28
+   |
+60 |         self.result.link = Some(LinuxSll(result));
+   |                            ^^^^^----------------^
+   |                                 |
+   |                                 this argument influences the type of `Some`
+note: tuple variant defined here
+  --> /rustc/ac68faa20c58cbccd01ee7208bf3b6e93a7d7f96/library/core/src/option.rs:608:4
+
+error[E0308]: mismatched types
+   --> etherparse/src/sliced_packet_cursor.rs:118:41
+    |
+118 |                 I::IpHeaders(err) => Ip(err),
+    |                                      -- ^^^ expected `HeaderError`, found `HeadersError`
+    |                                      |
+    |                                      arguments to this enum variant are incorrect
+    |
+note: tuple variant defined here
+   --> etherparse/src/err/packet/slice_error.rs:13:5
+    |
+ 13 |     Ip(err::ip::HeaderError),
+    |     ^^
+
+error[E0599]: no variant, associated function, or constant named `Ipv4Header` found for enum `headers_error::HeadersError` in the current scope
+   --> etherparse/src/sliced_packet_cursor.rs:150:61
+    |
+150 |                 I::Header(err) => Ip(err::ip::HeadersError::Ipv4Header(err)),
+    |                                                             ^^^^^^^^^^ variant, associated function, or constant not found in `headers_error::HeadersError`
+    |
+   ::: etherparse/src/err/ip/headers_error.rs:4:1
+    |
+  4 | pub enum HeadersError {
+    | --------------------- variant, associated function, or constant `Ipv4Header` not found for this enum
+
+error[E0599]: no variant, associated function, or constant named `Ipv4Exts` found for enum `headers_error::HeadersError` in the current scope
+   --> etherparse/src/sliced_packet_cursor.rs:151:59
+    |
+151 |                 I::Exts(err) => Ip(err::ip::HeadersError::Ipv4Exts(err)),
+    |                                                           ^^^^^^^^ variant, associated function, or constant not found in `headers_error::HeadersError`
+    |
+   ::: etherparse/src/err/ip/headers_error.rs:4:1
+    |
+  4 | pub enum HeadersError {
+    | --------------------- variant, associated function, or constant `Ipv4Exts` not found for this enum
+    |
+help: there is a variant with a similar name
+    |
+151 -                 I::Exts(err) => Ip(err::ip::HeadersError::Ipv4Exts(err)),
+151 +                 I::Exts(err) => Ip(err::ip::HeadersError::Ipv4Ext(err)),
+    |
+
+error[E0599]: no variant, associated function, or constant named `Ipv6Header` found for enum `headers_error::HeadersError` in the current scope
+   --> etherparse/src/sliced_packet_cursor.rs:179:61
+    |
+179 |                 I::Header(err) => Ip(err::ip::HeadersError::Ipv6Header(err)),
+    |                                                             ^^^^^^^^^^ variant, associated function, or constant not found in `headers_error::HeadersError`
+    |
+   ::: etherparse/src/err/ip/headers_error.rs:4:1
+    |
+  4 | pub enum HeadersError {
+    | --------------------- variant, associated function, or constant `Ipv6Header` not found for this enum
+
+error[E0599]: no variant, associated function, or constant named `Ipv6Exts` found for enum `headers_error::HeadersError` in the current scope
+   --> etherparse/src/sliced_packet_cursor.rs:180:59
+    |
+180 |                 I::Exts(err) => Ip(err::ip::HeadersError::Ipv6Exts(err)),
+    |                                                           ^^^^^^^^ variant, associated function, or constant not found in `headers_error::HeadersError`
+    |
+   ::: etherparse/src/err/ip/headers_error.rs:4:1
+    |
+  4 | pub enum HeadersError {
+    | --------------------- variant, associated function, or constant `Ipv6Exts` not found for this enum
+    |
+help: there is a variant with a similar name
+    |
+180 -                 I::Exts(err) => Ip(err::ip::HeadersError::Ipv6Exts(err)),
+180 +                 I::Exts(err) => Ip(err::ip::HeadersError::Ipv6Ext(err)),
+    |
+
+warning: unused import: ``
+ --> etherparse/src/transport/igmp/report_group_record_v3_header.rs:1:57
+  |
+1 | use crate::{err::LenError, igmp::ReportGroupRecordType, *};
+  |                                                         ^
+
+warning: unused variable: `f`
+  --> etherparse/src/err/ipv4_exts/header_write_error.rs:28:19
+   |
+28 |     fn fmt(&self, f: &mut core::fmt::Formatter<'_>) -> core::fmt::Result {
+   |                   ^ help: if this is intentional, prefix it with an underscore: `_f`
+   |
+   = note: `#[warn(unused_variables)]` (part of `#[warn(unused)]`) on by default
+
+error[E0004]: non-exhaustive patterns: `len_source::LenSource::MacsecShortLength` and `len_source::LenSource::ArpAddrLengths` not covered
+  --> etherparse/src/err/len_error.rs:71:38
+   |
+71 |         let len_source: &str = match self.len_source {
+   |                                      ^^^^^^^^^^^^^^^ patterns `len_source::LenSource::MacsecShortLength` and `len_source::LenSource::ArpAddrLengths` not covered
+   |
+note: `len_source::LenSource` defined here
+  --> etherparse/src/len_source.rs:3:10
+   |
+ 3 | pub enum LenSource {
+   |          ^^^^^^^^^
+...
+ 8 |     MacsecShortLength,
+   |     ----------------- not covered
+...
+18 |     ArpAddrLengths,
+   |     -------------- not covered
+   = note: the matched value is of type `len_source::LenSource`
+help: ensure that all possible cases are being handled by adding a match arm with a wildcard pattern, a match arm with multiple or-patterns as shown, or multiple match arms
+   |
+80 ~             TcpHeaderLen => "length calculated from the TCP header 'length' field",
+81 ~             len_source::LenSource::MacsecShortLength | len_source::LenSource::ArpAddrLengths => todo!(),
+   |
+
+warning: unused variable: `f`
+  --> etherparse/src/err/read_error.rs:69:19
+   |
+69 |     fn fmt(&self, f: &mut core::fmt::Formatter<'_>) -> core::fmt::Result {
+   |                   ^ help: if this is intentional, prefix it with an underscore: `_f`
+
+warning: unused variable: `value`
+  --> etherparse/src/err/read_error.rs:80:13
+   |
+80 |     fn from(value: std::io::Error) -> Self {
+   |             ^^^^^ help: if this is intentional, prefix it with an underscore: `_value`
+
+warning: unused variable: `value`
+  --> etherparse/src/err/read_error.rs:86:13
+   |
+86 |     fn from(value: LenError) -> Self {
+   |             ^^^^^ help: if this is intentional, prefix it with an underscore: `_value`
+
+warning: unused variable: `value`
+  --> etherparse/src/err/read_error.rs:92:13
+   |
+92 |     fn from(value: ip::HeaderError) -> Self {
+   |             ^^^^^ help: if this is intentional, prefix it with an underscore: `_value`
+
+warning: unused variable: `value`
+  --> etherparse/src/err/read_error.rs:98:13
+   |
+98 |     fn from(value: ip::HeadersError) -> Self {
+   |             ^^^^^ help: if this is intentional, prefix it with an underscore: `_value`
+
+warning: unused variable: `value`
+   --> etherparse/src/err/read_error.rs:104:13
+    |
+104 |     fn from(value: ip::HeaderReadError) -> Self {
+    |             ^^^^^ help: if this is intentional, prefix it with an underscore: `_value`
+
+warning: unused variable: `value`
+   --> etherparse/src/err/read_error.rs:110:13
+    |
+110 |     fn from(value: ip::HeadersSliceError) -> Self {
+    |             ^^^^^ help: if this is intentional, prefix it with an underscore: `_value`
+
+warning: unused variable: `value`
+   --> etherparse/src/err/read_error.rs:116:13
+    |
+116 |     fn from(value: ip::SliceError) -> Self {
+    |             ^^^^^ help: if this is intentional, prefix it with an underscore: `_value`
+
+warning: unused variable: `value`
+   --> etherparse/src/err/read_error.rs:122:13
+    |
+122 |     fn from(value: ip_auth::HeaderError) -> Self {
+    |             ^^^^^ help: if this is intentional, prefix it with an underscore: `_value`
+
+warning: unused variable: `value`
+   --> etherparse/src/err/read_error.rs:128:13
+    |
+128 |     fn from(value: ip_auth::HeaderReadError) -> Self {
+    |             ^^^^^ help: if this is intentional, prefix it with an underscore: `_value`
+
+warning: unused variable: `value`
+   --> etherparse/src/err/read_error.rs:134:13
+    |
+134 |     fn from(value: ip_auth::HeaderSliceError) -> Self {
+    |             ^^^^^ help: if this is intentional, prefix it with an underscore: `_value`
+
+warning: unused variable: `value`
+   --> etherparse/src/err/read_error.rs:140:13
+    |
+140 |     fn from(value: ipv4::HeaderError) -> Self {
+    |             ^^^^^ help: if this is intentional, prefix it with an underscore: `_value`
+
+warning: unused variable: `value`
+   --> etherparse/src/err/read_error.rs:146:13
+    |
+146 |     fn from(value: ipv4::HeaderReadError) -> Self {
+    |             ^^^^^ help: if this is intentional, prefix it with an underscore: `_value`
+
+warning: unused variable: `value`
+   --> etherparse/src/err/read_error.rs:152:13
+    |
+152 |     fn from(value: ipv4::HeaderSliceError) -> Self {
+    |             ^^^^^ help: if this is intentional, prefix it with an underscore: `_value`
+
+warning: unused variable: `value`
+   --> etherparse/src/err/read_error.rs:158:13
+    |
+158 |     fn from(value: ipv4::SliceError) -> Self {
+    |             ^^^^^ help: if this is intentional, prefix it with an underscore: `_value`
+
+warning: unused variable: `value`
+   --> etherparse/src/err/read_error.rs:164:13
+    |
+164 |     fn from(value: ipv6::HeaderError) -> Self {
+    |             ^^^^^ help: if this is intentional, prefix it with an underscore: `_value`
+
+warning: unused variable: `value`
+   --> etherparse/src/err/read_error.rs:170:13
+    |
+170 |     fn from(value: ipv6::HeaderReadError) -> Self {
+    |             ^^^^^ help: if this is intentional, prefix it with an underscore: `_value`
+
+warning: unused variable: `value`
+   --> etherparse/src/err/read_error.rs:176:13
+    |
+176 |     fn from(value: ipv6::HeaderSliceError) -> Self {
+    |             ^^^^^ help: if this is intentional, prefix it with an underscore: `_value`
+
+warning: unused variable: `value`
+   --> etherparse/src/err/read_error.rs:182:13
+    |
+182 |     fn from(value: ipv6::SliceError) -> Self {
+    |             ^^^^^ help: if this is intentional, prefix it with an underscore: `_value`
+
+warning: unused variable: `value`
+   --> etherparse/src/err/read_error.rs:188:13
+    |
+188 |     fn from(value: ipv6_exts::HeaderError) -> Self {
+    |             ^^^^^ help: if this is intentional, prefix it with an underscore: `_value`
+
+warning: unused variable: `value`
+   --> etherparse/src/err/read_error.rs:194:13
+    |
+194 |     fn from(value: ipv6_exts::HeaderReadError) -> Self {
+    |             ^^^^^ help: if this is intentional, prefix it with an underscore: `_value`
+
+warning: unused variable: `value`
+   --> etherparse/src/err/read_error.rs:200:13
+    |
+200 |     fn from(value: ipv6_exts::HeaderSliceError) -> Self {
+    |             ^^^^^ help: if this is intentional, prefix it with an underscore: `_value`
+
+warning: unused variable: `value`
+   --> etherparse/src/err/read_error.rs:206:13
+    |
+206 |     fn from(value: linux_sll::HeaderError) -> Self {
+    |             ^^^^^ help: if this is intentional, prefix it with an underscore: `_value`
+
+warning: unused variable: `value`
+   --> etherparse/src/err/read_error.rs:212:13
+    |
+212 |     fn from(value: linux_sll::HeaderReadError) -> Self {
+    |             ^^^^^ help: if this is intentional, prefix it with an underscore: `_value`
+
+warning: unused variable: `value`
+   --> etherparse/src/err/read_error.rs:218:13
+    |
+218 |     fn from(value: linux_sll::HeaderSliceError) -> Self {
+    |             ^^^^^ help: if this is intentional, prefix it with an underscore: `_value`
+
+warning: unused variable: `value`
+   --> etherparse/src/err/read_error.rs:224:13
+    |
+224 |     fn from(value: macsec::HeaderError) -> Self {
+    |             ^^^^^ help: if this is intentional, prefix it with an underscore: `_value`
+
+warning: unused variable: `value`
+   --> etherparse/src/err/read_error.rs:230:13
+    |
+230 |     fn from(value: macsec::HeaderReadError) -> Self {
+    |             ^^^^^ help: if this is intentional, prefix it with an underscore: `_value`
+
+warning: unused variable: `value`
+   --> etherparse/src/err/read_error.rs:236:13
+    |
+236 |     fn from(value: macsec::HeaderSliceError) -> Self {
+    |             ^^^^^ help: if this is intentional, prefix it with an underscore: `_value`
+
+warning: unused variable: `value`
+   --> etherparse/src/err/read_error.rs:242:13
+    |
+242 |     fn from(value: packet::SliceError) -> Self {
+    |             ^^^^^ help: if this is intentional, prefix it with an underscore: `_value`
+
+warning: unused variable: `value`
+   --> etherparse/src/err/read_error.rs:248:13
+    |
+248 |     fn from(value: tcp::HeaderError) -> Self {
+    |             ^^^^^ help: if this is intentional, prefix it with an underscore: `_value`
+
+warning: unused variable: `value`
+   --> etherparse/src/err/read_error.rs:254:13
+    |
+254 |     fn from(value: tcp::HeaderReadError) -> Self {
+    |             ^^^^^ help: if this is intentional, prefix it with an underscore: `_value`
+
+warning: unused variable: `value`
+   --> etherparse/src/err/read_error.rs:260:13
+    |
+260 |     fn from(value: tcp::HeaderSliceError) -> Self {
+    |             ^^^^^ help: if this is intentional, prefix it with an underscore: `_value`
+
+warning: unused variable: `slice`
+  --> etherparse/src/link/macsec_header_slice.rs:14:9
+   |
+14 |         slice: &'a [u8],
+   |         ^^^^^ help: if this is intentional, prefix it with an underscore: `_slice`
+
+error[E0133]: call to unsafe function `vlan_pcp::VlanPcp::new_unchecked` is unsafe and requires unsafe function or block
+  --> etherparse/src/link/single_vlan_header.rs:49:18
+   |
+49 |             pcp: VlanPcp::new_unchecked((bytes[0] >> 5) & 0b111),
+   |                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ call to unsafe function
+   |
+   = note: consult the function's documentation for information on how to avoid undefined behavior
+
+error[E0133]: call to unsafe function `vlan_id::VlanId::new_unchecked` is unsafe and requires unsafe function or block
+  --> etherparse/src/link/single_vlan_header.rs:51:22
+   |
+51 |             vlan_id: VlanId::new_unchecked(u16::from_be_bytes([bytes[0] & 0b1111, bytes[1]])),
+   |                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ call to unsafe function
+   |
+   = note: consult the function's documentation for information on how to avoid undefined behavior
+
+warning: unused variable: `slice`
+  --> etherparse/src/net/arp_packet_slice.rs:14:23
+   |
+14 |     pub fn from_slice(slice: &'a [u8]) -> Result<ArpPacketSlice<'a>, LenError> {
+   |                       ^^^^^ help: if this is intentional, prefix it with an underscore: `_slice`
+
+warning: unused variable: `code_u8`
+  --> etherparse/src/transport/icmpv4/time_exceeded_code.rs:15:20
+   |
+15 |     pub fn from_u8(code_u8: u8) -> Option<TimeExceededCode> {
+   |                    ^^^^^^^ help: if this is intentional, prefix it with an underscore: `_code_u8`
+
+warning: unused variable: `code_u8`
+  --> etherparse/src/transport/icmpv6/time_exceeded_code.rs:15:20
+   |
+15 |     pub fn from_u8(code_u8: u8) -> Option<TimeExceededCode> {
+   |                    ^^^^^^^ help: if this is intentional, prefix it with an underscore: `_code_u8`
+
+warning: unused variable: `slice`
+  --> etherparse/src/transport/icmpv6/ndp_option/target_link_layer_address_option_slice.rs:21:23
+   |
+21 |     pub fn from_slice(slice: &'a [u8]) -> Result<Self, NdpOptionReadError> {
+   |                       ^^^^^ help: if this is intentional, prefix it with an underscore: `_slice`
+
+warning: unused variable: `bytes`
+  --> etherparse/src/transport/icmpv6/router_advertisement_header.rs:49:23
+   |
+49 |     pub fn from_bytes(bytes: [u8; 4]) -> Self {
+   |                       ^^^^^ help: if this is intentional, prefix it with an underscore: `_bytes`
+
+warning: unused variable: `address`
+ --> etherparse/src/transport/igmp/group_address.rs:7:16
+  |
+7 |     pub fn new(address: [u8; 4]) -> Self {
+  |                ^^^^^^^ help: if this is intentional, prefix it with an underscore: `_address`
+
+warning: unused variable: `value`
+  --> etherparse/src/transport/igmp/group_address.rs:15:13
+   |
+15 |     fn from(value: GroupAddress) -> Self {
+   |             ^^^^^ help: if this is intentional, prefix it with an underscore: `_value`
+
+warning: unused variable: `value`
+  --> etherparse/src/transport/igmp/group_address.rs:20:13
+   |
+20 |     fn from(value: [u8; 4]) -> Self {
+   |             ^^^^^ help: if this is intentional, prefix it with an underscore: `_value`
+
+warning: unused variable: `value`
+  --> etherparse/src/transport/igmp/group_address.rs:27:13
+   |
+27 |     fn from(value: std::net::Ipv4Addr) -> Self {
+   |             ^^^^^ help: if this is intentional, prefix it with an underscore: `_value`
+
+warning: unused variable: `value`
+  --> etherparse/src/transport/igmp/group_address.rs:34:13
+   |
+34 |     fn from(value: GroupAddress) -> Self {
+   |             ^^^^^ help: if this is intentional, prefix it with an underscore: `_value`
+
+warning: unused variable: `value`
+  --> etherparse/src/transport/igmp/membership_query_with_sources_header.rs:65:33
+   |
+65 |     pub fn set_flags(&mut self, value: u8) {
+   |                                 ^^^^^ help: if this is intentional, prefix it with an underscore: `_value`
+
+warning: unused variable: `value`
+  --> etherparse/src/transport/igmp/membership_query_with_sources_header.rs:75:34
+   |
+75 |     pub fn set_s_flag(&mut self, value: bool) {
+   |                                  ^^^^^ help: if this is intentional, prefix it with an underscore: `_value`
+
+warning: unused variable: `value`
+  --> etherparse/src/transport/igmp/membership_query_with_sources_header.rs:85:31
+   |
+85 |     pub fn set_qrv(&mut self, value: Qrv) {
+   |                               ^^^^^ help: if this is intentional, prefix it with an underscore: `_value`
+
+warning: unused variable: `f`
+  --> etherparse/src/transport/igmp/qrv.rs:86:19
+   |
+86 |     fn fmt(&self, f: &mut core::fmt::Formatter<'_>) -> core::fmt::Result {
+   |                   ^ help: if this is intentional, prefix it with an underscore: `_f`
+
+warning: unused variable: `value`
+  --> etherparse/src/transport/igmp/qrv.rs:92:13
+   |
+92 |     fn from(value: Qrv) -> Self {
+   |             ^^^^^ help: if this is intentional, prefix it with an underscore: `_value`
+
+warning: unused variable: `value`
+  --> etherparse/src/transport/igmp/qrv.rs:99:17
+   |
+99 |     fn try_from(value: u8) -> Result<Self, Self::Error> {
+   |                 ^^^^^ help: if this is intentional, prefix it with an underscore: `_value`
+
+warning: unused variable: `slice`
+  --> etherparse/src/transport/igmp/report_group_record_v3_header.rs:60:9
+   |
+60 |         slice: &[u8],
+   |         ^^^^^ help: if this is intentional, prefix it with an underscore: `_slice`
+
+warning: unused variable: `icmp_type`
+  --> etherparse/src/transport/icmpv6_header.rs:32:16
+   |
+32 |     pub fn new(icmp_type: Icmpv6Type) -> Icmpv6Header {
+   |                ^^^^^^^^^ help: if this is intentional, prefix it with an underscore: `_icmp_type`
+
+warning: unused variable: `icmp_type`
+  --> etherparse/src/transport/icmpv6_header.rs:38:9
+   |
+38 |         icmp_type: Icmpv6Type,
+   |         ^^^^^^^^^ help: if this is intentional, prefix it with an underscore: `_icmp_type`
+
+warning: unused variable: `source_ip`
+  --> etherparse/src/transport/icmpv6_header.rs:39:9
+   |
+39 |         source_ip: [u8; 16],
+   |         ^^^^^^^^^ help: if this is intentional, prefix it with an underscore: `_source_ip`
+
+warning: unused variable: `destination_ip`
+  --> etherparse/src/transport/icmpv6_header.rs:40:9
+   |
+40 |         destination_ip: [u8; 16],
+   |         ^^^^^^^^^^^^^^ help: if this is intentional, prefix it with an underscore: `_destination_ip`
+
+warning: unused variable: `payload`
+  --> etherparse/src/transport/icmpv6_header.rs:41:9
+   |
+41 |         payload: &[u8],
+   |         ^^^^^^^ help: if this is intentional, prefix it with an underscore: `_payload`
+
+warning: unused variable: `slice`
+  --> etherparse/src/transport/icmpv6_header.rs:48:23
+   |
+48 |     pub fn from_slice(slice: &[u8]) -> Result<(Icmpv6Header, &[u8]), err::LenError> {
+   |                       ^^^^^ help: if this is intentional, prefix it with an underscore: `_slice`
+
+warning: unused variable: `reader`
+  --> etherparse/src/transport/icmpv6_header.rs:55:9
+   |
+55 |         reader: &mut T,
+   |         ^^^^^^ help: if this is intentional, prefix it with an underscore: `_reader`
+
+warning: unused variable: `writer`
+  --> etherparse/src/transport/icmpv6_header.rs:64:9
+   |
+64 |         writer: &mut T,
+   |         ^^^^^^ help: if this is intentional, prefix it with an underscore: `_writer`
+
+warning: unused variable: `source_ip`
+  --> etherparse/src/transport/icmpv6_header.rs:85:9
+   |
+85 |         source_ip: [u8; 16],
+   |         ^^^^^^^^^ help: if this is intentional, prefix it with an underscore: `_source_ip`
+
+warning: unused variable: `destination_ip`
+  --> etherparse/src/transport/icmpv6_header.rs:86:9
+   |
+86 |         destination_ip: [u8; 16],
+   |         ^^^^^^^^^^^^^^ help: if this is intentional, prefix it with an underscore: `_destination_ip`
+
+warning: unused variable: `payload`
+  --> etherparse/src/transport/icmpv6_header.rs:87:9
+   |
+87 |         payload: &[u8],
+   |         ^^^^^^^ help: if this is intentional, prefix it with an underscore: `_payload`
+
+warning: unused variable: `slice`
+  --> etherparse/src/transport/icmpv6_slice.rs:19:23
+   |
+19 |     pub fn from_slice(slice: &'a [u8]) -> Result<Icmpv6Slice<'a>, err::LenError> {
+   |                       ^^^^^ help: if this is intentional, prefix it with an underscore: `_slice`
+
+warning: unused variable: `source_ip`
+  --> etherparse/src/transport/icmpv6_slice.rs:55:9
+   |
+55 |         source_ip: [u8; 16],
+   |         ^^^^^^^^^ help: if this is intentional, prefix it with an underscore: `_source_ip`
+
+warning: unused variable: `destination_ip`
+  --> etherparse/src/transport/icmpv6_slice.rs:56:9
+   |
+56 |         destination_ip: [u8; 16],
+   |         ^^^^^^^^^^^^^^ help: if this is intentional, prefix it with an underscore: `_destination_ip`
+
+warning: unused variable: `source_ip`
+   --> etherparse/src/transport/icmpv6_type.rs:549:9
+    |
+549 |         source_ip: [u8; 16],
+    |         ^^^^^^^^^ help: if this is intentional, prefix it with an underscore: `_source_ip`
+
+warning: unused variable: `destination_ip`
+   --> etherparse/src/transport/icmpv6_type.rs:550:9
+    |
+550 |         destination_ip: [u8; 16],
+    |         ^^^^^^^^^^^^^^ help: if this is intentional, prefix it with an underscore: `_destination_ip`
+
+warning: unused variable: `payload`
+   --> etherparse/src/transport/icmpv6_type.rs:551:9
+    |
+551 |         payload: &[u8],
+    |         ^^^^^^^ help: if this is intentional, prefix it with an underscore: `_payload`
+
+warning: unused variable: `source_ip`
+   --> etherparse/src/transport/icmpv6_type.rs:558:9
+    |
+558 |         source_ip: [u8; 16],
+    |         ^^^^^^^^^ help: if this is intentional, prefix it with an underscore: `_source_ip`
+
+warning: unused variable: `destination_ip`
+   --> etherparse/src/transport/icmpv6_type.rs:559:9
+    |
+559 |         destination_ip: [u8; 16],
+    |         ^^^^^^^^^^^^^^ help: if this is intentional, prefix it with an underscore: `_destination_ip`
+
+warning: unused variable: `payload`
+   --> etherparse/src/transport/icmpv6_type.rs:560:9
+    |
+560 |         payload: &[u8],
+    |         ^^^^^^^ help: if this is intentional, prefix it with an underscore: `_payload`
+
+warning: unused variable: `payload`
+   --> etherparse/src/transport/icmpv6_type.rs:568:9
+    |
+568 |         payload: &'a [u8],
+    |         ^^^^^^^ help: if this is intentional, prefix it with an underscore: `_payload`
+
+warning: unused variable: `payload`
+   --> etherparse/src/transport/icmpv6_type.rs:583:9
+    |
+583 |         payload: &'a [u8],
+    |         ^^^^^^^ help: if this is intentional, prefix it with an underscore: `_payload`
+
+warning: unused variable: `igmp_type`
+  --> etherparse/src/transport/igmp_header.rs:86:16
+   |
+86 |     pub fn new(igmp_type: IgmpType) -> IgmpHeader {
+   |                ^^^^^^^^^ help: if this is intentional, prefix it with an underscore: `_igmp_type`
+
+warning: unused variable: `igmp_type`
+  --> etherparse/src/transport/igmp_header.rs:97:26
+   |
+97 |     pub fn with_checksum(igmp_type: IgmpType, payload: &[u8]) -> IgmpHeader {
+   |                          ^^^^^^^^^ help: if this is intentional, prefix it with an underscore: `_igmp_type`
+
+warning: unused variable: `payload`
+  --> etherparse/src/transport/igmp_header.rs:97:47
+   |
+97 |     pub fn with_checksum(igmp_type: IgmpType, payload: &[u8]) -> IgmpHeader {
+   |                                               ^^^^^^^ help: if this is intentional, prefix it with an underscore: `_payload`
+
+warning: unused variable: `slice`
+   --> etherparse/src/transport/igmp_header.rs:135:23
+    |
+135 |     pub fn from_slice(slice: &[u8]) -> Result<(IgmpHeader, &[u8]), LenError> {
+    |                       ^^^^^ help: if this is intentional, prefix it with an underscore: `_slice`
+
+warning: unused variable: `payload`
+   --> etherparse/src/transport/igmp_header.rs:151:33
+    |
+151 |     pub fn calc_checksum(&self, payload: &[u8]) -> u16 {
+    |                                 ^^^^^^^ help: if this is intentional, prefix it with an underscore: `_payload`
+
+warning: unused variable: `source_port`
+  --> etherparse/src/transport/tcp_header.rs:86:9
+   |
+86 |         source_port: u16,
+   |         ^^^^^^^^^^^ help: if this is intentional, prefix it with an underscore: `_source_port`
+
+warning: unused variable: `destination_port`
+  --> etherparse/src/transport/tcp_header.rs:87:9
+   |
+87 |         destination_port: u16,
+   |         ^^^^^^^^^^^^^^^^ help: if this is intentional, prefix it with an underscore: `_destination_port`
+
+warning: unused variable: `sequence_number`
+  --> etherparse/src/transport/tcp_header.rs:88:9
+   |
+88 |         sequence_number: u32,
+   |         ^^^^^^^^^^^^^^^ help: if this is intentional, prefix it with an underscore: `_sequence_number`
+
+warning: unused variable: `window_size`
+  --> etherparse/src/transport/tcp_header.rs:89:9
+   |
+89 |         window_size: u16,
+   |         ^^^^^^^^^^^ help: if this is intentional, prefix it with an underscore: `_window_size`
+
+warning: unused variable: `elements`
+   --> etherparse/src/transport/tcp_header.rs:154:9
+    |
+154 |         elements: &[TcpOptionElement],
+    |         ^^^^^^^^ help: if this is intentional, prefix it with an underscore: `_elements`
+
+warning: unused variable: `data`
+   --> etherparse/src/transport/tcp_header.rs:159:39
+    |
+159 |     pub fn set_options_raw(&mut self, data: &[u8]) -> Result<(), TcpOptionWriteError> {
+    |                                       ^^^^ help: if this is intentional, prefix it with an underscore: `_data`
+
+warning: unused variable: `slice`
+   --> etherparse/src/transport/tcp_header.rs:172:9
+    |
+172 |         slice: &[u8],
+    |         ^^^^^ help: if this is intentional, prefix it with an underscore: `_slice`
+
+warning: unused variable: `slice`
+   --> etherparse/src/transport/tcp_header.rs:179:9
+    |
+179 |         slice: &[u8],
+    |         ^^^^^ help: if this is intentional, prefix it with an underscore: `_slice`
+
+warning: unused variable: `reader`
+   --> etherparse/src/transport/tcp_header.rs:187:9
+    |
+187 |         reader: &mut T,
+    |         ^^^^^^ help: if this is intentional, prefix it with an underscore: `_reader`
+
+warning: unused variable: `writer`
+   --> etherparse/src/transport/tcp_header.rs:196:9
+    |
+196 |         writer: &mut T,
+    |         ^^^^^^ help: if this is intentional, prefix it with an underscore: `_writer`
+
+warning: unused variable: `ip_header`
+   --> etherparse/src/transport/tcp_header.rs:207:9
+    |
+207 |         ip_header: &Ipv4Header,
+    |         ^^^^^^^^^ help: if this is intentional, prefix it with an underscore: `_ip_header`
+
+warning: unused variable: `payload`
+   --> etherparse/src/transport/tcp_header.rs:208:9
+    |
+208 |         payload: &[u8],
+    |         ^^^^^^^ help: if this is intentional, prefix it with an underscore: `_payload`
+
+warning: unused variable: `source_ip`
+   --> etherparse/src/transport/tcp_header.rs:215:9
+    |
+215 |         source_ip: [u8; 4],
+    |         ^^^^^^^^^ help: if this is intentional, prefix it with an underscore: `_source_ip`
+
+warning: unused variable: `destination_ip`
+   --> etherparse/src/transport/tcp_header.rs:216:9
+    |
+216 |         destination_ip: [u8; 4],
+    |         ^^^^^^^^^^^^^^ help: if this is intentional, prefix it with an underscore: `_destination_ip`
+
+warning: unused variable: `payload`
+   --> etherparse/src/transport/tcp_header.rs:217:9
+    |
+217 |         payload: &[u8],
+    |         ^^^^^^^ help: if this is intentional, prefix it with an underscore: `_payload`
+
+warning: unused variable: `ip_header`
+   --> etherparse/src/transport/tcp_header.rs:224:9
+    |
+224 |         ip_header: &Ipv6Header,
+    |         ^^^^^^^^^ help: if this is intentional, prefix it with an underscore: `_ip_header`
+
+warning: unused variable: `payload`
+   --> etherparse/src/transport/tcp_header.rs:225:9
+    |
+225 |         payload: &[u8],
+    |         ^^^^^^^ help: if this is intentional, prefix it with an underscore: `_payload`
+
+warning: unused variable: `source`
+   --> etherparse/src/transport/tcp_header.rs:232:9
+    |
+232 |         source: [u8; 16],
+    |         ^^^^^^ help: if this is intentional, prefix it with an underscore: `_source`
+
+warning: unused variable: `destination`
+   --> etherparse/src/transport/tcp_header.rs:233:9
+    |
+233 |         destination: [u8; 16],
+    |         ^^^^^^^^^^^ help: if this is intentional, prefix it with an underscore: `_destination`
+
+warning: unused variable: `payload`
+   --> etherparse/src/transport/tcp_header.rs:234:9
+    |
+234 |         payload: &[u8],
+    |         ^^^^^^^ help: if this is intentional, prefix it with an underscore: `_payload`
+
+warning: unused variable: `ip_pseudo_header_sum`
+   --> etherparse/src/transport/tcp_header.rs:241:9
+    |
+241 |         ip_pseudo_header_sum: checksum::Sum16BitWords,
+    |         ^^^^^^^^^^^^^^^^^^^^ help: if this is intentional, prefix it with an underscore: `_ip_pseudo_header_sum`
+
+warning: unused variable: `payload`
+   --> etherparse/src/transport/tcp_header.rs:242:9
+    |
+242 |         payload: &[u8],
+    |         ^^^^^^^ help: if this is intentional, prefix it with an underscore: `_payload`
+
+warning: unused variable: `slice`
+  --> etherparse/src/transport/tcp_header_slice.rs:13:9
+   |
+13 |         slice: &'a [u8],
+   |         ^^^^^ help: if this is intentional, prefix it with an underscore: `_slice`
+
+warning: unused variable: `ip_header`
+   --> etherparse/src/transport/tcp_header_slice.rs:148:9
+    |
+148 |         ip_header: &Ipv4HeaderSlice,
+    |         ^^^^^^^^^ help: if this is intentional, prefix it with an underscore: `_ip_header`
+
+warning: unused variable: `payload`
+   --> etherparse/src/transport/tcp_header_slice.rs:149:9
+    |
+149 |         payload: &[u8],
+    |         ^^^^^^^ help: if this is intentional, prefix it with an underscore: `_payload`
+
+warning: unused variable: `source_ip`
+   --> etherparse/src/transport/tcp_header_slice.rs:156:9
+    |
+156 |         source_ip: [u8; 4],
+    |         ^^^^^^^^^ help: if this is intentional, prefix it with an underscore: `_source_ip`
+
+warning: unused variable: `destination_ip`
+   --> etherparse/src/transport/tcp_header_slice.rs:157:9
+    |
+157 |         destination_ip: [u8; 4],
+    |         ^^^^^^^^^^^^^^ help: if this is intentional, prefix it with an underscore: `_destination_ip`
+
+warning: unused variable: `payload`
+   --> etherparse/src/transport/tcp_header_slice.rs:158:9
+    |
+158 |         payload: &[u8],
+    |         ^^^^^^^ help: if this is intentional, prefix it with an underscore: `_payload`
+
+warning: unused variable: `ip_header`
+   --> etherparse/src/transport/tcp_header_slice.rs:165:9
+    |
+165 |         ip_header: &Ipv6HeaderSlice,
+    |         ^^^^^^^^^ help: if this is intentional, prefix it with an underscore: `_ip_header`
+
+warning: unused variable: `payload`
+   --> etherparse/src/transport/tcp_header_slice.rs:166:9
+    |
+166 |         payload: &[u8],
+    |         ^^^^^^^ help: if this is intentional, prefix it with an underscore: `_payload`
+
+warning: unused variable: `source`
+   --> etherparse/src/transport/tcp_header_slice.rs:173:9
+    |
+173 |         source: [u8; 16],
+    |         ^^^^^^ help: if this is intentional, prefix it with an underscore: `_source`
+
+warning: unused variable: `destination`
+   --> etherparse/src/transport/tcp_header_slice.rs:174:9
+    |
+174 |         destination: [u8; 16],
+    |         ^^^^^^^^^^^ help: if this is intentional, prefix it with an underscore: `_destination`
+
+warning: unused variable: `payload`
+   --> etherparse/src/transport/tcp_header_slice.rs:175:9
+    |
+175 |         payload: &[u8],
+    |         ^^^^^^^ help: if this is intentional, prefix it with an underscore: `_payload`
+
+warning: unused variable: `ip_pseudo_header_sum`
+   --> etherparse/src/transport/tcp_header_slice.rs:182:9
+    |
+182 |         ip_pseudo_header_sum: checksum::Sum16BitWords,
+    |         ^^^^^^^^^^^^^^^^^^^^ help: if this is intentional, prefix it with an underscore: `_ip_pseudo_header_sum`
+
+warning: unused variable: `payload`
+   --> etherparse/src/transport/tcp_header_slice.rs:183:9
+    |
+183 |         payload: &[u8],
+    |         ^^^^^^^ help: if this is intentional, prefix it with an underscore: `_payload`
+
+warning: unused variable: `f`
+  --> etherparse/src/transport/tcp_option_read_error.rs:19:19
+   |
+19 |     fn fmt(&self, f: &mut core::fmt::Formatter<'_>) -> core::fmt::Result {
+   |                   ^ help: if this is intentional, prefix it with an underscore: `_f`
+
+warning: unused variable: `f`
+  --> etherparse/src/transport/tcp_option_write_error.rs:17:19
+   |
+17 |     fn fmt(&self, f: &mut core::fmt::Formatter<'_>) -> core::fmt::Result {
+   |                   ^ help: if this is intentional, prefix it with an underscore: `_f`
+
+warning: unused variable: `slice`
+   --> etherparse/src/transport/tcp_options.rs:189:27
+    |
+189 |     pub fn try_from_slice(slice: &[u8]) -> Result<TcpOptions, TcpOptionWriteError> {
+    |                           ^^^^^ help: if this is intentional, prefix it with an underscore: `_slice`
+
+warning: unused variable: `elements`
+   --> etherparse/src/transport/tcp_options.rs:220:9
+    |
+220 |         elements: &[TcpOptionElement],
+    |         ^^^^^^^^ help: if this is intentional, prefix it with an underscore: `_elements`
+
+warning: unused variable: `other`
+   --> etherparse/src/transport/tcp_options.rs:310:18
+    |
+310 |     fn eq(&self, other: &Self) -> bool {
+    |                  ^^^^^ help: if this is intentional, prefix it with an underscore: `_other`
+
+warning: unused variable: `value`
+   --> etherparse/src/transport/tcp_options.rs:317:17
+    |
+317 |     fn try_from(value: &'a [u8]) -> Result<Self, Self::Error> {
+    |                 ^^^^^ help: if this is intentional, prefix it with an underscore: `_value`
+
+warning: unused variable: `value`
+   --> etherparse/src/transport/tcp_options.rs:324:17
+    |
+324 |     fn try_from(value: &'a [TcpOptionElement]) -> Result<Self, Self::Error> {
+    |                 ^^^^^ help: if this is intentional, prefix it with an underscore: `_value`
+
+warning: unused variable: `f`
+   --> etherparse/src/transport/tcp_options.rs:329:19
+    |
+329 |     fn fmt(&self, f: &mut core::fmt::Formatter<'_>) -> core::fmt::Result {
+    |                   ^ help: if this is intentional, prefix it with an underscore: `_f`
+
+warning: unused variable: `state`
+   --> etherparse/src/transport/tcp_options.rs:334:43
+    |
+334 |     fn hash<H: core::hash::Hasher>(&self, state: &mut H) {
+    |                                           ^^^^^ help: if this is intentional, prefix it with an underscore: `_state`
+
+warning: unused variable: `other`
+   --> etherparse/src/transport/tcp_options.rs:339:27
+    |
+339 |     fn partial_cmp(&self, other: &Self) -> Option<core::cmp::Ordering> {
+    |                           ^^^^^ help: if this is intentional, prefix it with an underscore: `_other`
+
+warning: unused variable: `other`
+   --> etherparse/src/transport/tcp_options.rs:344:19
+    |
+344 |     fn cmp(&self, other: &Self) -> core::cmp::Ordering {
+    |                   ^^^^^ help: if this is intentional, prefix it with an underscore: `_other`
+
+warning: unused variable: `values`
+   --> etherparse/src/transport/tcp_options.rs:396:13
+    |
+396 |     fn from(values: [u8; 40]) -> Self {
+    |             ^^^^^^ help: if this is intentional, prefix it with an underscore: `_values`
+
+warning: unused variable: `options`
+ --> etherparse/src/transport/tcp_options_iterator.rs:9:23
+  |
+9 |     pub fn from_slice(options: &'a [u8]) -> TcpOptionsIterator<'a> {
+  |                       ^^^^^^^ help: if this is intentional, prefix it with an underscore: `_options`
+
+warning: unused variable: `fmt`
+  --> etherparse/src/transport/tcp_options_iterator.rs:24:19
+   |
+24 |     fn fmt(&self, fmt: &mut core::fmt::Formatter) -> Result<(), core::fmt::Error> {
+   |                   ^^^ help: if this is intentional, prefix it with an underscore: `_fmt`
+
+warning: unused variable: `slice`
+  --> etherparse/src/transport/tcp_slice.rs:15:9
+   |
+15 |         slice: &'a [u8],
+   |         ^^^^^ help: if this is intentional, prefix it with an underscore: `_slice`
+
+warning: unused variable: `source_ip`
+   --> etherparse/src/transport/tcp_slice.rs:169:9
+    |
+169 |         source_ip: [u8; 4],
+    |         ^^^^^^^^^ help: if this is intentional, prefix it with an underscore: `_source_ip`
+
+warning: unused variable: `destination_ip`
+   --> etherparse/src/transport/tcp_slice.rs:170:9
+    |
+170 |         destination_ip: [u8; 4],
+    |         ^^^^^^^^^^^^^^ help: if this is intentional, prefix it with an underscore: `_destination_ip`
+
+warning: unused variable: `source`
+   --> etherparse/src/transport/tcp_slice.rs:178:9
+    |
+178 |         source: [u8; 16],
+    |         ^^^^^^ help: if this is intentional, prefix it with an underscore: `_source`
+
+warning: unused variable: `destination`
+   --> etherparse/src/transport/tcp_slice.rs:179:9
+    |
+179 |         destination: [u8; 16],
+    |         ^^^^^^^^^^^ help: if this is intentional, prefix it with an underscore: `_destination`
+
+warning: unused variable: `ip_pseudo_header_sum`
+   --> etherparse/src/transport/tcp_slice.rs:186:9
+    |
+186 |         ip_pseudo_header_sum: checksum::Sum16BitWords,
+    |         ^^^^^^^^^^^^^^^^^^^^ help: if this is intentional, prefix it with an underscore: `_ip_pseudo_header_sum`
+
+warning: unused variable: `f`
+   --> etherparse/src/transport/tcp_slice.rs:192:19
+    |
+192 |     fn fmt(&self, f: &mut core::fmt::Formatter<'_>) -> core::fmt::Result {
+    |                   ^ help: if this is intentional, prefix it with an underscore: `_f`
+
+warning: unused variable: `ip_header`
+  --> etherparse/src/transport/transport_header.rs:63:9
+   |
+63 |         ip_header: &Ipv4Header,
+   |         ^^^^^^^^^ help: if this is intentional, prefix it with an underscore: `_ip_header`
+
+warning: unused variable: `payload`
+  --> etherparse/src/transport/transport_header.rs:64:9
+   |
+64 |         payload: &[u8],
+   |         ^^^^^^^ help: if this is intentional, prefix it with an underscore: `_payload`
+
+warning: unused variable: `ip_header`
+  --> etherparse/src/transport/transport_header.rs:72:9
+   |
+72 |         ip_header: &Ipv6Header,
+   |         ^^^^^^^^^ help: if this is intentional, prefix it with an underscore: `_ip_header`
+
+warning: unused variable: `payload`
+  --> etherparse/src/transport/transport_header.rs:73:9
+   |
+73 |         payload: &[u8],
+   |         ^^^^^^^ help: if this is intentional, prefix it with an underscore: `_payload`
+
+warning: unused variable: `writer`
+  --> etherparse/src/transport/transport_header.rs:82:9
+   |
+82 |         writer: &mut T,
+   |         ^^^^^^ help: if this is intentional, prefix it with an underscore: `_writer`
+
+warning: unused variable: `source_port`
+  --> etherparse/src/transport/udp_header.rs:23:9
+   |
+23 |         source_port: u16,
+   |         ^^^^^^^^^^^ help: if this is intentional, prefix it with an underscore: `_source_port`
+
+warning: unused variable: `destination_port`
+  --> etherparse/src/transport/udp_header.rs:24:9
+   |
+24 |         destination_port: u16,
+   |         ^^^^^^^^^^^^^^^^ help: if this is intentional, prefix it with an underscore: `_destination_port`
+
+warning: unused variable: `payload_length`
+  --> etherparse/src/transport/udp_header.rs:25:9
+   |
+25 |         payload_length: usize,
+   |         ^^^^^^^^^^^^^^ help: if this is intentional, prefix it with an underscore: `_payload_length`
+
+warning: unused variable: `source_port`
+  --> etherparse/src/transport/udp_header.rs:31:9
+   |
+31 |         source_port: u16,
+   |         ^^^^^^^^^^^ help: if this is intentional, prefix it with an underscore: `_source_port`
+
+warning: unused variable: `destination_port`
+  --> etherparse/src/transport/udp_header.rs:32:9
+   |
+32 |         destination_port: u16,
+   |         ^^^^^^^^^^^^^^^^ help: if this is intentional, prefix it with an underscore: `_destination_port`
+
+warning: unused variable: `ip_header`
+  --> etherparse/src/transport/udp_header.rs:33:9
+   |
+33 |         ip_header: &Ipv4Header,
+   |         ^^^^^^^^^ help: if this is intentional, prefix it with an underscore: `_ip_header`
+
+warning: unused variable: `payload`
+  --> etherparse/src/transport/udp_header.rs:34:9
+   |
+34 |         payload: &[u8],
+   |         ^^^^^^^ help: if this is intentional, prefix it with an underscore: `_payload`
+
+warning: unused variable: `ip_header`
+  --> etherparse/src/transport/udp_header.rs:41:9
+   |
+41 |         ip_header: &Ipv4Header,
+   |         ^^^^^^^^^ help: if this is intentional, prefix it with an underscore: `_ip_header`
+
+warning: unused variable: `payload`
+  --> etherparse/src/transport/udp_header.rs:42:9
+   |
+42 |         payload: &[u8],
+   |         ^^^^^^^ help: if this is intentional, prefix it with an underscore: `_payload`
+
+warning: unused variable: `source`
+  --> etherparse/src/transport/udp_header.rs:49:9
+   |
+49 |         source: [u8; 4],
+   |         ^^^^^^ help: if this is intentional, prefix it with an underscore: `_source`
+
+warning: unused variable: `destination`
+  --> etherparse/src/transport/udp_header.rs:50:9
+   |
+50 |         destination: [u8; 4],
+   |         ^^^^^^^^^^^ help: if this is intentional, prefix it with an underscore: `_destination`
+
+warning: unused variable: `payload`
+  --> etherparse/src/transport/udp_header.rs:51:9
+   |
+51 |         payload: &[u8],
+   |         ^^^^^^^ help: if this is intentional, prefix it with an underscore: `_payload`
+
+warning: unused variable: `source`
+  --> etherparse/src/transport/udp_header.rs:58:9
+   |
+58 |         source: [u8; 4],
+   |         ^^^^^^ help: if this is intentional, prefix it with an underscore: `_source`
+
+warning: unused variable: `destination`
+  --> etherparse/src/transport/udp_header.rs:59:9
+   |
+59 |         destination: [u8; 4],
+   |         ^^^^^^^^^^^ help: if this is intentional, prefix it with an underscore: `_destination`
+
+warning: unused variable: `payload`
+  --> etherparse/src/transport/udp_header.rs:60:9
+   |
+60 |         payload: &[u8],
+   |         ^^^^^^^ help: if this is intentional, prefix it with an underscore: `_payload`
+
+warning: unused variable: `source_port`
+  --> etherparse/src/transport/udp_header.rs:66:9
+   |
+66 |         source_port: u16,
+   |         ^^^^^^^^^^^ help: if this is intentional, prefix it with an underscore: `_source_port`
+
+warning: unused variable: `destination_port`
+  --> etherparse/src/transport/udp_header.rs:67:9
+   |
+67 |         destination_port: u16,
+   |         ^^^^^^^^^^^^^^^^ help: if this is intentional, prefix it with an underscore: `_destination_port`
+
+warning: unused variable: `ip_header`
+  --> etherparse/src/transport/udp_header.rs:68:9
+   |
+68 |         ip_header: &Ipv6Header,
+   |         ^^^^^^^^^ help: if this is intentional, prefix it with an underscore: `_ip_header`
+
+warning: unused variable: `payload`
+  --> etherparse/src/transport/udp_header.rs:69:9
+   |
+69 |         payload: &[u8],
+   |         ^^^^^^^ help: if this is intentional, prefix it with an underscore: `_payload`
+
+warning: unused variable: `ip_header`
+  --> etherparse/src/transport/udp_header.rs:76:9
+   |
+76 |         ip_header: &Ipv6Header,
+   |         ^^^^^^^^^ help: if this is intentional, prefix it with an underscore: `_ip_header`
+
+warning: unused variable: `payload`
+  --> etherparse/src/transport/udp_header.rs:77:9
+   |
+77 |         payload: &[u8],
+   |         ^^^^^^^ help: if this is intentional, prefix it with an underscore: `_payload`
+
+warning: unused variable: `source`
+  --> etherparse/src/transport/udp_header.rs:84:9
+   |
+84 |         source: [u8; 16],
+   |         ^^^^^^ help: if this is intentional, prefix it with an underscore: `_source`
+
+warning: unused variable: `destination`
+  --> etherparse/src/transport/udp_header.rs:85:9
+   |
+85 |         destination: [u8; 16],
+   |         ^^^^^^^^^^^ help: if this is intentional, prefix it with an underscore: `_destination`
+
+warning: unused variable: `payload`
+  --> etherparse/src/transport/udp_header.rs:86:9
+   |
+86 |         payload: &[u8],
+   |         ^^^^^^^ help: if this is intentional, prefix it with an underscore: `_payload`
+
+warning: unused variable: `source`
+  --> etherparse/src/transport/udp_header.rs:92:9
+   |
+92 |         source: [u8; 16],
+   |         ^^^^^^ help: if this is intentional, prefix it with an underscore: `_source`
+
+warning: unused variable: `destination`
+  --> etherparse/src/transport/udp_header.rs:93:9
+   |
+93 |         destination: [u8; 16],
+   |         ^^^^^^^^^^^ help: if this is intentional, prefix it with an underscore: `_destination`
+
+warning: unused variable: `payload`
+  --> etherparse/src/transport/udp_header.rs:94:9
+   |
+94 |         payload: &[u8],
+   |         ^^^^^^^ help: if this is intentional, prefix it with an underscore: `_payload`
+
+warning: unused variable: `ip_pseudo_header_sum`
+   --> etherparse/src/transport/udp_header.rs:101:9
+    |
+101 |         ip_pseudo_header_sum: checksum::Sum16BitWords,
+    |         ^^^^^^^^^^^^^^^^^^^^ help: if this is intentional, prefix it with an underscore: `_ip_pseudo_header_sum`
+
+warning: unused variable: `payload`
+   --> etherparse/src/transport/udp_header.rs:102:9
+    |
+102 |         payload: &[u8],
+    |         ^^^^^^^ help: if this is intentional, prefix it with an underscore: `_payload`
+
+warning: unused variable: `slice`
+   --> etherparse/src/transport/udp_header.rs:109:28
+    |
+109 |     pub fn read_from_slice(slice: &[u8]) -> Result<(UdpHeader, &[u8]), err::LenError> {
+    |                            ^^^^^ help: if this is intentional, prefix it with an underscore: `_slice`
+
+warning: unused variable: `slice`
+   --> etherparse/src/transport/udp_header.rs:114:23
+    |
+114 |     pub fn from_slice(slice: &[u8]) -> Result<(UdpHeader, &[u8]), err::LenError> {
+    |                       ^^^^^ help: if this is intentional, prefix it with an underscore: `_slice`
+
+warning: unused variable: `bytes`
+   --> etherparse/src/transport/udp_header.rs:119:23
+    |
+119 |     pub fn from_bytes(bytes: [u8; 8]) -> UdpHeader {
+    |                       ^^^^^ help: if this is intentional, prefix it with an underscore: `_bytes`
+
+warning: unused variable: `reader`
+   --> etherparse/src/transport/udp_header.rs:126:9
+    |
+126 |         reader: &mut T,
+    |         ^^^^^^ help: if this is intentional, prefix it with an underscore: `_reader`
+
+warning: unused variable: `writer`
+   --> etherparse/src/transport/udp_header.rs:135:9
+    |
+135 |         writer: &mut T,
+    |         ^^^^^^ help: if this is intentional, prefix it with an underscore: `_writer`
+
+warning: unused variable: `slice`
+  --> etherparse/src/transport/udp_header_slice.rs:11:23
+   |
+11 |     pub fn from_slice(slice: &'a [u8]) -> Result<UdpHeaderSlice<'a>, err::LenError> {
+   |                       ^^^^^ help: if this is intentional, prefix it with an underscore: `_slice`
+
+warning: unused variable: `slice`
+  --> etherparse/src/transport/udp_slice.rs:13:23
+   |
+13 |     pub fn from_slice(slice: &'a [u8]) -> Result<UdpSlice<'a>, LenError> {
+   |                       ^^^^^ help: if this is intentional, prefix it with an underscore: `_slice`
+
+warning: unused variable: `slice`
+  --> etherparse/src/transport/udp_slice.rs:23:27
+   |
+23 |     pub fn from_slice_lax(slice: &'a [u8]) -> Result<UdpSlice<'a>, LenError> {
+   |                           ^^^^^ help: if this is intentional, prefix it with an underscore: `_slice`
+
+warning: unused variable: `buf`
+  --> etherparse/src/writer.rs:32:23
+   |
+32 |     pub(crate) fn new(buf: &'a mut [u8]) -> Self {
+   |                       ^^^ help: if this is intentional, prefix it with an underscore: `_buf`
+
+warning: unused variable: `slice`
+  --> etherparse/src/writer.rs:39:29
+   |
+39 |     fn write_all(&mut self, slice: &[u8]) -> Result<(), Self::Error> {
+   |                             ^^^^^ help: if this is intentional, prefix it with an underscore: `_slice`
+
+warning: unused variable: `slice`
+  --> etherparse/src/writer.rs:47:29
+   |
+47 |     fn write_all(&mut self, slice: &[u8]) -> Result<(), Self::Error> {
+   |                             ^^^^^ help: if this is intentional, prefix it with an underscore: `_slice`
+
+warning: unused variable: `slice`
+  --> etherparse/src/writer.rs:55:29
+   |
+55 |     fn write_all(&mut self, slice: &[u8]) -> Result<(), Self::Error> {
+   |                             ^^^^^ help: if this is intentional, prefix it with an underscore: `_slice`
+
+warning: unused variable: `slice`
+   --> etherparse/src/lax_packet_headers.rs:136:9
+    |
+136 |         slice: &'a [u8],
+    |         ^^^^^ help: if this is intentional, prefix it with an underscore: `_slice`
+
+warning: variable does not need to be mutable
+   --> etherparse/src/lax_packet_headers.rs:254:9
+    |
+254 |         mut ether_type: EtherType,
+    |         ----^^^^^^^^^^
+    |         |
+    |         help: remove this `mut`
+    |
+    = note: `#[warn(unused_mut)]` (part of `#[warn(unused)]`) on by default
+
+warning: unused variable: `ether_type`
+   --> etherparse/src/lax_packet_headers.rs:254:9
+    |
+254 |         mut ether_type: EtherType,
+    |         ^^^^^^^^^^^^^^ help: if this is intentional, prefix it with an underscore: `_ether_type`
+
+warning: unused variable: `slice`
+   --> etherparse/src/lax_packet_headers.rs:255:9
+    |
+255 |         slice: &'a [u8],
+    |         ^^^^^ help: if this is intentional, prefix it with an underscore: `_slice`
+
+warning: unused variable: `slice`
+   --> etherparse/src/lax_packet_headers.rs:369:9
+    |
+369 |         slice: &'a [u8],
+    |         ^^^^^ help: if this is intentional, prefix it with an underscore: `_slice`
+
+warning: unused variable: `slice`
+   --> etherparse/src/lax_packet_headers.rs:476:9
+    |
+476 |         slice: &'a [u8],
+    |         ^^^^^ help: if this is intentional, prefix it with an underscore: `_slice`
+
+warning: unused variable: `offset`
+   --> etherparse/src/lax_packet_headers.rs:490:9
+    |
+490 |         offset: usize,
+    |         ^^^^^^ help: if this is intentional, prefix it with an underscore: `_offset`
+
+warning: unused variable: `slice`
+   --> etherparse/src/lax_packet_headers.rs:491:9
+    |
+491 |         slice: &'a [u8],
+    |         ^^^^^ help: if this is intentional, prefix it with an underscore: `_slice`
+
+warning: unused variable: `slice`
+  --> etherparse/src/lax_sliced_packet_cursor.rs:14:9
+   |
+14 |         slice: &'a [u8],
+   |         ^^^^^ help: if this is intentional, prefix it with an underscore: `_slice`
+
+warning: unused variable: `ether_type`
+  --> etherparse/src/lax_sliced_packet_cursor.rs:19:9
+   |
+19 |         ether_type: EtherType,
+   |         ^^^^^^^^^^ help: if this is intentional, prefix it with an underscore: `_ether_type`
+
+warning: unused variable: `slice`
+  --> etherparse/src/lax_sliced_packet_cursor.rs:20:9
+   |
+20 |         slice: &'a [u8],
+   |         ^^^^^ help: if this is intentional, prefix it with an underscore: `_slice`
+
+warning: unused variable: `slice`
+  --> etherparse/src/lax_sliced_packet_cursor.rs:25:9
+   |
+25 |         slice: &'a [u8],
+   |         ^^^^^ help: if this is intentional, prefix it with an underscore: `_slice`
+
+warning: variable does not need to be mutable
+  --> etherparse/src/lax_sliced_packet_cursor.rs:30:9
+   |
+30 |         mut self,
+   |         ----^^^^
+   |         |
+   |         help: remove this `mut`
+
+warning: variable does not need to be mutable
+  --> etherparse/src/lax_sliced_packet_cursor.rs:31:9
+   |
+31 |         mut ether_payload: EtherPayloadSlice<'a>,
+   |         ----^^^^^^^^^^^^^
+   |         |
+   |         help: remove this `mut`
+
+warning: unused variable: `ether_payload`
+  --> etherparse/src/lax_sliced_packet_cursor.rs:31:9
+   |
+31 |         mut ether_payload: EtherPayloadSlice<'a>,
+   |         ^^^^^^^^^^^^^^^^^ help: if this is intentional, prefix it with an underscore: `_ether_payload`
+
+warning: variable does not need to be mutable
+  --> etherparse/src/lax_sliced_packet_cursor.rs:35:22
+   |
+35 |     pub fn slice_arp(mut self, slice: &'a [u8]) -> LaxSlicedPacket<'a> {
+   |                      ----^^^^
+   |                      |
+   |                      help: remove this `mut`
+
+warning: unused variable: `slice`
+  --> etherparse/src/lax_sliced_packet_cursor.rs:35:32
+   |
+35 |     pub fn slice_arp(mut self, slice: &'a [u8]) -> LaxSlicedPacket<'a> {
+   |                                ^^^^^ help: if this is intentional, prefix it with an underscore: `_slice`
+
+warning: variable does not need to be mutable
+  --> etherparse/src/lax_sliced_packet_cursor.rs:38:21
+   |
+38 |     pub fn slice_ip(mut self, slice: &'a [u8]) -> LaxSlicedPacket<'a> {
+   |                     ----^^^^
+   |                     |
+   |                     help: remove this `mut`
+
+warning: unused variable: `slice`
+  --> etherparse/src/lax_sliced_packet_cursor.rs:38:31
+   |
+38 |     pub fn slice_ip(mut self, slice: &'a [u8]) -> LaxSlicedPacket<'a> {
+   |                               ^^^^^ help: if this is intentional, prefix it with an underscore: `_slice`
+
+warning: variable does not need to be mutable
+  --> etherparse/src/lax_sliced_packet_cursor.rs:41:24
+   |
+41 |     fn slice_transport(mut self, slice: LaxIpPayloadSlice<'a>) -> LaxSlicedPacket<'a> {
+   |                        ----^^^^
+   |                        |
+   |                        help: remove this `mut`
+
+warning: unused variable: `slice`
+  --> etherparse/src/lax_sliced_packet_cursor.rs:41:34
+   |
+41 |     fn slice_transport(mut self, slice: LaxIpPayloadSlice<'a>) -> LaxSlicedPacket<'a> {
+   |                                  ^^^^^ help: if this is intentional, prefix it with an underscore: `_slice`
+
+warning: variable does not need to be mutable
+    --> etherparse/src/packet_builder.rs:1239:9
+     |
+1239 |         mut self,
+     |         ----^^^^
+     |         |
+     |         help: remove this `mut`
+
+warning: variable does not need to be mutable
+    --> etherparse/src/packet_builder.rs:1279:9
+     |
+1279 |         mut self,
+     |         ----^^^^
+     |         |
+     |         help: remove this `mut`
+
+warning: variable does not need to be mutable
+    --> etherparse/src/packet_builder.rs:1314:9
+     |
+1314 |         mut self,
+     |         ----^^^^
+     |         |
+     |         help: remove this `mut`
+
+warning: variable does not need to be mutable
+    --> etherparse/src/packet_builder.rs:1415:9
+     |
+1415 |         mut self,
+     |         ----^^^^
+     |         |
+     |         help: remove this `mut`
+
+warning: variable does not need to be mutable
+    --> etherparse/src/packet_builder.rs:1459:9
+     |
+1459 |         mut self,
+     |         ----^^^^
+     |         |
+     |         help: remove this `mut`
+
+warning: variable does not need to be mutable
+    --> etherparse/src/packet_builder.rs:1498:9
+     |
+1498 |         mut self,
+     |         ----^^^^
+     |         |
+     |         help: remove this `mut`
+
+warning: variable does not need to be mutable
+    --> etherparse/src/packet_builder.rs:1664:9
+     |
+1664 |         mut self,
+     |         ----^^^^
+     |         |
+     |         help: remove this `mut`
+
+Some errors have detailed explanations: E0004, E0061, E0133, E0277, E0308, E0433, E0559, E0560, E0599...
+For more information about an error, try `rustc --explain E0004`.
+warning: `etherparse` (lib) generated 231 warnings
+error: could not compile `etherparse` (lib) due to 113 previous errors; 231 warnings emitted
+warning: build failed, waiting for other jobs to finish...

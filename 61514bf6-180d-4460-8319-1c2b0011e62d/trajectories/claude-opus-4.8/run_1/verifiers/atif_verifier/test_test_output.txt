@@ -1,0 +1,130 @@
+ts-jest[ts-jest-transformer] (WARN) Define `ts-jest` config under `globals` is deprecated. Please do
+transform: {
+    <transform_regex>: ['ts-jest', { /* ts-jest config goes here in Jest */ }],
+},
+PASS __tests__/host.spec.ts
+PASS __tests__/get-options-overrides.spec.ts
+FAIL __tests__/integration/errors.spec.ts (5.416 s)
+  ● integration - type-only import error - abortOnError: false / check: false
+
+    [96m__tests__/integration/fixtures/errors/type-only-import-with-error.ts[0m:[93m2[0m:[93m33[0m - [91merror[0m[90m TS2339: [0mProperty 'nonexistent' does not exist on type 'someObj'.
+
+    [7m2[0m export type typeError = someObj['nonexistent'];
+    [7m [0m [91m                                ~~~~~~~~~~~~~[0m
+
+      33 |
+      34 | 		if (this.bail)
+    > 35 | 			this.context.error(`${getText(message)}`);
+         | 			             ^
+      36 | 		else
+      37 | 			this.context.warn(`${getText(message)}`);
+      38 | 	}
+
+      at error (../../../testbed/node_modules/rollup/dist/shared/rollup.js:198:30)
+      at throwPluginError (../../../testbed/node_modules/rollup/dist/shared/rollup.js:21891:12)
+      at Object.error (../../../testbed/node_modules/rollup/dist/shared/rollup.js:22614:20)
+      at RollupContext.error (src/context.ts:35:17)
+      at src/diagnostics.ts:70:10
+          at Array.forEach (<anonymous>)
+      at printDiagnostics (src/diagnostics.ts:42:14)
+      at src/index.ts:257:23
+          at Array.forEach (<anonymous>)
+      at Object.generateBundle (src/index.ts:238:27)
+      at ../../../testbed/node_modules/rollup/dist/shared/rollup.js:22823:37
+
+FAIL __tests__/integration/no-errors.spec.ts
+  ● Console
+
+    console.warn
+      Generated an empty chunk: "some-js-import"
+
+      at Object.defaultOnWarn [as onwarn] (../../../testbed/node_modules/rollup/dist/shared/rollup.js:542:42)
+      at Chunk.preRender (../../../testbed/node_modules/rollup/dist/shared/rollup.js:14873:31)
+      at Bundle.prerenderChunks (../../../testbed/node_modules/rollup/dist/shared/rollup.js:16190:19)
+      at Bundle.generate (../../../testbed/node_modules/rollup/dist/shared/rollup.js:16050:18)
+      at ../../../testbed/node_modules/rollup/dist/shared/rollup.js:23679:27
+      at catchUnfinishedHookActions (../../../testbed/node_modules/rollup/dist/shared/rollup.js:23121:20)
+
+  ● integration - no errors
+
+    Unexpected token (Note that you need plugins to import files that are not JavaScript)
+
+      at error (../../../testbed/node_modules/rollup/dist/shared/rollup.js:198:30)
+      at Module.error (../../../testbed/node_modules/rollup/dist/shared/rollup.js:12521:16)
+      at Module.tryParse (../../../testbed/node_modules/rollup/dist/shared/rollup.js:12897:25)
+      at Module.setSource (../../../testbed/node_modules/rollup/dist/shared/rollup.js:12800:24)
+      at ModuleLoader.addModuleSource (../../../testbed/node_modules/rollup/dist/shared/rollup.js:22264:20)
+
+  ● integration - no errors - using files list
+
+    Unexpected token (Note that you need plugins to import files that are not JavaScript)
+
+      at error (../../../testbed/node_modules/rollup/dist/shared/rollup.js:198:30)
+      at Module.error (../../../testbed/node_modules/rollup/dist/shared/rollup.js:12521:16)
+      at Module.tryParse (../../../testbed/node_modules/rollup/dist/shared/rollup.js:12897:25)
+      at Module.setSource (../../../testbed/node_modules/rollup/dist/shared/rollup.js:12800:24)
+      at ModuleLoader.addModuleSource (../../../testbed/node_modules/rollup/dist/shared/rollup.js:22264:20)
+
+  ● integration - no errors - no declaration maps
+
+    Unexpected token (Note that you need plugins to import files that are not JavaScript)
+
+      at error (../../../testbed/node_modules/rollup/dist/shared/rollup.js:198:30)
+      at Module.error (../../../testbed/node_modules/rollup/dist/shared/rollup.js:12521:16)
+      at Module.tryParse (../../../testbed/node_modules/rollup/dist/shared/rollup.js:12897:25)
+      at Module.setSource (../../../testbed/node_modules/rollup/dist/shared/rollup.js:12800:24)
+      at ModuleLoader.addModuleSource (../../../testbed/node_modules/rollup/dist/shared/rollup.js:22264:20)
+
+  ● integration - no errors - no declarations
+
+    Unexpected token (Note that you need plugins to import files that are not JavaScript)
+
+      at error (../../../testbed/node_modules/rollup/dist/shared/rollup.js:198:30)
+      at Module.error (../../../testbed/node_modules/rollup/dist/shared/rollup.js:12521:16)
+      at Module.tryParse (../../../testbed/node_modules/rollup/dist/shared/rollup.js:12897:25)
+      at Module.setSource (../../../testbed/node_modules/rollup/dist/shared/rollup.js:12800:24)
+      at ModuleLoader.addModuleSource (../../../testbed/node_modules/rollup/dist/shared/rollup.js:22264:20)
+
+  ● integration - no errors - allowJs + emitDeclarationOnly
+
+    expect(received).toEqual(expected) // deep equality
+
+    Expected: StringContaining "identity"
+    Received: "
+    "
+
+      104 |   expect(output.length).toEqual(files.length); // no other files
+      105 |
+    > 106 |   expect(output[0].code).toEqual(expect.stringContaining("identity"));
+          |                          ^
+      107 |   expect(output[0].code).not.toEqual(expect.stringContaining("sum")); // no TS files included
+      108 |
+      109 |   const dec = findName(output, "some-js-import.d.ts");
+
+      at __tests__/integration/no-errors.spec.ts:106:26
+      at fulfilled (__tests__/integration/no-errors.spec.ts:28:58)
+
+FAIL __tests__/integration/watch.spec.ts
+  ● integration - watch
+
+    Unexpected token (Note that you need plugins to import files that are not JavaScript)
+
+      at error (../../../testbed/node_modules/rollup/dist/shared/rollup.js:198:30)
+      at Module.error (../../../testbed/node_modules/rollup/dist/shared/rollup.js:12521:16)
+      at Module.tryParse (../../../testbed/node_modules/rollup/dist/shared/rollup.js:12897:25)
+      at Module.setSource (../../../testbed/node_modules/rollup/dist/shared/rollup.js:12800:24)
+      at ModuleLoader.addModuleSource (../../../testbed/node_modules/rollup/dist/shared/rollup.js:22264:20)
+
+PASS __tests__/diagnostics.spec.ts
+PASS __tests__/rollingcache.spec.ts
+PASS __tests__/context.spec.ts
+PASS __tests__/parse-tsconfig.spec.ts
+PASS __tests__/tslib.spec.ts
+PASS __tests__/diagnostics-format-host.spec.ts
+
+Test Suites: 3 failed, 8 passed, 11 total
+Tests:       7 failed, 37 passed, 44 total
+Snapshots:   0 total
+Time:        8.935 s
+Ran all test suites matching /__tests__/i.
+Test results written to: report.json

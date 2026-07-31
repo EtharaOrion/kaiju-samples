@@ -1,0 +1,76 @@
+{
+  "solution": {
+    "passed": 18,
+    "failed": 0,
+    "errors": 0,
+    "skipped": 0,
+    "collected": 18,
+    "status": "OK",
+    "detail": "============================== 18 passed in 0.11s ==============================",
+    "total": 18,
+    "pass_rate": 1.0,
+    "log": ""
+  },
+  "anchors": {
+    "golden": {
+      "passed": 18,
+      "failed": 0,
+      "errors": 0,
+      "skipped": 0,
+      "collected": 18,
+      "status": "OK",
+      "detail": "============================== 18 passed in 0.11s ==============================",
+      "total": 18,
+      "pass_rate": 1.0,
+      "log": ""
+    },
+    "stub": {
+      "passed": 14,
+      "failed": 4,
+      "errors": 0,
+      "skipped": 0,
+      "collected": 18,
+      "status": "OK",
+      "detail": "========================= 4 failed, 14 passed in 0.14s =========================",
+      "total": 18,
+      "pass_rate": 0.7777777777777778,
+      "log": ""
+    }
+  },
+  "analysis": {
+    "n_total": 18,
+    "n_sound": 4,
+    "sound_subset": [
+      "test_fenwick_prefix_sum",
+      "test_our_heap",
+      "test_our_queue_fifo",
+      "test_subsetsum"
+    ],
+    "wrong_oracle_dropped": [],
+    "non_discriminating_dropped": [
+      "test_differential_0",
+      "test_differential_1",
+      "test_differential_10",
+      "test_differential_11",
+      "test_differential_12",
+      "test_differential_13",
+      "test_differential_2",
+      "test_differential_3",
+      "test_differential_4",
+      "test_differential_5",
+      "test_differential_6",
+      "test_differential_7",
+      "test_differential_8",
+      "test_differential_9"
+    ],
+    "inconclusive_on_stub": [],
+    "solution_pass_on_sound": 1.0,
+    "gap_vs_golden": 0.0,
+    "golden_status": "OK",
+    "stub_status": "OK",
+    "solution_status": "OK",
+    "infra_failures": [],
+    "stub_import_broken": false,
+    "stub_note": ""
+  }
+}

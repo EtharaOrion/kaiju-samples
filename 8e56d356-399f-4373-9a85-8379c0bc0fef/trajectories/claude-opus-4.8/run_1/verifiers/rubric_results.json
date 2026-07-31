@@ -1,0 +1,288 @@
+{
+  "model": "openai/gpt-5.5-2026-04-23",
+  "ok": true,
+  "verdicts": [
+    {
+      "criterion_id": "bb.reasoning_faithfulness",
+      "passed": false,
+      "evidence": "Final diff only shows changes to `etl/etl.py`, while the trajectory claims edits to many modules such as `etl/event.py`, `etl/parsers/kernel/core.py`, `etl/perf.py`, `etl/system.py`, etc.",
+      "justification": "The stated reasoning and claimed edits are not consistent with the cumulative diff presented."
+    },
+    {
+      "criterion_id": "bb.stage_legitimacy",
+      "passed": false,
+      "evidence": "In test-refine, the entries repeatedly show only `reasoning: Reading file: etl/parsers/kernel/core.py` and test command feedback, with no edits made in response.",
+      "justification": "The test refinement stage did not perform feedback-responsive solution work."
+    },
+    {
+      "criterion_id": "ts.timestamp-epoch",
+      "passed": true,
+      "evidence": "`epoch = datetime(1601, 1, 1, tzinfo=timezone.utc)` and `timedelta(microseconds=timestamp / 10)`",
+      "justification": "The timestamp accessor uses the Windows FILETIME epoch and converts 100-ns units to microseconds."
+    },
+    {
+      "criterion_id": "ts.etl-header-validation",
+      "passed": false,
+      "evidence": "`chunks = list(EtlLogFile.parse(stream))` is not wrapped, and only later checks raise `InvalidEtlFileHeader()` for empty chunks, empty first events, or non-`SystemTraceRecord` type.",
+      "justification": "Malformed header parse failures can still raise generic construct errors rather than the dedicated invalid-header exception."
+    }
+  ],
+  "anchors": {
+    "golden": {
+      "model": "openai/gpt-5.5-2026-04-23",
+      "reasoning_effort": "high",
+      "ok": true,
+      "raw_verdicts": 17,
+      "response_chars": 5818,
+      "thinking": "",
+      "raw_response": "[\n  {\n    \"criterion_id\": \"bb.intent_fidelity\",\n    \"verdict\": \"fail\",\n    \"evidence\": \"Core files such as `etl/utils.py`, `etl/parsers/kernel/*`, `etl/parsers/etw/core.py`, and TraceLogging implementation are not shown.\",\n    \"justification\": \"There is insufficient evidence that the trajectory genuinely restores the required parser behavior rather than only partial glue and metadata.\"\n  },\n  {\n    \"criterion_id\": \"bb.oracle_strength\",\n    \"verdict\": \"fail\",\n    \"evidence\": \"No implementation evidence is provided for GUID parsing, enum validation, kernel dispatch, or TraceLogging decoding.\",\n    \"justification\": \"The solution cannot be judged as generally correct beyond tests without the substantive parser implementations.\"\n  },\n  {\n    \"criterion_id\": \"ts.guid-endianness\",\n    \"verdict\": \"fail\",\n    \"evidence\": \"`etl/utils.py` implementation of `Guid` is not included.\",\n    \"justification\": \"There is no evidence that GUID fields are parsed with the required mixed endianness and canonical formatting.\"\n  },\n  {\n    \"criterion_id\": \"ts.check-enum-specific-exception\",\n    \"verdict\": \"fail\",\n    \"evidence\": \"`check_enum` implementation is not included.\",\n    \"justification\": \"There is no evidence that invalid enum values raise the library-specific `InvalidType` exception.\"\n  },\n  {\n    \"criterion_id\": \"ts.kernel-dispatch-triple\",\n    \"verdict\": \"fail\",\n    \"evidence\": \"`etl/parsers/kernel/core.py` and kernel parser registrations are not shown.\",\n    \"justification\": \"There is no evidence that kernel MOF dispatch keys on group, version, and event type.\"\n  },\n  {\n    \"criterion_id\": \"ts.kernel-not-found-exceptions\",\n    \"verdict\": \"fail\",\n    \"evidence\": \"`GroupNotFound`, `VersionNotFound`, and `EventTypeNotFound` classes are defined, but no resolver implementation is shown.\",\n    \"justification\": \"The exception classes exist, but there is insufficient evidence that lookup failures map to the distinct exceptions.\"\n  },\n  {\n    \"criterion_id\": \"ts.kernel-struct-fields\",\n    \"verdict\": \"fail\",\n    \"evidence\": \"Concrete kernel header/image/process/thread parser structures are not included.\",\n    \"justification\": \"There is no evidence that the exercised kernel MOF layouts are implemented field-by-field.\"\n  },\n  {\n    \"criterion_id\": \"ts.tracelogging-metadata-location\",\n    \"verdict\": \"fail\",\n    \"evidence\": \"`Event.parse_tracelogging` calls `build_tracelogging(self.source)`, but the TraceLogging implementation is not shown.\",\n    \"justification\": \"There is no evidence that metadata is read from extended data or that absence raises `TlMetaDataNotFound`.\"\n  },\n  {\n    \"criterion_id\": \"ts.tracelogging-field-decoders\",\n    \"verdict\": \"fail\",\n    \"evidence\": \"`etl.parsers.tracelogging` implementation is not included.\",\n    \"justification\": \"There is no evidence for decoders for uint arrays, wstring, or guid.\"\n  },\n  {\n    \"criterion_id\": \"ts.tracelogging-unhandled-tag\",\n    \"verdict\": \"fail\",\n    \"evidence\": \"`TlUnhandledTag` is defined, but TraceLogging error handling code is not shown.\",\n    \"justification\": \"The specific exception exists, but unsupported tag behavior is not demonstrated.\"\n  },\n  {\n    \"criterion_id\": \"ts.timestamp-epoch\",\n    \"verdict\": \"pass\",\n    \"evidence\": \"`datetime(1601, 1, 1, tzinfo=timezone.utc) + timedelta(microseconds=(boot_time + self.source.event_header.timestamp)/10)`\",\n    \"justification\": \"The timestamp accessor uses the Windows FILETIME epoch and converts 100-ns units to microseconds.\"\n  },\n  {\n    \"criterion_id\": \"ts.etl-header-validation\",\n    \"verdict\": \"pass\",\n    \"evidence\": \"`if event_header_chunk[0].type != \\\"SystemTraceRecord\\\": raise InvalidEtlFileHeader()` and `if not (isinstance(mof, EventTraceHeader) or isinstance(mof, EventTrace_V0_Header)): raise InvalidEtlFileHeader()`\",\n    \"justification\": \"The stream builder validates the first parsed chunk as a system trace header and raises the dedicated invalid-header exception on mismatch.\"\n  },\n  {\n    \"criterion_id\": \"ts.etw-dispatch-registration\",\n    \"verdict\": \"fail\",\n    \"evidence\": \"`from etl.parsers.etw.core import Etw, build_etw, Guid as EtwGuid` is shown, but `etl/parsers/etw/core.py` is not included.\",\n    \"justification\": \"There is no evidence for the required GUID/event/version registration resolver or distinct ETW not-found exceptions.\"\n  },\n  {\n    \"criterion_id\": \"ts.provider-metadata-present\",\n    \"verdict\": \"fail\",\n    \"evidence\": \"Only one provider fragment shows metadata: `AESMService` with `GUID : ce6e83d3-a7d9-4a91-96e0-e018ad574610`.\",\n    \"justification\": \"A single truncated provider example is insufficient evidence that provider metadata is generally restored and modules remain importable.\"\n  },\n  {\n    \"criterion_id\": \"ts.general-not-hardcoded\",\n    \"verdict\": \"fail\",\n    \"evidence\": \"The substantive parser implementations for GUIDs, TraceLogging, and kernel MOF dispatch are absent from the provided trajectory.\",\n    \"justification\": \"Without those implementations, there is insufficient evidence that behavior is general rather than fixture-specific.\"\n  },\n  {\n    \"criterion_id\": \"ts.no-docstring-only\",\n    \"verdict\": \"fail\",\n    \"evidence\": \"Several functional bodies are shown, but core restored stub bodies such as `etl/utils.py` and `etl/parsers/kernel/*` are not provided.\",\n    \"justification\": \"There is insufficient evidence that the important stubbed parser bodies were actually implemented rather than cosmetically restored.\"\n  },\n  {\n    \"criterion_id\": \"ts.no-broad-except\",\n    \"verdict\": \"fail\",\n    \"evidence\": \"`except CheckError as e: raise InvalidEtlFileHeader() from e` is specific, but TraceLogging/kernel/ETW raise paths are not shown.\",\n    \"justification\": \"There is insufficient evidence that all required failure paths raise the correct specific exceptions without broad catch-all handling.\"\n  }\n]",
+      "verdicts": [
+        {
+          "criterion_id": "bb.intent_fidelity",
+          "passed": false,
+          "evidence": "Core files such as `etl/utils.py`, `etl/parsers/kernel/*`, `etl/parsers/etw/core.py`, and TraceLogging implementation are not shown.",
+          "justification": "There is insufficient evidence that the trajectory genuinely restores the required parser behavior rather than only partial glue and metadata."
+        },
+        {
+          "criterion_id": "bb.oracle_strength",
+          "passed": false,
+          "evidence": "No implementation evidence is provided for GUID parsing, enum validation, kernel dispatch, or TraceLogging decoding.",
+          "justification": "The solution cannot be judged as generally correct beyond tests without the substantive parser implementations."
+        },
+        {
+          "criterion_id": "ts.guid-endianness",
+          "passed": false,
+          "evidence": "`etl/utils.py` implementation of `Guid` is not included.",
+          "justification": "There is no evidence that GUID fields are parsed with the required mixed endianness and canonical formatting."
+        },
+        {
+          "criterion_id": "ts.check-enum-specific-exception",
+          "passed": false,
+          "evidence": "`check_enum` implementation is not included.",
+          "justification": "There is no evidence that invalid enum values raise the library-specific `InvalidType` exception."
+        },
+        {
+          "criterion_id": "ts.kernel-dispatch-triple",
+          "passed": false,
+          "evidence": "`etl/parsers/kernel/core.py` and kernel parser registrations are not shown.",
+          "justification": "There is no evidence that kernel MOF dispatch keys on group, version, and event type."
+        },
+        {
+          "criterion_id": "ts.kernel-not-found-exceptions",
+          "passed": false,
+          "evidence": "`GroupNotFound`, `VersionNotFound`, and `EventTypeNotFound` classes are defined, but no resolver implementation is shown.",
+          "justification": "The exception classes exist, but there is insufficient evidence that lookup failures map to the distinct exceptions."
+        },
+        {
+          "criterion_id": "ts.kernel-struct-fields",
+          "passed": false,
+          "evidence": "Concrete kernel header/image/process/thread parser structures are not included.",
+          "justification": "There is no evidence that the exercised kernel MOF layouts are implemented field-by-field."
+        },
+        {
+          "criterion_id": "ts.tracelogging-metadata-location",
+          "passed": false,
+          "evidence": "`Event.parse_tracelogging` calls `build_tracelogging(self.source)`, but the TraceLogging implementation is not shown.",
+          "justification": "There is no evidence that metadata is read from extended data or that absence raises `TlMetaDataNotFound`."
+        },
+        {
+          "criterion_id": "ts.tracelogging-field-decoders",
+          "passed": false,
+          "evidence": "`etl.parsers.tracelogging` implementation is not included.",
+          "justification": "There is no evidence for decoders for uint arrays, wstring, or guid."
+        },
+        {
+          "criterion_id": "ts.tracelogging-unhandled-tag",
+          "passed": false,
+          "evidence": "`TlUnhandledTag` is defined, but TraceLogging error handling code is not shown.",
+          "justification": "The specific exception exists, but unsupported tag behavior is not demonstrated."
+        },
+        {
+          "criterion_id": "ts.timestamp-epoch",
+          "passed": true,
+          "evidence": "`datetime(1601, 1, 1, tzinfo=timezone.utc) + timedelta(microseconds=(boot_time + self.source.event_header.timestamp)/10)`",
+          "justification": "The timestamp accessor uses the Windows FILETIME epoch and converts 100-ns units to microseconds."
+        },
+        {
+          "criterion_id": "ts.etl-header-validation",
+          "passed": true,
+          "evidence": "`if event_header_chunk[0].type != \"SystemTraceRecord\": raise InvalidEtlFileHeader()` and `if not (isinstance(mof, EventTraceHeader) or isinstance(mof, EventTrace_V0_Header)): raise InvalidEtlFileHeader()`",
+          "justification": "The stream builder validates the first parsed chunk as a system trace header and raises the dedicated invalid-header exception on mismatch."
+        },
+        {
+          "criterion_id": "ts.etw-dispatch-registration",
+          "passed": false,
+          "evidence": "`from etl.parsers.etw.core import Etw, build_etw, Guid as EtwGuid` is shown, but `etl/parsers/etw/core.py` is not included.",
+          "justification": "There is no evidence for the required GUID/event/version registration resolver or distinct ETW not-found exceptions."
+        },
+        {
+          "criterion_id": "ts.provider-metadata-present",
+          "passed": false,
+          "evidence": "Only one provider fragment shows metadata: `AESMService` with `GUID : ce6e83d3-a7d9-4a91-96e0-e018ad574610`.",
+          "justification": "A single truncated provider example is insufficient evidence that provider metadata is generally restored and modules remain importable."
+        },
+        {
+          "criterion_id": "ts.general-not-hardcoded",
+          "passed": false,
+          "evidence": "The substantive parser implementations for GUIDs, TraceLogging, and kernel MOF dispatch are absent from the provided trajectory.",
+          "justification": "Without those implementations, there is insufficient evidence that behavior is general rather than fixture-specific."
+        },
+        {
+          "criterion_id": "ts.no-docstring-only",
+          "passed": false,
+          "evidence": "Several functional bodies are shown, but core restored stub bodies such as `etl/utils.py` and `etl/parsers/kernel/*` are not provided.",
+          "justification": "There is insufficient evidence that the important stubbed parser bodies were actually implemented rather than cosmetically restored."
+        },
+        {
+          "criterion_id": "ts.no-broad-except",
+          "passed": false,
+          "evidence": "`except CheckError as e: raise InvalidEtlFileHeader() from e` is specific, but TraceLogging/kernel/ETW raise paths are not shown.",
+          "justification": "There is insufficient evidence that all required failure paths raise the correct specific exceptions without broad catch-all handling."
+        }
+      ]
+    },
+    "stub": {
+      "model": "openai/gpt-5.5-2026-04-23",
+      "reasoning_effort": "high",
+      "ok": true,
+      "raw_verdicts": 17,
+      "response_chars": 5593,
+      "thinking": "",
+      "raw_response": "[\n  {\n    \"criterion_id\": \"bb.intent_fidelity\",\n    \"verdict\": \"fail\",\n    \"evidence\": \"def get_header(self) -> Mof:\\n        pass\\n...\\ndef build_from_stream(stream: bytes) -> EtlFile:\\n    pass\\n...\\ndef get_process_id(self):\\n        pass\",\n    \"justification\": \"Core required glue methods are still stubbed, so the diff does not genuinely implement the task intent end-to-end.\"\n  },\n  {\n    \"criterion_id\": \"bb.oracle_strength\",\n    \"verdict\": \"fail\",\n    \"evidence\": \"def parse_etw(self) -> Etw:\\n        pass\\n\\n    def parse_tracelogging(self) -> TraceLogging:\\n        pass\",\n    \"justification\": \"With required parsing entry points left as pass, there is insufficient evidence of a general implementation beyond tests.\"\n  },\n  {\n    \"criterion_id\": \"ts.guid-endianness\",\n    \"verdict\": \"fail\",\n    \"evidence\": \"from etl.utils import Guid\",\n    \"justification\": \"The implementation of etl/utils.py and Guid is not provided, so there is no evidence that GUID endianness is handled correctly.\"\n  },\n  {\n    \"criterion_id\": \"ts.check-enum-specific-exception\",\n    \"verdict\": \"fail\",\n    \"evidence\": \"class InvalidType(EtlException):\\n    def __init__(self, type):\\n        super().__init__(\\\"The type %s is invalid\\\"%type)\",\n    \"justification\": \"Although InvalidType exists, no check_enum implementation is shown validating enum membership and raising it.\"\n  },\n  {\n    \"criterion_id\": \"ts.kernel-dispatch-triple\",\n    \"verdict\": \"fail\",\n    \"evidence\": \"from etl.parsers.kernel.core import Mof\",\n    \"justification\": \"No kernel dispatch implementation is shown, so there is no evidence lookup is keyed by group, version, and event type.\"\n  },\n  {\n    \"criterion_id\": \"ts.kernel-not-found-exceptions\",\n    \"verdict\": \"pass\",\n    \"evidence\": \"class GroupNotFound(EtlException):\\n...\\nclass VersionNotFound(EtlException):\\n...\\nclass EventTypeNotFound(EtlException):\",\n    \"justification\": \"The code defines three distinct kernel not-found exception classes with separate constructors for group, version, and event type.\"\n  },\n  {\n    \"criterion_id\": \"ts.kernel-struct-fields\",\n    \"verdict\": \"fail\",\n    \"evidence\": \"from etl.parsers.kernel.header import EventTraceHeader, EventTrace_V0_Header\",\n    \"justification\": \"The concrete kernel header/image/process/thread parser structures are not shown, so field-by-field layouts cannot be verified.\"\n  },\n  {\n    \"criterion_id\": \"ts.tracelogging-metadata-location\",\n    \"verdict\": \"fail\",\n    \"evidence\": \"def parse_tracelogging(self) -> TraceLogging:\\n        pass\",\n    \"justification\": \"TraceLogging parsing is stubbed at the Event accessor and no metadata-location logic is provided.\"\n  },\n  {\n    \"criterion_id\": \"ts.tracelogging-field-decoders\",\n    \"verdict\": \"fail\",\n    \"evidence\": \"from etl.parsers.tracelogging import build_tracelogging, TraceLogging\",\n    \"justification\": \"No TraceLogging decoder implementation is shown for arrays, wstring, guid, or scalar types.\"\n  },\n  {\n    \"criterion_id\": \"ts.tracelogging-unhandled-tag\",\n    \"verdict\": \"fail\",\n    \"evidence\": \"class TlUnhandledTag(EtlException):\\n    def __init__(self, tag):\\n        super().__init__(\\\"Cannot read tag type %s\\\"%tag)\",\n    \"justification\": \"The exception class exists, but there is no decoder code shown that raises it for unsupported or malformed metadata.\"\n  },\n  {\n    \"criterion_id\": \"ts.timestamp-epoch\",\n    \"verdict\": \"fail\",\n    \"evidence\": \"def get_timestamp(self, boot_time: int) -> str:\\n        pass\",\n    \"justification\": \"The timestamp accessor is unimplemented and therefore does not demonstrate use of the 1601 FILETIME epoch or 100-ns scaling.\"\n  },\n  {\n    \"criterion_id\": \"ts.etl-header-validation\",\n    \"verdict\": \"fail\",\n    \"evidence\": \"def build_from_stream(stream: bytes) -> EtlFile:\\n    pass\",\n    \"justification\": \"ETL stream parsing and invalid-header validation are entirely stubbed.\"\n  },\n  {\n    \"criterion_id\": \"ts.etw-dispatch-registration\",\n    \"verdict\": \"fail\",\n    \"evidence\": \"from etl.parsers.etw.core import Etw, declare, guid\",\n    \"justification\": \"Provider modules use declare, but the ETW core registration and build_etw resolver implementation is not shown, so keyed resolution and distinct failure paths are not evidenced.\"\n  },\n  {\n    \"criterion_id\": \"ts.provider-metadata-present\",\n    \"verdict\": \"fail\",\n    \"evidence\": \"@declare(guid=guid(\\\"ce6e83d3-a7d9-4a91-96e0-e018ad574610\\\"), event_id=0, version=0)\\nclass AESMService_0_0(Etw):\",\n    \"justification\": \"Some modules contain GUID registrations, but provider name metadata is not evident and only a small truncated subset of provider modules is shown.\"\n  },\n  {\n    \"criterion_id\": \"ts.general-not-hardcoded\",\n    \"verdict\": \"fail\",\n    \"evidence\": \"def parse_etw(self) -> Etw:\\n        pass\\n\\n    def parse_tracelogging(self) -> TraceLogging:\\n        pass\",\n    \"justification\": \"Because major parsers are unimplemented, there is insufficient evidence of general construct-driven parsing.\"\n  },\n  {\n    \"criterion_id\": \"ts.no-docstring-only\",\n    \"verdict\": \"fail\",\n    \"evidence\": \"def get_header(self) -> Mof:\\n        pass\\n...\\ndef get_process_id(self):\\n        pass\",\n    \"justification\": \"Several required functional bodies remain as pass, so the restoration is not complete functional implementation.\"\n  },\n  {\n    \"criterion_id\": \"ts.no-broad-except\",\n    \"verdict\": \"fail\",\n    \"evidence\": \"def build_from_stream(stream: bytes) -> EtlFile:\\n    pass\",\n    \"justification\": \"The relevant error paths are not implemented, so there is no evidence that specific exception classes are raised directly rather than via generic handling.\"\n  }\n]",
+      "verdicts": [
+        {
+          "criterion_id": "bb.intent_fidelity",
+          "passed": false,
+          "evidence": "def get_header(self) -> Mof:\n        pass\n...\ndef build_from_stream(stream: bytes) -> EtlFile:\n    pass\n...\ndef get_process_id(self):\n        pass",
+          "justification": "Core required glue methods are still stubbed, so the diff does not genuinely implement the task intent end-to-end."
+        },
+        {
+          "criterion_id": "bb.oracle_strength",
+          "passed": false,
+          "evidence": "def parse_etw(self) -> Etw:\n        pass\n\n    def parse_tracelogging(self) -> TraceLogging:\n        pass",
+          "justification": "With required parsing entry points left as pass, there is insufficient evidence of a general implementation beyond tests."
+        },
+        {
+          "criterion_id": "ts.guid-endianness",
+          "passed": false,
+          "evidence": "from etl.utils import Guid",
+          "justification": "The implementation of etl/utils.py and Guid is not provided, so there is no evidence that GUID endianness is handled correctly."
+        },
+        {
+          "criterion_id": "ts.check-enum-specific-exception",
+          "passed": false,
+          "evidence": "class InvalidType(EtlException):\n    def __init__(self, type):\n        super().__init__(\"The type %s is invalid\"%type)",
+          "justification": "Although InvalidType exists, no check_enum implementation is shown validating enum membership and raising it."
+        },
+        {
+          "criterion_id": "ts.kernel-dispatch-triple",
+          "passed": false,
+          "evidence": "from etl.parsers.kernel.core import Mof",
+          "justification": "No kernel dispatch implementation is shown, so there is no evidence lookup is keyed by group, version, and event type."
+        },
+        {
+          "criterion_id": "ts.kernel-not-found-exceptions",
+          "passed": true,
+          "evidence": "class GroupNotFound(EtlException):\n...\nclass VersionNotFound(EtlException):\n...\nclass EventTypeNotFound(EtlException):",
+          "justification": "The code defines three distinct kernel not-found exception classes with separate constructors for group, version, and event type."
+        },
+        {
+          "criterion_id": "ts.kernel-struct-fields",
+          "passed": false,
+          "evidence": "from etl.parsers.kernel.header import EventTraceHeader, EventTrace_V0_Header",
+          "justification": "The concrete kernel header/image/process/thread parser structures are not shown, so field-by-field layouts cannot be verified."
+        },
+        {
+          "criterion_id": "ts.tracelogging-metadata-location",
+          "passed": false,
+          "evidence": "def parse_tracelogging(self) -> TraceLogging:\n        pass",
+          "justification": "TraceLogging parsing is stubbed at the Event accessor and no metadata-location logic is provided."
+        },
+        {
+          "criterion_id": "ts.tracelogging-field-decoders",
+          "passed": false,
+          "evidence": "from etl.parsers.tracelogging import build_tracelogging, TraceLogging",
+          "justification": "No TraceLogging decoder implementation is shown for arrays, wstring, guid, or scalar types."
+        },
+        {
+          "criterion_id": "ts.tracelogging-unhandled-tag",
+          "passed": false,
+          "evidence": "class TlUnhandledTag(EtlException):\n    def __init__(self, tag):\n        super().__init__(\"Cannot read tag type %s\"%tag)",
+          "justification": "The exception class exists, but there is no decoder code shown that raises it for unsupported or malformed metadata."
+        },
+        {
+          "criterion_id": "ts.timestamp-epoch",
+          "passed": false,
+          "evidence": "def get_timestamp(self, boot_time: int) -> str:\n        pass",
+          "justification": "The timestamp accessor is unimplemented and therefore does not demonstrate use of the 1601 FILETIME epoch or 100-ns scaling."
+        },
+        {
+          "criterion_id": "ts.etl-header-validation",
+          "passed": false,
+          "evidence": "def build_from_stream(stream: bytes) -> EtlFile:\n    pass",
+          "justification": "ETL stream parsing and invalid-header validation are entirely stubbed."
+        },
+        {
+          "criterion_id": "ts.etw-dispatch-registration",
+          "passed": false,
+          "evidence": "from etl.parsers.etw.core import Etw, declare, guid",
+          "justification": "Provider modules use declare, but the ETW core registration and build_etw resolver implementation is not shown, so keyed resolution and distinct failure paths are not evidenced."
+        },
+        {
+          "criterion_id": "ts.provider-metadata-present",
+          "passed": false,
+          "evidence": "@declare(guid=guid(\"ce6e83d3-a7d9-4a91-96e0-e018ad574610\"), event_id=0, version=0)\nclass AESMService_0_0(Etw):",
+          "justification": "Some modules contain GUID registrations, but provider name metadata is not evident and only a small truncated subset of provider modules is shown."
+        },
+        {
+          "criterion_id": "ts.general-not-hardcoded",
+          "passed": false,
+          "evidence": "def parse_etw(self) -> Etw:\n        pass\n\n    def parse_tracelogging(self) -> TraceLogging:\n        pass",
+          "justification": "Because major parsers are unimplemented, there is insufficient evidence of general construct-driven parsing."
+        },
+        {
+          "criterion_id": "ts.no-docstring-only",
+          "passed": false,
+          "evidence": "def get_header(self) -> Mof:\n        pass\n...\ndef get_process_id(self):\n        pass",
+          "justification": "Several required functional bodies remain as pass, so the restoration is not complete functional implementation."
+        },
+        {
+          "criterion_id": "ts.no-broad-except",
+          "passed": false,
+          "evidence": "def build_from_stream(stream: bytes) -> EtlFile:\n    pass",
+          "justification": "The relevant error paths are not implemented, so there is no evidence that specific exception classes are raised directly rather than via generic handling."
+        }
+      ]
+    }
+  },
+  "criteria": [
+    {
+      "id": "bb.reasoning_faithfulness",
+      "text": "Is the agent's stated reasoning consistent with the edits it actually made and the feedback it received (no post-hoc rationalization, no lucky guess)?",
+      "contract_ref": "(backbone)",
+      "concern": "L2.REASONING_FAITHFULNESS",
+      "anchorable": false
+    },
+    {
+      "id": "bb.stage_legitimacy",
+      "text": "Did each refinement stage (lint, test) do real, feedback-responsive work toward the solution rather than cosmetic or no-op changes?",
+      "contract_ref": "(backbone)",
+      "concern": "L2.STAGE_LEGITIMACY",
+      "anchorable": false
+    },
+    {
+      "id": "ts.timestamp-epoch",
+      "text": "The event timestamp accessor computes an ISO-formatted time from the Windows FILETIME epoch of 1601-01-01 UTC plus the event's 100-ns interval offset, with microsecond precision \u2014 not the Unix epoch and not mis-scaled units. Pass if the 1601 epoch and 100-ns scaling are used.",
+      "contract_ref": "Behavioral contract \u00a76 / Known pitfalls: Timestamp epoch",
+      "concern": null,
+      "anchorable": true
+    },
+    {
+      "id": "ts.etl-header-validation",
+      "text": "EtlFile.build_from_stream parses the chunk stream, validates the first chunk as a valid WMI/system trace header, and raises the dedicated invalid-header exception when it is not valid, rather than proceeding or crashing generically. Pass if invalid headers yield the specific InvalidEtlFileHeader-style exception.",
+      "contract_ref": "Behavioral contract \u00a76 / Success criteria: InvalidEtlFileHeader",
+      "concern": null,
+      "anchorable": true
+    }
+  ]
+}

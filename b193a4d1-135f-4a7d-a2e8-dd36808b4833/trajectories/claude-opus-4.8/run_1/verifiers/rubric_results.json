@@ -1,0 +1,326 @@
+{
+  "model": "openai/gpt-5.5-2026-04-23",
+  "ok": true,
+  "verdicts": [
+    {
+      "criterion_id": "bb.reasoning_faithfulness",
+      "passed": true,
+      "evidence": "reasoning: \"I need to implement the full Raft `Replica`... `Timer`... must be implemented too\"; edits replace `panic!(\"STUB: not implemented\")` in `Replica::new`, `start`, polling, message handling, and timer stage says \"The `Timer` fires after `timeout`...\"",
+      "justification": "The stated plan to implement Replica and Timer is consistent with the substantial implementation edits shown."
+    },
+    {
+      "criterion_id": "bb.stage_legitimacy",
+      "passed": false,
+      "evidence": "lint-refine repeatedly states \"there is nothing for me to fix here\" and test-refine entries only show \"Reading file\" with no responsive edits despite test feedback.",
+      "justification": "The refinement stages did not perform concrete feedback-responsive fixes and appear largely no-op after lint/test feedback."
+    },
+    {
+      "criterion_id": "ts.no-op-entry-seed",
+      "passed": false,
+      "evidence": "None branch: `log.push(LogEntry { term: 0, index: 0, transition: noop_transition.clone(), });`; snapshot branch: `index_offset = snapshot.last_included_index + 1; commit_index = snapshot.last_included_index;` followed by `current_term: 0`.",
+      "justification": "The no-snapshot case seeds the no-op entry, but snapshot construction fails to set `current_term` from the snapshot term."
+    },
+    {
+      "criterion_id": "ts.heartbeat-driven",
+      "passed": true,
+      "evidence": "`poll_as_leader` selects on `let recv_heartbeat = self.heartbeat_timer.get_rx();` and on `Action::Heartbeat` runs `self.broadcast_append_entry_request(); self.heartbeat_timer.renew();`.",
+      "justification": "Leader heartbeats are timer-driven and the timer is renewed after each heartbeat broadcast."
+    },
+    {
+      "criterion_id": "ts.notification-driven-loop",
+      "passed": false,
+      "evidence": "On leader heartbeat: `Action::Heartbeat => { self.load_new_transitions(); self.broadcast_append_entry_request(); self.heartbeat_timer.renew(); }`.",
+      "justification": "Client transitions are pulled on heartbeat events, not only after receiving a transition notification."
+    },
+    {
+      "criterion_id": "ts.halt-terminates-loop",
+      "passed": true,
+      "evidence": "`loop { if self.cluster.lock().unwrap().halt() { return; } match self.state { ... } ... }`.",
+      "justification": "The main start loop explicitly checks the cluster halt condition and returns when it is true."
+    }
+  ],
+  "anchors": {
+    "golden": {
+      "model": "openai/gpt-5.5-2026-04-23",
+      "reasoning_effort": "high",
+      "ok": true,
+      "raw_verdicts": 18,
+      "response_chars": 6671,
+      "thinking": "",
+      "raw_response": "[\n  {\n    \"criterion_id\": \"bb.intent_fidelity\",\n    \"verdict\": \"fail\",\n    \"evidence\": \"solution code is truncated at `Message::InstallSnapshotRequest { ... done: true, }` and omits the rest of `replica.rs`, plus `state_machine.rs` and `timer.rs`\",\n    \"justification\": \"There is insufficient evidence that the final implementation genuinely completes the Raft behavior rather than only defining partial structures.\"\n  },\n  {\n    \"criterion_id\": \"bb.oracle_strength\",\n    \"verdict\": \"fail\",\n    \"evidence\": \"Only partial code is shown, ending inside `broadcast_append_entry_request`, with no complete election, commit, apply, snapshot, or timer implementation visible.\",\n    \"justification\": \"The trajectory does not provide enough evidence of a general Raft implementation beyond frozen tests.\"\n  },\n  {\n    \"criterion_id\": \"ts.no-op-entry-seed\",\n    \"verdict\": \"pass\",\n    \"evidence\": \"`if let Some(ref snapshot) = snapshot { index_offset = snapshot.last_included_index + 1; current_term = snapshot.last_included_term; } else { ... log = vec![LogEntry { term: 0, index: 0, transition: noop_transition.clone(), }] }`\",\n    \"justification\": \"Replica construction seeds a no-op entry for fresh replicas and uses empty log plus snapshot-derived offset and term when a snapshot exists.\"\n  },\n  {\n    \"criterion_id\": \"ts.message-variants-complete\",\n    \"verdict\": \"fail\",\n    \"evidence\": \"`AppendEntryRequest { ... }`, `AppendEntryResponse { ... }`, `VoteRequest { ... }`, and `VoteResponse { ... }` are defined, but only `AppendEntryRequest` construction is visible in `broadcast_append_entry_request`.\",\n    \"justification\": \"Although the variants and fields are present, there is insufficient visible evidence that all fields are actually read and written by the Raft logic.\"\n  },\n  {\n    \"criterion_id\": \"ts.candidate-transition\",\n    \"verdict\": \"fail\",\n    \"evidence\": \"`State::Follower => self.poll_as_follower(&recv_msg)` is shown, but `poll_as_follower` is not included.\",\n    \"justification\": \"There is no concrete evidence that election timeout causes transition to candidate, term increment, self-vote, and vote requests.\"\n  },\n  {\n    \"criterion_id\": \"ts.leader-on-majority-votes\",\n    \"verdict\": \"fail\",\n    \"evidence\": \"`current_votes: Option<Box<BTreeSet<usize>>>` exists, but vote processing and leader transition logic are not shown.\",\n    \"justification\": \"The code shown does not demonstrate majority-based leader election computed from the peer set.\"\n  },\n  {\n    \"criterion_id\": \"ts.term-stepdown\",\n    \"verdict\": \"fail\",\n    \"evidence\": \"`self.process_message(message);` is called, but `process_message` is not shown.\",\n    \"justification\": \"There is insufficient evidence that higher-term messages force adoption of the term and step-down to follower.\"\n  },\n  {\n    \"criterion_id\": \"ts.vote-safety\",\n    \"verdict\": \"fail\",\n    \"evidence\": \"`voted_for: None` is initialized, but vote request handling is not shown.\",\n    \"justification\": \"The trajectory does not show log up-to-date checks, one-vote-per-term enforcement, or reset on term advancement.\"\n  },\n  {\n    \"criterion_id\": \"ts.heartbeat-driven\",\n    \"verdict\": \"pass\",\n    \"evidence\": \"`let recv_heartbeat = self.heartbeat_timer.get_rx(); ... i if i == heartbeat => { ... self.broadcast_append_entry_request(); self.heartbeat_timer.renew(); }`\",\n    \"justification\": \"Leader polling waits on the heartbeat timer, broadcasts append-entry requests on firing, and renews the timer.\"\n  },\n  {\n    \"criterion_id\": \"ts.follower-append-logic\",\n    \"verdict\": \"fail\",\n    \"evidence\": \"`process_message` is invoked for received messages, but its implementation is not provided.\",\n    \"justification\": \"There is no visible evidence of follower previous-index/term validation, conflict truncation, rejection, or commit adoption.\"\n  },\n  {\n    \"criterion_id\": \"ts.leader-replication-backoff\",\n    \"verdict\": \"fail\",\n    \"evidence\": \"`next_index: BTreeMap<usize, usize>` and `match_index: BTreeMap<usize, usize>` exist, and `self.next_index[&peer_id]` is used, but response handling is not shown.\",\n    \"justification\": \"The code does not demonstrate maintenance of per-peer replication state or backoff on append rejection.\"\n  },\n  {\n    \"criterion_id\": \"ts.commit-current-term-rule\",\n    \"verdict\": \"fail\",\n    \"evidence\": \"`commit_index: 0` is initialized, but commit advancement logic is not included.\",\n    \"justification\": \"There is no evidence that commits advance only for current-term entries replicated on a majority.\"\n  },\n  {\n    \"criterion_id\": \"ts.apply-in-order-gated\",\n    \"verdict\": \"fail\",\n    \"evidence\": \"`self.apply_ready_entries();` is called after each poll, but `apply_ready_entries` is not shown.\",\n    \"justification\": \"The trajectory does not show in-order, last_applied-gated application or no-op handling.\"\n  },\n  {\n    \"criterion_id\": \"ts.index-offset-translation\",\n    \"verdict\": \"fail\",\n    \"evidence\": \"`index_offset` is documented and initialized, and `get_term_at_index(self.next_index[&peer_id] - 1)` is used, but log-access helpers are not shown.\",\n    \"justification\": \"There is insufficient evidence that all absolute log indices are translated through `index_offset` consistently.\"\n  },\n  {\n    \"criterion_id\": \"ts.snapshot-compaction\",\n    \"verdict\": \"fail\",\n    \"evidence\": \"`snapshot_delta`, `snapshot`, `index_offset`, and `ReplicaError::LogCompacted` exist, and compacted lookup sends `InstallSnapshotRequest`, but compaction logic is not shown.\",\n    \"justification\": \"The visible code does not prove applied-prefix compaction, offset adjustment, disabled snapshotting at delta zero, or complete compacted-entry recovery.\"\n  },\n  {\n    \"criterion_id\": \"ts.notification-driven-loop\",\n    \"verdict\": \"pass\",\n    \"evidence\": \"`poll_as_leader` uses `Select` over `recv_msg`, `recv_transition`, and heartbeat, and calls `receive_messages()` only inside the `recv_msg` arm; `load_new_transitions()` only inside the `recv_transition` arm.\",\n    \"justification\": \"The shown leader event loop is notification-driven for both messages and client transitions.\"\n  },\n  {\n    \"criterion_id\": \"ts.halt-terminates-loop\",\n    \"verdict\": \"pass\",\n    \"evidence\": \"`loop { if self.cluster.lock().unwrap().halt() { return; } ... }`\",\n    \"justification\": \"The start loop checks the cluster halt condition each iteration and returns when it is true.\"\n  },\n  {\n    \"criterion_id\": \"ts.leader-change-hook\",\n    \"verdict\": \"fail\",\n    \"evidence\": \"`Cluster` defines `fn register_leader(&mut self, leader_id: Option<ReplicaID>);`, but no call to `register_leader` is shown.\",\n    \"justification\": \"There is no evidence that perceived leader changes are reported through the hook.\"\n  }\n]",
+      "verdicts": [
+        {
+          "criterion_id": "bb.intent_fidelity",
+          "passed": false,
+          "evidence": "solution code is truncated at `Message::InstallSnapshotRequest { ... done: true, }` and omits the rest of `replica.rs`, plus `state_machine.rs` and `timer.rs`",
+          "justification": "There is insufficient evidence that the final implementation genuinely completes the Raft behavior rather than only defining partial structures."
+        },
+        {
+          "criterion_id": "bb.oracle_strength",
+          "passed": false,
+          "evidence": "Only partial code is shown, ending inside `broadcast_append_entry_request`, with no complete election, commit, apply, snapshot, or timer implementation visible.",
+          "justification": "The trajectory does not provide enough evidence of a general Raft implementation beyond frozen tests."
+        },
+        {
+          "criterion_id": "ts.no-op-entry-seed",
+          "passed": true,
+          "evidence": "`if let Some(ref snapshot) = snapshot { index_offset = snapshot.last_included_index + 1; current_term = snapshot.last_included_term; } else { ... log = vec![LogEntry { term: 0, index: 0, transition: noop_transition.clone(), }] }`",
+          "justification": "Replica construction seeds a no-op entry for fresh replicas and uses empty log plus snapshot-derived offset and term when a snapshot exists."
+        },
+        {
+          "criterion_id": "ts.message-variants-complete",
+          "passed": false,
+          "evidence": "`AppendEntryRequest { ... }`, `AppendEntryResponse { ... }`, `VoteRequest { ... }`, and `VoteResponse { ... }` are defined, but only `AppendEntryRequest` construction is visible in `broadcast_append_entry_request`.",
+          "justification": "Although the variants and fields are present, there is insufficient visible evidence that all fields are actually read and written by the Raft logic."
+        },
+        {
+          "criterion_id": "ts.candidate-transition",
+          "passed": false,
+          "evidence": "`State::Follower => self.poll_as_follower(&recv_msg)` is shown, but `poll_as_follower` is not included.",
+          "justification": "There is no concrete evidence that election timeout causes transition to candidate, term increment, self-vote, and vote requests."
+        },
+        {
+          "criterion_id": "ts.leader-on-majority-votes",
+          "passed": false,
+          "evidence": "`current_votes: Option<Box<BTreeSet<usize>>>` exists, but vote processing and leader transition logic are not shown.",
+          "justification": "The code shown does not demonstrate majority-based leader election computed from the peer set."
+        },
+        {
+          "criterion_id": "ts.term-stepdown",
+          "passed": false,
+          "evidence": "`self.process_message(message);` is called, but `process_message` is not shown.",
+          "justification": "There is insufficient evidence that higher-term messages force adoption of the term and step-down to follower."
+        },
+        {
+          "criterion_id": "ts.vote-safety",
+          "passed": false,
+          "evidence": "`voted_for: None` is initialized, but vote request handling is not shown.",
+          "justification": "The trajectory does not show log up-to-date checks, one-vote-per-term enforcement, or reset on term advancement."
+        },
+        {
+          "criterion_id": "ts.heartbeat-driven",
+          "passed": true,
+          "evidence": "`let recv_heartbeat = self.heartbeat_timer.get_rx(); ... i if i == heartbeat => { ... self.broadcast_append_entry_request(); self.heartbeat_timer.renew(); }`",
+          "justification": "Leader polling waits on the heartbeat timer, broadcasts append-entry requests on firing, and renews the timer."
+        },
+        {
+          "criterion_id": "ts.follower-append-logic",
+          "passed": false,
+          "evidence": "`process_message` is invoked for received messages, but its implementation is not provided.",
+          "justification": "There is no visible evidence of follower previous-index/term validation, conflict truncation, rejection, or commit adoption."
+        },
+        {
+          "criterion_id": "ts.leader-replication-backoff",
+          "passed": false,
+          "evidence": "`next_index: BTreeMap<usize, usize>` and `match_index: BTreeMap<usize, usize>` exist, and `self.next_index[&peer_id]` is used, but response handling is not shown.",
+          "justification": "The code does not demonstrate maintenance of per-peer replication state or backoff on append rejection."
+        },
+        {
+          "criterion_id": "ts.commit-current-term-rule",
+          "passed": false,
+          "evidence": "`commit_index: 0` is initialized, but commit advancement logic is not included.",
+          "justification": "There is no evidence that commits advance only for current-term entries replicated on a majority."
+        },
+        {
+          "criterion_id": "ts.apply-in-order-gated",
+          "passed": false,
+          "evidence": "`self.apply_ready_entries();` is called after each poll, but `apply_ready_entries` is not shown.",
+          "justification": "The trajectory does not show in-order, last_applied-gated application or no-op handling."
+        },
+        {
+          "criterion_id": "ts.index-offset-translation",
+          "passed": false,
+          "evidence": "`index_offset` is documented and initialized, and `get_term_at_index(self.next_index[&peer_id] - 1)` is used, but log-access helpers are not shown.",
+          "justification": "There is insufficient evidence that all absolute log indices are translated through `index_offset` consistently."
+        },
+        {
+          "criterion_id": "ts.snapshot-compaction",
+          "passed": false,
+          "evidence": "`snapshot_delta`, `snapshot`, `index_offset`, and `ReplicaError::LogCompacted` exist, and compacted lookup sends `InstallSnapshotRequest`, but compaction logic is not shown.",
+          "justification": "The visible code does not prove applied-prefix compaction, offset adjustment, disabled snapshotting at delta zero, or complete compacted-entry recovery."
+        },
+        {
+          "criterion_id": "ts.notification-driven-loop",
+          "passed": true,
+          "evidence": "`poll_as_leader` uses `Select` over `recv_msg`, `recv_transition`, and heartbeat, and calls `receive_messages()` only inside the `recv_msg` arm; `load_new_transitions()` only inside the `recv_transition` arm.",
+          "justification": "The shown leader event loop is notification-driven for both messages and client transitions."
+        },
+        {
+          "criterion_id": "ts.halt-terminates-loop",
+          "passed": true,
+          "evidence": "`loop { if self.cluster.lock().unwrap().halt() { return; } ... }`",
+          "justification": "The start loop checks the cluster halt condition each iteration and returns when it is true."
+        },
+        {
+          "criterion_id": "ts.leader-change-hook",
+          "passed": false,
+          "evidence": "`Cluster` defines `fn register_leader(&mut self, leader_id: Option<ReplicaID>);`, but no call to `register_leader` is shown.",
+          "justification": "There is no evidence that perceived leader changes are reported through the hook."
+        }
+      ]
+    },
+    "stub": {
+      "model": "openai/gpt-5.5-2026-04-23",
+      "reasoning_effort": "high",
+      "ok": true,
+      "raw_verdicts": 18,
+      "response_chars": 5982,
+      "thinking": "",
+      "raw_response": "[\n  {\n    \"criterion_id\": \"bb.intent_fidelity\",\n    \"verdict\": \"fail\",\n    \"evidence\": \"pub fn new(...) -> Replica<C, M, T, D> { panic!(\\\"STUB: not implemented\\\") } ... pub fn start(...) { panic!(\\\"STUB: not implemented\\\") }\",\n    \"justification\": \"Core replica behavior remains stubbed, so the implementation does not genuinely implement Raft or the task intent.\"\n  },\n  {\n    \"criterion_id\": \"bb.oracle_strength\",\n    \"verdict\": \"fail\",\n    \"evidence\": \"fn process_message(&mut self, message: Message<T, D>) { panic!(\\\"STUB: not implemented\\\") }\",\n    \"justification\": \"Because the core message-processing and event-loop logic is absent, there is no general implementation beyond any tests.\"\n  },\n  {\n    \"criterion_id\": \"ts.no-op-entry-seed\",\n    \"verdict\": \"fail\",\n    \"evidence\": \"pub fn new(...) -> Replica<C, M, T, D> { panic!(\\\"STUB: not implemented\\\") }\",\n    \"justification\": \"Replica construction is not implemented, so there is no evidence of seeding a no-op entry or initializing from a snapshot correctly.\"\n  },\n  {\n    \"criterion_id\": \"ts.message-variants-complete\",\n    \"verdict\": \"fail\",\n    \"evidence\": \"pub enum Message<T, D> { AppendEntryRequest { ... }, AppendEntryResponse { ... }, VoteRequest { ... }, VoteResponse { ... }, ... }\",\n    \"justification\": \"Although the enum fields are present, the criterion also requires the fields to be actually read and written by the logic, while all relevant logic is stubbed.\"\n  },\n  {\n    \"criterion_id\": \"ts.candidate-transition\",\n    \"verdict\": \"fail\",\n    \"evidence\": \"fn become_candidate(&mut self) { panic!(\\\"STUB: not implemented\\\") }\",\n    \"justification\": \"Candidate transition behavior is absent.\"\n  },\n  {\n    \"criterion_id\": \"ts.leader-on-majority-votes\",\n    \"verdict\": \"fail\",\n    \"evidence\": \"fn process_vote_response_as_candidate(...) { panic!(\\\"STUB: not implemented\\\") } ... fn become_leader(&mut self) { panic!(\\\"STUB: not implemented\\\") }\",\n    \"justification\": \"There is no implemented majority-vote calculation or leader transition.\"\n  },\n  {\n    \"criterion_id\": \"ts.term-stepdown\",\n    \"verdict\": \"fail\",\n    \"evidence\": \"fn process_message(&mut self, message: Message<T, D>) { panic!(\\\"STUB: not implemented\\\") } ... fn become_follower(&mut self, term: usize) { panic!(\\\"STUB: not implemented\\\") }\",\n    \"justification\": \"Higher-term message handling and follower stepdown are not implemented.\"\n  },\n  {\n    \"criterion_id\": \"ts.vote-safety\",\n    \"verdict\": \"fail\",\n    \"evidence\": \"fn process_vote_request_as_follower(...) { panic!(\\\"STUB: not implemented\\\") }\",\n    \"justification\": \"Vote-granting logic, log freshness checks, and voted_for handling are missing.\"\n  },\n  {\n    \"criterion_id\": \"ts.heartbeat-driven\",\n    \"verdict\": \"fail\",\n    \"evidence\": \"fn poll_as_leader(...) { panic!(\\\"STUB: not implemented\\\") } ... fn broadcast_append_entry_request(&mut self) { panic!(\\\"STUB: not implemented\\\") }\",\n    \"justification\": \"Leader heartbeat polling and append-entry broadcasting are not implemented.\"\n  },\n  {\n    \"criterion_id\": \"ts.follower-append-logic\",\n    \"verdict\": \"fail\",\n    \"evidence\": \"fn process_append_entry_request_as_follower(...) { panic!(\\\"STUB: not implemented\\\") }\",\n    \"justification\": \"Follower append validation, conflict truncation, and commit adoption are absent.\"\n  },\n  {\n    \"criterion_id\": \"ts.leader-replication-backoff\",\n    \"verdict\": \"fail\",\n    \"evidence\": \"fn get_entries_for_peer(&self, peer_id: ReplicaID) -> Vec<LogEntry<T>> { panic!(\\\"STUB: not implemented\\\") } ... fn process_message_as_leader(...) { panic!(\\\"STUB: not implemented\\\") }\",\n    \"justification\": \"Per-peer replication and rejection backoff logic is not implemented.\"\n  },\n  {\n    \"criterion_id\": \"ts.commit-current-term-rule\",\n    \"verdict\": \"fail\",\n    \"evidence\": \"fn process_message_as_leader(&mut self, message: Message<T, D>) { panic!(\\\"STUB: not implemented\\\") }\",\n    \"justification\": \"There is no implemented commit advancement logic enforcing the current-term majority rule.\"\n  },\n  {\n    \"criterion_id\": \"ts.apply-in-order-gated\",\n    \"verdict\": \"fail\",\n    \"evidence\": \"fn apply_ready_entries(&mut self) { panic!(\\\"STUB: not implemented\\\") }\",\n    \"justification\": \"Committed-entry application and last_applied gating are not implemented.\"\n  },\n  {\n    \"criterion_id\": \"ts.index-offset-translation\",\n    \"verdict\": \"fail\",\n    \"evidence\": \"fn get_term_at_index(&self, index: usize) -> Result<usize> { panic!(\\\"STUB: not implemented\\\") } ... fn get_last_log_index(&self) -> usize { panic!(\\\"STUB: not implemented\\\") }\",\n    \"justification\": \"Index-offset-aware log access is not implemented.\"\n  },\n  {\n    \"criterion_id\": \"ts.snapshot-compaction\",\n    \"verdict\": \"fail\",\n    \"evidence\": \"fn process_install_snapshot_request_as_follower(...) { panic!(\\\"STUB: not implemented\\\") } ... fn apply_ready_entries(&mut self) { panic!(\\\"STUB: not implemented\\\") }\",\n    \"justification\": \"Snapshot installation, compaction, and compacted-log handling are not implemented.\"\n  },\n  {\n    \"criterion_id\": \"ts.notification-driven-loop\",\n    \"verdict\": \"fail\",\n    \"evidence\": \"pub fn start(&mut self, recv_msg: Receiver<()>, recv_transition: Receiver<()>) { panic!(\\\"STUB: not implemented\\\") }\",\n    \"justification\": \"The event loop is missing, so there is no notification-driven polling behavior.\"\n  },\n  {\n    \"criterion_id\": \"ts.halt-terminates-loop\",\n    \"verdict\": \"fail\",\n    \"evidence\": \"pub fn start(&mut self, recv_msg: Receiver<()>, recv_transition: Receiver<()>) { panic!(\\\"STUB: not implemented\\\") }\",\n    \"justification\": \"The start loop is not implemented and therefore cannot consult halt or terminate cleanly.\"\n  },\n  {\n    \"criterion_id\": \"ts.leader-change-hook\",\n    \"verdict\": \"fail\",\n    \"evidence\": \"fn become_leader(&mut self) { panic!(\\\"STUB: not implemented\\\") } ... fn become_follower(&mut self, term: usize) { panic!(\\\"STUB: not implemented\\\") }\",\n    \"justification\": \"Leader-change transitions are stubbed and never call the cluster's register_leader hook.\"\n  }\n]",
+      "verdicts": [
+        {
+          "criterion_id": "bb.intent_fidelity",
+          "passed": false,
+          "evidence": "pub fn new(...) -> Replica<C, M, T, D> { panic!(\"STUB: not implemented\") } ... pub fn start(...) { panic!(\"STUB: not implemented\") }",
+          "justification": "Core replica behavior remains stubbed, so the implementation does not genuinely implement Raft or the task intent."
+        },
+        {
+          "criterion_id": "bb.oracle_strength",
+          "passed": false,
+          "evidence": "fn process_message(&mut self, message: Message<T, D>) { panic!(\"STUB: not implemented\") }",
+          "justification": "Because the core message-processing and event-loop logic is absent, there is no general implementation beyond any tests."
+        },
+        {
+          "criterion_id": "ts.no-op-entry-seed",
+          "passed": false,
+          "evidence": "pub fn new(...) -> Replica<C, M, T, D> { panic!(\"STUB: not implemented\") }",
+          "justification": "Replica construction is not implemented, so there is no evidence of seeding a no-op entry or initializing from a snapshot correctly."
+        },
+        {
+          "criterion_id": "ts.message-variants-complete",
+          "passed": false,
+          "evidence": "pub enum Message<T, D> { AppendEntryRequest { ... }, AppendEntryResponse { ... }, VoteRequest { ... }, VoteResponse { ... }, ... }",
+          "justification": "Although the enum fields are present, the criterion also requires the fields to be actually read and written by the logic, while all relevant logic is stubbed."
+        },
+        {
+          "criterion_id": "ts.candidate-transition",
+          "passed": false,
+          "evidence": "fn become_candidate(&mut self) { panic!(\"STUB: not implemented\") }",
+          "justification": "Candidate transition behavior is absent."
+        },
+        {
+          "criterion_id": "ts.leader-on-majority-votes",
+          "passed": false,
+          "evidence": "fn process_vote_response_as_candidate(...) { panic!(\"STUB: not implemented\") } ... fn become_leader(&mut self) { panic!(\"STUB: not implemented\") }",
+          "justification": "There is no implemented majority-vote calculation or leader transition."
+        },
+        {
+          "criterion_id": "ts.term-stepdown",
+          "passed": false,
+          "evidence": "fn process_message(&mut self, message: Message<T, D>) { panic!(\"STUB: not implemented\") } ... fn become_follower(&mut self, term: usize) { panic!(\"STUB: not implemented\") }",
+          "justification": "Higher-term message handling and follower stepdown are not implemented."
+        },
+        {
+          "criterion_id": "ts.vote-safety",
+          "passed": false,
+          "evidence": "fn process_vote_request_as_follower(...) { panic!(\"STUB: not implemented\") }",
+          "justification": "Vote-granting logic, log freshness checks, and voted_for handling are missing."
+        },
+        {
+          "criterion_id": "ts.heartbeat-driven",
+          "passed": false,
+          "evidence": "fn poll_as_leader(...) { panic!(\"STUB: not implemented\") } ... fn broadcast_append_entry_request(&mut self) { panic!(\"STUB: not implemented\") }",
+          "justification": "Leader heartbeat polling and append-entry broadcasting are not implemented."
+        },
+        {
+          "criterion_id": "ts.follower-append-logic",
+          "passed": false,
+          "evidence": "fn process_append_entry_request_as_follower(...) { panic!(\"STUB: not implemented\") }",
+          "justification": "Follower append validation, conflict truncation, and commit adoption are absent."
+        },
+        {
+          "criterion_id": "ts.leader-replication-backoff",
+          "passed": false,
+          "evidence": "fn get_entries_for_peer(&self, peer_id: ReplicaID) -> Vec<LogEntry<T>> { panic!(\"STUB: not implemented\") } ... fn process_message_as_leader(...) { panic!(\"STUB: not implemented\") }",
+          "justification": "Per-peer replication and rejection backoff logic is not implemented."
+        },
+        {
+          "criterion_id": "ts.commit-current-term-rule",
+          "passed": false,
+          "evidence": "fn process_message_as_leader(&mut self, message: Message<T, D>) { panic!(\"STUB: not implemented\") }",
+          "justification": "There is no implemented commit advancement logic enforcing the current-term majority rule."
+        },
+        {
+          "criterion_id": "ts.apply-in-order-gated",
+          "passed": false,
+          "evidence": "fn apply_ready_entries(&mut self) { panic!(\"STUB: not implemented\") }",
+          "justification": "Committed-entry application and last_applied gating are not implemented."
+        },
+        {
+          "criterion_id": "ts.index-offset-translation",
+          "passed": false,
+          "evidence": "fn get_term_at_index(&self, index: usize) -> Result<usize> { panic!(\"STUB: not implemented\") } ... fn get_last_log_index(&self) -> usize { panic!(\"STUB: not implemented\") }",
+          "justification": "Index-offset-aware log access is not implemented."
+        },
+        {
+          "criterion_id": "ts.snapshot-compaction",
+          "passed": false,
+          "evidence": "fn process_install_snapshot_request_as_follower(...) { panic!(\"STUB: not implemented\") } ... fn apply_ready_entries(&mut self) { panic!(\"STUB: not implemented\") }",
+          "justification": "Snapshot installation, compaction, and compacted-log handling are not implemented."
+        },
+        {
+          "criterion_id": "ts.notification-driven-loop",
+          "passed": false,
+          "evidence": "pub fn start(&mut self, recv_msg: Receiver<()>, recv_transition: Receiver<()>) { panic!(\"STUB: not implemented\") }",
+          "justification": "The event loop is missing, so there is no notification-driven polling behavior."
+        },
+        {
+          "criterion_id": "ts.halt-terminates-loop",
+          "passed": false,
+          "evidence": "pub fn start(&mut self, recv_msg: Receiver<()>, recv_transition: Receiver<()>) { panic!(\"STUB: not implemented\") }",
+          "justification": "The start loop is not implemented and therefore cannot consult halt or terminate cleanly."
+        },
+        {
+          "criterion_id": "ts.leader-change-hook",
+          "passed": false,
+          "evidence": "fn become_leader(&mut self) { panic!(\"STUB: not implemented\") } ... fn become_follower(&mut self, term: usize) { panic!(\"STUB: not implemented\") }",
+          "justification": "Leader-change transitions are stubbed and never call the cluster's register_leader hook."
+        }
+      ]
+    }
+  },
+  "criteria": [
+    {
+      "id": "bb.reasoning_faithfulness",
+      "text": "Is the agent's stated reasoning consistent with the edits it actually made and the feedback it received (no post-hoc rationalization, no lucky guess)?",
+      "contract_ref": "(backbone)",
+      "concern": "L2.REASONING_FAITHFULNESS",
+      "anchorable": false
+    },
+    {
+      "id": "bb.stage_legitimacy",
+      "text": "Did each refinement stage (lint, test) do real, feedback-responsive work toward the solution rather than cosmetic or no-op changes?",
+      "contract_ref": "(backbone)",
+      "concern": "L2.STAGE_LEGITIMACY",
+      "anchorable": false
+    },
+    {
+      "id": "ts.no-op-entry-seed",
+      "text": "When a replica is created without a seed snapshot, its log is initialized with a single no-op entry at index 0 / term 0 (log is never empty); when created from a snapshot, the in-memory log starts empty with an index offset set to one past the snapshot's last-included index and term/state derived from the snapshot.",
+      "contract_ref": "Behavioral contract: Replica construction / Known pitfalls: Empty-log invariant",
+      "concern": null,
+      "anchorable": true
+    },
+    {
+      "id": "ts.heartbeat-driven",
+      "text": "A leader periodically broadcasts append-entries requests (including empty heartbeats) driven by a heartbeat timer that is renewed/re-armed each cycle, so it keeps asserting authority rather than sending once and stopping.",
+      "contract_ref": "Behavioral contract: Heartbeats / Known pitfalls: Not driving the heartbeat",
+      "concern": null,
+      "anchorable": true
+    },
+    {
+      "id": "ts.notification-driven-loop",
+      "text": "The event loop polls the cluster for messages only in response to the message-notification channel and pulls client transitions only in response to the transition-notification channel, rather than calling receive unconditionally in a tight busy loop.",
+      "contract_ref": "Behavioral contract: Driven, non-blocking event loop / Known pitfalls: Notification-driven polling",
+      "concern": null,
+      "anchorable": true
+    },
+    {
+      "id": "ts.halt-terminates-loop",
+      "text": "The start loop consults the cluster's halt condition and exits when it becomes true, allowing test threads to terminate rather than hanging.",
+      "contract_ref": "Known pitfalls: halt() not checked / Success criteria",
+      "concern": null,
+      "anchorable": true
+    }
+  ]
+}

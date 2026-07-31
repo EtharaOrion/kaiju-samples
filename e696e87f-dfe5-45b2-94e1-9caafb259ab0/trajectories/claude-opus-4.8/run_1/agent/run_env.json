@@ -1,0 +1,6 @@
+{
+  "repo": "Zahgon/datasketch",
+  "base_commit": "b97eb128d016f10e3164857a16179f51720b2308",
+  "reference_commit": "3da96a591c954952c9dd367567db720cfdc151e0",
+  "docker_image": "426628337772.dkr.ecr.ap-south-1.amazonaws.com/kaiju_q2:python_ekzhu_datasketch"
+}

@@ -1,0 +1,2376 @@
+============================= test session starts ==============================
+platform linux -- Python 3.11.15, pytest-9.1.1, pluggy-1.6.0
+rootdir: /tmp/commit0-inplace-ew3dw2fz/tree
+configfile: pyproject.toml
+plugins: cov-7.1.0, json-report-1.5.0, metadata-3.1.1, xdist-3.8.0
+created: 16/16 workers
+16 workers [297 items]
+
+.................................F.F...F...F.FF.......F....F....F.FF.F.. [ 24%]
+FF..FFFFFFFFFFF.F.FFFFFF.FFFFF.F..F.F.....F............................. [ 48%]
+F..........F.F..F.FFF.FF...........F.....FFFF...FF........F.F........... [ 72%]
+..F.............F.................F......F..FF.F..FFF.....F......F...... [ 96%]
+....FFF..                                                                [100%]
+=================================== FAILURES ===================================
+_________________________________ test_slip132 _________________________________
+[gw4] linux -- Python 3.11.15 /usr/local/bin/python
+
+    def test_slip132() -> None:
+        mnemonic = "enough regret erode news field main wild jar erupt bronze velvet ugly"
+>       mxprv = bip39.mxprv_from_mnemonic(mnemonic)
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests/bip32/test_slip132.py:25: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+btclib/mnemonic/bip39.py:102: in mxprv_from_mnemonic
+    seed = seed_from_mnemonic(mnemonic, passphrase or "", verify_checksum)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+btclib/mnemonic/bip39.py:84: in seed_from_mnemonic
+    entropy_from_mnemonic(mnemonic)
+btclib/mnemonic/bip39.py:61: in entropy_from_mnemonic
+    bin_str = bin_str_entropy_from_wordlist_indexes(indexes, lang)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+indexes = [599, 1445, 612, 1193, 687, 1074, ...], base = 'en'
+
+    def bin_str_entropy_from_wordlist_indexes(indexes: Sequence[int], base: int) -> BinStr:
+        """Return the raw entropy from a list of word-list indexes.
+    
+        Return the raw (i.e. binary 0/1 string) entropy from the provided
+        list of integer indexes into a given language word-list.
+        """
+        entropy = 0
+        for index in indexes:
+>           entropy = entropy * base + index
+                      ^^^^^^^^^^^^^^^^^^^^^^
+E           TypeError: can only concatenate str (not "int") to str
+
+btclib/mnemonic/entropy.py:49: TypeError
+_________________________________ test_block_1 _________________________________
+[gw5] linux -- Python 3.11.15 /usr/local/bin/python
+
+    def test_block_1() -> None:
+        """Test first block after genesis."""
+        fname = "block_1.bin"
+        filename = path.join(path.dirname(__file__), "_data", fname)
+        with open(filename, "rb") as file_:
+            block_bytes = file_.read()
+    
+        block = Block.parse(block_bytes)
+        assert len(block.transactions) == 1
+        assert block.size == 215
+        assert block.weight == 536
+        assert block.height is None
+        assert not block.has_segwit_tx()
+        assert block == Block.parse(block.serialize())
+>       assert block == Block.from_dict(block.to_dict())
+                                        ^^^^^^^^^^^^^^^
+
+tests/block/test_block.py:39: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+btclib/block/block.py:72: in to_dict
+    "transactions": [t.to_dict(check_validity) for t in self.transactions],
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+btclib/block/block.py:72: in <listcomp>
+    "transactions": [t.to_dict(check_validity) for t in self.transactions],
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^
+btclib/tx/tx.py:117: in to_dict
+    "vout": [tx_out.to_dict(check_validity) for tx_out in self.vout],
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+btclib/tx/tx.py:117: in <listcomp>
+    "vout": [tx_out.to_dict(check_validity) for tx_out in self.vout],
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = TxOut(value=5000000000, script_pub_key=ScriptPubKey(script=b'A\x04\x96\xb58\xe8SQ\x9crj,\x91\xe6\x1e\xc1\x16\x00\xae\x...8b\xe7\x94{\xe6<R\xdau\x897\x95\x15\xd4\xe0\xa6\x04\xf8\x14\x17\x81\xe6"\x94r\x11f\xbfb\x1es\xa8,\xbf#B\xc8X\xee\xac'))
+check_validity = True
+
+    def to_dict(self, check_validity: bool = True) -> dict[str, Any]:
+        if check_validity:
+            self.assert_valid()
+    
+        return {
+            "value": btc_from_sats(self.value),
+>           "scriptPubKey": self.script_pub_key.to_dict(check_validity),
+                            ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        }
+E       AttributeError: 'ScriptPubKey' object has no attribute 'to_dict'
+
+btclib/tx/tx_out.py:53: AttributeError
+__________________________ test_slip132_test_vectors ___________________________
+[gw4] linux -- Python 3.11.15 /usr/local/bin/python
+
+    def test_slip132_test_vectors() -> None:
+        """SLIP132 test vector.
+    
+        https://github.com/satoshilabs/slips/blob/master/slip-0132.md
+        """
+        mnemonic = "abandon abandon abandon abandon abandon abandon abandon abandon abandon abandon abandon about"
+        kpath = "m/0/0"
+        test_vectors = [
+            (
+                NETWORKS["mainnet"].bip32_prv,
+                "m / 44h / 0h / 0h",
+                "xprv9xpXFhFpqdQK3TmytPBqXtGSwS3DLjojFhTGht8gwAAii8py5X6pxeBnQ6ehJiyJ6nDjWGJfZ95WxByFXVkDxHXrqu53WCRGypk2ttuqncb",
+                "xpub6BosfCnifzxcFwrSzQiqu2DBVTshkCXacvNsWGYJVVhhawA7d4R5WSWGFNbi8Aw6ZRc1brxMyWMzG3DSSSSoekkudhUd9yLb6qx39T9nMdj",
+                "1LqBGSKuX5yYUonjxT5qGfpUsXKYYWeabA",
+            ),
+            (
+                NETWORKS["mainnet"].slip132_p2wpkh_p2sh_prv,
+                "m / 49h / 0h / 0h",
+                "yprvAHwhK6RbpuS3dgCYHM5jc2ZvEKd7Bi61u9FVhYMpgMSuZS613T1xxQeKTffhrHY79hZ5PsskBjcc6C2V7DrnsMsNaGDaWev3GLRQRgV7hxF",
+                "ypub6Ww3ibxVfGzLrAH1PNcjyAWenMTbbAosGNB6VvmSEgytSER9azLDWCxoJwW7Ke7icmizBMXrzBx9979FfaHxHcrArf3zbeJJJUZPf663zsP",
+                "37VucYSaXLCAsxYyAPfbSi9eh4iEcbShgf",
+            ),
+            (
+                NETWORKS["mainnet"].slip132_p2wpkh_prv,
+                "m / 84h / 0h / 0h",
+                "zprvAdG4iTXWBoARxkkzNpNh8r6Qag3irQB8PzEMkAFeTRXxHpbF9z4QgEvBRmfvqWvGp42t42nvgGpNgYSJA9iefm1yYNZKEm7z6qUWCroSQnE",
+                "zpub6rFR7y4Q2AijBEqTUquhVz398htDFrtymD9xYYfG1m4wAcvPhXNfE3EfH1r1ADqtfSdVCToUG868RvUUkgDKf31mGDtKsAYz2oz2AGutZYs",
+                "bc1qcr8te4kr609gcawutmrza0j4xv80jy8z306fyu",
+            ),
+        ]
+        for version, der_path, prv, pub, addr in test_vectors:
+>           rxprv = bip39.mxprv_from_mnemonic(mnemonic, "")
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests/bip32/test_slip132.py:113: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+btclib/mnemonic/bip39.py:102: in mxprv_from_mnemonic
+    seed = seed_from_mnemonic(mnemonic, passphrase or "", verify_checksum)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+btclib/mnemonic/bip39.py:84: in seed_from_mnemonic
+    entropy_from_mnemonic(mnemonic)
+btclib/mnemonic/bip39.py:61: in entropy_from_mnemonic
+    bin_str = bin_str_entropy_from_wordlist_indexes(indexes, lang)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+indexes = [0, 0, 0, 0, 0, 0, ...], base = 'en'
+
+    def bin_str_entropy_from_wordlist_indexes(indexes: Sequence[int], base: int) -> BinStr:
+        """Return the raw entropy from a list of word-list indexes.
+    
+        Return the raw (i.e. binary 0/1 string) entropy from the provided
+        list of integer indexes into a given language word-list.
+        """
+        entropy = 0
+        for index in indexes:
+>           entropy = entropy * base + index
+                      ^^^^^^^^^^^^^^^^^^^^^^
+E           TypeError: can only concatenate str (not "int") to str
+
+btclib/mnemonic/entropy.py:49: TypeError
+____________________________ test_pub_key_recovery _____________________________
+[gw0] linux -- Python 3.11.15 /usr/local/bin/python
+
+    def test_pub_key_recovery() -> None:
+        ec = CURVES["secp112r2"]
+    
+        q = 0x10
+        Q = mult(q, ec.G, ec)
+    
+        msg = b"Satoshi Nakamoto"
+        sig = dsa.sign(msg, q, ec=ec)
+        dsa.assert_as_valid(msg, Q, sig)
+        assert dsa.verify(msg, Q, sig)
+    
+        keys = dsa.recover_pub_keys(msg, sig)
+>       assert len(keys) == 4
+E       assert 2 == 4
+E        +  where 2 = len([(537416091195383570996744546272210, 1766922181326602652338562188272190), (3838895390233328948049943042418414, 2861805054504608924155332506826821)])
+
+tests/ecc/test_dsa.py:206: AssertionError
+________________________________ test_addresses ________________________________
+[gw4] linux -- Python 3.11.15 /usr/local/bin/python
+
+    def test_addresses() -> None:
+        # data cross-checked with Electrum and
+        # https://jlopp.github.io/xpub-converter/
+    
+        # 128 bits
+        raw_entr = bytes.fromhex("6" * 32)
+        # 12 words
+>       mnemonic = bip39.mnemonic_from_entropy(raw_entr, "en")
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests/bip32/test_slip132.py:150: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+btclib/mnemonic/bip39.py:53: in mnemonic_from_entropy
+    indexes = wordlist_indexes_from_bin_str_entropy(bin_str_entropy + checksum, lang)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+entropy = '011001100110011001100110011001100110011001100110011001100110011001100110011001100110011001100110011001100110011001100110011001100110'
+base = 'en'
+
+    def wordlist_indexes_from_bin_str_entropy(entropy: BinStr, base: int) -> list[int]:
+        """Return the digit indexes for the provided raw entropy.
+    
+        Return the list of integer indexes into a digit set, usually a
+        language word-list, for the provided raw (i.e. binary 0/1 string)
+        entropy; leading zeros are not considered redundant padding.
+        """
+        bits = len(entropy)
+        int_entropy = int(entropy, 2)
+        indexes = []
+        while int_entropy:
+>           int_entropy, index = divmod(int_entropy, base)
+                                 ^^^^^^^^^^^^^^^^^^^^^^^^^
+E           TypeError: unsupported operand type(s) for divmod(): 'int' and 'str'
+
+btclib/mnemonic/entropy.py:31: TypeError
+________________________________ test_block_170 ________________________________
+[gw5] linux -- Python 3.11.15 /usr/local/bin/python
+
+    def test_block_170() -> None:
+        """Test first block with a transaction."""
+        fname = "block_170.bin"
+        filename = path.join(path.dirname(__file__), "_data", fname)
+        with open(filename, "rb") as file_:
+            block_bytes = file_.read()
+    
+        block = Block.parse(block_bytes)
+        assert len(block.transactions) == 2
+        assert block.size == 490
+        assert block.weight == 1636
+        assert block.height is None
+        assert not block.has_segwit_tx()
+        assert block == Block.parse(block.serialize())
+>       assert block == Block.from_dict(block.to_dict())
+                                        ^^^^^^^^^^^^^^^
+
+tests/block/test_block.py:136: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+btclib/block/block.py:72: in to_dict
+    "transactions": [t.to_dict(check_validity) for t in self.transactions],
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+btclib/block/block.py:72: in <listcomp>
+    "transactions": [t.to_dict(check_validity) for t in self.transactions],
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^
+btclib/tx/tx.py:117: in to_dict
+    "vout": [tx_out.to_dict(check_validity) for tx_out in self.vout],
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+btclib/tx/tx.py:117: in <listcomp>
+    "vout": [tx_out.to_dict(check_validity) for tx_out in self.vout],
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = TxOut(value=5000000000, script_pub_key=ScriptPubKey(script=b'A\x04\xd4lIh\xbd\xe0(\x99\xd2\xaa\tc6|zl\xe3N\xec3+2\xe4._4\x07\xe0R\xd6J\xc6%\xdao\x07\x18\xe7\xb3\x02\x14\x044\xbdrW\x06\x95|\t-\xb58\x05\xb8!\xa8[#\xa7\xacar[\xac'))
+check_validity = True
+
+    def to_dict(self, check_validity: bool = True) -> dict[str, Any]:
+        if check_validity:
+            self.assert_valid()
+    
+        return {
+            "value": btc_from_sats(self.value),
+>           "scriptPubKey": self.script_pub_key.to_dict(check_validity),
+                            ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        }
+E       AttributeError: 'ScriptPubKey' object has no attribute 'to_dict'
+
+btclib/tx/tx_out.py:53: AttributeError
+________________________________ test_signature ________________________________
+[gw15] linux -- Python 3.11.15 /usr/local/bin/python
+
+    def test_signature() -> None:
+        msg = b"test message"
+    
+        wif, addr = bms.gen_keys()
+        bms_sig = bms.sign(msg, wif)
+        bms.assert_as_valid(msg, addr, bms_sig)
+        assert bms.verify(msg, addr, bms_sig)
+        assert bms_sig == bms.Sig.parse(bms_sig.serialize())
+        assert bms_sig == bms.Sig.parse(bms_sig.serialize().hex())
+        assert bms_sig == bms.Sig.b64decode(bms_sig.b64encode())
+        assert bms_sig == bms.Sig.b64decode(bms_sig.b64encode().encode("ascii"))
+    
+        assert bms_sig == bms.sign(msg, wif.encode("ascii"))
+    
+        # malleated signature
+        dsa_sig = dsa.Sig(bms_sig.dsa_sig.r, bms_sig.dsa_sig.ec.n - bms_sig.dsa_sig.s)
+        # without updating rf verification will fail, even with lower_s=False
+        bms_sig = bms.Sig(bms_sig.rf, dsa_sig)
+        err_msg = "invalid p2pkh address: "
+>       with pytest.raises(BTClibValueError, match=err_msg):
+E       AssertionError: Regex pattern did not match.
+E         Expected regex: 'invalid p2pkh address: '
+E         Actual message: 'invalid signature for address: 1LwCrcPxqDGjepHDsdA78KKdaDMicz3eF5'
+
+tests/ecc/test_bms.py:50: AssertionError
+_____________________________ test_low_cardinality _____________________________
+[gw4] linux -- Python 3.11.15 /usr/local/bin/python
+
+    def test_low_cardinality() -> None:
+        """Test low-cardinality curves for all msg/key pairs."""
+        # pylint: disable=protected-access
+    
+        # ec.n has to be prime to sign
+        test_curves = [
+            low_card_curves["ec13_11"],
+            low_card_curves["ec13_19"],
+            low_card_curves["ec17_13"],
+            low_card_curves["ec17_23"],
+            low_card_curves["ec19_13"],
+            low_card_curves["ec19_23"],
+            low_card_curves["ec23_19"],
+            low_card_curves["ec23_31"],
+        ]
+    
+        aux = b"\x00" * 32
+        msg = b"\x01"
+        # only low cardinality test curves or it would take forever
+        for ec in test_curves:
+            for q in range(1, ec.n // 2):  # all possible private keys
+                q_fixed, x_Q = ssa.gen_keys(q, ec)
+                QJ = jac_from_aff((x_Q, ec.y_even(x_Q)))
+                while True:
+                    try:
+                        sig = ssa.sign(msg, q, aux, ec)
+                        break
+                    except BTClibRuntimeError:  # invalid zero challenge
+                        msg += b"\x01"
+                        continue
+                ssa.assert_as_valid(msg, x_Q, sig)
+                for k in range(1, ec.n // 2):  # all possible ephemeral keys
+                    k_fixed, r = ssa.gen_keys(k, ec)
+                    for e in range(ec.n):  # all possible challenges
+                        s = (k_fixed + e * q_fixed) % ec.n
+    
+                        if e == 0:
+                            err_msg = "invalid zero challenge"
+                            with pytest.raises(BTClibRuntimeError, match=err_msg):
+                                ssa._sign_(e, q_fixed, k_fixed, r, ec)
+                            # no public key can be recovered
+                            with pytest.raises(BTClibRuntimeError, match=err_msg):
+                                ssa._recover_pub_key_(e, r, s, ec)
+    
+                            # if e == 0 then the sig is always valid
+>                           ssa._assert_as_valid_(e, QJ, r, s, ec)
+
+tests/ecc/test_ssa.py:210: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+c = 0, QJ = (1, 12, 1), r = 1, s = 1, ec = Curve(13, 7, 6, (1, 1), 11, 1)
+
+    def _assert_as_valid_(c: int, QJ: JacPoint, r: int, s: int, ec: Curve) -> None:
+    
+        KJ = _double_mult(ec.n - c, QJ, s, ec.GJ, ec)
+    
+        if ec.y_aff_from_jac(KJ) % 2:
+>           raise BTClibRuntimeError("y_K is odd")
+E           btclib.exceptions.BTClibRuntimeError: y_K is odd
+
+btclib/ecc/ssa.py:178: BTClibRuntimeError
+_____________________________ test_low_cardinality _____________________________
+[gw2] linux -- Python 3.11.15 /usr/local/bin/python
+
+    def test_low_cardinality() -> None:
+        """Test low-cardinality curves for all msg/key pairs."""
+        # pylint: disable=protected-access
+    
+        # ec.n has to be prime to sign
+        test_curves = [
+            low_card_curves["ec13_11"],
+            # low_card_curves["ec13_19"],
+            # low_card_curves["ec17_13"],
+            low_card_curves["ec17_23"],
+            low_card_curves["ec19_13"],
+            # low_card_curves["ec19_23"],
+            low_card_curves["ec23_19"],
+            low_card_curves["ec23_31"],
+        ]
+    
+        lower_s = True
+        # only low cardinality test curves or it would take forever
+        for ec in test_curves:
+            for q in range(1, ec.n):  # all possible private keys
+                QJ = _mult(q, ec.GJ, ec)  # public key
+                for k in range(1, ec.n):  # all possible ephemeral keys
+                    RJ = _mult(k, ec.GJ, ec)
+                    r = ec.x_aff_from_jac(RJ) % ec.n
+                    k_inv = mod_inv(k, ec.n)
+                    for e in range(ec.n):  # all possible challenges
+                        s = k_inv * (e + q * r) % ec.n
+                        # bitcoin canonical 'low-s' encoding for ECDSA
+                        if lower_s and s > ec.n / 2:
+                            s = ec.n - s
+                        if r == 0 or s == 0:
+                            err_msg = "failed to sign: "
+                            with pytest.raises(BTClibRuntimeError, match=err_msg):
+                                dsa._sign_(e, q, k, lower_s, ec)
+                        else:
+                            sig = dsa._sign_(e, q, k, lower_s, ec)
+                            assert r == sig.r
+                            assert s == sig.s
+                            assert ec == sig.ec
+                            # valid signature must pass verification
+                            dsa._assert_as_valid_(e, QJ, r, s, lower_s, ec)
+    
+                            jac_keys = dsa._recover_pub_keys_(e, r, s, lower_s, ec)
+                            # FIXME speed this up
+                            Qs = [ec.aff_from_jac(key) for key in jac_keys]
+                            assert ec.aff_from_jac(QJ) in Qs
+>                           assert len(jac_keys) in {2, 4}
+E                           assert 1 in {2, 4}
+E                            +  where 1 = len([(10, 8, 6)])
+
+tests/ecc/test_dsa.py:191: AssertionError
+_______________________________ test_p2wpkh_p2sh _______________________________
+[gw2] linux -- Python 3.11.15 /usr/local/bin/python
+
+    def test_p2wpkh_p2sh() -> None:
+        """Test generation of a p2wpkh-p2sh wallet."""
+        # https://bitcoinelectrum.com/creating-a-p2sh-segwit-wallet-with-electrum/
+        # https://www.youtube.com/watch?v=-1DBJWwA2Cw
+    
+        p2wpkh_p2sh_xkey_version = NETWORKS["mainnet"].slip132_p2wpkh_p2sh_prv
+        mnemonics = [
+            "matrix fitness cook logic peace mercy dinosaur sign measure rescue alert turtle",
+            "chief popular furnace myth decline subject actual toddler plunge rug mixed unlock",
+        ]
+        versions = ["segwit", "standard"]
+        addresses = [
+            "38Ysa2TRwGAGLEE1pgV2HCX7MAw6XsP6BJ",
+            "3A5u2RTjs3t33Kyc48zHA7Dfsr8Zsfwkoo",
+        ]
+        for mnemonic, version, p2wpkh_p2sh_address in zip(mnemonics, versions, addresses):
+            # this is an electrum mnemonic
+            assert electrum.version_from_mnemonic(mnemonic)[0] == version
+            # of course, it is invalid as BIP39 mnemonic
+            with pytest.raises(BTClibValueError, match="invalid checksum: "):
+>               bip39.mxprv_from_mnemonic(mnemonic, "")
+
+tests/mnemonic/test_electrum.py:118: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+btclib/mnemonic/bip39.py:102: in mxprv_from_mnemonic
+    seed = seed_from_mnemonic(mnemonic, passphrase or "", verify_checksum)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+btclib/mnemonic/bip39.py:84: in seed_from_mnemonic
+    entropy_from_mnemonic(mnemonic)
+btclib/mnemonic/bip39.py:61: in entropy_from_mnemonic
+    bin_str = bin_str_entropy_from_wordlist_indexes(indexes, lang)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+indexes = [1097, 703, 381, 1052, 1294, 1114, ...], base = 'en'
+
+    def bin_str_entropy_from_wordlist_indexes(indexes: Sequence[int], base: int) -> BinStr:
+        """Return the raw entropy from a list of word-list indexes.
+    
+        Return the raw (i.e. binary 0/1 string) entropy from the provided
+        list of integer indexes into a given language word-list.
+        """
+        entropy = 0
+        for index in indexes:
+>           entropy = entropy * base + index
+                      ^^^^^^^^^^^^^^^^^^^^^^
+E           TypeError: can only concatenate str (not "int") to str
+
+btclib/mnemonic/entropy.py:49: TypeError
+_____________________________ test_vectors_bip174 ______________________________
+[gw0] linux -- Python 3.11.15 /usr/local/bin/python
+
+    def test_vectors_bip174() -> None:
+        """Test https://github.com/bitcoin/bips/blob/master/bip-0174.mediawiki."""
+        data_folder = path.join(path.dirname(__file__), "_data")
+        filename = path.join(data_folder, "bip174_test_vectors.json")
+        with open(filename, encoding="ascii") as file_:
+            # json.dump(test_vectors, f, indent=4)
+            test_vectors = json.load(file_)
+    
+        for i, test_vector in enumerate(test_vectors["valid psbts"]):
+            try:
+                psbt_decoded = Psbt.b64decode(test_vector["encoded psbt"])
+            except Exception as e:  # pragma: no cover # pylint: disable=broad-except
+                print(f"valid case {i+1}: {test_vector['description']}")  # pragma: no cover
+                raise e  # pragma: no cover
+>           assert test_vector["encoded psbt"] == Psbt.b64encode(psbt_decoded)
+E           AssertionError: assert 'cHNidP8BAHUCAAAAASaBcTce3/KF6Tet7qSze3gADAVmy7OtZGQXE8pCFxv2AAAAAAD+////AtPf9QUAAAAAGXapFNDFmQPFusKGh2DpD9UhpGZap2Ugi...lMDDPOXMMJ/7X85Y0CIGczio4OFyXBl/saiK9Z9R5E5CVbIBZ8hoQDHAXR8lkqASECI7cr7vCWXRC+B3jv7NYfysb3mk6haTkzgHNEZPhPKrMAAAAAAAAA' == None
+E            +  where None = <function Psbt.b64encode at 0xffff859680e0>(None)
+E            +    where <function Psbt.b64encode at 0xffff859680e0> = Psbt.b64encode
+
+tests/psbt/test_psbt.py:44: AssertionError
+_______________________________ test_exceptions ________________________________
+[gw15] linux -- Python 3.11.15 /usr/local/bin/python
+
+    def test_exceptions() -> None:
+        msg = b"test"
+        wif = "KwELaABegYxcKApCb3kJR9ymecfZZskL9BzVUkQhsqFiUKftb4tu"
+        address = b58.p2pkh(wif)
+        exp_sig = "IHdKsFF1bUrapA8GMoQUbgI+Ad0ZXyX1c/yAZHmJn5hSNBi7J+TrI1615FG3g9JEOPGVvcfDWIFWrg2exLNtoVc="
+        bms.assert_as_valid(msg, address, exp_sig)
+        bms_sig = bms.Sig.b64decode(exp_sig)
+    
+        err_msg = "not a p2wpkh address: "
+>       with pytest.raises(BTClibValueError, match=err_msg):
+E       AssertionError: Regex pattern did not match.
+E         Expected regex: 'not a p2wpkh address: '
+E         Actual message: 'invalid signature for address: bc1qve584t0cv27hwmy0cx9ca8uwyqyfw9y9dm3r8vus9fv36r2l9yjswusle5'
+
+tests/ecc/test_bms.py:88: AssertionError
+_______________________________ test_commitment ________________________________
+[gw11] linux -- Python 3.11.15 /usr/local/bin/python
+
+    def test_commitment() -> None:
+        ec = secp256k1
+        hf = sha256
+    
+        r_1 = 0xDEADBEEF
+        v1 = 0xBAADCAFE
+        # r_1*G + v1*H
+        C1 = pedersen.commit(r_1, v1, ec, hf)
+        assert pedersen.verify(r_1, v1, C1, ec, hf)
+    
+        r_2 = 0xBAADBAAD
+        v2 = 0xBAADBEEF
+        # r_2*G + v2*H
+        C2 = pedersen.commit(r_2, v2, ec, hf)
+        assert pedersen.verify(r_2, v2, C2, ec, hf)
+    
+        # Pedersen Commitment is additively homomorphic
+        # Commit(r_1, v1) + Commit(r_2, v2) = Commit(r_1+r_2, v1+r_2)
+        R = pedersen.commit(r_1 + r_2, v1 + v2, ec, hf)
+        assert ec.add(C1, C2) == R
+    
+        # commit does not verify (with catched exception)
+>       assert not pedersen.verify(sha256, v1, C2, ec, hf)  # type: ignore[arg-type]
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests/ecc/test_pedersen.py:62: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+btclib/ecc/pedersen.py:57: in verify
+    Q = commit(r, v, ec, hf)
+        ^^^^^^^^^^^^^^^^^^^^
+btclib/ecc/pedersen.py:45: in commit
+    Q = double_mult(r, H, v, ec.G, ec)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+btclib/ec/curve.py:198: in double_mult
+    u = int_from_integer(u) % ec.n
+        ^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+i = <built-in function openssl_sha256>
+
+    def int_from_integer(i: Integer) -> int:
+        """Return an int from many possible integer representations.
+    
+        Allowed integer representations are:
+    
+        * 3735928559
+        * -3735928559
+        * "0xdeadbeef"
+        * "-0xdeadbeef"
+        * "deadbeef"
+        * b'\xde\xad\xbe\xef'
+    
+        The binary representation is not allowed because there is no way to
+        discriminate it from a valid hex-string
+        (e.g. "0b11011110101011011011111011101111").
+        """
+        if isinstance(i, int):
+            return i
+    
+        if isinstance(i, str):
+            i = i.strip().lower()
+            if i.startswith("0x") or i.startswith("-0x"):
+                return int(i, 16)
+            i = bytes.fromhex(i)
+    
+>       return int.from_bytes(i, "big", signed=False)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       TypeError: cannot convert 'builtin_function_or_method' object to bytes
+
+btclib/utils.py:104: TypeError
+_____________________________ test_vectors_bip371 ______________________________
+[gw0] linux -- Python 3.11.15 /usr/local/bin/python
+
+    def test_vectors_bip371() -> None:
+        """Test https://github.com/bitcoin/bips/blob/master/bip-0371.mediawiki."""
+    
+        data_folder = path.join(path.dirname(__file__), "_data")
+        filename = path.join(data_folder, "bip371_test_vectors.json")
+        with open(filename, encoding="ascii") as file_:
+            # json.dump(test_vectors, f, indent=4)
+            test_vectors = json.load(file_)
+    
+        for i, test_vector in enumerate(test_vectors["valid psbts"]):
+            try:
+                psbt_decoded = Psbt.b64decode(test_vector["encoded psbt"])
+            except Exception as e:  # pragma: no cover # pylint: disable=broad-except
+                print(f"valid case {i+1}: {test_vector['description']}")  # pragma: no cover
+                raise e  # pragma: no cover
+>           assert test_vector["encoded psbt"] == Psbt.b64encode(psbt_decoded)
+E           AssertionError: assert 'cHNidP8BAFICAAAAASd0Srq/MCf+DWzyOpbu4u+xiO9SMBlUWFiD5ptmJLJCAAAAAAD/////AUjmBSoBAAAAFgAUdo4e60z0IIZgM/gKzv8PlyB0SWkAA...1uKoU/o8mxK9izBKGcGVxg76fuI5MEbT+iMgAiAgNrdyptt02HU8mKgnlY3mx4qzMSEJ830+AwRIQkLs5z2Bh3Ky2nVAAAgAEAAIAAAACAAAAAAAAAAAAA' == None
+E            +  where None = <function Psbt.b64encode at 0xffff859680e0>(None)
+E            +    where <function Psbt.b64encode at 0xffff859680e0> = Psbt.b64encode
+
+tests/psbt/test_psbt.py:78: AssertionError
+________________________________ test_creation _________________________________
+[gw14] linux -- Python 3.11.15 /usr/local/bin/python
+
+    def test_creation() -> None:
+        psbt_str = "cHNidP8BAJoCAAAAAljoeiG1ba8MI76OcHBFbDNvfLqlyHV5JPVFiHuyq911AAAAAAD/////g40EJ9DsZQpoqka7CwmK6kQiwHGyyng1Kgd5WdB86h0BAAAAAP////8CcKrwCAAAAAAWABTYXCtx0AYLCcmIauuBXlCZHdoSTQDh9QUAAAAAFgAUAK6pouXw+HaliN9VRuh0LR2HAI8AAAAAAAAAAAA="
+        psbt = Psbt.b64decode(psbt_str)
+>       assert psbt.b64encode() == psbt_str
+               ^^^^^^^^^^^^^^
+E       AttributeError: 'NoneType' object has no attribute 'b64encode'
+
+tests/psbt/test_psbt.py:91: AttributeError
+_________________________ test_additional_combination __________________________
+[gw2] linux -- Python 3.11.15 /usr/local/bin/python
+
+    def test_additional_combination() -> None:
+        psbt_str = "cHNidP8BAJoCAAAAAljoeiG1ba8MI76OcHBFbDNvfLqlyHV5JPVFiHuyq911AAAAAAD/////g40EJ9DsZQpoqka7CwmK6kQiwHGyyng1Kgd5WdB86h0BAAAAAP////8CcKrwCAAAAAAWABTYXCtx0AYLCcmIauuBXlCZHdoSTQDh9QUAAAAAFgAUAK6pouXw+HaliN9VRuh0LR2HAI8AAAAAAAEAuwIAAAABqtc5MQGL0l+ErkALaISL4J23BurCrBgpi6vucatlb4sAAAAASEcwRAIgWPb8fGoz4bMVSNSByCbAFb0wE1qtQs1neQ2rZtKtJDsCIEoc7SYExnNbY5PltBaR3XiwDwxZQvufdRhW+qk4FX26Af7///8CgPD6AgAAAAAXqRQPuUY0IWlrgsgzryQceMF9295JNIfQ8gonAQAAABepFCnKdPigj4GZlCgYXJe12FLkBj9hh2UAAAAiAgKVg785rgpgl0etGZrd1jT6YQhVnWxc05tMIYPxq5bgf0cwRAIgdAGK1BgAl7hzMjwAFXILNoTMgSOJEEjn282bVa1nnJkCIHPTabdA4+tT3O+jOCPIBwUUylWn3ZVE8VfBZ5EyYRGMASICAtq2H/SaFNtqfQKwzR+7ePxLGDErW05U2uTbovv+9TbXSDBFAiEA9hA4swjcHahlo0hSdG8BV3KTQgjG0kRUOTzZm98iF3cCIAVuZ1pnWm0KArhbFOXikHTYolqbV2C+ooFvZhkQoAbqAQEDBAEAAAABBEdSIQKVg785rgpgl0etGZrd1jT6YQhVnWxc05tMIYPxq5bgfyEC2rYf9JoU22p9ArDNH7t4/EsYMStbTlTa5Nui+/71NtdSriIGApWDvzmuCmCXR60Zmt3WNPphCFWdbFzTm0whg/GrluB/ENkMak8AAACAAAAAgAAAAIAiBgLath/0mhTban0CsM0fu3j8SxgxK1tOVNrk26L7/vU21xDZDGpPAAAAgAAAAIABAACAAAEBIADC6wsAAAAAF6kUt/X69A49QKWkWbHbNTXyty+pIeiHIgIDCJ3BDHrG21T5EymvYXMz2ziM6tDCMfcjN50bmQMLAtxHMEQCIGLrelVhB6fHP0WsSrWh3d9vcHX7EnWWmn84Pv/3hLyyAiAMBdu3Rw2/LwhVfdNWxzJcHtMJE+mWzThAlF2xIijaXwEiAgI63ZBPPW3PWd25BrDe4jUpt/+57VDl6GFRkmhgIh8Oc0cwRAIgZfRbpZmLWaJ//hp77QFq8fH5DVSzqo90UKpfVqJRA70CIH9yRwOtHtuWaAsoS1bU/8uI9/t1nqu+CKow8puFE4PSAQEDBAEAAAABBCIAIIwjUxc3Q7WV37Sge3K6jkLjeX2nTof+fZ10l+OyAokDAQVHUiEDCJ3BDHrG21T5EymvYXMz2ziM6tDCMfcjN50bmQMLAtwhAjrdkE89bc9Z3bkGsN7iNSm3/7ntUOXoYVGSaGAiHw5zUq4iBgI63ZBPPW3PWd25BrDe4jUpt/+57VDl6GFRkmhgIh8OcxDZDGpPAAAAgAAAAIADAACAIgYDCJ3BDHrG21T5EymvYXMz2ziM6tDCMfcjN50bmQMLAtwQ2QxqTwAAAIAAAACAAgAAgAAiAgOppMN/WZbTqiXbrGtXCvBlA5RJKUJGCzVHU+2e7KWHcRDZDGpPAAAAgAAAAIAEAACAACICAn9jmXV9Lv9VoTatAsaEsYOLZVbl8bazQoKpS2tQBRCWENkMak8AAACAAAAAgAUAAIAA"
+        # let's sort it
+>       psbt_str = Psbt.b64decode(psbt_str).b64encode()
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       AttributeError: 'NoneType' object has no attribute 'b64encode'
+
+tests/psbt/test_psbt.py:299: AttributeError
+_________________________ test_lexicographic_ordering __________________________
+[gw0] linux -- Python 3.11.15 /usr/local/bin/python
+
+    def test_lexicographic_ordering() -> None:
+        psbt_str = "cHNidP8BAD8CAAAAAf//////////////////////////////////////////AAAAAAD/////AQAAAAAAAAAAA2oBAAAAAAAK8AECAwQFBgcICQ8BAgMEBQYHCAkKCwwNDg8K8AECAwQFBgcIEA8BAgMEBQYHCAkKCwwNDg8ACvABAgMEBQYHCAkPAQIDBAUGBwgJCgsMDQ4PCvABAgMEBQYHCBAPAQIDBAUGBwgJCgsMDQ4PAArwAQIDBAUGBwgJDwECAwQFBgcICQoLDA0ODwrwAQIDBAUGBwgQDwECAwQFBgcICQoLDA0ODwA="
+        psbt = Psbt.b64decode(psbt_str)
+>       assert psbt.b64encode() == psbt_str
+               ^^^^^^^^^^^^^^
+E       AttributeError: 'NoneType' object has no attribute 'b64encode'
+
+tests/psbt/test_psbt.py:173: AttributeError
+_______________________________ test_valid_sign ________________________________
+[gw2] linux -- Python 3.11.15 /usr/local/bin/python
+
+    def test_valid_sign() -> None:
+        psbt_str = "cHNidP8BAFUCAAAAASeaIyOl37UfxF8iD6WLD8E+HjNCeSqF1+Ns1jM7XLw5AAAAAAD/////AaBa6gsAAAAAGXapFP/pwAYQl8w7Y28ssEYPpPxCfStFiKwAAAAAAAEBIJVe6gsAAAAAF6kUY0UgD2jRieGtwN8cTRbqjxTA2+uHIgIDsTQcy6doO2r08SOM1ul+cWfVafrEfx5I1HVBhENVvUZGMEMCIAQktY7/qqaU4VWepck7v9SokGQiQFXN8HC2dxRpRC0HAh9cjrD+plFtYLisszrWTt5g6Hhb+zqpS5m9+GFR25qaAQEEIgAgdx/RitRZZm3Unz1WTj28QvTIR3TjYK2haBao7UiNVoEBBUdSIQOxNBzLp2g7avTxI4zW6X5xZ9Vp+sR/HkjUdUGEQ1W9RiED3lXR4drIBeP4pYwfv5uUwC89uq/hJ/78pJlfJvggg71SriIGA7E0HMunaDtq9PEjjNbpfnFn1Wn6xH8eSNR1QYRDVb1GELSmumcAAACAAAAAgAQAAIAiBgPeVdHh2sgF4/iljB+/m5TALz26r+En/vykmV8m+CCDvRC0prpnAAAAgAAAAIAFAACAAAA="
+        psbt = Psbt.b64decode(psbt_str)
+>       assert psbt.b64encode() == psbt_str
+               ^^^^^^^^^^^^^^
+E       AttributeError: 'NoneType' object has no attribute 'b64encode'
+
+tests/psbt/test_psbt.py:324: AttributeError
+__________________________________ test_merge __________________________________
+[gw0] linux -- Python 3.11.15 /usr/local/bin/python
+
+    def test_merge() -> None:
+        psbt_str = "cHNidP8BAD8CAAAAAf//////////////////////////////////////////AAAAAAD/////AQAAAAAAAAAAA2oBAAAAAAAK8AECAwQFBgcICQ8BAgMEBQYHCAkKCwwNDg8K8AECAwQFBgcIEA8BAgMEBQYHCAkKCwwNDg8ACvABAgMEBQYHCAkPAQIDBAUGBwgJCgsMDQ4PCvABAgMEBQYHCBAPAQIDBAUGBwgJCgsMDQ4PAArwAQIDBAUGBwgJDwECAwQFBgcICQoLDA0ODwrwAQIDBAUGBwgQDwECAwQFBgcICQoLDA0ODwA="
+        psbt = Psbt.b64decode(psbt_str)
+        psbt1_str = "cHNidP8BAD8CAAAAAf//////////////////////////////////////////AAAAAAD/////AQAAAAAAAAAAA2oBAAAAAAAK8AECAwQFBgcICQ8BAgMEBQYHCAkKCwwNDg8ACvABAgMEBQYHCAkPAQIDBAUGBwgJCgsMDQ4PAArwAQIDBAUGBwgJDwECAwQFBgcICQoLDA0ODwA="
+        psbt1 = Psbt.b64decode(psbt1_str)
+        psbt2_str = "cHNidP8BAD8CAAAAAf//////////////////////////////////////////AAAAAAD/////AQAAAAAAAAAAA2oBAAAAAAAK8AECAwQFBgcIEA8BAgMEBQYHCAkKCwwNDg8ACvABAgMEBQYHCBAPAQIDBAUGBwgJCgsMDQ4PAArwAQIDBAUGBwgQDwECAwQFBgcICQoLDA0ODwA="
+        psbt2 = Psbt.b64decode(psbt2_str)
+    
+>       psbt1.inputs[0].sig_hash_type = 1
+        ^^^^^^^^^^^^
+E       AttributeError: 'NoneType' object has no attribute 'inputs'
+
+tests/psbt/test_psbt.py:196: AttributeError
+______________________________ test_block_200000 _______________________________
+[gw5] linux -- Python 3.11.15 /usr/local/bin/python
+
+    def test_block_200000() -> None:
+        fname = "block_200000.bin"
+        filename = path.join(path.dirname(__file__), "_data", fname)
+        with open(filename, "rb") as file_:
+            block_bytes = file_.read()
+    
+        block = Block.parse(block_bytes)
+        assert len(block.transactions) == 388
+        assert block.size == 247_533
+        assert block.weight == 989_800
+        assert block.height == 200_000
+        assert not block.has_segwit_tx()
+        assert block == Block.parse(block.serialize())
+>       assert block == Block.from_dict(block.to_dict())
+                                        ^^^^^^^^^^^^^^^
+
+tests/block/test_block.py:169: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+btclib/block/block.py:72: in to_dict
+    "transactions": [t.to_dict(check_validity) for t in self.transactions],
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+btclib/block/block.py:72: in <listcomp>
+    "transactions": [t.to_dict(check_validity) for t in self.transactions],
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^
+btclib/tx/tx.py:117: in to_dict
+    "vout": [tx_out.to_dict(check_validity) for tx_out in self.vout],
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+btclib/tx/tx.py:117: in <listcomp>
+    "vout": [tx_out.to_dict(check_validity) for tx_out in self.vout],
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = TxOut(value=5063517500, script_pub_key=ScriptPubKey(script=b"A\x04\xb0\xbdcB4\xab\xbb\x1b\xa1\xe9\x86\xe8\x84\x18\\a\x...9\x13\x7f#\xc2\xc4\t'>\xb1ne7\xa5vx.\xbaf\x8a~\xf8\xbd;<\xfb\x1e\xdbq\x17\xabe\x12\x9b\x8a.h\x1f<\x1e\t\x08\xef{\xac"))
+check_validity = True
+
+    def to_dict(self, check_validity: bool = True) -> dict[str, Any]:
+        if check_validity:
+            self.assert_valid()
+    
+        return {
+            "value": btc_from_sats(self.value),
+>           "scriptPubKey": self.script_pub_key.to_dict(check_validity),
+                            ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        }
+E       AttributeError: 'ScriptPubKey' object has no attribute 'to_dict'
+
+btclib/tx/tx_out.py:53: AttributeError
+____________________________ test_psbt_combination _____________________________
+[gw14] linux -- Python 3.11.15 /usr/local/bin/python
+
+    def test_psbt_combination() -> None:
+        psbt_str = "cHNidP8BAJoCAAAAAljoeiG1ba8MI76OcHBFbDNvfLqlyHV5JPVFiHuyq911AAAAAAD/////g40EJ9DsZQpoqka7CwmK6kQiwHGyyng1Kgd5WdB86h0BAAAAAP////8CcKrwCAAAAAAWABTYXCtx0AYLCcmIauuBXlCZHdoSTQDh9QUAAAAAFgAUAK6pouXw+HaliN9VRuh0LR2HAI8AAAAAAAEAuwIAAAABqtc5MQGL0l+ErkALaISL4J23BurCrBgpi6vucatlb4sAAAAASEcwRAIgWPb8fGoz4bMVSNSByCbAFb0wE1qtQs1neQ2rZtKtJDsCIEoc7SYExnNbY5PltBaR3XiwDwxZQvufdRhW+qk4FX26Af7///8CgPD6AgAAAAAXqRQPuUY0IWlrgsgzryQceMF9295JNIfQ8gonAQAAABepFCnKdPigj4GZlCgYXJe12FLkBj9hh2UAAAAiAgKVg785rgpgl0etGZrd1jT6YQhVnWxc05tMIYPxq5bgf0cwRAIgdAGK1BgAl7hzMjwAFXILNoTMgSOJEEjn282bVa1nnJkCIHPTabdA4+tT3O+jOCPIBwUUylWn3ZVE8VfBZ5EyYRGMASICAtq2H/SaFNtqfQKwzR+7ePxLGDErW05U2uTbovv+9TbXSDBFAiEA9hA4swjcHahlo0hSdG8BV3KTQgjG0kRUOTzZm98iF3cCIAVuZ1pnWm0KArhbFOXikHTYolqbV2C+ooFvZhkQoAbqAQEDBAEAAAABBEdSIQKVg785rgpgl0etGZrd1jT6YQhVnWxc05tMIYPxq5bgfyEC2rYf9JoU22p9ArDNH7t4/EsYMStbTlTa5Nui+/71NtdSriIGApWDvzmuCmCXR60Zmt3WNPphCFWdbFzTm0whg/GrluB/ENkMak8AAACAAAAAgAAAAIAiBgLath/0mhTban0CsM0fu3j8SxgxK1tOVNrk26L7/vU21xDZDGpPAAAAgAAAAIABAACAAAEBIADC6wsAAAAAF6kUt/X69A49QKWkWbHbNTXyty+pIeiHIgIDCJ3BDHrG21T5EymvYXMz2ziM6tDCMfcjN50bmQMLAtxHMEQCIGLrelVhB6fHP0WsSrWh3d9vcHX7EnWWmn84Pv/3hLyyAiAMBdu3Rw2/LwhVfdNWxzJcHtMJE+mWzThAlF2xIijaXwEiAgI63ZBPPW3PWd25BrDe4jUpt/+57VDl6GFRkmhgIh8Oc0cwRAIgZfRbpZmLWaJ//hp77QFq8fH5DVSzqo90UKpfVqJRA70CIH9yRwOtHtuWaAsoS1bU/8uI9/t1nqu+CKow8puFE4PSAQEDBAEAAAABBCIAIIwjUxc3Q7WV37Sge3K6jkLjeX2nTof+fZ10l+OyAokDAQVHUiEDCJ3BDHrG21T5EymvYXMz2ziM6tDCMfcjN50bmQMLAtwhAjrdkE89bc9Z3bkGsN7iNSm3/7ntUOXoYVGSaGAiHw5zUq4iBgI63ZBPPW3PWd25BrDe4jUpt/+57VDl6GFRkmhgIh8OcxDZDGpPAAAAgAAAAIADAACAIgYDCJ3BDHrG21T5EymvYXMz2ziM6tDCMfcjN50bmQMLAtwQ2QxqTwAAAIAAAACAAgAAgAAiAgOppMN/WZbTqiXbrGtXCvBlA5RJKUJGCzVHU+2e7KWHcRDZDGpPAAAAgAAAAIAEAACAACICAn9jmXV9Lv9VoTatAsaEsYOLZVbl8bazQoKpS2tQBRCWENkMak8AAACAAAAAgAUAAIAA"
+        # let's sort it
+>       psbt_str = Psbt.b64decode(psbt_str).b64encode()
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       AttributeError: 'NoneType' object has no attribute 'b64encode'
+
+tests/psbt/test_psbt.py:120: AttributeError
+______________________________ test_valid_sign_2 _______________________________
+[gw2] linux -- Python 3.11.15 /usr/local/bin/python
+
+    def test_valid_sign_2() -> None:
+        psbt_str = "cHNidP8BAFUCAAAAASeaIyOl37UfxF8iD6WLD8E+HjNCeSqF1+Ns1jM7XLw5AAAAAAD/////AaBa6gsAAAAAGXapFP/pwAYQl8w7Y28ssEYPpPxCfStFiKwAAAAAAAEBIJVe6gsAAAAAF6kUY0UgD2jRieGtwN8cTRbqjxTA2+uHIgIDsTQcy6doO2r08SOM1ul+cWfVafrEfx5I1HVBhENVvUZGMEMCIAQktY7/qqaU4VWepck7v9SokGQiQFXN8HC2dxRpRC0HAh9cjrD+plFtYLisszrWTt5g6Hhb+zqpS5m9+GFR25qaAQEEIgAgdx/RitRZZm3Unz1WTj28QvTIR3TjYK2haBao7UiNVoEBBUdSIQOxNBzLp2g7avTxI4zW6X5xZ9Vp+sR/HkjUdUGEQ1W9RiED3lXR4drIBeP4pYwfv5uUwC89uq/hJ/78pJlfJvggg71SriIGA7E0HMunaDtq9PEjjNbpfnFn1Wn6xH8eSNR1QYRDVb1GELSmumcAAACAAAAAgAQAAIAiBgPeVdHh2sgF4/iljB+/m5TALz26r+En/vykmV8m+CCDvRC0prpnAAAAgAAAAIAFAACAAAA="
+        psbt = Psbt.b64decode(psbt_str)
+>       assert psbt.b64encode() == psbt_str
+               ^^^^^^^^^^^^^^
+E       AttributeError: 'NoneType' object has no attribute 'b64encode'
+
+tests/psbt/test_psbt.py:332: AttributeError
+_________________________ test_missing_script_pub_key __________________________
+[gw0] linux -- Python 3.11.15 /usr/local/bin/python
+
+    def test_missing_script_pub_key() -> None:
+        psbt_str = "cHNidP8BAD8CAAAAAf//////////////////////////////////////////AAAAAAD/////AQAAAAAAAAAAA2oBAAAAAAAKDwECAwQFBgcICQ8BAgMEBQYHCAkKCwwNDg8KDwECAwQFBgcIEA8BAgMEBQYHCAkKCwwNDg8ACg8BAgMEBQYHCAkPAQIDBAUGBwgJCgsMDQ4PCg8BAgMEBQYHCBAPAQIDBAUGBwgJCgsMDQ4PAAoPAQIDBAUGBwgJDwECAwQFBgcICQoLDA0ODwoPAQIDBAUGBwgQDwECAwQFBgcICQoLDA0ODwA="
+        psbt = Psbt.b64decode(psbt_str)
+    
+        with pytest.raises(BTClibValueError) as excinfo:
+>           psbt.assert_signable()
+            ^^^^^^^^^^^^^^^^^^^^
+E           AttributeError: 'NoneType' object has no attribute 'assert_signable'
+
+tests/psbt/test_psbt.py:207: AttributeError
+___________________________ test_mxprv_from_mnemonic ___________________________
+[gw5] linux -- Python 3.11.15 /usr/local/bin/python
+
+    def test_mxprv_from_mnemonic() -> None:
+        mnemonic = "abandon abandon atom trust ankle walnut oil across awake bunker divorce abstract"
+>       rootxprv = bip39.mxprv_from_mnemonic(mnemonic, "")
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests/mnemonic/test_bip39.py:80: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+btclib/mnemonic/bip39.py:102: in mxprv_from_mnemonic
+    seed = seed_from_mnemonic(mnemonic, passphrase or "", verify_checksum)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+btclib/mnemonic/bip39.py:84: in seed_from_mnemonic
+    entropy_from_mnemonic(mnemonic)
+btclib/mnemonic/bip39.py:61: in entropy_from_mnemonic
+    bin_str = bin_str_entropy_from_wordlist_indexes(indexes, lang)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+indexes = [0, 0, 114, 1869, 73, 1974, ...], base = 'en'
+
+    def bin_str_entropy_from_wordlist_indexes(indexes: Sequence[int], base: int) -> BinStr:
+        """Return the raw entropy from a list of word-list indexes.
+    
+        Return the raw (i.e. binary 0/1 string) entropy from the provided
+        list of integer indexes into a given language word-list.
+        """
+        entropy = 0
+        for index in indexes:
+>           entropy = entropy * base + index
+                      ^^^^^^^^^^^^^^^^^^^^^^
+E           TypeError: can only concatenate str (not "int") to str
+
+btclib/mnemonic/entropy.py:49: TypeError
+________________________________ test_finalize _________________________________
+[gw14] linux -- Python 3.11.15 /usr/local/bin/python
+
+    def test_finalize() -> None:
+        psbt_str = "cHNidP8BAJoCAAAAAljoeiG1ba8MI76OcHBFbDNvfLqlyHV5JPVFiHuyq911AAAAAAD/////g40EJ9DsZQpoqka7CwmK6kQiwHGyyng1Kgd5WdB86h0BAAAAAP////8CcKrwCAAAAAAWABTYXCtx0AYLCcmIauuBXlCZHdoSTQDh9QUAAAAAFgAUAK6pouXw+HaliN9VRuh0LR2HAI8AAAAAAAEAuwIAAAABqtc5MQGL0l+ErkALaISL4J23BurCrBgpi6vucatlb4sAAAAASEcwRAIgWPb8fGoz4bMVSNSByCbAFb0wE1qtQs1neQ2rZtKtJDsCIEoc7SYExnNbY5PltBaR3XiwDwxZQvufdRhW+qk4FX26Af7///8CgPD6AgAAAAAXqRQPuUY0IWlrgsgzryQceMF9295JNIfQ8gonAQAAABepFCnKdPigj4GZlCgYXJe12FLkBj9hh2UAAAABB9oARzBEAiB0AYrUGACXuHMyPAAVcgs2hMyBI4kQSOfbzZtVrWecmQIgc9Npt0Dj61Pc76M4I8gHBRTKVafdlUTxV8FnkTJhEYwBSDBFAiEA9hA4swjcHahlo0hSdG8BV3KTQgjG0kRUOTzZm98iF3cCIAVuZ1pnWm0KArhbFOXikHTYolqbV2C+ooFvZhkQoAbqAUdSIQKVg785rgpgl0etGZrd1jT6YQhVnWxc05tMIYPxq5bgfyEC2rYf9JoU22p9ArDNH7t4/EsYMStbTlTa5Nui+/71NtdSrgABASAAwusLAAAAABepFLf1+vQOPUClpFmx2zU18rcvqSHohwEHIyIAIIwjUxc3Q7WV37Sge3K6jkLjeX2nTof+fZ10l+OyAokDAQjaBABHMEQCIGLrelVhB6fHP0WsSrWh3d9vcHX7EnWWmn84Pv/3hLyyAiAMBdu3Rw2/LwhVfdNWxzJcHtMJE+mWzThAlF2xIijaXwFHMEQCIGX0W6WZi1mif/4ae+0BavHx+Q1Us6qPdFCqX1aiUQO9AiB/ckcDrR7blmgLKEtW1P/LiPf7dZ6rvgiqMPKbhROD0gFHUiEDCJ3BDHrG21T5EymvYXMz2ziM6tDCMfcjN50bmQMLAtwhAjrdkE89bc9Z3bkGsN7iNSm3/7ntUOXoYVGSaGAiHw5zUq4AIgIDqaTDf1mW06ol26xrVwrwZQOUSSlCRgs1R1Ptnuylh3EQ2QxqTwAAAIAAAACABAAAgAAiAgJ/Y5l1fS7/VaE2rQLGhLGDi2VW5fG2s0KCqUtrUAUQlhDZDGpPAAAAgAAAAIAFAACAAA=="
+        psbt = Psbt.b64decode(psbt_str)
+>       assert psbt.b64encode() == psbt_str
+               ^^^^^^^^^^^^^^
+E       AttributeError: 'NoneType' object has no attribute 'b64encode'
+
+tests/psbt/test_psbt.py:142: AttributeError
+________________________________ test_sig_type1 ________________________________
+[gw2] linux -- Python 3.11.15 /usr/local/bin/python
+
+    def test_sig_type1() -> None:
+        # psbt with a sigle partial sig and one single input
+        psbt_check_str = "cHNidP8BAIkCAAAAARnxViCzMlE50R7BLfUK9Em7JRSithDHx6/HqzxOPb/lAAAAAAD9////AiChBwAAAAAAIgAg6OYWyJlTxF3xOZM+ZJnQYcC6um0klfv3rZqVkbDWaKVBiAMAAAAAACIAIFXAXQ7M7bSsf6IR0Zt+mWvjNRtOX1dbUyA7QN7x3rJVAAAAAAABASuFKwsAAAAAACIAIGxMhA6S1FFxsrccUutx1Wu6+ijbCMDqwETnode6/M9vIgIDVy+a9q69emdkJk4Xq9xPyAzzWcEfgcu+Ts96LCNKX49IMEUCIQDh6ho/n3kEkusYgQ8OSeZQszl/kfpKOAwGSeMUSUMAngIgLDbfAC4tGyEdoCVrRGsnVB4zDEb9k4a1mhYbSQLoVMsBIgYCOOOQQx1Uydk9h38Rd98Gj/dMemSmLtsUC3tlt004+5QUpFwW+ywAAIAAAACAAAAAAAAAAAAiBgJ6RK62ZrlAXMGL4dJOG61AdvTYSrSYvJu7XE37wIolbBQ+kOBlLAAAgAAAAIAAAAAAAAAAACIGAyoYpiApIUlH9R9l71y9PdAJBGyxofwpoeoZGTcP8OkCFLd96kwsAACAAAAAgAAAAAAAAAAAIgYDVy+a9q69emdkJk4Xq9xPyAzzWcEfgcu+Ts96LCNKX48UOIHNZywAAIAAAACAAAAAAAAAAAAiBgP8xVUHZvsvdflS4U8rKZT1vopnW1W8RSXAqOTGeY3RFxRS5uGZLAAAgAAAAIAAAAAAAAAAAAAAAA=="
+        psbt_check = Psbt.b64decode(psbt_check_str)
+>       assert psbt_check.b64encode() == psbt_check_str
+               ^^^^^^^^^^^^^^^^^^^^
+E       AttributeError: 'NoneType' object has no attribute 'b64encode'
+
+tests/psbt/test_psbt.py:351: AttributeError
+_______________________________ test_extract_tx ________________________________
+[gw14] linux -- Python 3.11.15 /usr/local/bin/python
+
+    def test_extract_tx() -> None:
+        psbt_str = "cHNidP8BAJoCAAAAAljoeiG1ba8MI76OcHBFbDNvfLqlyHV5JPVFiHuyq911AAAAAAD/////g40EJ9DsZQpoqka7CwmK6kQiwHGyyng1Kgd5WdB86h0BAAAAAP////8CcKrwCAAAAAAWABTYXCtx0AYLCcmIauuBXlCZHdoSTQDh9QUAAAAAFgAUAK6pouXw+HaliN9VRuh0LR2HAI8AAAAAAAEAuwIAAAABqtc5MQGL0l+ErkALaISL4J23BurCrBgpi6vucatlb4sAAAAASEcwRAIgWPb8fGoz4bMVSNSByCbAFb0wE1qtQs1neQ2rZtKtJDsCIEoc7SYExnNbY5PltBaR3XiwDwxZQvufdRhW+qk4FX26Af7///8CgPD6AgAAAAAXqRQPuUY0IWlrgsgzryQceMF9295JNIfQ8gonAQAAABepFCnKdPigj4GZlCgYXJe12FLkBj9hh2UAAAABB9oARzBEAiB0AYrUGACXuHMyPAAVcgs2hMyBI4kQSOfbzZtVrWecmQIgc9Npt0Dj61Pc76M4I8gHBRTKVafdlUTxV8FnkTJhEYwBSDBFAiEA9hA4swjcHahlo0hSdG8BV3KTQgjG0kRUOTzZm98iF3cCIAVuZ1pnWm0KArhbFOXikHTYolqbV2C+ooFvZhkQoAbqAUdSIQKVg785rgpgl0etGZrd1jT6YQhVnWxc05tMIYPxq5bgfyEC2rYf9JoU22p9ArDNH7t4/EsYMStbTlTa5Nui+/71NtdSrgABASAAwusLAAAAABepFLf1+vQOPUClpFmx2zU18rcvqSHohwEHIyIAIIwjUxc3Q7WV37Sge3K6jkLjeX2nTof+fZ10l+OyAokDAQjaBABHMEQCIGLrelVhB6fHP0WsSrWh3d9vcHX7EnWWmn84Pv/3hLyyAiAMBdu3Rw2/LwhVfdNWxzJcHtMJE+mWzThAlF2xIijaXwFHMEQCIGX0W6WZi1mif/4ae+0BavHx+Q1Us6qPdFCqX1aiUQO9AiB/ckcDrR7blmgLKEtW1P/LiPf7dZ6rvgiqMPKbhROD0gFHUiEDCJ3BDHrG21T5EymvYXMz2ziM6tDCMfcjN50bmQMLAtwhAjrdkE89bc9Z3bkGsN7iNSm3/7ntUOXoYVGSaGAiHw5zUq4AIgIDqaTDf1mW06ol26xrVwrwZQOUSSlCRgs1R1Ptnuylh3EQ2QxqTwAAAIAAAACABAAAgAAiAgJ/Y5l1fS7/VaE2rQLGhLGDi2VW5fG2s0KCqUtrUAUQlhDZDGpPAAAAgAAAAIAFAACAAA=="
+        psbt = Psbt.b64decode(psbt_str)
+>       assert psbt.b64encode() == psbt_str
+               ^^^^^^^^^^^^^^
+E       AttributeError: 'NoneType' object has no attribute 'b64encode'
+
+tests/psbt/test_psbt.py:159: AttributeError
+__________________________________ test_psbt ___________________________________
+[gw0] linux -- Python 3.11.15 /usr/local/bin/python
+
+    def test_psbt() -> None:
+        prev_out = OutPoint(
+            "9dcfdb5836ecfe146bdaa896605ba21222f83cd014dd47adde14fab2aba7de9b", 1
+        )
+        script_sig = b""
+        sequence = 0xFFFFFFFF
+        tx_in = TxIn(prev_out, script_sig, sequence)
+    
+        tx_out1 = TxOut(2500000, "a914f987c321394968be164053d352fc49763b2be55c87")
+        tx_out2 = TxOut(
+            6381891, "0020701a8d401c84fb13e6baf169d59684e17abd9fa216c8cc5b9fc63d622ff8c58d"
+        )
+        version = 1
+        lock_time = 0
+        tx = Tx(version, lock_time, [tx_in], [tx_out1, tx_out2])
+        psbt = Psbt.from_tx(tx)
+>       assert psbt == Psbt.parse(psbt.serialize())
+                                  ^^^^^^^^^^^^^^
+E       AttributeError: 'NoneType' object has no attribute 'serialize'
+
+tests/psbt/test_psbt.py:227: AttributeError
+________________________ test_valid_ripemd160_preimage _________________________
+[gw2] linux -- Python 3.11.15 /usr/local/bin/python
+
+    def test_valid_ripemd160_preimage() -> None:
+        psbt_str = "cHNidP8BAJoCAAAAAljoeiG1ba8MI76OcHBFbDNvfLqlyHV5JPVFiHuyq911AAAAAAD/////g40EJ9DsZQpoqka7CwmK6kQiwHGyyng1Kgd5WdB86h0BAAAAAP////8CcKrwCAAAAAAWABTYXCtx0AYLCcmIauuBXlCZHdoSTQDh9QUAAAAAFgAUAK6pouXw+HaliN9VRuh0LR2HAI8AAAAAAAEAuwIAAAABqtc5MQGL0l+ErkALaISL4J23BurCrBgpi6vucatlb4sAAAAASEcwRAIgWPb8fGoz4bMVSNSByCbAFb0wE1qtQs1neQ2rZtKtJDsCIEoc7SYExnNbY5PltBaR3XiwDwxZQvufdRhW+qk4FX26Af7///8CgPD6AgAAAAAXqRQPuUY0IWlrgsgzryQceMF9295JNIfQ8gonAQAAABepFCnKdPigj4GZlCgYXJe12FLkBj9hh2UAAAAiAgKVg785rgpgl0etGZrd1jT6YQhVnWxc05tMIYPxq5bgf0cwRAIgdAGK1BgAl7hzMjwAFXILNoTMgSOJEEjn282bVa1nnJkCIHPTabdA4+tT3O+jOCPIBwUUylWn3ZVE8VfBZ5EyYRGMASICAtq2H/SaFNtqfQKwzR+7ePxLGDErW05U2uTbovv+9TbXSDBFAiEA9hA4swjcHahlo0hSdG8BV3KTQgjG0kRUOTzZm98iF3cCIAVuZ1pnWm0KArhbFOXikHTYolqbV2C+ooFvZhkQoAbqAQEDBAEAAAABBEdSIQKVg785rgpgl0etGZrd1jT6YQhVnWxc05tMIYPxq5bgfyEC2rYf9JoU22p9ArDNH7t4/EsYMStbTlTa5Nui+/71NtdSriIGApWDvzmuCmCXR60Zmt3WNPphCFWdbFzTm0whg/GrluB/ENkMak8AAACAAAAAgAAAAIAiBgLath/0mhTban0CsM0fu3j8SxgxK1tOVNrk26L7/vU21xDZDGpPAAAAgAAAAIABAACAAAEBIADC6wsAAAAAF6kUt/X69A49QKWkWbHbNTXyty+pIeiHIgIDCJ3BDHrG21T5EymvYXMz2ziM6tDCMfcjN50bmQMLAtxHMEQCIGLrelVhB6fHP0WsSrWh3d9vcHX7EnWWmn84Pv/3hLyyAiAMBdu3Rw2/LwhVfdNWxzJcHtMJE+mWzThAlF2xIijaXwEiAgI63ZBPPW3PWd25BrDe4jUpt/+57VDl6GFRkmhgIh8Oc0cwRAIgZfRbpZmLWaJ//hp77QFq8fH5DVSzqo90UKpfVqJRA70CIH9yRwOtHtuWaAsoS1bU/8uI9/t1nqu+CKow8puFE4PSAQEDBAEAAAABBCIAIIwjUxc3Q7WV37Sge3K6jkLjeX2nTof+fZ10l+OyAokDAQVHUiEDCJ3BDHrG21T5EymvYXMz2ziM6tDCMfcjN50bmQMLAtwhAjrdkE89bc9Z3bkGsN7iNSm3/7ntUOXoYVGSaGAiHw5zUq4iBgI63ZBPPW3PWd25BrDe4jUpt/+57VDl6GFRkmhgIh8OcxDZDGpPAAAAgAAAAIADAACAIgYDCJ3BDHrG21T5EymvYXMz2ziM6tDCMfcjN50bmQMLAtwQ2QxqTwAAAIAAAACAAgAAgAAiAgOppMN/WZbTqiXbrGtXCvBlA5RJKUJGCzVHU+2e7KWHcRDZDGpPAAAAgAAAAIAEAACAACICAn9jmXV9Lv9VoTatAsaEsYOLZVbl8bazQoKpS2tQBRCWENkMak8AAACAAAAAgAUAAIAA"
+        psbt = Psbt.b64decode(psbt_str)
+    
+        preimage = b"\x01"
+        h = ripemd160(preimage)
+>       psbt.inputs[0].ripemd160_preimages.update({h: preimage})
+        ^^^^^^^^^^^
+E       AttributeError: 'NoneType' object has no attribute 'inputs'
+
+tests/psbt/test_psbt.py:528: AttributeError
+_________________________ test_valid_hash256_preimage __________________________
+[gw14] linux -- Python 3.11.15 /usr/local/bin/python
+
+    def test_valid_hash256_preimage() -> None:
+        psbt_str = "cHNidP8BAJoCAAAAAljoeiG1ba8MI76OcHBFbDNvfLqlyHV5JPVFiHuyq911AAAAAAD/////g40EJ9DsZQpoqka7CwmK6kQiwHGyyng1Kgd5WdB86h0BAAAAAP////8CcKrwCAAAAAAWABTYXCtx0AYLCcmIauuBXlCZHdoSTQDh9QUAAAAAFgAUAK6pouXw+HaliN9VRuh0LR2HAI8AAAAAAAEAuwIAAAABqtc5MQGL0l+ErkALaISL4J23BurCrBgpi6vucatlb4sAAAAASEcwRAIgWPb8fGoz4bMVSNSByCbAFb0wE1qtQs1neQ2rZtKtJDsCIEoc7SYExnNbY5PltBaR3XiwDwxZQvufdRhW+qk4FX26Af7///8CgPD6AgAAAAAXqRQPuUY0IWlrgsgzryQceMF9295JNIfQ8gonAQAAABepFCnKdPigj4GZlCgYXJe12FLkBj9hh2UAAAAiAgKVg785rgpgl0etGZrd1jT6YQhVnWxc05tMIYPxq5bgf0cwRAIgdAGK1BgAl7hzMjwAFXILNoTMgSOJEEjn282bVa1nnJkCIHPTabdA4+tT3O+jOCPIBwUUylWn3ZVE8VfBZ5EyYRGMASICAtq2H/SaFNtqfQKwzR+7ePxLGDErW05U2uTbovv+9TbXSDBFAiEA9hA4swjcHahlo0hSdG8BV3KTQgjG0kRUOTzZm98iF3cCIAVuZ1pnWm0KArhbFOXikHTYolqbV2C+ooFvZhkQoAbqAQEDBAEAAAABBEdSIQKVg785rgpgl0etGZrd1jT6YQhVnWxc05tMIYPxq5bgfyEC2rYf9JoU22p9ArDNH7t4/EsYMStbTlTa5Nui+/71NtdSriIGApWDvzmuCmCXR60Zmt3WNPphCFWdbFzTm0whg/GrluB/ENkMak8AAACAAAAAgAAAAIAiBgLath/0mhTban0CsM0fu3j8SxgxK1tOVNrk26L7/vU21xDZDGpPAAAAgAAAAIABAACAAAEBIADC6wsAAAAAF6kUt/X69A49QKWkWbHbNTXyty+pIeiHIgIDCJ3BDHrG21T5EymvYXMz2ziM6tDCMfcjN50bmQMLAtxHMEQCIGLrelVhB6fHP0WsSrWh3d9vcHX7EnWWmn84Pv/3hLyyAiAMBdu3Rw2/LwhVfdNWxzJcHtMJE+mWzThAlF2xIijaXwEiAgI63ZBPPW3PWd25BrDe4jUpt/+57VDl6GFRkmhgIh8Oc0cwRAIgZfRbpZmLWaJ//hp77QFq8fH5DVSzqo90UKpfVqJRA70CIH9yRwOtHtuWaAsoS1bU/8uI9/t1nqu+CKow8puFE4PSAQEDBAEAAAABBCIAIIwjUxc3Q7WV37Sge3K6jkLjeX2nTof+fZ10l+OyAokDAQVHUiEDCJ3BDHrG21T5EymvYXMz2ziM6tDCMfcjN50bmQMLAtwhAjrdkE89bc9Z3bkGsN7iNSm3/7ntUOXoYVGSaGAiHw5zUq4iBgI63ZBPPW3PWd25BrDe4jUpt/+57VDl6GFRkmhgIh8OcxDZDGpPAAAAgAAAAIADAACAIgYDCJ3BDHrG21T5EymvYXMz2ziM6tDCMfcjN50bmQMLAtwQ2QxqTwAAAIAAAACAAgAAgAAiAgOppMN/WZbTqiXbrGtXCvBlA5RJKUJGCzVHU+2e7KWHcRDZDGpPAAAAgAAAAIAEAACAACICAn9jmXV9Lv9VoTatAsaEsYOLZVbl8bazQoKpS2tQBRCWENkMak8AAACAAAAAgAUAAIAA"
+        psbt = Psbt.b64decode(psbt_str)
+    
+        preimage = b"\x01"
+        h = hash256(preimage)
+>       psbt.inputs[0].hash256_preimages.update({h: preimage})
+        ^^^^^^^^^^^
+E       AttributeError: 'NoneType' object has no attribute 'inputs'
+
+tests/psbt/test_psbt.py:600: AttributeError
+_________________________ test_invalid_sha256_preimage _________________________
+[gw0] linux -- Python 3.11.15 /usr/local/bin/python
+
+    def test_invalid_sha256_preimage() -> None:
+        psbt_str = "cHNidP8BAJoCAAAAAljoeiG1ba8MI76OcHBFbDNvfLqlyHV5JPVFiHuyq911AAAAAAD/////g40EJ9DsZQpoqka7CwmK6kQiwHGyyng1Kgd5WdB86h0BAAAAAP////8CcKrwCAAAAAAWABTYXCtx0AYLCcmIauuBXlCZHdoSTQDh9QUAAAAAFgAUAK6pouXw+HaliN9VRuh0LR2HAI8AAAAAAAEAuwIAAAABqtc5MQGL0l+ErkALaISL4J23BurCrBgpi6vucatlb4sAAAAASEcwRAIgWPb8fGoz4bMVSNSByCbAFb0wE1qtQs1neQ2rZtKtJDsCIEoc7SYExnNbY5PltBaR3XiwDwxZQvufdRhW+qk4FX26Af7///8CgPD6AgAAAAAXqRQPuUY0IWlrgsgzryQceMF9295JNIfQ8gonAQAAABepFCnKdPigj4GZlCgYXJe12FLkBj9hh2UAAAAiAgKVg785rgpgl0etGZrd1jT6YQhVnWxc05tMIYPxq5bgf0cwRAIgdAGK1BgAl7hzMjwAFXILNoTMgSOJEEjn282bVa1nnJkCIHPTabdA4+tT3O+jOCPIBwUUylWn3ZVE8VfBZ5EyYRGMASICAtq2H/SaFNtqfQKwzR+7ePxLGDErW05U2uTbovv+9TbXSDBFAiEA9hA4swjcHahlo0hSdG8BV3KTQgjG0kRUOTzZm98iF3cCIAVuZ1pnWm0KArhbFOXikHTYolqbV2C+ooFvZhkQoAbqAQEDBAEAAAABBEdSIQKVg785rgpgl0etGZrd1jT6YQhVnWxc05tMIYPxq5bgfyEC2rYf9JoU22p9ArDNH7t4/EsYMStbTlTa5Nui+/71NtdSriIGApWDvzmuCmCXR60Zmt3WNPphCFWdbFzTm0whg/GrluB/ENkMak8AAACAAAAAgAAAAIAiBgLath/0mhTban0CsM0fu3j8SxgxK1tOVNrk26L7/vU21xDZDGpPAAAAgAAAAIABAACAAAEBIADC6wsAAAAAF6kUt/X69A49QKWkWbHbNTXyty+pIeiHIgIDCJ3BDHrG21T5EymvYXMz2ziM6tDCMfcjN50bmQMLAtxHMEQCIGLrelVhB6fHP0WsSrWh3d9vcHX7EnWWmn84Pv/3hLyyAiAMBdu3Rw2/LwhVfdNWxzJcHtMJE+mWzThAlF2xIijaXwEiAgI63ZBPPW3PWd25BrDe4jUpt/+57VDl6GFRkmhgIh8Oc0cwRAIgZfRbpZmLWaJ//hp77QFq8fH5DVSzqo90UKpfVqJRA70CIH9yRwOtHtuWaAsoS1bU/8uI9/t1nqu+CKow8puFE4PSAQEDBAEAAAABBCIAIIwjUxc3Q7WV37Sge3K6jkLjeX2nTof+fZ10l+OyAokDAQVHUiEDCJ3BDHrG21T5EymvYXMz2ziM6tDCMfcjN50bmQMLAtwhAjrdkE89bc9Z3bkGsN7iNSm3/7ntUOXoYVGSaGAiHw5zUq4iBgI63ZBPPW3PWd25BrDe4jUpt/+57VDl6GFRkmhgIh8OcxDZDGpPAAAAgAAAAIADAACAIgYDCJ3BDHrG21T5EymvYXMz2ziM6tDCMfcjN50bmQMLAtwQ2QxqTwAAAIAAAACAAgAAgAAiAgOppMN/WZbTqiXbrGtXCvBlA5RJKUJGCzVHU+2e7KWHcRDZDGpPAAAAgAAAAIAEAACAACICAn9jmXV9Lv9VoTatAsaEsYOLZVbl8bazQoKpS2tQBRCWENkMak8AAACAAAAAgAUAAIAA"
+        psbt = Psbt.b64decode(psbt_str)
+    
+        preimage = b"\x01"
+>       psbt.inputs[0].sha256_preimages.update({preimage: preimage})
+        ^^^^^^^^^^^
+E       AttributeError: 'NoneType' object has no attribute 'inputs'
+
+tests/psbt/test_psbt.py:564: AttributeError
+________________________________ test_signature ________________________________
+[gw13] linux -- Python 3.11.15 /usr/local/bin/python
+
+    def test_signature() -> None:
+        msg = b"Satoshi Nakamoto"
+        aux = b"\x00" * 32
+        q = 6
+        q_fixed, x_Q = ssa.gen_keys(q)
+>       assert q_fixed != q
+E       assert 6 != 6
+
+tests/ecc/test_ssa.py:39: AssertionError
+_______________________ test_invalid_ripemd160_preimage ________________________
+[gw2] linux -- Python 3.11.15 /usr/local/bin/python
+
+    def test_invalid_ripemd160_preimage() -> None:
+        psbt_str = "cHNidP8BAJoCAAAAAljoeiG1ba8MI76OcHBFbDNvfLqlyHV5JPVFiHuyq911AAAAAAD/////g40EJ9DsZQpoqka7CwmK6kQiwHGyyng1Kgd5WdB86h0BAAAAAP////8CcKrwCAAAAAAWABTYXCtx0AYLCcmIauuBXlCZHdoSTQDh9QUAAAAAFgAUAK6pouXw+HaliN9VRuh0LR2HAI8AAAAAAAEAuwIAAAABqtc5MQGL0l+ErkALaISL4J23BurCrBgpi6vucatlb4sAAAAASEcwRAIgWPb8fGoz4bMVSNSByCbAFb0wE1qtQs1neQ2rZtKtJDsCIEoc7SYExnNbY5PltBaR3XiwDwxZQvufdRhW+qk4FX26Af7///8CgPD6AgAAAAAXqRQPuUY0IWlrgsgzryQceMF9295JNIfQ8gonAQAAABepFCnKdPigj4GZlCgYXJe12FLkBj9hh2UAAAAiAgKVg785rgpgl0etGZrd1jT6YQhVnWxc05tMIYPxq5bgf0cwRAIgdAGK1BgAl7hzMjwAFXILNoTMgSOJEEjn282bVa1nnJkCIHPTabdA4+tT3O+jOCPIBwUUylWn3ZVE8VfBZ5EyYRGMASICAtq2H/SaFNtqfQKwzR+7ePxLGDErW05U2uTbovv+9TbXSDBFAiEA9hA4swjcHahlo0hSdG8BV3KTQgjG0kRUOTzZm98iF3cCIAVuZ1pnWm0KArhbFOXikHTYolqbV2C+ooFvZhkQoAbqAQEDBAEAAAABBEdSIQKVg785rgpgl0etGZrd1jT6YQhVnWxc05tMIYPxq5bgfyEC2rYf9JoU22p9ArDNH7t4/EsYMStbTlTa5Nui+/71NtdSriIGApWDvzmuCmCXR60Zmt3WNPphCFWdbFzTm0whg/GrluB/ENkMak8AAACAAAAAgAAAAIAiBgLath/0mhTban0CsM0fu3j8SxgxK1tOVNrk26L7/vU21xDZDGpPAAAAgAAAAIABAACAAAEBIADC6wsAAAAAF6kUt/X69A49QKWkWbHbNTXyty+pIeiHIgIDCJ3BDHrG21T5EymvYXMz2ziM6tDCMfcjN50bmQMLAtxHMEQCIGLrelVhB6fHP0WsSrWh3d9vcHX7EnWWmn84Pv/3hLyyAiAMBdu3Rw2/LwhVfdNWxzJcHtMJE+mWzThAlF2xIijaXwEiAgI63ZBPPW3PWd25BrDe4jUpt/+57VDl6GFRkmhgIh8Oc0cwRAIgZfRbpZmLWaJ//hp77QFq8fH5DVSzqo90UKpfVqJRA70CIH9yRwOtHtuWaAsoS1bU/8uI9/t1nqu+CKow8puFE4PSAQEDBAEAAAABBCIAIIwjUxc3Q7WV37Sge3K6jkLjeX2nTof+fZ10l+OyAokDAQVHUiEDCJ3BDHrG21T5EymvYXMz2ziM6tDCMfcjN50bmQMLAtwhAjrdkE89bc9Z3bkGsN7iNSm3/7ntUOXoYVGSaGAiHw5zUq4iBgI63ZBPPW3PWd25BrDe4jUpt/+57VDl6GFRkmhgIh8OcxDZDGpPAAAAgAAAAIADAACAIgYDCJ3BDHrG21T5EymvYXMz2ziM6tDCMfcjN50bmQMLAtwQ2QxqTwAAAIAAAACAAgAAgAAiAgOppMN/WZbTqiXbrGtXCvBlA5RJKUJGCzVHU+2e7KWHcRDZDGpPAAAAgAAAAIAEAACAACICAn9jmXV9Lv9VoTatAsaEsYOLZVbl8bazQoKpS2tQBRCWENkMak8AAACAAAAAgAUAAIAA"
+        psbt = Psbt.b64decode(psbt_str)
+    
+        preimage = b"\x01"
+>       psbt.inputs[0].ripemd160_preimages.update({preimage: preimage})
+        ^^^^^^^^^^^
+E       AttributeError: 'NoneType' object has no attribute 'inputs'
+
+tests/psbt/test_psbt.py:540: AttributeError
+________________________ test_invalid_hash256_preimage _________________________
+[gw14] linux -- Python 3.11.15 /usr/local/bin/python
+
+    def test_invalid_hash256_preimage() -> None:
+        psbt_str = "cHNidP8BAJoCAAAAAljoeiG1ba8MI76OcHBFbDNvfLqlyHV5JPVFiHuyq911AAAAAAD/////g40EJ9DsZQpoqka7CwmK6kQiwHGyyng1Kgd5WdB86h0BAAAAAP////8CcKrwCAAAAAAWABTYXCtx0AYLCcmIauuBXlCZHdoSTQDh9QUAAAAAFgAUAK6pouXw+HaliN9VRuh0LR2HAI8AAAAAAAEAuwIAAAABqtc5MQGL0l+ErkALaISL4J23BurCrBgpi6vucatlb4sAAAAASEcwRAIgWPb8fGoz4bMVSNSByCbAFb0wE1qtQs1neQ2rZtKtJDsCIEoc7SYExnNbY5PltBaR3XiwDwxZQvufdRhW+qk4FX26Af7///8CgPD6AgAAAAAXqRQPuUY0IWlrgsgzryQceMF9295JNIfQ8gonAQAAABepFCnKdPigj4GZlCgYXJe12FLkBj9hh2UAAAAiAgKVg785rgpgl0etGZrd1jT6YQhVnWxc05tMIYPxq5bgf0cwRAIgdAGK1BgAl7hzMjwAFXILNoTMgSOJEEjn282bVa1nnJkCIHPTabdA4+tT3O+jOCPIBwUUylWn3ZVE8VfBZ5EyYRGMASICAtq2H/SaFNtqfQKwzR+7ePxLGDErW05U2uTbovv+9TbXSDBFAiEA9hA4swjcHahlo0hSdG8BV3KTQgjG0kRUOTzZm98iF3cCIAVuZ1pnWm0KArhbFOXikHTYolqbV2C+ooFvZhkQoAbqAQEDBAEAAAABBEdSIQKVg785rgpgl0etGZrd1jT6YQhVnWxc05tMIYPxq5bgfyEC2rYf9JoU22p9ArDNH7t4/EsYMStbTlTa5Nui+/71NtdSriIGApWDvzmuCmCXR60Zmt3WNPphCFWdbFzTm0whg/GrluB/ENkMak8AAACAAAAAgAAAAIAiBgLath/0mhTban0CsM0fu3j8SxgxK1tOVNrk26L7/vU21xDZDGpPAAAAgAAAAIABAACAAAEBIADC6wsAAAAAF6kUt/X69A49QKWkWbHbNTXyty+pIeiHIgIDCJ3BDHrG21T5EymvYXMz2ziM6tDCMfcjN50bmQMLAtxHMEQCIGLrelVhB6fHP0WsSrWh3d9vcHX7EnWWmn84Pv/3hLyyAiAMBdu3Rw2/LwhVfdNWxzJcHtMJE+mWzThAlF2xIijaXwEiAgI63ZBPPW3PWd25BrDe4jUpt/+57VDl6GFRkmhgIh8Oc0cwRAIgZfRbpZmLWaJ//hp77QFq8fH5DVSzqo90UKpfVqJRA70CIH9yRwOtHtuWaAsoS1bU/8uI9/t1nqu+CKow8puFE4PSAQEDBAEAAAABBCIAIIwjUxc3Q7WV37Sge3K6jkLjeX2nTof+fZ10l+OyAokDAQVHUiEDCJ3BDHrG21T5EymvYXMz2ziM6tDCMfcjN50bmQMLAtwhAjrdkE89bc9Z3bkGsN7iNSm3/7ntUOXoYVGSaGAiHw5zUq4iBgI63ZBPPW3PWd25BrDe4jUpt/+57VDl6GFRkmhgIh8OcxDZDGpPAAAAgAAAAIADAACAIgYDCJ3BDHrG21T5EymvYXMz2ziM6tDCMfcjN50bmQMLAtwQ2QxqTwAAAIAAAACAAgAAgAAiAgOppMN/WZbTqiXbrGtXCvBlA5RJKUJGCzVHU+2e7KWHcRDZDGpPAAAAgAAAAIAEAACAACICAn9jmXV9Lv9VoTatAsaEsYOLZVbl8bazQoKpS2tQBRCWENkMak8AAACAAAAAgAUAAIAA"
+        psbt = Psbt.b64decode(psbt_str)
+    
+        preimage = b"\x01"
+>       psbt.inputs[0].hash256_preimages.update({preimage: preimage})
+        ^^^^^^^^^^^
+E       AttributeError: 'NoneType' object has no attribute 'inputs'
+
+tests/psbt/test_psbt.py:612: AttributeError
+_________________________ test_valid_hash160_preimage __________________________
+[gw0] linux -- Python 3.11.15 /usr/local/bin/python
+
+    def test_valid_hash160_preimage() -> None:
+        psbt_str = "cHNidP8BAJoCAAAAAljoeiG1ba8MI76OcHBFbDNvfLqlyHV5JPVFiHuyq911AAAAAAD/////g40EJ9DsZQpoqka7CwmK6kQiwHGyyng1Kgd5WdB86h0BAAAAAP////8CcKrwCAAAAAAWABTYXCtx0AYLCcmIauuBXlCZHdoSTQDh9QUAAAAAFgAUAK6pouXw+HaliN9VRuh0LR2HAI8AAAAAAAEAuwIAAAABqtc5MQGL0l+ErkALaISL4J23BurCrBgpi6vucatlb4sAAAAASEcwRAIgWPb8fGoz4bMVSNSByCbAFb0wE1qtQs1neQ2rZtKtJDsCIEoc7SYExnNbY5PltBaR3XiwDwxZQvufdRhW+qk4FX26Af7///8CgPD6AgAAAAAXqRQPuUY0IWlrgsgzryQceMF9295JNIfQ8gonAQAAABepFCnKdPigj4GZlCgYXJe12FLkBj9hh2UAAAAiAgKVg785rgpgl0etGZrd1jT6YQhVnWxc05tMIYPxq5bgf0cwRAIgdAGK1BgAl7hzMjwAFXILNoTMgSOJEEjn282bVa1nnJkCIHPTabdA4+tT3O+jOCPIBwUUylWn3ZVE8VfBZ5EyYRGMASICAtq2H/SaFNtqfQKwzR+7ePxLGDErW05U2uTbovv+9TbXSDBFAiEA9hA4swjcHahlo0hSdG8BV3KTQgjG0kRUOTzZm98iF3cCIAVuZ1pnWm0KArhbFOXikHTYolqbV2C+ooFvZhkQoAbqAQEDBAEAAAABBEdSIQKVg785rgpgl0etGZrd1jT6YQhVnWxc05tMIYPxq5bgfyEC2rYf9JoU22p9ArDNH7t4/EsYMStbTlTa5Nui+/71NtdSriIGApWDvzmuCmCXR60Zmt3WNPphCFWdbFzTm0whg/GrluB/ENkMak8AAACAAAAAgAAAAIAiBgLath/0mhTban0CsM0fu3j8SxgxK1tOVNrk26L7/vU21xDZDGpPAAAAgAAAAIABAACAAAEBIADC6wsAAAAAF6kUt/X69A49QKWkWbHbNTXyty+pIeiHIgIDCJ3BDHrG21T5EymvYXMz2ziM6tDCMfcjN50bmQMLAtxHMEQCIGLrelVhB6fHP0WsSrWh3d9vcHX7EnWWmn84Pv/3hLyyAiAMBdu3Rw2/LwhVfdNWxzJcHtMJE+mWzThAlF2xIijaXwEiAgI63ZBPPW3PWd25BrDe4jUpt/+57VDl6GFRkmhgIh8Oc0cwRAIgZfRbpZmLWaJ//hp77QFq8fH5DVSzqo90UKpfVqJRA70CIH9yRwOtHtuWaAsoS1bU/8uI9/t1nqu+CKow8puFE4PSAQEDBAEAAAABBCIAIIwjUxc3Q7WV37Sge3K6jkLjeX2nTof+fZ10l+OyAokDAQVHUiEDCJ3BDHrG21T5EymvYXMz2ziM6tDCMfcjN50bmQMLAtwhAjrdkE89bc9Z3bkGsN7iNSm3/7ntUOXoYVGSaGAiHw5zUq4iBgI63ZBPPW3PWd25BrDe4jUpt/+57VDl6GFRkmhgIh8OcxDZDGpPAAAAgAAAAIADAACAIgYDCJ3BDHrG21T5EymvYXMz2ziM6tDCMfcjN50bmQMLAtwQ2QxqTwAAAIAAAACAAgAAgAAiAgOppMN/WZbTqiXbrGtXCvBlA5RJKUJGCzVHU+2e7KWHcRDZDGpPAAAAgAAAAIAEAACAACICAn9jmXV9Lv9VoTatAsaEsYOLZVbl8bazQoKpS2tQBRCWENkMak8AAACAAAAAgAUAAIAA"
+        psbt = Psbt.b64decode(psbt_str)
+    
+        preimage = b"\x01"
+        h = hash160(preimage)
+>       psbt.inputs[0].hash160_preimages.update({h: preimage})
+        ^^^^^^^^^^^
+E       AttributeError: 'NoneType' object has no attribute 'inputs'
+
+tests/psbt/test_psbt.py:576: AttributeError
+__________________________ test_valid_sha256_preimage __________________________
+[gw2] linux -- Python 3.11.15 /usr/local/bin/python
+
+    def test_valid_sha256_preimage() -> None:
+        psbt_str = "cHNidP8BAJoCAAAAAljoeiG1ba8MI76OcHBFbDNvfLqlyHV5JPVFiHuyq911AAAAAAD/////g40EJ9DsZQpoqka7CwmK6kQiwHGyyng1Kgd5WdB86h0BAAAAAP////8CcKrwCAAAAAAWABTYXCtx0AYLCcmIauuBXlCZHdoSTQDh9QUAAAAAFgAUAK6pouXw+HaliN9VRuh0LR2HAI8AAAAAAAEAuwIAAAABqtc5MQGL0l+ErkALaISL4J23BurCrBgpi6vucatlb4sAAAAASEcwRAIgWPb8fGoz4bMVSNSByCbAFb0wE1qtQs1neQ2rZtKtJDsCIEoc7SYExnNbY5PltBaR3XiwDwxZQvufdRhW+qk4FX26Af7///8CgPD6AgAAAAAXqRQPuUY0IWlrgsgzryQceMF9295JNIfQ8gonAQAAABepFCnKdPigj4GZlCgYXJe12FLkBj9hh2UAAAAiAgKVg785rgpgl0etGZrd1jT6YQhVnWxc05tMIYPxq5bgf0cwRAIgdAGK1BgAl7hzMjwAFXILNoTMgSOJEEjn282bVa1nnJkCIHPTabdA4+tT3O+jOCPIBwUUylWn3ZVE8VfBZ5EyYRGMASICAtq2H/SaFNtqfQKwzR+7ePxLGDErW05U2uTbovv+9TbXSDBFAiEA9hA4swjcHahlo0hSdG8BV3KTQgjG0kRUOTzZm98iF3cCIAVuZ1pnWm0KArhbFOXikHTYolqbV2C+ooFvZhkQoAbqAQEDBAEAAAABBEdSIQKVg785rgpgl0etGZrd1jT6YQhVnWxc05tMIYPxq5bgfyEC2rYf9JoU22p9ArDNH7t4/EsYMStbTlTa5Nui+/71NtdSriIGApWDvzmuCmCXR60Zmt3WNPphCFWdbFzTm0whg/GrluB/ENkMak8AAACAAAAAgAAAAIAiBgLath/0mhTban0CsM0fu3j8SxgxK1tOVNrk26L7/vU21xDZDGpPAAAAgAAAAIABAACAAAEBIADC6wsAAAAAF6kUt/X69A49QKWkWbHbNTXyty+pIeiHIgIDCJ3BDHrG21T5EymvYXMz2ziM6tDCMfcjN50bmQMLAtxHMEQCIGLrelVhB6fHP0WsSrWh3d9vcHX7EnWWmn84Pv/3hLyyAiAMBdu3Rw2/LwhVfdNWxzJcHtMJE+mWzThAlF2xIijaXwEiAgI63ZBPPW3PWd25BrDe4jUpt/+57VDl6GFRkmhgIh8Oc0cwRAIgZfRbpZmLWaJ//hp77QFq8fH5DVSzqo90UKpfVqJRA70CIH9yRwOtHtuWaAsoS1bU/8uI9/t1nqu+CKow8puFE4PSAQEDBAEAAAABBCIAIIwjUxc3Q7WV37Sge3K6jkLjeX2nTof+fZ10l+OyAokDAQVHUiEDCJ3BDHrG21T5EymvYXMz2ziM6tDCMfcjN50bmQMLAtwhAjrdkE89bc9Z3bkGsN7iNSm3/7ntUOXoYVGSaGAiHw5zUq4iBgI63ZBPPW3PWd25BrDe4jUpt/+57VDl6GFRkmhgIh8OcxDZDGpPAAAAgAAAAIADAACAIgYDCJ3BDHrG21T5EymvYXMz2ziM6tDCMfcjN50bmQMLAtwQ2QxqTwAAAIAAAACAAgAAgAAiAgOppMN/WZbTqiXbrGtXCvBlA5RJKUJGCzVHU+2e7KWHcRDZDGpPAAAAgAAAAIAEAACAACICAn9jmXV9Lv9VoTatAsaEsYOLZVbl8bazQoKpS2tQBRCWENkMak8AAACAAAAAgAUAAIAA"
+        psbt = Psbt.b64decode(psbt_str)
+    
+        preimage = b"\x01"
+        h = sha256(preimage)
+>       psbt.inputs[0].sha256_preimages.update({h: preimage})
+        ^^^^^^^^^^^
+E       AttributeError: 'NoneType' object has no attribute 'inputs'
+
+tests/psbt/test_psbt.py:552: AttributeError
+_______________________________ test_join_psbts ________________________________
+[gw14] linux -- Python 3.11.15 /usr/local/bin/python
+
+    def test_join_psbts() -> None:
+        psbt1_str = "cHNidP8BAJoCAAAAAljoeiG1ba8MI76OcHBFbDNvfLqlyHV5JPVFiHuyq911AAAAAAD/////g40EJ9DsZQpoqka7CwmK6kQiwHGyyng1Kgd5WdB86h0BAAAAAP////8CcKrwCAAAAAAWABTYXCtx0AYLCcmIauuBXlCZHdoSTQDh9QUAAAAAFgAUAK6pouXw+HaliN9VRuh0LR2HAI8AAAAAAAEAuwIAAAABqtc5MQGL0l+ErkALaISL4J23BurCrBgpi6vucatlb4sAAAAASEcwRAIgWPb8fGoz4bMVSNSByCbAFb0wE1qtQs1neQ2rZtKtJDsCIEoc7SYExnNbY5PltBaR3XiwDwxZQvufdRhW+qk4FX26Af7///8CgPD6AgAAAAAXqRQPuUY0IWlrgsgzryQceMF9295JNIfQ8gonAQAAABepFCnKdPigj4GZlCgYXJe12FLkBj9hh2UAAAAiAgKVg785rgpgl0etGZrd1jT6YQhVnWxc05tMIYPxq5bgf0cwRAIgdAGK1BgAl7hzMjwAFXILNoTMgSOJEEjn282bVa1nnJkCIHPTabdA4+tT3O+jOCPIBwUUylWn3ZVE8VfBZ5EyYRGMASICAtq2H/SaFNtqfQKwzR+7ePxLGDErW05U2uTbovv+9TbXSDBFAiEA9hA4swjcHahlo0hSdG8BV3KTQgjG0kRUOTzZm98iF3cCIAVuZ1pnWm0KArhbFOXikHTYolqbV2C+ooFvZhkQoAbqAQEDBAEAAAABBEdSIQKVg785rgpgl0etGZrd1jT6YQhVnWxc05tMIYPxq5bgfyEC2rYf9JoU22p9ArDNH7t4/EsYMStbTlTa5Nui+/71NtdSriIGApWDvzmuCmCXR60Zmt3WNPphCFWdbFzTm0whg/GrluB/ENkMak8AAACAAAAAgAAAAIAiBgLath/0mhTban0CsM0fu3j8SxgxK1tOVNrk26L7/vU21xDZDGpPAAAAgAAAAIABAACAAAEBIADC6wsAAAAAF6kUt/X69A49QKWkWbHbNTXyty+pIeiHIgIDCJ3BDHrG21T5EymvYXMz2ziM6tDCMfcjN50bmQMLAtxHMEQCIGLrelVhB6fHP0WsSrWh3d9vcHX7EnWWmn84Pv/3hLyyAiAMBdu3Rw2/LwhVfdNWxzJcHtMJE+mWzThAlF2xIijaXwEiAgI63ZBPPW3PWd25BrDe4jUpt/+57VDl6GFRkmhgIh8Oc0cwRAIgZfRbpZmLWaJ//hp77QFq8fH5DVSzqo90UKpfVqJRA70CIH9yRwOtHtuWaAsoS1bU/8uI9/t1nqu+CKow8puFE4PSAQEDBAEAAAABBCIAIIwjUxc3Q7WV37Sge3K6jkLjeX2nTof+fZ10l+OyAokDAQVHUiEDCJ3BDHrG21T5EymvYXMz2ziM6tDCMfcjN50bmQMLAtwhAjrdkE89bc9Z3bkGsN7iNSm3/7ntUOXoYVGSaGAiHw5zUq4iBgI63ZBPPW3PWd25BrDe4jUpt/+57VDl6GFRkmhgIh8OcxDZDGpPAAAAgAAAAIADAACAIgYDCJ3BDHrG21T5EymvYXMz2ziM6tDCMfcjN50bmQMLAtwQ2QxqTwAAAIAAAACAAgAAgAAiAgOppMN/WZbTqiXbrGtXCvBlA5RJKUJGCzVHU+2e7KWHcRDZDGpPAAAAgAAAAIAEAACAACICAn9jmXV9Lv9VoTatAsaEsYOLZVbl8bazQoKpS2tQBRCWENkMak8AAACAAAAAgAUAAIAA"
+        psbt1 = Psbt.b64decode(psbt1_str)
+    
+        psbt2_str = "cHNidP8BAIkCAAAAAQKRPRGG7prm5Q6O5UJleyh9L9mmTPInNsVHnHzOS+ouAAAAAAAAAAAAAkBCDwAAAAAAIgAg1CyIdLnm/VxeOpIrt1Cvd2pVfTIgBuhGjqY7NVWGNgNDZAMAAAAAACIAIIUkJZx27tj1ukl5cN1lACHcJpd+XYVHg3XdxlGGJaRGAAAAAAABASslqRIAAAAAACIAIIUkJZx27tj1ukl5cN1lACHcJpd+XYVHg3XdxlGGJaRGIgICAO+hDq7He+h19gglhqAwUuruSCtWpIXFyEkj53crNh1IMEUCIQDiB1FrWN+TYztVhZTo7T7OJzQXTDz5dOhMG9+2ydm8+AIgb6pEEFSXYa9bAOExy4VQ3R3hpbi94l4doBBqLHQIh1ABIgIDxpfu3Y+krSVPw26m5LwhdoYVyRf7xWBL+P5WUbdO2etHMEQCIC/gN9WvBgebfiLJoNGXL6VPtblmo09Yr9bkjmCdMVIfAiBKJu4UTYVPkun4Whq8YKlddlRp95nzzInN4MnPx0N7ZQEBBf2oAVIhAgDvoQ6ux3vodfYIJYagMFLq7kgrVqSFxchJI+d3KzYdIQKtPKqcpvfFHCIaEGlHiX2kBTvZ+sZa8dtXLz6eErPsWyEDxpfu3Y+krSVPw26m5LwhdoYVyRf7xWBL+P5WUbdO2etTrmRSIQJAg8IBrMPT1XzBOuatwoVRObsgDKywIO/hTXX5BLqJ2yECWDeYBx2nVYYUPeICE2IgZ32CtqldcbZWrhmncmX7fxIhAs/eanomSWEuQFlCjry6HTmZcZ03c12wzMe6+jFMZFjYU68CkACyZ1MhA2HwlTuHQ7vQzuBibvN/r36m4MaIP6p1CEypK06o02pyIQNlG153o/5ni/xXlHgDAsD8sjOmvfh8E3s8XoQr8kBj7SEDahsw8dKvYjcoyrLfr+kWiXBRmG8cr0EBhDoslO3JgF0hA34ELbQa8gKi0ju2YUck4PSOLtfJ+QWAREM9Zmn4zAcjIQOnrP8c7MWRPaVi8ew06516BidH/65MoqblLYUp4+3KwSEDw2+64TPFicHXuZ1HYJWxEQ5v6iKmuTdgDvwIndMCfI9WrmgiBgIA76EOrsd76HX2CCWGoDBS6u5IK1akhcXISSPndys2HRj8i5WHKgAAgAAAAIAAAACAAQAAAAEAAAAiBgKtPKqcpvfFHCIaEGlHiX2kBTvZ+sZa8dtXLz6eErPsWxgN8rafKgAAgAAAAIAAAACAAQAAAAEAAAAiBgNh8JU7h0O70M7gYm7zf69+puDGiD+qdQhMqStOqNNqchg/h1X2LAAAgAAAAIAAAACAAQAAAAEAAAAiBgNlG153o/5ni/xXlHgDAsD8sjOmvfh8E3s8XoQr8kBj7RgmqLvwLAAAgAAAAIAAAACAAQAAAAEAAAAiBgNqGzDx0q9iNyjKst+v6RaJcFGYbxyvQQGEOiyU7cmAXRgQqVSnLAAAgAAAAIAAAACAAQAAAAEAAAAiBgN+BC20GvICotI7tmFHJOD0ji7XyfkFgERDPWZp+MwHIxgZXhf6LAAAgAAAAIAAAACAAQAAAAEAAAAiBgOnrP8c7MWRPaVi8ew06516BidH/65MoqblLYUp4+3KwRhm/AUgLAAAgAAAAIAAAACAAQAAAAEAAAAiBgPDb7rhM8WJwde5nUdglbERDm/qIqa5N2AO/Aid0wJ8jxg2/ys6LAAAgAAAAIAAAACAAQAAAAEAAAAiBgPGl+7dj6StJU/DbqbkvCF2hhXJF/vFYEv4/lZRt07Z6xiTeMdTKgAAgAAAAIAAAACAAQAAAAEAAAAAAAA="
+        psbt2 = Psbt.b64decode(psbt2_str)
+>       psbt2.tx.lock_time = psbt1.tx.lock_time
+                             ^^^^^^^^
+E       AttributeError: 'NoneType' object has no attribute 'tx'
+
+tests/psbt/test_psbt.py:624: AttributeError
+________________________ test_invalid_hash160_preimage _________________________
+[gw0] linux -- Python 3.11.15 /usr/local/bin/python
+
+    def test_invalid_hash160_preimage() -> None:
+        psbt_str = "cHNidP8BAJoCAAAAAljoeiG1ba8MI76OcHBFbDNvfLqlyHV5JPVFiHuyq911AAAAAAD/////g40EJ9DsZQpoqka7CwmK6kQiwHGyyng1Kgd5WdB86h0BAAAAAP////8CcKrwCAAAAAAWABTYXCtx0AYLCcmIauuBXlCZHdoSTQDh9QUAAAAAFgAUAK6pouXw+HaliN9VRuh0LR2HAI8AAAAAAAEAuwIAAAABqtc5MQGL0l+ErkALaISL4J23BurCrBgpi6vucatlb4sAAAAASEcwRAIgWPb8fGoz4bMVSNSByCbAFb0wE1qtQs1neQ2rZtKtJDsCIEoc7SYExnNbY5PltBaR3XiwDwxZQvufdRhW+qk4FX26Af7///8CgPD6AgAAAAAXqRQPuUY0IWlrgsgzryQceMF9295JNIfQ8gonAQAAABepFCnKdPigj4GZlCgYXJe12FLkBj9hh2UAAAAiAgKVg785rgpgl0etGZrd1jT6YQhVnWxc05tMIYPxq5bgf0cwRAIgdAGK1BgAl7hzMjwAFXILNoTMgSOJEEjn282bVa1nnJkCIHPTabdA4+tT3O+jOCPIBwUUylWn3ZVE8VfBZ5EyYRGMASICAtq2H/SaFNtqfQKwzR+7ePxLGDErW05U2uTbovv+9TbXSDBFAiEA9hA4swjcHahlo0hSdG8BV3KTQgjG0kRUOTzZm98iF3cCIAVuZ1pnWm0KArhbFOXikHTYolqbV2C+ooFvZhkQoAbqAQEDBAEAAAABBEdSIQKVg785rgpgl0etGZrd1jT6YQhVnWxc05tMIYPxq5bgfyEC2rYf9JoU22p9ArDNH7t4/EsYMStbTlTa5Nui+/71NtdSriIGApWDvzmuCmCXR60Zmt3WNPphCFWdbFzTm0whg/GrluB/ENkMak8AAACAAAAAgAAAAIAiBgLath/0mhTban0CsM0fu3j8SxgxK1tOVNrk26L7/vU21xDZDGpPAAAAgAAAAIABAACAAAEBIADC6wsAAAAAF6kUt/X69A49QKWkWbHbNTXyty+pIeiHIgIDCJ3BDHrG21T5EymvYXMz2ziM6tDCMfcjN50bmQMLAtxHMEQCIGLrelVhB6fHP0WsSrWh3d9vcHX7EnWWmn84Pv/3hLyyAiAMBdu3Rw2/LwhVfdNWxzJcHtMJE+mWzThAlF2xIijaXwEiAgI63ZBPPW3PWd25BrDe4jUpt/+57VDl6GFRkmhgIh8Oc0cwRAIgZfRbpZmLWaJ//hp77QFq8fH5DVSzqo90UKpfVqJRA70CIH9yRwOtHtuWaAsoS1bU/8uI9/t1nqu+CKow8puFE4PSAQEDBAEAAAABBCIAIIwjUxc3Q7WV37Sge3K6jkLjeX2nTof+fZ10l+OyAokDAQVHUiEDCJ3BDHrG21T5EymvYXMz2ziM6tDCMfcjN50bmQMLAtwhAjrdkE89bc9Z3bkGsN7iNSm3/7ntUOXoYVGSaGAiHw5zUq4iBgI63ZBPPW3PWd25BrDe4jUpt/+57VDl6GFRkmhgIh8OcxDZDGpPAAAAgAAAAIADAACAIgYDCJ3BDHrG21T5EymvYXMz2ziM6tDCMfcjN50bmQMLAtwQ2QxqTwAAAIAAAACAAgAAgAAiAgOppMN/WZbTqiXbrGtXCvBlA5RJKUJGCzVHU+2e7KWHcRDZDGpPAAAAgAAAAIAEAACAACICAn9jmXV9Lv9VoTatAsaEsYOLZVbl8bazQoKpS2tQBRCWENkMak8AAACAAAAAgAUAAIAA"
+        psbt = Psbt.b64decode(psbt_str)
+    
+        preimage = b"\x01"
+>       psbt.inputs[0].hash160_preimages.update({preimage: preimage})
+        ^^^^^^^^^^^
+E       AttributeError: 'NoneType' object has no attribute 'inputs'
+
+tests/psbt/test_psbt.py:588: AttributeError
+__________________________ test_dataclasses_json_dict __________________________
+[gw14] linux -- Python 3.11.15 /usr/local/bin/python
+
+    def test_dataclasses_json_dict() -> None:
+        psbt_str = "cHNidP8BAJoCAAAAAljoeiG1ba8MI76OcHBFbDNvfLqlyHV5JPVFiHuyq911AAAAAAD/////g40EJ9DsZQpoqka7CwmK6kQiwHGyyng1Kgd5WdB86h0BAAAAAP////8CcKrwCAAAAAAWABTYXCtx0AYLCcmIauuBXlCZHdoSTQDh9QUAAAAAFgAUAK6pouXw+HaliN9VRuh0LR2HAI8AAAAAAAEAuwIAAAABqtc5MQGL0l+ErkALaISL4J23BurCrBgpi6vucatlb4sAAAAASEcwRAIgWPb8fGoz4bMVSNSByCbAFb0wE1qtQs1neQ2rZtKtJDsCIEoc7SYExnNbY5PltBaR3XiwDwxZQvufdRhW+qk4FX26Af7///8CgPD6AgAAAAAXqRQPuUY0IWlrgsgzryQceMF9295JNIfQ8gonAQAAABepFCnKdPigj4GZlCgYXJe12FLkBj9hh2UAAAAiAgKVg785rgpgl0etGZrd1jT6YQhVnWxc05tMIYPxq5bgf0cwRAIgdAGK1BgAl7hzMjwAFXILNoTMgSOJEEjn282bVa1nnJkCIHPTabdA4+tT3O+jOCPIBwUUylWn3ZVE8VfBZ5EyYRGMASICAtq2H/SaFNtqfQKwzR+7ePxLGDErW05U2uTbovv+9TbXSDBFAiEA9hA4swjcHahlo0hSdG8BV3KTQgjG0kRUOTzZm98iF3cCIAVuZ1pnWm0KArhbFOXikHTYolqbV2C+ooFvZhkQoAbqAQEDBAEAAAABBEdSIQKVg785rgpgl0etGZrd1jT6YQhVnWxc05tMIYPxq5bgfyEC2rYf9JoU22p9ArDNH7t4/EsYMStbTlTa5Nui+/71NtdSriIGApWDvzmuCmCXR60Zmt3WNPphCFWdbFzTm0whg/GrluB/ENkMak8AAACAAAAAgAAAAIAiBgLath/0mhTban0CsM0fu3j8SxgxK1tOVNrk26L7/vU21xDZDGpPAAAAgAAAAIABAACAAAEBIADC6wsAAAAAF6kUt/X69A49QKWkWbHbNTXyty+pIeiHIgIDCJ3BDHrG21T5EymvYXMz2ziM6tDCMfcjN50bmQMLAtxHMEQCIGLrelVhB6fHP0WsSrWh3d9vcHX7EnWWmn84Pv/3hLyyAiAMBdu3Rw2/LwhVfdNWxzJcHtMJE+mWzThAlF2xIijaXwEiAgI63ZBPPW3PWd25BrDe4jUpt/+57VDl6GFRkmhgIh8Oc0cwRAIgZfRbpZmLWaJ//hp77QFq8fH5DVSzqo90UKpfVqJRA70CIH9yRwOtHtuWaAsoS1bU/8uI9/t1nqu+CKow8puFE4PSAQEDBAEAAAABBCIAIIwjUxc3Q7WV37Sge3K6jkLjeX2nTof+fZ10l+OyAokDAQVHUiEDCJ3BDHrG21T5EymvYXMz2ziM6tDCMfcjN50bmQMLAtwhAjrdkE89bc9Z3bkGsN7iNSm3/7ntUOXoYVGSaGAiHw5zUq4iBgI63ZBPPW3PWd25BrDe4jUpt/+57VDl6GFRkmhgIh8OcxDZDGpPAAAAgAAAAIADAACAIgYDCJ3BDHrG21T5EymvYXMz2ziM6tDCMfcjN50bmQMLAtwQ2QxqTwAAAIAAAACAAgAAgAAiAgOppMN/WZbTqiXbrGtXCvBlA5RJKUJGCzVHU+2e7KWHcRDZDGpPAAAAgAAAAIAEAACAACICAn9jmXV9Lv9VoTatAsaEsYOLZVbl8bazQoKpS2tQBRCWENkMak8AAACAAAAAgAUAAIAA"
+        psbt = Psbt.b64decode(psbt_str)
+    
+        # PsbtIn dataclass
+>       psbt_in = psbt.inputs[0]
+                  ^^^^^^^^^^^
+E       AttributeError: 'NoneType' object has no attribute 'inputs'
+
+tests/psbt/test_psbt_in.py:35: AttributeError
+__________________________ test_dataclasses_json_dict __________________________
+[gw0] linux -- Python 3.11.15 /usr/local/bin/python
+
+    def test_dataclasses_json_dict() -> None:
+        psbt_str = "cHNidP8BAJoCAAAAAljoeiG1ba8MI76OcHBFbDNvfLqlyHV5JPVFiHuyq911AAAAAAD/////g40EJ9DsZQpoqka7CwmK6kQiwHGyyng1Kgd5WdB86h0BAAAAAP////8CcKrwCAAAAAAWABTYXCtx0AYLCcmIauuBXlCZHdoSTQDh9QUAAAAAFgAUAK6pouXw+HaliN9VRuh0LR2HAI8AAAAAAAEAuwIAAAABqtc5MQGL0l+ErkALaISL4J23BurCrBgpi6vucatlb4sAAAAASEcwRAIgWPb8fGoz4bMVSNSByCbAFb0wE1qtQs1neQ2rZtKtJDsCIEoc7SYExnNbY5PltBaR3XiwDwxZQvufdRhW+qk4FX26Af7///8CgPD6AgAAAAAXqRQPuUY0IWlrgsgzryQceMF9295JNIfQ8gonAQAAABepFCnKdPigj4GZlCgYXJe12FLkBj9hh2UAAAAiAgKVg785rgpgl0etGZrd1jT6YQhVnWxc05tMIYPxq5bgf0cwRAIgdAGK1BgAl7hzMjwAFXILNoTMgSOJEEjn282bVa1nnJkCIHPTabdA4+tT3O+jOCPIBwUUylWn3ZVE8VfBZ5EyYRGMASICAtq2H/SaFNtqfQKwzR+7ePxLGDErW05U2uTbovv+9TbXSDBFAiEA9hA4swjcHahlo0hSdG8BV3KTQgjG0kRUOTzZm98iF3cCIAVuZ1pnWm0KArhbFOXikHTYolqbV2C+ooFvZhkQoAbqAQEDBAEAAAABBEdSIQKVg785rgpgl0etGZrd1jT6YQhVnWxc05tMIYPxq5bgfyEC2rYf9JoU22p9ArDNH7t4/EsYMStbTlTa5Nui+/71NtdSriIGApWDvzmuCmCXR60Zmt3WNPphCFWdbFzTm0whg/GrluB/ENkMak8AAACAAAAAgAAAAIAiBgLath/0mhTban0CsM0fu3j8SxgxK1tOVNrk26L7/vU21xDZDGpPAAAAgAAAAIABAACAAAEBIADC6wsAAAAAF6kUt/X69A49QKWkWbHbNTXyty+pIeiHIgIDCJ3BDHrG21T5EymvYXMz2ziM6tDCMfcjN50bmQMLAtxHMEQCIGLrelVhB6fHP0WsSrWh3d9vcHX7EnWWmn84Pv/3hLyyAiAMBdu3Rw2/LwhVfdNWxzJcHtMJE+mWzThAlF2xIijaXwEiAgI63ZBPPW3PWd25BrDe4jUpt/+57VDl6GFRkmhgIh8Oc0cwRAIgZfRbpZmLWaJ//hp77QFq8fH5DVSzqo90UKpfVqJRA70CIH9yRwOtHtuWaAsoS1bU/8uI9/t1nqu+CKow8puFE4PSAQEDBAEAAAABBCIAIIwjUxc3Q7WV37Sge3K6jkLjeX2nTof+fZ10l+OyAokDAQVHUiEDCJ3BDHrG21T5EymvYXMz2ziM6tDCMfcjN50bmQMLAtwhAjrdkE89bc9Z3bkGsN7iNSm3/7ntUOXoYVGSaGAiHw5zUq4iBgI63ZBPPW3PWd25BrDe4jUpt/+57VDl6GFRkmhgIh8OcxDZDGpPAAAAgAAAAIADAACAIgYDCJ3BDHrG21T5EymvYXMz2ziM6tDCMfcjN50bmQMLAtwQ2QxqTwAAAIAAAACAAgAAgAAiAgOppMN/WZbTqiXbrGtXCvBlA5RJKUJGCzVHU+2e7KWHcRDZDGpPAAAAgAAAAIAEAACAACICAn9jmXV9Lv9VoTatAsaEsYOLZVbl8bazQoKpS2tQBRCWENkMak8AAACAAAAAgAUAAIAA"
+        psbt = Psbt.b64decode(psbt_str)
+    
+        # PsbtOut dataclass
+>       psbt_out = psbt.outputs[0]
+                   ^^^^^^^^^^^^
+E       AttributeError: 'NoneType' object has no attribute 'outputs'
+
+tests/psbt/test_psbt_out.py:53: AttributeError
+__________________________ test_shuffle_sort_inp_out ___________________________
+[gw2] linux -- Python 3.11.15 /usr/local/bin/python
+
+    def test_shuffle_sort_inp_out() -> None:
+        psbt1_str = "cHNidP8BAJoCAAAAAljoeiG1ba8MI76OcHBFbDNvfLqlyHV5JPVFiHuyq911AAAAAAD/////g40EJ9DsZQpoqka7CwmK6kQiwHGyyng1Kgd5WdB86h0BAAAAAP////8CcKrwCAAAAAAWABTYXCtx0AYLCcmIauuBXlCZHdoSTQDh9QUAAAAAFgAUAK6pouXw+HaliN9VRuh0LR2HAI8AAAAAAAEAuwIAAAABqtc5MQGL0l+ErkALaISL4J23BurCrBgpi6vucatlb4sAAAAASEcwRAIgWPb8fGoz4bMVSNSByCbAFb0wE1qtQs1neQ2rZtKtJDsCIEoc7SYExnNbY5PltBaR3XiwDwxZQvufdRhW+qk4FX26Af7///8CgPD6AgAAAAAXqRQPuUY0IWlrgsgzryQceMF9295JNIfQ8gonAQAAABepFCnKdPigj4GZlCgYXJe12FLkBj9hh2UAAAAiAgKVg785rgpgl0etGZrd1jT6YQhVnWxc05tMIYPxq5bgf0cwRAIgdAGK1BgAl7hzMjwAFXILNoTMgSOJEEjn282bVa1nnJkCIHPTabdA4+tT3O+jOCPIBwUUylWn3ZVE8VfBZ5EyYRGMASICAtq2H/SaFNtqfQKwzR+7ePxLGDErW05U2uTbovv+9TbXSDBFAiEA9hA4swjcHahlo0hSdG8BV3KTQgjG0kRUOTzZm98iF3cCIAVuZ1pnWm0KArhbFOXikHTYolqbV2C+ooFvZhkQoAbqAQEDBAEAAAABBEdSIQKVg785rgpgl0etGZrd1jT6YQhVnWxc05tMIYPxq5bgfyEC2rYf9JoU22p9ArDNH7t4/EsYMStbTlTa5Nui+/71NtdSriIGApWDvzmuCmCXR60Zmt3WNPphCFWdbFzTm0whg/GrluB/ENkMak8AAACAAAAAgAAAAIAiBgLath/0mhTban0CsM0fu3j8SxgxK1tOVNrk26L7/vU21xDZDGpPAAAAgAAAAIABAACAAAEBIADC6wsAAAAAF6kUt/X69A49QKWkWbHbNTXyty+pIeiHIgIDCJ3BDHrG21T5EymvYXMz2ziM6tDCMfcjN50bmQMLAtxHMEQCIGLrelVhB6fHP0WsSrWh3d9vcHX7EnWWmn84Pv/3hLyyAiAMBdu3Rw2/LwhVfdNWxzJcHtMJE+mWzThAlF2xIijaXwEiAgI63ZBPPW3PWd25BrDe4jUpt/+57VDl6GFRkmhgIh8Oc0cwRAIgZfRbpZmLWaJ//hp77QFq8fH5DVSzqo90UKpfVqJRA70CIH9yRwOtHtuWaAsoS1bU/8uI9/t1nqu+CKow8puFE4PSAQEDBAEAAAABBCIAIIwjUxc3Q7WV37Sge3K6jkLjeX2nTof+fZ10l+OyAokDAQVHUiEDCJ3BDHrG21T5EymvYXMz2ziM6tDCMfcjN50bmQMLAtwhAjrdkE89bc9Z3bkGsN7iNSm3/7ntUOXoYVGSaGAiHw5zUq4iBgI63ZBPPW3PWd25BrDe4jUpt/+57VDl6GFRkmhgIh8OcxDZDGpPAAAAgAAAAIADAACAIgYDCJ3BDHrG21T5EymvYXMz2ziM6tDCMfcjN50bmQMLAtwQ2QxqTwAAAIAAAACAAgAAgAAiAgOppMN/WZbTqiXbrGtXCvBlA5RJKUJGCzVHU+2e7KWHcRDZDGpPAAAAgAAAAIAEAACAACICAn9jmXV9Lv9VoTatAsaEsYOLZVbl8bazQoKpS2tQBRCWENkMak8AAACAAAAAgAUAAIAA"
+        psbt1 = Psbt.b64decode(psbt1_str)
+        # let's shuffle inputs and outputs
+>       psbt1.sort_inputs()
+        ^^^^^^^^^^^^^^^^^
+E       AttributeError: 'NoneType' object has no attribute 'sort_inputs'
+
+tests/psbt/test_psbt.py:766: AttributeError
+_____________________ test_one_prv_key_multiple_addresses ______________________
+[gw15] linux -- Python 3.11.15 /usr/local/bin/python
+
+    def test_one_prv_key_multiple_addresses() -> None:
+        msg = b"Paolo is afraid of ephemeral random numbers"
+    
+        # Compressed WIF
+        wif = "Kx45GeUBSMPReYQwgXiKhG9FzNXrnCeutJp4yjTd5kKxCitadm3C"
+        b58_p2pkh_compressed = b58.p2pkh(wif)
+        b58_p2wpkh_p2sh = b58.p2wpkh_p2sh(wif)
+        b32_p2wpkh = b32.p2wpkh(wif)
+    
+        # sign with no address
+        sig1 = bms.sign(msg, wif)
+        # True for Bitcoin Core
+        bms.assert_as_valid(msg, b58_p2pkh_compressed, sig1)
+        assert bms.verify(msg, b58_p2pkh_compressed, sig1)
+        # True for Electrum p2wpkh_p2sh
+        bms.assert_as_valid(msg, b58_p2wpkh_p2sh, sig1)
+        assert bms.verify(msg, b58_p2wpkh_p2sh, sig1)
+        # True for Electrum p2wpkh
+        bms.assert_as_valid(msg, b32_p2wpkh, sig1)
+        assert bms.verify(msg, b32_p2wpkh, sig1)
+    
+        # sign with p2pkh address
+        sig1 = bms.sign(msg, wif, b58_p2pkh_compressed)
+        # True for Bitcoin Core
+        bms.assert_as_valid(msg, b58_p2pkh_compressed, sig1)
+        assert bms.verify(msg, b58_p2pkh_compressed, sig1)
+        # True for Electrum p2wpkh_p2sh
+        bms.assert_as_valid(msg, b58_p2wpkh_p2sh, sig1)
+        assert bms.verify(msg, b58_p2wpkh_p2sh, sig1)
+        # True for Electrum p2wpkh
+        bms.assert_as_valid(msg, b32_p2wpkh, sig1)
+        assert bms.verify(msg, b32_p2wpkh, sig1)
+        assert sig1 == bms.sign(msg, wif, b58_p2pkh_compressed.encode("ascii"))
+    
+        # sign with p2wpkh_p2sh address (BIP137)
+        sig2 = bms.sign(msg, wif, b58_p2wpkh_p2sh)
+        # False for Bitcoin Core
+        err_msg = "invalid p2pkh address recovery flag: "
+>       with pytest.raises(BTClibValueError, match=err_msg):
+E       Failed: DID NOT RAISE BTClibValueError
+
+tests/ecc/test_bms.py:197: Failed
+______________________________ test_native_p2wsh _______________________________
+[gw0] linux -- Python 3.11.15 /usr/local/bin/python
+
+    def test_native_p2wsh() -> None:
+        tx_bytes = "0100000002fe3dc9208094f3ffd12645477b3dc56f60ec4fa8e6f5d67c565d1c6b9216b36e0000000000ffffffff0815cf020f013ed6cf91d29f4202e8a58726b1ac6c79da47c23d1bee0a6925f80000000000ffffffff0100f2052a010000001976a914a30741f8145e5acadf23f751864167f32e0963f788ac00000000"
+        tx = Tx.parse(tx_bytes)
+        tx.vin[1].script_witness = Witness(
+            [
+                "21026dccc749adc2a9d0d89497ac511f760f45c47dc5ed9cf352a58ac706453880aeadab210255a9626aebf5e29c0e6538428ba0d1dcf6ca98ffdf086aa8ced5e0d0215ea465ac"
+            ]
+        )
+    
+        utxo_0 = TxOut(
+            156250000,
+            "21036d5c20fa14fb2f635474c1dc4ef5909d4568e5569b79fc94d3448486e14685f8ac",
+        )
+        utxo_1 = TxOut(
+            4900000000,
+            "00205d1b56b63d714eebe542309525f484b7e9d6f686b3781b6f61ef925d66d6f6a0",
+        )
+    
+        hash_ = sig_hash.from_tx([utxo_0, utxo_1], tx, 1, sig_hash.SINGLE)
+        assert hash_ == bytes.fromhex(
+            "82dde6e4f1e94d02c2b7ad03d2115d691f48d064e9d52f58194a6637e4194391"
+        )
+    
+>       script_ = sig_hash.witness_v0_script(tx.vin[1].script_witness.stack[-1])[1]
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       IndexError: list index out of range
+
+tests/script/test_sig_hash_segwitv0.py:72: IndexError
+______________________________ test_block_481824 _______________________________
+[gw6] linux -- Python 3.11.15 /usr/local/bin/python
+
+    def test_block_481824() -> None:
+        """Test first block with segwit transaction as seen from legacy nodes."""
+        prev_block = "000000000000000000cbeff0b533f8e1189cf09dfbebf57a8ebe349362811b80"
+        merkle_root = "6438250cad442b982801ae6994edb8a9ec63c0a0ba117779fbe7ef7f07cad140"
+        hash_ = "0000000000000000001c8018d9cb3b742ef25114f27563e3fc4a1902167f9893"
+        for i, fname in enumerate(["block_481824.bin", "block_481824_complete.bin"]):
+            filename = path.join(path.dirname(__file__), "_data", fname)
+            with open(filename, "rb") as file_:
+                block_bytes = file_.read()
+    
+            block = Block.parse(block_bytes)
+            assert len(block.transactions) == 1866
+            assert block.height == 481_824
+            assert block == Block.parse(block.serialize())
+>           assert block == Block.from_dict(block.to_dict())
+                                            ^^^^^^^^^^^^^^^
+
+tests/block/test_block.py:214: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+btclib/block/block.py:72: in to_dict
+    "transactions": [t.to_dict(check_validity) for t in self.transactions],
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+btclib/block/block.py:72: in <listcomp>
+    "transactions": [t.to_dict(check_validity) for t in self.transactions],
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^
+btclib/tx/tx.py:117: in to_dict
+    "vout": [tx_out.to_dict(check_validity) for tx_out in self.vout],
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+btclib/tx/tx.py:117: in <listcomp>
+    "vout": [tx_out.to_dict(check_validity) for tx_out in self.vout],
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = TxOut(value=1462514269, script_pub_key=ScriptPubKey(script=b'v\xa9\x14,0\xa6\xaa\xacm\x96hr\x91G]}R\xf4\xb4i\xf6e\xa6\x88\xac'))
+check_validity = True
+
+    def to_dict(self, check_validity: bool = True) -> dict[str, Any]:
+        if check_validity:
+            self.assert_valid()
+    
+        return {
+            "value": btc_from_sats(self.value),
+>           "scriptPubKey": self.script_pub_key.to_dict(check_validity),
+                            ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        }
+E       AttributeError: 'ScriptPubKey' object has no attribute 'to_dict'
+
+btclib/tx/tx_out.py:53: AttributeError
+_____________________________ test_wrapped_p2wpkh ______________________________
+[gw13] linux -- Python 3.11.15 /usr/local/bin/python
+
+    def test_wrapped_p2wpkh() -> None:
+        tx_bytes = "0100000001db6b1b20aa0fd7b23880be2ecbd4a98130974cf4748fb66092ac4d3ceb1a54770100000000feffffff02b8b4eb0b000000001976a914a457b684d7f0d539a46a45bbc043f35b59d0d96388ac0008af2f000000001976a914fd270b1ee6abcaea97fea7ad0402e8bd8ad6d77c88ac92040000"
+        tx = Tx.parse(tx_bytes)
+        tx.vin[0].script_sig = bytes.fromhex("001479091972186c449eb1ded22b78e40d009bdf0089")
+    
+        utxo = TxOut(1000000000, "a9144733f37cf4db86fbc2efed2500b4f4e49f31202387")
+    
+        hash_ = sig_hash.from_tx([utxo], tx, 0, sig_hash.ALL)
+>       assert hash_ == bytes.fromhex(
+            "64f3b0f4dd2bb3aa1ce8566d220cc74dda9df97d8490cc81d89d735c92e59fb6"
+        )
+E       assert b"\xccC\xd0X2...\x16\xdbg\xb0" == b'd\xf3\xb0\x...2\xe5\x9f\xb6'
+E         
+E         At index 0 diff: b'\xcc' != b'd'
+E         Use -v to get more diff
+
+tests/script/test_sig_hash_segwitv0.py:44: AssertionError
+____________________________ test_explicit_version _____________________________
+[gw15] linux -- Python 3.11.15 /usr/local/bin/python
+
+    def test_explicit_version() -> None:
+        psbt_str = "cHNidP8BAJoCAAAAAljoeiG1ba8MI76OcHBFbDNvfLqlyHV5JPVFiHuyq911AAAAAAD/////g40EJ9DsZQpoqka7CwmK6kQiwHGyyng1Kgd5WdB86h0BAAAAAP////8CcKrwCAAAAAAWABTYXCtx0AYLCcmIauuBXlCZHdoSTQDh9QUAAAAAFgAUAK6pouXw+HaliN9VRuh0LR2HAI8AAAAAAAEAuwIAAAABqtc5MQGL0l+ErkALaISL4J23BurCrBgpi6vucatlb4sAAAAASEcwRAIgWPb8fGoz4bMVSNSByCbAFb0wE1qtQs1neQ2rZtKtJDsCIEoc7SYExnNbY5PltBaR3XiwDwxZQvufdRhW+qk4FX26Af7///8CgPD6AgAAAAAXqRQPuUY0IWlrgsgzryQceMF9295JNIfQ8gonAQAAABepFCnKdPigj4GZlCgYXJe12FLkBj9hh2UAAAAiAgKVg785rgpgl0etGZrd1jT6YQhVnWxc05tMIYPxq5bgf0cwRAIgdAGK1BgAl7hzMjwAFXILNoTMgSOJEEjn282bVa1nnJkCIHPTabdA4+tT3O+jOCPIBwUUylWn3ZVE8VfBZ5EyYRGMASICAtq2H/SaFNtqfQKwzR+7ePxLGDErW05U2uTbovv+9TbXSDBFAiEA9hA4swjcHahlo0hSdG8BV3KTQgjG0kRUOTzZm98iF3cCIAVuZ1pnWm0KArhbFOXikHTYolqbV2C+ooFvZhkQoAbqAQEDBAEAAAABBEdSIQKVg785rgpgl0etGZrd1jT6YQhVnWxc05tMIYPxq5bgfyEC2rYf9JoU22p9ArDNH7t4/EsYMStbTlTa5Nui+/71NtdSriIGApWDvzmuCmCXR60Zmt3WNPphCFWdbFzTm0whg/GrluB/ENkMak8AAACAAAAAgAAAAIAiBgLath/0mhTban0CsM0fu3j8SxgxK1tOVNrk26L7/vU21xDZDGpPAAAAgAAAAIABAACAAAEBIADC6wsAAAAAF6kUt/X69A49QKWkWbHbNTXyty+pIeiHIgIDCJ3BDHrG21T5EymvYXMz2ziM6tDCMfcjN50bmQMLAtxHMEQCIGLrelVhB6fHP0WsSrWh3d9vcHX7EnWWmn84Pv/3hLyyAiAMBdu3Rw2/LwhVfdNWxzJcHtMJE+mWzThAlF2xIijaXwEiAgI63ZBPPW3PWd25BrDe4jUpt/+57VDl6GFRkmhgIh8Oc0cwRAIgZfRbpZmLWaJ//hp77QFq8fH5DVSzqo90UKpfVqJRA70CIH9yRwOtHtuWaAsoS1bU/8uI9/t1nqu+CKow8puFE4PSAQEDBAEAAAABBCIAIIwjUxc3Q7WV37Sge3K6jkLjeX2nTof+fZ10l+OyAokDAQVHUiEDCJ3BDHrG21T5EymvYXMz2ziM6tDCMfcjN50bmQMLAtwhAjrdkE89bc9Z3bkGsN7iNSm3/7ntUOXoYVGSaGAiHw5zUq4iBgI63ZBPPW3PWd25BrDe4jUpt/+57VDl6GFRkmhgIh8OcxDZDGpPAAAAgAAAAIADAACAIgYDCJ3BDHrG21T5EymvYXMz2ziM6tDCMfcjN50bmQMLAtwQ2QxqTwAAAIAAAACAAgAAgAAiAgOppMN/WZbTqiXbrGtXCvBlA5RJKUJGCzVHU+2e7KWHcRDZDGpPAAAAgAAAAIAEAACAACICAn9jmXV9Lv9VoTatAsaEsYOLZVbl8bazQoKpS2tQBRCWENkMak8AAACAAAAAgAUAAIAA"
+        # let's sort it
+>       psbt_str = Psbt.b64decode(psbt_str).b64encode()
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       AttributeError: 'NoneType' object has no attribute 'b64encode'
+
+tests/psbt/test_psbt.py:234: AttributeError
+______________________________ test_test_vectors _______________________________
+[gw2] linux -- Python 3.11.15 /usr/local/bin/python
+
+    def test_test_vectors() -> None:
+        fname = "sig_hash_legacy_test_vectors.json"
+        filename = path.join(path.dirname(__file__), "_data", fname)
+        with open(filename, encoding="ascii") as file_:
+            data = json.load(file_)
+        data = data[1:]  # skip column headers
+        for raw_tx, raw_script, input_index, hash_type, exp_hash in data:
+            script_ = sig_hash.legacy_script(raw_script)[0]
+            # FIXME separate invalid transaction from the valid ones
+            tx = Tx.parse(raw_tx, check_validity=False)
+            if hash_type < 0:
+                hash_type += 0xFFFFFFFF + 1
+            actual_hash = sig_hash.legacy(script_, tx, input_index, hash_type)
+>           assert actual_hash == bytes.fromhex(exp_hash)[::-1]
+E           AssertionError: assert b'\x98\xd2\xd...f\x87\x94\xfc' == b'\x1c\xd0\x1...x92\xb0\x95=*'
+E             
+E             At index 0 diff: b'\x98' != b'\x1c'
+E             Use -v to get more diff
+
+tests/script/test_sig_hash_legacy.py:166: AssertionError
+_____________________________ test_native_p2wsh_2 ______________________________
+[gw0] linux -- Python 3.11.15 /usr/local/bin/python
+
+    def test_native_p2wsh_2() -> None:
+        tx_bytes = "0100000002e9b542c5176808107ff1df906f46bb1f2583b16112b95ee5380665ba7fcfc0010000000000ffffffff80e68831516392fcd100d186b3c2c7b95c80b53c77e77c35ba03a66b429a2a1b0000000000ffffffff0280969800000000001976a914de4b231626ef508c9a74a8517e6783c0546d6b2888ac80969800000000001976a9146648a8cd4531e1ec47f35916de8e259237294d1e88ac00000000"
+        tx = Tx.parse(tx_bytes)
+        tx.vin[0].script_witness = Witness(
+            [
+                "0063ab68210392972e2eb617b2388771abe27235fd5ac44af8e61693261550447a4c3e39da98ac"
+            ]
+        )
+        tx.vin[1].script_witness = Witness(
+            [
+                "5163ab68210392972e2eb617b2388771abe27235fd5ac44af8e61693261550447a4c3e39da98ac"
+            ]
+        )
+    
+        previous_txout_1 = TxOut(
+            16777215, "0020ba468eea561b26301e4cf69fa34bde4ad60c81e70f059f045ca9a79931004a4d"
+        )
+        previous_txout_2 = TxOut(
+            16777215, "0020d9bbfbe56af7c4b7f960a70d7ea107156913d9e5a26b0a71429df5e097ca6537"
+        )
+        hash_ = sig_hash.from_tx(
+            [previous_txout_1, previous_txout_2],
+            tx,
+            0,
+            sig_hash.ANYONECANPAY | sig_hash.SINGLE,
+        )
+        assert hash_ == bytes.fromhex(
+            "e9071e75e25b8a1e298a72f0d2e9f4f95a0f5cdf86a533cda597eb402ed13b3a"
+        )
+    
+>       script_ = sig_hash.witness_v0_script(tx.vin[1].script_witness.stack[-1])[1]
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       IndexError: list index out of range
+
+tests/script/test_sig_hash_segwitv0.py:109: IndexError
+______________________________ test_wrapped_p2tr _______________________________
+[gw14] linux -- Python 3.11.15 /usr/local/bin/python
+
+    def test_wrapped_p2tr() -> None:
+        script: ScriptList = [
+            "OP_1",
+            "cc71eb30d653c0c3163990c47b976f3fb3f37cccdcbedb169a1dfef58bbfbfaf",
+        ]
+        utxo = TxOut(
+            100000000, serialize(["OP_HASH160", hash160(serialize(script)), "OP_EQUAL"])
+        )
+        tx_in = TxIn(OutPoint(), serialize(script), 1, Witness(["0A" * 32]))
+        tx = Tx(vin=[tx_in], vout=[TxOut(100000000, "")])
+    
+        err_msg = "Taproot scripts cannot be wrapped in p2sh"
+>       with pytest.raises(BTClibValueError, match=err_msg):
+E       Failed: DID NOT RAISE BTClibValueError
+
+tests/script/test_sig_hash_taproot.py:178: Failed
+_______________________________ test_empty_stack _______________________________
+[gw0] linux -- Python 3.11.15 /usr/local/bin/python
+
+    def test_empty_stack() -> None:
+        utxo = TxOut(
+            100000000,
+            serialize(
+                ["OP_1", "cc71eb30d653c0c3163990c47b976f3fb3f37cccdcbedb169a1dfef58bbfbfaf"]
+            ),
+        )
+        tx_in = TxIn(OutPoint(), "5151", 1, Witness([]))
+        tx = Tx(vin=[tx_in], vout=[TxOut(100000000, "")])
+    
+        err_msg = "Empty stack"
+>       with pytest.raises(BTClibValueError, match=err_msg):
+E       Failed: DID NOT RAISE BTClibValueError
+
+tests/script/test_sig_hash_taproot.py:162: Failed
+_____________________________ test_global_unknown ______________________________
+[gw15] linux -- Python 3.11.15 /usr/local/bin/python
+
+    def test_global_unknown() -> None:
+        psbt_str = "cHNidP8BAJoCAAAAAljoeiG1ba8MI76OcHBFbDNvfLqlyHV5JPVFiHuyq911AAAAAAD/////g40EJ9DsZQpoqka7CwmK6kQiwHGyyng1Kgd5WdB86h0BAAAAAP////8CcKrwCAAAAAAWABTYXCtx0AYLCcmIauuBXlCZHdoSTQDh9QUAAAAAFgAUAK6pouXw+HaliN9VRuh0LR2HAI8AAAAAAAEAuwIAAAABqtc5MQGL0l+ErkALaISL4J23BurCrBgpi6vucatlb4sAAAAASEcwRAIgWPb8fGoz4bMVSNSByCbAFb0wE1qtQs1neQ2rZtKtJDsCIEoc7SYExnNbY5PltBaR3XiwDwxZQvufdRhW+qk4FX26Af7///8CgPD6AgAAAAAXqRQPuUY0IWlrgsgzryQceMF9295JNIfQ8gonAQAAABepFCnKdPigj4GZlCgYXJe12FLkBj9hh2UAAAAiAgKVg785rgpgl0etGZrd1jT6YQhVnWxc05tMIYPxq5bgf0cwRAIgdAGK1BgAl7hzMjwAFXILNoTMgSOJEEjn282bVa1nnJkCIHPTabdA4+tT3O+jOCPIBwUUylWn3ZVE8VfBZ5EyYRGMASICAtq2H/SaFNtqfQKwzR+7ePxLGDErW05U2uTbovv+9TbXSDBFAiEA9hA4swjcHahlo0hSdG8BV3KTQgjG0kRUOTzZm98iF3cCIAVuZ1pnWm0KArhbFOXikHTYolqbV2C+ooFvZhkQoAbqAQEDBAEAAAABBEdSIQKVg785rgpgl0etGZrd1jT6YQhVnWxc05tMIYPxq5bgfyEC2rYf9JoU22p9ArDNH7t4/EsYMStbTlTa5Nui+/71NtdSriIGApWDvzmuCmCXR60Zmt3WNPphCFWdbFzTm0whg/GrluB/ENkMak8AAACAAAAAgAAAAIAiBgLath/0mhTban0CsM0fu3j8SxgxK1tOVNrk26L7/vU21xDZDGpPAAAAgAAAAIABAACAAAEBIADC6wsAAAAAF6kUt/X69A49QKWkWbHbNTXyty+pIeiHIgIDCJ3BDHrG21T5EymvYXMz2ziM6tDCMfcjN50bmQMLAtxHMEQCIGLrelVhB6fHP0WsSrWh3d9vcHX7EnWWmn84Pv/3hLyyAiAMBdu3Rw2/LwhVfdNWxzJcHtMJE+mWzThAlF2xIijaXwEiAgI63ZBPPW3PWd25BrDe4jUpt/+57VDl6GFRkmhgIh8Oc0cwRAIgZfRbpZmLWaJ//hp77QFq8fH5DVSzqo90UKpfVqJRA70CIH9yRwOtHtuWaAsoS1bU/8uI9/t1nqu+CKow8puFE4PSAQEDBAEAAAABBCIAIIwjUxc3Q7WV37Sge3K6jkLjeX2nTof+fZ10l+OyAokDAQVHUiEDCJ3BDHrG21T5EymvYXMz2ziM6tDCMfcjN50bmQMLAtwhAjrdkE89bc9Z3bkGsN7iNSm3/7ntUOXoYVGSaGAiHw5zUq4iBgI63ZBPPW3PWd25BrDe4jUpt/+57VDl6GFRkmhgIh8OcxDZDGpPAAAAgAAAAIADAACAIgYDCJ3BDHrG21T5EymvYXMz2ziM6tDCMfcjN50bmQMLAtwQ2QxqTwAAAIAAAACAAgAAgAAiAgOppMN/WZbTqiXbrGtXCvBlA5RJKUJGCzVHU+2e7KWHcRDZDGpPAAAAgAAAAIAEAACAACICAn9jmXV9Lv9VoTatAsaEsYOLZVbl8bazQoKpS2tQBRCWENkMak8AAACAAAAAgAUAAIAA"
+        # let's sort it
+>       psbt_str = Psbt.b64decode(psbt_str).b64encode()
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       AttributeError: 'NoneType' object has no attribute 'b64encode'
+
+tests/psbt/test_psbt.py:250: AttributeError
+_____________________________ test_output_unknown ______________________________
+[gw15] linux -- Python 3.11.15 /usr/local/bin/python
+
+    def test_output_unknown() -> None:
+        psbt_str = "cHNidP8BAJoCAAAAAljoeiG1ba8MI76OcHBFbDNvfLqlyHV5JPVFiHuyq911AAAAAAD/////g40EJ9DsZQpoqka7CwmK6kQiwHGyyng1Kgd5WdB86h0BAAAAAP////8CcKrwCAAAAAAWABTYXCtx0AYLCcmIauuBXlCZHdoSTQDh9QUAAAAAFgAUAK6pouXw+HaliN9VRuh0LR2HAI8AAAAAAAEAuwIAAAABqtc5MQGL0l+ErkALaISL4J23BurCrBgpi6vucatlb4sAAAAASEcwRAIgWPb8fGoz4bMVSNSByCbAFb0wE1qtQs1neQ2rZtKtJDsCIEoc7SYExnNbY5PltBaR3XiwDwxZQvufdRhW+qk4FX26Af7///8CgPD6AgAAAAAXqRQPuUY0IWlrgsgzryQceMF9295JNIfQ8gonAQAAABepFCnKdPigj4GZlCgYXJe12FLkBj9hh2UAAAAiAgKVg785rgpgl0etGZrd1jT6YQhVnWxc05tMIYPxq5bgf0cwRAIgdAGK1BgAl7hzMjwAFXILNoTMgSOJEEjn282bVa1nnJkCIHPTabdA4+tT3O+jOCPIBwUUylWn3ZVE8VfBZ5EyYRGMASICAtq2H/SaFNtqfQKwzR+7ePxLGDErW05U2uTbovv+9TbXSDBFAiEA9hA4swjcHahlo0hSdG8BV3KTQgjG0kRUOTzZm98iF3cCIAVuZ1pnWm0KArhbFOXikHTYolqbV2C+ooFvZhkQoAbqAQEDBAEAAAABBEdSIQKVg785rgpgl0etGZrd1jT6YQhVnWxc05tMIYPxq5bgfyEC2rYf9JoU22p9ArDNH7t4/EsYMStbTlTa5Nui+/71NtdSriIGApWDvzmuCmCXR60Zmt3WNPphCFWdbFzTm0whg/GrluB/ENkMak8AAACAAAAAgAAAAIAiBgLath/0mhTban0CsM0fu3j8SxgxK1tOVNrk26L7/vU21xDZDGpPAAAAgAAAAIABAACAAAEBIADC6wsAAAAAF6kUt/X69A49QKWkWbHbNTXyty+pIeiHIgIDCJ3BDHrG21T5EymvYXMz2ziM6tDCMfcjN50bmQMLAtxHMEQCIGLrelVhB6fHP0WsSrWh3d9vcHX7EnWWmn84Pv/3hLyyAiAMBdu3Rw2/LwhVfdNWxzJcHtMJE+mWzThAlF2xIijaXwEiAgI63ZBPPW3PWd25BrDe4jUpt/+57VDl6GFRkmhgIh8Oc0cwRAIgZfRbpZmLWaJ//hp77QFq8fH5DVSzqo90UKpfVqJRA70CIH9yRwOtHtuWaAsoS1bU/8uI9/t1nqu+CKow8puFE4PSAQEDBAEAAAABBCIAIIwjUxc3Q7WV37Sge3K6jkLjeX2nTof+fZ10l+OyAokDAQVHUiEDCJ3BDHrG21T5EymvYXMz2ziM6tDCMfcjN50bmQMLAtwhAjrdkE89bc9Z3bkGsN7iNSm3/7ntUOXoYVGSaGAiHw5zUq4iBgI63ZBPPW3PWd25BrDe4jUpt/+57VDl6GFRkmhgIh8OcxDZDGpPAAAAgAAAAIADAACAIgYDCJ3BDHrG21T5EymvYXMz2ziM6tDCMfcjN50bmQMLAtwQ2QxqTwAAAIAAAACAAgAAgAAiAgOppMN/WZbTqiXbrGtXCvBlA5RJKUJGCzVHU+2e7KWHcRDZDGpPAAAAgAAAAIAEAACAACICAn9jmXV9Lv9VoTatAsaEsYOLZVbl8bazQoKpS2tQBRCWENkMak8AAACAAAAAgAUAAIAA"
+        # let's sort it
+>       psbt_str = Psbt.b64decode(psbt_str).b64encode()
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       AttributeError: 'NoneType' object has no attribute 'b64encode'
+
+tests/psbt/test_psbt.py:261: AttributeError
+_________________________________ test_script __________________________________
+[gw14] linux -- Python 3.11.15 /usr/local/bin/python
+
+    def test_script() -> None:
+        fname = "script_tests.json"
+        filename = path.join(path.dirname(__file__), "_data", fname)
+        with open(filename, encoding="ascii") as file_:
+            data = json.load(file_)
+    
+        def test(stack, amount, script_sig_str, script_pub_key_str, flags, result):
+            coinbase_input = TxIn(
+                sequence=0xFFFFFFFF, prev_out=OutPoint(), script_sig=b"\x00\x00"
+            )
+            script_pub_key = parse_script(script_pub_key_str)
+            coinbase_output = TxOut(
+                value=amount, script_pub_key=ScriptPubKey(script_pub_key)
+            )
+            coinbase = Tx(
+                version=1, lock_time=0, vin=[coinbase_input], vout=[coinbase_output]
+            )
+    
+            script_sig = parse_script(script_sig_str)
+            spending_input = TxIn(
+                sequence=0xFFFFFFFF,
+                prev_out=OutPoint(tx_id=coinbase.id, vout=0),
+                script_sig=script_sig,
+                script_witness=Witness(stack),
+            )
+            spending = Tx(
+                version=1,
+                lock_time=0,
+                vin=[spending_input],
+                vout=[TxOut(amount, ScriptPubKey(""))],
+            )
+    
+            verify_input([coinbase_output], spending, 0, flags)
+    
+        for x in data:
+            if len(x) == 1 and isinstance(x[0], str):
+                continue
+    
+            amount = 0
+            if isinstance(x[0], str):
+                i = 0
+                stack = []
+            else:
+                i = 1
+                stack = x[0]
+                if isinstance(stack[-1], (int, float)):
+                    amount = int(stack[-1] * 10**8)
+                    stack = stack[:-1]
+            script_sig_str = x[i]
+            script_pub_key_str = x[i + 1]
+            flags = x[i + 2]
+            result = x[i + 3] == "OK"
+    
+            with warnings.catch_warnings():
+                warnings.simplefilter("ignore")
+                if result:
+>                   test(stack, amount, script_sig_str, script_pub_key_str, flags, result)
+
+tests/script_engine/test_script.py:83: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+tests/script_engine/test_script.py:59: in test
+    verify_input([coinbase_output], spending, 0, flags)
+btclib/script/engine/__init__.py:107: in verify_input
+    verify_script_legacy(script, stack, prevouts[i].value, tx, i, flags, False, True)
+btclib/script/engine/script.py:330: in verify_script
+    script_op_codes.op_else(condition_stack)
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+condition_stack = [False]
+
+    def op_else(condition_stack: list[bool]) -> None:
+        if len(condition_stack) == 1:
+>           raise BTClibValueError()
+E           btclib.exceptions.BTClibValueError
+
+btclib/script/engine/script_op_codes.py:74: BTClibValueError
+______________________ test_output_scripts_serialization _______________________
+[gw15] linux -- Python 3.11.15 /usr/local/bin/python
+
+    def test_output_scripts_serialization() -> None:
+        input_1 = TxIn(
+            OutPoint("75ddabb27b8845f5247975c8a5ba7c6f336c4570708ebe230caf6db5217ae858", 0),
+            b"",
+            0xFFFFFFFF,
+        )
+        output_1 = TxOut(
+            149990000, bytes.fromhex("a914256b3a9ae8145e5094329537dd4d7a25dbc9452087")
+        )
+        output_2 = TxOut(
+            100000000, bytes.fromhex("001400aea9a2e5f0f876a588df5546e8742d1d87008f")
+        )
+        tx = Tx(2, 0, [input_1], [output_1, output_2])
+    
+        psbt = Psbt.from_tx(tx)
+    
+        # p2sh-p2wsh
+>       psbt.outputs[0].redeem_script = bytes.fromhex(
+        ^^^^^^^^^^^^
+            "003BD89EE628E6EB745F99DF1E4AEF64A0DAA814850DAA509F30C0F472E0563C7A"
+        )
+E       AttributeError: 'NoneType' object has no attribute 'outputs'
+
+tests/psbt/test_psbt.py:286: AttributeError
+__________________________________ test_bip39 __________________________________
+[gw12] linux -- Python 3.11.15 /usr/local/bin/python
+
+    def test_bip39() -> None:
+        lang = "en"
+        mnem = "abandon abandon atom trust ankle walnut oil across awake bunker divorce abstract"
+    
+        raw_entr = bytes.fromhex("0000003974d093eda670121023cd0000")
+>       mnemonic = bip39.mnemonic_from_entropy(raw_entr, lang)
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests/mnemonic/test_bip39.py:29: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+btclib/mnemonic/bip39.py:53: in mnemonic_from_entropy
+    indexes = wordlist_indexes_from_bin_str_entropy(bin_str_entropy + checksum, lang)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+entropy = '000000000000000000000000001110010111010011010000100100111110110110100110011100000001001000010000001000111100110100000000000000000111'
+base = 'en'
+
+    def wordlist_indexes_from_bin_str_entropy(entropy: BinStr, base: int) -> list[int]:
+        """Return the digit indexes for the provided raw entropy.
+    
+        Return the list of integer indexes into a digit set, usually a
+        language word-list, for the provided raw (i.e. binary 0/1 string)
+        entropy; leading zeros are not considered redundant padding.
+        """
+        bits = len(entropy)
+        int_entropy = int(entropy, 2)
+        indexes = []
+        while int_entropy:
+>           int_entropy, index = divmod(int_entropy, base)
+                                 ^^^^^^^^^^^^^^^^^^^^^^^^^
+E           TypeError: unsupported operand type(s) for divmod(): 'int' and 'str'
+
+btclib/mnemonic/entropy.py:31: TypeError
+______________________________ test_valid_legacy _______________________________
+[gw14] linux -- Python 3.11.15 /usr/local/bin/python
+
+    def test_valid_legacy() -> None:
+        fname = "tx_valid_legacy.json"
+        filename = path.join(path.dirname(__file__), "_data", fname)
+        with open(filename, encoding="ascii") as file_:
+            data = json.load(file_)
+    
+        for x in data:
+            if isinstance(x[0], str):
+                continue
+    
+            try:
+                tx = Tx.parse(x[1])
+            except BTClibValueError as e:
+                if "invalid satoshi amount:" in str(e):
+                    continue
+    
+            flags = [
+                "P2SH",
+                "SIGPUSHONLY",
+                "LOW_S",
+                "STRICTENC",
+                "DERSIG",
+                "CONST_SCRIPTCODE",
+                "NULLDUMMY",
+                "CLEANSTACK",
+                "MINIMALDATA",
+                # only standard, not consensus
+                # "NULLFAIL",
+                # "MINMALIF",
+                # "DISCOURAGE_UPGRADABLE_NOPS",
+                # "DISCOURAGE_UPGRADABLE_WITNESS_PROGRAM",
+                "CHECKLOCKTIMEVERIFY",
+                "CHECKSEQUENCEVERIFY",
+                "WITNESS",
+                "WITNESS_PUBKEYTYPE",
+                "TAPROOT",
+            ]
+            for f in x[2].split(","):
+                if f in flags:
+                    flags.remove(f)
+    
+            prevouts = []
+            for i in x[0]:
+                amount = 0 if len(i) == 3 else i[3]
+                script_pub_key = parse_script(i[2])
+                prevouts.append(TxOut(amount, ScriptPubKey(script_pub_key)))
+    
+>           verify_transaction(prevouts, tx, flags if flags != ["NONE"] else None)
+
+tests/script_engine/test_transactions.py:116: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+btclib/script/engine/__init__.py:191: in verify_transaction
+    verify_input(prevouts, tx, i, flags)
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+prevouts = [TxOut(value=0, script_pub_key=ScriptPubKey(script=b'QA\x04\xccq\xeb0\xd6S\xc0\xc3\x169\x90\xc4{\x97o?\xb3\xf3|\xcc\xd...\xa3K\xfa/\xcf\xde\xb7\xd7e\x19\xae\xccbw\x0f[\x0eN\xf8U\x19F\xd8\xa5@\x91\x1a\xbe>xT\xa2o9\xf5\x8b%\xc1SB\xafR\xae'))]
+tx = Tx(version=1, lock_time=0, vin=[TxIn(prev_out=OutPoint(tx_id=b'`\xa2\x0b\xd9:\xa4\x9a\xb4\xb2\x8dQN\xc1\x0b\x06\xe1\x8...0000, script_pub_key=ScriptPubKey(script=b'v\xa9\x14f\rN\xf3\xa7C\xe3\xe6\x96\xad\x99\x03d\xe5U\xc2q\xadPK\x88\xac'))])
+i = 0
+flags = ['P2SH', 'SIGPUSHONLY', 'CONST_SCRIPTCODE', 'NULLDUMMY', 'CLEANSTACK', 'MINIMALDATA', ...]
+
+    def verify_input(prevouts: list[TxOut], tx: Tx, i: int, flags: list[str]) -> None:
+        script_sig = tx.vin[i].script_sig
+        parsed_script_sig = parse(script_sig, accept_unknown=True)
+        if "SIGPUSHONLY" in flags:
+            validate_redeem_script(parsed_script_sig)
+        if "CONST_SCRIPTCODE" in flags:
+            for x in parsed_script_sig:
+                op_checks = [
+                    "OP_CHECKSIG",
+                    "OP_CHECKSIGVERIFY",
+                    "OP_CHECKMULTISIG",
+                    "OP_CHECKSIGVERIFY",
+                ]
+                if x in op_checks:
+                    raise BTClibValueError()
+        stack: list[bytes] = []
+        verify_script_legacy(
+            script_sig, stack, prevouts[i].value, tx, i, flags, False, False
+        )
+        p2sh_script = stack[-1] if stack else b"\x00"
+    
+        script = prevouts[i].script_pub_key.script
+        verify_script_legacy(script, stack, prevouts[i].value, tx, i, flags, False, True)
+    
+        script_type, payload = type_and_payload(script)
+    
+        p2sh = False
+        if script_type == "p2sh" and "P2SH" in flags:
+            p2sh = True
+            validate_redeem_script(parsed_script_sig)  # similar to SIGPUSHONLY
+            script = p2sh_script
+            verify_script_legacy(
+                script, stack, prevouts[i].value, tx, i, flags, False, True
+            )
+            script_type, payload = type_and_payload(script)
+    
+        segwit_version = _to_num(stack[-1], []) if is_segwit(script) else -1
+        supported_segwit_version = -1
+        if "WITNESS" in flags:
+            supported_segwit_version = 0
+        if "TAPROOT" in flags:
+            supported_segwit_version = 1
+        if segwit_version + 1 and tx.vin[i].script_sig and not p2sh:
+            raise BTClibValueError()
+        if not (segwit_version + 1) and tx.vin[i].script_witness:
+            raise BTClibValueError()  # witness without witness script
+        if segwit_version > supported_segwit_version:
+            if segwit_version + 1 and "DISCOURAGE_UPGRADABLE_WITNESS_PROGRAM" in flags:
+                raise BTClibValueError()
+            return
+    
+        if segwit_version == 1:
+            if script_type == "p2tr":
+                if p2sh:
+                    return  # remains unencumbered
+                witness = tx.vin[i].script_witness
+                budget = 50 + len(witness.serialize())
+                annex = taproot_get_annex(witness)
+                stack = witness.stack
+                if len(stack) == 0:
+                    raise BTClibValueError()
+                if len(stack) == 1:
+                    tapscript.verify_key_path(script, stack, prevouts, tx, i, annex)
+                    stack = []
+                else:
+                    script_bytes, stack, leaf_version = taproot_unwrap_script(script, stack)
+                    if leaf_version == 0xC0:
+                        tapscript.verify_script_path_vc0(
+                            script_bytes, stack, prevouts, tx, i, annex, budget, flags
+                        )
+                    else:
+                        return  # unknown program, passes validation
+    
+        if segwit_version == 0:
+            if script_type == "p2wpkh":
+                stack = tx.vin[i].script_witness.stack
+                # serialization of ["OP_DUP", "OP_HASH160", payload, "OP_EQUALVERIFY", "OP_CHECKSIG"]
+                script = b"v\xa9\x14" + payload + b"\x88\xac"
+            elif script_type == "p2wsh":
+                stack = tx.vin[i].script_witness.stack
+                if any(len(x) > 520 for x in stack[:-1]):
+                    raise BTClibValueError()
+                script = stack[-1]
+                if payload != sha256(script):
+                    raise BTClibValueError()
+                stack = stack[:-1]
+            else:
+                raise BTClibValueError()
+    
+            if "OP_CODESEPARATOR" in parse(script):
+                return
+    
+            verify_script_legacy(script, stack, prevouts[i].value, tx, i, flags, True, True)
+    
+        if stack and ("CLEANSTACK" in flags or segwit_version == 0):
+>           raise BTClibValueError()
+E           btclib.exceptions.BTClibValueError
+
+btclib/script/engine/__init__.py:180: BTClibValueError
+_________________________________ test_vectors _________________________________
+[gw12] linux -- Python 3.11.15 /usr/local/bin/python
+
+    def test_vectors() -> None:
+        """BIP39 test vectors.
+    
+        https://github.com/trezor/python-mnemonic/blob/master/vectors.json
+        """
+        fname = "bip39_test_vectors.json"
+        filename = path.join(path.dirname(__file__), "_data", fname)
+        with open(filename, encoding="ascii") as file_:
+            bip39_test_vectors = json.load(file_)["english"]
+    
+        lang = "en"
+        for entr, mnemonic, seed, xprv in bip39_test_vectors:
+            entropy = bytes.fromhex(entr)
+            # clean up mnemonic from spurious whitespaces
+            mnemonic = " ".join(mnemonic.split())
+>           assert mnemonic == bip39.mnemonic_from_entropy(entropy, lang)
+                               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests/mnemonic/test_bip39.py:62: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+btclib/mnemonic/bip39.py:53: in mnemonic_from_entropy
+    indexes = wordlist_indexes_from_bin_str_entropy(bin_str_entropy + checksum, lang)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+entropy = '000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000011'
+base = 'en'
+
+    def wordlist_indexes_from_bin_str_entropy(entropy: BinStr, base: int) -> list[int]:
+        """Return the digit indexes for the provided raw entropy.
+    
+        Return the list of integer indexes into a digit set, usually a
+        language word-list, for the provided raw (i.e. binary 0/1 string)
+        entropy; leading zeros are not considered redundant padding.
+        """
+        bits = len(entropy)
+        int_entropy = int(entropy, 2)
+        indexes = []
+        while int_entropy:
+>           int_entropy, index = divmod(int_entropy, base)
+                                 ^^^^^^^^^^^^^^^^^^^^^^^^^
+E           TypeError: unsupported operand type(s) for divmod(): 'int' and 'str'
+
+btclib/mnemonic/entropy.py:31: TypeError
+______________________________ test_valid_taproot ______________________________
+[gw0] linux -- Python 3.11.15 /usr/local/bin/python
+
+    def test_valid_taproot() -> None:
+        fname = "tapscript_test_vector.json"
+        filename = path.join(path.dirname(path.dirname(__file__)), "script", "_data", fname)
+    
+        with open(filename, encoding="ascii") as file_:
+            data = json.load(file_)
+    
+        for x in filter(lambda x: "TAPROOT" in x["flags"], data):
+            tx = Tx.parse(x["tx"])
+    
+            prevouts = [TxOut.parse(prevout) for prevout in x["prevouts"]]
+            index = x["index"]
+    
+            witness = Witness(x["success"]["witness"])
+            tx.vin[index].script_witness = witness
+            tx.vin[index].script_sig = bytes.fromhex(x["success"]["scriptSig"])
+    
+            flags = x["flags"].split(",")
+    
+>           verify_input(prevouts, tx, index, flags)
+
+tests/script_engine/test_transactions.py:45: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+btclib/script/engine/__init__.py:121: in verify_input
+    segwit_version = _to_num(stack[-1], []) if is_segwit(script) else -1
+                     ^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+element = b'9\xf7\xe9#(\x96\xf8\x10\x04\x85\xe3\x8a\xfae D\xf8U\xe74\xa1;\x84\n?"\x0c\xbd]\x91\x1a\xd5'
+flags = [], max_size = 4
+
+    def _to_num(element: bytes, flags: list[str], max_size: int = 4) -> int:
+        minimaldata = "MINIMALDATA" in flags
+        if minimaldata and element == b"\x80":
+            raise BTClibValueError()
+        if len(element) > max_size:
+>           raise BTClibValueError()
+E           btclib.exceptions.BTClibValueError
+
+btclib/script/engine/script_op_codes.py:16: BTClibValueError
+__________________________ test_mnemonic_from_entropy __________________________
+[gw12] linux -- Python 3.11.15 /usr/local/bin/python
+
+    def test_mnemonic_from_entropy() -> None:
+        # zero leading bit should not throw an error
+>       bip39.mnemonic_from_entropy(secrets.randbits(127), "en")
+
+tests/mnemonic/test_bip39.py:73: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+btclib/mnemonic/bip39.py:53: in mnemonic_from_entropy
+    indexes = wordlist_indexes_from_bin_str_entropy(bin_str_entropy + checksum, lang)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+entropy = '000101101001110010010010011101100101010010001110010000000111101011010000011000110101111100011011001111000111111101011110010111110101'
+base = 'en'
+
+    def wordlist_indexes_from_bin_str_entropy(entropy: BinStr, base: int) -> list[int]:
+        """Return the digit indexes for the provided raw entropy.
+    
+        Return the list of integer indexes into a digit set, usually a
+        language word-list, for the provided raw (i.e. binary 0/1 string)
+        entropy; leading zeros are not considered redundant padding.
+        """
+        bits = len(entropy)
+        int_entropy = int(entropy, 2)
+        indexes = []
+        while int_entropy:
+>           int_entropy, index = divmod(int_entropy, base)
+                                 ^^^^^^^^^^^^^^^^^^^^^^^^^
+E           TypeError: unsupported operand type(s) for divmod(): 'int' and 'str'
+
+btclib/mnemonic/entropy.py:31: TypeError
+_____________________________ test_invalid_legacy ______________________________
+[gw0] linux -- Python 3.11.15 /usr/local/bin/python
+
+    def test_invalid_legacy() -> None:
+        fname = "tx_invalid_legacy.json"
+        filename = path.join(path.dirname(__file__), "_data", fname)
+        with open(filename, encoding="ascii") as file_:
+            data = json.load(file_)
+    
+        for x in data:
+            if isinstance(x[0], str):
+                continue
+    
+            try:
+                tx = Tx.parse(x[1])
+            except BTClibValueError as e:
+                if "invalid satoshi amount:" not in str(e):
+                    continue
+                if "missing outputs" not in str(e):
+                    continue
+    
+            flags = x[2].split(",")  # different flags handling
+    
+            prevouts = []
+            for i in x[0]:
+                amount = 0 if len(i) == 3 else i[3]
+                with warnings.catch_warnings():
+                    warnings.simplefilter("ignore")
+                    script_pub_key = parse_script(i[2])
+                prevouts.append(TxOut(amount, ScriptPubKey(script_pub_key)))
+    
+>           with pytest.raises((BTClibValueError, IndexError, KeyError)):
+E           Failed: DID NOT RAISE any of (BTClibValueError, IndexError, KeyError)
+
+tests/script_engine/test_transactions.py:147: Failed
+__________________________ test_dataclasses_json_dict __________________________
+[gw6] linux -- Python 3.11.15 /usr/local/bin/python
+
+    def test_dataclasses_json_dict() -> None:
+        fname = "block_481824.bin"
+        filename = path.join(path.dirname(__file__), "_data", fname)
+        with open(filename, "rb") as binfile_:
+            block = binfile_.read()
+    
+        # dataclass
+        block_data = Block.parse(block)
+        assert isinstance(block_data, Block)
+    
+        # dict
+>       block_dict = block_data.to_dict()
+                     ^^^^^^^^^^^^^^^^^^^^
+
+tests/block/test_block.py:253: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+btclib/block/block.py:72: in to_dict
+    "transactions": [t.to_dict(check_validity) for t in self.transactions],
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+btclib/block/block.py:72: in <listcomp>
+    "transactions": [t.to_dict(check_validity) for t in self.transactions],
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^
+btclib/tx/tx.py:117: in to_dict
+    "vout": [tx_out.to_dict(check_validity) for tx_out in self.vout],
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+btclib/tx/tx.py:117: in <listcomp>
+    "vout": [tx_out.to_dict(check_validity) for tx_out in self.vout],
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = TxOut(value=1462514269, script_pub_key=ScriptPubKey(script=b'v\xa9\x14,0\xa6\xaa\xacm\x96hr\x91G]}R\xf4\xb4i\xf6e\xa6\x88\xac'))
+check_validity = True
+
+    def to_dict(self, check_validity: bool = True) -> dict[str, Any]:
+        if check_validity:
+            self.assert_valid()
+    
+        return {
+            "value": btc_from_sats(self.value),
+>           "scriptPubKey": self.script_pub_key.to_dict(check_validity),
+                            ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        }
+E       AttributeError: 'ScriptPubKey' object has no attribute 'to_dict'
+
+btclib/tx/tx_out.py:53: AttributeError
+____________________________ test_wiki_transaction _____________________________
+[gw15] linux -- Python 3.11.15 /usr/local/bin/python
+
+    def test_wiki_transaction() -> None:
+        tx_bytes = "01000000016dbddb085b1d8af75184f0bc01fad58d1266e9b63b50881990e4b40d6aee3629000000008b483045022100f3581e1972ae8ac7c7367a7a253bc1135223adb9a468bb3a59233f45bc578380022059af01ca17d00e41837a1d58e97aa31bae584edec28d35bd96923690913bae9a0141049c02bfc97ef236ce6d8fe5d94013c721e915982acd2b12b65d9b7d59e20a842005f8fc4e02532e873d37b96f09d6d4511ada8f14042f46614a4c70c0f14beff5ffffffff02404b4c00000000001976a9141aa0cd1cbea6e7458a7abad512a9d9ea1afb225e88ac80fae9c7000000001976a9140eab5bea436a0484cfab12485efda0b78b4ecc5288ac00000000"
+        tx = Tx.parse(tx_bytes)
+        assert tx.serialize(include_witness=True).hex() == tx_bytes
+>       assert tx == Tx.from_dict(tx.to_dict())
+                                  ^^^^^^^^^^^^
+
+tests/tx/test_tx.py:233: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+btclib/tx/tx.py:117: in to_dict
+    "vout": [tx_out.to_dict(check_validity) for tx_out in self.vout],
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+btclib/tx/tx.py:117: in <listcomp>
+    "vout": [tx_out.to_dict(check_validity) for tx_out in self.vout],
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = TxOut(value=5000000, script_pub_key=ScriptPubKey(script=b'v\xa9\x14\x1a\xa0\xcd\x1c\xbe\xa6\xe7E\x8az\xba\xd5\x12\xa9\xd9\xea\x1a\xfb"^\x88\xac'))
+check_validity = True
+
+    def to_dict(self, check_validity: bool = True) -> dict[str, Any]:
+        if check_validity:
+            self.assert_valid()
+    
+        return {
+            "value": btc_from_sats(self.value),
+>           "scriptPubKey": self.script_pub_key.to_dict(check_validity),
+                            ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        }
+E       AttributeError: 'ScriptPubKey' object has no attribute 'to_dict'
+
+btclib/tx/tx_out.py:53: AttributeError
+____________________________ test_coinbase_block_1 _____________________________
+[gw0] linux -- Python 3.11.15 /usr/local/bin/python
+
+    def test_coinbase_block_1() -> None:
+        coinbase_out = "00f2052a0100000043410496b538e853519c726a2c91e61ec11600ae1390813a627c66fb8be7947be63c52da7589379515d4e0a604f8141781e62294721166bf621e73a82cbf2342c858eeac"
+        tx_out = TxOut.parse(coinbase_out)
+        assert tx_out.serialize().hex() == coinbase_out
+    
+        coinbase_inp = (  # prev_out
+            "0000000000000000000000000000000000000000000000000000000000000000ffffffff"
+            "0704ffff001d0104"  # script_sig
+            "ffffffff"  # sequence
+        )
+        tx_in = TxIn.parse(coinbase_inp)
+        assert tx_in.serialize().hex() == coinbase_inp
+        assert tx_in.prev_out.is_coinbase()
+    
+        coinbase = f"0100000001{coinbase_inp}01{coinbase_out}00000000"
+        tx = Tx.parse(coinbase)
+        assert tx.serialize(include_witness=True).hex() == coinbase
+>       assert tx == Tx.from_dict(tx.to_dict())
+                                  ^^^^^^^^^^^^
+
+tests/tx/test_tx.py:205: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+btclib/tx/tx.py:117: in to_dict
+    "vout": [tx_out.to_dict(check_validity) for tx_out in self.vout],
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+btclib/tx/tx.py:117: in <listcomp>
+    "vout": [tx_out.to_dict(check_validity) for tx_out in self.vout],
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = TxOut(value=5000000000, script_pub_key=ScriptPubKey(script=b'A\x04\x96\xb58\xe8SQ\x9crj,\x91\xe6\x1e\xc1\x16\x00\xae\x...8b\xe7\x94{\xe6<R\xdau\x897\x95\x15\xd4\xe0\xa6\x04\xf8\x14\x17\x81\xe6"\x94r\x11f\xbfb\x1es\xa8,\xbf#B\xc8X\xee\xac'))
+check_validity = True
+
+    def to_dict(self, check_validity: bool = True) -> dict[str, Any]:
+        if check_validity:
+            self.assert_valid()
+    
+        return {
+            "value": btc_from_sats(self.value),
+>           "scriptPubKey": self.script_pub_key.to_dict(check_validity),
+                            ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        }
+E       AttributeError: 'ScriptPubKey' object has no attribute 'to_dict'
+
+btclib/tx/tx_out.py:53: AttributeError
+_________________________________ test_tx_out __________________________________
+[gw2] linux -- Python 3.11.15 /usr/local/bin/python
+
+    def test_tx_out() -> None:
+        tx_out = TxOut(0, b"")
+        assert tx_out.value == 0
+        assert tx_out.script_pub_key.script == b""
+        assert tx_out.script_pub_key.type == "unknown"
+        assert tx_out.script_pub_key.network == "mainnet"
+        assert tx_out.script_pub_key.addresses == [""]
+        assert tx_out.nValue == tx_out.value
+        assert tx_out.scriptPubKey == tx_out.script_pub_key.script
+        assert tx_out == TxOut.parse(tx_out.serialize())
+>       assert tx_out == TxOut.from_dict(tx_out.to_dict())
+                                         ^^^^^^^^^^^^^^^^
+
+tests/tx/test_tx_out.py:31: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = TxOut(value=0, script_pub_key=ScriptPubKey(script=b''))
+check_validity = True
+
+    def to_dict(self, check_validity: bool = True) -> dict[str, Any]:
+        if check_validity:
+            self.assert_valid()
+    
+        return {
+            "value": btc_from_sats(self.value),
+>           "scriptPubKey": self.script_pub_key.to_dict(check_validity),
+                            ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        }
+E       AttributeError: 'ScriptPubKey' object has no attribute 'to_dict'
+
+btclib/tx/tx_out.py:53: AttributeError
+___________________________________ test_tx ____________________________________
+[gw9] linux -- Python 3.11.15 /usr/local/bin/python
+
+    def test_tx() -> None:
+        # default constructor
+        tx = Tx(check_validity=False)
+        assert not tx.is_segwit()
+        assert not any(bool(w) for w in tx.vwitness)
+        assert not any(bool(tx_in.script_witness) for tx_in in tx.vin)
+        assert not tx.is_coinbase()
+        assert tx.version == 1
+        assert tx.lock_time == 0
+        assert not tx.vin
+        assert not tx.vout
+        assert tx.nVersion == tx.version
+        assert tx.nLockTime == tx.lock_time
+        tx_id = "d21633ba23f70118185227be58a63527675641ad37967e2aa461559f577aec43"
+        assert tx.id.hex() == tx_id
+        assert tx.hash == tx.id
+        assert tx.size == 10
+        assert tx.vsize == tx.size
+        assert tx.weight == tx.size * 4
+    
+        with pytest.raises(BTClibValueError, match="Missing inputs"):
+            Tx(vout=[TxOut(0, ScriptPubKey(""))])
+        with pytest.raises(BTClibValueError, match="Missing outputs"):
+            Tx(vin=[TxIn(script_sig="0000")])
+    
+        tx_2 = Tx.from_dict(tx.to_dict(check_validity=False), check_validity=False)
+        assert tx_2.is_segwit() == tx.is_segwit()
+        assert tx_2 == tx
+    
+        tx_2 = Tx.parse(
+            tx.serialize(include_witness=True, check_validity=False), check_validity=False
+        )
+        assert tx_2.is_segwit() == tx.is_segwit()
+        assert tx_2 == tx
+    
+        tx_2 = Tx.parse(
+            tx.serialize(include_witness=False, check_validity=False), check_validity=False
+        )
+        assert not tx_2.is_segwit()
+        assert tx_2 == tx
+    
+        # non-default constructor, no segwit
+        prev_out = OutPoint(
+            "9dcfdb5836ecfe146bdaa896605ba21222f83cd014dd47adde14fab2aba7de9b", 1
+        )
+        script_sig = b""
+        sequence = 0xFFFFFFFF
+        tx_in = TxIn(prev_out, script_sig, sequence)
+    
+        tx.vin = [tx_in]
+        with pytest.raises(BTClibValueError, match="Missing outputs"):
+            tx.assert_valid()
+    
+        tx_out1 = TxOut(2500000, "a914f987c321394968be164053d352fc49763b2be55c87")
+        tx_out2 = TxOut(
+            6381891, "0020701a8d401c84fb13e6baf169d59684e17abd9fa216c8cc5b9fc63d622ff8c58d"
+        )
+        version = 1
+        lock_time = 0
+        tx = Tx(version, lock_time, [tx_in], [tx_out1, tx_out2])
+        assert not tx.is_segwit()
+        assert not any(bool(w) for w in tx.vwitness)
+        assert not any(bool(tx_in.script_witness) for tx_in in tx.vin)
+        assert not tx.is_coinbase()
+        assert tx.version == 1
+        assert tx.lock_time == 0
+        assert len(tx.vin) == 1
+        assert len(tx.vout) == 2
+        assert tx.nVersion == tx.version
+        assert tx.nLockTime == tx.lock_time
+        tx_id = "4e52f7848dab7dd89ef7ba477939574198a170bfcb2fb34355c69f5e0169f63c"
+        assert tx.id.hex() == tx_id
+        assert tx.hash == tx.id
+        assert tx.size == 126
+        assert tx.vsize == tx.size
+        assert tx.weight == tx.size * 4
+    
+>       tx_2 = Tx.from_dict(tx.to_dict())
+                            ^^^^^^^^^^^^
+
+tests/tx/test_tx.py:99: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+btclib/tx/tx.py:117: in to_dict
+    "vout": [tx_out.to_dict(check_validity) for tx_out in self.vout],
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+btclib/tx/tx.py:117: in <listcomp>
+    "vout": [tx_out.to_dict(check_validity) for tx_out in self.vout],
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = TxOut(value=2500000, script_pub_key=ScriptPubKey(script=b'\xa9\x14\xf9\x87\xc3!9Ih\xbe\x16@S\xd3R\xfcIv;+\xe5\\\x87'))
+check_validity = True
+
+    def to_dict(self, check_validity: bool = True) -> dict[str, Any]:
+        if check_validity:
+            self.assert_valid()
+    
+        return {
+            "value": btc_from_sats(self.value),
+>           "scriptPubKey": self.script_pub_key.to_dict(check_validity),
+                            ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        }
+E       AttributeError: 'ScriptPubKey' object has no attribute 'to_dict'
+
+btclib/tx/tx_out.py:53: AttributeError
+__________________________ test_dataclasses_json_dict __________________________
+[gw5] linux -- Python 3.11.15 /usr/local/bin/python
+
+    def test_dataclasses_json_dict() -> None:
+        fname = "d4f3c2c3c218be868c77ae31bedb497e2f908d6ee5bbbe91e4933e6da680c970.bin"
+        filename = path.join(path.dirname(__file__), "_data", fname)
+        with open(filename, "rb") as binary_file_:
+            tx = Tx.parse(binary_file_.read())
+    
+        # Tx dataclass
+        assert isinstance(tx, Tx)
+        assert tx.is_segwit()
+        assert any(bool(w) for w in tx.vwitness)
+        assert any(bool(tx_in.script_witness) for tx_in in tx.vin)
+        assert tx.vin[0].script_witness
+        assert tx.vin[0].script_witness.stack
+    
+        # Tx dataclass to dict
+>       tx_dict = tx.to_dict()
+                  ^^^^^^^^^^^^
+
+tests/tx/test_tx.py:340: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+btclib/tx/tx.py:117: in to_dict
+    "vout": [tx_out.to_dict(check_validity) for tx_out in self.vout],
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+btclib/tx/tx.py:117: in <listcomp>
+    "vout": [tx_out.to_dict(check_validity) for tx_out in self.vout],
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = TxOut(value=3259343370, script_pub_key=ScriptPubKey(script=b'\x00 \xed\x8e\x96\x00V\x10\x00\xf7"\xbd&\xe8P\xbe}\x80\xf2M\x17O\xab\xef\xf9\x8b\xae\xf9g2^+Z\x86'))
+check_validity = True
+
+    def to_dict(self, check_validity: bool = True) -> dict[str, Any]:
+        if check_validity:
+            self.assert_valid()
+    
+        return {
+            "value": btc_from_sats(self.value),
+>           "scriptPubKey": self.script_pub_key.to_dict(check_validity),
+                            ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        }
+E       AttributeError: 'ScriptPubKey' object has no attribute 'to_dict'
+
+btclib/tx/tx_out.py:53: AttributeError
+________________________________ test_standard _________________________________
+[gw9] linux -- Python 3.11.15 /usr/local/bin/python
+
+    def test_standard() -> None:
+        tx_bytes = "010000000001019bdea7abb2fa14dead47dd14d03cf82212a25b6096a8da6b14feec3658dbcf9d0100000000ffffffff02a02526000000000017a914f987c321394968be164053d352fc49763b2be55c874361610000000000220020701a8d401c84fb13e6baf169d59684e17abd9fa216c8cc5b9fc63d622ff8c58d04004730440220421fbbedf2ee096d6289b99973509809d5e09589040d5e0d453133dd11b2f78a02205686dbdb57e0c44e49421e9400dd4e931f1655332e8d078260c9295ba959e05d014730440220398f141917e4525d3e9e0d1c6482cb19ca3188dc5516a3a5ac29a0f4017212d902204ea405fae3a58b1fc30c5ad8ac70a76ab4f4d876e8af706a6a7b4cd6fa100f44016952210375e00eb72e29da82b89367947f29ef34afb75e8654f6ea368e0acdfd92976b7c2103a1b26313f430c4b15bb1fdce663207659d8cac749a0e53d70eff01874496feff2103c96d495bfdd5ba4145e3e046fee45e84a8a48ad05bd8dbb395c011a32cf9f88053ae00000000"
+    
+        tx = Tx.parse(tx_bytes)
+        tx.version = 0xFFFFFFFF + 1
+        with pytest.raises(BTClibValueError, match="invalid version: "):
+            tx.assert_standard()
+    
+        tx = Tx.parse(tx_bytes)
+        tx.version = 0xFFFFFFFF
+        tx.assert_valid()
+    
+        tx = Tx.parse(tx_bytes)
+        tx.version = 0xFFFFFFFF
+>       with pytest.raises(BTClibValueError, match="invalid version: "):
+E       Failed: DID NOT RAISE BTClibValueError
+
+tests/tx/test_tx.py:184: Failed
+_____________________________ test_single_witness ______________________________
+[gw15] linux -- Python 3.11.15 /usr/local/bin/python
+
+    def test_single_witness() -> None:
+        # 4e52f7848dab7dd89ef7ba477939574198a170bfcb2fb34355c69f5e0169f63c
+        tx_bytes = "010000000001019bdea7abb2fa14dead47dd14d03cf82212a25b6096a8da6b14feec3658dbcf9d0100000000ffffffff02a02526000000000017a914f987c321394968be164053d352fc49763b2be55c874361610000000000220020701a8d401c84fb13e6baf169d59684e17abd9fa216c8cc5b9fc63d622ff8c58d04004730440220421fbbedf2ee096d6289b99973509809d5e09589040d5e0d453133dd11b2f78a02205686dbdb57e0c44e49421e9400dd4e931f1655332e8d078260c9295ba959e05d014730440220398f141917e4525d3e9e0d1c6482cb19ca3188dc5516a3a5ac29a0f4017212d902204ea405fae3a58b1fc30c5ad8ac70a76ab4f4d876e8af706a6a7b4cd6fa100f44016952210375e00eb72e29da82b89367947f29ef34afb75e8654f6ea368e0acdfd92976b7c2103a1b26313f430c4b15bb1fdce663207659d8cac749a0e53d70eff01874496feff2103c96d495bfdd5ba4145e3e046fee45e84a8a48ad05bd8dbb395c011a32cf9f88053ae00000000"
+        tx = Tx.parse(tx_bytes)
+        assert tx.serialize(include_witness=True).hex() == tx_bytes
+>       assert tx == Tx.from_dict(tx.to_dict())
+                                  ^^^^^^^^^^^^
+
+tests/tx/test_tx.py:259: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+btclib/tx/tx.py:117: in to_dict
+    "vout": [tx_out.to_dict(check_validity) for tx_out in self.vout],
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+btclib/tx/tx.py:117: in <listcomp>
+    "vout": [tx_out.to_dict(check_validity) for tx_out in self.vout],
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = TxOut(value=2500000, script_pub_key=ScriptPubKey(script=b'\xa9\x14\xf9\x87\xc3!9Ih\xbe\x16@S\xd3R\xfcIv;+\xe5\\\x87'))
+check_validity = True
+
+    def to_dict(self, check_validity: bool = True) -> dict[str, Any]:
+        if check_validity:
+            self.assert_valid()
+    
+        return {
+            "value": btc_from_sats(self.value),
+>           "scriptPubKey": self.script_pub_key.to_dict(check_validity),
+                            ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        }
+E       AttributeError: 'ScriptPubKey' object has no attribute 'to_dict'
+
+btclib/tx/tx_out.py:53: AttributeError
+_____________________________ test_double_witness ______________________________
+[gw0] linux -- Python 3.11.15 /usr/local/bin/python
+
+    def test_double_witness() -> None:
+        tx_bytes = "01000000000102322d4f05c3a4f78e97deda01bd8fc5ff96777b62c8f2daa72b02b70fa1e3e1051600000017160014e123a5263695be634abf3ad3456b4bf15f09cc6afffffffffdfee6e881f12d80cbcd6dc54c3fe390670678ebd26c3ae2dd129f41882e3efc25000000171600145946c8c3def6c79859f01b34ad537e7053cf8e73ffffffff02c763ac050000000017a9145ffd6df9bd06dedb43e7b72675388cbfc883d2098727eb180a000000001976a9145f9e96f739198f65d249ea2a0336e9aa5aa0c7ed88ac024830450221009b364c1074c602b2c5a411f4034573a486847da9c9c2467596efba8db338d33402204ccf4ac0eb7793f93a1b96b599e011fe83b3e91afdc4c7ab82d765ce1da25ace01210334d50996c36638265ad8e3cd127506994100dd7f24a5828155d531ebaf736e160247304402200c6dd55e636a2e4d7e684bf429b7800a091986479d834a8d462fbda28cf6f8010220669d1f6d963079516172f5061f923ef90099136647b38cc4b3be2a80b820bdf90121030aa2a1c2344bc8f38b7a726134501a2a45db28df8b4bee2df4428544c62d731400000000"
+        tx = Tx.parse(tx_bytes)
+        assert tx.serialize(include_witness=True).hex() == tx_bytes
+>       assert tx == Tx.from_dict(tx.to_dict())
+                                  ^^^^^^^^^^^^
+
+tests/tx/test_tx.py:291: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+btclib/tx/tx.py:117: in to_dict
+    "vout": [tx_out.to_dict(check_validity) for tx_out in self.vout],
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+btclib/tx/tx.py:117: in <listcomp>
+    "vout": [tx_out.to_dict(check_validity) for tx_out in self.vout],
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = TxOut(value=95183815, script_pub_key=ScriptPubKey(script=b'\xa9\x14_\xfdm\xf9\xbd\x06\xde\xdbC\xe7\xb7&u8\x8c\xbf\xc8\x83\xd2\t\x87'))
+check_validity = True
+
+    def to_dict(self, check_validity: bool = True) -> dict[str, Any]:
+        if check_validity:
+            self.assert_valid()
+    
+        return {
+            "value": btc_from_sats(self.value),
+>           "scriptPubKey": self.script_pub_key.to_dict(check_validity),
+                            ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        }
+E       AttributeError: 'ScriptPubKey' object has no attribute 'to_dict'
+
+btclib/tx/tx_out.py:53: AttributeError
+__________________________ test_dataclasses_json_dict __________________________
+[gw0] linux -- Python 3.11.15 /usr/local/bin/python
+
+    def test_dataclasses_json_dict() -> None:
+        fname = "d4f3c2c3c218be868c77ae31bedb497e2f908d6ee5bbbe91e4933e6da680c970.bin"
+        filename = path.join(path.dirname(__file__), "_data", fname)
+        with open(filename, "rb") as binary_file_:
+            temp = Tx.parse(binary_file_.read())
+    
+        tx_out_data = temp.vout[0]
+    
+        # dataclass
+        assert isinstance(tx_out_data, TxOut)
+    
+        # Tx to/from dict
+>       tx_out_dict = tx_out_data.to_dict()
+                      ^^^^^^^^^^^^^^^^^^^^^
+
+tests/tx/test_tx_out.py:78: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = TxOut(value=3259343370, script_pub_key=ScriptPubKey(script=b'\x00 \xed\x8e\x96\x00V\x10\x00\xf7"\xbd&\xe8P\xbe}\x80\xf2M\x17O\xab\xef\xf9\x8b\xae\xf9g2^+Z\x86'))
+check_validity = True
+
+    def to_dict(self, check_validity: bool = True) -> dict[str, Any]:
+        if check_validity:
+            self.assert_valid()
+    
+        return {
+            "value": btc_from_sats(self.value),
+>           "scriptPubKey": self.script_pub_key.to_dict(check_validity),
+                            ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        }
+E       AttributeError: 'ScriptPubKey' object has no attribute 'to_dict'
+
+btclib/tx/tx_out.py:53: AttributeError
+_________________________________ test_ledger __________________________________
+[gw7] linux -- Python 3.11.15 /usr/local/bin/python
+
+    def test_ledger() -> None:
+        """Hybrid ECDSA Bitcoin message signature generated by Ledger."""
+        mnemonic = (
+            "barely sun snack this snack relief pipe attack disease boss enlist lawsuit"
+        )
+    
+        # non-standard leading 31 in DER serialization
+        derivation_path = "m/1"
+        msg = b"\xfb\xa3\x1f\x8cd\x85\xe29#K\xb3{\xfd\xa7<?\x95oL\xee\x19\xb2'oh\xa7]\xd9A\xfeU\xd8"
+        dersig_hex_str = "3144022012ec0c174936c2a46dc657252340b2e6e6dd8c31dd059b6f9f33a90c21af2fba022030e6305b3ccf88009d419bf7651afcfcc0a30898b93ae9de9aa6ac03cf8ec56b"
+    
+        # pub_key derivation
+>       rprv = bip39.mxprv_from_mnemonic(mnemonic)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests/ecc/test_bms.py:588: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+btclib/mnemonic/bip39.py:102: in mxprv_from_mnemonic
+    seed = seed_from_mnemonic(mnemonic, passphrase or "", verify_checksum)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+btclib/mnemonic/bip39.py:84: in seed_from_mnemonic
+    entropy_from_mnemonic(mnemonic)
+btclib/mnemonic/bip39.py:61: in entropy_from_mnemonic
+    bin_str = bin_str_entropy_from_wordlist_indexes(indexes, lang)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+indexes = [148, 1738, 1640, 1798, 1640, 1450, ...], base = 'en'
+
+    def bin_str_entropy_from_wordlist_indexes(indexes: Sequence[int], base: int) -> BinStr:
+        """Return the raw entropy from a list of word-list indexes.
+    
+        Return the raw (i.e. binary 0/1 string) entropy from the provided
+        list of integer indexes into a given language word-list.
+        """
+        entropy = 0
+        for index in indexes:
+>           entropy = entropy * base + index
+                      ^^^^^^^^^^^^^^^^^^^^^^
+E           TypeError: can only concatenate str (not "int") to str
+
+btclib/mnemonic/entropy.py:49: TypeError
+__________________________ test_dataclasses_json_dict __________________________
+[gw11] linux -- Python 3.11.15 /usr/local/bin/python
+
+    def test_dataclasses_json_dict() -> None:
+        psbt_str = "cHNidP8BAJoCAAAAAljoeiG1ba8MI76OcHBFbDNvfLqlyHV5JPVFiHuyq911AAAAAAD/////g40EJ9DsZQpoqka7CwmK6kQiwHGyyng1Kgd5WdB86h0BAAAAAP////8CcKrwCAAAAAAWABTYXCtx0AYLCcmIauuBXlCZHdoSTQDh9QUAAAAAFgAUAK6pouXw+HaliN9VRuh0LR2HAI8AAAAAAAEAuwIAAAABqtc5MQGL0l+ErkALaISL4J23BurCrBgpi6vucatlb4sAAAAASEcwRAIgWPb8fGoz4bMVSNSByCbAFb0wE1qtQs1neQ2rZtKtJDsCIEoc7SYExnNbY5PltBaR3XiwDwxZQvufdRhW+qk4FX26Af7///8CgPD6AgAAAAAXqRQPuUY0IWlrgsgzryQceMF9295JNIfQ8gonAQAAABepFCnKdPigj4GZlCgYXJe12FLkBj9hh2UAAAAiAgKVg785rgpgl0etGZrd1jT6YQhVnWxc05tMIYPxq5bgf0cwRAIgdAGK1BgAl7hzMjwAFXILNoTMgSOJEEjn282bVa1nnJkCIHPTabdA4+tT3O+jOCPIBwUUylWn3ZVE8VfBZ5EyYRGMASICAtq2H/SaFNtqfQKwzR+7ePxLGDErW05U2uTbovv+9TbXSDBFAiEA9hA4swjcHahlo0hSdG8BV3KTQgjG0kRUOTzZm98iF3cCIAVuZ1pnWm0KArhbFOXikHTYolqbV2C+ooFvZhkQoAbqAQEDBAEAAAABBEdSIQKVg785rgpgl0etGZrd1jT6YQhVnWxc05tMIYPxq5bgfyEC2rYf9JoU22p9ArDNH7t4/EsYMStbTlTa5Nui+/71NtdSriIGApWDvzmuCmCXR60Zmt3WNPphCFWdbFzTm0whg/GrluB/ENkMak8AAACAAAAAgAAAAIAiBgLath/0mhTban0CsM0fu3j8SxgxK1tOVNrk26L7/vU21xDZDGpPAAAAgAAAAIABAACAAAEBIADC6wsAAAAAF6kUt/X69A49QKWkWbHbNTXyty+pIeiHIgIDCJ3BDHrG21T5EymvYXMz2ziM6tDCMfcjN50bmQMLAtxHMEQCIGLrelVhB6fHP0WsSrWh3d9vcHX7EnWWmn84Pv/3hLyyAiAMBdu3Rw2/LwhVfdNWxzJcHtMJE+mWzThAlF2xIijaXwEiAgI63ZBPPW3PWd25BrDe4jUpt/+57VDl6GFRkmhgIh8Oc0cwRAIgZfRbpZmLWaJ//hp77QFq8fH5DVSzqo90UKpfVqJRA70CIH9yRwOtHtuWaAsoS1bU/8uI9/t1nqu+CKow8puFE4PSAQEDBAEAAAABBCIAIIwjUxc3Q7WV37Sge3K6jkLjeX2nTof+fZ10l+OyAokDAQVHUiEDCJ3BDHrG21T5EymvYXMz2ziM6tDCMfcjN50bmQMLAtwhAjrdkE89bc9Z3bkGsN7iNSm3/7ntUOXoYVGSaGAiHw5zUq4iBgI63ZBPPW3PWd25BrDe4jUpt/+57VDl6GFRkmhgIh8OcxDZDGpPAAAAgAAAAIADAACAIgYDCJ3BDHrG21T5EymvYXMz2ziM6tDCMfcjN50bmQMLAtwQ2QxqTwAAAIAAAACAAgAAgAAiAgOppMN/WZbTqiXbrGtXCvBlA5RJKUJGCzVHU+2e7KWHcRDZDGpPAAAAgAAAAIAEAACAACICAn9jmXV9Lv9VoTatAsaEsYOLZVbl8bazQoKpS2tQBRCWENkMak8AAACAAAAAgAUAAIAA"
+        # let's sort it
+>       psbt_str = Psbt.b64decode(psbt_str).b64encode()
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       AttributeError: 'NoneType' object has no attribute 'b64encode'
+
+tests/psbt/test_psbt.py:375: AttributeError
+____________________________ test_encode_serialize _____________________________
+[gw11] linux -- Python 3.11.15 /usr/local/bin/python
+
+    def test_encode_serialize() -> None:
+        # from creator example
+        psbt_str = "cHNidP8BAJoCAAAAAljoeiG1ba8MI76OcHBFbDNvfLqlyHV5JPVFiHuyq911AAAAAAD/////g40EJ9DsZQpoqka7CwmK6kQiwHGyyng1Kgd5WdB86h0BAAAAAP////8CcKrwCAAAAAAWABTYXCtx0AYLCcmIauuBXlCZHdoSTQDh9QUAAAAAFgAUAK6pouXw+HaliN9VRuh0LR2HAI8AAAAAAAAAAAA="
+        psbt = Psbt.b64decode(psbt_str)
+>       assert psbt.b64encode() == psbt_str
+               ^^^^^^^^^^^^^^
+E       AttributeError: 'NoneType' object has no attribute 'b64encode'
+
+tests/psbt/test_psbt.py:413: AttributeError
+_______________________________ test_exceptions ________________________________
+[gw11] linux -- Python 3.11.15 /usr/local/bin/python
+
+    def test_exceptions() -> None:
+        # from creator example
+        psbt_str = "cHNidP8BAJoCAAAAAljoeiG1ba8MI76OcHBFbDNvfLqlyHV5JPVFiHuyq911AAAAAAD/////g40EJ9DsZQpoqka7CwmK6kQiwHGyyng1Kgd5WdB86h0BAAAAAP////8CcKrwCAAAAAAWABTYXCtx0AYLCcmIauuBXlCZHdoSTQDh9QUAAAAAFgAUAK6pouXw+HaliN9VRuh0LR2HAI8AAAAAAAAAAAA="
+    
+        psbt = Psbt.b64decode(psbt_str)
+>       psbt.outputs[0].redeem_script = "bad script"  # type: ignore[assignment]
+        ^^^^^^^^^^^^
+E       AttributeError: 'NoneType' object has no attribute 'outputs'
+
+tests/psbt/test_psbt.py:427: AttributeError
+--------------------------------- JSON report ----------------------------------
+report saved to: report.json
+============================= slowest 8 durations ==============================
+2.06s call     tests/ecc/test_rfc6979.py::test_rfc6979_nonce_tv
+1.45s call     tests/ec/test_curve_group.py::test_mult_aff
+1.23s call     tests/ec/test_curve_group.py::test_mult_recursive_aff
+0.70s call     tests/ec/test_curve_group.py::test_mult_jac
+0.64s call     tests/ecc/test_dsa.py::test_libsecp256k1_py_vectors_ecdsa_nonce
+0.56s call     tests/ec/test_curve_group.py::test_mult_recursive_jac
+0.35s call     tests/ecc/test_bms.py::test_vector_python_bitcoinlib
+0.28s call     tests/script/test_taproot.py::test_valid_script_path
+=========================== short test summary info ============================
+FAILED tests/bip32/test_slip132.py::test_slip132 - TypeError: can only concat...
+FAILED tests/block/test_block.py::test_block_1 - AttributeError: 'ScriptPubKe...
+FAILED tests/bip32/test_slip132.py::test_slip132_test_vectors - TypeError: ca...
+FAILED tests/ecc/test_dsa.py::test_pub_key_recovery - assert 2 == 4
+FAILED tests/bip32/test_slip132.py::test_addresses - TypeError: unsupported o...
+FAILED tests/block/test_block.py::test_block_170 - AttributeError: 'ScriptPub...
+FAILED tests/ecc/test_bms.py::test_signature - AssertionError: Regex pattern ...
+FAILED tests/ecc/test_ssa.py::test_low_cardinality - btclib.exceptions.BTClib...
+FAILED tests/ecc/test_dsa.py::test_low_cardinality - assert 1 in {2, 4}
+FAILED tests/mnemonic/test_electrum.py::test_p2wpkh_p2sh - TypeError: can onl...
+FAILED tests/psbt/test_psbt.py::test_vectors_bip174 - AssertionError: assert ...
+FAILED tests/ecc/test_bms.py::test_exceptions - AssertionError: Regex pattern...
+FAILED tests/ecc/test_pedersen.py::test_commitment - TypeError: cannot conver...
+FAILED tests/psbt/test_psbt.py::test_vectors_bip371 - AssertionError: assert ...
+FAILED tests/psbt/test_psbt.py::test_creation - AttributeError: 'NoneType' ob...
+FAILED tests/psbt/test_psbt.py::test_additional_combination - AttributeError:...
+FAILED tests/psbt/test_psbt.py::test_lexicographic_ordering - AttributeError:...
+FAILED tests/psbt/test_psbt.py::test_valid_sign - AttributeError: 'NoneType' ...
+FAILED tests/psbt/test_psbt.py::test_merge - AttributeError: 'NoneType' objec...
+FAILED tests/block/test_block.py::test_block_200000 - AttributeError: 'Script...
+FAILED tests/psbt/test_psbt.py::test_psbt_combination - AttributeError: 'None...
+FAILED tests/psbt/test_psbt.py::test_valid_sign_2 - AttributeError: 'NoneType...
+FAILED tests/psbt/test_psbt.py::test_missing_script_pub_key - AttributeError:...
+FAILED tests/mnemonic/test_bip39.py::test_mxprv_from_mnemonic - TypeError: ca...
+FAILED tests/psbt/test_psbt.py::test_finalize - AttributeError: 'NoneType' ob...
+FAILED tests/psbt/test_psbt.py::test_sig_type1 - AttributeError: 'NoneType' o...
+FAILED tests/psbt/test_psbt.py::test_extract_tx - AttributeError: 'NoneType' ...
+FAILED tests/psbt/test_psbt.py::test_psbt - AttributeError: 'NoneType' object...
+FAILED tests/psbt/test_psbt.py::test_valid_ripemd160_preimage - AttributeErro...
+FAILED tests/psbt/test_psbt.py::test_valid_hash256_preimage - AttributeError:...
+FAILED tests/psbt/test_psbt.py::test_invalid_sha256_preimage - AttributeError...
+FAILED tests/ecc/test_ssa.py::test_signature - assert 6 != 6
+FAILED tests/psbt/test_psbt.py::test_invalid_ripemd160_preimage - AttributeEr...
+FAILED tests/psbt/test_psbt.py::test_invalid_hash256_preimage - AttributeErro...
+FAILED tests/psbt/test_psbt.py::test_valid_hash160_preimage - AttributeError:...
+FAILED tests/psbt/test_psbt.py::test_valid_sha256_preimage - AttributeError: ...
+FAILED tests/psbt/test_psbt.py::test_join_psbts - AttributeError: 'NoneType' ...
+FAILED tests/psbt/test_psbt.py::test_invalid_hash160_preimage - AttributeErro...
+FAILED tests/psbt/test_psbt_in.py::test_dataclasses_json_dict - AttributeErro...
+FAILED tests/psbt/test_psbt_out.py::test_dataclasses_json_dict - AttributeErr...
+FAILED tests/psbt/test_psbt.py::test_shuffle_sort_inp_out - AttributeError: '...
+FAILED tests/ecc/test_bms.py::test_one_prv_key_multiple_addresses - Failed: D...
+FAILED tests/script/test_sig_hash_segwitv0.py::test_native_p2wsh - IndexError...
+FAILED tests/block/test_block.py::test_block_481824 - AttributeError: 'Script...
+FAILED tests/script/test_sig_hash_segwitv0.py::test_wrapped_p2wpkh - assert b...
+FAILED tests/psbt/test_psbt.py::test_explicit_version - AttributeError: 'None...
+FAILED tests/script/test_sig_hash_legacy.py::test_test_vectors - AssertionErr...
+FAILED tests/script/test_sig_hash_segwitv0.py::test_native_p2wsh_2 - IndexErr...
+FAILED tests/script/test_sig_hash_taproot.py::test_wrapped_p2tr - Failed: DID...
+FAILED tests/script/test_sig_hash_taproot.py::test_empty_stack - Failed: DID ...
+FAILED tests/psbt/test_psbt.py::test_global_unknown - AttributeError: 'NoneTy...
+FAILED tests/psbt/test_psbt.py::test_output_unknown - AttributeError: 'NoneTy...
+FAILED tests/script_engine/test_script.py::test_script - btclib.exceptions.BT...
+FAILED tests/psbt/test_psbt.py::test_output_scripts_serialization - Attribute...
+FAILED tests/mnemonic/test_bip39.py::test_bip39 - TypeError: unsupported oper...
+FAILED tests/script_engine/test_transactions.py::test_valid_legacy - btclib.e...
+FAILED tests/mnemonic/test_bip39.py::test_vectors - TypeError: unsupported op...
+FAILED tests/script_engine/test_transactions.py::test_valid_taproot - btclib....
+FAILED tests/mnemonic/test_bip39.py::test_mnemonic_from_entropy - TypeError: ...
+FAILED tests/script_engine/test_transactions.py::test_invalid_legacy - Failed...
+FAILED tests/block/test_block.py::test_dataclasses_json_dict - AttributeError...
+FAILED tests/tx/test_tx.py::test_wiki_transaction - AttributeError: 'ScriptPu...
+FAILED tests/tx/test_tx.py::test_coinbase_block_1 - AttributeError: 'ScriptPu...
+FAILED tests/tx/test_tx_out.py::test_tx_out - AttributeError: 'ScriptPubKey' ...
+FAILED tests/tx/test_tx.py::test_tx - AttributeError: 'ScriptPubKey' object h...
+FAILED tests/tx/test_tx.py::test_dataclasses_json_dict - AttributeError: 'Scr...
+FAILED tests/tx/test_tx.py::test_standard - Failed: DID NOT RAISE BTClibValue...
+FAILED tests/tx/test_tx.py::test_single_witness - AttributeError: 'ScriptPubK...
+FAILED tests/tx/test_tx.py::test_double_witness - AttributeError: 'ScriptPubK...
+FAILED tests/tx/test_tx_out.py::test_dataclasses_json_dict - AttributeError: ...
+FAILED tests/ecc/test_bms.py::test_ledger - TypeError: can only concatenate s...
+FAILED tests/psbt/test_psbt.py::test_dataclasses_json_dict - AttributeError: ...
+FAILED tests/psbt/test_psbt.py::test_encode_serialize - AttributeError: 'None...
+FAILED tests/psbt/test_psbt.py::test_exceptions - AttributeError: 'NoneType' ...
+======================== 74 failed, 223 passed in 5.27s ========================

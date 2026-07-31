@@ -1,0 +1,6 @@
+{
+  "repo": "Zahgon/btclib",
+  "base_commit": "fe5cb942954e2645f2f7b65c5367634dbbc306fa",
+  "reference_commit": "600cb1365781aa7dadcfb1e58a449db0e2d0a1f6",
+  "docker_image": "426628337772.dkr.ecr.ap-south-1.amazonaws.com/kaiju_q2:python_btclib_org_btclib"
+}

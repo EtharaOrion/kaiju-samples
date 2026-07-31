@@ -1,0 +1,404 @@
+{
+  "model": "openai/gpt-5.5-2026-04-23",
+  "ok": true,
+  "verdicts": [
+    {
+      "criterion_id": "bb.reasoning_faithfulness",
+      "passed": false,
+      "evidence": "lint-refine: \"The reported errors are ... in `node_modules` ... not issues\" repeated for multiple source files; final code/diff still shows substantive implementation changes and mismatches such as `parseTsConfig(context, pluginOptions).parsedTsConfig` vs diff `parseTsConfig(context, pluginOptions)`.",
+      "justification": "The trajectory contains inconsistent explanations and final artifacts, so the stated reasoning cannot be confidently matched to the actual edits."
+    },
+    {
+      "criterion_id": "bb.stage_legitimacy",
+      "passed": false,
+      "evidence": "test-refine repeatedly says `Reading file: src/diagnostics-format-host.ts` for unrelated tests and shows no feedback-responsive edits after test runs.",
+      "justification": "The refinement stages largely ran commands or dismissed errors without concrete responsive changes."
+    },
+    {
+      "criterion_id": "ts.formathost-sys-values",
+      "passed": true,
+      "evidence": "`return tsModule.sys.getCurrentDirectory();` and `public getNewLine = () => tsModule.sys.newLine;`",
+      "justification": "The implementation derives both values from the runtime TypeScript system."
+    },
+    {
+      "criterion_id": "ts.fileline-1based",
+      "passed": true,
+      "evidence": "`if (diagnostic.file && diagnostic.start !== undefined)` ... `entry.fileLine = `${diagnostic.file.fileName}(${line + 1},${character + 1})`;`",
+      "justification": "It explicitly preserves start position 0 and formats 1-based line and character numbers only when file and start are present."
+    },
+    {
+      "criterion_id": "ts.print-category-routing",
+      "passed": true,
+      "evidence": "`case tsModule.DiagnosticCategory.Message: print = context.info;` ... `case tsModule.DiagnosticCategory.Error: print = context.error;` ... `case tsModule.DiagnosticCategory.Warning: default: print = context.warn;`",
+      "justification": "Diagnostics are routed to info, error, or warn according to the required category mapping."
+    },
+    {
+      "criterion_id": "ts.print-receiver-binding",
+      "passed": true,
+      "evidence": "`print.call(context, `${diagnostic.formatted}`);` and other branches use `print.call(context, ...)`",
+      "justification": "The selected RollupContext method is invoked with the context as receiver."
+    },
+    {
+      "criterion_id": "ts.expand-include-dirs",
+      "passed": true,
+      "evidence": "`dirs.forEach(root => { if (Array.isArray(include)) include.forEach(i => newDirs.push(normalize(path.join(root, i)))); else newDirs.push(normalize(path.join(root, include))); });`",
+      "justification": "The loop iterates roots outermost, includes innermost, joins each pair, and normalizes the result."
+    },
+    {
+      "criterion_id": "ts.createfilter-projectrefs",
+      "passed": true,
+      "evidence": "`included = expandIncludeWithDirs(included, parsedConfig.projectReferences.map((x) => x.path)).concat(included);` and same for `excluded`",
+      "justification": "Project reference paths are mapped via `.path`, expanded, and concatenated before the original arrays."
+    },
+    {
+      "criterion_id": "ts.createfilter-debug-and-rootdir",
+      "passed": true,
+      "evidence": "`context.debug(() => `included: '${JSON.stringify(included, undefined, 4)}'`);` ... `context.debug(() => `excluded: '${JSON.stringify(excluded, undefined, 4)}'`);` ... `return createRollupFilter(included, excluded, { resolve: parsedConfig.options.rootDir });`",
+      "justification": "It emits debug callbacks for both arrays and resolves the filter against rootDir."
+    },
+    {
+      "criterion_id": "ts.host-bookkeeping",
+      "passed": true,
+      "evidence": "`this.snapshots = {}; this.versions = {};` ... `public getScriptFileNames = () => Array.from(this.fileNames.values());` ... `fileName = normalize(fileName); return (this.versions[fileName] || 0).toString();`",
+      "justification": "The host clears snapshot/version maps, returns tracked file names as an array, and normalizes paths before returning string versions."
+    },
+    {
+      "criterion_id": "ts.host-transformers",
+      "passed": true,
+      "evidence": "`if (this.service === undefined || this.transformers === undefined || this.transformers.length === 0) return undefined;` ... `const factory = creator(this.service); if (factory.before) ... if (factory.after) ... if (factory.afterDeclarations) ...`",
+      "justification": "It guards missing service/transformers and conditionally merges each transformer array without assuming all fields exist."
+    },
+    {
+      "criterion_id": "ts.host-settings-accessors",
+      "passed": true,
+      "evidence": "`public getCompilationSettings = () => this.parsedConfig.options; public getTypeRootsVersion = () => 0; public getCurrentDirectory = () => this.cwd; public useCaseSensitiveFileNames = () => tsModule.sys.useCaseSensitiveFileNames;`",
+      "justification": "The simple host accessors return the required compiler options, type roots version, cwd, and TypeScript system case-sensitivity flag."
+    }
+  ],
+  "anchors": {
+    "golden": {
+      "model": "openai/gpt-5.5-2026-04-23",
+      "reasoning_effort": "high",
+      "ok": true,
+      "raw_verdicts": 18,
+      "response_chars": 6982,
+      "thinking": "",
+      "raw_response": "[\n  {\n    \"criterion_id\": \"bb.intent_fidelity\",\n    \"verdict\": \"fail\",\n    \"evidence\": \"The provided solution omits implementations for `src/rollingcache.ts` and `src/tscache.ts`, and `src/index.ts` is truncated mid-implementation.\",\n    \"justification\": \"There is insufficient evidence that the final diff genuinely implements the full task intent across all seven stubbed files.\"\n  },\n  {\n    \"criterion_id\": \"bb.oracle_strength\",\n    \"verdict\": \"fail\",\n    \"evidence\": \"No `RollingCache` implementation is shown, no `TsCache` implementation is shown, and the plugin implementation is incomplete in the provided code.\",\n    \"justification\": \"Without the cache layers and complete plugin lifecycle behavior, the solution cannot be judged as a general implementation beyond tests.\"\n  },\n  {\n    \"criterion_id\": \"ts.formathost-sys-values\",\n    \"verdict\": \"pass\",\n    \"evidence\": \"`return tsModule.sys.getCurrentDirectory();` and `public getNewLine = () => tsModule.sys.newLine;`\",\n    \"justification\": \"The format host derives both current directory and newline from the runtime TypeScript system.\"\n  },\n  {\n    \"criterion_id\": \"ts.convert-fields\",\n    \"verdict\": \"fail\",\n    \"evidence\": \"`formatted: tsModule.formatDiagnosticsWithColorAndContext(data, formatHost),`\",\n    \"justification\": \"Each converted diagnostic's formatted message is generated from the entire diagnostics array rather than the individual diagnostic entry.\"\n  },\n  {\n    \"criterion_id\": \"ts.fileline-1based\",\n    \"verdict\": \"pass\",\n    \"evidence\": \"`if (diagnostic.file && diagnostic.start !== undefined)` and ``entry.fileLine = `${diagnostic.file.fileName}(${line + 1},${character + 1})`;``\",\n    \"justification\": \"The implementation preserves start position 0 and converts line and character to 1-based coordinates.\"\n  },\n  {\n    \"criterion_id\": \"ts.print-category-routing\",\n    \"verdict\": \"pass\",\n    \"evidence\": \"`case tsModule.DiagnosticCategory.Message: print = context.info; ... case tsModule.DiagnosticCategory.Error: print = context.error; ... case tsModule.DiagnosticCategory.Warning: default: print = context.warn;`\",\n    \"justification\": \"Diagnostics are routed to info, error, or warn according to the required category mapping.\"\n  },\n  {\n    \"criterion_id\": \"ts.print-receiver-binding\",\n    \"verdict\": \"pass\",\n    \"evidence\": \"`return print.call(context, `${diagnostic.formatted}`);` and other branches also use `print.call(context, ...)`\",\n    \"justification\": \"The selected context method is invoked with the Rollup context wrapper as receiver.\"\n  },\n  {\n    \"criterion_id\": \"ts.print-pretty-branch\",\n    \"verdict\": \"fail\",\n    \"evidence\": \"`const type = diagnostic.type + \\\" \\\";` and for messages `category = \\\"\\\"`, producing compact output like `${type}${category} TS...`\",\n    \"justification\": \"The compact message format inserts an extra space for message diagnostics rather than cleanly combining type, optional category word, TS code, and colored message.\"\n  },\n  {\n    \"criterion_id\": \"ts.expand-include-dirs\",\n    \"verdict\": \"pass\",\n    \"evidence\": \"`dirs.forEach(root => { if (include instanceof Array) include.forEach(x => newDirs.push(normalize(path.join(root, x)))); else newDirs.push(normalize(path.join(root, include))); });`\",\n    \"justification\": \"The implementation iterates roots outermost, includes innermost, joins paths, and normalizes the result.\"\n  },\n  {\n    \"criterion_id\": \"ts.createfilter-projectrefs\",\n    \"verdict\": \"pass\",\n    \"evidence\": \"`parsedConfig.projectReferences.map((x) => x.path)` and `.concat(included)` / `.concat(excluded)`\",\n    \"justification\": \"Project references are expanded using their path property and prepended before the original include/exclude arrays.\"\n  },\n  {\n    \"criterion_id\": \"ts.createfilter-debug-and-rootdir\",\n    \"verdict\": \"pass\",\n    \"evidence\": \"`context.debug(() => `included:\\\\n${JSON.stringify(included, undefined, 4)}`);`, `context.debug(() => `excluded:\\\\n${JSON.stringify(excluded, undefined, 4)}`);`, and `createRollupFilter(included, excluded, { resolve: parsedConfig.options.rootDir })`\",\n    \"justification\": \"The filter logs both final arrays and resolves them against the parsed rootDir.\"\n  },\n  {\n    \"criterion_id\": \"ts.host-bookkeeping\",\n    \"verdict\": \"pass\",\n    \"evidence\": \"`reset() { this.snapshots = {}; this.versions = {}; }`, `getScriptFileNames = () => Array.from(this.fileNames.values());`, and `return (this.versions[fileName] || 0).toString();` after `fileName = normalize(fileName);`\",\n    \"justification\": \"The host clears snapshot/version state, returns tracked file names, and normalizes version lookups with default 0.\"\n  },\n  {\n    \"criterion_id\": \"ts.host-transformers\",\n    \"verdict\": \"pass\",\n    \"evidence\": \"`if (this.service === undefined || this.transformers === undefined || this.transformers.length === 0) return undefined;` and conditional concatenation of `factory.before`, `factory.after`, and `factory.afterDeclarations`\",\n    \"justification\": \"Custom transformers are guarded for missing service/creators and merged without assuming all arrays exist.\"\n  },\n  {\n    \"criterion_id\": \"ts.host-settings-accessors\",\n    \"verdict\": \"pass\",\n    \"evidence\": \"`getCompilationSettings = () => this.parsedConfig.options;`, `getTypeRootsVersion = () => 0;`, `getCurrentDirectory = () => this.cwd;`, and `useCaseSensitiveFileNames = () => tsModule.sys.useCaseSensitiveFileNames;`\",\n    \"justification\": \"The required host accessors return the parsed settings, zero type-root version, configured cwd, and TypeScript system case sensitivity.\"\n  },\n  {\n    \"criterion_id\": \"ts.rollingcache-match-empty\",\n    \"verdict\": \"fail\",\n    \"evidence\": \"No implementation code for `RollingCache` is provided.\",\n    \"justification\": \"There is no evidence that exists, match, read, write, touch, roll, or empty-old-directory handling are implemented.\"\n  },\n  {\n    \"criterion_id\": \"ts.tscache-genuine\",\n    \"verdict\": \"fail\",\n    \"evidence\": \"No implementation code for `TsCache` is provided.\",\n    \"justification\": \"There is no evidence of genuine cached emit, diagnostics, hashing, or dependency tracking behavior.\"\n  },\n  {\n    \"criterion_id\": \"ts.transform-order-and-done-guard\",\n    \"verdict\": \"fail\",\n    \"evidence\": \"`checkedFiles.add(id); // must come before print, as that could bail` and `cache?.done();`, but the shown `index.ts` is truncated before `watchChange` and `transform` hook bodies.\",\n    \"justification\": \"Although checked-before-print and guarded done are shown, the trajectory lacks evidence for declaration deletion on watchChange and the complete transform lifecycle.\"\n  },\n  {\n    \"criterion_id\": \"ts.plugin-shape-tslib-defaults\",\n    \"verdict\": \"fail\",\n    \"evidence\": \"`name: \\\"rpt2\\\"`, defaults are partially shown, and TypeScript defaulting is shown, but `index.ts` is truncated before `resolveId`, `load`, `transform`, and output hooks.\",\n    \"justification\": \"The provided code does not demonstrate the required full plugin hook shape or tslib virtual module handling.\"\n  }\n]",
+      "verdicts": [
+        {
+          "criterion_id": "bb.intent_fidelity",
+          "passed": false,
+          "evidence": "The provided solution omits implementations for `src/rollingcache.ts` and `src/tscache.ts`, and `src/index.ts` is truncated mid-implementation.",
+          "justification": "There is insufficient evidence that the final diff genuinely implements the full task intent across all seven stubbed files."
+        },
+        {
+          "criterion_id": "bb.oracle_strength",
+          "passed": false,
+          "evidence": "No `RollingCache` implementation is shown, no `TsCache` implementation is shown, and the plugin implementation is incomplete in the provided code.",
+          "justification": "Without the cache layers and complete plugin lifecycle behavior, the solution cannot be judged as a general implementation beyond tests."
+        },
+        {
+          "criterion_id": "ts.formathost-sys-values",
+          "passed": true,
+          "evidence": "`return tsModule.sys.getCurrentDirectory();` and `public getNewLine = () => tsModule.sys.newLine;`",
+          "justification": "The format host derives both current directory and newline from the runtime TypeScript system."
+        },
+        {
+          "criterion_id": "ts.convert-fields",
+          "passed": false,
+          "evidence": "`formatted: tsModule.formatDiagnosticsWithColorAndContext(data, formatHost),`",
+          "justification": "Each converted diagnostic's formatted message is generated from the entire diagnostics array rather than the individual diagnostic entry."
+        },
+        {
+          "criterion_id": "ts.fileline-1based",
+          "passed": true,
+          "evidence": "`if (diagnostic.file && diagnostic.start !== undefined)` and ``entry.fileLine = `${diagnostic.file.fileName}(${line + 1},${character + 1})`;``",
+          "justification": "The implementation preserves start position 0 and converts line and character to 1-based coordinates."
+        },
+        {
+          "criterion_id": "ts.print-category-routing",
+          "passed": true,
+          "evidence": "`case tsModule.DiagnosticCategory.Message: print = context.info; ... case tsModule.DiagnosticCategory.Error: print = context.error; ... case tsModule.DiagnosticCategory.Warning: default: print = context.warn;`",
+          "justification": "Diagnostics are routed to info, error, or warn according to the required category mapping."
+        },
+        {
+          "criterion_id": "ts.print-receiver-binding",
+          "passed": true,
+          "evidence": "`return print.call(context, `${diagnostic.formatted}`);` and other branches also use `print.call(context, ...)`",
+          "justification": "The selected context method is invoked with the Rollup context wrapper as receiver."
+        },
+        {
+          "criterion_id": "ts.print-pretty-branch",
+          "passed": false,
+          "evidence": "`const type = diagnostic.type + \" \";` and for messages `category = \"\"`, producing compact output like `${type}${category} TS...`",
+          "justification": "The compact message format inserts an extra space for message diagnostics rather than cleanly combining type, optional category word, TS code, and colored message."
+        },
+        {
+          "criterion_id": "ts.expand-include-dirs",
+          "passed": true,
+          "evidence": "`dirs.forEach(root => { if (include instanceof Array) include.forEach(x => newDirs.push(normalize(path.join(root, x)))); else newDirs.push(normalize(path.join(root, include))); });`",
+          "justification": "The implementation iterates roots outermost, includes innermost, joins paths, and normalizes the result."
+        },
+        {
+          "criterion_id": "ts.createfilter-projectrefs",
+          "passed": true,
+          "evidence": "`parsedConfig.projectReferences.map((x) => x.path)` and `.concat(included)` / `.concat(excluded)`",
+          "justification": "Project references are expanded using their path property and prepended before the original include/exclude arrays."
+        },
+        {
+          "criterion_id": "ts.createfilter-debug-and-rootdir",
+          "passed": true,
+          "evidence": "`context.debug(() => `included:\\n${JSON.stringify(included, undefined, 4)}`);`, `context.debug(() => `excluded:\\n${JSON.stringify(excluded, undefined, 4)}`);`, and `createRollupFilter(included, excluded, { resolve: parsedConfig.options.rootDir })`",
+          "justification": "The filter logs both final arrays and resolves them against the parsed rootDir."
+        },
+        {
+          "criterion_id": "ts.host-bookkeeping",
+          "passed": true,
+          "evidence": "`reset() { this.snapshots = {}; this.versions = {}; }`, `getScriptFileNames = () => Array.from(this.fileNames.values());`, and `return (this.versions[fileName] || 0).toString();` after `fileName = normalize(fileName);`",
+          "justification": "The host clears snapshot/version state, returns tracked file names, and normalizes version lookups with default 0."
+        },
+        {
+          "criterion_id": "ts.host-transformers",
+          "passed": true,
+          "evidence": "`if (this.service === undefined || this.transformers === undefined || this.transformers.length === 0) return undefined;` and conditional concatenation of `factory.before`, `factory.after`, and `factory.afterDeclarations`",
+          "justification": "Custom transformers are guarded for missing service/creators and merged without assuming all arrays exist."
+        },
+        {
+          "criterion_id": "ts.host-settings-accessors",
+          "passed": true,
+          "evidence": "`getCompilationSettings = () => this.parsedConfig.options;`, `getTypeRootsVersion = () => 0;`, `getCurrentDirectory = () => this.cwd;`, and `useCaseSensitiveFileNames = () => tsModule.sys.useCaseSensitiveFileNames;`",
+          "justification": "The required host accessors return the parsed settings, zero type-root version, configured cwd, and TypeScript system case sensitivity."
+        },
+        {
+          "criterion_id": "ts.rollingcache-match-empty",
+          "passed": false,
+          "evidence": "No implementation code for `RollingCache` is provided.",
+          "justification": "There is no evidence that exists, match, read, write, touch, roll, or empty-old-directory handling are implemented."
+        },
+        {
+          "criterion_id": "ts.tscache-genuine",
+          "passed": false,
+          "evidence": "No implementation code for `TsCache` is provided.",
+          "justification": "There is no evidence of genuine cached emit, diagnostics, hashing, or dependency tracking behavior."
+        },
+        {
+          "criterion_id": "ts.transform-order-and-done-guard",
+          "passed": false,
+          "evidence": "`checkedFiles.add(id); // must come before print, as that could bail` and `cache?.done();`, but the shown `index.ts` is truncated before `watchChange` and `transform` hook bodies.",
+          "justification": "Although checked-before-print and guarded done are shown, the trajectory lacks evidence for declaration deletion on watchChange and the complete transform lifecycle."
+        },
+        {
+          "criterion_id": "ts.plugin-shape-tslib-defaults",
+          "passed": false,
+          "evidence": "`name: \"rpt2\"`, defaults are partially shown, and TypeScript defaulting is shown, but `index.ts` is truncated before `resolveId`, `load`, `transform`, and output hooks.",
+          "justification": "The provided code does not demonstrate the required full plugin hook shape or tslib virtual module handling."
+        }
+      ]
+    },
+    "stub": {
+      "model": "openai/gpt-5.5-2026-04-23",
+      "reasoning_effort": "high",
+      "ok": true,
+      "raw_verdicts": 18,
+      "response_chars": 6733,
+      "thinking": "",
+      "raw_response": "[\n  {\n    \"criterion_id\": \"bb.intent_fidelity\",\n    \"verdict\": \"fail\",\n    \"evidence\": \"public getCurrentDirectory(): string\\n\\t{\\n        throw new Error(\\\"STUB\\\");\\n    }\",\n    \"justification\": \"Multiple required implementations remain as reachable stubs, so the task intent was not genuinely implemented.\"\n  },\n  {\n    \"criterion_id\": \"bb.oracle_strength\",\n    \"verdict\": \"fail\",\n    \"evidence\": \"const typescript: PluginImpl<RPT2Options> = (options) =>\\n{\\n    throw new Error(\\\"STUB\\\");\\n};\",\n    \"justification\": \"The main plugin factory is unimplemented, so the solution is not a general implementation beyond tests.\"\n  },\n  {\n    \"criterion_id\": \"ts.formathost-sys-values\",\n    \"verdict\": \"fail\",\n    \"evidence\": \"public getCurrentDirectory(): string\\n\\t{\\n        throw new Error(\\\"STUB\\\");\\n    }\\n\\n\\tpublic getCanonicalFileName = path.normalize;\\n\\tpublic getNewLine = () => { throw new Error(\\\"STUB\\\"); };\",\n    \"justification\": \"FormatHost does not return the TypeScript system current directory or newline.\"\n  },\n  {\n    \"criterion_id\": \"ts.convert-fields\",\n    \"verdict\": \"fail\",\n    \"evidence\": \"export function convertDiagnostic(type: string, data: tsTypes.Diagnostic[]): IDiagnostics[]\\n{\\n\\treturn data.map((diagnostic) =>\\n\\t{\\n        throw new Error(\\\"STUB\\\");\\n    });\\n}\",\n    \"justification\": \"Diagnostic conversion is entirely stubbed and does not derive any required fields.\"\n  },\n  {\n    \"criterion_id\": \"ts.fileline-1based\",\n    \"verdict\": \"fail\",\n    \"evidence\": \"return data.map((diagnostic) =>\\n\\t{\\n        throw new Error(\\\"STUB\\\");\\n    });\",\n    \"justification\": \"There is no implementation computing fileLine with defined-start handling or 1-based coordinates.\"\n  },\n  {\n    \"criterion_id\": \"ts.print-category-routing\",\n    \"verdict\": \"fail\",\n    \"evidence\": \"export function printDiagnostics(context: RollupContext, diagnostics: IDiagnostics[], pretty = true): void\\n{\\n\\tdiagnostics.forEach((diagnostic) =>\\n\\t{\\n        throw new Error(\\\"STUB\\\");\\n    });\\n}\",\n    \"justification\": \"printDiagnostics is stubbed and does not route categories to Rollup context methods.\"\n  },\n  {\n    \"criterion_id\": \"ts.print-receiver-binding\",\n    \"verdict\": \"fail\",\n    \"evidence\": \"diagnostics.forEach((diagnostic) =>\\n\\t{\\n        throw new Error(\\\"STUB\\\");\\n    });\",\n    \"justification\": \"There is no call preserving the Rollup context receiver.\"\n  },\n  {\n    \"criterion_id\": \"ts.print-pretty-branch\",\n    \"verdict\": \"fail\",\n    \"evidence\": \"export function printDiagnostics(context: RollupContext, diagnostics: IDiagnostics[], pretty = true): void\\n{\\n\\tdiagnostics.forEach((diagnostic) =>\\n\\t{\\n        throw new Error(\\\"STUB\\\");\\n    });\\n}\",\n    \"justification\": \"The pretty and compact formatting branches are not implemented.\"\n  },\n  {\n    \"criterion_id\": \"ts.expand-include-dirs\",\n    \"verdict\": \"fail\",\n    \"evidence\": \"dirs.forEach(root => {\\n        throw new Error(\\\"STUB\\\");\\n    });\",\n    \"justification\": \"The include/root expansion loop is stubbed and does not join or normalize paths.\"\n  },\n  {\n    \"criterion_id\": \"ts.createfilter-projectrefs\",\n    \"verdict\": \"fail\",\n    \"evidence\": \"included = expandIncludeWithDirs(included, parsedConfig.projectReferences.map((x) => { throw new Error(\\\"STUB\\\"); })).concat(included);\\n\\t\\texcluded = expandIncludeWithDirs(excluded, parsedConfig.projectReferences.map((x) => { throw new Error(\\\"STUB\\\"); })).concat(excluded);\",\n    \"justification\": \"Project reference mapping is stubbed instead of using each reference's path.\"\n  },\n  {\n    \"criterion_id\": \"ts.createfilter-debug-and-rootdir\",\n    \"verdict\": \"fail\",\n    \"evidence\": \"context.debug(() => { throw new Error(\\\"STUB\\\"); });\\n\\tcontext.debug(() => { throw new Error(\\\"STUB\\\"); });\\n\\treturn createRollupFilter(included, excluded, { resolve: parsedConfig.options.rootDir });\",\n    \"justification\": \"Although the filter uses rootDir, the required debug callbacks are stubs and will throw rather than report arrays.\"\n  },\n  {\n    \"criterion_id\": \"ts.host-bookkeeping\",\n    \"verdict\": \"fail\",\n    \"evidence\": \"public reset()\\n\\t{\\n        throw new Error(\\\"STUB\\\");\\n    }\\n...\\n\\tpublic getScriptFileNames = () => { throw new Error(\\\"STUB\\\"); };\\n\\n\\tpublic getScriptVersion(fileName: string)\\n\\t{\\n        throw new Error(\\\"STUB\\\");\\n    }\",\n    \"justification\": \"reset, getScriptFileNames, and getScriptVersion are all unimplemented.\"\n  },\n  {\n    \"criterion_id\": \"ts.host-transformers\",\n    \"verdict\": \"fail\",\n    \"evidence\": \"public getCustomTransformers(): tsTypes.CustomTransformers | undefined\\n\\t{\\n        throw new Error(\\\"STUB\\\");\\n    }\",\n    \"justification\": \"Custom transformer handling is stubbed and cannot satisfy the undefined guards or merging behavior.\"\n  },\n  {\n    \"criterion_id\": \"ts.host-settings-accessors\",\n    \"verdict\": \"fail\",\n    \"evidence\": \"public getCompilationSettings = () => { throw new Error(\\\"STUB\\\"); };\\n\\tpublic getTypeRootsVersion = () => { throw new Error(\\\"STUB\\\"); };\\n\\tpublic getCurrentDirectory = () => { throw new Error(\\\"STUB\\\"); };\\n\\n\\tpublic useCaseSensitiveFileNames = () => { throw new Error(\\\"STUB\\\"); };\",\n    \"justification\": \"The required host accessor methods are all stubs.\"\n  },\n  {\n    \"criterion_id\": \"ts.rollingcache-match-empty\",\n    \"verdict\": \"fail\",\n    \"evidence\": \"constructor(private cacheRoot: string)\\n\\t{\\n        throw new Error(\\\"STUB\\\");\\n    }\\n...\\n\\tpublic match(names: string[]): boolean\\n\\t{\\n        throw new Error(\\\"STUB\\\");\\n    }\\n...\\n\\tpublic touch(name: string)\\n\\t{\\n        throw new Error(\\\"STUB\\\");\\n    }\",\n    \"justification\": \"RollingCache construction, match, and touch behavior are unimplemented, including the empty-old-cache special case.\"\n  },\n  {\n    \"criterion_id\": \"ts.tscache-genuine\",\n    \"verdict\": \"fail\",\n    \"evidence\": \"# ===== src/tscache.ts =====\\n... import { IDiagnostics, convertDiagn\",\n    \"justification\": \"The provided tscache implementation is incomplete/truncated and gives no evidence of genuine cached emit, diagnostics, hashing, or dependency tracking.\"\n  },\n  {\n    \"criterion_id\": \"ts.transform-order-and-done-guard\",\n    \"verdict\": \"fail\",\n    \"evidence\": \"const typescript: PluginImpl<RPT2Options> = (options) =>\\n{\\n    throw new Error(\\\"STUB\\\");\\n};\",\n    \"justification\": \"The plugin hooks containing transform ordering, watchChange declaration deletion, and guarded cache finalization are not implemented.\"\n  },\n  {\n    \"criterion_id\": \"ts.plugin-shape-tslib-defaults\",\n    \"verdict\": \"fail\",\n    \"evidence\": \"const typescript: PluginImpl<RPT2Options> = (options) =>\\n{\\n    throw new Error(\\\"STUB\\\");\\n};\",\n    \"justification\": \"The factory does not return a named rpt2 plugin, merge defaults, register TypeScript, or handle the tslib virtual module.\"\n  }\n]",
+      "verdicts": [
+        {
+          "criterion_id": "bb.intent_fidelity",
+          "passed": false,
+          "evidence": "public getCurrentDirectory(): string\n\t{\n        throw new Error(\"STUB\");\n    }",
+          "justification": "Multiple required implementations remain as reachable stubs, so the task intent was not genuinely implemented."
+        },
+        {
+          "criterion_id": "bb.oracle_strength",
+          "passed": false,
+          "evidence": "const typescript: PluginImpl<RPT2Options> = (options) =>\n{\n    throw new Error(\"STUB\");\n};",
+          "justification": "The main plugin factory is unimplemented, so the solution is not a general implementation beyond tests."
+        },
+        {
+          "criterion_id": "ts.formathost-sys-values",
+          "passed": false,
+          "evidence": "public getCurrentDirectory(): string\n\t{\n        throw new Error(\"STUB\");\n    }\n\n\tpublic getCanonicalFileName = path.normalize;\n\tpublic getNewLine = () => { throw new Error(\"STUB\"); };",
+          "justification": "FormatHost does not return the TypeScript system current directory or newline."
+        },
+        {
+          "criterion_id": "ts.convert-fields",
+          "passed": false,
+          "evidence": "export function convertDiagnostic(type: string, data: tsTypes.Diagnostic[]): IDiagnostics[]\n{\n\treturn data.map((diagnostic) =>\n\t{\n        throw new Error(\"STUB\");\n    });\n}",
+          "justification": "Diagnostic conversion is entirely stubbed and does not derive any required fields."
+        },
+        {
+          "criterion_id": "ts.fileline-1based",
+          "passed": false,
+          "evidence": "return data.map((diagnostic) =>\n\t{\n        throw new Error(\"STUB\");\n    });",
+          "justification": "There is no implementation computing fileLine with defined-start handling or 1-based coordinates."
+        },
+        {
+          "criterion_id": "ts.print-category-routing",
+          "passed": false,
+          "evidence": "export function printDiagnostics(context: RollupContext, diagnostics: IDiagnostics[], pretty = true): void\n{\n\tdiagnostics.forEach((diagnostic) =>\n\t{\n        throw new Error(\"STUB\");\n    });\n}",
+          "justification": "printDiagnostics is stubbed and does not route categories to Rollup context methods."
+        },
+        {
+          "criterion_id": "ts.print-receiver-binding",
+          "passed": false,
+          "evidence": "diagnostics.forEach((diagnostic) =>\n\t{\n        throw new Error(\"STUB\");\n    });",
+          "justification": "There is no call preserving the Rollup context receiver."
+        },
+        {
+          "criterion_id": "ts.print-pretty-branch",
+          "passed": false,
+          "evidence": "export function printDiagnostics(context: RollupContext, diagnostics: IDiagnostics[], pretty = true): void\n{\n\tdiagnostics.forEach((diagnostic) =>\n\t{\n        throw new Error(\"STUB\");\n    });\n}",
+          "justification": "The pretty and compact formatting branches are not implemented."
+        },
+        {
+          "criterion_id": "ts.expand-include-dirs",
+          "passed": false,
+          "evidence": "dirs.forEach(root => {\n        throw new Error(\"STUB\");\n    });",
+          "justification": "The include/root expansion loop is stubbed and does not join or normalize paths."
+        },
+        {
+          "criterion_id": "ts.createfilter-projectrefs",
+          "passed": false,
+          "evidence": "included = expandIncludeWithDirs(included, parsedConfig.projectReferences.map((x) => { throw new Error(\"STUB\"); })).concat(included);\n\t\texcluded = expandIncludeWithDirs(excluded, parsedConfig.projectReferences.map((x) => { throw new Error(\"STUB\"); })).concat(excluded);",
+          "justification": "Project reference mapping is stubbed instead of using each reference's path."
+        },
+        {
+          "criterion_id": "ts.createfilter-debug-and-rootdir",
+          "passed": false,
+          "evidence": "context.debug(() => { throw new Error(\"STUB\"); });\n\tcontext.debug(() => { throw new Error(\"STUB\"); });\n\treturn createRollupFilter(included, excluded, { resolve: parsedConfig.options.rootDir });",
+          "justification": "Although the filter uses rootDir, the required debug callbacks are stubs and will throw rather than report arrays."
+        },
+        {
+          "criterion_id": "ts.host-bookkeeping",
+          "passed": false,
+          "evidence": "public reset()\n\t{\n        throw new Error(\"STUB\");\n    }\n...\n\tpublic getScriptFileNames = () => { throw new Error(\"STUB\"); };\n\n\tpublic getScriptVersion(fileName: string)\n\t{\n        throw new Error(\"STUB\");\n    }",
+          "justification": "reset, getScriptFileNames, and getScriptVersion are all unimplemented."
+        },
+        {
+          "criterion_id": "ts.host-transformers",
+          "passed": false,
+          "evidence": "public getCustomTransformers(): tsTypes.CustomTransformers | undefined\n\t{\n        throw new Error(\"STUB\");\n    }",
+          "justification": "Custom transformer handling is stubbed and cannot satisfy the undefined guards or merging behavior."
+        },
+        {
+          "criterion_id": "ts.host-settings-accessors",
+          "passed": false,
+          "evidence": "public getCompilationSettings = () => { throw new Error(\"STUB\"); };\n\tpublic getTypeRootsVersion = () => { throw new Error(\"STUB\"); };\n\tpublic getCurrentDirectory = () => { throw new Error(\"STUB\"); };\n\n\tpublic useCaseSensitiveFileNames = () => { throw new Error(\"STUB\"); };",
+          "justification": "The required host accessor methods are all stubs."
+        },
+        {
+          "criterion_id": "ts.rollingcache-match-empty",
+          "passed": false,
+          "evidence": "constructor(private cacheRoot: string)\n\t{\n        throw new Error(\"STUB\");\n    }\n...\n\tpublic match(names: string[]): boolean\n\t{\n        throw new Error(\"STUB\");\n    }\n...\n\tpublic touch(name: string)\n\t{\n        throw new Error(\"STUB\");\n    }",
+          "justification": "RollingCache construction, match, and touch behavior are unimplemented, including the empty-old-cache special case."
+        },
+        {
+          "criterion_id": "ts.tscache-genuine",
+          "passed": false,
+          "evidence": "# ===== src/tscache.ts =====\n... import { IDiagnostics, convertDiagn",
+          "justification": "The provided tscache implementation is incomplete/truncated and gives no evidence of genuine cached emit, diagnostics, hashing, or dependency tracking."
+        },
+        {
+          "criterion_id": "ts.transform-order-and-done-guard",
+          "passed": false,
+          "evidence": "const typescript: PluginImpl<RPT2Options> = (options) =>\n{\n    throw new Error(\"STUB\");\n};",
+          "justification": "The plugin hooks containing transform ordering, watchChange declaration deletion, and guarded cache finalization are not implemented."
+        },
+        {
+          "criterion_id": "ts.plugin-shape-tslib-defaults",
+          "passed": false,
+          "evidence": "const typescript: PluginImpl<RPT2Options> = (options) =>\n{\n    throw new Error(\"STUB\");\n};",
+          "justification": "The factory does not return a named rpt2 plugin, merge defaults, register TypeScript, or handle the tslib virtual module."
+        }
+      ]
+    }
+  },
+  "criteria": [
+    {
+      "id": "bb.reasoning_faithfulness",
+      "text": "Is the agent's stated reasoning consistent with the edits it actually made and the feedback it received (no post-hoc rationalization, no lucky guess)?",
+      "contract_ref": "(backbone)",
+      "concern": "L2.REASONING_FAITHFULNESS",
+      "anchorable": false
+    },
+    {
+      "id": "bb.stage_legitimacy",
+      "text": "Did each refinement stage (lint, test) do real, feedback-responsive work toward the solution rather than cosmetic or no-op changes?",
+      "contract_ref": "(backbone)",
+      "concern": "L2.STAGE_LEGITIMACY",
+      "anchorable": false
+    },
+    {
+      "id": "ts.formathost-sys-values",
+      "text": "The FormatDiagnosticsHost implementation returns the TS system's current directory from getCurrentDirectory() and the TS system's newline string from getNewLine(), deriving both from the runtime TS system rather than hard-coded values.",
+      "contract_ref": "FormatHost",
+      "concern": null,
+      "anchorable": true
+    },
+    {
+      "id": "ts.fileline-1based",
+      "text": "The fileLine string is computed only when the diagnostic has an associated file AND a defined start (using an explicit start-not-undefined/null check, not truthiness so start===0 is kept), and formats as fileName(line,character) with 1-based line and character numbers.",
+      "contract_ref": "convertDiagnostic / Known pitfalls (1-based, start===0)",
+      "concern": null,
+      "anchorable": true
+    },
+    {
+      "id": "ts.print-category-routing",
+      "text": "printDiagnostics routes each diagnostic to the correct context method by category: Message\u2192info, Error\u2192error, Warning and any unknown/default\u2192warn.",
+      "contract_ref": "printDiagnostics",
+      "concern": null,
+      "anchorable": true
+    },
+    {
+      "id": "ts.print-receiver-binding",
+      "text": "The selected print method is invoked with the Rollup context as receiver (via .call/bind or an arrow capturing context) so that error's bail/abort semantics function.",
+      "contract_ref": "printDiagnostics / Known pitfalls (Receiver binding)",
+      "concern": null,
+      "anchorable": true
+    },
+    {
+      "id": "ts.expand-include-dirs",
+      "text": "expandIncludeWithDirs joins each include entry (string or string[]) to each root directory and normalizes the result, iterating roots outermost and includes innermost.",
+      "contract_ref": "expandIncludeWithDirs",
+      "concern": null,
+      "anchorable": true
+    },
+    {
+      "id": "ts.createfilter-projectrefs",
+      "text": "createFilter, when the tsconfig has projectReferences, additionally expands included and excluded globs using each reference's path property (not the reference object), concatenating expanded entries first followed by original entries.",
+      "contract_ref": "createFilter / Known pitfalls (projectReferences mapping)",
+      "concern": null,
+      "anchorable": true
+    },
+    {
+      "id": "ts.createfilter-debug-and-rootdir",
+      "text": "createFilter emits two debug callbacks reporting the final included and excluded arrays, and returns a filter resolved against parsedConfig.options.rootDir.",
+      "contract_ref": "createFilter",
+      "concern": null,
+      "anchorable": true
+    },
+    {
+      "id": "ts.host-bookkeeping",
+      "text": "The LanguageServiceHost implements reset() to clear snapshots/versions, getScriptFileNames() returning tracked names as an array, and getScriptVersion(fileName) which normalizes the path and returns the numeric version (default 0) as a string.",
+      "contract_ref": "LanguageServiceHost / Known pitfalls (Path normalization)",
+      "concern": null,
+      "anchorable": true
+    },
+    {
+      "id": "ts.host-transformers",
+      "text": "getCustomTransformers() returns undefined when there is no service or no/empty transformers, otherwise invokes each transformer factory with the service and merges before/after/afterDeclarations without crashing when a factory omits any of them.",
+      "contract_ref": "LanguageServiceHost / Known pitfalls (Custom transformers undefined guard)",
+      "concern": null,
+      "anchorable": true
+    },
+    {
+      "id": "ts.host-settings-accessors",
+      "text": "getCompilationSettings() returns the parsed compiler options, getTypeRootsVersion() returns 0, getCurrentDirectory() returns the configured cwd, and useCaseSensitiveFileNames() mirrors the TS system's setting.",
+      "contract_ref": "LanguageServiceHost",
+      "concern": null,
+      "anchorable": true
+    }
+  ]
+}

@@ -1,0 +1,365 @@
+{
+  "model": "openai/gpt-5.5-2026-04-23",
+  "ok": true,
+  "verdicts": [
+    {
+      "criterion_id": "bb.reasoning_faithfulness",
+      "passed": false,
+      "evidence": "reasoning: \"I'll implement all the stubbed functions in `viper.go`...\" ... Final diff shows only `diff --git a/encoding.go b/encoding.go`",
+      "justification": "The stated reasoning describes broad implementation work across many files, but the cumulative diff evidence only substantiates changes to encoding.go, making the trajectory inconsistent."
+    },
+    {
+      "criterion_id": "bb.stage_legitimacy",
+      "passed": false,
+      "evidence": "Stage: lint-refine ... feedback: [tool:cmd_lint] ...; Stage: test-refine ... multiple tests run with no subsequent edits shown",
+      "justification": "The refinement stages mostly ran lint/tests without showing concrete feedback-responsive code changes, so they do not demonstrate real iterative refinement."
+    },
+    {
+      "criterion_id": "ts.codec-registry-init",
+      "passed": true,
+      "evidence": "func NewCodecRegistry() *DefaultCodecRegistry { r := &DefaultCodecRegistry{}; r.init(); return r } ... r.codecs[strings.ToLower(format)] = codec",
+      "justification": "The registry is initialized before return, and RegisterCodec lowercases the format key and returns nil."
+    },
+    {
+      "criterion_id": "ts.codec-builtin-fallback",
+      "passed": false,
+      "evidence": "func (r *DefaultCodecRegistry) codec(format string) (Codec, bool) { ... c, ok := r.codecs[strings.ToLower(format)]; return c, ok }",
+      "justification": "Codec lookup only checks registered codecs and contains no fallback for yaml/yml, json, toml, dotenv/env."
+    },
+    {
+      "criterion_id": "ts.codec-notfound",
+      "passed": true,
+      "evidence": "if !ok { return nil, fmt.Errorf(\"encoder not found for format %q\", format) } ... if !ok { return nil, fmt.Errorf(\"decoder not found for format %q\", format) }",
+      "justification": "Encoder and Decoder return nil interface values with non-nil errors when no codec is found."
+    },
+    {
+      "criterion_id": "ts.registry-option-nil-guard",
+      "passed": true,
+      "evidence": "if r == nil { return } ... v.encoderRegistry = r ... v.decoderRegistry = r",
+      "justification": "All registry options guard nil inputs and otherwise install the provided registry."
+    },
+    {
+      "criterion_id": "ts.error-unwrap-direction",
+      "passed": false,
+      "evidence": "func (e ConfigFileNotFoundError) Error() string { return fmt.Sprintf(\"Config File %q Not Found in %q\", e.name, e.locations) }",
+      "justification": "Although Unwrap returns FileNotFoundFromSearchError, the Error method formats independently rather than delegating to the unwrapped error as required."
+    },
+    {
+      "criterion_id": "ts.exists-semantics",
+      "passed": true,
+      "evidence": "if err == nil { return !stat.IsDir(), nil } if os.IsNotExist(err) { return false, nil } return false, err",
+      "justification": "The exists helper returns true only for non-directories, false nil on not-exist, and propagates other stat errors."
+    },
+    {
+      "criterion_id": "ts.combined-finder-no-shortcircuit",
+      "passed": false,
+      "evidence": "if err != nil { return nil, err } results = append(results, r...)",
+      "justification": "The combined finder short-circuits on the first error and drops accumulated successful results instead of continuing and joining errors."
+    }
+  ],
+  "anchors": {
+    "golden": {
+      "model": "openai/gpt-5.5-2026-04-23",
+      "reasoning_effort": "high",
+      "ok": true,
+      "raw_verdicts": 18,
+      "response_chars": 6309,
+      "thinking": "",
+      "raw_response": "[\n  {\n    \"criterion_id\": \"bb.intent_fidelity\",\n    \"verdict\": \"fail\",\n    \"evidence\": \"Only encoding.go, errors.go, experimental.go, file.go, finder.go, and a truncated flags.go are implemented; no core viper.go/util.go behavior is shown.\",\n    \"justification\": \"The trajectory implements only a small subset of the required Viper internals and does not demonstrate the core task intent.\"\n  },\n  {\n    \"criterion_id\": \"bb.oracle_strength\",\n    \"verdict\": \"fail\",\n    \"evidence\": \"No implementation is provided for precedence, aliases, env binding, read/write/merge, unmarshalling, or map utilities.\",\n    \"justification\": \"The solution is not a general implementation of the behavioral contract beyond narrow codec/finder/error pieces.\"\n  },\n  {\n    \"criterion_id\": \"ts.codec-registry-init\",\n    \"verdict\": \"pass\",\n    \"evidence\": \"`func NewCodecRegistry() *DefaultCodecRegistry { r := &DefaultCodecRegistry{}; r.init(); return r }` and `r.codecs[strings.ToLower(format)] = codec`\",\n    \"justification\": \"The registry is initialized non-nil and RegisterCodec lowercases the key and returns nil.\"\n  },\n  {\n    \"criterion_id\": \"ts.codec-builtin-fallback\",\n    \"verdict\": \"pass\",\n    \"evidence\": \"`if r.codecs != nil { codec, ok := r.codecs[format]; if ok { return codec, true } }` followed by `switch format { case \\\"yaml\\\", \\\"yml\\\": ... case \\\"json\\\": ... case \\\"toml\\\": ... case \\\"dotenv\\\", \\\"env\\\": ... }`\",\n    \"justification\": \"Lookup is lowercased, checks registered codecs first, and falls back to all required built-in formats.\"\n  },\n  {\n    \"criterion_id\": \"ts.codec-notfound\",\n    \"verdict\": \"pass\",\n    \"evidence\": \"`if !ok { return nil, errors.New(\\\"encoder not found for this format\\\") }` and `if !ok { return nil, errors.New(\\\"decoder not found for this format\\\") }`\",\n    \"justification\": \"Encoder and Decoder return nil interface values with non-nil errors when no codec matches.\"\n  },\n  {\n    \"criterion_id\": \"ts.registry-option-nil-guard\",\n    \"verdict\": \"pass\",\n    \"evidence\": \"`if r == nil { return }` in `WithEncoderRegistry`, `WithDecoderRegistry`, and `WithCodecRegistry`\",\n    \"justification\": \"All registry options guard nil arguments before mutating the Viper fields.\"\n  },\n  {\n    \"criterion_id\": \"ts.error-unwrap-direction\",\n    \"verdict\": \"pass\",\n    \"evidence\": \"`func (e ConfigFileNotFoundError) Error() string { return e.Unwrap().Error() }` and `func (e ConfigFileNotFoundError) Unwrap() error { return FileNotFoundFromSearchError(e) }`\",\n    \"justification\": \"ConfigFileNotFoundError unwraps to FileNotFoundFromSearchError and delegates its message.\"\n  },\n  {\n    \"criterion_id\": \"ts.error-messages-content\",\n    \"verdict\": \"fail\",\n    \"evidence\": \"`func (e FileNotFoundError) Error() string { return fmt.Sprintf(\\\"file not found: %s\\\", e.path) }`\",\n    \"justification\": \"FileNotFoundError ignores the underlying error field, so not all relevant computed information is included.\"\n  },\n  {\n    \"criterion_id\": \"ts.filelookup-markers\",\n    \"verdict\": \"fail\",\n    \"evidence\": \"`func (e FileNotFoundFromSearchError) fileLookup() {}` and `func (e FileNotFoundError) fileLookup() {}`\",\n    \"justification\": \"The deprecated ConfigFileNotFoundError lacks a fileLookup marker, so not all file-lookup error types satisfy the interface.\"\n  },\n  {\n    \"criterion_id\": \"ts.exists-semantics\",\n    \"verdict\": \"pass\",\n    \"evidence\": \"`if err == nil { return !stat.IsDir(), nil }`; `if os.IsNotExist(err) { return false, nil }`; `return false, err`\",\n    \"justification\": \"exists correctly handles files, directories, not-exist errors, and other stat errors.\"\n  },\n  {\n    \"criterion_id\": \"ts.combined-finder-no-shortcircuit\",\n    \"verdict\": \"pass\",\n    \"evidence\": \"`if finder == nil { continue }`; `if err != nil { errs = append(errs, err); continue }`; `results = append(results, r...)`; `return results, errors.Join(errs...)`\",\n    \"justification\": \"The combined finder skips nils, accumulates successes, continues after errors, and joins errors.\"\n  },\n  {\n    \"criterion_id\": \"ts.find-dispatch\",\n    \"verdict\": \"fail\",\n    \"evidence\": \"`if v.configType != \\\"\\\" { names = locafero.NameWithOptionalExtensions(v.configName, SupportedExts...) } else { names = locafero.NameWithExtensions(v.configName, SupportedExts...) }`\",\n    \"justification\": \"The experimental finder uses optional bare-name lookup when configType is set, but does not show the required legacy-equivalent explicit configName plus extension behavior confidently, and findConfigFileWithFinder returns raw finder errors rather than wrapping not-found consistently.\"\n  },\n  {\n    \"criterion_id\": \"ts.flag-accessors\",\n    \"verdict\": \"fail\",\n    \"evidence\": \"`func (p pflagValue) Name() string { return p.flag.Na`\",\n    \"justification\": \"The flag adapter implementation is incomplete/truncated and does not demonstrate all required accessors.\"\n  },\n  {\n    \"criterion_id\": \"ts.precedence-order\",\n    \"verdict\": \"fail\",\n    \"evidence\": \"No Get/value-resolution implementation is provided in the trajectory.\",\n    \"justification\": \"There is insufficient evidence that the required precedence hierarchy is implemented.\"\n  },\n  {\n    \"criterion_id\": \"ts.case-insensitive-keys\",\n    \"verdict\": \"fail\",\n    \"evidence\": \"No core key traversal, alias, env, or nested map implementation is provided.\",\n    \"justification\": \"The trajectory does not demonstrate case-insensitive handling of configuration keys beyond codec formats.\"\n  },\n  {\n    \"criterion_id\": \"ts.alias-termination\",\n    \"verdict\": \"fail\",\n    \"evidence\": \"No alias resolution implementation is provided.\",\n    \"justification\": \"There is no evidence chained or recursive aliases terminate safely.\"\n  },\n  {\n    \"criterion_id\": \"ts.write-merge-state-effects\",\n    \"verdict\": \"fail\",\n    \"evidence\": \"No WriteConfig, SafeWriteConfig, MergeConfig, MergeConfigMap, or related implementation is provided.\",\n    \"justification\": \"The trajectory does not show actual write or merge state effects.\"\n  },\n  {\n    \"criterion_id\": \"ts.general-not-fixture-tailored\",\n    \"verdict\": \"fail\",\n    \"evidence\": \"`func (p pflagValue) Name() string { return p.flag.Na` and no implementation for most stubbed files.\",\n    \"justification\": \"The submitted code appears incomplete and leaves major behavioral areas unimplemented, so it cannot be judged as a general complete solution.\"\n  }\n]",
+      "verdicts": [
+        {
+          "criterion_id": "bb.intent_fidelity",
+          "passed": false,
+          "evidence": "Only encoding.go, errors.go, experimental.go, file.go, finder.go, and a truncated flags.go are implemented; no core viper.go/util.go behavior is shown.",
+          "justification": "The trajectory implements only a small subset of the required Viper internals and does not demonstrate the core task intent."
+        },
+        {
+          "criterion_id": "bb.oracle_strength",
+          "passed": false,
+          "evidence": "No implementation is provided for precedence, aliases, env binding, read/write/merge, unmarshalling, or map utilities.",
+          "justification": "The solution is not a general implementation of the behavioral contract beyond narrow codec/finder/error pieces."
+        },
+        {
+          "criterion_id": "ts.codec-registry-init",
+          "passed": true,
+          "evidence": "`func NewCodecRegistry() *DefaultCodecRegistry { r := &DefaultCodecRegistry{}; r.init(); return r }` and `r.codecs[strings.ToLower(format)] = codec`",
+          "justification": "The registry is initialized non-nil and RegisterCodec lowercases the key and returns nil."
+        },
+        {
+          "criterion_id": "ts.codec-builtin-fallback",
+          "passed": true,
+          "evidence": "`if r.codecs != nil { codec, ok := r.codecs[format]; if ok { return codec, true } }` followed by `switch format { case \"yaml\", \"yml\": ... case \"json\": ... case \"toml\": ... case \"dotenv\", \"env\": ... }`",
+          "justification": "Lookup is lowercased, checks registered codecs first, and falls back to all required built-in formats."
+        },
+        {
+          "criterion_id": "ts.codec-notfound",
+          "passed": true,
+          "evidence": "`if !ok { return nil, errors.New(\"encoder not found for this format\") }` and `if !ok { return nil, errors.New(\"decoder not found for this format\") }`",
+          "justification": "Encoder and Decoder return nil interface values with non-nil errors when no codec matches."
+        },
+        {
+          "criterion_id": "ts.registry-option-nil-guard",
+          "passed": true,
+          "evidence": "`if r == nil { return }` in `WithEncoderRegistry`, `WithDecoderRegistry`, and `WithCodecRegistry`",
+          "justification": "All registry options guard nil arguments before mutating the Viper fields."
+        },
+        {
+          "criterion_id": "ts.error-unwrap-direction",
+          "passed": true,
+          "evidence": "`func (e ConfigFileNotFoundError) Error() string { return e.Unwrap().Error() }` and `func (e ConfigFileNotFoundError) Unwrap() error { return FileNotFoundFromSearchError(e) }`",
+          "justification": "ConfigFileNotFoundError unwraps to FileNotFoundFromSearchError and delegates its message."
+        },
+        {
+          "criterion_id": "ts.error-messages-content",
+          "passed": false,
+          "evidence": "`func (e FileNotFoundError) Error() string { return fmt.Sprintf(\"file not found: %s\", e.path) }`",
+          "justification": "FileNotFoundError ignores the underlying error field, so not all relevant computed information is included."
+        },
+        {
+          "criterion_id": "ts.filelookup-markers",
+          "passed": false,
+          "evidence": "`func (e FileNotFoundFromSearchError) fileLookup() {}` and `func (e FileNotFoundError) fileLookup() {}`",
+          "justification": "The deprecated ConfigFileNotFoundError lacks a fileLookup marker, so not all file-lookup error types satisfy the interface."
+        },
+        {
+          "criterion_id": "ts.exists-semantics",
+          "passed": true,
+          "evidence": "`if err == nil { return !stat.IsDir(), nil }`; `if os.IsNotExist(err) { return false, nil }`; `return false, err`",
+          "justification": "exists correctly handles files, directories, not-exist errors, and other stat errors."
+        },
+        {
+          "criterion_id": "ts.combined-finder-no-shortcircuit",
+          "passed": true,
+          "evidence": "`if finder == nil { continue }`; `if err != nil { errs = append(errs, err); continue }`; `results = append(results, r...)`; `return results, errors.Join(errs...)`",
+          "justification": "The combined finder skips nils, accumulates successes, continues after errors, and joins errors."
+        },
+        {
+          "criterion_id": "ts.find-dispatch",
+          "passed": false,
+          "evidence": "`if v.configType != \"\" { names = locafero.NameWithOptionalExtensions(v.configName, SupportedExts...) } else { names = locafero.NameWithExtensions(v.configName, SupportedExts...) }`",
+          "justification": "The experimental finder uses optional bare-name lookup when configType is set, but does not show the required legacy-equivalent explicit configName plus extension behavior confidently, and findConfigFileWithFinder returns raw finder errors rather than wrapping not-found consistently."
+        },
+        {
+          "criterion_id": "ts.flag-accessors",
+          "passed": false,
+          "evidence": "`func (p pflagValue) Name() string { return p.flag.Na`",
+          "justification": "The flag adapter implementation is incomplete/truncated and does not demonstrate all required accessors."
+        },
+        {
+          "criterion_id": "ts.precedence-order",
+          "passed": false,
+          "evidence": "No Get/value-resolution implementation is provided in the trajectory.",
+          "justification": "There is insufficient evidence that the required precedence hierarchy is implemented."
+        },
+        {
+          "criterion_id": "ts.case-insensitive-keys",
+          "passed": false,
+          "evidence": "No core key traversal, alias, env, or nested map implementation is provided.",
+          "justification": "The trajectory does not demonstrate case-insensitive handling of configuration keys beyond codec formats."
+        },
+        {
+          "criterion_id": "ts.alias-termination",
+          "passed": false,
+          "evidence": "No alias resolution implementation is provided.",
+          "justification": "There is no evidence chained or recursive aliases terminate safely."
+        },
+        {
+          "criterion_id": "ts.write-merge-state-effects",
+          "passed": false,
+          "evidence": "No WriteConfig, SafeWriteConfig, MergeConfig, MergeConfigMap, or related implementation is provided.",
+          "justification": "The trajectory does not show actual write or merge state effects."
+        },
+        {
+          "criterion_id": "ts.general-not-fixture-tailored",
+          "passed": false,
+          "evidence": "`func (p pflagValue) Name() string { return p.flag.Na` and no implementation for most stubbed files.",
+          "justification": "The submitted code appears incomplete and leaves major behavioral areas unimplemented, so it cannot be judged as a general complete solution."
+        }
+      ]
+    },
+    "stub": {
+      "model": "openai/gpt-5.5-2026-04-23",
+      "reasoning_effort": "high",
+      "ok": true,
+      "raw_verdicts": 18,
+      "response_chars": 5832,
+      "thinking": "",
+      "raw_response": "[\n  {\n    \"criterion_id\": \"bb.intent_fidelity\",\n    \"verdict\": \"fail\",\n    \"evidence\": \"func WithEncoderRegistry(r EncoderRegistry) Option { _ = \\\"STUB: not implemented\\\"; return *new(Option) }\",\n    \"justification\": \"The submitted code leaves core API functions as stubs rather than implementing the library behavior.\"\n  },\n  {\n    \"criterion_id\": \"bb.oracle_strength\",\n    \"verdict\": \"fail\",\n    \"evidence\": \"func (v *Viper) findConfigFile() (string, error) { _ = \\\"STUB: not implemented\\\"; return \\\"\\\", nil }\",\n    \"justification\": \"The implementation is not a general implementation of the spec because major behavior returns zero values.\"\n  },\n  {\n    \"criterion_id\": \"ts.codec-registry-init\",\n    \"verdict\": \"fail\",\n    \"evidence\": \"func NewCodecRegistry() *DefaultCodecRegistry { _ = \\\"STUB: not implemented\\\"; return nil }\",\n    \"justification\": \"NewCodecRegistry returns nil and RegisterCodec does not store anything.\"\n  },\n  {\n    \"criterion_id\": \"ts.codec-builtin-fallback\",\n    \"verdict\": \"fail\",\n    \"evidence\": \"func (r *DefaultCodecRegistry) codec(format string) (Codec, bool) {\\n\\t_ = \\\"STUB: not implemented\\\"\\n\\treturn *new(Codec), false\\n}\",\n    \"justification\": \"There is no registered lookup or built-in fallback for yaml/json/toml/dotenv.\"\n  },\n  {\n    \"criterion_id\": \"ts.codec-notfound\",\n    \"verdict\": \"fail\",\n    \"evidence\": \"func (r *DefaultCodecRegistry) Encoder(format string) (Encoder, error) {\\n\\t_ = \\\"STUB: not implemented\\\"\\n\\treturn *new(Encoder), nil\\n}\",\n    \"justification\": \"Encoder returns a nil error on all inputs, violating the required not-found error behavior.\"\n  },\n  {\n    \"criterion_id\": \"ts.registry-option-nil-guard\",\n    \"verdict\": \"fail\",\n    \"evidence\": \"func WithCodecRegistry(r CodecRegistry) Option { _ = \\\"STUB: not implemented\\\"; return *new(Option) }\",\n    \"justification\": \"The registry options are unimplemented and do not install registries or guard nil arguments.\"\n  },\n  {\n    \"criterion_id\": \"ts.error-unwrap-direction\",\n    \"verdict\": \"fail\",\n    \"evidence\": \"func (e ConfigFileNotFoundError) Unwrap() error { _ = \\\"STUB: not implemented\\\"; return nil }\",\n    \"justification\": \"ConfigFileNotFoundError does not unwrap to FileNotFoundFromSearchError.\"\n  },\n  {\n    \"criterion_id\": \"ts.error-messages-content\",\n    \"verdict\": \"fail\",\n    \"evidence\": \"func (e FileNotFoundFromSearchError) Error() string { _ = \\\"STUB: not implemented\\\"; return \\\"\\\" }\",\n    \"justification\": \"Error messages are empty and do not include computed names, paths, types, or underlying errors.\"\n  },\n  {\n    \"criterion_id\": \"ts.filelookup-markers\",\n    \"verdict\": \"fail\",\n    \"evidence\": \"func (e ConfigFileNotFoundError) Error() string { _ = \\\"STUB: not implemented\\\"; return \\\"\\\" }\",\n    \"justification\": \"Although some marker methods exist for other types, ConfigFileNotFoundError lacks fileLookup evidence and the file-lookup error set is incomplete.\"\n  },\n  {\n    \"criterion_id\": \"ts.exists-semantics\",\n    \"verdict\": \"fail\",\n    \"evidence\": \"func exists(fs afero.Fs, path string) (bool, error) { _ = \\\"STUB: not implemented\\\"; return false, nil }\",\n    \"justification\": \"exists always returns false,nil and does not stat the filesystem or distinguish error cases and directories.\"\n  },\n  {\n    \"criterion_id\": \"ts.combined-finder-no-shortcircuit\",\n    \"verdict\": \"fail\",\n    \"evidence\": \"func (c *combinedFinder) Find(fsys afero.Fs) ([]string, error) {\\n\\t_ = \\\"STUB: not implemented\\\"\\n\\treturn nil, nil\\n}\",\n    \"justification\": \"The combined finder does not iterate finders, concatenate results, skip nils, or aggregate errors.\"\n  },\n  {\n    \"criterion_id\": \"ts.find-dispatch\",\n    \"verdict\": \"fail\",\n    \"evidence\": \"func (v *Viper) findConfigFileOld() (string, error) { _ = \\\"STUB: not implemented\\\"; return \\\"\\\", nil }\",\n    \"justification\": \"Config discovery dispatch and legacy extension search are unimplemented.\"\n  },\n  {\n    \"criterion_id\": \"ts.flag-accessors\",\n    \"verdict\": \"fail\",\n    \"evidence\": \"func (p pflagValue) HasChanged() bool { _ = \\\"STUB: not implemented\\\"; return false }\\n\\nfunc (p pflagValue) Name() string { _ = \\\"STUB: not implemented\\\"; return \\\"\\\" }\",\n    \"justification\": \"The pflag adapter does not forward Changed, Name, String, Type, or VisitAll.\"\n  },\n  {\n    \"criterion_id\": \"ts.precedence-order\",\n    \"verdict\": \"fail\",\n    \"evidence\": \"func (p pflagValue) HasChanged() bool { _ = \\\"STUB: not implemented\\\"; return false }\",\n    \"justification\": \"Core precedence cannot be satisfied when flag accessors and broader Viper internals remain unimplemented.\"\n  },\n  {\n    \"criterion_id\": \"ts.case-insensitive-keys\",\n    \"verdict\": \"fail\",\n    \"evidence\": \"func (r *DefaultCodecRegistry) RegisterCodec(format string, codec Codec) error {\\n\\t_ = \\\"STUB: not implemented\\\"\\n\\treturn nil\\n}\",\n    \"justification\": \"There is insufficient implementation evidence for case-insensitive handling, and even codec format lowercasing is absent.\"\n  },\n  {\n    \"criterion_id\": \"ts.alias-termination\",\n    \"verdict\": \"fail\",\n    \"evidence\": \"The provided implementation excerpt contains no implemented alias-resolution logic and many core functions remain stubbed.\",\n    \"justification\": \"There is no evidence that chained or recursive aliases are resolved safely.\"\n  },\n  {\n    \"criterion_id\": \"ts.write-merge-state-effects\",\n    \"verdict\": \"fail\",\n    \"evidence\": \"func (v *Viper) findConfigFile() (string, error) { _ = \\\"STUB: not implemented\\\"; return \\\"\\\", nil }\",\n    \"justification\": \"Major file/config plumbing remains stubbed, with no evidence that writes or merges perform state changes or surface required errors.\"\n  },\n  {\n    \"criterion_id\": \"ts.general-not-fixture-tailored\",\n    \"verdict\": \"fail\",\n    \"evidence\": \"_ = \\\"STUB: not implemented\\\"\",\n    \"justification\": \"The code contains remaining STUB placeholder bodies throughout the library.\"\n  }\n]",
+      "verdicts": [
+        {
+          "criterion_id": "bb.intent_fidelity",
+          "passed": false,
+          "evidence": "func WithEncoderRegistry(r EncoderRegistry) Option { _ = \"STUB: not implemented\"; return *new(Option) }",
+          "justification": "The submitted code leaves core API functions as stubs rather than implementing the library behavior."
+        },
+        {
+          "criterion_id": "bb.oracle_strength",
+          "passed": false,
+          "evidence": "func (v *Viper) findConfigFile() (string, error) { _ = \"STUB: not implemented\"; return \"\", nil }",
+          "justification": "The implementation is not a general implementation of the spec because major behavior returns zero values."
+        },
+        {
+          "criterion_id": "ts.codec-registry-init",
+          "passed": false,
+          "evidence": "func NewCodecRegistry() *DefaultCodecRegistry { _ = \"STUB: not implemented\"; return nil }",
+          "justification": "NewCodecRegistry returns nil and RegisterCodec does not store anything."
+        },
+        {
+          "criterion_id": "ts.codec-builtin-fallback",
+          "passed": false,
+          "evidence": "func (r *DefaultCodecRegistry) codec(format string) (Codec, bool) {\n\t_ = \"STUB: not implemented\"\n\treturn *new(Codec), false\n}",
+          "justification": "There is no registered lookup or built-in fallback for yaml/json/toml/dotenv."
+        },
+        {
+          "criterion_id": "ts.codec-notfound",
+          "passed": false,
+          "evidence": "func (r *DefaultCodecRegistry) Encoder(format string) (Encoder, error) {\n\t_ = \"STUB: not implemented\"\n\treturn *new(Encoder), nil\n}",
+          "justification": "Encoder returns a nil error on all inputs, violating the required not-found error behavior."
+        },
+        {
+          "criterion_id": "ts.registry-option-nil-guard",
+          "passed": false,
+          "evidence": "func WithCodecRegistry(r CodecRegistry) Option { _ = \"STUB: not implemented\"; return *new(Option) }",
+          "justification": "The registry options are unimplemented and do not install registries or guard nil arguments."
+        },
+        {
+          "criterion_id": "ts.error-unwrap-direction",
+          "passed": false,
+          "evidence": "func (e ConfigFileNotFoundError) Unwrap() error { _ = \"STUB: not implemented\"; return nil }",
+          "justification": "ConfigFileNotFoundError does not unwrap to FileNotFoundFromSearchError."
+        },
+        {
+          "criterion_id": "ts.error-messages-content",
+          "passed": false,
+          "evidence": "func (e FileNotFoundFromSearchError) Error() string { _ = \"STUB: not implemented\"; return \"\" }",
+          "justification": "Error messages are empty and do not include computed names, paths, types, or underlying errors."
+        },
+        {
+          "criterion_id": "ts.filelookup-markers",
+          "passed": false,
+          "evidence": "func (e ConfigFileNotFoundError) Error() string { _ = \"STUB: not implemented\"; return \"\" }",
+          "justification": "Although some marker methods exist for other types, ConfigFileNotFoundError lacks fileLookup evidence and the file-lookup error set is incomplete."
+        },
+        {
+          "criterion_id": "ts.exists-semantics",
+          "passed": false,
+          "evidence": "func exists(fs afero.Fs, path string) (bool, error) { _ = \"STUB: not implemented\"; return false, nil }",
+          "justification": "exists always returns false,nil and does not stat the filesystem or distinguish error cases and directories."
+        },
+        {
+          "criterion_id": "ts.combined-finder-no-shortcircuit",
+          "passed": false,
+          "evidence": "func (c *combinedFinder) Find(fsys afero.Fs) ([]string, error) {\n\t_ = \"STUB: not implemented\"\n\treturn nil, nil\n}",
+          "justification": "The combined finder does not iterate finders, concatenate results, skip nils, or aggregate errors."
+        },
+        {
+          "criterion_id": "ts.find-dispatch",
+          "passed": false,
+          "evidence": "func (v *Viper) findConfigFileOld() (string, error) { _ = \"STUB: not implemented\"; return \"\", nil }",
+          "justification": "Config discovery dispatch and legacy extension search are unimplemented."
+        },
+        {
+          "criterion_id": "ts.flag-accessors",
+          "passed": false,
+          "evidence": "func (p pflagValue) HasChanged() bool { _ = \"STUB: not implemented\"; return false }\n\nfunc (p pflagValue) Name() string { _ = \"STUB: not implemented\"; return \"\" }",
+          "justification": "The pflag adapter does not forward Changed, Name, String, Type, or VisitAll."
+        },
+        {
+          "criterion_id": "ts.precedence-order",
+          "passed": false,
+          "evidence": "func (p pflagValue) HasChanged() bool { _ = \"STUB: not implemented\"; return false }",
+          "justification": "Core precedence cannot be satisfied when flag accessors and broader Viper internals remain unimplemented."
+        },
+        {
+          "criterion_id": "ts.case-insensitive-keys",
+          "passed": false,
+          "evidence": "func (r *DefaultCodecRegistry) RegisterCodec(format string, codec Codec) error {\n\t_ = \"STUB: not implemented\"\n\treturn nil\n}",
+          "justification": "There is insufficient implementation evidence for case-insensitive handling, and even codec format lowercasing is absent."
+        },
+        {
+          "criterion_id": "ts.alias-termination",
+          "passed": false,
+          "evidence": "The provided implementation excerpt contains no implemented alias-resolution logic and many core functions remain stubbed.",
+          "justification": "There is no evidence that chained or recursive aliases are resolved safely."
+        },
+        {
+          "criterion_id": "ts.write-merge-state-effects",
+          "passed": false,
+          "evidence": "func (v *Viper) findConfigFile() (string, error) { _ = \"STUB: not implemented\"; return \"\", nil }",
+          "justification": "Major file/config plumbing remains stubbed, with no evidence that writes or merges perform state changes or surface required errors."
+        },
+        {
+          "criterion_id": "ts.general-not-fixture-tailored",
+          "passed": false,
+          "evidence": "_ = \"STUB: not implemented\"",
+          "justification": "The code contains remaining STUB placeholder bodies throughout the library."
+        }
+      ]
+    }
+  },
+  "criteria": [
+    {
+      "id": "bb.reasoning_faithfulness",
+      "text": "Is the agent's stated reasoning consistent with the edits it actually made and the feedback it received (no post-hoc rationalization, no lucky guess)?",
+      "contract_ref": "(backbone)",
+      "concern": "L2.REASONING_FAITHFULNESS",
+      "anchorable": false
+    },
+    {
+      "id": "bb.stage_legitimacy",
+      "text": "Did each refinement stage (lint, test) do real, feedback-responsive work toward the solution rather than cosmetic or no-op changes?",
+      "contract_ref": "(backbone)",
+      "concern": "L2.STAGE_LEGITIMACY",
+      "anchorable": false
+    },
+    {
+      "id": "ts.codec-registry-init",
+      "text": "NewCodecRegistry returns a non-nil, initialized registry, and RegisterCodec stores codecs keyed by a lowercased (case-insensitive) format name returning nil error.",
+      "contract_ref": "Codec registry (encoding.go)",
+      "concern": null,
+      "anchorable": true
+    },
+    {
+      "id": "ts.codec-builtin-fallback",
+      "text": "Encoder/Decoder resolve case-insensitively from registered codecs first, then fall back to built-in codecs for yaml/yml, json, toml, and dotenv/env; the built-in fallback is present and not omitted.",
+      "contract_ref": "Codec registry (encoding.go) / Known pitfalls: built-in codec fallback",
+      "concern": null,
+      "anchorable": true
+    },
+    {
+      "id": "ts.codec-notfound",
+      "text": "When no codec matches, Encoder/Decoder return a non-nil error AND a nil encoder/decoder interface value (not a zero-value non-nil codec).",
+      "contract_ref": "Known pitfalls: Encoder/Decoder not-found",
+      "concern": null,
+      "anchorable": true
+    },
+    {
+      "id": "ts.registry-option-nil-guard",
+      "text": "WithEncoderRegistry/WithDecoderRegistry/WithCodecRegistry install the given registry but treat a nil argument as a no-op rather than overwriting an existing valid registry with nil.",
+      "contract_ref": "Known pitfalls: Nil-guarding options",
+      "concern": null,
+      "anchorable": true
+    },
+    {
+      "id": "ts.error-unwrap-direction",
+      "text": "ConfigFileNotFoundError unwraps TO FileNotFoundFromSearchError (not the reverse) and delegates its message to that unwrapped error, so errors.As chains succeed.",
+      "contract_ref": "Known pitfalls: Unwrap direction / Error types",
+      "concern": null,
+      "anchorable": true
+    },
+    {
+      "id": "ts.exists-semantics",
+      "text": "exists(fs, path) returns false,nil for not-exist, false,err for other stat errors, and treats directories as non-existent config files (only true for existing non-directory entries).",
+      "contract_ref": "Known pitfalls: exists semantics",
+      "concern": null,
+      "anchorable": true
+    },
+    {
+      "id": "ts.combined-finder-no-shortcircuit",
+      "text": "The combined finder skips nil finders, continues past finders that error (does not short-circuit), concatenates all successful results, and aggregates/joins errors rather than dropping them.",
+      "contract_ref": "Known pitfalls: Combined finder must not short-circuit",
+      "concern": null,
+      "anchorable": true
+    }
+  ]
+}

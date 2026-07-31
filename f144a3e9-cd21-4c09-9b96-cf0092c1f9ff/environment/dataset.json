@@ -1,0 +1,51 @@
+{
+  "instance_id": "commit-0/btclib",
+  "id": "f144a3e9-cd21-4c09-9b96-cf0092c1f9ff",
+  "repo": "Zahgon/btclib",
+  "base_commit": "fe5cb942954e2645f2f7b65c5367634dbbc306fa",
+  "reference_commit": "600cb1365781aa7dadcfb1e58a449db0e2d0a1f6",
+  "setup": {
+    "install": "pip install -e \".\"",
+    "packages": "",
+    "pip_packages": [
+      "autoflake",
+      "bandit",
+      "black",
+      "btclib_libsecp256k1",
+      "check-manifest",
+      "coverage",
+      "flake8",
+      "isort",
+      "mypy",
+      "pip",
+      "pre-commit",
+      "pylint",
+      "pyroma",
+      "pytest",
+      "pytest-cov",
+      "pytest-json-report",
+      "pytest-xdist",
+      "pyupgrade",
+      "setuptools",
+      "tox",
+      "twine",
+      "wheel"
+    ],
+    "pre_install": [
+      "apt-get update && apt-get install -y autoconf automake libtool"
+    ],
+    "python": "3.11",
+    "specification": "",
+    "version_source": "setup.py:python_requires",
+    "version_conflicts": [],
+    "system_deps_hint": []
+  },
+  "test": {
+    "test_cmd": "pytest",
+    "test_dir": "tests"
+  },
+  "src_dir": "btclib",
+  "base_compiles": null,
+  "language": "python",
+  "ecr_image_uri": "426628337772.dkr.ecr.ap-south-1.amazonaws.com/kaiju_q2:python_btclib_org_btclib"
+}

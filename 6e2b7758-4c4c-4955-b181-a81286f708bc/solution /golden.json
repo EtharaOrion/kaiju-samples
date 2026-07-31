@@ -1,0 +1,9 @@
+{
+  "kind": "commit0-golden-ref",
+  "repo": "Zahgon/BlackSheep",
+  "base_commit": "5cb9476fe374b49f2835c86cece5f07b61af074b",
+  "reference_commit": "b5d548b345fe800269cbbbf21126ba1f3a2426a0",
+  "src_dir": "blacksheep",
+  "language": "python",
+  "note": "Golden solution = the repo at reference_commit; solve.sh fetches+resets to it."
+}

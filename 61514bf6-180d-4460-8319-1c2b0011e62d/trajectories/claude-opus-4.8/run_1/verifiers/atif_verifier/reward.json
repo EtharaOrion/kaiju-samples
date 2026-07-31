@@ -1,0 +1,12 @@
+{
+  "stage_pass_rate": {
+    "stage1": 0.681818,
+    "stage2": 0.772727,
+    "stage3": 0.840909
+  },
+  "resolved": {
+    "stage1": 0,
+    "stage2": 0,
+    "stage3": 0
+  }
+}

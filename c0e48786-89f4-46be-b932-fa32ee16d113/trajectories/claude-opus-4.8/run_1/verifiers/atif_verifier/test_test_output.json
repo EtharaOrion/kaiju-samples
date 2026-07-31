@@ -1,0 +1,106 @@
+{"ImportPath":"github.com/spf13/viper/internal/encoding/hcl","Action":"build-output","Output":"# github.com/spf13/viper\n"}
+{"ImportPath":"github.com/spf13/viper/internal/encoding/hcl","Action":"build-output","Output":"viper.go:25:2: no required module provides package github.com/spf13/viper/internal/encoding/hcl; to add it:\n"}
+{"ImportPath":"github.com/spf13/viper/internal/encoding/hcl","Action":"build-output","Output":"\tgo get github.com/spf13/viper/internal/encoding/hcl\n"}
+{"ImportPath":"github.com/spf13/viper/internal/encoding/hcl","Action":"build-fail"}
+{"ImportPath":"github.com/spf13/viper/internal/encoding/ini","Action":"build-output","Output":"# github.com/spf13/viper\n"}
+{"ImportPath":"github.com/spf13/viper/internal/encoding/ini","Action":"build-output","Output":"viper.go:26:2: no required module provides package github.com/spf13/viper/internal/encoding/ini; to add it:\n"}
+{"ImportPath":"github.com/spf13/viper/internal/encoding/ini","Action":"build-output","Output":"\tgo get github.com/spf13/viper/internal/encoding/ini\n"}
+{"ImportPath":"github.com/spf13/viper/internal/encoding/ini","Action":"build-fail"}
+{"ImportPath":"github.com/spf13/viper/internal/encoding/javaproperties","Action":"build-output","Output":"# github.com/spf13/viper\n"}
+{"ImportPath":"github.com/spf13/viper/internal/encoding/javaproperties","Action":"build-output","Output":"viper.go:27:2: no required module provides package github.com/spf13/viper/internal/encoding/javaproperties; to add it:\n"}
+{"ImportPath":"github.com/spf13/viper/internal/encoding/javaproperties","Action":"build-output","Output":"\tgo get github.com/spf13/viper/internal/encoding/javaproperties\n"}
+{"ImportPath":"github.com/spf13/viper/internal/encoding/javaproperties","Action":"build-fail"}
+{"Time":"2026-07-20T19:43:12.13390185Z","Action":"start","Package":"github.com/spf13/viper"}
+{"Time":"2026-07-20T19:43:12.133923069Z","Action":"output","Package":"github.com/spf13/viper","Output":"FAIL\tgithub.com/spf13/viper [setup failed]\n"}
+{"Time":"2026-07-20T19:43:12.133929302Z","Action":"fail","Package":"github.com/spf13/viper","Elapsed":0,"FailedBuild":"github.com/spf13/viper/internal/encoding/hcl"}
+{"Time":"2026-07-20T19:43:12.349409291Z","Action":"start","Package":"github.com/spf13/viper/internal/encoding/dotenv"}
+{"Time":"2026-07-20T19:43:12.349501115Z","Action":"start","Package":"github.com/spf13/viper/internal/encoding/json"}
+{"Time":"2026-07-20T19:43:12.349636756Z","Action":"start","Package":"github.com/spf13/viper/internal/encoding/toml"}
+{"Time":"2026-07-20T19:43:12.34979597Z","Action":"start","Package":"github.com/spf13/viper/internal/encoding/yaml"}
+{"Time":"2026-07-20T19:43:12.349891853Z","Action":"start","Package":"github.com/spf13/viper/internal/features"}
+{"Time":"2026-07-20T19:43:12.349911108Z","Action":"output","Package":"github.com/spf13/viper/internal/features","Output":"?   \tgithub.com/spf13/viper/internal/features\t[no test files]\n"}
+{"Time":"2026-07-20T19:43:12.349919793Z","Action":"skip","Package":"github.com/spf13/viper/internal/features","Elapsed":0}
+{"Time":"2026-07-20T19:43:12.349926768Z","Action":"start","Package":"github.com/spf13/viper/internal/testutil"}
+{"Time":"2026-07-20T19:43:12.34993034Z","Action":"output","Package":"github.com/spf13/viper/internal/testutil","Output":"?   \tgithub.com/spf13/viper/internal/testutil\t[no test files]\n"}
+{"Time":"2026-07-20T19:43:12.349933403Z","Action":"skip","Package":"github.com/spf13/viper/internal/testutil","Elapsed":0}
+{"Time":"2026-07-20T19:43:12.351148276Z","Action":"run","Package":"github.com/spf13/viper/internal/encoding/json","Test":"TestCodec_Encode"}
+{"Time":"2026-07-20T19:43:12.351178899Z","Action":"output","Package":"github.com/spf13/viper/internal/encoding/json","Test":"TestCodec_Encode","Output":"=== RUN   TestCodec_Encode\n"}
+{"Time":"2026-07-20T19:43:12.351201512Z","Action":"output","Package":"github.com/spf13/viper/internal/encoding/json","Test":"TestCodec_Encode","Output":"--- PASS: TestCodec_Encode (0.00s)\n"}
+{"Time":"2026-07-20T19:43:12.351206227Z","Action":"pass","Package":"github.com/spf13/viper/internal/encoding/json","Test":"TestCodec_Encode","Elapsed":0}
+{"Time":"2026-07-20T19:43:12.351215781Z","Action":"run","Package":"github.com/spf13/viper/internal/encoding/json","Test":"TestCodec_Decode"}
+{"Time":"2026-07-20T19:43:12.351218348Z","Action":"output","Package":"github.com/spf13/viper/internal/encoding/json","Test":"TestCodec_Decode","Output":"=== RUN   TestCodec_Decode\n"}
+{"Time":"2026-07-20T19:43:12.351222141Z","Action":"run","Package":"github.com/spf13/viper/internal/encoding/json","Test":"TestCodec_Decode/OK"}
+{"Time":"2026-07-20T19:43:12.351224551Z","Action":"output","Package":"github.com/spf13/viper/internal/encoding/json","Test":"TestCodec_Decode/OK","Output":"=== RUN   TestCodec_Decode/OK\n"}
+{"Time":"2026-07-20T19:43:12.351230588Z","Action":"run","Package":"github.com/spf13/viper/internal/encoding/dotenv","Test":"TestCodec_Encode"}
+{"Time":"2026-07-20T19:43:12.351240212Z","Action":"output","Package":"github.com/spf13/viper/internal/encoding/dotenv","Test":"TestCodec_Encode","Output":"=== RUN   TestCodec_Encode\n"}
+{"Time":"2026-07-20T19:43:12.351243187Z","Action":"output","Package":"github.com/spf13/viper/internal/encoding/dotenv","Test":"TestCodec_Encode","Output":"--- PASS: TestCodec_Encode (0.00s)\n"}
+{"Time":"2026-07-20T19:43:12.351246325Z","Action":"pass","Package":"github.com/spf13/viper/internal/encoding/dotenv","Test":"TestCodec_Encode","Elapsed":0}
+{"Time":"2026-07-20T19:43:12.351248522Z","Action":"run","Package":"github.com/spf13/viper/internal/encoding/dotenv","Test":"TestCodec_Decode"}
+{"Time":"2026-07-20T19:43:12.351250388Z","Action":"output","Package":"github.com/spf13/viper/internal/encoding/dotenv","Test":"TestCodec_Decode","Output":"=== RUN   TestCodec_Decode\n"}
+{"Time":"2026-07-20T19:43:12.351254255Z","Action":"run","Package":"github.com/spf13/viper/internal/encoding/dotenv","Test":"TestCodec_Decode/OK"}
+{"Time":"2026-07-20T19:43:12.35125625Z","Action":"output","Package":"github.com/spf13/viper/internal/encoding/dotenv","Test":"TestCodec_Decode/OK","Output":"=== RUN   TestCodec_Decode/OK\n"}
+{"Time":"2026-07-20T19:43:12.351260497Z","Action":"output","Package":"github.com/spf13/viper/internal/encoding/dotenv","Test":"TestCodec_Decode/OK","Output":"--- PASS: TestCodec_Decode/OK (0.00s)\n"}
+{"Time":"2026-07-20T19:43:12.351262758Z","Action":"pass","Package":"github.com/spf13/viper/internal/encoding/dotenv","Test":"TestCodec_Decode/OK","Elapsed":0}
+{"Time":"2026-07-20T19:43:12.351265662Z","Action":"run","Package":"github.com/spf13/viper/internal/encoding/dotenv","Test":"TestCodec_Decode/InvalidData"}
+{"Time":"2026-07-20T19:43:12.351267738Z","Action":"output","Package":"github.com/spf13/viper/internal/encoding/dotenv","Test":"TestCodec_Decode/InvalidData","Output":"=== RUN   TestCodec_Decode/InvalidData\n"}
+{"Time":"2026-07-20T19:43:12.351281155Z","Action":"run","Package":"github.com/spf13/viper/internal/encoding/toml","Test":"TestCodec_Encode"}
+{"Time":"2026-07-20T19:43:12.35128867Z","Action":"output","Package":"github.com/spf13/viper/internal/encoding/toml","Test":"TestCodec_Encode","Output":"=== RUN   TestCodec_Encode\n"}
+{"Time":"2026-07-20T19:43:12.351286857Z","Action":"output","Package":"github.com/spf13/viper/internal/encoding/json","Test":"TestCodec_Decode/OK","Output":"--- PASS: TestCodec_Decode/OK (0.00s)\n"}
+{"Time":"2026-07-20T19:43:12.351299996Z","Action":"pass","Package":"github.com/spf13/viper/internal/encoding/json","Test":"TestCodec_Decode/OK","Elapsed":0}
+{"Time":"2026-07-20T19:43:12.351295082Z","Action":"output","Package":"github.com/spf13/viper/internal/encoding/dotenv","Test":"TestCodec_Decode/InvalidData","Output":"    codec_test.go:53: decoding failed as expected: line `invalid data` doesn't match format\n"}
+{"Time":"2026-07-20T19:43:12.351345923Z","Action":"output","Package":"github.com/spf13/viper/internal/encoding/dotenv","Test":"TestCodec_Decode/InvalidData","Output":"--- PASS: TestCodec_Decode/InvalidData (0.00s)\n"}
+{"Time":"2026-07-20T19:43:12.351350639Z","Action":"pass","Package":"github.com/spf13/viper/internal/encoding/dotenv","Test":"TestCodec_Decode/InvalidData","Elapsed":0}
+{"Time":"2026-07-20T19:43:12.351359751Z","Action":"output","Package":"github.com/spf13/viper/internal/encoding/dotenv","Test":"TestCodec_Decode","Output":"--- PASS: TestCodec_Decode (0.00s)\n"}
+{"Time":"2026-07-20T19:43:12.3513653Z","Action":"pass","Package":"github.com/spf13/viper/internal/encoding/dotenv","Test":"TestCodec_Decode","Elapsed":0}
+{"Time":"2026-07-20T19:43:12.351368288Z","Action":"output","Package":"github.com/spf13/viper/internal/encoding/dotenv","Output":"PASS\n"}
+{"Time":"2026-07-20T19:43:12.351304536Z","Action":"run","Package":"github.com/spf13/viper/internal/encoding/json","Test":"TestCodec_Decode/InvalidData"}
+{"Time":"2026-07-20T19:43:12.351374006Z","Action":"output","Package":"github.com/spf13/viper/internal/encoding/json","Test":"TestCodec_Decode/InvalidData","Output":"=== RUN   TestCodec_Decode/InvalidData\n"}
+{"Time":"2026-07-20T19:43:12.351376607Z","Action":"output","Package":"github.com/spf13/viper/internal/encoding/json","Test":"TestCodec_Decode/InvalidData","Output":"    codec_test.go:85: decoding failed as expected: invalid character 'i' looking for beginning of value\n"}
+{"Time":"2026-07-20T19:43:12.351379455Z","Action":"output","Package":"github.com/spf13/viper/internal/encoding/json","Test":"TestCodec_Decode/InvalidData","Output":"--- PASS: TestCodec_Decode/InvalidData (0.00s)\n"}
+{"Time":"2026-07-20T19:43:12.351382004Z","Action":"pass","Package":"github.com/spf13/viper/internal/encoding/json","Test":"TestCodec_Decode/InvalidData","Elapsed":0}
+{"Time":"2026-07-20T19:43:12.351384705Z","Action":"output","Package":"github.com/spf13/viper/internal/encoding/json","Test":"TestCodec_Decode","Output":"--- PASS: TestCodec_Decode (0.00s)\n"}
+{"Time":"2026-07-20T19:43:12.351386927Z","Action":"pass","Package":"github.com/spf13/viper/internal/encoding/json","Test":"TestCodec_Decode","Elapsed":0}
+{"Time":"2026-07-20T19:43:12.351390382Z","Action":"output","Package":"github.com/spf13/viper/internal/encoding/json","Output":"PASS\n"}
+{"Time":"2026-07-20T19:43:12.351310427Z","Action":"output","Package":"github.com/spf13/viper/internal/encoding/toml","Test":"TestCodec_Encode","Output":"--- PASS: TestCodec_Encode (0.00s)\n"}
+{"Time":"2026-07-20T19:43:12.351396094Z","Action":"pass","Package":"github.com/spf13/viper/internal/encoding/toml","Test":"TestCodec_Encode","Elapsed":0}
+{"Time":"2026-07-20T19:43:12.351384841Z","Action":"run","Package":"github.com/spf13/viper/internal/encoding/yaml","Test":"TestCodec_Encode"}
+{"Time":"2026-07-20T19:43:12.351401182Z","Action":"output","Package":"github.com/spf13/viper/internal/encoding/yaml","Test":"TestCodec_Encode","Output":"=== RUN   TestCodec_Encode\n"}
+{"Time":"2026-07-20T19:43:12.351398507Z","Action":"run","Package":"github.com/spf13/viper/internal/encoding/toml","Test":"TestCodec_Decode"}
+{"Time":"2026-07-20T19:43:12.351407222Z","Action":"output","Package":"github.com/spf13/viper/internal/encoding/toml","Test":"TestCodec_Decode","Output":"=== RUN   TestCodec_Decode\n"}
+{"Time":"2026-07-20T19:43:12.351410042Z","Action":"run","Package":"github.com/spf13/viper/internal/encoding/toml","Test":"TestCodec_Decode/OK"}
+{"Time":"2026-07-20T19:43:12.351412145Z","Action":"output","Package":"github.com/spf13/viper/internal/encoding/toml","Test":"TestCodec_Decode/OK","Output":"=== RUN   TestCodec_Decode/OK\n"}
+{"Time":"2026-07-20T19:43:12.351415197Z","Action":"output","Package":"github.com/spf13/viper/internal/encoding/toml","Test":"TestCodec_Decode/OK","Output":"--- PASS: TestCodec_Decode/OK (0.00s)\n"}
+{"Time":"2026-07-20T19:43:12.351417823Z","Action":"pass","Package":"github.com/spf13/viper/internal/encoding/toml","Test":"TestCodec_Decode/OK","Elapsed":0}
+{"Time":"2026-07-20T19:43:12.351420317Z","Action":"run","Package":"github.com/spf13/viper/internal/encoding/toml","Test":"TestCodec_Decode/InvalidData"}
+{"Time":"2026-07-20T19:43:12.351422169Z","Action":"output","Package":"github.com/spf13/viper/internal/encoding/toml","Test":"TestCodec_Decode/InvalidData","Output":"=== RUN   TestCodec_Decode/InvalidData\n"}
+{"Time":"2026-07-20T19:43:12.351426027Z","Action":"output","Package":"github.com/spf13/viper/internal/encoding/toml","Test":"TestCodec_Decode/InvalidData","Output":"    codec_test.go:95: decoding failed as expected: toml: expected character =\n"}
+{"Time":"2026-07-20T19:43:12.351431957Z","Action":"output","Package":"github.com/spf13/viper/internal/encoding/toml","Test":"TestCodec_Decode/InvalidData","Output":"--- PASS: TestCodec_Decode/InvalidData (0.00s)\n"}
+{"Time":"2026-07-20T19:43:12.351434885Z","Action":"pass","Package":"github.com/spf13/viper/internal/encoding/toml","Test":"TestCodec_Decode/InvalidData","Elapsed":0}
+{"Time":"2026-07-20T19:43:12.351437575Z","Action":"output","Package":"github.com/spf13/viper/internal/encoding/toml","Test":"TestCodec_Decode","Output":"--- PASS: TestCodec_Decode (0.00s)\n"}
+{"Time":"2026-07-20T19:43:12.351439731Z","Action":"pass","Package":"github.com/spf13/viper/internal/encoding/toml","Test":"TestCodec_Decode","Elapsed":0}
+{"Time":"2026-07-20T19:43:12.351441703Z","Action":"output","Package":"github.com/spf13/viper/internal/encoding/toml","Output":"PASS\n"}
+{"Time":"2026-07-20T19:43:12.35146181Z","Action":"output","Package":"github.com/spf13/viper/internal/encoding/yaml","Test":"TestCodec_Encode","Output":"--- PASS: TestCodec_Encode (0.00s)\n"}
+{"Time":"2026-07-20T19:43:12.351465626Z","Action":"pass","Package":"github.com/spf13/viper/internal/encoding/yaml","Test":"TestCodec_Encode","Elapsed":0}
+{"Time":"2026-07-20T19:43:12.351469148Z","Action":"run","Package":"github.com/spf13/viper/internal/encoding/yaml","Test":"TestCodec_Decode"}
+{"Time":"2026-07-20T19:43:12.351471161Z","Action":"output","Package":"github.com/spf13/viper/internal/encoding/yaml","Test":"TestCodec_Decode","Output":"=== RUN   TestCodec_Decode\n"}
+{"Time":"2026-07-20T19:43:12.351481523Z","Action":"run","Package":"github.com/spf13/viper/internal/encoding/yaml","Test":"TestCodec_Decode/OK"}
+{"Time":"2026-07-20T19:43:12.351485679Z","Action":"output","Package":"github.com/spf13/viper/internal/encoding/yaml","Test":"TestCodec_Decode/OK","Output":"=== RUN   TestCodec_Decode/OK\n"}
+{"Time":"2026-07-20T19:43:12.35156584Z","Action":"output","Package":"github.com/spf13/viper/internal/encoding/yaml","Test":"TestCodec_Decode/OK","Output":"--- PASS: TestCodec_Decode/OK (0.00s)\n"}
+{"Time":"2026-07-20T19:43:12.351569295Z","Action":"pass","Package":"github.com/spf13/viper/internal/encoding/yaml","Test":"TestCodec_Decode/OK","Elapsed":0}
+{"Time":"2026-07-20T19:43:12.351572389Z","Action":"run","Package":"github.com/spf13/viper/internal/encoding/yaml","Test":"TestCodec_Decode/InvalidData"}
+{"Time":"2026-07-20T19:43:12.351574971Z","Action":"output","Package":"github.com/spf13/viper/internal/encoding/yaml","Test":"TestCodec_Decode/InvalidData","Output":"=== RUN   TestCodec_Decode/InvalidData\n"}
+{"Time":"2026-07-20T19:43:12.351580755Z","Action":"output","Package":"github.com/spf13/viper/internal/encoding/json","Output":"ok  \tgithub.com/spf13/viper/internal/encoding/json\t0.002s\n"}
+{"Time":"2026-07-20T19:43:12.351597069Z","Action":"pass","Package":"github.com/spf13/viper/internal/encoding/json","Elapsed":0.002}
+{"Time":"2026-07-20T19:43:12.351638498Z","Action":"output","Package":"github.com/spf13/viper/internal/encoding/yaml","Test":"TestCodec_Decode/InvalidData","Output":"    codec_test.go:126: decoding failed as expected: yaml: unmarshal errors:\n"}
+{"Time":"2026-07-20T19:43:12.351641831Z","Action":"output","Package":"github.com/spf13/viper/internal/encoding/yaml","Test":"TestCodec_Decode/InvalidData","Output":"          line 1: cannot unmarshal !!str `invalid...` into map[string]interface {}\n"}
+{"Time":"2026-07-20T19:43:12.351644744Z","Action":"output","Package":"github.com/spf13/viper/internal/encoding/yaml","Test":"TestCodec_Decode/InvalidData","Output":"--- PASS: TestCodec_Decode/InvalidData (0.00s)\n"}
+{"Time":"2026-07-20T19:43:12.351647076Z","Action":"pass","Package":"github.com/spf13/viper/internal/encoding/yaml","Test":"TestCodec_Decode/InvalidData","Elapsed":0}
+{"Time":"2026-07-20T19:43:12.351649668Z","Action":"output","Package":"github.com/spf13/viper/internal/encoding/yaml","Test":"TestCodec_Decode","Output":"--- PASS: TestCodec_Decode (0.00s)\n"}
+{"Time":"2026-07-20T19:43:12.35165453Z","Action":"pass","Package":"github.com/spf13/viper/internal/encoding/yaml","Test":"TestCodec_Decode","Elapsed":0}
+{"Time":"2026-07-20T19:43:12.351657537Z","Action":"output","Package":"github.com/spf13/viper/internal/encoding/yaml","Output":"PASS\n"}
+{"Time":"2026-07-20T19:43:12.351710947Z","Action":"output","Package":"github.com/spf13/viper/internal/encoding/dotenv","Output":"ok  \tgithub.com/spf13/viper/internal/encoding/dotenv\t0.002s\n"}
+{"Time":"2026-07-20T19:43:12.35172725Z","Action":"output","Package":"github.com/spf13/viper/internal/encoding/toml","Output":"ok  \tgithub.com/spf13/viper/internal/encoding/toml\t0.002s\n"}
+{"Time":"2026-07-20T19:43:12.351733788Z","Action":"pass","Package":"github.com/spf13/viper/internal/encoding/toml","Elapsed":0.002}
+{"Time":"2026-07-20T19:43:12.351727855Z","Action":"pass","Package":"github.com/spf13/viper/internal/encoding/dotenv","Elapsed":0.002}
+{"Time":"2026-07-20T19:43:12.351937964Z","Action":"output","Package":"github.com/spf13/viper/internal/encoding/yaml","Output":"ok  \tgithub.com/spf13/viper/internal/encoding/yaml\t0.002s\n"}
+{"Time":"2026-07-20T19:43:12.351956197Z","Action":"pass","Package":"github.com/spf13/viper/internal/encoding/yaml","Elapsed":0.002}

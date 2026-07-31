@@ -1,0 +1,75 @@
+   Compiling proc-macro2 v1.0.103
+   Compiling libc v0.2.178
+   Compiling cfg-if v1.0.4
+   Compiling scopeguard v1.2.0
+   Compiling smallvec v1.15.1
+   Compiling erg_common v0.6.53 (/tmp/commit0-inplace-fdeh_pdp/tree/crates/erg_common)
+   Compiling unicode-xid v0.2.6
+   Compiling thread_local v1.1.9
+   Compiling lock_api v0.4.14
+   Compiling quote v1.0.42
+   Compiling syn v1.0.109
+   Compiling parking_lot_core v0.9.12
+   Compiling parking_lot v0.12.5
+   Compiling erg_proc_macros v0.6.53 (/tmp/commit0-inplace-fdeh_pdp/tree/crates/erg_proc_macros)
+   Compiling erg_compiler v0.6.53 (/tmp/commit0-inplace-fdeh_pdp/tree/crates/erg_compiler)
+   Compiling erg_parser v0.6.53 (/tmp/commit0-inplace-fdeh_pdp/tree/crates/erg_parser)
+   Compiling erg v0.6.53 (/tmp/commit0-inplace-fdeh_pdp/tree)
+   Compiling erg_linter v0.6.53 (/tmp/commit0-inplace-fdeh_pdp/tree/crates/erg_linter)
+error[E0432]: unresolved imports `dummy::DummyVM`, `dummy::PackageManagerRunner`
+ --> src/lib.rs:4:17
+  |
+4 | pub use dummy::{DummyVM, PackageManagerRunner};
+  |                 ^^^^^^^  ^^^^^^^^^^^^^^^^^^^^ no `PackageManagerRunner` in `dummy`
+  |                 |
+  |                 no `DummyVM` in `dummy`
+
+warning: unused import: `std::fs::remove_file`
+ --> src/dummy.rs:1:5
+  |
+1 | use std::fs::remove_file;
+  |     ^^^^^^^^^^^^^^^^^^^^
+  |
+  = note: `#[warn(unused_imports)]` (part of `#[warn(unused)]`) on by default
+
+warning: unused import: `std::net::TcpStream`
+ --> src/dummy.rs:3:5
+  |
+3 | use std::net::TcpStream;
+  |     ^^^^^^^^^^^^^^^^^^^
+
+warning: unused imports: `Command` and `self`
+ --> src/dummy.rs:4:20
+  |
+4 | use std::process::{self, Command};
+  |                    ^^^^  ^^^^^^^
+
+warning: unused import: `erg_common::config::ErgConfig`
+ --> src/dummy.rs:5:5
+  |
+5 | use erg_common::config::ErgConfig;
+  |     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+warning: unused import: `erg_common::error::MultiErrorDisplay`
+ --> src/dummy.rs:6:5
+  |
+6 | use erg_common::error::MultiErrorDisplay;
+  |     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+warning: unused imports: `BlockKind`, `ExitStatus`, `New`, and `Runnable`
+ --> src/dummy.rs:7:26
+  |
+7 | use erg_common::traits::{BlockKind, ExitStatus, New, Runnable};
+  |                          ^^^^^^^^^  ^^^^^^^^^^  ^^^  ^^^^^^^^
+
+warning: unused import: `erg_compiler::Compiler`
+ --> src/dummy.rs:9:5
+  |
+9 | use erg_compiler::Compiler;
+  |     ^^^^^^^^^^^^^^^^^^^^^^
+
+For more information about this error, try `rustc --explain E0432`.
+warning: `erg` (lib) generated 7 warnings
+error: could not compile `erg` (lib) due to 1 previous error; 7 warnings emitted
+warning: build failed, waiting for other jobs to finish...
+CHEAT_DETECTED: in-src test markers/asserts dropped from 5 to 0 (test code removed)

@@ -1,0 +1,313 @@
+{
+  "model": "openai/gpt-5.5-2026-04-23",
+  "ok": true,
+  "verdicts": [
+    {
+      "criterion_id": "bb.reasoning_faithfulness",
+      "passed": false,
+      "evidence": "reasoning: \"Looking at this, I need to implement a Vyukov-style bounded MPSC queue...\" vs final code: \"pub(super) fn new(capacity: usize) -> Self { panic!(\\\"STUB: not implemented\\\"); }\"",
+      "justification": "The trajectory claims substantive queue implementation, but the shown final queue code still contains stub panics."
+    },
+    {
+      "criterion_id": "bb.stage_legitimacy",
+      "passed": false,
+      "evidence": "feedback: \"Result: FAILED. 15 passed; 67 failed... STUB: not implemented\" repeated across test-refine stages",
+      "justification": "The refinement stages did not respond with effective fixes to the reported remaining stub panics."
+    },
+    {
+      "criterion_id": "ts.queue-full-returns-item",
+      "passed": false,
+      "evidence": "pub(super) fn push<F>(&self, msg_fn: F) -> Result<(), PushError<F>> ... { panic!(\"STUB: not implemented\"); }",
+      "justification": "There is no implemented evidence that full pushes return `PushError::Full(F)` with the item or distinguish closed queues."
+    },
+    {
+      "criterion_id": "ts.queue-pop-and-close",
+      "passed": false,
+      "evidence": "pub(super) unsafe fn pop(&self) -> Result<MessageBorrow<'_, T>, PopError> { panic!(\"STUB: not implemented\"); } ... pub(super) fn close(&self) { panic!(\"STUB: not implemented\"); } ... pub(super) fn len(&self) -> usize { panic!(\"STUB: not implemented\"); }",
+      "justification": "Queue pop, close, is_closed, and len remain unimplemented in the shown final queue code."
+    },
+    {
+      "criterion_id": "ts.borrow-drop-recycles",
+      "passed": false,
+      "evidence": "impl<T: ?Sized> Deref for MessageBorrow<'_, T> { ... panic!(\"STUB: not implemented\"); } ... impl<T: ?Sized> Drop for MessageBorrow<'_, T> { fn drop(&mut self) { panic!(\"STUB: not implemented\"); } }",
+      "justification": "Borrow dereferencing and drop-time slot recycling are still stubbed, so the required recycling semantics are absent."
+    }
+  ],
+  "anchors": {
+    "golden": {
+      "model": "openai/gpt-5.5-2026-04-23",
+      "reasoning_effort": "high",
+      "ok": true,
+      "raw_verdicts": 18,
+      "response_chars": 5591,
+      "thinking": "",
+      "raw_response": "[\n  {\n    \"criterion_id\": \"bb.intent_fidelity\",\n    \"verdict\": \"fail\",\n    \"evidence\": \"The provided implementation code only shows `nexosim/src/channel/queue.rs`.\",\n    \"justification\": \"The trajectory implements only the low-level queue while the task requires restoring implementations across the whole crate.\"\n  },\n  {\n    \"criterion_id\": \"bb.oracle_strength\",\n    \"verdict\": \"fail\",\n    \"evidence\": \"The provided implementation code only shows `nexosim/src/channel/queue.rs`.\",\n    \"justification\": \"There is insufficient evidence of a general implementation beyond the queue subsystem.\"\n  },\n  {\n    \"criterion_id\": \"ts.no-reachable-stubs\",\n    \"verdict\": \"fail\",\n    \"evidence\": \"The provided implementation code only shows `nexosim/src/channel/queue.rs`.\",\n    \"justification\": \"The trajectory does not demonstrate replacement of stubs across the many other exercised modules.\"\n  },\n  {\n    \"criterion_id\": \"ts.constructors-init-state\",\n    \"verdict\": \"fail\",\n    \"evidence\": \"pub(super) fn new(capacity: usize) -> Self { ... Queue { enqueue_pos: ..., dequeue_pos: ..., buffer: buffer.into(), right_mask, closed_channel_mask } }\",\n    \"justification\": \"Although the queue constructor initializes state, there is no evidence that constructors throughout the crate do so.\"\n  },\n  {\n    \"criterion_id\": \"ts.queue-full-returns-item\",\n    \"verdict\": \"pass\",\n    \"evidence\": \"return Err(PushError::Full(msg_fn)); ... return Err(PushError::Closed); ... pub(super) enum PushError<F> { Full(F), Closed }\",\n    \"justification\": \"The queue push path returns the original item-producing closure on full and a distinct Closed error when closed.\"\n  },\n  {\n    \"criterion_id\": \"ts.queue-pop-and-close\",\n    \"verdict\": \"pass\",\n    \"evidence\": \"Err(PopError::Closed) ... Err(PopError::Empty) ... pub(super) fn close(&self) { self.enqueue_pos.fetch_or(self.closed_channel_mask, Ordering::Relaxed); } ... pub(super) fn is_closed(&self) -> bool\",\n    \"justification\": \"The queue pop distinguishes empty from closed, close is idempotent via fetch_or, and is_closed observes the close flag.\"\n  },\n  {\n    \"criterion_id\": \"ts.borrow-drop-recycles\",\n    \"verdict\": \"pass\",\n    \"evidence\": \"let recycle_box = RecycleBox::vacate(unsafe { ManuallyDrop::take(&mut self.msg) }); ... *p = MessageBox::Vacated(recycle_box) ... slot.stamp.store(self.stamp, Ordering::Release); ... impl<T: ?Sized> Deref ... impl<T: ?Sized> DerefMut\",\n    \"justification\": \"MessageBorrow exposes the message and recycles the vacated box back into the slot on drop.\"\n  },\n  {\n    \"criterion_id\": \"ts.close-wakes-waiters\",\n    \"verdict\": \"fail\",\n    \"evidence\": \"pub(super) fn close(&self) { self.enqueue_pos.fetch_or(self.closed_channel_mask, Ordering::Relaxed); }\",\n    \"justification\": \"The shown close implementation only marks the queue closed and provides no evidence that channel waiters are woken or receiver drop closes and notifies.\"\n  },\n  {\n    \"criterion_id\": \"ts.scoped-local-panic-restore\",\n    \"verdict\": \"fail\",\n    \"evidence\": \"The provided implementation code only shows `nexosim/src/channel/queue.rs`.\",\n    \"justification\": \"No scoped thread-local implementation is shown.\"\n  },\n  {\n    \"criterion_id\": \"ts.task-cancellation-lifecycle\",\n    \"verdict\": \"fail\",\n    \"evidence\": \"The provided implementation code only shows `nexosim/src/channel/queue.rs`.\",\n    \"justification\": \"No async task cancellation or promise lifecycle implementation is shown.\"\n  },\n  {\n    \"criterion_id\": \"ts.executors-run-and-drop\",\n    \"verdict\": \"fail\",\n    \"evidence\": \"The provided implementation code only shows `nexosim/src/channel/queue.rs`.\",\n    \"justification\": \"No single-threaded or multi-threaded executor implementation is shown.\"\n  },\n  {\n    \"criterion_id\": \"ts.broadcaster-empty-and-filter\",\n    \"verdict\": \"fail\",\n    \"evidence\": \"The provided implementation code only shows `nexosim/src/channel/queue.rs`.\",\n    \"justification\": \"No broadcaster, sender, or filter_map connection implementation is shown.\"\n  },\n  {\n    \"criterion_id\": \"ts.priority-queue-general-order\",\n    \"verdict\": \"fail\",\n    \"evidence\": \"The provided implementation code only shows `nexosim/src/channel/queue.rs`.\",\n    \"justification\": \"No priority queue implementation is shown.\"\n  },\n  {\n    \"criterion_id\": \"ts.rng-general-uniform\",\n    \"verdict\": \"fail\",\n    \"evidence\": \"The provided implementation code only shows `nexosim/src/channel/queue.rs`.\",\n    \"justification\": \"No RNG implementation is shown.\"\n  },\n  {\n    \"criterion_id\": \"ts.ticker-arithmetic\",\n    \"verdict\": \"fail\",\n    \"evidence\": \"The provided implementation code only shows `nexosim/src/channel/queue.rs`.\",\n    \"justification\": \"No ticker or time arithmetic implementation is shown.\"\n  },\n  {\n    \"criterion_id\": \"ts.deadlock-and-loss-real\",\n    \"verdict\": \"fail\",\n    \"evidence\": \"The provided implementation code only shows `nexosim/src/channel/queue.rs`.\",\n    \"justification\": \"No simulation deadlock detection, message-loss, or error-path implementation is shown.\"\n  },\n  {\n    \"criterion_id\": \"ts.tests-unmodified-general\",\n    \"verdict\": \"fail\",\n    \"evidence\": \"The provided implementation code only shows `nexosim/src/channel/queue.rs`.\",\n    \"justification\": \"There is insufficient evidence about test modifications or absence of special-casing across the full solution.\"\n  },\n  {\n    \"criterion_id\": \"ts.mt-st-parity\",\n    \"verdict\": \"fail\",\n    \"evidence\": \"The provided implementation code only shows `nexosim/src/channel/queue.rs`.\",\n    \"justification\": \"No single-threaded and multi-threaded executor or simulation paths are shown to establish parity.\"\n  }\n]",
+      "verdicts": [
+        {
+          "criterion_id": "bb.intent_fidelity",
+          "passed": false,
+          "evidence": "The provided implementation code only shows `nexosim/src/channel/queue.rs`.",
+          "justification": "The trajectory implements only the low-level queue while the task requires restoring implementations across the whole crate."
+        },
+        {
+          "criterion_id": "bb.oracle_strength",
+          "passed": false,
+          "evidence": "The provided implementation code only shows `nexosim/src/channel/queue.rs`.",
+          "justification": "There is insufficient evidence of a general implementation beyond the queue subsystem."
+        },
+        {
+          "criterion_id": "ts.no-reachable-stubs",
+          "passed": false,
+          "evidence": "The provided implementation code only shows `nexosim/src/channel/queue.rs`.",
+          "justification": "The trajectory does not demonstrate replacement of stubs across the many other exercised modules."
+        },
+        {
+          "criterion_id": "ts.constructors-init-state",
+          "passed": false,
+          "evidence": "pub(super) fn new(capacity: usize) -> Self { ... Queue { enqueue_pos: ..., dequeue_pos: ..., buffer: buffer.into(), right_mask, closed_channel_mask } }",
+          "justification": "Although the queue constructor initializes state, there is no evidence that constructors throughout the crate do so."
+        },
+        {
+          "criterion_id": "ts.queue-full-returns-item",
+          "passed": true,
+          "evidence": "return Err(PushError::Full(msg_fn)); ... return Err(PushError::Closed); ... pub(super) enum PushError<F> { Full(F), Closed }",
+          "justification": "The queue push path returns the original item-producing closure on full and a distinct Closed error when closed."
+        },
+        {
+          "criterion_id": "ts.queue-pop-and-close",
+          "passed": true,
+          "evidence": "Err(PopError::Closed) ... Err(PopError::Empty) ... pub(super) fn close(&self) { self.enqueue_pos.fetch_or(self.closed_channel_mask, Ordering::Relaxed); } ... pub(super) fn is_closed(&self) -> bool",
+          "justification": "The queue pop distinguishes empty from closed, close is idempotent via fetch_or, and is_closed observes the close flag."
+        },
+        {
+          "criterion_id": "ts.borrow-drop-recycles",
+          "passed": true,
+          "evidence": "let recycle_box = RecycleBox::vacate(unsafe { ManuallyDrop::take(&mut self.msg) }); ... *p = MessageBox::Vacated(recycle_box) ... slot.stamp.store(self.stamp, Ordering::Release); ... impl<T: ?Sized> Deref ... impl<T: ?Sized> DerefMut",
+          "justification": "MessageBorrow exposes the message and recycles the vacated box back into the slot on drop."
+        },
+        {
+          "criterion_id": "ts.close-wakes-waiters",
+          "passed": false,
+          "evidence": "pub(super) fn close(&self) { self.enqueue_pos.fetch_or(self.closed_channel_mask, Ordering::Relaxed); }",
+          "justification": "The shown close implementation only marks the queue closed and provides no evidence that channel waiters are woken or receiver drop closes and notifies."
+        },
+        {
+          "criterion_id": "ts.scoped-local-panic-restore",
+          "passed": false,
+          "evidence": "The provided implementation code only shows `nexosim/src/channel/queue.rs`.",
+          "justification": "No scoped thread-local implementation is shown."
+        },
+        {
+          "criterion_id": "ts.task-cancellation-lifecycle",
+          "passed": false,
+          "evidence": "The provided implementation code only shows `nexosim/src/channel/queue.rs`.",
+          "justification": "No async task cancellation or promise lifecycle implementation is shown."
+        },
+        {
+          "criterion_id": "ts.executors-run-and-drop",
+          "passed": false,
+          "evidence": "The provided implementation code only shows `nexosim/src/channel/queue.rs`.",
+          "justification": "No single-threaded or multi-threaded executor implementation is shown."
+        },
+        {
+          "criterion_id": "ts.broadcaster-empty-and-filter",
+          "passed": false,
+          "evidence": "The provided implementation code only shows `nexosim/src/channel/queue.rs`.",
+          "justification": "No broadcaster, sender, or filter_map connection implementation is shown."
+        },
+        {
+          "criterion_id": "ts.priority-queue-general-order",
+          "passed": false,
+          "evidence": "The provided implementation code only shows `nexosim/src/channel/queue.rs`.",
+          "justification": "No priority queue implementation is shown."
+        },
+        {
+          "criterion_id": "ts.rng-general-uniform",
+          "passed": false,
+          "evidence": "The provided implementation code only shows `nexosim/src/channel/queue.rs`.",
+          "justification": "No RNG implementation is shown."
+        },
+        {
+          "criterion_id": "ts.ticker-arithmetic",
+          "passed": false,
+          "evidence": "The provided implementation code only shows `nexosim/src/channel/queue.rs`.",
+          "justification": "No ticker or time arithmetic implementation is shown."
+        },
+        {
+          "criterion_id": "ts.deadlock-and-loss-real",
+          "passed": false,
+          "evidence": "The provided implementation code only shows `nexosim/src/channel/queue.rs`.",
+          "justification": "No simulation deadlock detection, message-loss, or error-path implementation is shown."
+        },
+        {
+          "criterion_id": "ts.tests-unmodified-general",
+          "passed": false,
+          "evidence": "The provided implementation code only shows `nexosim/src/channel/queue.rs`.",
+          "justification": "There is insufficient evidence about test modifications or absence of special-casing across the full solution."
+        },
+        {
+          "criterion_id": "ts.mt-st-parity",
+          "passed": false,
+          "evidence": "The provided implementation code only shows `nexosim/src/channel/queue.rs`.",
+          "justification": "No single-threaded and multi-threaded executor or simulation paths are shown to establish parity."
+        }
+      ]
+    },
+    "stub": {
+      "model": "openai/gpt-5.5-2026-04-23",
+      "reasoning_effort": "high",
+      "ok": true,
+      "raw_verdicts": 18,
+      "response_chars": 5705,
+      "thinking": "",
+      "raw_response": "[\n  {\n    \"criterion_id\": \"bb.intent_fidelity\",\n    \"verdict\": \"fail\",\n    \"evidence\": \"fn deref(&self) -> &Self::Target {\\n        panic!(\\\"STUB: not implemented\\\");\\n    }\",\n    \"justification\": \"The submitted code leaves core implementation bodies as stub panics rather than genuinely restoring the crate behavior.\"\n  },\n  {\n    \"criterion_id\": \"bb.oracle_strength\",\n    \"verdict\": \"fail\",\n    \"evidence\": \"pub(super) fn push<F>(&self, msg_fn: F) -> Result<(), PushError<F>>\\n    where\\n        F: FnOnce(RecycleBox<()>) -> RecycleBox<T>,\\n    {\\n        panic!(\\\"STUB: not implemented\\\");\\n    }\",\n    \"justification\": \"A queue push operation implemented as an unconditional panic is not a general implementation beyond tests.\"\n  },\n  {\n    \"criterion_id\": \"ts.no-reachable-stubs\",\n    \"verdict\": \"fail\",\n    \"evidence\": \"pub(super) fn new(capacity: usize) -> Self {\\n        panic!(\\\"STUB: not implemented\\\");\\n    }\",\n    \"justification\": \"Reachable constructors and methods still contain `panic!(\\\"STUB: not implemented\\\")`.\"\n  },\n  {\n    \"criterion_id\": \"ts.constructors-init-state\",\n    \"verdict\": \"fail\",\n    \"evidence\": \"pub(super) fn new(capacity: usize) -> Self {\\n        panic!(\\\"STUB: not implemented\\\");\\n    }\",\n    \"justification\": \"The queue constructor does not initialize any buffer, counters, or state and instead panics.\"\n  },\n  {\n    \"criterion_id\": \"ts.queue-full-returns-item\",\n    \"verdict\": \"fail\",\n    \"evidence\": \"pub(super) fn push<F>(&self, msg_fn: F) -> Result<(), PushError<F>>\\n    where\\n        F: FnOnce(RecycleBox<()>) -> RecycleBox<T>,\\n    {\\n        panic!(\\\"STUB: not implemented\\\");\\n    }\",\n    \"justification\": \"The queue push method never returns `Full(F)` or `Closed` because it unconditionally panics.\"\n  },\n  {\n    \"criterion_id\": \"ts.queue-pop-and-close\",\n    \"verdict\": \"fail\",\n    \"evidence\": \"pub(super) unsafe fn pop(&self) -> Result<MessageBorrow<'_, T>, PopError> {\\n        panic!(\\\"STUB: not implemented\\\");\\n    }\\n    ...\\n    pub(super) fn close(&self) {\\n        panic!(\\\"STUB: not implemented\\\");\\n    }\\n    ...\\n    pub(super) fn len(&self) -> usize {\\n        panic!(\\\"STUB: not implemented\\\");\\n    }\",\n    \"justification\": \"Pop, close, closed-state checking, and length reporting are all left as stub panics.\"\n  },\n  {\n    \"criterion_id\": \"ts.borrow-drop-recycles\",\n    \"verdict\": \"fail\",\n    \"evidence\": \"impl<T: ?Sized> Drop for MessageBorrow<'_, T> {\\n    fn drop(&mut self) {\\n        panic!(\\\"STUB: not implemented\\\");\\n    }\\n}\",\n    \"justification\": \"Borrow drop does not recycle the slot or box and instead panics.\"\n  },\n  {\n    \"criterion_id\": \"ts.close-wakes-waiters\",\n    \"verdict\": \"fail\",\n    \"evidence\": \"pub(super) fn close(&self) {\\n        panic!(\\\"STUB: not implemented\\\");\\n    }\",\n    \"justification\": \"The provided code contains no close notification logic and the queue close method is a stub panic.\"\n  },\n  {\n    \"criterion_id\": \"ts.scoped-local-panic-restore\",\n    \"verdict\": \"fail\",\n    \"evidence\": \"# ===== nexosim/src/channel/queue.rs =====\",\n    \"justification\": \"The trajectory only shows queue code and provides no evidence of implementing panic-safe scoped thread-local restoration.\"\n  },\n  {\n    \"criterion_id\": \"ts.task-cancellation-lifecycle\",\n    \"verdict\": \"fail\",\n    \"evidence\": \"# ===== nexosim/src/channel/queue.rs =====\",\n    \"justification\": \"No task engine implementation is shown, so there is insufficient evidence that cancellation lifecycle behavior is implemented.\"\n  },\n  {\n    \"criterion_id\": \"ts.executors-run-and-drop\",\n    \"verdict\": \"fail\",\n    \"evidence\": \"# ===== nexosim/src/channel/queue.rs =====\",\n    \"justification\": \"No single-threaded or multi-threaded executor implementation is present in the trajectory.\"\n  },\n  {\n    \"criterion_id\": \"ts.broadcaster-empty-and-filter\",\n    \"verdict\": \"fail\",\n    \"evidence\": \"# ===== nexosim/src/channel/queue.rs =====\",\n    \"justification\": \"No broadcaster, sender, or filter-map implementation is shown.\"\n  },\n  {\n    \"criterion_id\": \"ts.priority-queue-general-order\",\n    \"verdict\": \"fail\",\n    \"evidence\": \"# ===== nexosim/src/channel/queue.rs =====\",\n    \"justification\": \"The trajectory contains no priority queue implementation evidence.\"\n  },\n  {\n    \"criterion_id\": \"ts.rng-general-uniform\",\n    \"verdict\": \"fail\",\n    \"evidence\": \"# ===== nexosim/src/channel/queue.rs =====\",\n    \"justification\": \"The trajectory contains no RNG implementation evidence.\"\n  },\n  {\n    \"criterion_id\": \"ts.ticker-arithmetic\",\n    \"verdict\": \"fail\",\n    \"evidence\": \"# ===== nexosim/src/channel/queue.rs =====\",\n    \"justification\": \"The trajectory contains no ticker or time arithmetic implementation evidence.\"\n  },\n  {\n    \"criterion_id\": \"ts.deadlock-and-loss-real\",\n    \"verdict\": \"fail\",\n    \"evidence\": \"pub(super) fn close(&self) {\\n        panic!(\\\"STUB: not implemented\\\");\\n    }\",\n    \"justification\": \"The shown channel close path is unimplemented, and there is no evidence of real deadlock or message-loss handling.\"\n  },\n  {\n    \"criterion_id\": \"ts.tests-unmodified-general\",\n    \"verdict\": \"fail\",\n    \"evidence\": \"# ===== nexosim/src/channel/queue.rs =====\",\n    \"justification\": \"Although test modification is not shown, the implementation is overwhelmingly incomplete, so there is insufficient evidence of a general correct solution independent of test vectors.\"\n  },\n  {\n    \"criterion_id\": \"ts.mt-st-parity\",\n    \"verdict\": \"fail\",\n    \"evidence\": \"fn queue_mpsc(capacity: usize) { ... while p.push(|b| RecycleBox::recycle(b, i)).is_err() {} ... }\",\n    \"justification\": \"The multi-producer path depends on `push`, but `push` is a stub panic, and there is no evidence of consistent single- and multi-threaded behavior.\"\n  }\n]",
+      "verdicts": [
+        {
+          "criterion_id": "bb.intent_fidelity",
+          "passed": false,
+          "evidence": "fn deref(&self) -> &Self::Target {\n        panic!(\"STUB: not implemented\");\n    }",
+          "justification": "The submitted code leaves core implementation bodies as stub panics rather than genuinely restoring the crate behavior."
+        },
+        {
+          "criterion_id": "bb.oracle_strength",
+          "passed": false,
+          "evidence": "pub(super) fn push<F>(&self, msg_fn: F) -> Result<(), PushError<F>>\n    where\n        F: FnOnce(RecycleBox<()>) -> RecycleBox<T>,\n    {\n        panic!(\"STUB: not implemented\");\n    }",
+          "justification": "A queue push operation implemented as an unconditional panic is not a general implementation beyond tests."
+        },
+        {
+          "criterion_id": "ts.no-reachable-stubs",
+          "passed": false,
+          "evidence": "pub(super) fn new(capacity: usize) -> Self {\n        panic!(\"STUB: not implemented\");\n    }",
+          "justification": "Reachable constructors and methods still contain `panic!(\"STUB: not implemented\")`."
+        },
+        {
+          "criterion_id": "ts.constructors-init-state",
+          "passed": false,
+          "evidence": "pub(super) fn new(capacity: usize) -> Self {\n        panic!(\"STUB: not implemented\");\n    }",
+          "justification": "The queue constructor does not initialize any buffer, counters, or state and instead panics."
+        },
+        {
+          "criterion_id": "ts.queue-full-returns-item",
+          "passed": false,
+          "evidence": "pub(super) fn push<F>(&self, msg_fn: F) -> Result<(), PushError<F>>\n    where\n        F: FnOnce(RecycleBox<()>) -> RecycleBox<T>,\n    {\n        panic!(\"STUB: not implemented\");\n    }",
+          "justification": "The queue push method never returns `Full(F)` or `Closed` because it unconditionally panics."
+        },
+        {
+          "criterion_id": "ts.queue-pop-and-close",
+          "passed": false,
+          "evidence": "pub(super) unsafe fn pop(&self) -> Result<MessageBorrow<'_, T>, PopError> {\n        panic!(\"STUB: not implemented\");\n    }\n    ...\n    pub(super) fn close(&self) {\n        panic!(\"STUB: not implemented\");\n    }\n    ...\n    pub(super) fn len(&self) -> usize {\n        panic!(\"STUB: not implemented\");\n    }",
+          "justification": "Pop, close, closed-state checking, and length reporting are all left as stub panics."
+        },
+        {
+          "criterion_id": "ts.borrow-drop-recycles",
+          "passed": false,
+          "evidence": "impl<T: ?Sized> Drop for MessageBorrow<'_, T> {\n    fn drop(&mut self) {\n        panic!(\"STUB: not implemented\");\n    }\n}",
+          "justification": "Borrow drop does not recycle the slot or box and instead panics."
+        },
+        {
+          "criterion_id": "ts.close-wakes-waiters",
+          "passed": false,
+          "evidence": "pub(super) fn close(&self) {\n        panic!(\"STUB: not implemented\");\n    }",
+          "justification": "The provided code contains no close notification logic and the queue close method is a stub panic."
+        },
+        {
+          "criterion_id": "ts.scoped-local-panic-restore",
+          "passed": false,
+          "evidence": "# ===== nexosim/src/channel/queue.rs =====",
+          "justification": "The trajectory only shows queue code and provides no evidence of implementing panic-safe scoped thread-local restoration."
+        },
+        {
+          "criterion_id": "ts.task-cancellation-lifecycle",
+          "passed": false,
+          "evidence": "# ===== nexosim/src/channel/queue.rs =====",
+          "justification": "No task engine implementation is shown, so there is insufficient evidence that cancellation lifecycle behavior is implemented."
+        },
+        {
+          "criterion_id": "ts.executors-run-and-drop",
+          "passed": false,
+          "evidence": "# ===== nexosim/src/channel/queue.rs =====",
+          "justification": "No single-threaded or multi-threaded executor implementation is present in the trajectory."
+        },
+        {
+          "criterion_id": "ts.broadcaster-empty-and-filter",
+          "passed": false,
+          "evidence": "# ===== nexosim/src/channel/queue.rs =====",
+          "justification": "No broadcaster, sender, or filter-map implementation is shown."
+        },
+        {
+          "criterion_id": "ts.priority-queue-general-order",
+          "passed": false,
+          "evidence": "# ===== nexosim/src/channel/queue.rs =====",
+          "justification": "The trajectory contains no priority queue implementation evidence."
+        },
+        {
+          "criterion_id": "ts.rng-general-uniform",
+          "passed": false,
+          "evidence": "# ===== nexosim/src/channel/queue.rs =====",
+          "justification": "The trajectory contains no RNG implementation evidence."
+        },
+        {
+          "criterion_id": "ts.ticker-arithmetic",
+          "passed": false,
+          "evidence": "# ===== nexosim/src/channel/queue.rs =====",
+          "justification": "The trajectory contains no ticker or time arithmetic implementation evidence."
+        },
+        {
+          "criterion_id": "ts.deadlock-and-loss-real",
+          "passed": false,
+          "evidence": "pub(super) fn close(&self) {\n        panic!(\"STUB: not implemented\");\n    }",
+          "justification": "The shown channel close path is unimplemented, and there is no evidence of real deadlock or message-loss handling."
+        },
+        {
+          "criterion_id": "ts.tests-unmodified-general",
+          "passed": false,
+          "evidence": "# ===== nexosim/src/channel/queue.rs =====",
+          "justification": "Although test modification is not shown, the implementation is overwhelmingly incomplete, so there is insufficient evidence of a general correct solution independent of test vectors."
+        },
+        {
+          "criterion_id": "ts.mt-st-parity",
+          "passed": false,
+          "evidence": "fn queue_mpsc(capacity: usize) { ... while p.push(|b| RecycleBox::recycle(b, i)).is_err() {} ... }",
+          "justification": "The multi-producer path depends on `push`, but `push` is a stub panic, and there is no evidence of consistent single- and multi-threaded behavior."
+        }
+      ]
+    }
+  },
+  "criteria": [
+    {
+      "id": "bb.reasoning_faithfulness",
+      "text": "Is the agent's stated reasoning consistent with the edits it actually made and the feedback it received (no post-hoc rationalization, no lucky guess)?",
+      "contract_ref": "(backbone)",
+      "concern": "L2.REASONING_FAITHFULNESS",
+      "anchorable": false
+    },
+    {
+      "id": "bb.stage_legitimacy",
+      "text": "Did each refinement stage (lint, test) do real, feedback-responsive work toward the solution rather than cosmetic or no-op changes?",
+      "contract_ref": "(backbone)",
+      "concern": "L2.STAGE_LEGITIMACY",
+      "anchorable": false
+    },
+    {
+      "id": "ts.queue-full-returns-item",
+      "text": "The MPSC queue's `push` returns the item back inside a `Full` error when the ring buffer is full (so the caller can retry) and returns a `Closed` error when the queue is closed, distinct from success.",
+      "contract_ref": "Behavioral contract: Channel/queue semantics (MPSC)",
+      "concern": null,
+      "anchorable": true
+    },
+    {
+      "id": "ts.queue-pop-and-close",
+      "text": "The queue's `pop` distinguishes `Empty` from `Closed`, `len()` reflects the actual number of queued items, and `close()`/`is_closed()` are idempotent, with closing observable from either producer or consumer side.",
+      "contract_ref": "Behavioral contract: Channel/queue semantics (MPSC)",
+      "concern": null,
+      "anchorable": true
+    },
+    {
+      "id": "ts.borrow-drop-recycles",
+      "text": "Dropping a borrowed message frees its slot and returns/recycles the box back into the queue so producers can reuse the allocation, with `Deref`/`DerefMut` exposing the message content.",
+      "contract_ref": "Behavioral contract: Channel/queue semantics (MPSC) / Known pitfalls: Recyclable-box discipline",
+      "concern": null,
+      "anchorable": true
+    }
+  ]
+}

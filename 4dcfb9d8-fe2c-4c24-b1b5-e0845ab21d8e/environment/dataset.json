@@ -1,0 +1,31 @@
+{
+  "instance_id": "commit-0/jsons",
+  "id": "4dcfb9d8-fe2c-4c24-b1b5-e0845ab21d8e",
+  "repo": "Zahgon/jsons",
+  "base_commit": "8d69e8cd3e1322e2225577df5da1da4a3fa32a2f",
+  "reference_commit": "9abbf3a3bd32435ac74bc98c3554ad3c71086036",
+  "setup": {
+    "install": "pip install -e \".\"",
+    "packages": "",
+    "pip_packages": [
+      "pytest",
+      "pytest-json-report",
+      "typish>=1.9.2",
+      "attrs"
+    ],
+    "pre_install": [],
+    "python": "3.7",
+    "specification": "",
+    "version_source": "setup.py:python_requires",
+    "version_conflicts": [],
+    "system_deps_hint": []
+  },
+  "test": {
+    "test_cmd": "pytest",
+    "test_dir": "tests"
+  },
+  "src_dir": "jsons",
+  "base_compiles": null,
+  "language": "python",
+  "ecr_image_uri": "426628337772.dkr.ecr.ap-south-1.amazonaws.com/kaiju_q2:python_ramonhagenaars_jsons"
+}

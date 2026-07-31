@@ -1,0 +1,27 @@
+{"ImportPath":"github.com/gocolly/colly/v2","Action":"build-output","Output":"# github.com/gocolly/colly/v2\n"}
+{"ImportPath":"github.com/gocolly/colly/v2","Action":"build-output","Output":"./colly.go:580:85: not enough arguments in call to c.backend.Cache\n"}
+{"ImportPath":"github.com/gocolly/colly/v2","Action":"build-output","Output":"\thave (*http.Request, int, func(sreq http.Request, statusCode int, headers http.Header) bool, string, time.Duration)\n"}
+{"ImportPath":"github.com/gocolly/colly/v2","Action":"build-output","Output":"\twant (*http.Request, int, checkRequestHeadersFunc, checkResponseHeadersFunc, string, time.Duration)\n"}
+{"ImportPath":"github.com/gocolly/colly/v2","Action":"build-output","Output":"./request.go:61:31: cannot use \u0026r.collector.requestCount (value of type *\"sync/atomic\".Uint32) as *uint32 value in argument to atomic.AddUint32\n"}
+{"ImportPath":"github.com/gocolly/colly/v2","Action":"build-fail"}
+{"Time":"2026-07-21T03:37:39.716538381Z","Action":"start","Package":"github.com/gocolly/colly/v2"}
+{"Time":"2026-07-21T03:37:39.716604763Z","Action":"output","Package":"github.com/gocolly/colly/v2","Output":"FAIL\tgithub.com/gocolly/colly/v2 [build failed]\n"}
+{"Time":"2026-07-21T03:37:39.716612392Z","Action":"fail","Package":"github.com/gocolly/colly/v2","Elapsed":0,"FailedBuild":"github.com/gocolly/colly/v2"}
+{"Time":"2026-07-21T03:37:39.727696993Z","Action":"start","Package":"github.com/gocolly/colly/v2/cmd/colly"}
+{"Time":"2026-07-21T03:37:39.727843403Z","Action":"output","Package":"github.com/gocolly/colly/v2/cmd/colly","Output":"?   \tgithub.com/gocolly/colly/v2/cmd/colly\t[no test files]\n"}
+{"Time":"2026-07-21T03:37:39.727848792Z","Action":"skip","Package":"github.com/gocolly/colly/v2/cmd/colly","Elapsed":0}
+{"Time":"2026-07-21T03:37:39.727858822Z","Action":"start","Package":"github.com/gocolly/colly/v2/debug"}
+{"Time":"2026-07-21T03:37:39.727875261Z","Action":"output","Package":"github.com/gocolly/colly/v2/debug","Output":"?   \tgithub.com/gocolly/colly/v2/debug\t[no test files]\n"}
+{"Time":"2026-07-21T03:37:39.727877984Z","Action":"skip","Package":"github.com/gocolly/colly/v2/debug","Elapsed":0}
+{"Time":"2026-07-21T03:37:39.727883053Z","Action":"start","Package":"github.com/gocolly/colly/v2/extensions"}
+{"Time":"2026-07-21T03:37:39.727889681Z","Action":"output","Package":"github.com/gocolly/colly/v2/extensions","Output":"FAIL\tgithub.com/gocolly/colly/v2/extensions [build failed]\n"}
+{"Time":"2026-07-21T03:37:39.727892396Z","Action":"fail","Package":"github.com/gocolly/colly/v2/extensions","Elapsed":0,"FailedBuild":"github.com/gocolly/colly/v2"}
+{"Time":"2026-07-21T03:37:39.727898383Z","Action":"start","Package":"github.com/gocolly/colly/v2/proxy"}
+{"Time":"2026-07-21T03:37:39.72790149Z","Action":"output","Package":"github.com/gocolly/colly/v2/proxy","Output":"FAIL\tgithub.com/gocolly/colly/v2/proxy [build failed]\n"}
+{"Time":"2026-07-21T03:37:39.727903893Z","Action":"fail","Package":"github.com/gocolly/colly/v2/proxy","Elapsed":0,"FailedBuild":"github.com/gocolly/colly/v2"}
+{"Time":"2026-07-21T03:37:39.727909202Z","Action":"start","Package":"github.com/gocolly/colly/v2/queue"}
+{"Time":"2026-07-21T03:37:39.727916331Z","Action":"output","Package":"github.com/gocolly/colly/v2/queue","Output":"FAIL\tgithub.com/gocolly/colly/v2/queue [build failed]\n"}
+{"Time":"2026-07-21T03:37:39.72791846Z","Action":"fail","Package":"github.com/gocolly/colly/v2/queue","Elapsed":0,"FailedBuild":"github.com/gocolly/colly/v2"}
+{"Time":"2026-07-21T03:37:39.727966652Z","Action":"start","Package":"github.com/gocolly/colly/v2/storage"}
+{"Time":"2026-07-21T03:37:39.727988225Z","Action":"output","Package":"github.com/gocolly/colly/v2/storage","Output":"?   \tgithub.com/gocolly/colly/v2/storage\t[no test files]\n"}
+{"Time":"2026-07-21T03:37:39.727993881Z","Action":"skip","Package":"github.com/gocolly/colly/v2/storage","Elapsed":0}

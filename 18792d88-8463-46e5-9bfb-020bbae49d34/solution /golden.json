@@ -1,0 +1,9 @@
+{
+  "kind": "commit0-golden-ref",
+  "repo": "Zahgon/graphql-jit",
+  "base_commit": "4289f484cd98e0cb569db43c1b9a4372108a0a3d",
+  "reference_commit": "61e5a006156f6c95e9a3246715a135da93216342",
+  "src_dir": "src",
+  "language": "typescript",
+  "note": "Golden solution = the repo at reference_commit; solve.sh fetches+resets to it."
+}

@@ -1,0 +1,287 @@
+{
+  "model": "openai/gpt-5.5-2026-04-23",
+  "ok": true,
+  "verdicts": [
+    {
+      "criterion_id": "bb.reasoning_faithfulness",
+      "passed": false,
+      "evidence": "reasoning: \"I'll implement all the checksum functions.\" ... diff: `u32::from_ne_bytes(value)` / `u16::from_ne_bytes(value)`",
+      "justification": "The trajectory claims to implement the checksum functionality, but the actual edits use native-endian byte interpretation, contradicting the required endianness-correct behavior."
+    },
+    {
+      "criterion_id": "bb.stage_legitimacy",
+      "passed": false,
+      "evidence": "Multiple stages end with \"You can run the tests with:\" and include failed/no-op moments such as `# 1 SEARCH/REPLACE block failed to match!` followed by `reasoning: The changes are already present in the file. No further edits are needed.`",
+      "justification": "The trajectory shows many broad edits but no real test/lint feedback loop, and at least some stages are no-op or unsupported by concrete successful refinement evidence."
+    },
+    {
+      "criterion_id": "ts.checksum-no-zero",
+      "passed": true,
+      "evidence": "`pub fn ones_complement_with_no_zero(sum: u32) -> u16 { let result = ones_complement(sum); if result == 0 { 0xffff } else { result } }` and `pub fn ones_complement(sum: u32) -> u16 { ... !(folded as u16) }`",
+      "justification": "The helper explicitly remaps only a computed zero checksum to `0xffff`, while the ordinary ones-complement function returns the raw complemented value."
+    }
+  ],
+  "anchors": {
+    "golden": {
+      "model": "openai/gpt-5.5-2026-04-23",
+      "reasoning_effort": "high",
+      "ok": true,
+      "raw_verdicts": 18,
+      "response_chars": 5525,
+      "thinking": "",
+      "raw_response": "[\n  {\n    \"criterion_id\": \"bb.intent_fidelity\",\n    \"verdict\": \"fail\",\n    \"evidence\": \"The submitted code only shows an implementation of `etherparse/src/checksum.rs` and no implementations for errors, headers, defrag, parsing, manifests, or versioning.\",\n    \"justification\": \"The trajectory does not demonstrate reimplementation of the crate-wide behavioral contract and contains an explicit checksum endianness flaw.\"\n  },\n  {\n    \"criterion_id\": \"bb.oracle_strength\",\n    \"verdict\": \"fail\",\n    \"evidence\": \"Checksum tests in the submitted file assert against `u16::from_ne_bytes` and `u32::from_ne_bytes`, and implementation uses the same native-endian conversions.\",\n    \"justification\": \"Using native-endian expectations indicates the implementation is not generally correct beyond a weak little-endian oracle.\"\n  },\n  {\n    \"criterion_id\": \"ts.checksum-rfc1071-genuine\",\n    \"verdict\": \"fail\",\n    \"evidence\": \"`pub fn add_4bytes(start: u32, value: [u8; 4]) -> u32 { let (sum, carry) = start.overflowing_add(u32::from_ne_bytes(value)); ... }`\",\n    \"justification\": \"Adding 32-bit native-endian chunks is not a genuine RFC 1071 sum of network-order 16-bit words for arbitrary input.\"\n  },\n  {\n    \"criterion_id\": \"ts.checksum-endianness\",\n    \"verdict\": \"fail\",\n    \"evidence\": \"`u32::from_ne_bytes(value)` and `u16::from_ne_bytes(value)` are used in checksum addition.\",\n    \"justification\": \"Native-endian byte interpretation makes identical input bytes produce different sums on little-endian and big-endian targets.\"\n  },\n  {\n    \"criterion_id\": \"ts.checksum-no-zero\",\n    \"verdict\": \"pass\",\n    \"evidence\": \"`let u16value = ones_complement(sum); if u16value == 0 { 0xffff } else { u16value }`\",\n    \"justification\": \"The no-zero variant explicitly maps an ordinary computed checksum of zero to `0xffff`.\"\n  },\n  {\n    \"criterion_id\": \"ts.checksum-fold-ops\",\n    \"verdict\": \"fail\",\n    \"evidence\": \"`pub fn add_4bytes(&mut self, value: [u8; 4]) -> Sum16BitWords { Sum16BitWords { sum: ... } }` and similarly for `add_8bytes`/`add_16bytes`.\",\n    \"justification\": \"Several operations take `&mut self` but do not mutate `self`, so they do not reliably accumulate into the running sum when used as mutating methods.\"\n  },\n  {\n    \"criterion_id\": \"ts.err-source-behavior\",\n    \"verdict\": \"fail\",\n    \"evidence\": \"No error type implementations or `std::error::Error::source` implementations are shown.\",\n    \"justification\": \"There is insufficient evidence that leaf and wrapper error `source()` behavior is implemented correctly.\"\n  },\n  {\n    \"criterion_id\": \"ts.err-display-derived\",\n    \"verdict\": \"fail\",\n    \"evidence\": \"No `Display` implementations for the error hierarchy are shown.\",\n    \"justification\": \"There is no evidence that error messages are formatted from actual field values.\"\n  },\n  {\n    \"criterion_id\": \"ts.err-accessors-offset\",\n    \"verdict\": \"fail\",\n    \"evidence\": \"No accessor or `add_slice_offset`-style helper implementations are shown.\",\n    \"justification\": \"There is insufficient evidence that offset adjustment helpers add offsets arithmetically correctly.\"\n  },\n  {\n    \"criterion_id\": \"ts.err-from-conversions\",\n    \"verdict\": \"fail\",\n    \"evidence\": \"No `From` conversion implementations between error types are shown.\",\n    \"justification\": \"There is insufficient evidence that required error wrapping/lifting conversions exist.\"\n  },\n  {\n    \"criterion_id\": \"ts.newtype-range-enforced\",\n    \"verdict\": \"fail\",\n    \"evidence\": \"No bounded integer newtype implementations are shown.\",\n    \"justification\": \"There is no evidence that range-checked constructors enforce exact protocol bounds.\"\n  },\n  {\n    \"criterion_id\": \"ts.header-roundtrip\",\n    \"verdict\": \"fail\",\n    \"evidence\": \"No link, network, or transport header read/write implementations are shown.\",\n    \"justification\": \"There is no evidence that header write/read round-trips preserve field values.\"\n  },\n  {\n    \"criterion_id\": \"ts.slice-zero-copy\",\n    \"verdict\": \"fail\",\n    \"evidence\": \"No `...Slice` type implementations are shown.\",\n    \"justification\": \"There is no evidence that zero-copy slice views expose fields and backing slices correctly.\"\n  },\n  {\n    \"criterion_id\": \"ts.lax-vs-strict\",\n    \"verdict\": \"fail\",\n    \"evidence\": \"No strict or lax packet parser implementations are shown.\",\n    \"justification\": \"There is no evidence that lax parsers tolerate truncation while strict parsers reject it.\"\n  },\n  {\n    \"criterion_id\": \"ts.defrag-range-algebra\",\n    \"verdict\": \"fail\",\n    \"evidence\": \"No `IpFragRange` implementation is shown.\",\n    \"justification\": \"There is no evidence that fragment range connectivity and merge semantics are implemented.\"\n  },\n  {\n    \"criterion_id\": \"ts.defrag-pool\",\n    \"verdict\": \"fail\",\n    \"evidence\": \"No defragmentation pool or buffer implementation is shown.\",\n    \"justification\": \"There is no evidence that fragments are reassembled, retained, or buffers reused correctly.\"\n  },\n  {\n    \"criterion_id\": \"ts.feature-gating\",\n    \"verdict\": \"fail\",\n    \"evidence\": \"Only checksum code is shown, with no crate-wide `no_std`, `alloc`, or `std` feature-gating evidence.\",\n    \"justification\": \"There is insufficient evidence that the whole crate compiles under default and no-default-feature configurations.\"\n  },\n  {\n    \"criterion_id\": \"ts.version-consistency\",\n    \"verdict\": \"fail\",\n    \"evidence\": \"No manifest or README changes are shown.\",\n    \"justification\": \"There is no evidence that all version references were consistently bumped to `0.20.3`.\"\n  }\n]",
+      "verdicts": [
+        {
+          "criterion_id": "bb.intent_fidelity",
+          "passed": false,
+          "evidence": "The submitted code only shows an implementation of `etherparse/src/checksum.rs` and no implementations for errors, headers, defrag, parsing, manifests, or versioning.",
+          "justification": "The trajectory does not demonstrate reimplementation of the crate-wide behavioral contract and contains an explicit checksum endianness flaw."
+        },
+        {
+          "criterion_id": "bb.oracle_strength",
+          "passed": false,
+          "evidence": "Checksum tests in the submitted file assert against `u16::from_ne_bytes` and `u32::from_ne_bytes`, and implementation uses the same native-endian conversions.",
+          "justification": "Using native-endian expectations indicates the implementation is not generally correct beyond a weak little-endian oracle."
+        },
+        {
+          "criterion_id": "ts.checksum-rfc1071-genuine",
+          "passed": false,
+          "evidence": "`pub fn add_4bytes(start: u32, value: [u8; 4]) -> u32 { let (sum, carry) = start.overflowing_add(u32::from_ne_bytes(value)); ... }`",
+          "justification": "Adding 32-bit native-endian chunks is not a genuine RFC 1071 sum of network-order 16-bit words for arbitrary input."
+        },
+        {
+          "criterion_id": "ts.checksum-endianness",
+          "passed": false,
+          "evidence": "`u32::from_ne_bytes(value)` and `u16::from_ne_bytes(value)` are used in checksum addition.",
+          "justification": "Native-endian byte interpretation makes identical input bytes produce different sums on little-endian and big-endian targets."
+        },
+        {
+          "criterion_id": "ts.checksum-no-zero",
+          "passed": true,
+          "evidence": "`let u16value = ones_complement(sum); if u16value == 0 { 0xffff } else { u16value }`",
+          "justification": "The no-zero variant explicitly maps an ordinary computed checksum of zero to `0xffff`."
+        },
+        {
+          "criterion_id": "ts.checksum-fold-ops",
+          "passed": false,
+          "evidence": "`pub fn add_4bytes(&mut self, value: [u8; 4]) -> Sum16BitWords { Sum16BitWords { sum: ... } }` and similarly for `add_8bytes`/`add_16bytes`.",
+          "justification": "Several operations take `&mut self` but do not mutate `self`, so they do not reliably accumulate into the running sum when used as mutating methods."
+        },
+        {
+          "criterion_id": "ts.err-source-behavior",
+          "passed": false,
+          "evidence": "No error type implementations or `std::error::Error::source` implementations are shown.",
+          "justification": "There is insufficient evidence that leaf and wrapper error `source()` behavior is implemented correctly."
+        },
+        {
+          "criterion_id": "ts.err-display-derived",
+          "passed": false,
+          "evidence": "No `Display` implementations for the error hierarchy are shown.",
+          "justification": "There is no evidence that error messages are formatted from actual field values."
+        },
+        {
+          "criterion_id": "ts.err-accessors-offset",
+          "passed": false,
+          "evidence": "No accessor or `add_slice_offset`-style helper implementations are shown.",
+          "justification": "There is insufficient evidence that offset adjustment helpers add offsets arithmetically correctly."
+        },
+        {
+          "criterion_id": "ts.err-from-conversions",
+          "passed": false,
+          "evidence": "No `From` conversion implementations between error types are shown.",
+          "justification": "There is insufficient evidence that required error wrapping/lifting conversions exist."
+        },
+        {
+          "criterion_id": "ts.newtype-range-enforced",
+          "passed": false,
+          "evidence": "No bounded integer newtype implementations are shown.",
+          "justification": "There is no evidence that range-checked constructors enforce exact protocol bounds."
+        },
+        {
+          "criterion_id": "ts.header-roundtrip",
+          "passed": false,
+          "evidence": "No link, network, or transport header read/write implementations are shown.",
+          "justification": "There is no evidence that header write/read round-trips preserve field values."
+        },
+        {
+          "criterion_id": "ts.slice-zero-copy",
+          "passed": false,
+          "evidence": "No `...Slice` type implementations are shown.",
+          "justification": "There is no evidence that zero-copy slice views expose fields and backing slices correctly."
+        },
+        {
+          "criterion_id": "ts.lax-vs-strict",
+          "passed": false,
+          "evidence": "No strict or lax packet parser implementations are shown.",
+          "justification": "There is no evidence that lax parsers tolerate truncation while strict parsers reject it."
+        },
+        {
+          "criterion_id": "ts.defrag-range-algebra",
+          "passed": false,
+          "evidence": "No `IpFragRange` implementation is shown.",
+          "justification": "There is no evidence that fragment range connectivity and merge semantics are implemented."
+        },
+        {
+          "criterion_id": "ts.defrag-pool",
+          "passed": false,
+          "evidence": "No defragmentation pool or buffer implementation is shown.",
+          "justification": "There is no evidence that fragments are reassembled, retained, or buffers reused correctly."
+        },
+        {
+          "criterion_id": "ts.feature-gating",
+          "passed": false,
+          "evidence": "Only checksum code is shown, with no crate-wide `no_std`, `alloc`, or `std` feature-gating evidence.",
+          "justification": "There is insufficient evidence that the whole crate compiles under default and no-default-feature configurations."
+        },
+        {
+          "criterion_id": "ts.version-consistency",
+          "passed": false,
+          "evidence": "No manifest or README changes are shown.",
+          "justification": "There is no evidence that all version references were consistently bumped to `0.20.3`."
+        }
+      ]
+    },
+    "stub": {
+      "model": "openai/gpt-5.5-2026-04-23",
+      "reasoning_effort": "high",
+      "ok": true,
+      "raw_verdicts": 18,
+      "response_chars": 4758,
+      "thinking": "",
+      "raw_response": "[\n  {\n    \"criterion_id\": \"bb.intent_fidelity\",\n    \"verdict\": \"fail\",\n    \"evidence\": \"pub fn new() -> Sum16BitWords {\\n        panic!(\\\"STUB: not implemented\\\");\\n    }\",\n    \"justification\": \"The implementation leaves core functionality as explicit stubs, so it does not genuinely implement the packet library task.\"\n  },\n  {\n    \"criterion_id\": \"bb.oracle_strength\",\n    \"verdict\": \"fail\",\n    \"evidence\": \"panic!(\\\"STUB: not implemented\\\");\",\n    \"justification\": \"A solution consisting of panicking stubs is not correct beyond tests and provides no general implementation.\"\n  },\n  {\n    \"criterion_id\": \"ts.checksum-rfc1071-genuine\",\n    \"verdict\": \"fail\",\n    \"evidence\": \"pub fn ones_complement(sum: u32) -> u16 {\\n        panic!(\\\"STUB: not implemented\\\");\\n    }\",\n    \"justification\": \"The checksum folding and complement functions are unimplemented.\"\n  },\n  {\n    \"criterion_id\": \"ts.checksum-endianness\",\n    \"verdict\": \"fail\",\n    \"evidence\": \"assert_eq!(\\n            ! u16::from_ne_bytes([0x12, 0x34]), Sum16BitWords::new().add_slice(& [0x12,\\n            0x34]).ones_complement()\\n        );\",\n    \"justification\": \"The shown tests/trajectory rely on native-endian conversion and the implementation itself is stubbed, giving no evidence of network-order endianness correctness.\"\n  },\n  {\n    \"criterion_id\": \"ts.checksum-no-zero\",\n    \"verdict\": \"fail\",\n    \"evidence\": \"pub fn to_ones_complement_with_no_zero(&self) -> u16 {\\n        panic!(\\\"STUB: not implemented\\\");\\n    }\",\n    \"justification\": \"The no-zero checksum variant is explicitly unimplemented.\"\n  },\n  {\n    \"criterion_id\": \"ts.checksum-fold-ops\",\n    \"verdict\": \"fail\",\n    \"evidence\": \"pub fn add_2bytes(self, value: [u8; 2]) -> Sum16BitWords {\\n        panic!(\\\"STUB: not implemented\\\");\\n    }\",\n    \"justification\": \"The required add/fold operations are present only as panicking stubs.\"\n  },\n  {\n    \"criterion_id\": \"ts.err-source-behavior\",\n    \"verdict\": \"fail\",\n    \"evidence\": \"# ===== etherparse/src/checksum.rs =====\",\n    \"justification\": \"The trajectory provides no implementation evidence for the error hierarchy or source() behavior.\"\n  },\n  {\n    \"criterion_id\": \"ts.err-display-derived\",\n    \"verdict\": \"fail\",\n    \"evidence\": \"# ===== etherparse/src/checksum.rs =====\",\n    \"justification\": \"No error Display implementations are shown, so there is insufficient evidence that messages derive from actual fields.\"\n  },\n  {\n    \"criterion_id\": \"ts.err-accessors-offset\",\n    \"verdict\": \"fail\",\n    \"evidence\": \"# ===== etherparse/src/checksum.rs =====\",\n    \"justification\": \"No accessor or add_slice_offset-style helper implementations are provided.\"\n  },\n  {\n    \"criterion_id\": \"ts.err-from-conversions\",\n    \"verdict\": \"fail\",\n    \"evidence\": \"# ===== etherparse/src/checksum.rs =====\",\n    \"justification\": \"No From/conversion implementations for error types are evidenced.\"\n  },\n  {\n    \"criterion_id\": \"ts.newtype-range-enforced\",\n    \"verdict\": \"fail\",\n    \"evidence\": \"# ===== etherparse/src/checksum.rs =====\",\n    \"justification\": \"No bounded newtype constructors or range checks are shown.\"\n  },\n  {\n    \"criterion_id\": \"ts.header-roundtrip\",\n    \"verdict\": \"fail\",\n    \"evidence\": \"# ===== etherparse/src/checksum.rs =====\",\n    \"justification\": \"No header read/write round-trip implementations are provided.\"\n  },\n  {\n    \"criterion_id\": \"ts.slice-zero-copy\",\n    \"verdict\": \"fail\",\n    \"evidence\": \"# ===== etherparse/src/checksum.rs =====\",\n    \"justification\": \"No slice types or zero-copy accessors are evidenced.\"\n  },\n  {\n    \"criterion_id\": \"ts.lax-vs-strict\",\n    \"verdict\": \"fail\",\n    \"evidence\": \"# ===== etherparse/src/checksum.rs =====\",\n    \"justification\": \"No lax or strict parser implementations are shown.\"\n  },\n  {\n    \"criterion_id\": \"ts.defrag-range-algebra\",\n    \"verdict\": \"fail\",\n    \"evidence\": \"# ===== etherparse/src/checksum.rs =====\",\n    \"justification\": \"No IpFragRange connectivity or merge implementation is provided.\"\n  },\n  {\n    \"criterion_id\": \"ts.defrag-pool\",\n    \"verdict\": \"fail\",\n    \"evidence\": \"# ===== etherparse/src/checksum.rs =====\",\n    \"justification\": \"No defragmentation pool implementation is evidenced.\"\n  },\n  {\n    \"criterion_id\": \"ts.feature-gating\",\n    \"verdict\": \"fail\",\n    \"evidence\": \"panic!(\\\"STUB: not implemented\\\");\",\n    \"justification\": \"Because core functionality is stubbed and no broader module/feature-gating implementation is shown, there is insufficient evidence that std/no_std builds compile correctly.\"\n  },\n  {\n    \"criterion_id\": \"ts.version-consistency\",\n    \"verdict\": \"fail\",\n    \"evidence\": \"# ===== etherparse/src/checksum.rs =====\",\n    \"justification\": \"No manifest or README version changes are shown, so consistency of the 0.20.3 bump is unsupported.\"\n  }\n]",
+      "verdicts": [
+        {
+          "criterion_id": "bb.intent_fidelity",
+          "passed": false,
+          "evidence": "pub fn new() -> Sum16BitWords {\n        panic!(\"STUB: not implemented\");\n    }",
+          "justification": "The implementation leaves core functionality as explicit stubs, so it does not genuinely implement the packet library task."
+        },
+        {
+          "criterion_id": "bb.oracle_strength",
+          "passed": false,
+          "evidence": "panic!(\"STUB: not implemented\");",
+          "justification": "A solution consisting of panicking stubs is not correct beyond tests and provides no general implementation."
+        },
+        {
+          "criterion_id": "ts.checksum-rfc1071-genuine",
+          "passed": false,
+          "evidence": "pub fn ones_complement(sum: u32) -> u16 {\n        panic!(\"STUB: not implemented\");\n    }",
+          "justification": "The checksum folding and complement functions are unimplemented."
+        },
+        {
+          "criterion_id": "ts.checksum-endianness",
+          "passed": false,
+          "evidence": "assert_eq!(\n            ! u16::from_ne_bytes([0x12, 0x34]), Sum16BitWords::new().add_slice(& [0x12,\n            0x34]).ones_complement()\n        );",
+          "justification": "The shown tests/trajectory rely on native-endian conversion and the implementation itself is stubbed, giving no evidence of network-order endianness correctness."
+        },
+        {
+          "criterion_id": "ts.checksum-no-zero",
+          "passed": false,
+          "evidence": "pub fn to_ones_complement_with_no_zero(&self) -> u16 {\n        panic!(\"STUB: not implemented\");\n    }",
+          "justification": "The no-zero checksum variant is explicitly unimplemented."
+        },
+        {
+          "criterion_id": "ts.checksum-fold-ops",
+          "passed": false,
+          "evidence": "pub fn add_2bytes(self, value: [u8; 2]) -> Sum16BitWords {\n        panic!(\"STUB: not implemented\");\n    }",
+          "justification": "The required add/fold operations are present only as panicking stubs."
+        },
+        {
+          "criterion_id": "ts.err-source-behavior",
+          "passed": false,
+          "evidence": "# ===== etherparse/src/checksum.rs =====",
+          "justification": "The trajectory provides no implementation evidence for the error hierarchy or source() behavior."
+        },
+        {
+          "criterion_id": "ts.err-display-derived",
+          "passed": false,
+          "evidence": "# ===== etherparse/src/checksum.rs =====",
+          "justification": "No error Display implementations are shown, so there is insufficient evidence that messages derive from actual fields."
+        },
+        {
+          "criterion_id": "ts.err-accessors-offset",
+          "passed": false,
+          "evidence": "# ===== etherparse/src/checksum.rs =====",
+          "justification": "No accessor or add_slice_offset-style helper implementations are provided."
+        },
+        {
+          "criterion_id": "ts.err-from-conversions",
+          "passed": false,
+          "evidence": "# ===== etherparse/src/checksum.rs =====",
+          "justification": "No From/conversion implementations for error types are evidenced."
+        },
+        {
+          "criterion_id": "ts.newtype-range-enforced",
+          "passed": false,
+          "evidence": "# ===== etherparse/src/checksum.rs =====",
+          "justification": "No bounded newtype constructors or range checks are shown."
+        },
+        {
+          "criterion_id": "ts.header-roundtrip",
+          "passed": false,
+          "evidence": "# ===== etherparse/src/checksum.rs =====",
+          "justification": "No header read/write round-trip implementations are provided."
+        },
+        {
+          "criterion_id": "ts.slice-zero-copy",
+          "passed": false,
+          "evidence": "# ===== etherparse/src/checksum.rs =====",
+          "justification": "No slice types or zero-copy accessors are evidenced."
+        },
+        {
+          "criterion_id": "ts.lax-vs-strict",
+          "passed": false,
+          "evidence": "# ===== etherparse/src/checksum.rs =====",
+          "justification": "No lax or strict parser implementations are shown."
+        },
+        {
+          "criterion_id": "ts.defrag-range-algebra",
+          "passed": false,
+          "evidence": "# ===== etherparse/src/checksum.rs =====",
+          "justification": "No IpFragRange connectivity or merge implementation is provided."
+        },
+        {
+          "criterion_id": "ts.defrag-pool",
+          "passed": false,
+          "evidence": "# ===== etherparse/src/checksum.rs =====",
+          "justification": "No defragmentation pool implementation is evidenced."
+        },
+        {
+          "criterion_id": "ts.feature-gating",
+          "passed": false,
+          "evidence": "panic!(\"STUB: not implemented\");",
+          "justification": "Because core functionality is stubbed and no broader module/feature-gating implementation is shown, there is insufficient evidence that std/no_std builds compile correctly."
+        },
+        {
+          "criterion_id": "ts.version-consistency",
+          "passed": false,
+          "evidence": "# ===== etherparse/src/checksum.rs =====",
+          "justification": "No manifest or README version changes are shown, so consistency of the 0.20.3 bump is unsupported."
+        }
+      ]
+    }
+  },
+  "criteria": [
+    {
+      "id": "bb.reasoning_faithfulness",
+      "text": "Is the agent's stated reasoning consistent with the edits it actually made and the feedback it received (no post-hoc rationalization, no lucky guess)?",
+      "contract_ref": "(backbone)",
+      "concern": "L2.REASONING_FAITHFULNESS",
+      "anchorable": false
+    },
+    {
+      "id": "bb.stage_legitimacy",
+      "text": "Did each refinement stage (lint, test) do real, feedback-responsive work toward the solution rather than cosmetic or no-op changes?",
+      "contract_ref": "(backbone)",
+      "concern": "L2.STAGE_LEGITIMACY",
+      "anchorable": false
+    },
+    {
+      "id": "ts.checksum-no-zero",
+      "text": "The 'no-zero' final variant maps a computed 0x0000 result to 0xFFFF, while the ordinary ones-complement variant does not, matching the UDP 'zero means no checksum' rule.",
+      "contract_ref": "Checksum to_ones_complement_with_no_zero",
+      "concern": null,
+      "anchorable": true
+    }
+  ]
+}

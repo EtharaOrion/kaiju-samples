@@ -1,0 +1,3352 @@
+PASS src/__tests__/variables.test.ts
+FAIL src/__tests__/directives.test.ts
+  ● Execute: handles directives › skip include directives › nested fragments - skip/include propagation › skip foo = true, skip d = true
+
+    expect(received).toEqual(expected) // deep equality
+
+    - Expected  - 3
+    + Received  + 1
+
+      Object {
+        "data": Object {
+    -     "foo": Object {
+    -       "bar": Object {},
+    -     },
+    +     "foo": undefined,
+        },
+      }
+
+      1239 |           schema
+      1240 |         );
+    > 1241 |         expect(result).toEqual({ data: { foo: { bar: {} } } });
+           |                        ^
+      1242 |       });
+      1243 |
+      1244 |       test("skip foo = false, skip d = true", async () => {
+
+      at Object.toEqual (src/__tests__/directives.test.ts:1241:24)
+
+  ● Execute: handles directives › issue-166 - skip directive on fragment spread › include directive on fragment spread at nested places
+
+    expect(received).toEqual(expected) // deep equality
+
+    - Expected  - 0
+    + Received  + 4
+
+    @@ -3,18 +3,22 @@
+          Object {
+            "id": "post:1",
+            "related": Array [
+              Object {
+                "id": "article:1",
+    +           "title": "article Introduction to GraphQL!",
+    +           "type": "article",
+              },
+            ],
+          },
+          Object {
+            "id": "post:2",
+            "related": Array [
+              Object {
+                "id": "article:2",
+    +           "title": "article GraphQL-Jit a fast engine for GraphQL",
+    +           "type": "article",
+              },
+            ],
+          },
+          Object {
+            "title": "article Introduction to GraphQL!",
+
+      1662 |       );
+      1663 |
+    > 1664 |       expect(result.data).toEqual({
+           |                           ^
+      1665 |         detailContent: [
+      1666 |           {
+      1667 |             id: "post:1",
+
+      at Object.toEqual (src/__tests__/directives.test.ts:1664:27)
+
+  ● Execute: handles directives › issue-166 - skip directive on fragment spread › minimal reproduction › multiple paths to the same fieldnode in fragment - include directive
+
+    expect(received).toEqual(expected) // deep equality
+
+    - Expected  - 0
+    + Received  + 1
+
+    @@ -3,10 +3,11 @@
+          Object {
+            "id": "a:1",
+            "related": Array [
+              Object {
+                "id": "b:1",
+    +           "title": "b - one",
+              },
+            ],
+          },
+          Object {
+            "title": "b - one",
+
+      1752 |         });
+      1753 |
+    > 1754 |         expect(result.data).toEqual({
+           |                             ^
+      1755 |           someQuery: [
+      1756 |             {
+      1757 |               id: "a:1",
+
+      at Object.toEqual (src/__tests__/directives.test.ts:1754:29)
+
+  ● Execute: handles directives › issue-166 - skip directive on fragment spread › minimal reproduction › multiple paths to the same fieldnode in fragment - skip directive
+
+    expect(received).toEqual(expected) // deep equality
+
+    - Expected  - 0
+    + Received  + 1
+
+    @@ -3,10 +3,11 @@
+          Object {
+            "id": "a:1",
+            "related": Array [
+              Object {
+                "id": "b:1",
+    +           "title": "b - one",
+              },
+            ],
+          },
+          Object {
+            "title": "b - one",
+
+      1791 |         expect(result.errors).toBeUndefined();
+      1792 |
+    > 1793 |         expect(result.data).toEqual({
+           |                             ^
+      1794 |           someQuery: [
+      1795 |             {
+      1796 |               id: "a:1",
+
+      at Object.toEqual (src/__tests__/directives.test.ts:1793:29)
+
+FAIL src/__tests__/execution.test.ts
+  ● Execute: Handles basic execution tasks › nulls out error subtrees
+
+    TypeError: Cannot destructure property 'data' of 'undefined' as it is undefined.
+
+      413 |
+      414 | function postProcessResult({
+    > 415 |   data,
+          |   ^
+      416 |   nullErrors,
+      417 |   errors,
+      418 |   trimmer
+
+      at data (src/execution.ts:415:3)
+      at Object.<anonymous> (src/__tests__/execution.test.ts:508:20)
+
+  ● Execute: Handles basic execution tasks › nulls error subtree for promise rejection #1071
+
+    TypeError: Cannot destructure property 'data' of 'undefined' as it is undefined.
+
+      413 |
+      414 | function postProcessResult({
+    > 415 |   data,
+          |   ^
+      416 |   nullErrors,
+      417 |   errors,
+      418 |   trimmer
+
+      at data (src/execution.ts:415:3)
+      at Object.<anonymous> (src/__tests__/execution.test.ts:623:20)
+
+  ● Execute: Handles basic execution tasks › correct field ordering despite execution order
+
+    TypeError: Cannot destructure property 'data' of 'undefined' as it is undefined.
+
+      413 |
+      414 | function postProcessResult({
+    > 415 |   data,
+          |   ^
+      416 |   nullErrors,
+      417 |   errors,
+      418 |   trimmer
+
+      at data (src/execution.ts:415:3)
+      at Object.<anonymous> (src/__tests__/execution.test.ts:984:25)
+
+FAIL src/__tests__/resolve-info.test.ts
+  ● resolver info › Field Expansion › interfaces › fields per type
+
+    expect(received).toMatchInlineSnapshot(snapshot)
+
+    Snapshot name: `resolver info Field Expansion interfaces fields per type 1`
+
+    - Snapshot  -  0
+    + Received  + 12
+
+    @@ -1,18 +1,24 @@
+      {
+        "Bar1": {
+          "b1": {
+            Symbol(LeafFieldSymbol): true,
+          },
+    +     "b2": {
+    +       Symbol(LeafFieldSymbol): true,
+    +     },
+          "id": {
+            Symbol(LeafFieldSymbol): true,
+          },
+          "title": {
+            Symbol(LeafFieldSymbol): true,
+          },
+        },
+        "Bar2": {
+    +     "b1": {
+    +       Symbol(LeafFieldSymbol): true,
+    +     },
+          "b2": {
+            Symbol(LeafFieldSymbol): true,
+          },
+          "id": {
+            Symbol(LeafFieldSymbol): true,
+    @@ -20,10 +26,16 @@
+          "title": {
+            Symbol(LeafFieldSymbol): true,
+          },
+        },
+        "IBar": {
+    +     "b1": {
+    +       Symbol(LeafFieldSymbol): true,
+    +     },
+    +     "b2": {
+    +       Symbol(LeafFieldSymbol): true,
+    +     },
+          "id": {
+            Symbol(LeafFieldSymbol): true,
+          },
+          "title": {
+            Symbol(LeafFieldSymbol): true,
+
+      430 |         );
+      431 |         expect(result.errors).not.toBeDefined();
+    > 432 |         expect(inf.fieldExpansion).toMatchInlineSnapshot(`
+          |                                    ^
+      433 |           {
+      434 |             "Bar1": {
+      435 |               "b1": {
+
+      at Object.toMatchInlineSnapshot (src/__tests__/resolve-info.test.ts:432:36)
+
+  ● resolver info › Field Expansion › interfaces › fields per type - with fragments
+
+    expect(received).toMatchInlineSnapshot(snapshot)
+
+    Snapshot name: `resolver info Field Expansion interfaces fields per type - with fragments 1`
+
+    - Snapshot  -  0
+    + Received  + 12
+
+    @@ -1,18 +1,24 @@
+      {
+        "Bar1": {
+          "b1": {
+            Symbol(LeafFieldSymbol): true,
+          },
+    +     "b2": {
+    +       Symbol(LeafFieldSymbol): true,
+    +     },
+          "id": {
+            Symbol(LeafFieldSymbol): true,
+          },
+          "title": {
+            Symbol(LeafFieldSymbol): true,
+          },
+        },
+        "Bar2": {
+    +     "b1": {
+    +       Symbol(LeafFieldSymbol): true,
+    +     },
+          "b2": {
+            Symbol(LeafFieldSymbol): true,
+          },
+          "id": {
+            Symbol(LeafFieldSymbol): true,
+    @@ -20,10 +26,16 @@
+          "title": {
+            Symbol(LeafFieldSymbol): true,
+          },
+        },
+        "IBar": {
+    +     "b1": {
+    +       Symbol(LeafFieldSymbol): true,
+    +     },
+    +     "b2": {
+    +       Symbol(LeafFieldSymbol): true,
+    +     },
+          "id": {
+            Symbol(LeafFieldSymbol): true,
+          },
+          "title": {
+            Symbol(LeafFieldSymbol): true,
+
+      498 |
+      499 |         expect(result.errors).not.toBeDefined();
+    > 500 |         expect(inf.fieldExpansion).toMatchInlineSnapshot(`
+          |                                    ^
+      501 |           {
+      502 |             "Bar1": {
+      503 |               "b1": {
+
+      at Object.toMatchInlineSnapshot (src/__tests__/resolve-info.test.ts:500:36)
+
+  ● resolver info › Field Expansion › interfaces › aggregate multiple selections of the same field
+
+    expect(received).toMatchInlineSnapshot(snapshot)
+
+    Snapshot name: `resolver info Field Expansion interfaces aggregate multiple selections of the same field 1`
+
+    - Snapshot  -  0
+    + Received  + 12
+
+    @@ -1,18 +1,24 @@
+      {
+        "Bar1": {
+          "b1": {
+            Symbol(LeafFieldSymbol): true,
+          },
+    +     "b2": {
+    +       Symbol(LeafFieldSymbol): true,
+    +     },
+          "id": {
+            Symbol(LeafFieldSymbol): true,
+          },
+          "title": {
+            Symbol(LeafFieldSymbol): true,
+          },
+        },
+        "Bar2": {
+    +     "b1": {
+    +       Symbol(LeafFieldSymbol): true,
+    +     },
+          "b2": {
+            Symbol(LeafFieldSymbol): true,
+          },
+          "id": {
+            Symbol(LeafFieldSymbol): true,
+    @@ -20,10 +26,16 @@
+          "title": {
+            Symbol(LeafFieldSymbol): true,
+          },
+        },
+        "IBar": {
+    +     "b1": {
+    +       Symbol(LeafFieldSymbol): true,
+    +     },
+    +     "b2": {
+    +       Symbol(LeafFieldSymbol): true,
+    +     },
+          "id": {
+            Symbol(LeafFieldSymbol): true,
+          },
+          "title": {
+            Symbol(LeafFieldSymbol): true,
+
+      563 |         expect(result.errors).not.toBeDefined();
+      564 |
+    > 565 |         expect(inf.fieldExpansion).toMatchInlineSnapshot(`
+          |                                    ^
+      566 |           {
+      567 |             "Bar1": {
+      568 |               "b1": {
+
+      at Object.toMatchInlineSnapshot (src/__tests__/resolve-info.test.ts:565:36)
+
+  ● resolver info › Field Expansion › unions › union field nodes
+
+    expect(received).toMatchInlineSnapshot(snapshot)
+
+    Snapshot name: `resolver info Field Expansion unions union field nodes 1`
+
+    - Snapshot  -  0
+    + Received  + 14
+
+      {
+        "Bar": {
+          "bar": {
+            Symbol(LeafFieldSymbol): true,
+          },
+    +     "foo": {
+    +       Symbol(LeafFieldSymbol): true,
+    +     },
+    +   },
+    +   "Baz": {
+    +     "bar": {
+    +       Symbol(LeafFieldSymbol): true,
+    +     },
+    +     "foo": {
+    +       Symbol(LeafFieldSymbol): true,
+    +     },
+        },
+        "Foo": {
+    +     "bar": {
+    +       Symbol(LeafFieldSymbol): true,
+    +     },
+          "foo": {
+            Symbol(LeafFieldSymbol): true,
+          },
+        },
+      }
+
+      655 |
+      656 |         expect(result.errors).not.toBeDefined();
+    > 657 |         expect(inf.fieldExpansion).toMatchInlineSnapshot(`
+          |                                    ^
+      658 |           {
+      659 |             "Bar": {
+      660 |               "bar": {
+
+      at Object.toMatchInlineSnapshot (src/__tests__/resolve-info.test.ts:657:36)
+
+  ● resolver info › Field Expansion › unions › union field nodes - repeating names
+
+    expect(received).toMatchInlineSnapshot(snapshot)
+
+    Snapshot name: `resolver info Field Expansion unions union field nodes - repeating names 1`
+
+    - Snapshot  -  0
+    + Received  + 20
+
+    @@ -1,12 +1,32 @@
+      {
+        "Bar": {
+          "bar": {
+            Symbol(LeafFieldSymbol): true,
+          },
+    +     "common": {
+    +       Symbol(LeafFieldSymbol): true,
+    +     },
+    +     "foo": {
+    +       Symbol(LeafFieldSymbol): true,
+    +     },
+    +   },
+    +   "Baz": {
+    +     "bar": {
+    +       Symbol(LeafFieldSymbol): true,
+    +     },
+    +     "common": {
+    +       Symbol(LeafFieldSymbol): true,
+          },
+    +     "foo": {
+    +       Symbol(LeafFieldSymbol): true,
+    +     },
+    +   },
+        "Foo": {
+    +     "bar": {
+    +       Symbol(LeafFieldSymbol): true,
+    +     },
+          "common": {
+            Symbol(LeafFieldSymbol): true,
+          },
+          "foo": {
+            Symbol(LeafFieldSymbol): true,
+
+      692 |
+      693 |         expect(result.errors).not.toBeDefined();
+    > 694 |         expect(inf.fieldExpansion).toMatchInlineSnapshot(`
+          |                                    ^
+      695 |           {
+      696 |             "Bar": {
+      697 |               "bar": {
+
+      at Object.toMatchInlineSnapshot (src/__tests__/resolve-info.test.ts:694:36)
+
+  ● resolver info › Field Expansion › unions › __typename
+
+    expect(received).toMatchInlineSnapshot(snapshot)
+
+    Snapshot name: `resolver info Field Expansion unions __typename 1`
+
+    - Snapshot  - 0
+    + Received  + 1
+
+      {
+        "Bar": {},
+    +   "Baz": {},
+        "Foo": {},
+      }
+
+      724 |         );
+      725 |         expect(result.errors).not.toBeDefined();
+    > 726 |         expect(inf.fieldExpansion).toMatchInlineSnapshot(`
+          |                                    ^
+      727 |           {
+      728 |             "Bar": {},
+      729 |             "Foo": {},
+
+      at Object.toMatchInlineSnapshot (src/__tests__/resolve-info.test.ts:726:36)
+
+  ● resolver info › Field Expansion › unions › unions with fragments
+
+    expect(received).toMatchInlineSnapshot(snapshot)
+
+    Snapshot name: `resolver info Field Expansion unions unions with fragments 1`
+
+    - Snapshot  -  0
+    + Received  + 14
+
+      {
+        "Bar": {
+          "bar": {
+            Symbol(LeafFieldSymbol): true,
+          },
+    +     "foo": {
+    +       Symbol(LeafFieldSymbol): true,
+    +     },
+    +   },
+    +   "Baz": {
+    +     "bar": {
+    +       Symbol(LeafFieldSymbol): true,
+    +     },
+    +     "foo": {
+    +       Symbol(LeafFieldSymbol): true,
+    +     },
+        },
+        "Foo": {
+    +     "bar": {
+    +       Symbol(LeafFieldSymbol): true,
+    +     },
+          "foo": {
+            Symbol(LeafFieldSymbol): true,
+          },
+        },
+      }
+
+      754 |
+      755 |         expect(result.errors).not.toBeDefined();
+    > 756 |         expect(inf.fieldExpansion).toMatchInlineSnapshot(`
+          |                                    ^
+      757 |           {
+      758 |             "Bar": {
+      759 |               "bar": {
+
+      at Object.toMatchInlineSnapshot (src/__tests__/resolve-info.test.ts:756:36)
+
+  ● resolver info › Field Expansion › unions › aggregate multiple selections of the same field
+
+    expect(received).toMatchInlineSnapshot(snapshot)
+
+    Snapshot name: `resolver info Field Expansion unions aggregate multiple selections of the same field 1`
+
+    - Snapshot  -  0
+    + Received  + 14
+
+      {
+        "Bar": {
+          "bar": {
+            Symbol(LeafFieldSymbol): true,
+          },
+    +     "foo": {
+    +       Symbol(LeafFieldSymbol): true,
+    +     },
+    +   },
+    +   "Baz": {
+    +     "bar": {
+    +       Symbol(LeafFieldSymbol): true,
+    +     },
+    +     "foo": {
+    +       Symbol(LeafFieldSymbol): true,
+    +     },
+        },
+        "Foo": {
+    +     "bar": {
+    +       Symbol(LeafFieldSymbol): true,
+    +     },
+          "foo": {
+            Symbol(LeafFieldSymbol): true,
+          },
+        },
+      }
+
+      796 |
+      797 |         expect(result.errors).not.toBeDefined();
+    > 798 |         expect(inf.fieldExpansion).toMatchInlineSnapshot(`
+          |                                    ^
+      799 |           {
+      800 |             "Bar": {
+      801 |               "bar": {
+
+      at Object.toMatchInlineSnapshot (src/__tests__/resolve-info.test.ts:798:36)
+
+  ● resolver info › Field Expansion › lists, inputs, unions and interfaces 2 › node
+
+    expect(received).toMatchInlineSnapshot(snapshot)
+
+    Snapshot name: `resolver info Field Expansion lists, inputs, unions and interfaces 2 node 1`
+
+    - Snapshot  -  0
+    + Received  + 68
+
+    @@ -1,6 +1,24 @@
+      {
+    +   "DocumentElement": {
+    +     "tags": {
+    +       "Tag": {
+    +         "id": {
+    +           Symbol(LeafFieldSymbol): true,
+    +         },
+    +         "name": {
+    +           Symbol(LeafFieldSymbol): true,
+    +         },
+    +       },
+    +     },
+    +     "url": {
+    +       Symbol(LeafFieldSymbol): true,
+    +     },
+    +     "width": {
+    +       Symbol(LeafFieldSymbol): true,
+    +     },
+    +   },
+        "Image": {
+          "id": {
+            Symbol(LeafFieldSymbol): true,
+          },
+          "tags": {
+    @@ -24,31 +42,81 @@
+          "tags": {
+            "Tag": {
+              "id": {
+                Symbol(LeafFieldSymbol): true,
+              },
+    +         "name": {
+    +           Symbol(LeafFieldSymbol): true,
+    +         },
+    +       },
+    +     },
+    +     "url": {
+    +       Symbol(LeafFieldSymbol): true,
+          },
+    +     "width": {
+    +       Symbol(LeafFieldSymbol): true,
+          },
+        },
+        "Node": {
+          "id": {
+    +       Symbol(LeafFieldSymbol): true,
+    +     },
+    +     "tags": {
+    +       "Tag": {
+    +         "id": {
+    +           Symbol(LeafFieldSymbol): true,
+    +         },
+    +         "name": {
+                Symbol(LeafFieldSymbol): true,
+              },
+            },
+    +     },
+    +     "url": {
+    +       Symbol(LeafFieldSymbol): true,
+    +     },
+    +     "width": {
+    +       Symbol(LeafFieldSymbol): true,
+    +     },
+    +   },
+    +   "Tag": {
+    +     "id": {
+    +       Symbol(LeafFieldSymbol): true,
+    +     },
+    +     "tags": {
+            "Tag": {
+              "id": {
+    +           Symbol(LeafFieldSymbol): true,
+    +         },
+    +         "name": {
+                Symbol(LeafFieldSymbol): true,
+              },
+            },
+    +     },
+    +     "url": {
+    +       Symbol(LeafFieldSymbol): true,
+    +     },
+    +     "width": {
+    +       Symbol(LeafFieldSymbol): true,
+    +     },
+    +   },
+        "Video": {
+          "id": {
+            Symbol(LeafFieldSymbol): true,
+          },
+          "tags": {
+            "Tag": {
+              "id": {
+    +           Symbol(LeafFieldSymbol): true,
+    +         },
+    +         "name": {
+                Symbol(LeafFieldSymbol): true,
+              },
+            },
+    +     },
+    +     "url": {
+    +       Symbol(LeafFieldSymbol): true,
+    +     },
+    +     "width": {
+    +       Symbol(LeafFieldSymbol): true,
+          },
+        },
+      }
+
+      932 |         expect(validationErrors.length).toBe(0);
+      933 |         expect(result.errors).not.toBeDefined();
+    > 934 |         expect(infNode.fieldExpansion).toMatchInlineSnapshot(`
+          |                                        ^
+      935 |           {
+      936 |             "Image": {
+      937 |               "id": {
+
+      at Object.toMatchInlineSnapshot (src/__tests__/resolve-info.test.ts:934:40)
+
+  ● resolver info › Field Expansion › lists, inputs, unions and interfaces 2 › elements
+
+    expect(received).toMatchInlineSnapshot(snapshot)
+
+    Snapshot name: `resolver info Field Expansion lists, inputs, unions and interfaces 2 elements 1`
+
+    - Snapshot  -    3
+    + Received  + 1328
+
+    @@ -1,66 +1,1391 @@
+      {
+        "Div": {
+          "children": {
+            "Div": {
+              "children": {
+    -           "Div": {},
+    +           "Div": {
+    +             "url": {
+    +               Symbol(LeafFieldSymbol): true,
+    +             },
+    +           },
+    +           "DocumentElement": {
+    +             "url": {
+    +               Symbol(LeafFieldSymbol): true,
+    +             },
+    +           },
+    +           "Image": {
+    +             "url": {
+    +               Symbol(LeafFieldSymbol): true,
+    +             },
+    +           },
+    +           "Media": {
+    +             "url": {
+    +               Symbol(LeafFieldSymbol): true,
+    +             },
+    +           },
+    +           "Node": {
+    +             "url": {
+    +               Symbol(LeafFieldSymbol): true,
+    +             },
+    +           },
+    +           "Video": {
+    +             "url": {
+    +               Symbol(LeafFieldSymbol): true,
+    +             },
+    +           },
+    +         },
+    +         "id": {
+    +           Symbol(LeafFieldSymbol): true,
+    +         },
+    +       },
+    +       "DocumentElement": {
+    +         "children": {
+    +           "Div": {
+    +             "url": {
+    +               Symbol(LeafFieldSymbol): true,
+    +             },
+    +           },
+    +           "DocumentElement": {
+    +             "url": {
+    +               Symbol(LeafFieldSymbol): true,
+    +             },
+    +           },
+    +           "Image": {
+    +             "url": {
+    +               Symbol(LeafFieldSymbol): true,
+    +             },
+    +           },
+    +           "Media": {
+    +             "url": {
+    +               Symbol(LeafFieldSymbol): true,
+    +             },
+    +           },
+    +           "Node": {
+    +             "url": {
+    +               Symbol(LeafFieldSymbol): true,
+    +             },
+    +           },
+    +           "Video": {
+    +             "url": {
+    +               Symbol(LeafFieldSymbol): true,
+    +             },
+    +           },
+    +         },
+    +         "id": {
+    +           Symbol(LeafFieldSymbol): true,
+    +         },
+    +       },
+    +       "Image": {
+    +         "children": {
+    +           "Div": {
+    +             "url": {
+    +               Symbol(LeafFieldSymbol): true,
+    +             },
+    +           },
+    +           "DocumentElement": {
+    +             "url": {
+    +               Symbol(LeafFieldSymbol): true,
+    +             },
+    +           },
+    +           "Image": {
+    +             "url": {
+    +               Symbol(LeafFieldSymbol): true,
+    +             },
+    +           },
+    +           "Media": {
+    +             "url": {
+    +               Symbol(LeafFieldSymbol): true,
+    +             },
+    +           },
+    +           "Node": {
+    +             "url": {
+    +               Symbol(LeafFieldSymbol): true,
+    +             },
+    +           },
+    +           "Video": {
+    +             "url": {
+    +               Symbol(LeafFieldSymbol): true,
+    +             },
+    +           },
+    +         },
+    +         "id": {
+    +           Symbol(LeafFieldSymbol): true,
+    +         },
+    +       },
+    +       "Media": {
+    +         "children": {
+    +           "Div": {
+    +             "url": {
+    +               Symbol(LeafFieldSymbol): true,
+    +             },
+    +           },
+    +           "DocumentElement": {
+    +             "url": {
+    +               Symbol(LeafFieldSymbol): true,
+    +             },
+    +           },
+    +           "Image": {
+    +             "url": {
+    +               Symbol(LeafFieldSymbol): true,
+    +             },
+    +           },
+    +           "Media": {
+    +             "url": {
+    +               Symbol(LeafFieldSymbol): true,
+    +             },
+    +           },
+    +           "Node": {
+    +             "url": {
+    +               Symbol(LeafFieldSymbol): true,
+    +             },
+    +           },
+    +           "Video": {
+    +             "url": {
+    +               Symbol(LeafFieldSymbol): true,
+    +             },
+    +           },
+    +         },
+    +         "id": {
+    +           Symbol(LeafFieldSymbol): true,
+    +         },
+    +       },
+    +       "Node": {
+    +         "children": {
+    +           "Div": {
+    +             "url": {
+    +               Symbol(LeafFieldSymbol): true,
+    +             },
+    +           },
+    +           "DocumentElement": {
+    +             "url": {
+    +               Symbol(LeafFieldSymbol): true,
+    +             },
+    +           },
+    +           "Image": {
+    +             "url": {
+    +               Symbol(LeafFieldSymbol): true,
+    +             },
+    +           },
+    +           "Media": {
+    +             "url": {
+    +               Symbol(LeafFieldSymbol): true,
+    +             },
+    +           },
+    +           "Node": {
+    +             "url": {
+    +               Symbol(LeafFieldSymbol): true,
+    +             },
+    +           },
+    +           "Video": {
+    +             "url": {
+    +               Symbol(LeafFieldSymbol): true,
+    +             },
+    +           },
+    +         },
+    +         "id": {
+    +           Symbol(LeafFieldSymbol): true,
+    +         },
+    +       },
+    +       "Video": {
+    +         "children": {
+    +           "Div": {
+    +             "url": {
+    +               Symbol(LeafFieldSymbol): true,
+    +             },
+    +           },
+    +           "DocumentElement": {
+    +             "url": {
+    +               Symbol(LeafFieldSymbol): true,
+    +             },
+    +           },
+    +           "Image": {
+    +             "url": {
+    +               Symbol(LeafFieldSymbol): true,
+    +             },
+    +           },
+    +           "Media": {
+    +             "url": {
+    +               Symbol(LeafFieldSymbol): true,
+    +             },
+    +           },
+    +           "Node": {
+    +             "url": {
+    +               Symbol(LeafFieldSymbol): true,
+    +             },
+    +           },
+    +           "Video": {
+    +             "url": {
+    +               Symbol(LeafFieldSymbol): true,
+    +             },
+    +           },
+    +         },
+    +         "id": {
+    +           Symbol(LeafFieldSymbol): true,
+    +         },
+    +       },
+    +     },
+    +     "id": {
+    +       Symbol(LeafFieldSymbol): true,
+    +     },
+    +     "url": {
+    +       Symbol(LeafFieldSymbol): true,
+    +     },
+    +   },
+    +   "DocumentElement": {
+    +     "children": {
+    +       "Div": {
+    +         "children": {
+    +           "Div": {
+    +             "url": {
+    +               Symbol(LeafFieldSymbol): true,
+    +             },
+    +           },
+    +           "DocumentElement": {
+    +             "url": {
+    +               Symbol(LeafFieldSymbol): true,
+    +             },
+    +           },
+    +           "Image": {
+    +             "url": {
+    +               Symbol(LeafFieldSymbol): true,
+    +             },
+    +           },
+    +           "Media": {
+    +             "url": {
+    +               Symbol(LeafFieldSymbol): true,
+    +             },
+    +           },
+    +           "Node": {
+    +             "url": {
+    +               Symbol(LeafFieldSymbol): true,
+    +             },
+    +           },
+    +           "Video": {
+    +             "url": {
+    +               Symbol(LeafFieldSymbol): true,
+    +             },
+    +           },
+    +         },
+    +         "id": {
+    +           Symbol(LeafFieldSymbol): true,
+    +         },
+    +       },
+    +       "DocumentElement": {
+    +         "children": {
+    +           "Div": {
+    +             "url": {
+    +               Symbol(LeafFieldSymbol): true,
+    +             },
+    +           },
+    +           "DocumentElement": {
+    +             "url": {
+    +               Symbol(LeafFieldSymbol): true,
+    +             },
+    +           },
+    +           "Image": {
+    +             "url": {
+    +               Symbol(LeafFieldSymbol): true,
+    +             },
+    +           },
+    +           "Media": {
+    +             "url": {
+    +               Symbol(LeafFieldSymbol): true,
+    +             },
+    +           },
+    +           "Node": {
+    +             "url": {
+    +               Symbol(LeafFieldSymbol): true,
+    +             },
+    +           },
+    +           "Video": {
+    +             "url": {
+    +               Symbol(LeafFieldSymbol): true,
+    +             },
+    +           },
+    +         },
+    +         "id": {
+    +           Symbol(LeafFieldSymbol): true,
+    +         },
+    +       },
+    +       "Image": {
+    +         "children": {
+    +           "Div": {
+    +             "url": {
+    +               Symbol(LeafFieldSymbol): true,
+    +             },
+    +           },
+    +           "DocumentElement": {
+    +             "url": {
+    +               Symbol(LeafFieldSymbol): true,
+    +             },
+    +           },
+    +           "Image": {
+    +             "url": {
+    +               Symbol(LeafFieldSymbol): true,
+    +             },
+    +           },
+    +           "Media": {
+    +             "url": {
+    +               Symbol(LeafFieldSymbol): true,
+    +             },
+    +           },
+    +           "Node": {
+    +             "url": {
+    +               Symbol(LeafFieldSymbol): true,
+    +             },
+    +           },
+    +           "Video": {
+    +             "url": {
+    +               Symbol(LeafFieldSymbol): true,
+    +             },
+    +           },
+    +         },
+    +         "id": {
+    +           Symbol(LeafFieldSymbol): true,
+    +         },
+    +       },
+    +       "Media": {
+    +         "children": {
+    +           "Div": {
+    +             "url": {
+    +               Symbol(LeafFieldSymbol): true,
+    +             },
+    +           },
+    +           "DocumentElement": {
+    +             "url": {
+    +               Symbol(LeafFieldSymbol): true,
+    +             },
+    +           },
+    +           "Image": {
+    +             "url": {
+    +               Symbol(LeafFieldSymbol): true,
+    +             },
+    +           },
+    +           "Media": {
+    +             "url": {
+    +               Symbol(LeafFieldSymbol): true,
+    +             },
+    +           },
+    +           "Node": {
+    +             "url": {
+    +               Symbol(LeafFieldSymbol): true,
+    +             },
+    +           },
+    +           "Video": {
+    +             "url": {
+    +               Symbol(LeafFieldSymbol): true,
+    +             },
+    +           },
+    +         },
+    +         "id": {
+    +           Symbol(LeafFieldSymbol): true,
+    +         },
+    +       },
+    +       "Node": {
+    +         "children": {
+    +           "Div": {
+    +             "url": {
+    +               Symbol(LeafFieldSymbol): true,
+    +             },
+    +           },
+    +           "DocumentElement": {
+    +             "url": {
+    +               Symbol(LeafFieldSymbol): true,
+    +             },
+    +           },
+    +           "Image": {
+    +             "url": {
+    +               Symbol(LeafFieldSymbol): true,
+    +             },
+    +           },
+    +           "Media": {
+    +             "url": {
+    +               Symbol(LeafFieldSymbol): true,
+    +             },
+    +           },
+    +           "Node": {
+    +             "url": {
+    +               Symbol(LeafFieldSymbol): true,
+    +             },
+    +           },
+    +           "Video": {
+    +             "url": {
+    +               Symbol(LeafFieldSymbol): true,
+    +             },
+    +           },
+    +         },
+    +         "id": {
+    +           Symbol(LeafFieldSymbol): true,
+    +         },
+    +       },
+    +       "Video": {
+    +         "children": {
+    +           "Div": {
+    +             "url": {
+    +               Symbol(LeafFieldSymbol): true,
+    +             },
+    +           },
+    +           "DocumentElement": {
+    +             "url": {
+    +               Symbol(LeafFieldSymbol): true,
+    +             },
+    +           },
+    +           "Image": {
+    +             "url": {
+    +               Symbol(LeafFieldSymbol): true,
+    +             },
+    +           },
+    +           "Media": {
+    +             "url": {
+    +               Symbol(LeafFieldSymbol): true,
+    +             },
+    +           },
+    +           "Node": {
+    +             "url": {
+    +               Symbol(LeafFieldSymbol): true,
+    +             },
+    +           },
+    +           "Video": {
+    +             "url": {
+    +               Symbol(LeafFieldSymbol): true,
+    +             },
+    +           },
+    +         },
+    +         "id": {
+    +           Symbol(LeafFieldSymbol): true,
+    +         },
+    +       },
+    +     },
+    +     "id": {
+    +       Symbol(LeafFieldSymbol): true,
+    +     },
+    +     "url": {
+    +       Symbol(LeafFieldSymbol): true,
+    +     },
+    +   },
+    +   "Image": {
+    +     "children": {
+    +       "Div": {
+    +         "children": {
+    +           "Div": {
+    +             "url": {
+    +               Symbol(LeafFieldSymbol): true,
+    +             },
+    +           },
+    +           "DocumentElement": {
+    +             "url": {
+    +               Symbol(LeafFieldSymbol): true,
+    +             },
+    +           },
+    +           "Image": {
+    +             "url": {
+    +               Symbol(LeafFieldSymbol): true,
+    +             },
+    +           },
+    +           "Media": {
+    +             "url": {
+    +               Symbol(LeafFieldSymbol): true,
+    +             },
+    +           },
+    +           "Node": {
+    +             "url": {
+    +               Symbol(LeafFieldSymbol): true,
+    +             },
+    +           },
+    +           "Video": {
+    +             "url": {
+    +               Symbol(LeafFieldSymbol): true,
+    +             },
+    +           },
+    +         },
+    +         "id": {
+    +           Symbol(LeafFieldSymbol): true,
+    +         },
+    +       },
+    +       "DocumentElement": {
+    +         "children": {
+    +           "Div": {
+    +             "url": {
+    +               Symbol(LeafFieldSymbol): true,
+    +             },
+    +           },
+    +           "DocumentElement": {
+    +             "url": {
+    +               Symbol(LeafFieldSymbol): true,
+    +             },
+    +           },
+    +           "Image": {
+    +             "url": {
+    +               Symbol(LeafFieldSymbol): true,
+    +             },
+    +           },
+    +           "Media": {
+    +             "url": {
+    +               Symbol(LeafFieldSymbol): true,
+    +             },
+    +           },
+    +           "Node": {
+    +             "url": {
+    +               Symbol(LeafFieldSymbol): true,
+    +             },
+    +           },
+    +           "Video": {
+    +             "url": {
+    +               Symbol(LeafFieldSymbol): true,
+    +             },
+    +           },
+    +         },
+    +         "id": {
+    +           Symbol(LeafFieldSymbol): true,
+    +         },
+    +       },
+    +       "Image": {
+    +         "children": {
+    +           "Div": {
+    +             "url": {
+    +               Symbol(LeafFieldSymbol): true,
+    +             },
+    +           },
+    +           "DocumentElement": {
+    +             "url": {
+    +               Symbol(LeafFieldSymbol): true,
+    +             },
+    +           },
+    +           "Image": {
+    +             "url": {
+    +               Symbol(LeafFieldSymbol): true,
+    +             },
+    +           },
+    +           "Media": {
+    +             "url": {
+    +               Symbol(LeafFieldSymbol): true,
+    +             },
+    +           },
+    +           "Node": {
+    +             "url": {
+    +               Symbol(LeafFieldSymbol): true,
+    +             },
+    +           },
+    +           "Video": {
+    +             "url": {
+    +               Symbol(LeafFieldSymbol): true,
+    +             },
+    +           },
+    +         },
+    +         "id": {
+    +           Symbol(LeafFieldSymbol): true,
+    +         },
+    +       },
+    +       "Media": {
+    +         "children": {
+    +           "Div": {
+    +             "url": {
+    +               Symbol(LeafFieldSymbol): true,
+    +             },
+    +           },
+    +           "DocumentElement": {
+    +             "url": {
+    +               Symbol(LeafFieldSymbol): true,
+    +             },
+    +           },
+    +           "Image": {
+    +             "url": {
+    +               Symbol(LeafFieldSymbol): true,
+    +             },
+    +           },
+    +           "Media": {
+    +             "url": {
+    +               Symbol(LeafFieldSymbol): true,
+    +             },
+    +           },
+    +           "Node": {
+    +             "url": {
+    +               Symbol(LeafFieldSymbol): true,
+    +             },
+    +           },
+    +           "Video": {
+    +             "url": {
+    +               Symbol(LeafFieldSymbol): true,
+    +             },
+    +           },
+    +         },
+    +         "id": {
+    +           Symbol(LeafFieldSymbol): true,
+    +         },
+    +       },
+    +       "Node": {
+    +         "children": {
+    +           "Div": {
+    +             "url": {
+    +               Symbol(LeafFieldSymbol): true,
+    +             },
+    +           },
+    +           "DocumentElement": {
+    +             "url": {
+    +               Symbol(LeafFieldSymbol): true,
+    +             },
+    +           },
+    +           "Image": {
+    +             "url": {
+    +               Symbol(LeafFieldSymbol): true,
+    +             },
+    +           },
+    +           "Media": {
+    +             "url": {
+    +               Symbol(LeafFieldSymbol): true,
+    +             },
+    +           },
+    +           "Node": {
+    +             "url": {
+    +               Symbol(LeafFieldSymbol): true,
+    +             },
+    +           },
+    +           "Video": {
+    +             "url": {
+    +               Symbol(LeafFieldSymbol): true,
+    +             },
+    +           },
+    +         },
+    +         "id": {
+    +           Symbol(LeafFieldSymbol): true,
+    +         },
+    +       },
+    +       "Video": {
+    +         "children": {
+    +           "Div": {
+    +             "url": {
+    +               Symbol(LeafFieldSymbol): true,
+    +             },
+    +           },
+    +           "DocumentElement": {
+    +             "url": {
+    +               Symbol(LeafFieldSymbol): true,
+    +             },
+    +           },
+    +           "Image": {
+    +             "url": {
+    +               Symbol(LeafFieldSymbol): true,
+    +             },
+    +           },
+    +           "Media": {
+    +             "url": {
+    +               Symbol(LeafFieldSymbol): true,
+    +             },
+    +           },
+    +           "Node": {
+    +             "url": {
+    +               Symbol(LeafFieldSymbol): true,
+    +             },
+    +           },
+    +           "Video": {
+    +             "url": {
+    +               Symbol(LeafFieldSymbol): true,
+    +             },
+    +           },
+    +         },
+    +         "id": {
+    +           Symbol(LeafFieldSymbol): true,
+    +         },
+    +       },
+    +     },
+    +     "id": {
+    +       Symbol(LeafFieldSymbol): true,
+    +     },
+    +     "url": {
+    +       Symbol(LeafFieldSymbol): true,
+    +     },
+    +   },
+    +   "Media": {
+    +     "children": {
+    +       "Div": {
+    +         "children": {
+    +           "Div": {
+    +             "url": {
+    +               Symbol(LeafFieldSymbol): true,
+    +             },
+    +           },
+    +           "DocumentElement": {
+    +             "url": {
+    +               Symbol(LeafFieldSymbol): true,
+    +             },
+    +           },
+    +           "Image": {
+    +             "url": {
+    +               Symbol(LeafFieldSymbol): true,
+    +             },
+    +           },
+    +           "Media": {
+    +             "url": {
+    +               Symbol(LeafFieldSymbol): true,
+    +             },
+    +           },
+    +           "Node": {
+    +             "url": {
+    +               Symbol(LeafFieldSymbol): true,
+    +             },
+    +           },
+    +           "Video": {
+    +             "url": {
+    +               Symbol(LeafFieldSymbol): true,
+    +             },
+    +           },
+    +         },
+    +         "id": {
+    +           Symbol(LeafFieldSymbol): true,
+    +         },
+    +       },
+    +       "DocumentElement": {
+    +         "children": {
+    +           "Div": {
+    +             "url": {
+    +               Symbol(LeafFieldSymbol): true,
+    +             },
+    +           },
+    +           "DocumentElement": {
+    +             "url": {
+    +               Symbol(LeafFieldSymbol): true,
+    +             },
+    +           },
+    +           "Image": {
+    +             "url": {
+    +               Symbol(LeafFieldSymbol): true,
+    +             },
+    +           },
+    +           "Media": {
+    +             "url": {
+    +               Symbol(LeafFieldSymbol): true,
+    +             },
+    +           },
+    +           "Node": {
+    +             "url": {
+    +               Symbol(LeafFieldSymbol): true,
+    +             },
+    +           },
+    +           "Video": {
+    +             "url": {
+    +               Symbol(LeafFieldSymbol): true,
+    +             },
+    +           },
+    +         },
+    +         "id": {
+    +           Symbol(LeafFieldSymbol): true,
+    +         },
+    +       },
+    +       "Image": {
+    +         "children": {
+    +           "Div": {
+    +             "url": {
+    +               Symbol(LeafFieldSymbol): true,
+    +             },
+    +           },
+    +           "DocumentElement": {
+    +             "url": {
+    +               Symbol(LeafFieldSymbol): true,
+    +             },
+    +           },
+    +           "Image": {
+    +             "url": {
+    +               Symbol(LeafFieldSymbol): true,
+    +             },
+    +           },
+    +           "Media": {
+    +             "url": {
+    +               Symbol(LeafFieldSymbol): true,
+    +             },
+    +           },
+    +           "Node": {
+    +             "url": {
+    +               Symbol(LeafFieldSymbol): true,
+    +             },
+    +           },
+    +           "Video": {
+    +             "url": {
+    +               Symbol(LeafFieldSymbol): true,
+    +             },
+    +           },
+    +         },
+    +         "id": {
+    +           Symbol(LeafFieldSymbol): true,
+    +         },
+    +       },
+    +       "Media": {
+    +         "children": {
+    +           "Div": {
+    +             "url": {
+    +               Symbol(LeafFieldSymbol): true,
+    +             },
+    +           },
+    +           "DocumentElement": {
+    +             "url": {
+    +               Symbol(LeafFieldSymbol): true,
+    +             },
+    +           },
+    +           "Image": {
+    +             "url": {
+    +               Symbol(LeafFieldSymbol): true,
+    +             },
+    +           },
+    +           "Media": {
+    +             "url": {
+    +               Symbol(LeafFieldSymbol): true,
+    +             },
+    +           },
+    +           "Node": {
+    +             "url": {
+    +               Symbol(LeafFieldSymbol): true,
+    +             },
+    +           },
+    +           "Video": {
+    +             "url": {
+    +               Symbol(LeafFieldSymbol): true,
+    +             },
+    +           },
+    +         },
+    +         "id": {
+    +           Symbol(LeafFieldSymbol): true,
+    +         },
+    +       },
+    +       "Node": {
+    +         "children": {
+    +           "Div": {
+    +             "url": {
+    +               Symbol(LeafFieldSymbol): true,
+    +             },
+    +           },
+    +           "DocumentElement": {
+    +             "url": {
+    +               Symbol(LeafFieldSymbol): true,
+    +             },
+    +           },
+    +           "Image": {
+    +             "url": {
+    +               Symbol(LeafFieldSymbol): true,
+    +             },
+    +           },
+    +           "Media": {
+    +             "url": {
+    +               Symbol(LeafFieldSymbol): true,
+    +             },
+    +           },
+    +           "Node": {
+    +             "url": {
+    +               Symbol(LeafFieldSymbol): true,
+    +             },
+    +           },
+    +           "Video": {
+    +             "url": {
+    +               Symbol(LeafFieldSymbol): true,
+    +             },
+    +           },
+    +         },
+    +         "id": {
+    +           Symbol(LeafFieldSymbol): true,
+    +         },
+    +       },
+    +       "Video": {
+    +         "children": {
+    +           "Div": {
+    +             "url": {
+    +               Symbol(LeafFieldSymbol): true,
+    +             },
+    +           },
+    +           "DocumentElement": {
+    +             "url": {
+    +               Symbol(LeafFieldSymbol): true,
+    +             },
+    +           },
+    +           "Image": {
+    +             "url": {
+    +               Symbol(LeafFieldSymbol): true,
+    +             },
+    +           },
+    +           "Media": {
+    +             "url": {
+    +               Symbol(LeafFieldSymbol): true,
+    +             },
+    +           },
+    +           "Node": {
+    +             "url": {
+    +               Symbol(LeafFieldSymbol): true,
+    +             },
+    +           },
+    +           "Video": {
+    +             "url": {
+    +               Symbol(LeafFieldSymbol): true,
+    +             },
+    +           },
+    +         },
+    +         "id": {
+    +           Symbol(LeafFieldSymbol): true,
+    +         },
+    +       },
+    +     },
+    +     "id": {
+    +       Symbol(LeafFieldSymbol): true,
+    +     },
+    +     "url": {
+    +       Symbol(LeafFieldSymbol): true,
+    +     },
+    +   },
+    +   "Node": {
+    +     "children": {
+    +       "Div": {
+    +         "children": {
+    +           "Div": {
+    +             "url": {
+    +               Symbol(LeafFieldSymbol): true,
+    +             },
+    +           },
+    +           "DocumentElement": {
+    +             "url": {
+    +               Symbol(LeafFieldSymbol): true,
+    +             },
+    +           },
+    +           "Image": {
+    +             "url": {
+    +               Symbol(LeafFieldSymbol): true,
+    +             },
+    +           },
+    +           "Media": {
+    +             "url": {
+    +               Symbol(LeafFieldSymbol): true,
+    +             },
+    +           },
+    +           "Node": {
+    +             "url": {
+    +               Symbol(LeafFieldSymbol): true,
+    +             },
+    +           },
+    +           "Video": {
+    +             "url": {
+    +               Symbol(LeafFieldSymbol): true,
+    +             },
+    +           },
+    +         },
+    +         "id": {
+    +           Symbol(LeafFieldSymbol): true,
+    +         },
+    +       },
+    +       "DocumentElement": {
+    +         "children": {
+    +           "Div": {
+    +             "url": {
+    +               Symbol(LeafFieldSymbol): true,
+    +             },
+    +           },
+    +           "DocumentElement": {
+    +             "url": {
+    +               Symbol(LeafFieldSymbol): true,
+    +             },
+    +           },
+    +           "Image": {
+    +             "url": {
+    +               Symbol(LeafFieldSymbol): true,
+    +             },
+    +           },
+    +           "Media": {
+    +             "url": {
+    +               Symbol(LeafFieldSymbol): true,
+    +             },
+    +           },
+    +           "Node": {
+    +             "url": {
+    +               Symbol(LeafFieldSymbol): true,
+    +             },
+    +           },
+    +           "Video": {
+    +             "url": {
+    +               Symbol(LeafFieldSymbol): true,
+    +             },
+    +           },
+    +         },
+    +         "id": {
+    +           Symbol(LeafFieldSymbol): true,
+    +         },
+    +       },
+    +       "Image": {
+    +         "children": {
+    +           "Div": {
+    +             "url": {
+    +               Symbol(LeafFieldSymbol): true,
+    +             },
+    +           },
+    +           "DocumentElement": {
+    +             "url": {
+    +               Symbol(LeafFieldSymbol): true,
+    +             },
+    +           },
+                "Image": {
+                  "url": {
+                    Symbol(LeafFieldSymbol): true,
+                  },
+                },
+                "Media": {
+                  "url": {
+                    Symbol(LeafFieldSymbol): true,
+                  },
+                },
+    -           "Node": {},
+    +           "Node": {
+    +             "url": {
+    +               Symbol(LeafFieldSymbol): true,
+    +             },
+    +           },
+                "Video": {
+                  "url": {
+                    Symbol(LeafFieldSymbol): true,
+                  },
+                },
+              },
+    +         "id": {
+    +           Symbol(LeafFieldSymbol): true,
+    +         },
+    +       },
+    +       "Media": {
+    +         "children": {
+    +           "Div": {
+    +             "url": {
+    +               Symbol(LeafFieldSymbol): true,
+    +             },
+    +           },
+    +           "DocumentElement": {
+    +             "url": {
+    +               Symbol(LeafFieldSymbol): true,
+    +             },
+                },
+                "Image": {
+    +             "url": {
+    +               Symbol(LeafFieldSymbol): true,
+    +             },
+    +           },
+    +           "Media": {
+    +             "url": {
+    +               Symbol(LeafFieldSymbol): true,
+    +             },
+    +           },
+    +           "Node": {
+    +             "url": {
+    +               Symbol(LeafFieldSymbol): true,
+    +             },
+    +           },
+    +           "Video": {
+    +             "url": {
+    +               Symbol(LeafFieldSymbol): true,
+    +             },
+    +           },
+    +         },
+              "id": {
+    +           Symbol(LeafFieldSymbol): true,
+    +         },
+    +       },
+    +       "Node": {
+    +         "children": {
+    +           "Div": {
+    +             "url": {
+                    Symbol(LeafFieldSymbol): true,
+                  },
+                },
+    -       "Media": {},
+    +           "DocumentElement": {
+    +             "url": {
+    +               Symbol(LeafFieldSymbol): true,
+    +             },
+    +           },
+    +           "Image": {
+    +             "url": {
+    +               Symbol(LeafFieldSymbol): true,
+    +             },
+    +           },
+    +           "Media": {
+    +             "url": {
+    +               Symbol(LeafFieldSymbol): true,
+    +             },
+    +           },
+    +           "Node": {
+    +             "url": {
+    +               Symbol(LeafFieldSymbol): true,
+    +             },
+    +           },
+    +           "Video": {
+    +             "url": {
+    +               Symbol(LeafFieldSymbol): true,
+    +             },
+    +           },
+    +         },
+    +         "id": {
+    +           Symbol(LeafFieldSymbol): true,
+    +         },
+    +       },
+    +       "Video": {
+    +         "children": {
+    +           "Div": {
+    +             "url": {
+    +               Symbol(LeafFieldSymbol): true,
+    +             },
+    +           },
+    +           "DocumentElement": {
+    +             "url": {
+    +               Symbol(LeafFieldSymbol): true,
+    +             },
+    +           },
+    +           "Image": {
+    +             "url": {
+    +               Symbol(LeafFieldSymbol): true,
+    +             },
+    +           },
+    +           "Media": {
+    +             "url": {
+    +               Symbol(LeafFieldSymbol): true,
+    +             },
+    +           },
+    +           "Node": {
+    +             "url": {
+    +               Symbol(LeafFieldSymbol): true,
+    +             },
+    +           },
+    +           "Video": {
+    +             "url": {
+    +               Symbol(LeafFieldSymbol): true,
+    +             },
+    +           },
+    +         },
+    +         "id": {
+    +           Symbol(LeafFieldSymbol): true,
+    +         },
+    +       },
+    +     },
+    +     "id": {
+    +       Symbol(LeafFieldSymbol): true,
+    +     },
+    +     "url": {
+    +       Symbol(LeafFieldSymbol): true,
+    +     },
+    +   },
+    +   "Video": {
+    +     "children": {
+    +       "Div": {
+    +         "children": {
+    +           "Div": {
+    +             "url": {
+    +               Symbol(LeafFieldSymbol): true,
+    +             },
+    +           },
+    +           "DocumentElement": {
+    +             "url": {
+    +               Symbol(LeafFieldSymbol): true,
+    +             },
+    +           },
+    +           "Image": {
+    +             "url": {
+    +               Symbol(LeafFieldSymbol): true,
+    +             },
+    +           },
+    +           "Media": {
+    +             "url": {
+    +               Symbol(LeafFieldSymbol): true,
+    +             },
+    +           },
+    +           "Node": {
+    +             "url": {
+    +               Symbol(LeafFieldSymbol): true,
+    +             },
+    +           },
+    +           "Video": {
+    +             "url": {
+    +               Symbol(LeafFieldSymbol): true,
+    +             },
+    +           },
+    +         },
+    +         "id": {
+    +           Symbol(LeafFieldSymbol): true,
+    +         },
+    +       },
+    +       "DocumentElement": {
+    +         "children": {
+    +           "Div": {
+    +             "url": {
+    +               Symbol(LeafFieldSymbol): true,
+    +             },
+    +           },
+    +           "DocumentElement": {
+    +             "url": {
+    +               Symbol(LeafFieldSymbol): true,
+    +             },
+    +           },
+    +           "Image": {
+    +             "url": {
+    +               Symbol(LeafFieldSymbol): true,
+    +             },
+    +           },
+    +           "Media": {
+    +             "url": {
+    +               Symbol(LeafFieldSymbol): true,
+    +             },
+    +           },
+                "Node": {
+    +             "url": {
+    +               Symbol(LeafFieldSymbol): true,
+    +             },
+    +           },
+    +           "Video": {
+    +             "url": {
+    +               Symbol(LeafFieldSymbol): true,
+    +             },
+    +           },
+    +         },
+              "id": {
+                Symbol(LeafFieldSymbol): true,
+              },
+            },
+    +       "Image": {
+    +         "children": {
+    +           "Div": {
+    +             "url": {
+    +               Symbol(LeafFieldSymbol): true,
+    +             },
+    +           },
+    +           "DocumentElement": {
+    +             "url": {
+    +               Symbol(LeafFieldSymbol): true,
+    +             },
+    +           },
+    +           "Image": {
+    +             "url": {
+    +               Symbol(LeafFieldSymbol): true,
+    +             },
+    +           },
+    +           "Media": {
+    +             "url": {
+    +               Symbol(LeafFieldSymbol): true,
+    +             },
+    +           },
+    +           "Node": {
+    +             "url": {
+    +               Symbol(LeafFieldSymbol): true,
+    +             },
+    +           },
+                "Video": {
+    +             "url": {
+    +               Symbol(LeafFieldSymbol): true,
+    +             },
+    +           },
+    +         },
+              "id": {
+                Symbol(LeafFieldSymbol): true,
+              },
+            },
+    +       "Media": {
+    +         "children": {
+    +           "Div": {
+    +             "url": {
+    +               Symbol(LeafFieldSymbol): true,
+                  },
+                },
+    +           "DocumentElement": {
+    +             "url": {
+    +               Symbol(LeafFieldSymbol): true,
+    +             },
+    +           },
+                "Image": {
+    +             "url": {
+    +               Symbol(LeafFieldSymbol): true,
+    +             },
+    +           },
+    +           "Media": {
+    +             "url": {
+    +               Symbol(LeafFieldSymbol): true,
+    +             },
+    +           },
+    +           "Node": {
+    +             "url": {
+    +               Symbol(LeafFieldSymbol): true,
+    +             },
+    +           },
+    +           "Video": {
+    +             "url": {
+    +               Symbol(LeafFieldSymbol): true,
+    +             },
+    +           },
+    +         },
+              "id": {
+                Symbol(LeafFieldSymbol): true,
+              },
+    +       },
+    +       "Node": {
+    +         "children": {
+    +           "Div": {
+    +             "url": {
+    +               Symbol(LeafFieldSymbol): true,
+    +             },
+    +           },
+    +           "DocumentElement": {
+    +             "url": {
+    +               Symbol(LeafFieldSymbol): true,
+    +             },
+    +           },
+    +           "Image": {
+                  "url": {
+                    Symbol(LeafFieldSymbol): true,
+                  },
+                },
+                "Media": {
+                  "url": {
+                    Symbol(LeafFieldSymbol): true,
+                  },
+                },
+                "Node": {
+    +             "url": {
+    +               Symbol(LeafFieldSymbol): true,
+    +             },
+    +           },
+    +           "Video": {
+    +             "url": {
+    +               Symbol(LeafFieldSymbol): true,
+    +             },
+    +           },
+    +         },
+              "id": {
+    +           Symbol(LeafFieldSymbol): true,
+    +         },
+    +       },
+    +       "Video": {
+    +         "children": {
+    +           "Div": {
+    +             "url": {
+    +               Symbol(LeafFieldSymbol): true,
+    +             },
+    +           },
+    +           "DocumentElement": {
+    +             "url": {
+    +               Symbol(LeafFieldSymbol): true,
+    +             },
+    +           },
+    +           "Image": {
+    +             "url": {
+    +               Symbol(LeafFieldSymbol): true,
+    +             },
+    +           },
+    +           "Media": {
+    +             "url": {
+    +               Symbol(LeafFieldSymbol): true,
+    +             },
+    +           },
+    +           "Node": {
+    +             "url": {
+                    Symbol(LeafFieldSymbol): true,
+                  },
+                },
+                "Video": {
+    +             "url": {
+    +               Symbol(LeafFieldSymbol): true,
+    +             },
+    +           },
+    +         },
+    +         "id": {
+    +           Symbol(LeafFieldSymbol): true,
+    +         },
+    +       },
+    +     },
+          "id": {
+            Symbol(LeafFieldSymbol): true,
+          },
+          "url": {
+            Symbol(LeafFieldSymbol): true,
+
+      1027 |
+      1028 |         expect(result.errors).not.toBeDefined();
+    > 1029 |         expect(infElements.fieldExpansion).toMatchInlineSnapshot(`
+           |                                            ^
+      1030 |           {
+      1031 |             "Div": {
+      1032 |               "children": {
+
+      at Object.toMatchInlineSnapshot (src/__tests__/resolve-info.test.ts:1029:44)
+
+  ● resolver info › Field Expansion › lists, inputs, unions and interfaces 2 › alias 1
+
+    expect(received).toMatchInlineSnapshot(snapshot)
+
+    Snapshot name: `resolver info Field Expansion lists, inputs, unions and interfaces 2 alias 1 1`
+
+    - Snapshot  -  1
+    + Received  + 25
+
+    @@ -1,14 +1,35 @@
+      {
+    +   "DocumentElement": {
+    +     "id": {
+    +       Symbol(LeafFieldSymbol): true,
+    +     },
+    +     "name": {
+    +       Symbol(LeafFieldSymbol): true,
+    +     },
+    +   },
+        "Image": {
+          "id": {
+    +       Symbol(LeafFieldSymbol): true,
+    +     },
+    +     "name": {
+            Symbol(LeafFieldSymbol): true,
+          },
+        },
+    -   "Media": {},
+    +   "Media": {
+    +     "id": {
+    +       Symbol(LeafFieldSymbol): true,
+    +     },
+    +     "name": {
+    +       Symbol(LeafFieldSymbol): true,
+    +     },
+    +   },
+        "Node": {
+          "id": {
+    +       Symbol(LeafFieldSymbol): true,
+    +     },
+    +     "name": {
+            Symbol(LeafFieldSymbol): true,
+          },
+        },
+        "Tag": {
+          "id": {
+    @@ -18,9 +39,12 @@
+            Symbol(LeafFieldSymbol): true,
+          },
+        },
+        "Video": {
+          "id": {
+    +       Symbol(LeafFieldSymbol): true,
+    +     },
+    +     "name": {
+            Symbol(LeafFieldSymbol): true,
+          },
+        },
+      }
+
+      1121 |         expect(validationErrors.length).toBe(0);
+      1122 |         expect(result.errors).not.toBeDefined();
+    > 1123 |         expect(infNode.fieldExpansion).toMatchInlineSnapshot(`
+           |                                        ^
+      1124 |           {
+      1125 |             "Image": {
+      1126 |               "id": {
+
+      at Object.toMatchInlineSnapshot (src/__tests__/resolve-info.test.ts:1123:40)
+
+  ● resolver info › Field Expansion › lists, inputs, unions and interfaces 2 › aliases and __typename should not be included in resolveInfo
+
+    expect(received).toMatchInlineSnapshot(snapshot)
+
+    Snapshot name: `resolver info Field Expansion lists, inputs, unions and interfaces 2 aliases and __typename should not be included in resolveInfo 1`
+
+    - Snapshot  -  0
+    + Received  + 44
+
+    @@ -1,8 +1,26 @@
+      {
+    +   "DocumentElement": {
+    +     "id": {
+    +       Symbol(LeafFieldSymbol): true,
+    +     },
+    +     "name": {
+    +       Symbol(LeafFieldSymbol): true,
+    +     },
+    +     "tags": {
+    +       "Tag": {
+    +         "name": {
+    +           Symbol(LeafFieldSymbol): true,
+    +         },
+    +       },
+    +     },
+    +   },
+        "Image": {
+          "id": {
+    +       Symbol(LeafFieldSymbol): true,
+    +     },
+    +     "name": {
+            Symbol(LeafFieldSymbol): true,
+          },
+          "tags": {
+            "Tag": {
+              "name": {
+    @@ -10,10 +28,16 @@
+              },
+            },
+          },
+        },
+        "Media": {
+    +     "id": {
+    +       Symbol(LeafFieldSymbol): true,
+    +     },
+    +     "name": {
+    +       Symbol(LeafFieldSymbol): true,
+    +     },
+          "tags": {
+            "Tag": {
+              "name": {
+                Symbol(LeafFieldSymbol): true,
+              },
+    @@ -22,21 +46,41 @@
+        },
+        "Node": {
+          "id": {
+            Symbol(LeafFieldSymbol): true,
+          },
+    +     "name": {
+    +       Symbol(LeafFieldSymbol): true,
+          },
+    +     "tags": {
+            "Tag": {
+    +         "name": {
+    +           Symbol(LeafFieldSymbol): true,
+    +         },
+    +       },
+    +     },
+    +   },
+    +   "Tag": {
+          "id": {
+            Symbol(LeafFieldSymbol): true,
+          },
+          "name": {
+            Symbol(LeafFieldSymbol): true,
+          },
+    +     "tags": {
+    +       "Tag": {
+    +         "name": {
+    +           Symbol(LeafFieldSymbol): true,
+    +         },
+    +       },
+          },
+    +   },
+        "Video": {
+          "id": {
+    +       Symbol(LeafFieldSymbol): true,
+    +     },
+    +     "name": {
+            Symbol(LeafFieldSymbol): true,
+          },
+          "tags": {
+            "Tag": {
+              "name": {
+
+      1184 |         expect(validationErrors.length).toBe(0);
+      1185 |         expect(result.errors).not.toBeDefined();
+    > 1186 |         expect(infNode.fieldExpansion).toMatchInlineSnapshot(`
+           |                                        ^
+      1187 |           {
+      1188 |             "Image": {
+      1189 |               "id": {
+
+      at Object.toMatchInlineSnapshot (src/__tests__/resolve-info.test.ts:1186:40)
+
+ › 12 snapshots failed.
+PASS src/__tests__/subscription.test.ts
+FAIL src/__tests__/nonnull.test.ts
+  ● Execute: handles non-nullable types › nulls a nullable field › that returns null
+
+    TypeError: Cannot destructure property 'data' of 'undefined' as it is undefined.
+
+      413 |
+      414 | function postProcessResult({
+    > 415 |   data,
+          |   ^
+      416 |   nullErrors,
+      417 |   errors,
+      418 |   trimmer
+
+      at data (src/execution.ts:415:3)
+      at executeSyncAndAsync (src/__tests__/nonnull.test.ts:182:23)
+      at Object.<anonymous> (src/__tests__/nonnull.test.ts:197:22)
+
+  ● Execute: handles non-nullable types › nulls a nullable field › that throws
+
+    TypeError: Cannot destructure property 'data' of 'undefined' as it is undefined.
+
+      413 |
+      414 | function postProcessResult({
+    > 415 |   data,
+          |   ^
+      416 |   nullErrors,
+      417 |   errors,
+      418 |   trimmer
+
+      at data (src/execution.ts:415:3)
+      at executeSyncAndAsync (src/__tests__/nonnull.test.ts:182:23)
+      at Object.<anonymous> (src/__tests__/nonnull.test.ts:204:22)
+
+  ● Execute: handles non-nullable types › nulls a synchronously returned object that contains a non-nullable field › that returns null
+
+    TypeError: Cannot destructure property 'data' of 'undefined' as it is undefined.
+
+      413 |
+      414 | function postProcessResult({
+    > 415 |   data,
+          |   ^
+      416 |   nullErrors,
+      417 |   errors,
+      418 |   trimmer
+
+      at data (src/execution.ts:415:3)
+      at executeSyncAndAsync (src/__tests__/nonnull.test.ts:182:23)
+      at Object.<anonymous> (src/__tests__/nonnull.test.ts:228:22)
+
+  ● Execute: handles non-nullable types › nulls a synchronously returned object that contains a non-nullable field › that throws
+
+    TypeError: Cannot destructure property 'data' of 'undefined' as it is undefined.
+
+      413 |
+      414 | function postProcessResult({
+    > 415 |   data,
+          |   ^
+      416 |   nullErrors,
+      417 |   errors,
+      418 |   trimmer
+
+      at data (src/execution.ts:415:3)
+      at executeSyncAndAsync (src/__tests__/nonnull.test.ts:182:23)
+      at Object.<anonymous> (src/__tests__/nonnull.test.ts:243:22)
+
+  ● Execute: handles non-nullable types › nulls an object returned in a promise that contains a non-nullable field › that returns null
+
+    TypeError: Cannot destructure property 'data' of 'undefined' as it is undefined.
+
+      413 |
+      414 | function postProcessResult({
+    > 415 |   data,
+          |   ^
+      416 |   nullErrors,
+      417 |   errors,
+      418 |   trimmer
+
+      at data (src/execution.ts:415:3)
+      at executeSyncAndAsync (src/__tests__/nonnull.test.ts:181:22)
+      at Object.<anonymous> (src/__tests__/nonnull.test.ts:267:22)
+
+  ● Execute: handles non-nullable types › nulls an object returned in a promise that contains a non-nullable field › that throws
+
+    TypeError: Cannot destructure property 'data' of 'undefined' as it is undefined.
+
+      413 |
+      414 | function postProcessResult({
+    > 415 |   data,
+          |   ^
+      416 |   nullErrors,
+      417 |   errors,
+      418 |   trimmer
+
+      at data (src/execution.ts:415:3)
+      at executeSyncAndAsync (src/__tests__/nonnull.test.ts:181:22)
+      at Object.<anonymous> (src/__tests__/nonnull.test.ts:282:22)
+
+  ● Execute: handles non-nullable types › nulls a complex tree of nullable fields, each › that returns null
+
+    TypeError: Cannot destructure property 'data' of 'undefined' as it is undefined.
+
+      413 |
+      414 | function postProcessResult({
+    > 415 |   data,
+          |   ^
+      416 |   nullErrors,
+      417 |   errors,
+      418 |   trimmer
+
+      at data (src/execution.ts:415:3)
+      at Object.<anonymous> (src/__tests__/nonnull.test.ts:333:22)
+
+  ● Execute: handles non-nullable types › nulls a complex tree of nullable fields, each › that throws
+
+    TypeError: Cannot destructure property 'data' of 'undefined' as it is undefined.
+
+      413 |
+      414 | function postProcessResult({
+    > 415 |   data,
+          |   ^
+      416 |   nullErrors,
+      417 |   errors,
+      418 |   trimmer
+
+      at data (src/execution.ts:415:3)
+      at Object.<anonymous> (src/__tests__/nonnull.test.ts:338:22)
+
+  ● Execute: handles non-nullable types › nulls the first nullable object after a field in a long chain of non-null fields › that returns null
+
+    TypeError: Cannot destructure property 'data' of 'undefined' as it is undefined.
+
+      413 |
+      414 | function postProcessResult({
+    > 415 |   data,
+          |   ^
+      416 |   nullErrors,
+      417 |   errors,
+      418 |   trimmer
+
+      at data (src/execution.ts:415:3)
+      at Object.<anonymous> (src/__tests__/nonnull.test.ts:494:22)
+
+  ● Execute: handles non-nullable types › nulls the first nullable object after a field in a long chain of non-null fields › that throws
+
+    TypeError: Cannot destructure property 'data' of 'undefined' as it is undefined.
+
+      413 |
+      414 | function postProcessResult({
+    > 415 |   data,
+          |   ^
+      416 |   nullErrors,
+      417 |   errors,
+      418 |   trimmer
+
+      at data (src/execution.ts:415:3)
+      at Object.<anonymous> (src/__tests__/nonnull.test.ts:555:22)
+
+  ● Execute: handles non-nullable types › nulls the top level if non-nullable field › that returns null
+
+    TypeError: Cannot destructure property 'data' of 'undefined' as it is undefined.
+
+      413 |
+      414 | function postProcessResult({
+    > 415 |   data,
+          |   ^
+      416 |   nullErrors,
+      417 |   errors,
+      418 |   trimmer
+
+      at data (src/execution.ts:415:3)
+      at executeSyncAndAsync (src/__tests__/nonnull.test.ts:182:23)
+      at Object.<anonymous> (src/__tests__/nonnull.test.ts:620:22)
+
+  ● Execute: handles non-nullable types › nulls the top level if non-nullable field › that throws
+
+    TypeError: Cannot destructure property 'data' of 'undefined' as it is undefined.
+
+      413 |
+      414 | function postProcessResult({
+    > 415 |   data,
+          |   ^
+      416 |   nullErrors,
+      417 |   errors,
+      418 |   trimmer
+
+      at data (src/execution.ts:415:3)
+      at executeSyncAndAsync (src/__tests__/nonnull.test.ts:182:23)
+      at Object.<anonymous> (src/__tests__/nonnull.test.ts:635:22)
+
+  ● Execute: handles non-nullable types › handles late resolution of non-null fields › that nulls first nullable object after common ancestor when non-null sibling field of any ancestor returns null
+
+    TypeError: Cannot destructure property 'data' of 'undefined' as it is undefined.
+
+      413 |
+      414 | function postProcessResult({
+    > 415 |   data,
+          |   ^
+      416 |   nullErrors,
+      417 |   errors,
+      418 |   trimmer
+
+      at data (src/execution.ts:415:3)
+      at executeSyncAndAsync (src/__tests__/nonnull.test.ts:181:22)
+      at Object.<anonymous> (src/__tests__/nonnull.test.ts:860:22)
+
+  ● Execute: handles non-nullable types › handles late resolution of non-null fields › that throws
+
+    TypeError: Cannot destructure property 'data' of 'undefined' as it is undefined.
+
+      413 |
+      414 | function postProcessResult({
+    > 415 |   data,
+          |   ^
+      416 |   nullErrors,
+      417 |   errors,
+      418 |   trimmer
+
+      at data (src/execution.ts:415:3)
+      at executeSyncAndAsync (src/__tests__/nonnull.test.ts:181:22)
+      at Object.<anonymous> (src/__tests__/nonnull.test.ts:905:22)
+
+FAIL src/__tests__/abstract.test.ts
+  ● Execute: Handles execution of abstract types › complex schema with abstract types
+
+    TypeError: Cannot destructure property 'data' of 'undefined' as it is undefined.
+
+      413 |
+      414 | function postProcessResult({
+    > 415 |   data,
+          |   ^
+      416 |   nullErrors,
+      417 |   errors,
+      418 |   trimmer
+
+      at data (src/execution.ts:415:3)
+      at Object.<anonymous> (src/__tests__/abstract.test.ts:633:20)
+
+  ● Abstract type trivial case deduplication › non-trivial union member with async resolver returning typed object with __typename
+
+    TypeError: Cannot destructure property 'data' of 'undefined' as it is undefined.
+
+      413 |
+      414 | function postProcessResult({
+    > 415 |   data,
+          |   ^
+      416 |   nullErrors,
+      417 |   errors,
+      418 |   trimmer
+
+      at data (src/execution.ts:415:3)
+      at Object.<anonymous> (src/__tests__/abstract.test.ts:793:20)
+
+FAIL src/__tests__/lists.test.ts
+  ● Execute: Handles list nullability › [T] › Promise<Array<T>> › Contains values
+
+    TypeError: Cannot destructure property 'data' of 'undefined' as it is undefined.
+
+      413 |
+      414 | function postProcessResult({
+    > 415 |   data,
+          |   ^
+      416 |   nullErrors,
+      417 |   errors,
+      418 |   trimmer
+
+      at data (src/execution.ts:415:3)
+      at Object.<anonymous> (src/__tests__/lists.test.ts:48:22)
+
+  ● Execute: Handles list nullability › [T] › Promise<Array<T>> › Contains null
+
+    TypeError: Cannot destructure property 'data' of 'undefined' as it is undefined.
+
+      413 |
+      414 | function postProcessResult({
+    > 415 |   data,
+          |   ^
+      416 |   nullErrors,
+      417 |   errors,
+      418 |   trimmer
+
+      at data (src/execution.ts:415:3)
+      at Object.<anonymous> (src/__tests__/lists.test.ts:48:22)
+
+  ● Execute: Handles list nullability › [T] › Promise<Array<T>> › Returns null
+
+    TypeError: Cannot destructure property 'data' of 'undefined' as it is undefined.
+
+      413 |
+      414 | function postProcessResult({
+    > 415 |   data,
+          |   ^
+      416 |   nullErrors,
+      417 |   errors,
+      418 |   trimmer
+
+      at data (src/execution.ts:415:3)
+      at Object.<anonymous> (src/__tests__/lists.test.ts:48:22)
+
+  ● Execute: Handles list nullability › [T] › Promise<Array<T>> › Rejected
+
+    TypeError: Cannot destructure property 'data' of 'undefined' as it is undefined.
+
+      413 |
+      414 | function postProcessResult({
+    > 415 |   data,
+          |   ^
+      416 |   nullErrors,
+      417 |   errors,
+      418 |   trimmer
+
+      at data (src/execution.ts:415:3)
+      at Object.<anonymous> (src/__tests__/lists.test.ts:48:22)
+
+  ● Execute: Handles list nullability › [T] › Array<Promise<T>> › Contains values
+
+    TypeError: Cannot destructure property 'data' of 'undefined' as it is undefined.
+
+      413 |
+      414 | function postProcessResult({
+    > 415 |   data,
+          |   ^
+      416 |   nullErrors,
+      417 |   errors,
+      418 |   trimmer
+
+      at data (src/execution.ts:415:3)
+      at Object.<anonymous> (src/__tests__/lists.test.ts:48:22)
+
+  ● Execute: Handles list nullability › [T] › Array<Promise<T>> › Contains null
+
+    TypeError: Cannot destructure property 'data' of 'undefined' as it is undefined.
+
+      413 |
+      414 | function postProcessResult({
+    > 415 |   data,
+          |   ^
+      416 |   nullErrors,
+      417 |   errors,
+      418 |   trimmer
+
+      at data (src/execution.ts:415:3)
+      at Object.<anonymous> (src/__tests__/lists.test.ts:48:22)
+
+  ● Execute: Handles list nullability › [T] › Array<Promise<T>> › Contains reject
+
+    TypeError: Cannot destructure property 'data' of 'undefined' as it is undefined.
+
+      413 |
+      414 | function postProcessResult({
+    > 415 |   data,
+          |   ^
+      416 |   nullErrors,
+      417 |   errors,
+      418 |   trimmer
+
+      at data (src/execution.ts:415:3)
+      at Object.<anonymous> (src/__tests__/lists.test.ts:48:22)
+
+  ● Execute: Handles list nullability › [T]! › Promise<Array<T>> › Contains values
+
+    TypeError: Cannot destructure property 'data' of 'undefined' as it is undefined.
+
+      413 |
+      414 | function postProcessResult({
+    > 415 |   data,
+          |   ^
+      416 |   nullErrors,
+      417 |   errors,
+      418 |   trimmer
+
+      at data (src/execution.ts:415:3)
+      at Object.<anonymous> (src/__tests__/lists.test.ts:48:22)
+
+  ● Execute: Handles list nullability › [T]! › Promise<Array<T>> › Contains null
+
+    TypeError: Cannot destructure property 'data' of 'undefined' as it is undefined.
+
+      413 |
+      414 | function postProcessResult({
+    > 415 |   data,
+          |   ^
+      416 |   nullErrors,
+      417 |   errors,
+      418 |   trimmer
+
+      at data (src/execution.ts:415:3)
+      at Object.<anonymous> (src/__tests__/lists.test.ts:48:22)
+
+  ● Execute: Handles list nullability › [T]! › Promise<Array<T>> › Returns null
+
+    TypeError: Cannot destructure property 'data' of 'undefined' as it is undefined.
+
+      413 |
+      414 | function postProcessResult({
+    > 415 |   data,
+          |   ^
+      416 |   nullErrors,
+      417 |   errors,
+      418 |   trimmer
+
+      at data (src/execution.ts:415:3)
+      at Object.<anonymous> (src/__tests__/lists.test.ts:48:22)
+
+  ● Execute: Handles list nullability › [T]! › Promise<Array<T>> › Rejected
+
+    TypeError: Cannot destructure property 'data' of 'undefined' as it is undefined.
+
+      413 |
+      414 | function postProcessResult({
+    > 415 |   data,
+          |   ^
+      416 |   nullErrors,
+      417 |   errors,
+      418 |   trimmer
+
+      at data (src/execution.ts:415:3)
+      at Object.<anonymous> (src/__tests__/lists.test.ts:48:22)
+
+  ● Execute: Handles list nullability › [T]! › Array<Promise<T>> › Contains values
+
+    TypeError: Cannot destructure property 'data' of 'undefined' as it is undefined.
+
+      413 |
+      414 | function postProcessResult({
+    > 415 |   data,
+          |   ^
+      416 |   nullErrors,
+      417 |   errors,
+      418 |   trimmer
+
+      at data (src/execution.ts:415:3)
+      at Object.<anonymous> (src/__tests__/lists.test.ts:48:22)
+
+  ● Execute: Handles list nullability › [T]! › Array<Promise<T>> › Contains null
+
+    TypeError: Cannot destructure property 'data' of 'undefined' as it is undefined.
+
+      413 |
+      414 | function postProcessResult({
+    > 415 |   data,
+          |   ^
+      416 |   nullErrors,
+      417 |   errors,
+      418 |   trimmer
+
+      at data (src/execution.ts:415:3)
+      at Object.<anonymous> (src/__tests__/lists.test.ts:48:22)
+
+  ● Execute: Handles list nullability › [T]! › Array<Promise<T>> › Contains reject
+
+    TypeError: Cannot destructure property 'data' of 'undefined' as it is undefined.
+
+      413 |
+      414 | function postProcessResult({
+    > 415 |   data,
+          |   ^
+      416 |   nullErrors,
+      417 |   errors,
+      418 |   trimmer
+
+      at data (src/execution.ts:415:3)
+      at Object.<anonymous> (src/__tests__/lists.test.ts:48:22)
+
+  ● Execute: Handles list nullability › [T!] › Array<T> › Contains null
+
+    expect(received).toMatchObject(expected)
+
+    - Expected  - 1
+    + Received  + 6
+
+    @@ -14,10 +14,15 @@
+            ],
+            "message": "Cannot return null for non-nullable field DataType.test.",
+            "path": Array [
+              "nest",
+              "test",
+    -         1,
+    +         Array [
+    +           Object {
+    +             "column": 10,
+    +             "line": 1,
+    +           },
+    +         ],
+            ],
+          },
+        ],
+      }
+
+      47 |     }
+      48 |     const response = await prepared.query(data, undefined, {});
+    > 49 |     expect(response).toMatchObject(expected);
+         |                      ^
+      50 |   };
+      51 | }
+      52 |
+
+      at Object.toMatchObject (src/__tests__/lists.test.ts:49:22)
+
+  ● Execute: Handles list nullability › [T!] › Promise<Array<T>> › Contains values
+
+    TypeError: Cannot destructure property 'data' of 'undefined' as it is undefined.
+
+      413 |
+      414 | function postProcessResult({
+    > 415 |   data,
+          |   ^
+      416 |   nullErrors,
+      417 |   errors,
+      418 |   trimmer
+
+      at data (src/execution.ts:415:3)
+      at Object.<anonymous> (src/__tests__/lists.test.ts:48:22)
+
+  ● Execute: Handles list nullability › [T!] › Promise<Array<T>> › Contains null
+
+    TypeError: Cannot destructure property 'data' of 'undefined' as it is undefined.
+
+      413 |
+      414 | function postProcessResult({
+    > 415 |   data,
+          |   ^
+      416 |   nullErrors,
+      417 |   errors,
+      418 |   trimmer
+
+      at data (src/execution.ts:415:3)
+      at Object.<anonymous> (src/__tests__/lists.test.ts:48:22)
+
+  ● Execute: Handles list nullability › [T!] › Promise<Array<T>> › Returns null
+
+    TypeError: Cannot destructure property 'data' of 'undefined' as it is undefined.
+
+      413 |
+      414 | function postProcessResult({
+    > 415 |   data,
+          |   ^
+      416 |   nullErrors,
+      417 |   errors,
+      418 |   trimmer
+
+      at data (src/execution.ts:415:3)
+      at Object.<anonymous> (src/__tests__/lists.test.ts:48:22)
+
+  ● Execute: Handles list nullability › [T!] › Promise<Array<T>> › Rejected
+
+    TypeError: Cannot destructure property 'data' of 'undefined' as it is undefined.
+
+      413 |
+      414 | function postProcessResult({
+    > 415 |   data,
+          |   ^
+      416 |   nullErrors,
+      417 |   errors,
+      418 |   trimmer
+
+      at data (src/execution.ts:415:3)
+      at Object.<anonymous> (src/__tests__/lists.test.ts:48:22)
+
+  ● Execute: Handles list nullability › [T!] › Array<Promise<T>> › Contains values
+
+    TypeError: Cannot destructure property 'data' of 'undefined' as it is undefined.
+
+      413 |
+      414 | function postProcessResult({
+    > 415 |   data,
+          |   ^
+      416 |   nullErrors,
+      417 |   errors,
+      418 |   trimmer
+
+      at data (src/execution.ts:415:3)
+      at Object.<anonymous> (src/__tests__/lists.test.ts:48:22)
+
+  ● Execute: Handles list nullability › [T!] › Array<Promise<T>> › Contains null
+
+    TypeError: Cannot destructure property 'data' of 'undefined' as it is undefined.
+
+      413 |
+      414 | function postProcessResult({
+    > 415 |   data,
+          |   ^
+      416 |   nullErrors,
+      417 |   errors,
+      418 |   trimmer
+
+      at data (src/execution.ts:415:3)
+      at Object.<anonymous> (src/__tests__/lists.test.ts:48:22)
+
+  ● Execute: Handles list nullability › [T!] › Array<Promise<T>> › Contains reject
+
+    TypeError: Cannot destructure property 'data' of 'undefined' as it is undefined.
+
+      413 |
+      414 | function postProcessResult({
+    > 415 |   data,
+          |   ^
+      416 |   nullErrors,
+      417 |   errors,
+      418 |   trimmer
+
+      at data (src/execution.ts:415:3)
+      at Object.<anonymous> (src/__tests__/lists.test.ts:48:22)
+
+  ● Execute: Handles list nullability › [T!]! › Array<T> › Contains null
+
+    expect(received).toMatchObject(expected)
+
+    - Expected  - 1
+    + Received  + 6
+
+    @@ -12,10 +12,15 @@
+            ],
+            "message": "Cannot return null for non-nullable field DataType.test.",
+            "path": Array [
+              "nest",
+              "test",
+    -         1,
+    +         Array [
+    +           Object {
+    +             "column": 10,
+    +             "line": 1,
+    +           },
+    +         ],
+            ],
+          },
+        ],
+      }
+
+      47 |     }
+      48 |     const response = await prepared.query(data, undefined, {});
+    > 49 |     expect(response).toMatchObject(expected);
+         |                      ^
+      50 |   };
+      51 | }
+      52 |
+
+      at Object.toMatchObject (src/__tests__/lists.test.ts:49:22)
+
+  ● Execute: Handles list nullability › [T!]! › Promise<Array<T>> › Contains values
+
+    TypeError: Cannot destructure property 'data' of 'undefined' as it is undefined.
+
+      413 |
+      414 | function postProcessResult({
+    > 415 |   data,
+          |   ^
+      416 |   nullErrors,
+      417 |   errors,
+      418 |   trimmer
+
+      at data (src/execution.ts:415:3)
+      at Object.<anonymous> (src/__tests__/lists.test.ts:48:22)
+
+  ● Execute: Handles list nullability › [T!]! › Promise<Array<T>> › Contains null
+
+    TypeError: Cannot destructure property 'data' of 'undefined' as it is undefined.
+
+      413 |
+      414 | function postProcessResult({
+    > 415 |   data,
+          |   ^
+      416 |   nullErrors,
+      417 |   errors,
+      418 |   trimmer
+
+      at data (src/execution.ts:415:3)
+      at Object.<anonymous> (src/__tests__/lists.test.ts:48:22)
+
+  ● Execute: Handles list nullability › [T!]! › Promise<Array<T>> › Returns null
+
+    TypeError: Cannot destructure property 'data' of 'undefined' as it is undefined.
+
+      413 |
+      414 | function postProcessResult({
+    > 415 |   data,
+          |   ^
+      416 |   nullErrors,
+      417 |   errors,
+      418 |   trimmer
+
+      at data (src/execution.ts:415:3)
+      at Object.<anonymous> (src/__tests__/lists.test.ts:48:22)
+
+  ● Execute: Handles list nullability › [T!]! › Promise<Array<T>> › Rejected
+
+    TypeError: Cannot destructure property 'data' of 'undefined' as it is undefined.
+
+      413 |
+      414 | function postProcessResult({
+    > 415 |   data,
+          |   ^
+      416 |   nullErrors,
+      417 |   errors,
+      418 |   trimmer
+
+      at data (src/execution.ts:415:3)
+      at Object.<anonymous> (src/__tests__/lists.test.ts:48:22)
+
+  ● Execute: Handles list nullability › [T!]! › Array<Promise<T>> › Contains values
+
+    TypeError: Cannot destructure property 'data' of 'undefined' as it is undefined.
+
+      413 |
+      414 | function postProcessResult({
+    > 415 |   data,
+          |   ^
+      416 |   nullErrors,
+      417 |   errors,
+      418 |   trimmer
+
+      at data (src/execution.ts:415:3)
+      at Object.<anonymous> (src/__tests__/lists.test.ts:48:22)
+
+  ● Execute: Handles list nullability › [T!]! › Array<Promise<T>> › Contains null
+
+    TypeError: Cannot destructure property 'data' of 'undefined' as it is undefined.
+
+      413 |
+      414 | function postProcessResult({
+    > 415 |   data,
+          |   ^
+      416 |   nullErrors,
+      417 |   errors,
+      418 |   trimmer
+
+      at data (src/execution.ts:415:3)
+      at Object.<anonymous> (src/__tests__/lists.test.ts:48:22)
+
+  ● Execute: Handles list nullability › [T!]! › Array<Promise<T>> › Contains reject
+
+    TypeError: Cannot destructure property 'data' of 'undefined' as it is undefined.
+
+      413 |
+      414 | function postProcessResult({
+    > 415 |   data,
+          |   ^
+      416 |   nullErrors,
+      417 |   errors,
+      418 |   trimmer
+
+      at data (src/execution.ts:415:3)
+      at Object.<anonymous> (src/__tests__/lists.test.ts:48:22)
+
+  ● Execute: Handles nested lists › [Promise<[Promise<Scalar>]>]
+
+    TypeError: Cannot destructure property 'data' of 'undefined' as it is undefined.
+
+      413 |
+      414 | function postProcessResult({
+    > 415 |   data,
+          |   ^
+      416 |   nullErrors,
+      417 |   errors,
+      418 |   trimmer
+
+      at data (src/execution.ts:415:3)
+      at Object.<anonymous> (src/__tests__/lists.test.ts:567:24)
+
+  ● Execute: Handles nested lists › [[PromiseRejected<Scalar>]]
+
+    TypeError: Cannot destructure property 'data' of 'undefined' as it is undefined.
+
+      413 |
+      414 | function postProcessResult({
+    > 415 |   data,
+          |   ^
+      416 |   nullErrors,
+      417 |   errors,
+      418 |   trimmer
+
+      at data (src/execution.ts:415:3)
+      at Object.<anonymous> (src/__tests__/lists.test.ts:567:24)
+
+  ● Execute: Handles nested lists › wrong type for serialization [[Promise<BadScalar>]]
+
+    TypeError: Cannot destructure property 'data' of 'undefined' as it is undefined.
+
+      413 |
+      414 | function postProcessResult({
+    > 415 |   data,
+          |   ^
+      416 |   nullErrors,
+      417 |   errors,
+      418 |   trimmer
+
+      at data (src/execution.ts:415:3)
+      at Object.<anonymous> (src/__tests__/lists.test.ts:567:24)
+
+  ● Execute: Handles nested lists › [[Promise<Object>]]
+
+    TypeError: Cannot destructure property 'data' of 'undefined' as it is undefined.
+
+      413 |
+      414 | function postProcessResult({
+    > 415 |   data,
+          |   ^
+      416 |   nullErrors,
+      417 |   errors,
+      418 |   trimmer
+
+      at data (src/execution.ts:415:3)
+      at Object.<anonymous> (src/__tests__/lists.test.ts:567:24)
+
+  ● Execute: Handles nested lists › [[Promise<Object with nested resolver>]]
+
+    TypeError: Cannot destructure property 'data' of 'undefined' as it is undefined.
+
+      413 |
+      414 | function postProcessResult({
+    > 415 |   data,
+          |   ^
+      416 |   nullErrors,
+      417 |   errors,
+      418 |   trimmer
+
+      at data (src/execution.ts:415:3)
+      at Object.<anonymous> (src/__tests__/lists.test.ts:567:24)
+
+  ● Execute: Handles nested lists › [[Promise<Object with Promise field>]]
+
+    TypeError: Cannot destructure property 'data' of 'undefined' as it is undefined.
+
+      413 |
+      414 | function postProcessResult({
+    > 415 |   data,
+          |   ^
+      416 |   nullErrors,
+      417 |   errors,
+      418 |   trimmer
+
+      at data (src/execution.ts:415:3)
+      at Object.<anonymous> (src/__tests__/lists.test.ts:567:24)
+
+  ● Execute: Handles nested lists › [[PromiseRejected<Object>]]
+
+    TypeError: Cannot destructure property 'data' of 'undefined' as it is undefined.
+
+      413 |
+      414 | function postProcessResult({
+    > 415 |   data,
+          |   ^
+      416 |   nullErrors,
+      417 |   errors,
+      418 |   trimmer
+
+      at data (src/execution.ts:415:3)
+      at Object.<anonymous> (src/__tests__/lists.test.ts:567:24)
+
+  ● Execute: Handles nested lists › [[PromiseRejected<Object>!]]
+
+    TypeError: Cannot destructure property 'data' of 'undefined' as it is undefined.
+
+      413 |
+      414 | function postProcessResult({
+    > 415 |   data,
+          |   ^
+      416 |   nullErrors,
+      417 |   errors,
+      418 |   trimmer
+
+      at data (src/execution.ts:415:3)
+      at Object.<anonymous> (src/__tests__/lists.test.ts:567:24)
+
+  ● resolved fields in object list › executes with errors
+
+    expect(received).toMatchObject(expected)
+
+    - Expected  -  3
+    + Received  + 10
+
+    @@ -2,25 +2,32 @@
+        "data": Object {
+          "feed": Array [
+            Object {
+              "id": "123",
+            },
+    -       null,
+    +       Object {
+    +         "id": null,
+    +       },
+          ],
+        },
+        "errors": Array [
+          Object {
+            "locations": Array [
+              Object {
+                "column": 11,
+                "line": 4,
+              },
+            ],
+    -       "message": "test",
+    +       "message": "ID cannot represent value: {}",
+            "path": Array [
+              "feed",
+    -         1,
+    +         Array [
+    +           Object {
+    +             "column": 11,
+    +             "line": 4,
+    +           },
+    +         ],
+              "id",
+            ],
+          },
+        ],
+      }
+
+      810 |     );
+      811 |     const response = await prepared.query(undefined, undefined, {});
+    > 812 |     expect(response).toMatchObject({
+          |                      ^
+      813 |       data: {
+      814 |         feed: [{ id: "123" }, null]
+      815 |       },
+
+      at Object.toMatchObject (src/__tests__/lists.test.ts:812:22)
+
+FAIL src/__tests__/schema.test.ts
+  ● Execute: Handles execution with a complex schema › executes using a schema
+
+    TypeError: Cannot destructure property 'data' of 'undefined' as it is undefined.
+
+      413 |
+      414 | function postProcessResult({
+    > 415 |   data,
+          |   ^
+      416 |   nullErrors,
+      417 |   errors,
+      418 |   trimmer
+
+      at data (src/execution.ts:415:3)
+      at Object.<anonymous> (src/__tests__/schema.test.ts:167:20)
+
+  ● Execute: Handles execution with a complex schema › executes with resolves nested in lists
+
+    TypeError: Cannot destructure property 'data' of 'undefined' as it is undefined.
+
+      413 |
+      414 | function postProcessResult({
+    > 415 |   data,
+          |   ^
+      416 |   nullErrors,
+      417 |   errors,
+      418 |   trimmer
+
+      at data (src/execution.ts:415:3)
+      at Object.<anonymous> (src/__tests__/schema.test.ts:226:20)
+
+  ● Execute: Handles execution with a complex schema › executes using a schema without lists
+
+    TypeError: Cannot destructure property 'data' of 'undefined' as it is undefined.
+
+      413 |
+      414 | function postProcessResult({
+    > 415 |   data,
+          |   ^
+      416 |   nullErrors,
+      417 |   errors,
+      418 |   trimmer
+
+      at data (src/execution.ts:415:3)
+      at Object.<anonymous> (src/__tests__/schema.test.ts:374:20)
+
+PASS src/__tests__/union-interface.test.ts
+FAIL src/__tests__/scalars.test.ts
+  ● Scalars: Is able to serialize custom scalar › can handle errors in coercion › handles the field not being able to coerce
+
+    expect(received).toMatchObject(expected)
+
+    - Expected  - 1
+    + Received  + 1
+
+    @@ -8,11 +8,11 @@
+              Object {
+                "column": 9,
+                "line": 3,
+              },
+            ],
+    -       "message": "Expected a value of type \"Custom\" but received: test",
+    +       "message": "Expected a value of type \"Custom\" but received: \"test\"",
+            "path": Array [
+              "scalar",
+            ],
+          },
+        ],
+
+      78 |         parse(request)
+      79 |       );
+    > 80 |       expect(result).toMatchObject({
+         |                      ^
+      81 |         data: {
+      82 |           scalar: null
+      83 |         },
+
+      at Object.toMatchObject (src/__tests__/scalars.test.ts:80:22)
+
+FAIL src/__tests__/mutations.test.ts (10.072 s)
+  ● Execute: Handles mutation execution ordering › evaluates mutations serially
+
+    TypeError: Cannot read properties of undefined (reading 'jobCounter')
+
+      at Object.__context.resolve (eval at compileQuery (src/execution.ts:300:9), <anonymous>:47:19)
+      at resolve (src/runtime.ts:21:22)
+
+  ● Execute: Handles mutation execution ordering › evaluates mutations serially
+
+    thrown: "Exceeded timeout of 5000 ms for a test.
+    Add a timeout value to this test to increase the timeout, if this is a long-running test. See https://jestjs.io/docs/api#testname-fn-timeout."
+
+      172 |
+      173 | describe("Execute: Handles mutation execution ordering", () => {
+    > 174 |   test("evaluates mutations serially", async () => {
+          |   ^
+      175 |     const doc = `mutation M {
+      176 |       first: immediatelyChangeTheNumber(newNumber: 1) {
+      177 |         theNumber
+
+      at test (src/__tests__/mutations.test.ts:174:3)
+      at Object.describe (src/__tests__/mutations.test.ts:173:1)
+
+  ● Execute: Handles mutation execution ordering › evaluates mutations correctly in the presence of a failed mutation
+
+    TypeError: Cannot read properties of undefined (reading 'jobCounter')
+
+      at Object.__context.resolve (eval at compileQuery (src/execution.ts:300:9), <anonymous>:54:19)
+      at resolve (src/runtime.ts:21:22)
+
+  ● Execute: Handles mutation execution ordering › evaluates mutations correctly in the presence of a failed mutation
+
+    thrown: "Exceeded timeout of 5000 ms for a test.
+    Add a timeout value to this test to increase the timeout, if this is a long-running test. See https://jestjs.io/docs/api#testname-fn-timeout."
+
+      204 |   });
+      205 |
+    > 206 |   test("evaluates mutations correctly in the presence of a failed mutation", async () => {
+          |   ^
+      207 |     const doc = `mutation M {
+      208 |       first: immediatelyChangeTheNumber(newNumber: 1) {
+      209 |         theNumber
+
+      at test (src/__tests__/mutations.test.ts:206:3)
+      at Object.describe (src/__tests__/mutations.test.ts:173:1)
+
+PASS src/__tests__/alias.test.ts
+PASS src/__tests__/inspect.test.ts
+PASS src/__tests__/json.test.ts
+/tmp/commit0-inplace-1ngo4fnc/tree/src/execution.ts:181
+function postProcessResult({ data, nullErrors, errors, trimmer }) {
+                             ^
+
+TypeError: Cannot destructure property 'data' of 'undefined' as it is undefined.
+    at data (/tmp/commit0-inplace-1ngo4fnc/tree/src/execution.ts:415:3)
+
+Node.js v22.23.1

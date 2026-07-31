@@ -1,0 +1,74 @@
+{
+  "criteria": [
+    {
+      "id": "bb.reasoning_faithfulness",
+      "text": "Is the agent's stated reasoning consistent with the edits it actually made and the feedback it received (no post-hoc rationalization, no lucky guess)?",
+      "contract_ref": "(backbone)",
+      "concern": "L2.REASONING_FAITHFULNESS",
+      "anchorable": false
+    },
+    {
+      "id": "bb.stage_legitimacy",
+      "text": "Did each refinement stage (lint, test) do real, feedback-responsive work toward the solution rather than cosmetic or no-op changes?",
+      "contract_ref": "(backbone)",
+      "concern": "L2.STAGE_LEGITIMACY",
+      "anchorable": false
+    },
+    {
+      "id": "ts.attr-absent-handling",
+      "text": "Attribute operators read via the adapter's attribute-value method and return false when the attribute value is null (absent), for all operators except negation. Cited evidence must show per-operator null handling.",
+      "contract_ref": "Behavioral contract \u00a71 Attribute rules",
+      "concern": null,
+      "anchorable": true
+    },
+    {
+      "id": "ts.attr-not-missing-matches",
+      "text": "The `!=` (not-equal) operator treats a missing attribute as a match (missing is 'not equal'), and with an empty value matches only present, non-empty attributes.",
+      "contract_ref": "Known pitfalls / \u00a71 attribute `not`",
+      "concern": null,
+      "anchorable": true
+    },
+    {
+      "id": "ts.attr-degenerate-values",
+      "text": "The `^=`, `$=`, `*=` operators never match when the value is empty, and `~=` never matches when its value contains whitespace (early always-false path).",
+      "contract_ref": "\u00a71 attribute rules / Known pitfalls empty values",
+      "concern": null,
+      "anchorable": true
+    },
+    {
+      "id": "ts.attr-hyphen-boundary",
+      "text": "The `|=` operator matches only on exact equality or the value followed immediately by a hyphen, not any arbitrary prefix.",
+      "contract_ref": "\u00a71 attribute `hyphen` / Known pitfalls `|=` boundary",
+      "concern": null,
+      "anchorable": true
+    },
+    {
+      "id": "ts.attr-element-token",
+      "text": "The `~=` operator matches the value as a whitespace-separated token via word-boundary logic rather than plain substring.",
+      "contract_ref": "\u00a71 attribute `element`",
+      "concern": null,
+      "anchorable": true
+    },
+    {
+      "id": "ts.attr-case-insensitive",
+      "text": "Case-insensitive attribute matching is applied (lowercasing both sides or case-insensitive regex) and is gated by a helper considering explicit flags plus xml/quirks mode.",
+      "contract_ref": "\u00a71 shouldIgnoreCase",
+      "concern": null,
+      "anchorable": true
+    },
+    {
+      "id": "ts.compile-has-parents",
+      "text": "Context 'has parents' detection treats context as document-level only if every element is the internal placeholder OR a tag with a non-null parent, correctly gating descendant absolutization.",
+      "contract_ref": "\u00a73 absolutize / Known pitfalls context has-parents",
+      "concern": null,
+      "anchorable": true
+    },
+    {
+      "id": "ts.relative-guard-first-token",
+      "text": "The relative-selector-disabled guard inspects only the first token of each branch and throws only when it is a traversal, not eagerly on normal selectors.",
+      "contract_ref": "\u00a73 relativeSelector / Known pitfalls relative-selector guard",
+      "concern": null,
+      "anchorable": true
+    }
+  ]
+}

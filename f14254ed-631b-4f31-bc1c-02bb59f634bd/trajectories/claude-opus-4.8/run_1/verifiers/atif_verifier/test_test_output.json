@@ -1,0 +1,871 @@
+{"Time":"2026-07-21T05:36:01.247001055Z","Action":"start","Package":"github.com/gocolly/colly/v2"}
+{"Time":"2026-07-21T05:36:01.247141491Z","Action":"start","Package":"github.com/gocolly/colly/v2/cmd/colly"}
+{"Time":"2026-07-21T05:36:01.24726693Z","Action":"output","Package":"github.com/gocolly/colly/v2/cmd/colly","Output":"?   \tgithub.com/gocolly/colly/v2/cmd/colly\t[no test files]\n"}
+{"Time":"2026-07-21T05:36:01.247275328Z","Action":"skip","Package":"github.com/gocolly/colly/v2/cmd/colly","Elapsed":0}
+{"Time":"2026-07-21T05:36:01.247284021Z","Action":"start","Package":"github.com/gocolly/colly/v2/debug"}
+{"Time":"2026-07-21T05:36:01.247311878Z","Action":"output","Package":"github.com/gocolly/colly/v2/debug","Output":"?   \tgithub.com/gocolly/colly/v2/debug\t[no test files]\n"}
+{"Time":"2026-07-21T05:36:01.247315108Z","Action":"skip","Package":"github.com/gocolly/colly/v2/debug","Elapsed":0}
+{"Time":"2026-07-21T05:36:01.24731959Z","Action":"start","Package":"github.com/gocolly/colly/v2/extensions"}
+{"Time":"2026-07-21T05:36:01.247322755Z","Action":"output","Package":"github.com/gocolly/colly/v2/extensions","Output":"?   \tgithub.com/gocolly/colly/v2/extensions\t[no test files]\n"}
+{"Time":"2026-07-21T05:36:01.247325079Z","Action":"skip","Package":"github.com/gocolly/colly/v2/extensions","Elapsed":0}
+{"Time":"2026-07-21T05:36:01.247337005Z","Action":"start","Package":"github.com/gocolly/colly/v2/proxy"}
+{"Time":"2026-07-21T05:36:01.24736862Z","Action":"output","Package":"github.com/gocolly/colly/v2/proxy","Output":"?   \tgithub.com/gocolly/colly/v2/proxy\t[no test files]\n"}
+{"Time":"2026-07-21T05:36:01.247374352Z","Action":"skip","Package":"github.com/gocolly/colly/v2/proxy","Elapsed":0}
+{"Time":"2026-07-21T05:36:01.247381747Z","Action":"start","Package":"github.com/gocolly/colly/v2/queue"}
+{"Time":"2026-07-21T05:36:01.247645699Z","Action":"start","Package":"github.com/gocolly/colly/v2/storage"}
+{"Time":"2026-07-21T05:36:01.247705426Z","Action":"output","Package":"github.com/gocolly/colly/v2/storage","Output":"?   \tgithub.com/gocolly/colly/v2/storage\t[no test files]\n"}
+{"Time":"2026-07-21T05:36:01.247719308Z","Action":"skip","Package":"github.com/gocolly/colly/v2/storage","Elapsed":0}
+{"Time":"2026-07-21T05:36:01.250492934Z","Action":"run","Package":"github.com/gocolly/colly/v2","Test":"TestNoAcceptHeader"}
+{"Time":"2026-07-21T05:36:01.250564688Z","Action":"output","Package":"github.com/gocolly/colly/v2","Test":"TestNoAcceptHeader","Output":"=== RUN   TestNoAcceptHeader\n"}
+{"Time":"2026-07-21T05:36:01.250716846Z","Action":"run","Package":"github.com/gocolly/colly/v2/queue","Test":"TestQueue"}
+{"Time":"2026-07-21T05:36:01.250727546Z","Action":"output","Package":"github.com/gocolly/colly/v2/queue","Test":"TestQueue","Output":"=== RUN   TestQueue\n"}
+{"Time":"2026-07-21T05:36:01.251868678Z","Action":"output","Package":"github.com/gocolly/colly/v2","Test":"TestNoAcceptHeader","Output":"    colly_test.go:529: failed to pass request with no Accept header. got: */*\n"}
+{"Time":"2026-07-21T05:36:01.251945668Z","Action":"output","Package":"github.com/gocolly/colly/v2","Test":"TestNoAcceptHeader","Output":"--- FAIL: TestNoAcceptHeader (0.00s)\n"}
+{"Time":"2026-07-21T05:36:01.251950181Z","Action":"fail","Package":"github.com/gocolly/colly/v2","Test":"TestNoAcceptHeader","Elapsed":0}
+{"Time":"2026-07-21T05:36:01.251963131Z","Action":"run","Package":"github.com/gocolly/colly/v2","Test":"TestNewCollector"}
+{"Time":"2026-07-21T05:36:01.251965515Z","Action":"output","Package":"github.com/gocolly/colly/v2","Test":"TestNewCollector","Output":"=== RUN   TestNewCollector\n"}
+{"Time":"2026-07-21T05:36:01.25198408Z","Action":"run","Package":"github.com/gocolly/colly/v2","Test":"TestNewCollector/Functional_Options"}
+{"Time":"2026-07-21T05:36:01.251986471Z","Action":"output","Package":"github.com/gocolly/colly/v2","Test":"TestNewCollector/Functional_Options","Output":"=== RUN   TestNewCollector/Functional_Options\n"}
+{"Time":"2026-07-21T05:36:01.251995012Z","Action":"run","Package":"github.com/gocolly/colly/v2","Test":"TestNewCollector/Functional_Options/CheckHead"}
+{"Time":"2026-07-21T05:36:01.25200475Z","Action":"output","Package":"github.com/gocolly/colly/v2","Test":"TestNewCollector/Functional_Options/CheckHead","Output":"=== RUN   TestNewCollector/Functional_Options/CheckHead\n"}
+{"Time":"2026-07-21T05:36:01.252009133Z","Action":"output","Package":"github.com/gocolly/colly/v2","Test":"TestNewCollector/Functional_Options/CheckHead","Output":"--- PASS: TestNewCollector/Functional_Options/CheckHead (0.00s)\n"}
+{"Time":"2026-07-21T05:36:01.25201468Z","Action":"pass","Package":"github.com/gocolly/colly/v2","Test":"TestNewCollector/Functional_Options/CheckHead","Elapsed":0}
+{"Time":"2026-07-21T05:36:01.252017093Z","Action":"run","Package":"github.com/gocolly/colly/v2","Test":"TestNewCollector/Functional_Options/DisallowedURLFilters"}
+{"Time":"2026-07-21T05:36:01.25201919Z","Action":"output","Package":"github.com/gocolly/colly/v2","Test":"TestNewCollector/Functional_Options/DisallowedURLFilters","Output":"=== RUN   TestNewCollector/Functional_Options/DisallowedURLFilters\n"}
+{"Time":"2026-07-21T05:36:01.252029524Z","Action":"output","Package":"github.com/gocolly/colly/v2","Test":"TestNewCollector/Functional_Options/DisallowedURLFilters","Output":"--- PASS: TestNewCollector/Functional_Options/DisallowedURLFilters (0.00s)\n"}
+{"Time":"2026-07-21T05:36:01.25203363Z","Action":"pass","Package":"github.com/gocolly/colly/v2","Test":"TestNewCollector/Functional_Options/DisallowedURLFilters","Elapsed":0}
+{"Time":"2026-07-21T05:36:01.252035788Z","Action":"run","Package":"github.com/gocolly/colly/v2","Test":"TestNewCollector/Functional_Options/MaxBodySize"}
+{"Time":"2026-07-21T05:36:01.252037759Z","Action":"output","Package":"github.com/gocolly/colly/v2","Test":"TestNewCollector/Functional_Options/MaxBodySize","Output":"=== RUN   TestNewCollector/Functional_Options/MaxBodySize\n"}
+{"Time":"2026-07-21T05:36:01.25204298Z","Action":"output","Package":"github.com/gocolly/colly/v2","Test":"TestNewCollector/Functional_Options/MaxBodySize","Output":"--- PASS: TestNewCollector/Functional_Options/MaxBodySize (0.00s)\n"}
+{"Time":"2026-07-21T05:36:01.252045872Z","Action":"pass","Package":"github.com/gocolly/colly/v2","Test":"TestNewCollector/Functional_Options/MaxBodySize","Elapsed":0}
+{"Time":"2026-07-21T05:36:01.252048639Z","Action":"run","Package":"github.com/gocolly/colly/v2","Test":"TestNewCollector/Functional_Options/IgnoreRobotsTxt"}
+{"Time":"2026-07-21T05:36:01.25205059Z","Action":"output","Package":"github.com/gocolly/colly/v2","Test":"TestNewCollector/Functional_Options/IgnoreRobotsTxt","Output":"=== RUN   TestNewCollector/Functional_Options/IgnoreRobotsTxt\n"}
+{"Time":"2026-07-21T05:36:01.25205892Z","Action":"output","Package":"github.com/gocolly/colly/v2","Test":"TestNewCollector/Functional_Options/IgnoreRobotsTxt","Output":"--- PASS: TestNewCollector/Functional_Options/IgnoreRobotsTxt (0.00s)\n"}
+{"Time":"2026-07-21T05:36:01.252061688Z","Action":"pass","Package":"github.com/gocolly/colly/v2","Test":"TestNewCollector/Functional_Options/IgnoreRobotsTxt","Elapsed":0}
+{"Time":"2026-07-21T05:36:01.252064329Z","Action":"run","Package":"github.com/gocolly/colly/v2","Test":"TestNewCollector/Functional_Options/MaxDepth"}
+{"Time":"2026-07-21T05:36:01.252066413Z","Action":"output","Package":"github.com/gocolly/colly/v2","Test":"TestNewCollector/Functional_Options/MaxDepth","Output":"=== RUN   TestNewCollector/Functional_Options/MaxDepth\n"}
+{"Time":"2026-07-21T05:36:01.252080337Z","Action":"output","Package":"github.com/gocolly/colly/v2","Test":"TestNewCollector/Functional_Options/MaxDepth","Output":"--- PASS: TestNewCollector/Functional_Options/MaxDepth (0.00s)\n"}
+{"Time":"2026-07-21T05:36:01.252084587Z","Action":"pass","Package":"github.com/gocolly/colly/v2","Test":"TestNewCollector/Functional_Options/MaxDepth","Elapsed":0}
+{"Time":"2026-07-21T05:36:01.252086684Z","Action":"run","Package":"github.com/gocolly/colly/v2","Test":"TestNewCollector/Functional_Options/DisallowedDomains"}
+{"Time":"2026-07-21T05:36:01.252088636Z","Action":"output","Package":"github.com/gocolly/colly/v2","Test":"TestNewCollector/Functional_Options/DisallowedDomains","Output":"=== RUN   TestNewCollector/Functional_Options/DisallowedDomains\n"}
+{"Time":"2026-07-21T05:36:01.252099345Z","Action":"output","Package":"github.com/gocolly/colly/v2","Test":"TestNewCollector/Functional_Options/DisallowedDomains","Output":"--- PASS: TestNewCollector/Functional_Options/DisallowedDomains (0.00s)\n"}
+{"Time":"2026-07-21T05:36:01.252102377Z","Action":"pass","Package":"github.com/gocolly/colly/v2","Test":"TestNewCollector/Functional_Options/DisallowedDomains","Elapsed":0}
+{"Time":"2026-07-21T05:36:01.252104532Z","Action":"run","Package":"github.com/gocolly/colly/v2","Test":"TestNewCollector/Functional_Options/ID"}
+{"Time":"2026-07-21T05:36:01.252107094Z","Action":"output","Package":"github.com/gocolly/colly/v2","Test":"TestNewCollector/Functional_Options/ID","Output":"=== RUN   TestNewCollector/Functional_Options/ID\n"}
+{"Time":"2026-07-21T05:36:01.252153088Z","Action":"output","Package":"github.com/gocolly/colly/v2","Test":"TestNewCollector/Functional_Options/ID","Output":"--- PASS: TestNewCollector/Functional_Options/ID (0.00s)\n"}
+{"Time":"2026-07-21T05:36:01.252155782Z","Action":"pass","Package":"github.com/gocolly/colly/v2","Test":"TestNewCollector/Functional_Options/ID","Elapsed":0}
+{"Time":"2026-07-21T05:36:01.252166181Z","Action":"run","Package":"github.com/gocolly/colly/v2","Test":"TestNewCollector/Functional_Options/UserAgent"}
+{"Time":"2026-07-21T05:36:01.252168472Z","Action":"output","Package":"github.com/gocolly/colly/v2","Test":"TestNewCollector/Functional_Options/UserAgent","Output":"=== RUN   TestNewCollector/Functional_Options/UserAgent\n"}
+{"Time":"2026-07-21T05:36:01.252171379Z","Action":"output","Package":"github.com/gocolly/colly/v2","Test":"TestNewCollector/Functional_Options/UserAgent","Output":"--- PASS: TestNewCollector/Functional_Options/UserAgent (0.00s)\n"}
+{"Time":"2026-07-21T05:36:01.252174191Z","Action":"pass","Package":"github.com/gocolly/colly/v2","Test":"TestNewCollector/Functional_Options/UserAgent","Elapsed":0}
+{"Time":"2026-07-21T05:36:01.252176939Z","Action":"run","Package":"github.com/gocolly/colly/v2","Test":"TestNewCollector/Functional_Options/URLFilters"}
+{"Time":"2026-07-21T05:36:01.252178715Z","Action":"output","Package":"github.com/gocolly/colly/v2","Test":"TestNewCollector/Functional_Options/URLFilters","Output":"=== RUN   TestNewCollector/Functional_Options/URLFilters\n"}
+{"Time":"2026-07-21T05:36:01.252215909Z","Action":"output","Package":"github.com/gocolly/colly/v2","Test":"TestNewCollector/Functional_Options/URLFilters","Output":"--- PASS: TestNewCollector/Functional_Options/URLFilters (0.00s)\n"}
+{"Time":"2026-07-21T05:36:01.252225652Z","Action":"pass","Package":"github.com/gocolly/colly/v2","Test":"TestNewCollector/Functional_Options/URLFilters","Elapsed":0}
+{"Time":"2026-07-21T05:36:01.252227796Z","Action":"run","Package":"github.com/gocolly/colly/v2","Test":"TestNewCollector/Functional_Options/CacheDir"}
+{"Time":"2026-07-21T05:36:01.252229658Z","Action":"output","Package":"github.com/gocolly/colly/v2","Test":"TestNewCollector/Functional_Options/CacheDir","Output":"=== RUN   TestNewCollector/Functional_Options/CacheDir\n"}
+{"Time":"2026-07-21T05:36:01.25223295Z","Action":"output","Package":"github.com/gocolly/colly/v2","Test":"TestNewCollector/Functional_Options/CacheDir","Output":"--- PASS: TestNewCollector/Functional_Options/CacheDir (0.00s)\n"}
+{"Time":"2026-07-21T05:36:01.25223518Z","Action":"pass","Package":"github.com/gocolly/colly/v2","Test":"TestNewCollector/Functional_Options/CacheDir","Elapsed":0}
+{"Time":"2026-07-21T05:36:01.252237283Z","Action":"run","Package":"github.com/gocolly/colly/v2","Test":"TestNewCollector/Functional_Options/DetectCharset"}
+{"Time":"2026-07-21T05:36:01.252239184Z","Action":"output","Package":"github.com/gocolly/colly/v2","Test":"TestNewCollector/Functional_Options/DetectCharset","Output":"=== RUN   TestNewCollector/Functional_Options/DetectCharset\n"}
+{"Time":"2026-07-21T05:36:01.252242039Z","Action":"output","Package":"github.com/gocolly/colly/v2","Test":"TestNewCollector/Functional_Options/DetectCharset","Output":"--- PASS: TestNewCollector/Functional_Options/DetectCharset (0.00s)\n"}
+{"Time":"2026-07-21T05:36:01.252247588Z","Action":"pass","Package":"github.com/gocolly/colly/v2","Test":"TestNewCollector/Functional_Options/DetectCharset","Elapsed":0}
+{"Time":"2026-07-21T05:36:01.252249641Z","Action":"run","Package":"github.com/gocolly/colly/v2","Test":"TestNewCollector/Functional_Options/Debugger"}
+{"Time":"2026-07-21T05:36:01.252251436Z","Action":"output","Package":"github.com/gocolly/colly/v2","Test":"TestNewCollector/Functional_Options/Debugger","Output":"=== RUN   TestNewCollector/Functional_Options/Debugger\n"}
+{"Time":"2026-07-21T05:36:01.252256042Z","Action":"output","Package":"github.com/gocolly/colly/v2","Test":"TestNewCollector/Functional_Options/Debugger","Output":"--- PASS: TestNewCollector/Functional_Options/Debugger (0.00s)\n"}
+{"Time":"2026-07-21T05:36:01.252258632Z","Action":"pass","Package":"github.com/gocolly/colly/v2","Test":"TestNewCollector/Functional_Options/Debugger","Elapsed":0}
+{"Time":"2026-07-21T05:36:01.25226107Z","Action":"run","Package":"github.com/gocolly/colly/v2","Test":"TestNewCollector/Functional_Options/Async"}
+{"Time":"2026-07-21T05:36:01.252262942Z","Action":"output","Package":"github.com/gocolly/colly/v2","Test":"TestNewCollector/Functional_Options/Async","Output":"=== RUN   TestNewCollector/Functional_Options/Async\n"}
+{"Time":"2026-07-21T05:36:01.252271636Z","Action":"output","Package":"github.com/gocolly/colly/v2","Test":"TestNewCollector/Functional_Options/Async","Output":"--- PASS: TestNewCollector/Functional_Options/Async (0.00s)\n"}
+{"Time":"2026-07-21T05:36:01.252274379Z","Action":"pass","Package":"github.com/gocolly/colly/v2","Test":"TestNewCollector/Functional_Options/Async","Elapsed":0}
+{"Time":"2026-07-21T05:36:01.252277573Z","Action":"run","Package":"github.com/gocolly/colly/v2","Test":"TestNewCollector/Functional_Options/AllowedDomains"}
+{"Time":"2026-07-21T05:36:01.252279474Z","Action":"output","Package":"github.com/gocolly/colly/v2","Test":"TestNewCollector/Functional_Options/AllowedDomains","Output":"=== RUN   TestNewCollector/Functional_Options/AllowedDomains\n"}
+{"Time":"2026-07-21T05:36:01.252293502Z","Action":"output","Package":"github.com/gocolly/colly/v2","Test":"TestNewCollector/Functional_Options/AllowedDomains","Output":"--- PASS: TestNewCollector/Functional_Options/AllowedDomains (0.00s)\n"}
+{"Time":"2026-07-21T05:36:01.252296287Z","Action":"pass","Package":"github.com/gocolly/colly/v2","Test":"TestNewCollector/Functional_Options/AllowedDomains","Elapsed":0}
+{"Time":"2026-07-21T05:36:01.252298971Z","Action":"run","Package":"github.com/gocolly/colly/v2","Test":"TestNewCollector/Functional_Options/AllowURLRevisit"}
+{"Time":"2026-07-21T05:36:01.252300773Z","Action":"output","Package":"github.com/gocolly/colly/v2","Test":"TestNewCollector/Functional_Options/AllowURLRevisit","Output":"=== RUN   TestNewCollector/Functional_Options/AllowURLRevisit\n"}
+{"Time":"2026-07-21T05:36:01.252316437Z","Action":"output","Package":"github.com/gocolly/colly/v2","Test":"TestNewCollector/Functional_Options/AllowURLRevisit","Output":"--- PASS: TestNewCollector/Functional_Options/AllowURLRevisit (0.00s)\n"}
+{"Time":"2026-07-21T05:36:01.252318919Z","Action":"pass","Package":"github.com/gocolly/colly/v2","Test":"TestNewCollector/Functional_Options/AllowURLRevisit","Elapsed":0}
+{"Time":"2026-07-21T05:36:01.252321548Z","Action":"run","Package":"github.com/gocolly/colly/v2","Test":"TestNewCollector/Functional_Options/CacheExpiration"}
+{"Time":"2026-07-21T05:36:01.252323463Z","Action":"output","Package":"github.com/gocolly/colly/v2","Test":"TestNewCollector/Functional_Options/CacheExpiration","Output":"=== RUN   TestNewCollector/Functional_Options/CacheExpiration\n"}
+{"Time":"2026-07-21T05:36:01.252328712Z","Action":"output","Package":"github.com/gocolly/colly/v2","Test":"TestNewCollector/Functional_Options/CacheExpiration","Output":"--- PASS: TestNewCollector/Functional_Options/CacheExpiration (0.00s)\n"}
+{"Time":"2026-07-21T05:36:01.252331412Z","Action":"pass","Package":"github.com/gocolly/colly/v2","Test":"TestNewCollector/Functional_Options/CacheExpiration","Elapsed":0}
+{"Time":"2026-07-21T05:36:01.25233593Z","Action":"output","Package":"github.com/gocolly/colly/v2","Test":"TestNewCollector/Functional_Options","Output":"--- PASS: TestNewCollector/Functional_Options (0.00s)\n"}
+{"Time":"2026-07-21T05:36:01.252338527Z","Action":"pass","Package":"github.com/gocolly/colly/v2","Test":"TestNewCollector/Functional_Options","Elapsed":0}
+{"Time":"2026-07-21T05:36:01.25234073Z","Action":"output","Package":"github.com/gocolly/colly/v2","Test":"TestNewCollector","Output":"--- PASS: TestNewCollector (0.00s)\n"}
+{"Time":"2026-07-21T05:36:01.25234324Z","Action":"pass","Package":"github.com/gocolly/colly/v2","Test":"TestNewCollector","Elapsed":0}
+{"Time":"2026-07-21T05:36:01.252345854Z","Action":"run","Package":"github.com/gocolly/colly/v2","Test":"TestCollectorVisit"}
+{"Time":"2026-07-21T05:36:01.252347724Z","Action":"output","Package":"github.com/gocolly/colly/v2","Test":"TestCollectorVisit","Output":"=== RUN   TestCollectorVisit\n"}
+{"Time":"2026-07-21T05:36:01.252754743Z","Action":"output","Package":"github.com/gocolly/colly/v2","Test":"TestCollectorVisit","Output":"--- PASS: TestCollectorVisit (0.00s)\n"}
+{"Time":"2026-07-21T05:36:01.252757131Z","Action":"pass","Package":"github.com/gocolly/colly/v2","Test":"TestCollectorVisit","Elapsed":0}
+{"Time":"2026-07-21T05:36:01.252766694Z","Action":"run","Package":"github.com/gocolly/colly/v2","Test":"TestCollectorVisitNoContent"}
+{"Time":"2026-07-21T05:36:01.252768549Z","Action":"output","Package":"github.com/gocolly/colly/v2","Test":"TestCollectorVisitNoContent","Output":"=== RUN   TestCollectorVisitNoContent\n"}
+{"Time":"2026-07-21T05:36:01.253125063Z","Action":"output","Package":"github.com/gocolly/colly/v2","Test":"TestCollectorVisitNoContent","Output":"    colly_test.go:618: OnError called for 204 No Content response\n"}
+{"Time":"2026-07-21T05:36:01.253127931Z","Action":"output","Package":"github.com/gocolly/colly/v2","Test":"TestCollectorVisitNoContent","Output":"    colly_test.go:621: OnResponse not called for 204 No Content response\n"}
+{"Time":"2026-07-21T05:36:01.253187021Z","Action":"output","Package":"github.com/gocolly/colly/v2","Test":"TestCollectorVisitNoContent","Output":"--- FAIL: TestCollectorVisitNoContent (0.00s)\n"}
+{"Time":"2026-07-21T05:36:01.253189904Z","Action":"fail","Package":"github.com/gocolly/colly/v2","Test":"TestCollectorVisitNoContent","Elapsed":0}
+{"Time":"2026-07-21T05:36:01.253192514Z","Action":"run","Package":"github.com/gocolly/colly/v2","Test":"TestCollectorVisitWithAllowedDomains"}
+{"Time":"2026-07-21T05:36:01.253194357Z","Action":"output","Package":"github.com/gocolly/colly/v2","Test":"TestCollectorVisitWithAllowedDomains","Output":"=== RUN   TestCollectorVisitWithAllowedDomains\n"}
+{"Time":"2026-07-21T05:36:01.253547154Z","Action":"output","Package":"github.com/gocolly/colly/v2","Test":"TestCollectorVisitWithAllowedDomains","Output":"--- PASS: TestCollectorVisitWithAllowedDomains (0.00s)\n"}
+{"Time":"2026-07-21T05:36:01.253550484Z","Action":"pass","Package":"github.com/gocolly/colly/v2","Test":"TestCollectorVisitWithAllowedDomains","Elapsed":0}
+{"Time":"2026-07-21T05:36:01.253553087Z","Action":"run","Package":"github.com/gocolly/colly/v2","Test":"TestCollectorVisitWithDisallowedDomains"}
+{"Time":"2026-07-21T05:36:01.253554846Z","Action":"output","Package":"github.com/gocolly/colly/v2","Test":"TestCollectorVisitWithDisallowedDomains","Output":"=== RUN   TestCollectorVisitWithDisallowedDomains\n"}
+{"Time":"2026-07-21T05:36:01.253908728Z","Action":"output","Package":"github.com/gocolly/colly/v2","Test":"TestCollectorVisitWithDisallowedDomains","Output":"--- PASS: TestCollectorVisitWithDisallowedDomains (0.00s)\n"}
+{"Time":"2026-07-21T05:36:01.253911114Z","Action":"pass","Package":"github.com/gocolly/colly/v2","Test":"TestCollectorVisitWithDisallowedDomains","Elapsed":0}
+{"Time":"2026-07-21T05:36:01.253913576Z","Action":"run","Package":"github.com/gocolly/colly/v2","Test":"TestCollectorVisitResponseHeaders"}
+{"Time":"2026-07-21T05:36:01.253917001Z","Action":"output","Package":"github.com/gocolly/colly/v2","Test":"TestCollectorVisitResponseHeaders","Output":"=== RUN   TestCollectorVisitResponseHeaders\n"}
+{"Time":"2026-07-21T05:36:01.254367683Z","Action":"output","Package":"github.com/gocolly/colly/v2","Test":"TestCollectorVisitResponseHeaders","Output":"--- PASS: TestCollectorVisitResponseHeaders (0.00s)\n"}
+{"Time":"2026-07-21T05:36:01.254370683Z","Action":"pass","Package":"github.com/gocolly/colly/v2","Test":"TestCollectorVisitResponseHeaders","Elapsed":0}
+{"Time":"2026-07-21T05:36:01.254373371Z","Action":"run","Package":"github.com/gocolly/colly/v2","Test":"TestCollectorOnHTML"}
+{"Time":"2026-07-21T05:36:01.25437519Z","Action":"output","Package":"github.com/gocolly/colly/v2","Test":"TestCollectorOnHTML","Output":"=== RUN   TestCollectorOnHTML\n"}
+{"Time":"2026-07-21T05:36:01.254769673Z","Action":"output","Package":"github.com/gocolly/colly/v2","Test":"TestCollectorOnHTML","Output":"--- PASS: TestCollectorOnHTML (0.00s)\n"}
+{"Time":"2026-07-21T05:36:01.254773723Z","Action":"pass","Package":"github.com/gocolly/colly/v2","Test":"TestCollectorOnHTML","Elapsed":0}
+{"Time":"2026-07-21T05:36:01.254776407Z","Action":"run","Package":"github.com/gocolly/colly/v2","Test":"TestCollectorContentSniffing"}
+{"Time":"2026-07-21T05:36:01.254778582Z","Action":"output","Package":"github.com/gocolly/colly/v2","Test":"TestCollectorContentSniffing","Output":"=== RUN   TestCollectorContentSniffing\n"}
+{"Time":"2026-07-21T05:36:01.25507412Z","Action":"output","Package":"github.com/gocolly/colly/v2","Test":"TestCollectorContentSniffing","Output":"    colly_test.go:738: Content-Type unexpectedly not nil\n"}
+{"Time":"2026-07-21T05:36:01.255125491Z","Action":"output","Package":"github.com/gocolly/colly/v2","Test":"TestCollectorContentSniffing","Output":"--- FAIL: TestCollectorContentSniffing (0.00s)\n"}
+{"Time":"2026-07-21T05:36:01.255127806Z","Action":"fail","Package":"github.com/gocolly/colly/v2","Test":"TestCollectorContentSniffing","Elapsed":0}
+{"Time":"2026-07-21T05:36:01.255130512Z","Action":"run","Package":"github.com/gocolly/colly/v2","Test":"TestCollectorURLRevisit"}
+{"Time":"2026-07-21T05:36:01.255132424Z","Action":"output","Package":"github.com/gocolly/colly/v2","Test":"TestCollectorURLRevisit","Output":"=== RUN   TestCollectorURLRevisit\n"}
+{"Time":"2026-07-21T05:36:01.255528159Z","Action":"output","Package":"github.com/gocolly/colly/v2","Test":"TestCollectorURLRevisit","Output":"--- PASS: TestCollectorURLRevisit (0.00s)\n"}
+{"Time":"2026-07-21T05:36:01.255530482Z","Action":"pass","Package":"github.com/gocolly/colly/v2","Test":"TestCollectorURLRevisit","Elapsed":0}
+{"Time":"2026-07-21T05:36:01.255535815Z","Action":"run","Package":"github.com/gocolly/colly/v2","Test":"TestCollectorPostRevisit"}
+{"Time":"2026-07-21T05:36:01.255537747Z","Action":"output","Package":"github.com/gocolly/colly/v2","Test":"TestCollectorPostRevisit","Output":"=== RUN   TestCollectorPostRevisit\n"}
+{"Time":"2026-07-21T05:36:01.256815976Z","Action":"output","Package":"github.com/gocolly/colly/v2","Test":"TestCollectorPostRevisit","Output":"--- PASS: TestCollectorPostRevisit (0.00s)\n"}
+{"Time":"2026-07-21T05:36:01.256818939Z","Action":"pass","Package":"github.com/gocolly/colly/v2","Test":"TestCollectorPostRevisit","Elapsed":0}
+{"Time":"2026-07-21T05:36:01.256821677Z","Action":"run","Package":"github.com/gocolly/colly/v2","Test":"TestCollectorURLRevisitCheck"}
+{"Time":"2026-07-21T05:36:01.256823665Z","Action":"output","Package":"github.com/gocolly/colly/v2","Test":"TestCollectorURLRevisitCheck","Output":"=== RUN   TestCollectorURLRevisitCheck\n"}
+{"Time":"2026-07-21T05:36:01.257310104Z","Action":"output","Package":"github.com/gocolly/colly/v2","Test":"TestCollectorURLRevisitCheck","Output":"    colly_test.go:875: err=%!q(\u003cnil\u003e) returned when trying to revisit, expected AlreadyVisitedError\n"}
+{"Time":"2026-07-21T05:36:01.257508768Z","Action":"output","Package":"github.com/gocolly/colly/v2","Test":"TestCollectorURLRevisitCheck","Output":"    colly_test.go:875: err=%!q(\u003cnil\u003e) returned when trying to revisit, expected AlreadyVisitedError\n"}
+{"Time":"2026-07-21T05:36:01.257700048Z","Action":"output","Package":"github.com/gocolly/colly/v2","Test":"TestCollectorURLRevisitCheck","Output":"    colly_test.go:875: err=%!q(\u003cnil\u003e) returned when trying to revisit, expected AlreadyVisitedError\n"}
+{"Time":"2026-07-21T05:36:01.2577492Z","Action":"output","Package":"github.com/gocolly/colly/v2","Test":"TestCollectorURLRevisitCheck","Output":"--- FAIL: TestCollectorURLRevisitCheck (0.00s)\n"}
+{"Time":"2026-07-21T05:36:01.257751859Z","Action":"fail","Package":"github.com/gocolly/colly/v2","Test":"TestCollectorURLRevisitCheck","Elapsed":0}
+{"Time":"2026-07-21T05:36:01.257754427Z","Action":"run","Package":"github.com/gocolly/colly/v2","Test":"TestSetCookieRedirect"}
+{"Time":"2026-07-21T05:36:01.257756998Z","Action":"output","Package":"github.com/gocolly/colly/v2","Test":"TestSetCookieRedirect","Output":"=== RUN   TestSetCookieRedirect\n"}
+{"Time":"2026-07-21T05:36:01.257766741Z","Action":"run","Package":"github.com/gocolly/colly/v2","Test":"TestSetCookieRedirect/#00"}
+{"Time":"2026-07-21T05:36:01.257768623Z","Action":"output","Package":"github.com/gocolly/colly/v2","Test":"TestSetCookieRedirect/#00","Output":"=== RUN   TestSetCookieRedirect/#00\n"}
+{"Time":"2026-07-21T05:36:01.258176421Z","Action":"output","Package":"github.com/gocolly/colly/v2","Test":"TestSetCookieRedirect/#00","Output":"--- PASS: TestSetCookieRedirect/#00 (0.00s)\n"}
+{"Time":"2026-07-21T05:36:01.25817967Z","Action":"pass","Package":"github.com/gocolly/colly/v2","Test":"TestSetCookieRedirect/#00","Elapsed":0}
+{"Time":"2026-07-21T05:36:01.258187343Z","Action":"run","Package":"github.com/gocolly/colly/v2","Test":"TestSetCookieRedirect/#01"}
+{"Time":"2026-07-21T05:36:01.258189097Z","Action":"output","Package":"github.com/gocolly/colly/v2","Test":"TestSetCookieRedirect/#01","Output":"=== RUN   TestSetCookieRedirect/#01\n"}
+{"Time":"2026-07-21T05:36:01.258622524Z","Action":"output","Package":"github.com/gocolly/colly/v2","Test":"TestSetCookieRedirect/#01","Output":"--- PASS: TestSetCookieRedirect/#01 (0.00s)\n"}
+{"Time":"2026-07-21T05:36:01.258625518Z","Action":"pass","Package":"github.com/gocolly/colly/v2","Test":"TestSetCookieRedirect/#01","Elapsed":0}
+{"Time":"2026-07-21T05:36:01.258628122Z","Action":"output","Package":"github.com/gocolly/colly/v2","Test":"TestSetCookieRedirect","Output":"--- PASS: TestSetCookieRedirect (0.00s)\n"}
+{"Time":"2026-07-21T05:36:01.258630798Z","Action":"pass","Package":"github.com/gocolly/colly/v2","Test":"TestSetCookieRedirect","Elapsed":0}
+{"Time":"2026-07-21T05:36:01.258633685Z","Action":"run","Package":"github.com/gocolly/colly/v2","Test":"TestSetCookieComplexRedirectCycle"}
+{"Time":"2026-07-21T05:36:01.258635643Z","Action":"output","Package":"github.com/gocolly/colly/v2","Test":"TestSetCookieComplexRedirectCycle","Output":"=== RUN   TestSetCookieComplexRedirectCycle\n"}
+{"Time":"2026-07-21T05:36:01.259187652Z","Action":"output","Package":"github.com/gocolly/colly/v2","Test":"TestSetCookieComplexRedirectCycle","Output":"--- PASS: TestSetCookieComplexRedirectCycle (0.00s)\n"}
+{"Time":"2026-07-21T05:36:01.259189964Z","Action":"pass","Package":"github.com/gocolly/colly/v2","Test":"TestSetCookieComplexRedirectCycle","Elapsed":0}
+{"Time":"2026-07-21T05:36:01.259192757Z","Action":"run","Package":"github.com/gocolly/colly/v2","Test":"TestCollectorPostURLRevisitCheck"}
+{"Time":"2026-07-21T05:36:01.259194607Z","Action":"output","Package":"github.com/gocolly/colly/v2","Test":"TestCollectorPostURLRevisitCheck","Output":"=== RUN   TestCollectorPostURLRevisitCheck\n"}
+{"Time":"2026-07-21T05:36:01.259618476Z","Action":"output","Package":"github.com/gocolly/colly/v2","Test":"TestCollectorPostURLRevisitCheck","Output":"--- PASS: TestCollectorPostURLRevisitCheck (0.00s)\n"}
+{"Time":"2026-07-21T05:36:01.259621221Z","Action":"pass","Package":"github.com/gocolly/colly/v2","Test":"TestCollectorPostURLRevisitCheck","Elapsed":0}
+{"Time":"2026-07-21T05:36:01.259624102Z","Action":"run","Package":"github.com/gocolly/colly/v2","Test":"TestCollectorURLRevisitDomainDisallowed"}
+{"Time":"2026-07-21T05:36:01.259627536Z","Action":"output","Package":"github.com/gocolly/colly/v2","Test":"TestCollectorURLRevisitDomainDisallowed","Output":"=== RUN   TestCollectorURLRevisitDomainDisallowed\n"}
+{"Time":"2026-07-21T05:36:01.259749166Z","Action":"output","Package":"github.com/gocolly/colly/v2","Test":"TestCollectorURLRevisitDomainDisallowed","Output":"--- PASS: TestCollectorURLRevisitDomainDisallowed (0.00s)\n"}
+{"Time":"2026-07-21T05:36:01.259751597Z","Action":"pass","Package":"github.com/gocolly/colly/v2","Test":"TestCollectorURLRevisitDomainDisallowed","Elapsed":0}
+{"Time":"2026-07-21T05:36:01.259754338Z","Action":"run","Package":"github.com/gocolly/colly/v2","Test":"TestCollectorPost"}
+{"Time":"2026-07-21T05:36:01.259756033Z","Action":"output","Package":"github.com/gocolly/colly/v2","Test":"TestCollectorPost","Output":"=== RUN   TestCollectorPost\n"}
+{"Time":"2026-07-21T05:36:01.260122151Z","Action":"output","Package":"github.com/gocolly/colly/v2","Test":"TestCollectorPost","Output":"--- PASS: TestCollectorPost (0.00s)\n"}
+{"Time":"2026-07-21T05:36:01.260124965Z","Action":"pass","Package":"github.com/gocolly/colly/v2","Test":"TestCollectorPost","Elapsed":0}
+{"Time":"2026-07-21T05:36:01.260129442Z","Action":"run","Package":"github.com/gocolly/colly/v2","Test":"TestCollectorPostRaw"}
+{"Time":"2026-07-21T05:36:01.260131398Z","Action":"output","Package":"github.com/gocolly/colly/v2","Test":"TestCollectorPostRaw","Output":"=== RUN   TestCollectorPostRaw\n"}
+{"Time":"2026-07-21T05:36:01.260527977Z","Action":"output","Package":"github.com/gocolly/colly/v2","Test":"TestCollectorPostRaw","Output":"--- PASS: TestCollectorPostRaw (0.00s)\n"}
+{"Time":"2026-07-21T05:36:01.260530799Z","Action":"pass","Package":"github.com/gocolly/colly/v2","Test":"TestCollectorPostRaw","Elapsed":0}
+{"Time":"2026-07-21T05:36:01.260533414Z","Action":"run","Package":"github.com/gocolly/colly/v2","Test":"TestCollectorPostRawRevisit"}
+{"Time":"2026-07-21T05:36:01.26053534Z","Action":"output","Package":"github.com/gocolly/colly/v2","Test":"TestCollectorPostRawRevisit","Output":"=== RUN   TestCollectorPostRawRevisit\n"}
+{"Time":"2026-07-21T05:36:01.261029264Z","Action":"output","Package":"github.com/gocolly/colly/v2","Test":"TestCollectorPostRawRevisit","Output":"--- PASS: TestCollectorPostRawRevisit (0.00s)\n"}
+{"Time":"2026-07-21T05:36:01.261031649Z","Action":"pass","Package":"github.com/gocolly/colly/v2","Test":"TestCollectorPostRawRevisit","Elapsed":0}
+{"Time":"2026-07-21T05:36:01.26103428Z","Action":"run","Package":"github.com/gocolly/colly/v2","Test":"TestRedirect"}
+{"Time":"2026-07-21T05:36:01.261036181Z","Action":"output","Package":"github.com/gocolly/colly/v2","Test":"TestRedirect","Output":"=== RUN   TestRedirect\n"}
+{"Time":"2026-07-21T05:36:01.261425937Z","Action":"output","Package":"github.com/gocolly/colly/v2","Test":"TestRedirect","Output":"--- PASS: TestRedirect (0.00s)\n"}
+{"Time":"2026-07-21T05:36:01.261428465Z","Action":"pass","Package":"github.com/gocolly/colly/v2","Test":"TestRedirect","Elapsed":0}
+{"Time":"2026-07-21T05:36:01.261431066Z","Action":"run","Package":"github.com/gocolly/colly/v2","Test":"TestIssue594"}
+{"Time":"2026-07-21T05:36:01.261432816Z","Action":"output","Package":"github.com/gocolly/colly/v2","Test":"TestIssue594","Output":"=== RUN   TestIssue594\n"}
+{"Time":"2026-07-21T05:36:01.261725734Z","Action":"output","Package":"github.com/gocolly/colly/v2","Test":"TestIssue594","Output":"--- PASS: TestIssue594 (0.00s)\n"}
+{"Time":"2026-07-21T05:36:01.261728144Z","Action":"pass","Package":"github.com/gocolly/colly/v2","Test":"TestIssue594","Elapsed":0}
+{"Time":"2026-07-21T05:36:01.261730724Z","Action":"run","Package":"github.com/gocolly/colly/v2","Test":"TestRedirectWithDisallowedURLs"}
+{"Time":"2026-07-21T05:36:01.261732622Z","Action":"output","Package":"github.com/gocolly/colly/v2","Test":"TestRedirectWithDisallowedURLs","Output":"=== RUN   TestRedirectWithDisallowedURLs\n"}
+{"Time":"2026-07-21T05:36:01.262158576Z","Action":"output","Package":"github.com/gocolly/colly/v2","Test":"TestRedirectWithDisallowedURLs","Output":"--- PASS: TestRedirectWithDisallowedURLs (0.00s)\n"}
+{"Time":"2026-07-21T05:36:01.262162665Z","Action":"pass","Package":"github.com/gocolly/colly/v2","Test":"TestRedirectWithDisallowedURLs","Elapsed":0}
+{"Time":"2026-07-21T05:36:01.262165346Z","Action":"run","Package":"github.com/gocolly/colly/v2","Test":"TestBaseTag"}
+{"Time":"2026-07-21T05:36:01.262167211Z","Action":"output","Package":"github.com/gocolly/colly/v2","Test":"TestBaseTag","Output":"=== RUN   TestBaseTag\n"}
+{"Time":"2026-07-21T05:36:01.262732959Z","Action":"output","Package":"github.com/gocolly/colly/v2","Test":"TestBaseTag","Output":"--- PASS: TestBaseTag (0.00s)\n"}
+{"Time":"2026-07-21T05:36:01.262737523Z","Action":"pass","Package":"github.com/gocolly/colly/v2","Test":"TestBaseTag","Elapsed":0}
+{"Time":"2026-07-21T05:36:01.262740281Z","Action":"run","Package":"github.com/gocolly/colly/v2","Test":"TestBaseTagRelative"}
+{"Time":"2026-07-21T05:36:01.262742159Z","Action":"output","Package":"github.com/gocolly/colly/v2","Test":"TestBaseTagRelative","Output":"=== RUN   TestBaseTagRelative\n"}
+{"Time":"2026-07-21T05:36:01.263657415Z","Action":"output","Package":"github.com/gocolly/colly/v2","Test":"TestBaseTagRelative","Output":"--- PASS: TestBaseTagRelative (0.00s)\n"}
+{"Time":"2026-07-21T05:36:01.263660476Z","Action":"pass","Package":"github.com/gocolly/colly/v2","Test":"TestBaseTagRelative","Elapsed":0}
+{"Time":"2026-07-21T05:36:01.263664432Z","Action":"run","Package":"github.com/gocolly/colly/v2","Test":"TestTabsAndNewlines"}
+{"Time":"2026-07-21T05:36:01.263666209Z","Action":"output","Package":"github.com/gocolly/colly/v2","Test":"TestTabsAndNewlines","Output":"=== RUN   TestTabsAndNewlines\n"}
+{"Time":"2026-07-21T05:36:01.26419664Z","Action":"output","Package":"github.com/gocolly/colly/v2","Test":"TestTabsAndNewlines","Output":"--- PASS: TestTabsAndNewlines (0.00s)\n"}
+{"Time":"2026-07-21T05:36:01.26419899Z","Action":"pass","Package":"github.com/gocolly/colly/v2","Test":"TestTabsAndNewlines","Elapsed":0}
+{"Time":"2026-07-21T05:36:01.264201655Z","Action":"run","Package":"github.com/gocolly/colly/v2","Test":"TestLonePercent"}
+{"Time":"2026-07-21T05:36:01.264203421Z","Action":"output","Package":"github.com/gocolly/colly/v2","Test":"TestLonePercent","Output":"=== RUN   TestLonePercent\n"}
+{"Time":"2026-07-21T05:36:01.264647903Z","Action":"output","Package":"github.com/gocolly/colly/v2","Test":"TestLonePercent","Output":"--- PASS: TestLonePercent (0.00s)\n"}
+{"Time":"2026-07-21T05:36:01.264650216Z","Action":"pass","Package":"github.com/gocolly/colly/v2","Test":"TestLonePercent","Elapsed":0}
+{"Time":"2026-07-21T05:36:01.264652875Z","Action":"run","Package":"github.com/gocolly/colly/v2","Test":"TestCollectorCookies"}
+{"Time":"2026-07-21T05:36:01.264654691Z","Action":"output","Package":"github.com/gocolly/colly/v2","Test":"TestCollectorCookies","Output":"=== RUN   TestCollectorCookies\n"}
+{"Time":"2026-07-21T05:36:01.26505865Z","Action":"output","Package":"github.com/gocolly/colly/v2","Test":"TestCollectorCookies","Output":"--- PASS: TestCollectorCookies (0.00s)\n"}
+{"Time":"2026-07-21T05:36:01.265061571Z","Action":"pass","Package":"github.com/gocolly/colly/v2","Test":"TestCollectorCookies","Elapsed":0}
+{"Time":"2026-07-21T05:36:01.265064347Z","Action":"run","Package":"github.com/gocolly/colly/v2","Test":"TestRobotsWhenAllowed"}
+{"Time":"2026-07-21T05:36:01.265066182Z","Action":"output","Package":"github.com/gocolly/colly/v2","Test":"TestRobotsWhenAllowed","Output":"=== RUN   TestRobotsWhenAllowed\n"}
+{"Time":"2026-07-21T05:36:01.265432905Z","Action":"output","Package":"github.com/gocolly/colly/v2","Test":"TestRobotsWhenAllowed","Output":"--- PASS: TestRobotsWhenAllowed (0.00s)\n"}
+{"Time":"2026-07-21T05:36:01.265437004Z","Action":"pass","Package":"github.com/gocolly/colly/v2","Test":"TestRobotsWhenAllowed","Elapsed":0}
+{"Time":"2026-07-21T05:36:01.265441438Z","Action":"run","Package":"github.com/gocolly/colly/v2","Test":"TestRobotsWhenDisallowed"}
+{"Time":"2026-07-21T05:36:01.265447156Z","Action":"output","Package":"github.com/gocolly/colly/v2","Test":"TestRobotsWhenDisallowed","Output":"=== RUN   TestRobotsWhenDisallowed\n"}
+{"Time":"2026-07-21T05:36:01.265713866Z","Action":"output","Package":"github.com/gocolly/colly/v2","Test":"TestRobotsWhenDisallowed","Output":"--- PASS: TestRobotsWhenDisallowed (0.00s)\n"}
+{"Time":"2026-07-21T05:36:01.26572138Z","Action":"pass","Package":"github.com/gocolly/colly/v2","Test":"TestRobotsWhenDisallowed","Elapsed":0}
+{"Time":"2026-07-21T05:36:01.265726543Z","Action":"run","Package":"github.com/gocolly/colly/v2","Test":"TestRobotsWhenDisallowedWithQueryParameter"}
+{"Time":"2026-07-21T05:36:01.265729781Z","Action":"output","Package":"github.com/gocolly/colly/v2","Test":"TestRobotsWhenDisallowedWithQueryParameter","Output":"=== RUN   TestRobotsWhenDisallowedWithQueryParameter\n"}
+{"Time":"2026-07-21T05:36:01.266059891Z","Action":"output","Package":"github.com/gocolly/colly/v2","Test":"TestRobotsWhenDisallowedWithQueryParameter","Output":"--- PASS: TestRobotsWhenDisallowedWithQueryParameter (0.00s)\n"}
+{"Time":"2026-07-21T05:36:01.266080304Z","Action":"pass","Package":"github.com/gocolly/colly/v2","Test":"TestRobotsWhenDisallowedWithQueryParameter","Elapsed":0}
+{"Time":"2026-07-21T05:36:01.266084701Z","Action":"run","Package":"github.com/gocolly/colly/v2","Test":"TestIgnoreRobotsWhenDisallowed"}
+{"Time":"2026-07-21T05:36:01.266087368Z","Action":"output","Package":"github.com/gocolly/colly/v2","Test":"TestIgnoreRobotsWhenDisallowed","Output":"=== RUN   TestIgnoreRobotsWhenDisallowed\n"}
+{"Time":"2026-07-21T05:36:01.266415093Z","Action":"output","Package":"github.com/gocolly/colly/v2","Test":"TestIgnoreRobotsWhenDisallowed","Output":"--- PASS: TestIgnoreRobotsWhenDisallowed (0.00s)\n"}
+{"Time":"2026-07-21T05:36:01.266420042Z","Action":"pass","Package":"github.com/gocolly/colly/v2","Test":"TestIgnoreRobotsWhenDisallowed","Elapsed":0}
+{"Time":"2026-07-21T05:36:01.266423999Z","Action":"run","Package":"github.com/gocolly/colly/v2","Test":"TestConnectionErrorOnRobotsTxtResultsInError"}
+{"Time":"2026-07-21T05:36:01.266427086Z","Action":"output","Package":"github.com/gocolly/colly/v2","Test":"TestConnectionErrorOnRobotsTxtResultsInError","Output":"=== RUN   TestConnectionErrorOnRobotsTxtResultsInError\n"}
+{"Time":"2026-07-21T05:36:01.266633637Z","Action":"output","Package":"github.com/gocolly/colly/v2","Test":"TestConnectionErrorOnRobotsTxtResultsInError","Output":"--- PASS: TestConnectionErrorOnRobotsTxtResultsInError (0.00s)\n"}
+{"Time":"2026-07-21T05:36:01.266639836Z","Action":"pass","Package":"github.com/gocolly/colly/v2","Test":"TestConnectionErrorOnRobotsTxtResultsInError","Elapsed":0}
+{"Time":"2026-07-21T05:36:01.266644682Z","Action":"run","Package":"github.com/gocolly/colly/v2","Test":"TestEnvSettings"}
+{"Time":"2026-07-21T05:36:01.266647295Z","Action":"output","Package":"github.com/gocolly/colly/v2","Test":"TestEnvSettings","Output":"=== RUN   TestEnvSettings\n"}
+{"Time":"2026-07-21T05:36:01.267061993Z","Action":"output","Package":"github.com/gocolly/colly/v2","Test":"TestEnvSettings","Output":"--- PASS: TestEnvSettings (0.00s)\n"}
+{"Time":"2026-07-21T05:36:01.267196813Z","Action":"pass","Package":"github.com/gocolly/colly/v2","Test":"TestEnvSettings","Elapsed":0}
+{"Time":"2026-07-21T05:36:01.267202033Z","Action":"run","Package":"github.com/gocolly/colly/v2","Test":"TestUserAgent"}
+{"Time":"2026-07-21T05:36:01.267204461Z","Action":"output","Package":"github.com/gocolly/colly/v2","Test":"TestUserAgent","Output":"=== RUN   TestUserAgent\n"}
+{"Time":"2026-07-21T05:36:01.267422357Z","Action":"output","Package":"github.com/gocolly/colly/v2","Test":"TestUserAgent","Output":"    colly_test.go:1396: mismatched User-Agent: got=\"colly - https://github.com/gocolly/colly/v2\" want=\"colly - https://github.com/gocolly/colly\"\n"}
+{"Time":"2026-07-21T05:36:01.268281449Z","Action":"output","Package":"github.com/gocolly/colly/v2","Test":"TestUserAgent","Output":"--- FAIL: TestUserAgent (0.00s)\n"}
+{"Time":"2026-07-21T05:36:01.268293943Z","Action":"fail","Package":"github.com/gocolly/colly/v2","Test":"TestUserAgent","Elapsed":0}
+{"Time":"2026-07-21T05:36:01.268307974Z","Action":"run","Package":"github.com/gocolly/colly/v2","Test":"TestHeaders"}
+{"Time":"2026-07-21T05:36:01.268310773Z","Action":"output","Package":"github.com/gocolly/colly/v2","Test":"TestHeaders","Output":"=== RUN   TestHeaders\n"}
+{"Time":"2026-07-21T05:36:01.268914164Z","Action":"output","Package":"github.com/gocolly/colly/v2","Test":"TestHeaders","Output":"--- PASS: TestHeaders (0.00s)\n"}
+{"Time":"2026-07-21T05:36:01.268959844Z","Action":"pass","Package":"github.com/gocolly/colly/v2","Test":"TestHeaders","Elapsed":0}
+{"Time":"2026-07-21T05:36:01.268969874Z","Action":"run","Package":"github.com/gocolly/colly/v2","Test":"TestParseHTTPErrorResponse"}
+{"Time":"2026-07-21T05:36:01.268972693Z","Action":"output","Package":"github.com/gocolly/colly/v2","Test":"TestParseHTTPErrorResponse","Output":"=== RUN   TestParseHTTPErrorResponse\n"}
+{"Time":"2026-07-21T05:36:01.269475915Z","Action":"output","Package":"github.com/gocolly/colly/v2","Test":"TestParseHTTPErrorResponse","Output":"--- PASS: TestParseHTTPErrorResponse (0.00s)\n"}
+{"Time":"2026-07-21T05:36:01.269485869Z","Action":"pass","Package":"github.com/gocolly/colly/v2","Test":"TestParseHTTPErrorResponse","Elapsed":0}
+{"Time":"2026-07-21T05:36:01.26949023Z","Action":"run","Package":"github.com/gocolly/colly/v2","Test":"TestHTMLElement"}
+{"Time":"2026-07-21T05:36:01.269493333Z","Action":"output","Package":"github.com/gocolly/colly/v2","Test":"TestHTMLElement","Output":"=== RUN   TestHTMLElement\n"}
+{"Time":"2026-07-21T05:36:01.269498543Z","Action":"output","Package":"github.com/gocolly/colly/v2","Test":"TestHTMLElement","Output":"--- PASS: TestHTMLElement (0.00s)\n"}
+{"Time":"2026-07-21T05:36:01.269501569Z","Action":"pass","Package":"github.com/gocolly/colly/v2","Test":"TestHTMLElement","Elapsed":0}
+{"Time":"2026-07-21T05:36:01.2695046Z","Action":"run","Package":"github.com/gocolly/colly/v2","Test":"TestCollectorOnXMLWithHtml"}
+{"Time":"2026-07-21T05:36:01.26950695Z","Action":"output","Package":"github.com/gocolly/colly/v2","Test":"TestCollectorOnXMLWithHtml","Output":"=== RUN   TestCollectorOnXMLWithHtml\n"}
+{"Time":"2026-07-21T05:36:01.269961334Z","Action":"output","Package":"github.com/gocolly/colly/v2","Test":"TestCollectorOnXMLWithHtml","Output":"--- PASS: TestCollectorOnXMLWithHtml (0.00s)\n"}
+{"Time":"2026-07-21T05:36:01.269969196Z","Action":"pass","Package":"github.com/gocolly/colly/v2","Test":"TestCollectorOnXMLWithHtml","Elapsed":0}
+{"Time":"2026-07-21T05:36:01.26997337Z","Action":"run","Package":"github.com/gocolly/colly/v2","Test":"TestCollectorOnXMLWithXML"}
+{"Time":"2026-07-21T05:36:01.269975738Z","Action":"output","Package":"github.com/gocolly/colly/v2","Test":"TestCollectorOnXMLWithXML","Output":"=== RUN   TestCollectorOnXMLWithXML\n"}
+{"Time":"2026-07-21T05:36:01.27042731Z","Action":"output","Package":"github.com/gocolly/colly/v2","Test":"TestCollectorOnXMLWithXML","Output":"--- PASS: TestCollectorOnXMLWithXML (0.00s)\n"}
+{"Time":"2026-07-21T05:36:01.270442962Z","Action":"pass","Package":"github.com/gocolly/colly/v2","Test":"TestCollectorOnXMLWithXML","Elapsed":0}
+{"Time":"2026-07-21T05:36:01.270447449Z","Action":"run","Package":"github.com/gocolly/colly/v2","Test":"TestCollectorOnXMLWithXMLCompressed"}
+{"Time":"2026-07-21T05:36:01.270450018Z","Action":"output","Package":"github.com/gocolly/colly/v2","Test":"TestCollectorOnXMLWithXMLCompressed","Output":"=== RUN   TestCollectorOnXMLWithXMLCompressed\n"}
+{"Time":"2026-07-21T05:36:01.271582762Z","Action":"output","Package":"github.com/gocolly/colly/v2","Test":"TestCollectorOnXMLWithXMLCompressed","Output":"--- PASS: TestCollectorOnXMLWithXMLCompressed (0.00s)\n"}
+{"Time":"2026-07-21T05:36:01.271594284Z","Action":"pass","Package":"github.com/gocolly/colly/v2","Test":"TestCollectorOnXMLWithXMLCompressed","Elapsed":0}
+{"Time":"2026-07-21T05:36:01.271599198Z","Action":"run","Package":"github.com/gocolly/colly/v2","Test":"TestCollectorNonexistentXMLGZ"}
+{"Time":"2026-07-21T05:36:01.27160137Z","Action":"output","Package":"github.com/gocolly/colly/v2","Test":"TestCollectorNonexistentXMLGZ","Output":"=== RUN   TestCollectorNonexistentXMLGZ\n"}
+{"Time":"2026-07-21T05:36:01.272052673Z","Action":"output","Package":"github.com/gocolly/colly/v2","Test":"TestCollectorNonexistentXMLGZ","Output":"--- PASS: TestCollectorNonexistentXMLGZ (0.00s)\n"}
+{"Time":"2026-07-21T05:36:01.272070213Z","Action":"pass","Package":"github.com/gocolly/colly/v2","Test":"TestCollectorNonexistentXMLGZ","Elapsed":0}
+{"Time":"2026-07-21T05:36:01.272075994Z","Action":"run","Package":"github.com/gocolly/colly/v2","Test":"TestCollectorEmptyXMLGZ"}
+{"Time":"2026-07-21T05:36:01.272078763Z","Action":"output","Package":"github.com/gocolly/colly/v2","Test":"TestCollectorEmptyXMLGZ","Output":"=== RUN   TestCollectorEmptyXMLGZ\n"}
+{"Time":"2026-07-21T05:36:01.272563268Z","Action":"output","Package":"github.com/gocolly/colly/v2","Test":"TestCollectorEmptyXMLGZ","Output":"--- PASS: TestCollectorEmptyXMLGZ (0.00s)\n"}
+{"Time":"2026-07-21T05:36:01.27258792Z","Action":"pass","Package":"github.com/gocolly/colly/v2","Test":"TestCollectorEmptyXMLGZ","Elapsed":0}
+{"Time":"2026-07-21T05:36:01.27259663Z","Action":"run","Package":"github.com/gocolly/colly/v2","Test":"TestCollectorVisitWithTrace"}
+{"Time":"2026-07-21T05:36:01.272599456Z","Action":"output","Package":"github.com/gocolly/colly/v2","Test":"TestCollectorVisitWithTrace","Output":"=== RUN   TestCollectorVisitWithTrace\n"}
+{"Time":"2026-07-21T05:36:01.272981856Z","Action":"output","Package":"github.com/gocolly/colly/v2","Test":"TestCollectorVisitWithTrace","Output":"--- PASS: TestCollectorVisitWithTrace (0.00s)\n"}
+{"Time":"2026-07-21T05:36:01.272993658Z","Action":"pass","Package":"github.com/gocolly/colly/v2","Test":"TestCollectorVisitWithTrace","Elapsed":0}
+{"Time":"2026-07-21T05:36:01.27299886Z","Action":"run","Package":"github.com/gocolly/colly/v2","Test":"TestCollectorVisitWithCheckHead"}
+{"Time":"2026-07-21T05:36:01.273001413Z","Action":"output","Package":"github.com/gocolly/colly/v2","Test":"TestCollectorVisitWithCheckHead","Output":"=== RUN   TestCollectorVisitWithCheckHead\n"}
+{"Time":"2026-07-21T05:36:01.273502191Z","Action":"output","Package":"github.com/gocolly/colly/v2","Test":"TestCollectorVisitWithCheckHead","Output":"--- PASS: TestCollectorVisitWithCheckHead (0.00s)\n"}
+{"Time":"2026-07-21T05:36:01.273541937Z","Action":"pass","Package":"github.com/gocolly/colly/v2","Test":"TestCollectorVisitWithCheckHead","Elapsed":0}
+{"Time":"2026-07-21T05:36:01.273558378Z","Action":"run","Package":"github.com/gocolly/colly/v2","Test":"TestCollectorDepth"}
+{"Time":"2026-07-21T05:36:01.273561757Z","Action":"output","Package":"github.com/gocolly/colly/v2","Test":"TestCollectorDepth","Output":"=== RUN   TestCollectorDepth\n"}
+{"Time":"2026-07-21T05:36:01.275788574Z","Action":"output","Package":"github.com/gocolly/colly/v2","Test":"TestCollectorDepth","Output":"--- PASS: TestCollectorDepth (0.00s)\n"}
+{"Time":"2026-07-21T05:36:01.27580984Z","Action":"pass","Package":"github.com/gocolly/colly/v2","Test":"TestCollectorDepth","Elapsed":0}
+{"Time":"2026-07-21T05:36:01.275818557Z","Action":"run","Package":"github.com/gocolly/colly/v2","Test":"TestCollectorRequests"}
+{"Time":"2026-07-21T05:36:01.275821221Z","Action":"output","Package":"github.com/gocolly/colly/v2","Test":"TestCollectorRequests","Output":"=== RUN   TestCollectorRequests\n"}
+{"Time":"2026-07-21T05:36:01.276571937Z","Action":"output","Package":"github.com/gocolly/colly/v2","Test":"TestCollectorRequests","Output":"--- PASS: TestCollectorRequests (0.00s)\n"}
+{"Time":"2026-07-21T05:36:01.276582309Z","Action":"pass","Package":"github.com/gocolly/colly/v2","Test":"TestCollectorRequests","Elapsed":0}
+{"Time":"2026-07-21T05:36:01.276591423Z","Action":"run","Package":"github.com/gocolly/colly/v2","Test":"TestCollectorContext"}
+{"Time":"2026-07-21T05:36:01.276594513Z","Action":"output","Package":"github.com/gocolly/colly/v2","Test":"TestCollectorContext","Output":"=== RUN   TestCollectorContext\n"}
+{"Time":"2026-07-21T05:36:01.401269893Z","Action":"output","Package":"github.com/gocolly/colly/v2/queue","Test":"TestQueue","Output":"    queue_test.go:72: wrong Queue implementation: items = 3000, requests = 0, success = 0, failure = 0\n"}
+{"Time":"2026-07-21T05:36:01.401446814Z","Action":"output","Package":"github.com/gocolly/colly/v2/queue","Test":"TestQueue","Output":"--- FAIL: TestQueue (0.15s)\n"}
+{"Time":"2026-07-21T05:36:01.401453007Z","Action":"fail","Package":"github.com/gocolly/colly/v2/queue","Test":"TestQueue","Elapsed":0.15}
+{"Time":"2026-07-21T05:36:01.401458135Z","Action":"output","Package":"github.com/gocolly/colly/v2/queue","Output":"FAIL\n"}
+{"Time":"2026-07-21T05:36:01.403190992Z","Action":"output","Package":"github.com/gocolly/colly/v2/queue","Output":"FAIL\tgithub.com/gocolly/colly/v2/queue\t0.156s\n"}
+{"Time":"2026-07-21T05:36:01.403219501Z","Action":"fail","Package":"github.com/gocolly/colly/v2/queue","Elapsed":0.156}
+{"Time":"2026-07-21T05:36:01.777177234Z","Action":"output","Package":"github.com/gocolly/colly/v2","Test":"TestCollectorContext","Output":"--- PASS: TestCollectorContext (0.50s)\n"}
+{"Time":"2026-07-21T05:36:01.777212476Z","Action":"pass","Package":"github.com/gocolly/colly/v2","Test":"TestCollectorContext","Elapsed":0.5}
+{"Time":"2026-07-21T05:36:01.777220123Z","Action":"run","Package":"github.com/gocolly/colly/v2","Test":"TestCallbackDetachment"}
+{"Time":"2026-07-21T05:36:01.777223593Z","Action":"output","Package":"github.com/gocolly/colly/v2","Test":"TestCallbackDetachment","Output":"=== RUN   TestCallbackDetachment\n"}
+{"Time":"2026-07-21T05:36:01.777732738Z","Action":"output","Package":"github.com/gocolly/colly/v2","Test":"TestCallbackDetachment","Output":"    colly_test.go:1954: secondElem callback executed 1 times, expected 2\n"}
+{"Time":"2026-07-21T05:36:01.777735663Z","Action":"output","Package":"github.com/gocolly/colly/v2","Test":"TestCallbackDetachment","Output":"    colly_test.go:1957: thirdElem callback executed 3 times, expected 2\n"}
+{"Time":"2026-07-21T05:36:01.777803694Z","Action":"output","Package":"github.com/gocolly/colly/v2","Test":"TestCallbackDetachment","Output":"--- FAIL: TestCallbackDetachment (0.00s)\n"}
+{"Time":"2026-07-21T05:36:01.777806911Z","Action":"fail","Package":"github.com/gocolly/colly/v2","Test":"TestCallbackDetachment","Elapsed":0}
+{"Time":"2026-07-21T05:36:01.777810302Z","Action":"run","Package":"github.com/gocolly/colly/v2","Test":"TestCollectorPostRetry"}
+{"Time":"2026-07-21T05:36:01.777812406Z","Action":"output","Package":"github.com/gocolly/colly/v2","Test":"TestCollectorPostRetry","Output":"=== RUN   TestCollectorPostRetry\n"}
+{"Time":"2026-07-21T05:36:01.778795453Z","Action":"output","Package":"github.com/gocolly/colly/v2","Test":"TestCollectorPostRetry","Output":"--- PASS: TestCollectorPostRetry (0.00s)\n"}
+{"Time":"2026-07-21T05:36:01.778800181Z","Action":"pass","Package":"github.com/gocolly/colly/v2","Test":"TestCollectorPostRetry","Elapsed":0}
+{"Time":"2026-07-21T05:36:01.778803467Z","Action":"run","Package":"github.com/gocolly/colly/v2","Test":"TestCollectorGetRetry"}
+{"Time":"2026-07-21T05:36:01.778805717Z","Action":"output","Package":"github.com/gocolly/colly/v2","Test":"TestCollectorGetRetry","Output":"=== RUN   TestCollectorGetRetry\n"}
+{"Time":"2026-07-21T05:36:01.779250786Z","Action":"output","Package":"github.com/gocolly/colly/v2","Test":"TestCollectorGetRetry","Output":"--- PASS: TestCollectorGetRetry (0.00s)\n"}
+{"Time":"2026-07-21T05:36:01.77925335Z","Action":"pass","Package":"github.com/gocolly/colly/v2","Test":"TestCollectorGetRetry","Elapsed":0}
+{"Time":"2026-07-21T05:36:01.779256142Z","Action":"run","Package":"github.com/gocolly/colly/v2","Test":"TestCollectorPostRetryUnseekable"}
+{"Time":"2026-07-21T05:36:01.779258024Z","Action":"output","Package":"github.com/gocolly/colly/v2","Test":"TestCollectorPostRetryUnseekable","Output":"=== RUN   TestCollectorPostRetryUnseekable\n"}
+{"Time":"2026-07-21T05:36:01.779619936Z","Action":"output","Package":"github.com/gocolly/colly/v2","Test":"TestCollectorPostRetryUnseekable","Output":"--- PASS: TestCollectorPostRetryUnseekable (0.00s)\n"}
+{"Time":"2026-07-21T05:36:01.779630988Z","Action":"pass","Package":"github.com/gocolly/colly/v2","Test":"TestCollectorPostRetryUnseekable","Elapsed":0}
+{"Time":"2026-07-21T05:36:01.779634029Z","Action":"run","Package":"github.com/gocolly/colly/v2","Test":"TestRedirectErrorRetry"}
+{"Time":"2026-07-21T05:36:01.779635928Z","Action":"output","Package":"github.com/gocolly/colly/v2","Test":"TestRedirectErrorRetry","Output":"=== RUN   TestRedirectErrorRetry\n"}
+{"Time":"2026-07-21T05:36:01.780070735Z","Action":"output","Package":"github.com/gocolly/colly/v2","Test":"TestRedirectErrorRetry","Output":"--- PASS: TestRedirectErrorRetry (0.00s)\n"}
+{"Time":"2026-07-21T05:36:01.780073573Z","Action":"pass","Package":"github.com/gocolly/colly/v2","Test":"TestRedirectErrorRetry","Elapsed":0}
+{"Time":"2026-07-21T05:36:01.78007635Z","Action":"run","Package":"github.com/gocolly/colly/v2","Test":"TestCheckRequestHeadersFunc"}
+{"Time":"2026-07-21T05:36:01.78007822Z","Action":"output","Package":"github.com/gocolly/colly/v2","Test":"TestCheckRequestHeadersFunc","Output":"=== RUN   TestCheckRequestHeadersFunc\n"}
+{"Time":"2026-07-21T05:36:01.780328147Z","Action":"output","Package":"github.com/gocolly/colly/v2","Test":"TestCheckRequestHeadersFunc","Output":"--- PASS: TestCheckRequestHeadersFunc (0.00s)\n"}
+{"Time":"2026-07-21T05:36:01.780330556Z","Action":"pass","Package":"github.com/gocolly/colly/v2","Test":"TestCheckRequestHeadersFunc","Elapsed":0}
+{"Time":"2026-07-21T05:36:01.780333418Z","Action":"run","Package":"github.com/gocolly/colly/v2","Test":"TestIssue745GzipURLWith404Response"}
+{"Time":"2026-07-21T05:36:01.780335154Z","Action":"output","Package":"github.com/gocolly/colly/v2","Test":"TestIssue745GzipURLWith404Response","Output":"=== RUN   TestIssue745GzipURLWith404Response\n"}
+{"Time":"2026-07-21T05:36:01.780682453Z","Action":"output","Package":"github.com/gocolly/colly/v2","Test":"TestIssue745GzipURLWith404Response","Output":"--- PASS: TestIssue745GzipURLWith404Response (0.00s)\n"}
+{"Time":"2026-07-21T05:36:01.780684666Z","Action":"pass","Package":"github.com/gocolly/colly/v2","Test":"TestIssue745GzipURLWith404Response","Elapsed":0}
+{"Time":"2026-07-21T05:36:01.780688891Z","Action":"run","Package":"github.com/gocolly/colly/v2","Test":"TestSharedLimitRule_AInitThenBInit_ANotStuck"}
+{"Time":"2026-07-21T05:36:01.780690927Z","Action":"output","Package":"github.com/gocolly/colly/v2","Test":"TestSharedLimitRule_AInitThenBInit_ANotStuck","Output":"=== RUN   TestSharedLimitRule_AInitThenBInit_ANotStuck\n"}
+{"Time":"2026-07-21T05:36:41.795829048Z","Action":"output","Package":"github.com/gocolly/colly/v2","Test":"TestSharedLimitRule_AInitThenBInit_ANotStuck","Output":"--- PASS: TestSharedLimitRule_AInitThenBInit_ANotStuck (40.02s)\n"}
+{"Time":"2026-07-21T05:36:41.795874085Z","Action":"pass","Package":"github.com/gocolly/colly/v2","Test":"TestSharedLimitRule_AInitThenBInit_ANotStuck","Elapsed":40.02}
+{"Time":"2026-07-21T05:36:41.795881041Z","Action":"run","Package":"github.com/gocolly/colly/v2","Test":"TestSharedLimitRuleRace"}
+{"Time":"2026-07-21T05:36:41.795885702Z","Action":"output","Package":"github.com/gocolly/colly/v2","Test":"TestSharedLimitRuleRace","Output":"=== RUN   TestSharedLimitRuleRace\n"}
+{"Time":"2026-07-21T05:36:41.795892963Z","Action":"output","Package":"github.com/gocolly/colly/v2","Test":"TestSharedLimitRuleRace","Output":"--- PASS: TestSharedLimitRuleRace (0.00s)\n"}
+{"Time":"2026-07-21T05:36:41.795895719Z","Action":"pass","Package":"github.com/gocolly/colly/v2","Test":"TestSharedLimitRuleRace","Elapsed":0}
+{"Time":"2026-07-21T05:36:41.795898355Z","Action":"run","Package":"github.com/gocolly/colly/v2","Test":"TestLimitRuleClone"}
+{"Time":"2026-07-21T05:36:41.795900751Z","Action":"output","Package":"github.com/gocolly/colly/v2","Test":"TestLimitRuleClone","Output":"=== RUN   TestLimitRuleClone\n"}
+{"Time":"2026-07-21T05:36:41.795903832Z","Action":"output","Package":"github.com/gocolly/colly/v2","Test":"TestLimitRuleClone","Output":"    colly_test.go:2245: clone.compiledRegexp should be nil, got non-nil\n"}
+{"Time":"2026-07-21T05:36:41.795914257Z","Action":"output","Package":"github.com/gocolly/colly/v2","Test":"TestLimitRuleClone","Output":"    colly_test.go:2248: clone.compiledGlob should be nil, got non-nil\n"}
+{"Time":"2026-07-21T05:36:41.795922753Z","Action":"output","Package":"github.com/gocolly/colly/v2","Test":"TestLimitRuleClone","Output":"--- FAIL: TestLimitRuleClone (0.00s)\n"}
+{"Time":"2026-07-21T05:36:41.795925704Z","Action":"fail","Package":"github.com/gocolly/colly/v2","Test":"TestLimitRuleClone","Elapsed":0}
+{"Time":"2026-07-21T05:36:41.795928584Z","Action":"run","Package":"github.com/gocolly/colly/v2","Test":"TestRequestMarshalRoundtripHost"}
+{"Time":"2026-07-21T05:36:41.795930578Z","Action":"output","Package":"github.com/gocolly/colly/v2","Test":"TestRequestMarshalRoundtripHost","Output":"=== RUN   TestRequestMarshalRoundtripHost\n"}
+{"Time":"2026-07-21T05:36:41.796006814Z","Action":"output","Package":"github.com/gocolly/colly/v2","Test":"TestRequestMarshalRoundtripHost","Output":"--- PASS: TestRequestMarshalRoundtripHost (0.00s)\n"}
+{"Time":"2026-07-21T05:36:41.79600949Z","Action":"pass","Package":"github.com/gocolly/colly/v2","Test":"TestRequestMarshalRoundtripHost","Elapsed":0}
+{"Time":"2026-07-21T05:36:41.796012676Z","Action":"run","Package":"github.com/gocolly/colly/v2","Test":"TestContextIteration"}
+{"Time":"2026-07-21T05:36:41.796014699Z","Action":"output","Package":"github.com/gocolly/colly/v2","Test":"TestContextIteration","Output":"=== RUN   TestContextIteration\n"}
+{"Time":"2026-07-21T05:36:41.796022457Z","Action":"output","Package":"github.com/gocolly/colly/v2","Test":"TestContextIteration","Output":"--- PASS: TestContextIteration (0.00s)\n"}
+{"Time":"2026-07-21T05:36:41.796025391Z","Action":"pass","Package":"github.com/gocolly/colly/v2","Test":"TestContextIteration","Elapsed":0}
+{"Time":"2026-07-21T05:36:41.796027448Z","Action":"run","Package":"github.com/gocolly/colly/v2","Test":"TestContextClone"}
+{"Time":"2026-07-21T05:36:41.796029315Z","Action":"output","Package":"github.com/gocolly/colly/v2","Test":"TestContextClone","Output":"=== RUN   TestContextClone\n"}
+{"Time":"2026-07-21T05:36:41.796038725Z","Action":"output","Package":"github.com/gocolly/colly/v2","Test":"TestContextClone","Output":"--- PASS: TestContextClone (0.00s)\n"}
+{"Time":"2026-07-21T05:36:41.796041342Z","Action":"pass","Package":"github.com/gocolly/colly/v2","Test":"TestContextClone","Elapsed":0}
+{"Time":"2026-07-21T05:36:41.796044115Z","Action":"run","Package":"github.com/gocolly/colly/v2","Test":"TestTraceWithNoDelay"}
+{"Time":"2026-07-21T05:36:41.796045967Z","Action":"output","Package":"github.com/gocolly/colly/v2","Test":"TestTraceWithNoDelay","Output":"=== RUN   TestTraceWithNoDelay\n"}
+{"Time":"2026-07-21T05:36:41.796344272Z","Action":"output","Package":"github.com/gocolly/colly/v2","Test":"TestTraceWithNoDelay","Output":"--- PASS: TestTraceWithNoDelay (0.00s)\n"}
+{"Time":"2026-07-21T05:36:41.796346515Z","Action":"pass","Package":"github.com/gocolly/colly/v2","Test":"TestTraceWithNoDelay","Elapsed":0}
+{"Time":"2026-07-21T05:36:41.796354772Z","Action":"run","Package":"github.com/gocolly/colly/v2","Test":"TestTraceWithDelay"}
+{"Time":"2026-07-21T05:36:41.796356575Z","Action":"output","Package":"github.com/gocolly/colly/v2","Test":"TestTraceWithDelay","Output":"=== RUN   TestTraceWithDelay\n"}
+{"Time":"2026-07-21T05:36:41.996990802Z","Action":"output","Package":"github.com/gocolly/colly/v2","Test":"TestTraceWithDelay","Output":"--- PASS: TestTraceWithDelay (0.20s)\n"}
+{"Time":"2026-07-21T05:36:41.996999169Z","Action":"pass","Package":"github.com/gocolly/colly/v2","Test":"TestTraceWithDelay","Elapsed":0.2}
+{"Time":"2026-07-21T05:36:41.997003815Z","Action":"run","Package":"github.com/gocolly/colly/v2","Test":"TestBasicUnmarshal"}
+{"Time":"2026-07-21T05:36:41.997005848Z","Action":"output","Package":"github.com/gocolly/colly/v2","Test":"TestBasicUnmarshal","Output":"=== RUN   TestBasicUnmarshal\n"}
+{"Time":"2026-07-21T05:36:41.997063064Z","Action":"output","Package":"github.com/gocolly/colly/v2","Test":"TestBasicUnmarshal","Output":"--- PASS: TestBasicUnmarshal (0.00s)\n"}
+{"Time":"2026-07-21T05:36:41.997069042Z","Action":"pass","Package":"github.com/gocolly/colly/v2","Test":"TestBasicUnmarshal","Elapsed":0}
+{"Time":"2026-07-21T05:36:41.997071391Z","Action":"run","Package":"github.com/gocolly/colly/v2","Test":"TestNestedUnmarshalMap"}
+{"Time":"2026-07-21T05:36:41.997073437Z","Action":"output","Package":"github.com/gocolly/colly/v2","Test":"TestNestedUnmarshalMap","Output":"=== RUN   TestNestedUnmarshalMap\n"}
+{"Time":"2026-07-21T05:36:41.99710481Z","Action":"output","Package":"github.com/gocolly/colly/v2","Test":"TestNestedUnmarshalMap","Output":"--- PASS: TestNestedUnmarshalMap (0.00s)\n"}
+{"Time":"2026-07-21T05:36:41.997107678Z","Action":"pass","Package":"github.com/gocolly/colly/v2","Test":"TestNestedUnmarshalMap","Elapsed":0}
+{"Time":"2026-07-21T05:36:41.997110274Z","Action":"run","Package":"github.com/gocolly/colly/v2","Test":"TestNestedUnmarshal"}
+{"Time":"2026-07-21T05:36:41.997112047Z","Action":"output","Package":"github.com/gocolly/colly/v2","Test":"TestNestedUnmarshal","Output":"=== RUN   TestNestedUnmarshal\n"}
+{"Time":"2026-07-21T05:36:42.992564932Z","Action":"output","Package":"github.com/gocolly/colly/v2","Test":"TestNestedUnmarshal","Output":"runtime: goroutine stack exceeds 1000000000-byte limit\n"}
+{"Time":"2026-07-21T05:36:42.992599962Z","Action":"output","Package":"github.com/gocolly/colly/v2","Test":"TestNestedUnmarshal","Output":"runtime: sp=0x402061a390 stack=[0x402061a000, 0x404061a000]\n"}
+{"Time":"2026-07-21T05:36:42.992603454Z","Action":"output","Package":"github.com/gocolly/colly/v2","Test":"TestNestedUnmarshal","Output":"fatal error: stack overflow\n"}
+{"Time":"2026-07-21T05:36:42.994659747Z","Action":"output","Package":"github.com/gocolly/colly/v2","Test":"TestNestedUnmarshal","Output":"\n"}
+{"Time":"2026-07-21T05:36:42.994663148Z","Action":"output","Package":"github.com/gocolly/colly/v2","Test":"TestNestedUnmarshal","Output":"runtime stack:\n"}
+{"Time":"2026-07-21T05:36:42.994665728Z","Action":"output","Package":"github.com/gocolly/colly/v2","Test":"TestNestedUnmarshal","Output":"runtime.throw({0x5b18ba?, 0x412a0?})\n"}
+{"Time":"2026-07-21T05:36:42.994669474Z","Action":"output","Package":"github.com/gocolly/colly/v2","Test":"TestNestedUnmarshal","Output":"\t/usr/local/go/src/runtime/panic.go:1094 +0x34 fp=0xffff317be720 sp=0xffff317be6f0 pc=0x8a284\n"}
+{"Time":"2026-07-21T05:36:42.994672116Z","Action":"output","Package":"github.com/gocolly/colly/v2","Test":"TestNestedUnmarshal","Output":"runtime.newstack()\n"}
+{"Time":"2026-07-21T05:36:42.994678991Z","Action":"output","Package":"github.com/gocolly/colly/v2","Test":"TestNestedUnmarshal","Output":"\t/usr/local/go/src/runtime/stack.go:1159 +0x44c fp=0xffff317be850 sp=0xffff317be720 pc=0x6f49c\n"}
+{"Time":"2026-07-21T05:36:42.994681104Z","Action":"output","Package":"github.com/gocolly/colly/v2","Test":"TestNestedUnmarshal","Output":"runtime.morestack()\n"}
+{"Time":"2026-07-21T05:36:42.994683455Z","Action":"output","Package":"github.com/gocolly/colly/v2","Test":"TestNestedUnmarshal","Output":"\t/usr/local/go/src/runtime/asm_arm64.s:392 +0x70 fp=0xffff317be850 sp=0xffff317be850 pc=0x8fea0\n"}
+{"Time":"2026-07-21T05:36:42.994687656Z","Action":"output","Package":"github.com/gocolly/colly/v2","Test":"TestNestedUnmarshal","Output":"\n"}
+{"Time":"2026-07-21T05:36:42.994690628Z","Action":"output","Package":"github.com/gocolly/colly/v2","Test":"TestNestedUnmarshal","Output":"goroutine 692 gp=0x40002f0380 m=8 mp=0x40003e6008 [running]:\n"}
+{"Time":"2026-07-21T05:36:42.994692839Z","Action":"output","Package":"github.com/gocolly/colly/v2","Test":"TestNestedUnmarshal","Output":"runtime.concatstring2(0x0?, {0x0?, 0x0?}, {0x49ea60?, 0x3?})\n"}
+{"Time":"2026-07-21T05:36:42.994695879Z","Action":"output","Package":"github.com/gocolly/colly/v2","Test":"TestNestedUnmarshal","Output":"\t/usr/local/go/src/runtime/string.go:62 +0x60 fp=0x402061a390 sp=0x402061a390 pc=0x70a70\n"}
+{"Time":"2026-07-21T05:36:42.99469902Z","Action":"output","Package":"github.com/gocolly/colly/v2","Test":"TestNestedUnmarshal","Output":"github.com/andybalholm/cascadia.(*parser).parseName(0x402061a758)\n"}
+{"Time":"2026-07-21T05:36:42.99471474Z","Action":"output","Package":"github.com/gocolly/colly/v2","Test":"TestNestedUnmarshal","Output":"\t/root/go/pkg/mod/github.com/andybalholm/cascadia@v1.3.3/parser.go:136 +0x1ec fp=0x402061a3e0 sp=0x402061a390 pc=0x2d0fdc\n"}
+{"Time":"2026-07-21T05:36:42.994721286Z","Action":"output","Package":"github.com/gocolly/colly/v2","Test":"TestNestedUnmarshal","Output":"github.com/andybalholm/cascadia.(*parser).parseIdentifier(0x0?)\n"}
+{"Time":"2026-07-21T05:36:42.994723439Z","Action":"output","Package":"github.com/gocolly/colly/v2","Test":"TestNestedUnmarshal","Output":"\t/root/go/pkg/mod/github.com/andybalholm/cascadia@v1.3.3/parser.go:116 +0xa0 fp=0x402061a450 sp=0x402061a3e0 pc=0x2d0cd0\n"}
+{"Time":"2026-07-21T05:36:42.994725517Z","Action":"output","Package":"github.com/gocolly/colly/v2","Test":"TestNestedUnmarshal","Output":"github.com/andybalholm/cascadia.(*parser).parseTypeSelector(0x10?)\n"}
+{"Time":"2026-07-21T05:36:42.994728486Z","Action":"output","Package":"github.com/gocolly/colly/v2","Test":"TestNestedUnmarshal","Output":"\t/root/go/pkg/mod/github.com/andybalholm/cascadia@v1.3.3/parser.go:308 +0x1c fp=0x402061a4a0 sp=0x402061a450 pc=0x2d177c\n"}
+{"Time":"2026-07-21T05:36:42.994731306Z","Action":"output","Package":"github.com/gocolly/colly/v2","Test":"TestNestedUnmarshal","Output":"github.com/andybalholm/cascadia.(*parser).parseSimpleSelectorSequence(0x402061a758)\n"}
+{"Time":"2026-07-21T05:36:42.994733457Z","Action":"output","Package":"github.com/gocolly/colly/v2","Test":"TestNestedUnmarshal","Output":"\t/root/go/pkg/mod/github.com/andybalholm/cascadia@v1.3.3/parser.go:771 +0xc8 fp=0x402061a630 sp=0x402061a4a0 pc=0x2d40d8\n"}
+{"Time":"2026-07-21T05:36:42.994735718Z","Action":"output","Package":"github.com/gocolly/colly/v2","Test":"TestNestedUnmarshal","Output":"github.com/andybalholm/cascadia.(*parser).parseSelector(0x402061a758)\n"}
+{"Time":"2026-07-21T05:36:42.994737987Z","Action":"output","Package":"github.com/gocolly/colly/v2","Test":"TestNestedUnmarshal","Output":"\t/root/go/pkg/mod/github.com/andybalholm/cascadia@v1.3.3/parser.go:830 +0x28 fp=0x402061a690 sp=0x402061a630 pc=0x2d45a8\n"}
+{"Time":"2026-07-21T05:36:42.994740049Z","Action":"output","Package":"github.com/gocolly/colly/v2","Test":"TestNestedUnmarshal","Output":"github.com/andybalholm/cascadia.(*parser).parseSelectorGroup(0x402061a758)\n"}
+{"Time":"2026-07-21T05:36:42.994742143Z","Action":"output","Package":"github.com/gocolly/colly/v2","Test":"TestNestedUnmarshal","Output":"\t/root/go/pkg/mod/github.com/andybalholm/cascadia@v1.3.3/parser.go:871 +0x24 fp=0x402061a720 sp=0x402061a690 pc=0x2d4764\n"}
+{"Time":"2026-07-21T05:36:42.994744984Z","Action":"output","Package":"github.com/gocolly/colly/v2","Test":"TestNestedUnmarshal","Output":"github.com/andybalholm/cascadia.ParseGroup({0x49ea60, 0x9})\n"}
+{"Time":"2026-07-21T05:36:42.994747032Z","Action":"output","Package":"github.com/gocolly/colly/v2","Test":"TestNestedUnmarshal","Output":"\t/root/go/pkg/mod/github.com/andybalholm/cascadia@v1.3.3/selector.go:66 +0x38 fp=0x402061a7a0 sp=0x402061a720 pc=0x2d6308\n"}
+{"Time":"2026-07-21T05:36:42.994749706Z","Action":"output","Package":"github.com/gocolly/colly/v2","Test":"TestNestedUnmarshal","Output":"github.com/andybalholm/cascadia.Compile(...)\n"}
+{"Time":"2026-07-21T05:36:42.994751786Z","Action":"output","Package":"github.com/gocolly/colly/v2","Test":"TestNestedUnmarshal","Output":"\t/root/go/pkg/mod/github.com/andybalholm/cascadia@v1.3.3/selector.go:103\n"}
+{"Time":"2026-07-21T05:36:42.994754739Z","Action":"output","Package":"github.com/gocolly/colly/v2","Test":"TestNestedUnmarshal","Output":"github.com/PuerkitoBio/goquery.compileMatcher({0x49ea60?, 0x49ea4f?})\n"}
+{"Time":"2026-07-21T05:36:42.994757841Z","Action":"output","Package":"github.com/gocolly/colly/v2","Test":"TestNestedUnmarshal","Output":"\t/root/go/pkg/mod/github.com/!puerkito!bio/goquery@v1.11.0/type.go:167 +0x20 fp=0x402061a7e0 sp=0x402061a7a0 pc=0x2dc600\n"}
+{"Time":"2026-07-21T05:36:42.994762388Z","Action":"output","Package":"github.com/gocolly/colly/v2","Test":"TestNestedUnmarshal","Output":"github.com/PuerkitoBio/goquery.(*Selection).Find(0x400c1a0ed0, {0x49ea60?, 0x49ea5f?})\n"}
+{"Time":"2026-07-21T05:36:42.994765255Z","Action":"output","Package":"github.com/gocolly/colly/v2","Test":"TestNestedUnmarshal","Output":"\t/root/go/pkg/mod/github.com/!puerkito!bio/goquery@v1.11.0/traversal.go:30 +0x2c fp=0x402061a840 sp=0x402061a7e0 pc=0x2dbb2c\n"}
+{"Time":"2026-07-21T05:36:42.994777627Z","Action":"output","Package":"github.com/gocolly/colly/v2","Test":"TestNestedUnmarshal","Output":"github.com/gocolly/colly/v2.unmarshalPtr(0x49ea56?, {0x49ea60?, 0x5a8ba5?}, {0x4ae3e0?, 0x400c18f078?, 0x49ea4f?})\n"}
+{"Time":"2026-07-21T05:36:42.994782434Z","Action":"output","Package":"github.com/gocolly/colly/v2","Test":"TestNestedUnmarshal","Output":"\t/tmp/commit0-inplace-24m8yhz_/tree/unmarshal.go:147 +0x3c fp=0x402061a8d0 sp=0x402061a840 pc=0x41f8fc\n"}
+{"Time":"2026-07-21T05:36:42.994803118Z","Action":"output","Package":"github.com/gocolly/colly/v2","Test":"TestNestedUnmarshal","Output":"github.com/gocolly/colly/v2.unmarshalAttr(0x400c1a0ed0, {0x4ae3e0?, 0x400c18f078?, 0x402061aa18?}, {{0x49ea4f, 0x6}, {0x0, 0x0}, {0x689fd0, 0x4ae3e0}, ...})\n"}
+{"Time":"2026-07-21T05:36:42.994807899Z","Action":"output","Package":"github.com/gocolly/colly/v2","Test":"TestNestedUnmarshal","Output":"\t/tmp/commit0-inplace-24m8yhz_/tree/unmarshal.go:121 +0x108 fp=0x402061a970 sp=0x402061a8d0 pc=0x41f5c8\n"}
+{"Time":"2026-07-21T05:36:42.994817082Z","Action":"output","Package":"github.com/gocolly/colly/v2","Test":"TestNestedUnmarshal","Output":"github.com/gocolly/colly/v2.UnmarshalHTML({0x4ae3e0, 0x400c18f068?}, 0x400c1a0ed0, 0x0)\n"}
+{"Time":"2026-07-21T05:36:42.994822397Z","Action":"output","Package":"github.com/gocolly/colly/v2","Test":"TestNestedUnmarshal","Output":"\t/tmp/commit0-inplace-24m8yhz_/tree/unmarshal.go:65 +0x460 fp=0x402061ab70 sp=0x402061a970 pc=0x41f200\n"}
+{"Time":"2026-07-21T05:36:42.994836032Z","Action":"output","Package":"github.com/gocolly/colly/v2","Test":"TestNestedUnmarshal","Output":"github.com/gocolly/colly/v2.unmarshalPtr(0x49ea56?, {0x49ea60?, 0x5a8ba5?}, {0x4ae3e0?, 0x400c18f060?, 0x49ea4f?})\n"}
+{"Time":"2026-07-21T05:36:42.994842005Z","Action":"output","Package":"github.com/gocolly/colly/v2","Test":"TestNestedUnmarshal","Output":"\t/tmp/commit0-inplace-24m8yhz_/tree/unmarshal.go:154 +0xcc fp=0x402061ac00 sp=0x402061ab70 pc=0x41f98c\n"}
+{"Time":"2026-07-21T05:36:42.994864073Z","Action":"output","Package":"github.com/gocolly/colly/v2","Test":"TestNestedUnmarshal","Output":"github.com/gocolly/colly/v2.unmarshalAttr(0x400c1a0de0, {0x4ae3e0?, 0x400c18f060?, 0x8?}, {{0x49ea4f, 0x6}, {0x0, 0x0}, {0x689fd0, 0x4ae3e0}, ...})\n"}
+{"Time":"2026-07-21T05:36:42.994869945Z","Action":"output","Package":"github.com/gocolly/colly/v2","Test":"TestNestedUnmarshal","Output":"\t/tmp/commit0-inplace-24m8yhz_/tree/unmarshal.go:121 +0x108 fp=0x402061aca0 sp=0x402061ac00 pc=0x41f5c8\n"}
+{"Time":"2026-07-21T05:36:42.994877679Z","Action":"output","Package":"github.com/gocolly/colly/v2","Test":"TestNestedUnmarshal","Output":"github.com/gocolly/colly/v2.UnmarshalHTML({0x4ae3e0, 0x400c18f050?}, 0x400c1a0de0, 0x0)\n"}
+{"Time":"2026-07-21T05:36:42.994882685Z","Action":"output","Package":"github.com/gocolly/colly/v2","Test":"TestNestedUnmarshal","Output":"\t/tmp/commit0-inplace-24m8yhz_/tree/unmarshal.go:65 +0x460 fp=0x402061aea0 sp=0x402061aca0 pc=0x41f200\n"}
+{"Time":"2026-07-21T05:36:42.994896682Z","Action":"output","Package":"github.com/gocolly/colly/v2","Test":"TestNestedUnmarshal","Output":"github.com/gocolly/colly/v2.unmarshalPtr(0x49ea56?, {0x49ea60?, 0x5a8ba5?}, {0x4ae3e0?, 0x400c18f048?, 0x49ea4f?})\n"}
+{"Time":"2026-07-21T05:36:42.994900659Z","Action":"output","Package":"github.com/gocolly/colly/v2","Test":"TestNestedUnmarshal","Output":"\t/tmp/commit0-inplace-24m8yhz_/tree/unmarshal.go:154 +0xcc fp=0x402061af30 sp=0x402061aea0 pc=0x41f98c\n"}
+{"Time":"2026-07-21T05:36:42.994922107Z","Action":"output","Package":"github.com/gocolly/colly/v2","Test":"TestNestedUnmarshal","Output":"github.com/gocolly/colly/v2.unmarshalAttr(0x400c1a0cf0, {0x4ae3e0?, 0x400c18f048?, 0x10?}, {{0x49ea4f, 0x6}, {0x0, 0x0}, {0x689fd0, 0x4ae3e0}, ...})\n"}
+{"Time":"2026-07-21T05:36:42.994926809Z","Action":"output","Package":"github.com/gocolly/colly/v2","Test":"TestNestedUnmarshal","Output":"\t/tmp/commit0-inplace-24m8yhz_/tree/unmarshal.go:121 +0x108 fp=0x402061afd0 sp=0x402061af30 pc=0x41f5c8\n"}
+{"Time":"2026-07-21T05:36:42.994933281Z","Action":"output","Package":"github.com/gocolly/colly/v2","Test":"TestNestedUnmarshal","Output":"github.com/gocolly/colly/v2.UnmarshalHTML({0x4ae3e0, 0x400c18f038?}, 0x400c1a0cf0, 0x0)\n"}
+{"Time":"2026-07-21T05:36:42.994938663Z","Action":"output","Package":"github.com/gocolly/colly/v2","Test":"TestNestedUnmarshal","Output":"\t/tmp/commit0-inplace-24m8yhz_/tree/unmarshal.go:65 +0x460 fp=0x402061b1d0 sp=0x402061afd0 pc=0x41f200\n"}
+{"Time":"2026-07-21T05:36:42.99495137Z","Action":"output","Package":"github.com/gocolly/colly/v2","Test":"TestNestedUnmarshal","Output":"github.com/gocolly/colly/v2.unmarshalPtr(0x49ea56?, {0x49ea60?, 0x5a8ba5?}, {0x4ae3e0?, 0x400c18f030?, 0x49ea4f?})\n"}
+{"Time":"2026-07-21T05:36:42.99495609Z","Action":"output","Package":"github.com/gocolly/colly/v2","Test":"TestNestedUnmarshal","Output":"\t/tmp/commit0-inplace-24m8yhz_/tree/unmarshal.go:154 +0xcc fp=0x402061b260 sp=0x402061b1d0 pc=0x41f98c\n"}
+{"Time":"2026-07-21T05:36:42.994977208Z","Action":"output","Package":"github.com/gocolly/colly/v2","Test":"TestNestedUnmarshal","Output":"github.com/gocolly/colly/v2.unmarshalAttr(0x400c1a0c00, {0x4ae3e0?, 0x400c18f030?, 0x10?}, {{0x49ea4f, 0x6}, {0x0, 0x0}, {0x689fd0, 0x4ae3e0}, ...})\n"}
+{"Time":"2026-07-21T05:36:42.994983249Z","Action":"output","Package":"github.com/gocolly/colly/v2","Test":"TestNestedUnmarshal","Output":"\t/tmp/commit0-inplace-24m8yhz_/tree/unmarshal.go:121 +0x108 fp=0x402061b300 sp=0x402061b260 pc=0x41f5c8\n"}
+{"Time":"2026-07-21T05:36:42.994989845Z","Action":"output","Package":"github.com/gocolly/colly/v2","Test":"TestNestedUnmarshal","Output":"github.com/gocolly/colly/v2.UnmarshalHTML({0x4ae3e0, 0x400c18f020?}, 0x400c1a0c00, 0x0)\n"}
+{"Time":"2026-07-21T05:36:42.994995744Z","Action":"output","Package":"github.com/gocolly/colly/v2","Test":"TestNestedUnmarshal","Output":"\t/tmp/commit0-inplace-24m8yhz_/tree/unmarshal.go:65 +0x460 fp=0x402061b500 sp=0x402061b300 pc=0x41f200\n"}
+{"Time":"2026-07-21T05:36:42.995009192Z","Action":"output","Package":"github.com/gocolly/colly/v2","Test":"TestNestedUnmarshal","Output":"github.com/gocolly/colly/v2.unmarshalPtr(0x49ea56?, {0x49ea60?, 0x5a8ba5?}, {0x4ae3e0?, 0x400c18f018?, 0x49ea4f?})\n"}
+{"Time":"2026-07-21T05:36:42.995015247Z","Action":"output","Package":"github.com/gocolly/colly/v2","Test":"TestNestedUnmarshal","Output":"\t/tmp/commit0-inplace-24m8yhz_/tree/unmarshal.go:154 +0xcc fp=0x402061b590 sp=0x402061b500 pc=0x41f98c\n"}
+{"Time":"2026-07-21T05:36:42.99503664Z","Action":"output","Package":"github.com/gocolly/colly/v2","Test":"TestNestedUnmarshal","Output":"github.com/gocolly/colly/v2.unmarshalAttr(0x400c1a0b10, {0x4ae3e0?, 0x400c18f018?, 0x10?}, {{0x49ea4f, 0x6}, {0x0, 0x0}, {0x689fd0, 0x4ae3e0}, ...})\n"}
+{"Time":"2026-07-21T05:36:42.995042711Z","Action":"output","Package":"github.com/gocolly/colly/v2","Test":"TestNestedUnmarshal","Output":"\t/tmp/commit0-inplace-24m8yhz_/tree/unmarshal.go:121 +0x108 fp=0x402061b630 sp=0x402061b590 pc=0x41f5c8\n"}
+{"Time":"2026-07-21T05:36:42.995048312Z","Action":"output","Package":"github.com/gocolly/colly/v2","Test":"TestNestedUnmarshal","Output":"github.com/gocolly/colly/v2.UnmarshalHTML({0x4ae3e0, 0x400c18f008?}, 0x400c1a0b10, 0x0)\n"}
+{"Time":"2026-07-21T05:36:42.995054323Z","Action":"output","Package":"github.com/gocolly/colly/v2","Test":"TestNestedUnmarshal","Output":"\t/tmp/commit0-inplace-24m8yhz_/tree/unmarshal.go:65 +0x460 fp=0x402061b830 sp=0x402061b630 pc=0x41f200\n"}
+{"Time":"2026-07-21T05:36:42.995067672Z","Action":"output","Package":"github.com/gocolly/colly/v2","Test":"TestNestedUnmarshal","Output":"github.com/gocolly/colly/v2.unmarshalPtr(0x49ea56?, {0x49ea60?, 0x5a8ba5?}, {0x4ae3e0?, 0x400c18f000?, 0x49ea4f?})\n"}
+{"Time":"2026-07-21T05:36:42.9950721Z","Action":"output","Package":"github.com/gocolly/colly/v2","Test":"TestNestedUnmarshal","Output":"\t/tmp/commit0-inplace-24m8yhz_/tree/unmarshal.go:154 +0xcc fp=0x402061b8c0 sp=0x402061b830 pc=0x41f98c\n"}
+{"Time":"2026-07-21T05:36:42.99509252Z","Action":"output","Package":"github.com/gocolly/colly/v2","Test":"TestNestedUnmarshal","Output":"github.com/gocolly/colly/v2.unmarshalAttr(0x400c1a0a20, {0x4ae3e0?, 0x400c18f000?, 0x10?}, {{0x49ea4f, 0x6}, {0x0, 0x0}, {0x689fd0, 0x4ae3e0}, ...})\n"}
+{"Time":"2026-07-21T05:36:42.995099487Z","Action":"output","Package":"github.com/gocolly/colly/v2","Test":"TestNestedUnmarshal","Output":"\t/tmp/commit0-inplace-24m8yhz_/tree/unmarshal.go:121 +0x108 fp=0x402061b960 sp=0x402061b8c0 pc=0x41f5c8\n"}
+{"Time":"2026-07-21T05:36:42.995102292Z","Action":"output","Package":"github.com/gocolly/colly/v2","Test":"TestNestedUnmarshal","Output":"github.com/gocolly/colly/v2.UnmarshalHTML({0x4ae3e0, 0x400c18eff0?}, 0x400c1a0a20, 0x0)\n"}
+{"Time":"2026-07-21T05:36:42.995106411Z","Action":"output","Package":"github.com/gocolly/colly/v2","Test":"TestNestedUnmarshal","Output":"\t/tmp/commit0-inplace-24m8yhz_/tree/unmarshal.go:65 +0x460 fp=0x402061bb60 sp=0x402061b960 pc=0x41f200\n"}
+{"Time":"2026-07-21T05:36:42.99511924Z","Action":"output","Package":"github.com/gocolly/colly/v2","Test":"TestNestedUnmarshal","Output":"github.com/gocolly/colly/v2.unmarshalPtr(0x49ea56?, {0x49ea60?, 0x5a8ba5?}, {0x4ae3e0?, 0x400c18efe8?, 0x49ea4f?})\n"}
+{"Time":"2026-07-21T05:36:42.995124532Z","Action":"output","Package":"github.com/gocolly/colly/v2","Test":"TestNestedUnmarshal","Output":"\t/tmp/commit0-inplace-24m8yhz_/tree/unmarshal.go:154 +0xcc fp=0x402061bbf0 sp=0x402061bb60 pc=0x41f98c\n"}
+{"Time":"2026-07-21T05:36:42.995146784Z","Action":"output","Package":"github.com/gocolly/colly/v2","Test":"TestNestedUnmarshal","Output":"github.com/gocolly/colly/v2.unmarshalAttr(0x400c1a0930, {0x4ae3e0?, 0x400c18efe8?, 0x10?}, {{0x49ea4f, 0x6}, {0x0, 0x0}, {0x689fd0, 0x4ae3e0}, ...})\n"}
+{"Time":"2026-07-21T05:36:42.99515092Z","Action":"output","Package":"github.com/gocolly/colly/v2","Test":"TestNestedUnmarshal","Output":"\t/tmp/commit0-inplace-24m8yhz_/tree/unmarshal.go:121 +0x108 fp=0x402061bc90 sp=0x402061bbf0 pc=0x41f5c8\n"}
+{"Time":"2026-07-21T05:36:42.995160594Z","Action":"output","Package":"github.com/gocolly/colly/v2","Test":"TestNestedUnmarshal","Output":"github.com/gocolly/colly/v2.UnmarshalHTML({0x4ae3e0, 0x400c18efd8?}, 0x400c1a0930, 0x0)\n"}
+{"Time":"2026-07-21T05:36:42.99516262Z","Action":"output","Package":"github.com/gocolly/colly/v2","Test":"TestNestedUnmarshal","Output":"\t/tmp/commit0-inplace-24m8yhz_/tree/unmarshal.go:65 +0x460 fp=0x402061be90 sp=0x402061bc90 pc=0x41f200\n"}
+{"Time":"2026-07-21T05:36:42.995168193Z","Action":"output","Package":"github.com/gocolly/colly/v2","Test":"TestNestedUnmarshal","Output":"github.com/gocolly/colly/v2.unmarshalPtr(0x49ea56?, {0x49ea60?, 0x5a8ba5?}, {0x4ae3e0?, 0x400c18efd0?, 0x49ea4f?})\n"}
+{"Time":"2026-07-21T05:36:42.995172972Z","Action":"output","Package":"github.com/gocolly/colly/v2","Test":"TestNestedUnmarshal","Output":"\t/tmp/commit0-inplace-24m8yhz_/tree/unmarshal.go:154 +0xcc fp=0x402061bf20 sp=0x402061be90 pc=0x41f98c\n"}
+{"Time":"2026-07-21T05:36:42.995193769Z","Action":"output","Package":"github.com/gocolly/colly/v2","Test":"TestNestedUnmarshal","Output":"github.com/gocolly/colly/v2.unmarshalAttr(0x400c1a0840, {0x4ae3e0?, 0x400c18efd0?, 0x10?}, {{0x49ea4f, 0x6}, {0x0, 0x0}, {0x689fd0, 0x4ae3e0}, ...})\n"}
+{"Time":"2026-07-21T05:36:42.995199773Z","Action":"output","Package":"github.com/gocolly/colly/v2","Test":"TestNestedUnmarshal","Output":"\t/tmp/commit0-inplace-24m8yhz_/tree/unmarshal.go:121 +0x108 fp=0x402061bfc0 sp=0x402061bf20 pc=0x41f5c8\n"}
+{"Time":"2026-07-21T05:36:42.995207888Z","Action":"output","Package":"github.com/gocolly/colly/v2","Test":"TestNestedUnmarshal","Output":"github.com/gocolly/colly/v2.UnmarshalHTML({0x4ae3e0, 0x400c18efc0?}, 0x400c1a0840, 0x0)\n"}
+{"Time":"2026-07-21T05:36:42.995211903Z","Action":"output","Package":"github.com/gocolly/colly/v2","Test":"TestNestedUnmarshal","Output":"\t/tmp/commit0-inplace-24m8yhz_/tree/unmarshal.go:65 +0x460 fp=0x402061c1c0 sp=0x402061bfc0 pc=0x41f200\n"}
+{"Time":"2026-07-21T05:36:42.995224217Z","Action":"output","Package":"github.com/gocolly/colly/v2","Test":"TestNestedUnmarshal","Output":"github.com/gocolly/colly/v2.unmarshalPtr(0x49ea56?, {0x49ea60?, 0x5a8ba5?}, {0x4ae3e0?, 0x400c18efb8?, 0x49ea4f?})\n"}
+{"Time":"2026-07-21T05:36:42.995229061Z","Action":"output","Package":"github.com/gocolly/colly/v2","Test":"TestNestedUnmarshal","Output":"\t/tmp/commit0-inplace-24m8yhz_/tree/unmarshal.go:154 +0xcc fp=0x402061c250 sp=0x402061c1c0 pc=0x41f98c\n"}
+{"Time":"2026-07-21T05:36:42.995250791Z","Action":"output","Package":"github.com/gocolly/colly/v2","Test":"TestNestedUnmarshal","Output":"github.com/gocolly/colly/v2.unmarshalAttr(0x400c1a0750, {0x4ae3e0?, 0x400c18efb8?, 0x10?}, {{0x49ea4f, 0x6}, {0x0, 0x0}, {0x689fd0, 0x4ae3e0}, ...})\n"}
+{"Time":"2026-07-21T05:36:42.995256725Z","Action":"output","Package":"github.com/gocolly/colly/v2","Test":"TestNestedUnmarshal","Output":"\t/tmp/commit0-inplace-24m8yhz_/tree/unmarshal.go:121 +0x108 fp=0x402061c2f0 sp=0x402061c250 pc=0x41f5c8\n"}
+{"Time":"2026-07-21T05:36:42.995264479Z","Action":"output","Package":"github.com/gocolly/colly/v2","Test":"TestNestedUnmarshal","Output":"github.com/gocolly/colly/v2.UnmarshalHTML({0x4ae3e0, 0x400c18efa8?}, 0x400c1a0750, 0x0)\n"}
+{"Time":"2026-07-21T05:36:42.995269777Z","Action":"output","Package":"github.com/gocolly/colly/v2","Test":"TestNestedUnmarshal","Output":"\t/tmp/commit0-inplace-24m8yhz_/tree/unmarshal.go:65 +0x460 fp=0x402061c4f0 sp=0x402061c2f0 pc=0x41f200\n"}
+{"Time":"2026-07-21T05:36:42.99528311Z","Action":"output","Package":"github.com/gocolly/colly/v2","Test":"TestNestedUnmarshal","Output":"github.com/gocolly/colly/v2.unmarshalPtr(0x49ea56?, {0x49ea60?, 0x5a8ba5?}, {0x4ae3e0?, 0x400c18efa0?, 0x49ea4f?})\n"}
+{"Time":"2026-07-21T05:36:42.995288931Z","Action":"output","Package":"github.com/gocolly/colly/v2","Test":"TestNestedUnmarshal","Output":"\t/tmp/commit0-inplace-24m8yhz_/tree/unmarshal.go:154 +0xcc fp=0x402061c580 sp=0x402061c4f0 pc=0x41f98c\n"}
+{"Time":"2026-07-21T05:36:42.995310509Z","Action":"output","Package":"github.com/gocolly/colly/v2","Test":"TestNestedUnmarshal","Output":"github.com/gocolly/colly/v2.unmarshalAttr(0x400c1a0660, {0x4ae3e0?, 0x400c18efa0?, 0x10?}, {{0x49ea4f, 0x6}, {0x0, 0x0}, {0x689fd0, 0x4ae3e0}, ...})\n"}
+{"Time":"2026-07-21T05:36:42.995316427Z","Action":"output","Package":"github.com/gocolly/colly/v2","Test":"TestNestedUnmarshal","Output":"\t/tmp/commit0-inplace-24m8yhz_/tree/unmarshal.go:121 +0x108 fp=0x402061c620 sp=0x402061c580 pc=0x41f5c8\n"}
+{"Time":"2026-07-21T05:36:42.995322128Z","Action":"output","Package":"github.com/gocolly/colly/v2","Test":"TestNestedUnmarshal","Output":"github.com/gocolly/colly/v2.UnmarshalHTML({0x4ae3e0, 0x400c18ef90?}, 0x400c1a0660, 0x0)\n"}
+{"Time":"2026-07-21T05:36:42.995327005Z","Action":"output","Package":"github.com/gocolly/colly/v2","Test":"TestNestedUnmarshal","Output":"\t/tmp/commit0-inplace-24m8yhz_/tree/unmarshal.go:65 +0x460 fp=0x402061c820 sp=0x402061c620 pc=0x41f200\n"}
+{"Time":"2026-07-21T05:36:42.995340269Z","Action":"output","Package":"github.com/gocolly/colly/v2","Test":"TestNestedUnmarshal","Output":"github.com/gocolly/colly/v2.unmarshalPtr(0x49ea56?, {0x49ea60?, 0x5a8ba5?}, {0x4ae3e0?, 0x400c18ef88?, 0x49ea4f?})\n"}
+{"Time":"2026-07-21T05:36:42.995345687Z","Action":"output","Package":"github.com/gocolly/colly/v2","Test":"TestNestedUnmarshal","Output":"\t/tmp/commit0-inplace-24m8yhz_/tree/unmarshal.go:154 +0xcc fp=0x402061c8b0 sp=0x402061c820 pc=0x41f98c\n"}
+{"Time":"2026-07-21T05:36:42.995367332Z","Action":"output","Package":"github.com/gocolly/colly/v2","Test":"TestNestedUnmarshal","Output":"github.com/gocolly/colly/v2.unmarshalAttr(0x400c1a0570, {0x4ae3e0?, 0x400c18ef88?, 0x10?}, {{0x49ea4f, 0x6}, {0x0, 0x0}, {0x689fd0, 0x4ae3e0}, ...})\n"}
+{"Time":"2026-07-21T05:36:42.995375155Z","Action":"output","Package":"github.com/gocolly/colly/v2","Test":"TestNestedUnmarshal","Output":"\t/tmp/commit0-inplace-24m8yhz_/tree/unmarshal.go:121 +0x108 fp=0x402061c950 sp=0x402061c8b0 pc=0x41f5c8\n"}
+{"Time":"2026-07-21T05:36:42.995378155Z","Action":"output","Package":"github.com/gocolly/colly/v2","Test":"TestNestedUnmarshal","Output":"github.com/gocolly/colly/v2.UnmarshalHTML({0x4ae3e0, 0x400c18ef78?}, 0x400c1a0570, 0x0)\n"}
+{"Time":"2026-07-21T05:36:42.995381127Z","Action":"output","Package":"github.com/gocolly/colly/v2","Test":"TestNestedUnmarshal","Output":"\t/tmp/commit0-inplace-24m8yhz_/tree/unmarshal.go:65 +0x460 fp=0x402061cb50 sp=0x402061c950 pc=0x41f200\n"}
+{"Time":"2026-07-21T05:36:42.995390838Z","Action":"output","Package":"github.com/gocolly/colly/v2","Test":"TestNestedUnmarshal","Output":"github.com/gocolly/colly/v2.unmarshalPtr(0x49ea56?, {0x49ea60?, 0x5a8ba5?}, {0x4ae3e0?, 0x400c18ef70?, 0x49ea4f?})\n"}
+{"Time":"2026-07-21T05:36:42.995396346Z","Action":"output","Package":"github.com/gocolly/colly/v2","Test":"TestNestedUnmarshal","Output":"\t/tmp/commit0-inplace-24m8yhz_/tree/unmarshal.go:154 +0xcc fp=0x402061cbe0 sp=0x402061cb50 pc=0x41f98c\n"}
+{"Time":"2026-07-21T05:36:42.995417667Z","Action":"output","Package":"github.com/gocolly/colly/v2","Test":"TestNestedUnmarshal","Output":"github.com/gocolly/colly/v2.unmarshalAttr(0x400c1a0480, {0x4ae3e0?, 0x400c18ef70?, 0x10?}, {{0x49ea4f, 0x6}, {0x0, 0x0}, {0x689fd0, 0x4ae3e0}, ...})\n"}
+{"Time":"2026-07-21T05:36:42.995423051Z","Action":"output","Package":"github.com/gocolly/colly/v2","Test":"TestNestedUnmarshal","Output":"\t/tmp/commit0-inplace-24m8yhz_/tree/unmarshal.go:121 +0x108 fp=0x402061cc80 sp=0x402061cbe0 pc=0x41f5c8\n"}
+{"Time":"2026-07-21T05:36:42.995431057Z","Action":"output","Package":"github.com/gocolly/colly/v2","Test":"TestNestedUnmarshal","Output":"github.com/gocolly/colly/v2.UnmarshalHTML({0x4ae3e0, 0x400c18ef60?}, 0x400c1a0480, 0x0)\n"}
+{"Time":"2026-07-21T05:36:42.995436986Z","Action":"output","Package":"github.com/gocolly/colly/v2","Test":"TestNestedUnmarshal","Output":"\t/tmp/commit0-inplace-24m8yhz_/tree/unmarshal.go:65 +0x460 fp=0x402061ce80 sp=0x402061cc80 pc=0x41f200\n"}
+{"Time":"2026-07-21T05:36:42.995449568Z","Action":"output","Package":"github.com/gocolly/colly/v2","Test":"TestNestedUnmarshal","Output":"github.com/gocolly/colly/v2.unmarshalPtr(0x49ea56?, {0x49ea60?, 0x5a8ba5?}, {0x4ae3e0?, 0x400c18ef58?, 0x49ea4f?})\n"}
+{"Time":"2026-07-21T05:36:42.995455386Z","Action":"output","Package":"github.com/gocolly/colly/v2","Test":"TestNestedUnmarshal","Output":"\t/tmp/commit0-inplace-24m8yhz_/tree/unmarshal.go:154 +0xcc fp=0x402061cf10 sp=0x402061ce80 pc=0x41f98c\n"}
+{"Time":"2026-07-21T05:36:42.995476655Z","Action":"output","Package":"github.com/gocolly/colly/v2","Test":"TestNestedUnmarshal","Output":"github.com/gocolly/colly/v2.unmarshalAttr(0x400c1a0390, {0x4ae3e0?, 0x400c18ef58?, 0x10?}, {{0x49ea4f, 0x6}, {0x0, 0x0}, {0x689fd0, 0x4ae3e0}, ...})\n"}
+{"Time":"2026-07-21T05:36:42.995482003Z","Action":"output","Package":"github.com/gocolly/colly/v2","Test":"TestNestedUnmarshal","Output":"\t/tmp/commit0-inplace-24m8yhz_/tree/unmarshal.go:121 +0x108 fp=0x402061cfb0 sp=0x402061cf10 pc=0x41f5c8\n"}
+{"Time":"2026-07-21T05:36:42.995488863Z","Action":"output","Package":"github.com/gocolly/colly/v2","Test":"TestNestedUnmarshal","Output":"github.com/gocolly/colly/v2.UnmarshalHTML({0x4ae3e0, 0x400c18ef48?}, 0x400c1a0390, 0x0)\n"}
+{"Time":"2026-07-21T05:36:42.995494859Z","Action":"output","Package":"github.com/gocolly/colly/v2","Test":"TestNestedUnmarshal","Output":"\t/tmp/commit0-inplace-24m8yhz_/tree/unmarshal.go:65 +0x460 fp=0x402061d1b0 sp=0x402061cfb0 pc=0x41f200\n"}
+{"Time":"2026-07-21T05:36:43.058308806Z","Action":"output","Package":"github.com/gocolly/colly/v2","Test":"TestNestedUnmarshal","Output":"...1973697 frames elided...\n"}
+{"Time":"2026-07-21T05:36:43.121229544Z","Action":"output","Package":"github.com/gocolly/colly/v2","Test":"TestNestedUnmarshal","Output":"github.com/gocolly/colly/v2.unmarshalPtr(0x49ea56?, {0x49ea60?, 0x5a8ba5?}, {0x4ae3e0?, 0x400000f630?, 0x49ea4f?})\n"}
+{"Time":"2026-07-21T05:36:43.12124031Z","Action":"output","Package":"github.com/gocolly/colly/v2","Test":"TestNestedUnmarshal","Output":"\t/tmp/commit0-inplace-24m8yhz_/tree/unmarshal.go:154 +0xcc fp=0x4040616f50 sp=0x4040616ec0 pc=0x41f98c\n"}
+{"Time":"2026-07-21T05:36:43.121247092Z","Action":"output","Package":"github.com/gocolly/colly/v2","Test":"TestNestedUnmarshal","Output":"github.com/gocolly/colly/v2.unmarshalAttr(0x4000373e30, {0x4ae3e0?, 0x400000f630?, 0x10?}, {{0x49ea4f, 0x6}, {0x0, 0x0}, {0x689fd0, 0x4ae3e0}, ...})\n"}
+{"Time":"2026-07-21T05:36:43.121250715Z","Action":"output","Package":"github.com/gocolly/colly/v2","Test":"TestNestedUnmarshal","Output":"\t/tmp/commit0-inplace-24m8yhz_/tree/unmarshal.go:121 +0x108 fp=0x4040616ff0 sp=0x4040616f50 pc=0x41f5c8\n"}
+{"Time":"2026-07-21T05:36:43.121259687Z","Action":"output","Package":"github.com/gocolly/colly/v2","Test":"TestNestedUnmarshal","Output":"github.com/gocolly/colly/v2.UnmarshalHTML({0x4ae3e0, 0x400000f620?}, 0x4000373e30, 0x0)\n"}
+{"Time":"2026-07-21T05:36:43.121265473Z","Action":"output","Package":"github.com/gocolly/colly/v2","Test":"TestNestedUnmarshal","Output":"\t/tmp/commit0-inplace-24m8yhz_/tree/unmarshal.go:65 +0x460 fp=0x40406171f0 sp=0x4040616ff0 pc=0x41f200\n"}
+{"Time":"2026-07-21T05:36:43.121275386Z","Action":"output","Package":"github.com/gocolly/colly/v2","Test":"TestNestedUnmarshal","Output":"github.com/gocolly/colly/v2.unmarshalPtr(0x49ea56?, {0x49ea60?, 0x5a8ba5?}, {0x4ae3e0?, 0x400000f618?, 0x49ea4f?})\n"}
+{"Time":"2026-07-21T05:36:43.121280727Z","Action":"output","Package":"github.com/gocolly/colly/v2","Test":"TestNestedUnmarshal","Output":"\t/tmp/commit0-inplace-24m8yhz_/tree/unmarshal.go:154 +0xcc fp=0x4040617280 sp=0x40406171f0 pc=0x41f98c\n"}
+{"Time":"2026-07-21T05:36:43.121302326Z","Action":"output","Package":"github.com/gocolly/colly/v2","Test":"TestNestedUnmarshal","Output":"github.com/gocolly/colly/v2.unmarshalAttr(0x4000373d40, {0x4ae3e0?, 0x400000f618?, 0x10?}, {{0x49ea4f, 0x6}, {0x0, 0x0}, {0x689fd0, 0x4ae3e0}, ...})\n"}
+{"Time":"2026-07-21T05:36:43.121307746Z","Action":"output","Package":"github.com/gocolly/colly/v2","Test":"TestNestedUnmarshal","Output":"\t/tmp/commit0-inplace-24m8yhz_/tree/unmarshal.go:121 +0x108 fp=0x4040617320 sp=0x4040617280 pc=0x41f5c8\n"}
+{"Time":"2026-07-21T05:36:43.121314937Z","Action":"output","Package":"github.com/gocolly/colly/v2","Test":"TestNestedUnmarshal","Output":"github.com/gocolly/colly/v2.UnmarshalHTML({0x4ae3e0, 0x400000f608?}, 0x4000373d40, 0x0)\n"}
+{"Time":"2026-07-21T05:36:43.121320953Z","Action":"output","Package":"github.com/gocolly/colly/v2","Test":"TestNestedUnmarshal","Output":"\t/tmp/commit0-inplace-24m8yhz_/tree/unmarshal.go:65 +0x460 fp=0x4040617520 sp=0x4040617320 pc=0x41f200\n"}
+{"Time":"2026-07-21T05:36:43.121334569Z","Action":"output","Package":"github.com/gocolly/colly/v2","Test":"TestNestedUnmarshal","Output":"github.com/gocolly/colly/v2.unmarshalPtr(0x49ea56?, {0x49ea60?, 0x5a8ba5?}, {0x4ae3e0?, 0x400000f600?, 0x49ea4f?})\n"}
+{"Time":"2026-07-21T05:36:43.121340587Z","Action":"output","Package":"github.com/gocolly/colly/v2","Test":"TestNestedUnmarshal","Output":"\t/tmp/commit0-inplace-24m8yhz_/tree/unmarshal.go:154 +0xcc fp=0x40406175b0 sp=0x4040617520 pc=0x41f98c\n"}
+{"Time":"2026-07-21T05:36:43.121362676Z","Action":"output","Package":"github.com/gocolly/colly/v2","Test":"TestNestedUnmarshal","Output":"github.com/gocolly/colly/v2.unmarshalAttr(0x4000373c50, {0x4ae3e0?, 0x400000f600?, 0x10?}, {{0x49ea4f, 0x6}, {0x0, 0x0}, {0x689fd0, 0x4ae3e0}, ...})\n"}
+{"Time":"2026-07-21T05:36:43.121368788Z","Action":"output","Package":"github.com/gocolly/colly/v2","Test":"TestNestedUnmarshal","Output":"\t/tmp/commit0-inplace-24m8yhz_/tree/unmarshal.go:121 +0x108 fp=0x4040617650 sp=0x40406175b0 pc=0x41f5c8\n"}
+{"Time":"2026-07-21T05:36:43.121375288Z","Action":"output","Package":"github.com/gocolly/colly/v2","Test":"TestNestedUnmarshal","Output":"github.com/gocolly/colly/v2.UnmarshalHTML({0x4ae3e0, 0x400000f5f0?}, 0x4000373c50, 0x0)\n"}
+{"Time":"2026-07-21T05:36:43.121379947Z","Action":"output","Package":"github.com/gocolly/colly/v2","Test":"TestNestedUnmarshal","Output":"\t/tmp/commit0-inplace-24m8yhz_/tree/unmarshal.go:65 +0x460 fp=0x4040617850 sp=0x4040617650 pc=0x41f200\n"}
+{"Time":"2026-07-21T05:36:43.121392499Z","Action":"output","Package":"github.com/gocolly/colly/v2","Test":"TestNestedUnmarshal","Output":"github.com/gocolly/colly/v2.unmarshalPtr(0x49ea56?, {0x49ea60?, 0x5a8ba5?}, {0x4ae3e0?, 0x400000f5e8?, 0x49ea4f?})\n"}
+{"Time":"2026-07-21T05:36:43.121398409Z","Action":"output","Package":"github.com/gocolly/colly/v2","Test":"TestNestedUnmarshal","Output":"\t/tmp/commit0-inplace-24m8yhz_/tree/unmarshal.go:154 +0xcc fp=0x40406178e0 sp=0x4040617850 pc=0x41f98c\n"}
+{"Time":"2026-07-21T05:36:43.121419783Z","Action":"output","Package":"github.com/gocolly/colly/v2","Test":"TestNestedUnmarshal","Output":"github.com/gocolly/colly/v2.unmarshalAttr(0x4000373b60, {0x4ae3e0?, 0x400000f5e8?, 0x10?}, {{0x49ea4f, 0x6}, {0x0, 0x0}, {0x689fd0, 0x4ae3e0}, ...})\n"}
+{"Time":"2026-07-21T05:36:43.121425126Z","Action":"output","Package":"github.com/gocolly/colly/v2","Test":"TestNestedUnmarshal","Output":"\t/tmp/commit0-inplace-24m8yhz_/tree/unmarshal.go:121 +0x108 fp=0x4040617980 sp=0x40406178e0 pc=0x41f5c8\n"}
+{"Time":"2026-07-21T05:36:43.121433707Z","Action":"output","Package":"github.com/gocolly/colly/v2","Test":"TestNestedUnmarshal","Output":"github.com/gocolly/colly/v2.UnmarshalHTML({0x4ae3e0, 0x400000f5d8?}, 0x4000373b60, 0x0)\n"}
+{"Time":"2026-07-21T05:36:43.121437005Z","Action":"output","Package":"github.com/gocolly/colly/v2","Test":"TestNestedUnmarshal","Output":"\t/tmp/commit0-inplace-24m8yhz_/tree/unmarshal.go:65 +0x460 fp=0x4040617b80 sp=0x4040617980 pc=0x41f200\n"}
+{"Time":"2026-07-21T05:36:43.121449434Z","Action":"output","Package":"github.com/gocolly/colly/v2","Test":"TestNestedUnmarshal","Output":"github.com/gocolly/colly/v2.unmarshalPtr(0x49ea56?, {0x49ea60?, 0x5a8ba5?}, {0x4ae3e0?, 0x400000f5d0?, 0x49ea4f?})\n"}
+{"Time":"2026-07-21T05:36:43.121454902Z","Action":"output","Package":"github.com/gocolly/colly/v2","Test":"TestNestedUnmarshal","Output":"\t/tmp/commit0-inplace-24m8yhz_/tree/unmarshal.go:154 +0xcc fp=0x4040617c10 sp=0x4040617b80 pc=0x41f98c\n"}
+{"Time":"2026-07-21T05:36:43.121472346Z","Action":"output","Package":"github.com/gocolly/colly/v2","Test":"TestNestedUnmarshal","Output":"github.com/gocolly/colly/v2.unmarshalAttr(0x4000373a70, {0x4ae3e0?, 0x400000f5d0?, 0x10?}, {{0x49ea4f, 0x6}, {0x0, 0x0}, {0x689fd0, 0x4ae3e0}, ...})\n"}
+{"Time":"2026-07-21T05:36:43.121477565Z","Action":"output","Package":"github.com/gocolly/colly/v2","Test":"TestNestedUnmarshal","Output":"\t/tmp/commit0-inplace-24m8yhz_/tree/unmarshal.go:121 +0x108 fp=0x4040617cb0 sp=0x4040617c10 pc=0x41f5c8\n"}
+{"Time":"2026-07-21T05:36:43.121483819Z","Action":"output","Package":"github.com/gocolly/colly/v2","Test":"TestNestedUnmarshal","Output":"github.com/gocolly/colly/v2.UnmarshalHTML({0x4ae3e0, 0x400000f5c0?}, 0x4000373a70, 0x0)\n"}
+{"Time":"2026-07-21T05:36:43.121489738Z","Action":"output","Package":"github.com/gocolly/colly/v2","Test":"TestNestedUnmarshal","Output":"\t/tmp/commit0-inplace-24m8yhz_/tree/unmarshal.go:65 +0x460 fp=0x4040617eb0 sp=0x4040617cb0 pc=0x41f200\n"}
+{"Time":"2026-07-21T05:36:43.12150341Z","Action":"output","Package":"github.com/gocolly/colly/v2","Test":"TestNestedUnmarshal","Output":"github.com/gocolly/colly/v2.unmarshalPtr(0x49ea56?, {0x49ea60?, 0x5a8ba5?}, {0x4ae3e0?, 0x400000f5b8?, 0x49ea4f?})\n"}
+{"Time":"2026-07-21T05:36:43.121510567Z","Action":"output","Package":"github.com/gocolly/colly/v2","Test":"TestNestedUnmarshal","Output":"\t/tmp/commit0-inplace-24m8yhz_/tree/unmarshal.go:154 +0xcc fp=0x4040617f40 sp=0x4040617eb0 pc=0x41f98c\n"}
+{"Time":"2026-07-21T05:36:43.121526154Z","Action":"output","Package":"github.com/gocolly/colly/v2","Test":"TestNestedUnmarshal","Output":"github.com/gocolly/colly/v2.unmarshalAttr(0x4000373980, {0x4ae3e0?, 0x400000f5b8?, 0x10?}, {{0x49ea4f, 0x6}, {0x0, 0x0}, {0x689fd0, 0x4ae3e0}, ...})\n"}
+{"Time":"2026-07-21T05:36:43.121530233Z","Action":"output","Package":"github.com/gocolly/colly/v2","Test":"TestNestedUnmarshal","Output":"\t/tmp/commit0-inplace-24m8yhz_/tree/unmarshal.go:121 +0x108 fp=0x4040617fe0 sp=0x4040617f40 pc=0x41f5c8\n"}
+{"Time":"2026-07-21T05:36:43.121536848Z","Action":"output","Package":"github.com/gocolly/colly/v2","Test":"TestNestedUnmarshal","Output":"github.com/gocolly/colly/v2.UnmarshalHTML({0x4ae3e0, 0x400000f5a8?}, 0x4000373980, 0x0)\n"}
+{"Time":"2026-07-21T05:36:43.121541975Z","Action":"output","Package":"github.com/gocolly/colly/v2","Test":"TestNestedUnmarshal","Output":"\t/tmp/commit0-inplace-24m8yhz_/tree/unmarshal.go:65 +0x460 fp=0x40406181e0 sp=0x4040617fe0 pc=0x41f200\n"}
+{"Time":"2026-07-21T05:36:43.121554826Z","Action":"output","Package":"github.com/gocolly/colly/v2","Test":"TestNestedUnmarshal","Output":"github.com/gocolly/colly/v2.unmarshalPtr(0x49ea56?, {0x49ea60?, 0x5a8ba5?}, {0x4ae3e0?, 0x400000f5a0?, 0x49ea4f?})\n"}
+{"Time":"2026-07-21T05:36:43.121560212Z","Action":"output","Package":"github.com/gocolly/colly/v2","Test":"TestNestedUnmarshal","Output":"\t/tmp/commit0-inplace-24m8yhz_/tree/unmarshal.go:154 +0xcc fp=0x4040618270 sp=0x40406181e0 pc=0x41f98c\n"}
+{"Time":"2026-07-21T05:36:43.121582516Z","Action":"output","Package":"github.com/gocolly/colly/v2","Test":"TestNestedUnmarshal","Output":"github.com/gocolly/colly/v2.unmarshalAttr(0x4000373890, {0x4ae3e0?, 0x400000f5a0?, 0x10?}, {{0x49ea4f, 0x6}, {0x0, 0x0}, {0x689fd0, 0x4ae3e0}, ...})\n"}
+{"Time":"2026-07-21T05:36:43.1215884Z","Action":"output","Package":"github.com/gocolly/colly/v2","Test":"TestNestedUnmarshal","Output":"\t/tmp/commit0-inplace-24m8yhz_/tree/unmarshal.go:121 +0x108 fp=0x4040618310 sp=0x4040618270 pc=0x41f5c8\n"}
+{"Time":"2026-07-21T05:36:43.121594633Z","Action":"output","Package":"github.com/gocolly/colly/v2","Test":"TestNestedUnmarshal","Output":"github.com/gocolly/colly/v2.UnmarshalHTML({0x4ae3e0, 0x400000f590?}, 0x4000373890, 0x0)\n"}
+{"Time":"2026-07-21T05:36:43.12160047Z","Action":"output","Package":"github.com/gocolly/colly/v2","Test":"TestNestedUnmarshal","Output":"\t/tmp/commit0-inplace-24m8yhz_/tree/unmarshal.go:65 +0x460 fp=0x4040618510 sp=0x4040618310 pc=0x41f200\n"}
+{"Time":"2026-07-21T05:36:43.121613733Z","Action":"output","Package":"github.com/gocolly/colly/v2","Test":"TestNestedUnmarshal","Output":"github.com/gocolly/colly/v2.unmarshalPtr(0x49ea56?, {0x49ea60?, 0x5a8ba5?}, {0x4ae3e0?, 0x400000f588?, 0x49ea4f?})\n"}
+{"Time":"2026-07-21T05:36:43.121619796Z","Action":"output","Package":"github.com/gocolly/colly/v2","Test":"TestNestedUnmarshal","Output":"\t/tmp/commit0-inplace-24m8yhz_/tree/unmarshal.go:154 +0xcc fp=0x40406185a0 sp=0x4040618510 pc=0x41f98c\n"}
+{"Time":"2026-07-21T05:36:43.121642005Z","Action":"output","Package":"github.com/gocolly/colly/v2","Test":"TestNestedUnmarshal","Output":"github.com/gocolly/colly/v2.unmarshalAttr(0x40003737a0, {0x4ae3e0?, 0x400000f588?, 0x10?}, {{0x49ea4f, 0x6}, {0x0, 0x0}, {0x689fd0, 0x4ae3e0}, ...})\n"}
+{"Time":"2026-07-21T05:36:43.121647502Z","Action":"output","Package":"github.com/gocolly/colly/v2","Test":"TestNestedUnmarshal","Output":"\t/tmp/commit0-inplace-24m8yhz_/tree/unmarshal.go:121 +0x108 fp=0x4040618640 sp=0x40406185a0 pc=0x41f5c8\n"}
+{"Time":"2026-07-21T05:36:43.121655121Z","Action":"output","Package":"github.com/gocolly/colly/v2","Test":"TestNestedUnmarshal","Output":"github.com/gocolly/colly/v2.UnmarshalHTML({0x4ae3e0, 0x400000f578?}, 0x40003737a0, 0x0)\n"}
+{"Time":"2026-07-21T05:36:43.121660934Z","Action":"output","Package":"github.com/gocolly/colly/v2","Test":"TestNestedUnmarshal","Output":"\t/tmp/commit0-inplace-24m8yhz_/tree/unmarshal.go:65 +0x460 fp=0x4040618840 sp=0x4040618640 pc=0x41f200\n"}
+{"Time":"2026-07-21T05:36:43.121674193Z","Action":"output","Package":"github.com/gocolly/colly/v2","Test":"TestNestedUnmarshal","Output":"github.com/gocolly/colly/v2.unmarshalPtr(0x49ea56?, {0x49ea60?, 0x5a8ba5?}, {0x4ae3e0?, 0x400000f570?, 0x49ea4f?})\n"}
+{"Time":"2026-07-21T05:36:43.121678341Z","Action":"output","Package":"github.com/gocolly/colly/v2","Test":"TestNestedUnmarshal","Output":"\t/tmp/commit0-inplace-24m8yhz_/tree/unmarshal.go:154 +0xcc fp=0x40406188d0 sp=0x4040618840 pc=0x41f98c\n"}
+{"Time":"2026-07-21T05:36:43.121699796Z","Action":"output","Package":"github.com/gocolly/colly/v2","Test":"TestNestedUnmarshal","Output":"github.com/gocolly/colly/v2.unmarshalAttr(0x40003736b0, {0x4ae3e0?, 0x400000f570?, 0x10?}, {{0x49ea4f, 0x6}, {0x0, 0x0}, {0x689fd0, 0x4ae3e0}, ...})\n"}
+{"Time":"2026-07-21T05:36:43.121705582Z","Action":"output","Package":"github.com/gocolly/colly/v2","Test":"TestNestedUnmarshal","Output":"\t/tmp/commit0-inplace-24m8yhz_/tree/unmarshal.go:121 +0x108 fp=0x4040618970 sp=0x40406188d0 pc=0x41f5c8\n"}
+{"Time":"2026-07-21T05:36:43.121712712Z","Action":"output","Package":"github.com/gocolly/colly/v2","Test":"TestNestedUnmarshal","Output":"github.com/gocolly/colly/v2.UnmarshalHTML({0x4ae3e0, 0x400000f560?}, 0x40003736b0, 0x0)\n"}
+{"Time":"2026-07-21T05:36:43.121718652Z","Action":"output","Package":"github.com/gocolly/colly/v2","Test":"TestNestedUnmarshal","Output":"\t/tmp/commit0-inplace-24m8yhz_/tree/unmarshal.go:65 +0x460 fp=0x4040618b70 sp=0x4040618970 pc=0x41f200\n"}
+{"Time":"2026-07-21T05:36:43.121732034Z","Action":"output","Package":"github.com/gocolly/colly/v2","Test":"TestNestedUnmarshal","Output":"github.com/gocolly/colly/v2.unmarshalPtr(0x49ea56?, {0x49ea60?, 0x5a8ba5?}, {0x4ae3e0?, 0x400000f558?, 0x49ea4f?})\n"}
+{"Time":"2026-07-21T05:36:43.121737315Z","Action":"output","Package":"github.com/gocolly/colly/v2","Test":"TestNestedUnmarshal","Output":"\t/tmp/commit0-inplace-24m8yhz_/tree/unmarshal.go:154 +0xcc fp=0x4040618c00 sp=0x4040618b70 pc=0x41f98c\n"}
+{"Time":"2026-07-21T05:36:43.121758193Z","Action":"output","Package":"github.com/gocolly/colly/v2","Test":"TestNestedUnmarshal","Output":"github.com/gocolly/colly/v2.unmarshalAttr(0x40003735c0, {0x4ae3e0?, 0x400000f558?, 0x10?}, {{0x49ea4f, 0x6}, {0x0, 0x0}, {0x689fd0, 0x4ae3e0}, ...})\n"}
+{"Time":"2026-07-21T05:36:43.121763978Z","Action":"output","Package":"github.com/gocolly/colly/v2","Test":"TestNestedUnmarshal","Output":"\t/tmp/commit0-inplace-24m8yhz_/tree/unmarshal.go:121 +0x108 fp=0x4040618ca0 sp=0x4040618c00 pc=0x41f5c8\n"}
+{"Time":"2026-07-21T05:36:43.121771382Z","Action":"output","Package":"github.com/gocolly/colly/v2","Test":"TestNestedUnmarshal","Output":"github.com/gocolly/colly/v2.UnmarshalHTML({0x4ae3e0, 0x400000f548?}, 0x40003735c0, 0x0)\n"}
+{"Time":"2026-07-21T05:36:43.121777179Z","Action":"output","Package":"github.com/gocolly/colly/v2","Test":"TestNestedUnmarshal","Output":"\t/tmp/commit0-inplace-24m8yhz_/tree/unmarshal.go:65 +0x460 fp=0x4040618ea0 sp=0x4040618ca0 pc=0x41f200\n"}
+{"Time":"2026-07-21T05:36:43.121790851Z","Action":"output","Package":"github.com/gocolly/colly/v2","Test":"TestNestedUnmarshal","Output":"github.com/gocolly/colly/v2.unmarshalPtr(0x49ea56?, {0x49ea60?, 0x5a8ba5?}, {0x4ae3e0?, 0x400000f540?, 0x49ea4f?})\n"}
+{"Time":"2026-07-21T05:36:43.121796954Z","Action":"output","Package":"github.com/gocolly/colly/v2","Test":"TestNestedUnmarshal","Output":"\t/tmp/commit0-inplace-24m8yhz_/tree/unmarshal.go:154 +0xcc fp=0x4040618f30 sp=0x4040618ea0 pc=0x41f98c\n"}
+{"Time":"2026-07-21T05:36:43.121818147Z","Action":"output","Package":"github.com/gocolly/colly/v2","Test":"TestNestedUnmarshal","Output":"github.com/gocolly/colly/v2.unmarshalAttr(0x40003734d0, {0x4ae3e0?, 0x400000f540?, 0x10?}, {{0x49ea4f, 0x6}, {0x0, 0x0}, {0x689fd0, 0x4ae3e0}, ...})\n"}
+{"Time":"2026-07-21T05:36:43.121824325Z","Action":"output","Package":"github.com/gocolly/colly/v2","Test":"TestNestedUnmarshal","Output":"\t/tmp/commit0-inplace-24m8yhz_/tree/unmarshal.go:121 +0x108 fp=0x4040618fd0 sp=0x4040618f30 pc=0x41f5c8\n"}
+{"Time":"2026-07-21T05:36:43.121832057Z","Action":"output","Package":"github.com/gocolly/colly/v2","Test":"TestNestedUnmarshal","Output":"github.com/gocolly/colly/v2.UnmarshalHTML({0x4ae3e0, 0x400000f530?}, 0x40003734d0, 0x0)\n"}
+{"Time":"2026-07-21T05:36:43.121837987Z","Action":"output","Package":"github.com/gocolly/colly/v2","Test":"TestNestedUnmarshal","Output":"\t/tmp/commit0-inplace-24m8yhz_/tree/unmarshal.go:65 +0x460 fp=0x40406191d0 sp=0x4040618fd0 pc=0x41f200\n"}
+{"Time":"2026-07-21T05:36:43.121850382Z","Action":"output","Package":"github.com/gocolly/colly/v2","Test":"TestNestedUnmarshal","Output":"github.com/gocolly/colly/v2.unmarshalPtr(0x49ea56?, {0x49ea60?, 0x5a8ba5?}, {0x4ae3e0?, 0x400000f528?, 0x49ea4f?})\n"}
+{"Time":"2026-07-21T05:36:43.121856263Z","Action":"output","Package":"github.com/gocolly/colly/v2","Test":"TestNestedUnmarshal","Output":"\t/tmp/commit0-inplace-24m8yhz_/tree/unmarshal.go:154 +0xcc fp=0x4040619260 sp=0x40406191d0 pc=0x41f98c\n"}
+{"Time":"2026-07-21T05:36:43.121878615Z","Action":"output","Package":"github.com/gocolly/colly/v2","Test":"TestNestedUnmarshal","Output":"github.com/gocolly/colly/v2.unmarshalAttr(0x40003733e0, {0x4ae3e0?, 0x400000f528?, 0x1?}, {{0x49ea4f, 0x6}, {0x0, 0x0}, {0x689fd0, 0x4ae3e0}, ...})\n"}
+{"Time":"2026-07-21T05:36:43.121885372Z","Action":"output","Package":"github.com/gocolly/colly/v2","Test":"TestNestedUnmarshal","Output":"\t/tmp/commit0-inplace-24m8yhz_/tree/unmarshal.go:121 +0x108 fp=0x4040619300 sp=0x4040619260 pc=0x41f5c8\n"}
+{"Time":"2026-07-21T05:36:43.121889278Z","Action":"output","Package":"github.com/gocolly/colly/v2","Test":"TestNestedUnmarshal","Output":"github.com/gocolly/colly/v2.UnmarshalHTML({0x4ae3e0, 0x400000f518?}, 0x40003733e0, 0x0)\n"}
+{"Time":"2026-07-21T05:36:43.121892253Z","Action":"output","Package":"github.com/gocolly/colly/v2","Test":"TestNestedUnmarshal","Output":"\t/tmp/commit0-inplace-24m8yhz_/tree/unmarshal.go:65 +0x460 fp=0x4040619500 sp=0x4040619300 pc=0x41f200\n"}
+{"Time":"2026-07-21T05:36:43.121904368Z","Action":"output","Package":"github.com/gocolly/colly/v2","Test":"TestNestedUnmarshal","Output":"github.com/gocolly/colly/v2.unmarshalPtr(0x49ea56?, {0x49ea60?, 0x5a8ba5?}, {0x4ae3e0?, 0x400000f510?, 0x49ea4f?})\n"}
+{"Time":"2026-07-21T05:36:43.121909657Z","Action":"output","Package":"github.com/gocolly/colly/v2","Test":"TestNestedUnmarshal","Output":"\t/tmp/commit0-inplace-24m8yhz_/tree/unmarshal.go:154 +0xcc fp=0x4040619590 sp=0x4040619500 pc=0x41f98c\n"}
+{"Time":"2026-07-21T05:36:43.121931136Z","Action":"output","Package":"github.com/gocolly/colly/v2","Test":"TestNestedUnmarshal","Output":"github.com/gocolly/colly/v2.unmarshalAttr(0x40003732f0, {0x4ae3e0?, 0x400000f510?, 0x0?}, {{0x49ea4f, 0x6}, {0x0, 0x0}, {0x689fd0, 0x4ae3e0}, ...})\n"}
+{"Time":"2026-07-21T05:36:43.121936754Z","Action":"output","Package":"github.com/gocolly/colly/v2","Test":"TestNestedUnmarshal","Output":"\t/tmp/commit0-inplace-24m8yhz_/tree/unmarshal.go:121 +0x108 fp=0x4040619630 sp=0x4040619590 pc=0x41f5c8\n"}
+{"Time":"2026-07-21T05:36:43.121943154Z","Action":"output","Package":"github.com/gocolly/colly/v2","Test":"TestNestedUnmarshal","Output":"github.com/gocolly/colly/v2.UnmarshalHTML({0x4ae3e0, 0x400000f500?}, 0x40003732f0, 0x0)\n"}
+{"Time":"2026-07-21T05:36:43.121948982Z","Action":"output","Package":"github.com/gocolly/colly/v2","Test":"TestNestedUnmarshal","Output":"\t/tmp/commit0-inplace-24m8yhz_/tree/unmarshal.go:65 +0x460 fp=0x4040619830 sp=0x4040619630 pc=0x41f200\n"}
+{"Time":"2026-07-21T05:36:43.121961793Z","Action":"output","Package":"github.com/gocolly/colly/v2","Test":"TestNestedUnmarshal","Output":"github.com/gocolly/colly/v2.unmarshalPtr(0x49ea56?, {0x49ea60?, 0x5a8ba5?}, {0x4ae3e0?, 0x400000f4f8?, 0x49ea4f?})\n"}
+{"Time":"2026-07-21T05:36:43.121966872Z","Action":"output","Package":"github.com/gocolly/colly/v2","Test":"TestNestedUnmarshal","Output":"\t/tmp/commit0-inplace-24m8yhz_/tree/unmarshal.go:154 +0xcc fp=0x40406198c0 sp=0x4040619830 pc=0x41f98c\n"}
+{"Time":"2026-07-21T05:36:43.121988508Z","Action":"output","Package":"github.com/gocolly/colly/v2","Test":"TestNestedUnmarshal","Output":"github.com/gocolly/colly/v2.unmarshalAttr(0x4000373200, {0x4ae3e0?, 0x400000f4f8?, 0x0?}, {{0x49ea4f, 0x6}, {0x0, 0x0}, {0x689fd0, 0x4ae3e0}, ...})\n"}
+{"Time":"2026-07-21T05:36:43.121993771Z","Action":"output","Package":"github.com/gocolly/colly/v2","Test":"TestNestedUnmarshal","Output":"\t/tmp/commit0-inplace-24m8yhz_/tree/unmarshal.go:121 +0x108 fp=0x4040619960 sp=0x40406198c0 pc=0x41f5c8\n"}
+{"Time":"2026-07-21T05:36:43.121998863Z","Action":"output","Package":"github.com/gocolly/colly/v2","Test":"TestNestedUnmarshal","Output":"github.com/gocolly/colly/v2.UnmarshalHTML({0x4ae3e0, 0x400000f4e8?}, 0x4000373200, 0x0)\n"}
+{"Time":"2026-07-21T05:36:43.122004496Z","Action":"output","Package":"github.com/gocolly/colly/v2","Test":"TestNestedUnmarshal","Output":"\t/tmp/commit0-inplace-24m8yhz_/tree/unmarshal.go:65 +0x460 fp=0x4040619b60 sp=0x4040619960 pc=0x41f200\n"}
+{"Time":"2026-07-21T05:36:43.12201373Z","Action":"output","Package":"github.com/gocolly/colly/v2","Test":"TestNestedUnmarshal","Output":"github.com/gocolly/colly/v2.unmarshalPtr(0x49ea56?, {0x49ea60?, 0x5a8ba5?}, {0x4ae3e0?, 0x400000f4c8?, 0x49ea4f?})\n"}
+{"Time":"2026-07-21T05:36:43.1220196Z","Action":"output","Package":"github.com/gocolly/colly/v2","Test":"TestNestedUnmarshal","Output":"\t/tmp/commit0-inplace-24m8yhz_/tree/unmarshal.go:154 +0xcc fp=0x4040619bf0 sp=0x4040619b60 pc=0x41f98c\n"}
+{"Time":"2026-07-21T05:36:43.122039024Z","Action":"output","Package":"github.com/gocolly/colly/v2","Test":"TestNestedUnmarshal","Output":"github.com/gocolly/colly/v2.unmarshalAttr(0x4000373110, {0x4ae3e0?, 0x400000f4c8?, 0x400051dd58?}, {{0x49ea4f, 0x6}, {0x0, 0x0}, {0x689fd0, 0x4ae3e0}, ...})\n"}
+{"Time":"2026-07-21T05:36:43.122044499Z","Action":"output","Package":"github.com/gocolly/colly/v2","Test":"TestNestedUnmarshal","Output":"\t/tmp/commit0-inplace-24m8yhz_/tree/unmarshal.go:121 +0x108 fp=0x4040619c90 sp=0x4040619bf0 pc=0x41f5c8\n"}
+{"Time":"2026-07-21T05:36:43.122051023Z","Action":"output","Package":"github.com/gocolly/colly/v2","Test":"TestNestedUnmarshal","Output":"github.com/gocolly/colly/v2.UnmarshalHTML({0x4ae3e0, 0x400000f4b8?}, 0x4000373110, 0x0)\n"}
+{"Time":"2026-07-21T05:36:43.122056341Z","Action":"output","Package":"github.com/gocolly/colly/v2","Test":"TestNestedUnmarshal","Output":"\t/tmp/commit0-inplace-24m8yhz_/tree/unmarshal.go:65 +0x460 fp=0x4040619e90 sp=0x4040619c90 pc=0x41f200\n"}
+{"Time":"2026-07-21T05:36:43.122059485Z","Action":"output","Package":"github.com/gocolly/colly/v2","Test":"TestNestedUnmarshal","Output":"github.com/gocolly/colly/v2.(*HTMLElement).Unmarshal(...)\n"}
+{"Time":"2026-07-21T05:36:43.122062151Z","Action":"output","Package":"github.com/gocolly/colly/v2","Test":"TestNestedUnmarshal","Output":"\t/tmp/commit0-inplace-24m8yhz_/tree/unmarshal.go:13\n"}
+{"Time":"2026-07-21T05:36:43.122064888Z","Action":"output","Package":"github.com/gocolly/colly/v2","Test":"TestNestedUnmarshal","Output":"github.com/gocolly/colly/v2.TestNestedUnmarshal(0x4000399180)\n"}
+{"Time":"2026-07-21T05:36:43.122067704Z","Action":"output","Package":"github.com/gocolly/colly/v2","Test":"TestNestedUnmarshal","Output":"\t/tmp/commit0-inplace-24m8yhz_/tree/unmarshal_test.go:95 +0xdc fp=0x4040619f60 sp=0x4040619e90 pc=0x43082c\n"}
+{"Time":"2026-07-21T05:36:43.122072105Z","Action":"output","Package":"github.com/gocolly/colly/v2","Test":"TestNestedUnmarshal","Output":"testing.tRunner(0x4000399180, 0x5e0f30)\n"}
+{"Time":"2026-07-21T05:36:43.122077977Z","Action":"output","Package":"github.com/gocolly/colly/v2","Test":"TestNestedUnmarshal","Output":"\t/usr/local/go/src/testing/testing.go:1934 +0xc8 fp=0x4040619fb0 sp=0x4040619f60 pc=0x1260a8\n"}
+{"Time":"2026-07-21T05:36:43.122080582Z","Action":"output","Package":"github.com/gocolly/colly/v2","Test":"TestNestedUnmarshal","Output":"testing.(*T).Run.gowrap1()\n"}
+{"Time":"2026-07-21T05:36:43.122084Z","Action":"output","Package":"github.com/gocolly/colly/v2","Test":"TestNestedUnmarshal","Output":"\t/usr/local/go/src/testing/testing.go:1997 +0x28 fp=0x4040619fd0 sp=0x4040619fb0 pc=0x126f28\n"}
+{"Time":"2026-07-21T05:36:43.122087685Z","Action":"output","Package":"github.com/gocolly/colly/v2","Test":"TestNestedUnmarshal","Output":"runtime.goexit({})\n"}
+{"Time":"2026-07-21T05:36:43.122093665Z","Action":"output","Package":"github.com/gocolly/colly/v2","Test":"TestNestedUnmarshal","Output":"\t/usr/local/go/src/runtime/asm_arm64.s:1268 +0x4 fp=0x4040619fd0 sp=0x4040619fd0 pc=0x92234\n"}
+{"Time":"2026-07-21T05:36:43.122097606Z","Action":"output","Package":"github.com/gocolly/colly/v2","Test":"TestNestedUnmarshal","Output":"created by testing.(*T).Run in goroutine 1\n"}
+{"Time":"2026-07-21T05:36:43.12210025Z","Action":"output","Package":"github.com/gocolly/colly/v2","Test":"TestNestedUnmarshal","Output":"\t/usr/local/go/src/testing/testing.go:1997 +0x364\n"}
+{"Time":"2026-07-21T05:36:43.122102898Z","Action":"output","Package":"github.com/gocolly/colly/v2","Test":"TestNestedUnmarshal","Output":"\n"}
+{"Time":"2026-07-21T05:36:43.122105613Z","Action":"output","Package":"github.com/gocolly/colly/v2","Test":"TestNestedUnmarshal","Output":"goroutine 1 gp=0x40000021c0 m=nil [chan receive]:\n"}
+{"Time":"2026-07-21T05:36:43.122117682Z","Action":"output","Package":"github.com/gocolly/colly/v2","Test":"TestNestedUnmarshal","Output":"runtime.gopark(0x40000efa18?, 0x126d4c?, 0xe8?, 0xb4?, 0xffff7ffe90d0?)\n"}
+{"Time":"2026-07-21T05:36:43.122122386Z","Action":"output","Package":"github.com/gocolly/colly/v2","Test":"TestNestedUnmarshal","Output":"\t/usr/local/go/src/runtime/proc.go:460 +0xc0 fp=0x40000ef970 sp=0x40000ef950 pc=0x8a390\n"}
+{"Time":"2026-07-21T05:36:43.122128922Z","Action":"output","Package":"github.com/gocolly/colly/v2","Test":"TestNestedUnmarshal","Output":"runtime.chanrecv(0x400034e500, 0x40000efa77, 0x1)\n"}
+{"Time":"2026-07-21T05:36:43.122134519Z","Action":"output","Package":"github.com/gocolly/colly/v2","Test":"TestNestedUnmarshal","Output":"\t/usr/local/go/src/runtime/chan.go:667 +0x40c fp=0x40000ef9f0 sp=0x40000ef970 pc=0x2099c\n"}
+{"Time":"2026-07-21T05:36:43.122137082Z","Action":"output","Package":"github.com/gocolly/colly/v2","Test":"TestNestedUnmarshal","Output":"runtime.chanrecv1(0xaf5fe0?, 0x68e6e0?)\n"}
+{"Time":"2026-07-21T05:36:43.122142289Z","Action":"output","Package":"github.com/gocolly/colly/v2","Test":"TestNestedUnmarshal","Output":"\t/usr/local/go/src/runtime/chan.go:509 +0x14 fp=0x40000efa20 sp=0x40000ef9f0 pc=0x20554\n"}
+{"Time":"2026-07-21T05:36:43.122150312Z","Action":"output","Package":"github.com/gocolly/colly/v2","Test":"TestNestedUnmarshal","Output":"testing.(*T).Run(0x40002f0000, {0x5b5600?, 0x40000efb38?}, 0x5e0f30)\n"}
+{"Time":"2026-07-21T05:36:43.122156238Z","Action":"output","Package":"github.com/gocolly/colly/v2","Test":"TestNestedUnmarshal","Output":"\t/usr/local/go/src/testing/testing.go:2005 +0x378 fp=0x40000efb00 sp=0x40000efa20 pc=0x126e08\n"}
+{"Time":"2026-07-21T05:36:43.122158888Z","Action":"output","Package":"github.com/gocolly/colly/v2","Test":"TestNestedUnmarshal","Output":"testing.runTests.func1(0x40002f0000)\n"}
+{"Time":"2026-07-21T05:36:43.122164288Z","Action":"output","Package":"github.com/gocolly/colly/v2","Test":"TestNestedUnmarshal","Output":"\t/usr/local/go/src/testing/testing.go:2477 +0x38 fp=0x40000efb40 sp=0x40000efb00 pc=0x128c08\n"}
+{"Time":"2026-07-21T05:36:43.122166831Z","Action":"output","Package":"github.com/gocolly/colly/v2","Test":"TestNestedUnmarshal","Output":"testing.tRunner(0x40002f0000, 0x40000efc68)\n"}
+{"Time":"2026-07-21T05:36:43.12217457Z","Action":"output","Package":"github.com/gocolly/colly/v2","Test":"TestNestedUnmarshal","Output":"\t/usr/local/go/src/testing/testing.go:1934 +0xc8 fp=0x40000efb90 sp=0x40000efb40 pc=0x1260a8\n"}
+{"Time":"2026-07-21T05:36:43.12218113Z","Action":"output","Package":"github.com/gocolly/colly/v2","Test":"TestNestedUnmarshal","Output":"testing.runTests(0x400000e7b0, {0xada020, 0x48, 0x48}, {0x400007afe0?, 0x7?, 0xaf6d00?})\n"}
+{"Time":"2026-07-21T05:36:43.122195738Z","Action":"output","Package":"github.com/gocolly/colly/v2","Test":"TestNestedUnmarshal","Output":"\t/usr/local/go/src/testing/testing.go:2475 +0x3b8 fp=0x40000efc90 sp=0x40000efb90 pc=0x128b28\n"}
+{"Time":"2026-07-21T05:36:43.122198375Z","Action":"output","Package":"github.com/gocolly/colly/v2","Test":"TestNestedUnmarshal","Output":"testing.(*M).Run(0x40002e2960)\n"}
+{"Time":"2026-07-21T05:36:43.122201106Z","Action":"output","Package":"github.com/gocolly/colly/v2","Test":"TestNestedUnmarshal","Output":"\t/usr/local/go/src/testing/testing.go:2337 +0x530 fp=0x40000efec0 sp=0x40000efc90 pc=0x1279d0\n"}
+{"Time":"2026-07-21T05:36:43.122204909Z","Action":"output","Package":"github.com/gocolly/colly/v2","Test":"TestNestedUnmarshal","Output":"main.main()\n"}
+{"Time":"2026-07-21T05:36:43.122207595Z","Action":"output","Package":"github.com/gocolly/colly/v2","Test":"TestNestedUnmarshal","Output":"\t_testmain.go:195 +0x80 fp=0x40000eff40 sp=0x40000efec0 pc=0x4348a0\n"}
+{"Time":"2026-07-21T05:36:43.12221029Z","Action":"output","Package":"github.com/gocolly/colly/v2","Test":"TestNestedUnmarshal","Output":"runtime.main()\n"}
+{"Time":"2026-07-21T05:36:43.122212997Z","Action":"output","Package":"github.com/gocolly/colly/v2","Test":"TestNestedUnmarshal","Output":"\t/usr/local/go/src/runtime/proc.go:285 +0x278 fp=0x40000effd0 sp=0x40000eff40 pc=0x55098\n"}
+{"Time":"2026-07-21T05:36:43.122215632Z","Action":"output","Package":"github.com/gocolly/colly/v2","Test":"TestNestedUnmarshal","Output":"runtime.goexit({})\n"}
+{"Time":"2026-07-21T05:36:43.122219157Z","Action":"output","Package":"github.com/gocolly/colly/v2","Test":"TestNestedUnmarshal","Output":"\t/usr/local/go/src/runtime/asm_arm64.s:1268 +0x4 fp=0x40000effd0 sp=0x40000effd0 pc=0x92234\n"}
+{"Time":"2026-07-21T05:36:43.122221713Z","Action":"output","Package":"github.com/gocolly/colly/v2","Test":"TestNestedUnmarshal","Output":"\n"}
+{"Time":"2026-07-21T05:36:43.122224373Z","Action":"output","Package":"github.com/gocolly/colly/v2","Test":"TestNestedUnmarshal","Output":"goroutine 2 gp=0x4000002c40 m=nil [force gc (idle)]:\n"}
+{"Time":"2026-07-21T05:36:43.122230672Z","Action":"output","Package":"github.com/gocolly/colly/v2","Test":"TestNestedUnmarshal","Output":"runtime.gopark(0x0?, 0x0?, 0x0?, 0x0?, 0x0?)\n"}
+{"Time":"2026-07-21T05:36:43.122236761Z","Action":"output","Package":"github.com/gocolly/colly/v2","Test":"TestNestedUnmarshal","Output":"\t/usr/local/go/src/runtime/proc.go:460 +0xc0 fp=0x4000072f90 sp=0x4000072f70 pc=0x8a390\n"}
+{"Time":"2026-07-21T05:36:43.122239304Z","Action":"output","Package":"github.com/gocolly/colly/v2","Test":"TestNestedUnmarshal","Output":"runtime.goparkunlock(...)\n"}
+{"Time":"2026-07-21T05:36:43.122242018Z","Action":"output","Package":"github.com/gocolly/colly/v2","Test":"TestNestedUnmarshal","Output":"\t/usr/local/go/src/runtime/proc.go:466\n"}
+{"Time":"2026-07-21T05:36:43.122244Z","Action":"output","Package":"github.com/gocolly/colly/v2","Test":"TestNestedUnmarshal","Output":"runtime.forcegchelper()\n"}
+{"Time":"2026-07-21T05:36:43.122246615Z","Action":"output","Package":"github.com/gocolly/colly/v2","Test":"TestNestedUnmarshal","Output":"\t/usr/local/go/src/runtime/proc.go:373 +0xb4 fp=0x4000072fd0 sp=0x4000072f90 pc=0x553e4\n"}
+{"Time":"2026-07-21T05:36:43.12224934Z","Action":"output","Package":"github.com/gocolly/colly/v2","Test":"TestNestedUnmarshal","Output":"runtime.goexit({})\n"}
+{"Time":"2026-07-21T05:36:43.122251976Z","Action":"output","Package":"github.com/gocolly/colly/v2","Test":"TestNestedUnmarshal","Output":"\t/usr/local/go/src/runtime/asm_arm64.s:1268 +0x4 fp=0x4000072fd0 sp=0x4000072fd0 pc=0x92234\n"}
+{"Time":"2026-07-21T05:36:43.122254695Z","Action":"output","Package":"github.com/gocolly/colly/v2","Test":"TestNestedUnmarshal","Output":"created by runtime.init.7 in goroutine 1\n"}
+{"Time":"2026-07-21T05:36:43.12225752Z","Action":"output","Package":"github.com/gocolly/colly/v2","Test":"TestNestedUnmarshal","Output":"\t/usr/local/go/src/runtime/proc.go:361 +0x24\n"}
+{"Time":"2026-07-21T05:36:43.122259479Z","Action":"output","Package":"github.com/gocolly/colly/v2","Test":"TestNestedUnmarshal","Output":"\n"}
+{"Time":"2026-07-21T05:36:43.122262262Z","Action":"output","Package":"github.com/gocolly/colly/v2","Test":"TestNestedUnmarshal","Output":"goroutine 3 gp=0x4000003180 m=nil [GC sweep wait]:\n"}
+{"Time":"2026-07-21T05:36:43.122266631Z","Action":"output","Package":"github.com/gocolly/colly/v2","Test":"TestNestedUnmarshal","Output":"runtime.gopark(0x1?, 0x0?, 0x0?, 0x0?, 0x0?)\n"}
+{"Time":"2026-07-21T05:36:43.122273958Z","Action":"output","Package":"github.com/gocolly/colly/v2","Test":"TestNestedUnmarshal","Output":"\t/usr/local/go/src/runtime/proc.go:460 +0xc0 fp=0x4000073760 sp=0x4000073740 pc=0x8a390\n"}
+{"Time":"2026-07-21T05:36:43.122275876Z","Action":"output","Package":"github.com/gocolly/colly/v2","Test":"TestNestedUnmarshal","Output":"runtime.goparkunlock(...)\n"}
+{"Time":"2026-07-21T05:36:43.122278622Z","Action":"output","Package":"github.com/gocolly/colly/v2","Test":"TestNestedUnmarshal","Output":"\t/usr/local/go/src/runtime/proc.go:466\n"}
+{"Time":"2026-07-21T05:36:43.122280476Z","Action":"output","Package":"github.com/gocolly/colly/v2","Test":"TestNestedUnmarshal","Output":"runtime.bgsweep(0x400007e000)\n"}
+{"Time":"2026-07-21T05:36:43.122283234Z","Action":"output","Package":"github.com/gocolly/colly/v2","Test":"TestNestedUnmarshal","Output":"\t/usr/local/go/src/runtime/mgcsweep.go:323 +0x104 fp=0x40000737b0 sp=0x4000073760 pc=0x3d3a4\n"}
+{"Time":"2026-07-21T05:36:43.122285168Z","Action":"output","Package":"github.com/gocolly/colly/v2","Test":"TestNestedUnmarshal","Output":"runtime.gcenable.gowrap1()\n"}
+{"Time":"2026-07-21T05:36:43.122287801Z","Action":"output","Package":"github.com/gocolly/colly/v2","Test":"TestNestedUnmarshal","Output":"\t/usr/local/go/src/runtime/mgc.go:212 +0x28 fp=0x40000737d0 sp=0x40000737b0 pc=0x31038\n"}
+{"Time":"2026-07-21T05:36:43.122291191Z","Action":"output","Package":"github.com/gocolly/colly/v2","Test":"TestNestedUnmarshal","Output":"runtime.goexit({})\n"}
+{"Time":"2026-07-21T05:36:43.122294061Z","Action":"output","Package":"github.com/gocolly/colly/v2","Test":"TestNestedUnmarshal","Output":"\t/usr/local/go/src/runtime/asm_arm64.s:1268 +0x4 fp=0x40000737d0 sp=0x40000737d0 pc=0x92234\n"}
+{"Time":"2026-07-21T05:36:43.12229673Z","Action":"output","Package":"github.com/gocolly/colly/v2","Test":"TestNestedUnmarshal","Output":"created by runtime.gcenable in goroutine 1\n"}
+{"Time":"2026-07-21T05:36:43.12229949Z","Action":"output","Package":"github.com/gocolly/colly/v2","Test":"TestNestedUnmarshal","Output":"\t/usr/local/go/src/runtime/mgc.go:212 +0x6c\n"}
+{"Time":"2026-07-21T05:36:43.12230141Z","Action":"output","Package":"github.com/gocolly/colly/v2","Test":"TestNestedUnmarshal","Output":"\n"}
+{"Time":"2026-07-21T05:36:43.122304064Z","Action":"output","Package":"github.com/gocolly/colly/v2","Test":"TestNestedUnmarshal","Output":"goroutine 4 gp=0x4000003340 m=nil [GC scavenge wait]:\n"}
+{"Time":"2026-07-21T05:36:43.122306674Z","Action":"output","Package":"github.com/gocolly/colly/v2","Test":"TestNestedUnmarshal","Output":"runtime.gopark(0x10000?, 0xec279?, 0x0?, 0x0?, 0x0?)\n"}
+{"Time":"2026-07-21T05:36:43.122312415Z","Action":"output","Package":"github.com/gocolly/colly/v2","Test":"TestNestedUnmarshal","Output":"\t/usr/local/go/src/runtime/proc.go:460 +0xc0 fp=0x4000073f60 sp=0x4000073f40 pc=0x8a390\n"}
+{"Time":"2026-07-21T05:36:43.122314891Z","Action":"output","Package":"github.com/gocolly/colly/v2","Test":"TestNestedUnmarshal","Output":"runtime.goparkunlock(...)\n"}
+{"Time":"2026-07-21T05:36:43.122317399Z","Action":"output","Package":"github.com/gocolly/colly/v2","Test":"TestNestedUnmarshal","Output":"\t/usr/local/go/src/runtime/proc.go:466\n"}
+{"Time":"2026-07-21T05:36:43.122320877Z","Action":"output","Package":"github.com/gocolly/colly/v2","Test":"TestNestedUnmarshal","Output":"runtime.(*scavengerState).park(0xaf6f00)\n"}
+{"Time":"2026-07-21T05:36:43.122323659Z","Action":"output","Package":"github.com/gocolly/colly/v2","Test":"TestNestedUnmarshal","Output":"\t/usr/local/go/src/runtime/mgcscavenge.go:425 +0x5c fp=0x4000073f90 sp=0x4000073f60 pc=0x3aefc\n"}
+{"Time":"2026-07-21T05:36:43.122327002Z","Action":"output","Package":"github.com/gocolly/colly/v2","Test":"TestNestedUnmarshal","Output":"runtime.bgscavenge(0x400007e000)\n"}
+{"Time":"2026-07-21T05:36:43.122329787Z","Action":"output","Package":"github.com/gocolly/colly/v2","Test":"TestNestedUnmarshal","Output":"\t/usr/local/go/src/runtime/mgcscavenge.go:658 +0xac fp=0x4000073fb0 sp=0x4000073f90 pc=0x3b47c\n"}
+{"Time":"2026-07-21T05:36:43.122332643Z","Action":"output","Package":"github.com/gocolly/colly/v2","Test":"TestNestedUnmarshal","Output":"runtime.gcenable.gowrap2()\n"}
+{"Time":"2026-07-21T05:36:43.122335323Z","Action":"output","Package":"github.com/gocolly/colly/v2","Test":"TestNestedUnmarshal","Output":"\t/usr/local/go/src/runtime/mgc.go:213 +0x28 fp=0x4000073fd0 sp=0x4000073fb0 pc=0x30fd8\n"}
+{"Time":"2026-07-21T05:36:43.122337233Z","Action":"output","Package":"github.com/gocolly/colly/v2","Test":"TestNestedUnmarshal","Output":"runtime.goexit({})\n"}
+{"Time":"2026-07-21T05:36:43.122339937Z","Action":"output","Package":"github.com/gocolly/colly/v2","Test":"TestNestedUnmarshal","Output":"\t/usr/local/go/src/runtime/asm_arm64.s:1268 +0x4 fp=0x4000073fd0 sp=0x4000073fd0 pc=0x92234\n"}
+{"Time":"2026-07-21T05:36:43.122342426Z","Action":"output","Package":"github.com/gocolly/colly/v2","Test":"TestNestedUnmarshal","Output":"created by runtime.gcenable in goroutine 1\n"}
+{"Time":"2026-07-21T05:36:43.122345329Z","Action":"output","Package":"github.com/gocolly/colly/v2","Test":"TestNestedUnmarshal","Output":"\t/usr/local/go/src/runtime/mgc.go:213 +0xac\n"}
+{"Time":"2026-07-21T05:36:43.122347246Z","Action":"output","Package":"github.com/gocolly/colly/v2","Test":"TestNestedUnmarshal","Output":"\n"}
+{"Time":"2026-07-21T05:36:43.122349847Z","Action":"output","Package":"github.com/gocolly/colly/v2","Test":"TestNestedUnmarshal","Output":"goroutine 5 gp=0x4000003c00 m=nil [finalizer wait]:\n"}
+{"Time":"2026-07-21T05:36:43.122353222Z","Action":"output","Package":"github.com/gocolly/colly/v2","Test":"TestNestedUnmarshal","Output":"runtime.gopark(0x0?, 0x0?, 0xb8?, 0x25?, 0x8aeb4?)\n"}
+{"Time":"2026-07-21T05:36:43.122358389Z","Action":"output","Package":"github.com/gocolly/colly/v2","Test":"TestNestedUnmarshal","Output":"\t/usr/local/go/src/runtime/proc.go:460 +0xc0 fp=0x4000072580 sp=0x4000072560 pc=0x8a390\n"}
+{"Time":"2026-07-21T05:36:43.122360989Z","Action":"output","Package":"github.com/gocolly/colly/v2","Test":"TestNestedUnmarshal","Output":"runtime.runFinalizers()\n"}
+{"Time":"2026-07-21T05:36:43.122365525Z","Action":"output","Package":"github.com/gocolly/colly/v2","Test":"TestNestedUnmarshal","Output":"\t/usr/local/go/src/runtime/mfinal.go:210 +0x104 fp=0x40000727d0 sp=0x4000072580 pc=0x30024\n"}
+{"Time":"2026-07-21T05:36:43.122368059Z","Action":"output","Package":"github.com/gocolly/colly/v2","Test":"TestNestedUnmarshal","Output":"runtime.goexit({})\n"}
+{"Time":"2026-07-21T05:36:43.122371445Z","Action":"output","Package":"github.com/gocolly/colly/v2","Test":"TestNestedUnmarshal","Output":"\t/usr/local/go/src/runtime/asm_arm64.s:1268 +0x4 fp=0x40000727d0 sp=0x40000727d0 pc=0x92234\n"}
+{"Time":"2026-07-21T05:36:43.122373983Z","Action":"output","Package":"github.com/gocolly/colly/v2","Test":"TestNestedUnmarshal","Output":"created by runtime.createfing in goroutine 1\n"}
+{"Time":"2026-07-21T05:36:43.122376626Z","Action":"output","Package":"github.com/gocolly/colly/v2","Test":"TestNestedUnmarshal","Output":"\t/usr/local/go/src/runtime/mfinal.go:172 +0x78\n"}
+{"Time":"2026-07-21T05:36:43.122378676Z","Action":"output","Package":"github.com/gocolly/colly/v2","Test":"TestNestedUnmarshal","Output":"\n"}
+{"Time":"2026-07-21T05:36:43.12238132Z","Action":"output","Package":"github.com/gocolly/colly/v2","Test":"TestNestedUnmarshal","Output":"goroutine 6 gp=0x4000003dc0 m=nil [cleanup wait]:\n"}
+{"Time":"2026-07-21T05:36:43.122386017Z","Action":"output","Package":"github.com/gocolly/colly/v2","Test":"TestNestedUnmarshal","Output":"runtime.gopark(0x0?, 0x0?, 0x0?, 0x0?, 0x0?)\n"}
+{"Time":"2026-07-21T05:36:43.122391916Z","Action":"output","Package":"github.com/gocolly/colly/v2","Test":"TestNestedUnmarshal","Output":"\t/usr/local/go/src/runtime/proc.go:460 +0xc0 fp=0x4000074740 sp=0x4000074720 pc=0x8a390\n"}
+{"Time":"2026-07-21T05:36:43.122394472Z","Action":"output","Package":"github.com/gocolly/colly/v2","Test":"TestNestedUnmarshal","Output":"runtime.goparkunlock(...)\n"}
+{"Time":"2026-07-21T05:36:43.122397031Z","Action":"output","Package":"github.com/gocolly/colly/v2","Test":"TestNestedUnmarshal","Output":"\t/usr/local/go/src/runtime/proc.go:466\n"}
+{"Time":"2026-07-21T05:36:43.122403873Z","Action":"output","Package":"github.com/gocolly/colly/v2","Test":"TestNestedUnmarshal","Output":"runtime.(*cleanupQueue).dequeue(0xaf73a0)\n"}
+{"Time":"2026-07-21T05:36:43.122406124Z","Action":"output","Package":"github.com/gocolly/colly/v2","Test":"TestNestedUnmarshal","Output":"\t/usr/local/go/src/runtime/mcleanup.go:439 +0x110 fp=0x4000074780 sp=0x4000074740 pc=0x2d080\n"}
+{"Time":"2026-07-21T05:36:43.122408136Z","Action":"output","Package":"github.com/gocolly/colly/v2","Test":"TestNestedUnmarshal","Output":"runtime.runCleanups()\n"}
+{"Time":"2026-07-21T05:36:43.122410837Z","Action":"output","Package":"github.com/gocolly/colly/v2","Test":"TestNestedUnmarshal","Output":"\t/usr/local/go/src/runtime/mcleanup.go:635 +0x40 fp=0x40000747d0 sp=0x4000074780 pc=0x2d890\n"}
+{"Time":"2026-07-21T05:36:43.122412733Z","Action":"output","Package":"github.com/gocolly/colly/v2","Test":"TestNestedUnmarshal","Output":"runtime.goexit({})\n"}
+{"Time":"2026-07-21T05:36:43.122415592Z","Action":"output","Package":"github.com/gocolly/colly/v2","Test":"TestNestedUnmarshal","Output":"\t/usr/local/go/src/runtime/asm_arm64.s:1268 +0x4 fp=0x40000747d0 sp=0x40000747d0 pc=0x92234\n"}
+{"Time":"2026-07-21T05:36:43.122418348Z","Action":"output","Package":"github.com/gocolly/colly/v2","Test":"TestNestedUnmarshal","Output":"created by runtime.(*cleanupQueue).createGs in goroutine 1\n"}
+{"Time":"2026-07-21T05:36:43.122421002Z","Action":"output","Package":"github.com/gocolly/colly/v2","Test":"TestNestedUnmarshal","Output":"\t/usr/local/go/src/runtime/mcleanup.go:589 +0x108\n"}
+{"Time":"2026-07-21T05:36:43.122422976Z","Action":"output","Package":"github.com/gocolly/colly/v2","Test":"TestNestedUnmarshal","Output":"\n"}
+{"Time":"2026-07-21T05:36:43.122425023Z","Action":"output","Package":"github.com/gocolly/colly/v2","Test":"TestNestedUnmarshal","Output":"goroutine 32 gp=0x40002f08c0 m=nil [GC worker (idle)]:\n"}
+{"Time":"2026-07-21T05:36:43.122427635Z","Action":"output","Package":"github.com/gocolly/colly/v2","Test":"TestNestedUnmarshal","Output":"runtime.gopark(0x0?, 0x40002ef2d8?, 0xd0?, 0x82?, 0x40002ef2d4?)\n"}
+{"Time":"2026-07-21T05:36:43.122430937Z","Action":"output","Package":"github.com/gocolly/colly/v2","Test":"TestNestedUnmarshal","Output":"\t/usr/local/go/src/runtime/proc.go:460 +0xc0 fp=0x4000179710 sp=0x40001796f0 pc=0x8a390\n"}
+{"Time":"2026-07-21T05:36:43.12243349Z","Action":"output","Package":"github.com/gocolly/colly/v2","Test":"TestNestedUnmarshal","Output":"runtime.gcBgMarkWorker(0x400033cbd0)\n"}
+{"Time":"2026-07-21T05:36:43.122438166Z","Action":"output","Package":"github.com/gocolly/colly/v2","Test":"TestNestedUnmarshal","Output":"\t/usr/local/go/src/runtime/mgc.go:1463 +0xe0 fp=0x40001797b0 sp=0x4000179710 pc=0x336b0\n"}
+{"Time":"2026-07-21T05:36:43.122440915Z","Action":"output","Package":"github.com/gocolly/colly/v2","Test":"TestNestedUnmarshal","Output":"runtime.gcBgMarkStartWorkers.gowrap1()\n"}
+{"Time":"2026-07-21T05:36:43.122443573Z","Action":"output","Package":"github.com/gocolly/colly/v2","Test":"TestNestedUnmarshal","Output":"\t/usr/local/go/src/runtime/mgc.go:1373 +0x28 fp=0x40001797d0 sp=0x40001797b0 pc=0x33598\n"}
+{"Time":"2026-07-21T05:36:43.122446075Z","Action":"output","Package":"github.com/gocolly/colly/v2","Test":"TestNestedUnmarshal","Output":"runtime.goexit({})\n"}
+{"Time":"2026-07-21T05:36:43.122449271Z","Action":"output","Package":"github.com/gocolly/colly/v2","Test":"TestNestedUnmarshal","Output":"\t/usr/local/go/src/runtime/asm_arm64.s:1268 +0x4 fp=0x40001797d0 sp=0x40001797d0 pc=0x92234\n"}
+{"Time":"2026-07-21T05:36:43.122451737Z","Action":"output","Package":"github.com/gocolly/colly/v2","Test":"TestNestedUnmarshal","Output":"created by runtime.gcBgMarkStartWorkers in goroutine 30\n"}
+{"Time":"2026-07-21T05:36:43.122454305Z","Action":"output","Package":"github.com/gocolly/colly/v2","Test":"TestNestedUnmarshal","Output":"\t/usr/local/go/src/runtime/mgc.go:1373 +0x140\n"}
+{"Time":"2026-07-21T05:36:43.122458615Z","Action":"output","Package":"github.com/gocolly/colly/v2","Test":"TestNestedUnmarshal","Output":"\n"}
+{"Time":"2026-07-21T05:36:43.122461254Z","Action":"output","Package":"github.com/gocolly/colly/v2","Test":"TestNestedUnmarshal","Output":"goroutine 33 gp=0x40002f0a80 m=nil [GC worker (idle)]:\n"}
+{"Time":"2026-07-21T05:36:43.122463796Z","Action":"output","Package":"github.com/gocolly/colly/v2","Test":"TestNestedUnmarshal","Output":"runtime.gopark(0x1fddfb1c1ef35?, 0x3?, 0xc6?, 0x94?, 0x0?)\n"}
+{"Time":"2026-07-21T05:36:43.122467495Z","Action":"output","Package":"github.com/gocolly/colly/v2","Test":"TestNestedUnmarshal","Output":"\t/usr/local/go/src/runtime/proc.go:460 +0xc0 fp=0x4000508710 sp=0x40005086f0 pc=0x8a390\n"}
+{"Time":"2026-07-21T05:36:43.122469986Z","Action":"output","Package":"github.com/gocolly/colly/v2","Test":"TestNestedUnmarshal","Output":"runtime.gcBgMarkWorker(0x400033cbd0)\n"}
+{"Time":"2026-07-21T05:36:43.122473755Z","Action":"output","Package":"github.com/gocolly/colly/v2","Test":"TestNestedUnmarshal","Output":"\t/usr/local/go/src/runtime/mgc.go:1463 +0xe0 fp=0x40005087b0 sp=0x4000508710 pc=0x336b0\n"}
+{"Time":"2026-07-21T05:36:43.122476397Z","Action":"output","Package":"github.com/gocolly/colly/v2","Test":"TestNestedUnmarshal","Output":"runtime.gcBgMarkStartWorkers.gowrap1()\n"}
+{"Time":"2026-07-21T05:36:43.122479624Z","Action":"output","Package":"github.com/gocolly/colly/v2","Test":"TestNestedUnmarshal","Output":"\t/usr/local/go/src/runtime/mgc.go:1373 +0x28 fp=0x40005087d0 sp=0x40005087b0 pc=0x33598\n"}
+{"Time":"2026-07-21T05:36:43.122482049Z","Action":"output","Package":"github.com/gocolly/colly/v2","Test":"TestNestedUnmarshal","Output":"runtime.goexit({})\n"}
+{"Time":"2026-07-21T05:36:43.122484789Z","Action":"output","Package":"github.com/gocolly/colly/v2","Test":"TestNestedUnmarshal","Output":"\t/usr/local/go/src/runtime/asm_arm64.s:1268 +0x4 fp=0x40005087d0 sp=0x40005087d0 pc=0x92234\n"}
+{"Time":"2026-07-21T05:36:43.122487274Z","Action":"output","Package":"github.com/gocolly/colly/v2","Test":"TestNestedUnmarshal","Output":"created by runtime.gcBgMarkStartWorkers in goroutine 30\n"}
+{"Time":"2026-07-21T05:36:43.122489853Z","Action":"output","Package":"github.com/gocolly/colly/v2","Test":"TestNestedUnmarshal","Output":"\t/usr/local/go/src/runtime/mgc.go:1373 +0x140\n"}
+{"Time":"2026-07-21T05:36:43.122491654Z","Action":"output","Package":"github.com/gocolly/colly/v2","Test":"TestNestedUnmarshal","Output":"\n"}
+{"Time":"2026-07-21T05:36:43.122494008Z","Action":"output","Package":"github.com/gocolly/colly/v2","Test":"TestNestedUnmarshal","Output":"goroutine 146 gp=0x40003261c0 m=nil [GC worker (idle)]:\n"}
+{"Time":"2026-07-21T05:36:43.122500108Z","Action":"output","Package":"github.com/gocolly/colly/v2","Test":"TestNestedUnmarshal","Output":"runtime.gopark(0x1fddfb1c18a0f?, 0x1?, 0xca?, 0x7f?, 0x400032c0d4?)\n"}
+{"Time":"2026-07-21T05:36:43.122505865Z","Action":"output","Package":"github.com/gocolly/colly/v2","Test":"TestNestedUnmarshal","Output":"\t/usr/local/go/src/runtime/proc.go:460 +0xc0 fp=0x4000074f10 sp=0x4000074ef0 pc=0x8a390\n"}
+{"Time":"2026-07-21T05:36:43.122508516Z","Action":"output","Package":"github.com/gocolly/colly/v2","Test":"TestNestedUnmarshal","Output":"runtime.gcBgMarkWorker(0x400033cbd0)\n"}
+{"Time":"2026-07-21T05:36:43.122512399Z","Action":"output","Package":"github.com/gocolly/colly/v2","Test":"TestNestedUnmarshal","Output":"\t/usr/local/go/src/runtime/mgc.go:1463 +0xe0 fp=0x4000074fb0 sp=0x4000074f10 pc=0x336b0\n"}
+{"Time":"2026-07-21T05:36:43.122515027Z","Action":"output","Package":"github.com/gocolly/colly/v2","Test":"TestNestedUnmarshal","Output":"runtime.gcBgMarkStartWorkers.gowrap1()\n"}
+{"Time":"2026-07-21T05:36:43.122517523Z","Action":"output","Package":"github.com/gocolly/colly/v2","Test":"TestNestedUnmarshal","Output":"\t/usr/local/go/src/runtime/mgc.go:1373 +0x28 fp=0x4000074fd0 sp=0x4000074fb0 pc=0x33598\n"}
+{"Time":"2026-07-21T05:36:43.122520063Z","Action":"output","Package":"github.com/gocolly/colly/v2","Test":"TestNestedUnmarshal","Output":"runtime.goexit({})\n"}
+{"Time":"2026-07-21T05:36:43.122523458Z","Action":"output","Package":"github.com/gocolly/colly/v2","Test":"TestNestedUnmarshal","Output":"\t/usr/local/go/src/runtime/asm_arm64.s:1268 +0x4 fp=0x4000074fd0 sp=0x4000074fd0 pc=0x92234\n"}
+{"Time":"2026-07-21T05:36:43.122526142Z","Action":"output","Package":"github.com/gocolly/colly/v2","Test":"TestNestedUnmarshal","Output":"created by runtime.gcBgMarkStartWorkers in goroutine 30\n"}
+{"Time":"2026-07-21T05:36:43.122528636Z","Action":"output","Package":"github.com/gocolly/colly/v2","Test":"TestNestedUnmarshal","Output":"\t/usr/local/go/src/runtime/mgc.go:1373 +0x140\n"}
+{"Time":"2026-07-21T05:36:43.122530538Z","Action":"output","Package":"github.com/gocolly/colly/v2","Test":"TestNestedUnmarshal","Output":"\n"}
+{"Time":"2026-07-21T05:36:43.122533034Z","Action":"output","Package":"github.com/gocolly/colly/v2","Test":"TestNestedUnmarshal","Output":"goroutine 147 gp=0x4000326540 m=nil [GC worker (idle)]:\n"}
+{"Time":"2026-07-21T05:36:43.122537594Z","Action":"output","Package":"github.com/gocolly/colly/v2","Test":"TestNestedUnmarshal","Output":"runtime.gopark(0x1fddfb1c1851f?, 0x1?, 0x9b?, 0x71?, 0x0?)\n"}
+{"Time":"2026-07-21T05:36:43.122543273Z","Action":"output","Package":"github.com/gocolly/colly/v2","Test":"TestNestedUnmarshal","Output":"\t/usr/local/go/src/runtime/proc.go:460 +0xc0 fp=0x4000508f10 sp=0x4000508ef0 pc=0x8a390\n"}
+{"Time":"2026-07-21T05:36:43.122545847Z","Action":"output","Package":"github.com/gocolly/colly/v2","Test":"TestNestedUnmarshal","Output":"runtime.gcBgMarkWorker(0x400033cbd0)\n"}
+{"Time":"2026-07-21T05:36:43.122549752Z","Action":"output","Package":"github.com/gocolly/colly/v2","Test":"TestNestedUnmarshal","Output":"\t/usr/local/go/src/runtime/mgc.go:1463 +0xe0 fp=0x4000508fb0 sp=0x4000508f10 pc=0x336b0\n"}
+{"Time":"2026-07-21T05:36:43.122552266Z","Action":"output","Package":"github.com/gocolly/colly/v2","Test":"TestNestedUnmarshal","Output":"runtime.gcBgMarkStartWorkers.gowrap1()\n"}
+{"Time":"2026-07-21T05:36:43.122554775Z","Action":"output","Package":"github.com/gocolly/colly/v2","Test":"TestNestedUnmarshal","Output":"\t/usr/local/go/src/runtime/mgc.go:1373 +0x28 fp=0x4000508fd0 sp=0x4000508fb0 pc=0x33598\n"}
+{"Time":"2026-07-21T05:36:43.122557279Z","Action":"output","Package":"github.com/gocolly/colly/v2","Test":"TestNestedUnmarshal","Output":"runtime.goexit({})\n"}
+{"Time":"2026-07-21T05:36:43.122561172Z","Action":"output","Package":"github.com/gocolly/colly/v2","Test":"TestNestedUnmarshal","Output":"\t/usr/local/go/src/runtime/asm_arm64.s:1268 +0x4 fp=0x4000508fd0 sp=0x4000508fd0 pc=0x92234\n"}
+{"Time":"2026-07-21T05:36:43.122563613Z","Action":"output","Package":"github.com/gocolly/colly/v2","Test":"TestNestedUnmarshal","Output":"created by runtime.gcBgMarkStartWorkers in goroutine 30\n"}
+{"Time":"2026-07-21T05:36:43.122566175Z","Action":"output","Package":"github.com/gocolly/colly/v2","Test":"TestNestedUnmarshal","Output":"\t/usr/local/go/src/runtime/mgc.go:1373 +0x140\n"}
+{"Time":"2026-07-21T05:36:43.122568015Z","Action":"output","Package":"github.com/gocolly/colly/v2","Test":"TestNestedUnmarshal","Output":"\n"}
+{"Time":"2026-07-21T05:36:43.122570431Z","Action":"output","Package":"github.com/gocolly/colly/v2","Test":"TestNestedUnmarshal","Output":"goroutine 148 gp=0x4000326700 m=nil [GC worker (idle)]:\n"}
+{"Time":"2026-07-21T05:36:43.122576172Z","Action":"output","Package":"github.com/gocolly/colly/v2","Test":"TestNestedUnmarshal","Output":"runtime.gopark(0x1fddfb1c178ce?, 0x3?, 0x8a?, 0xd4?, 0x0?)\n"}
+{"Time":"2026-07-21T05:36:43.12258263Z","Action":"output","Package":"github.com/gocolly/colly/v2","Test":"TestNestedUnmarshal","Output":"\t/usr/local/go/src/runtime/proc.go:460 +0xc0 fp=0x4000509710 sp=0x40005096f0 pc=0x8a390\n"}
+{"Time":"2026-07-21T05:36:43.122585305Z","Action":"output","Package":"github.com/gocolly/colly/v2","Test":"TestNestedUnmarshal","Output":"runtime.gcBgMarkWorker(0x400033cbd0)\n"}
+{"Time":"2026-07-21T05:36:43.122589138Z","Action":"output","Package":"github.com/gocolly/colly/v2","Test":"TestNestedUnmarshal","Output":"\t/usr/local/go/src/runtime/mgc.go:1463 +0xe0 fp=0x40005097b0 sp=0x4000509710 pc=0x336b0\n"}
+{"Time":"2026-07-21T05:36:43.122592591Z","Action":"output","Package":"github.com/gocolly/colly/v2","Test":"TestNestedUnmarshal","Output":"runtime.gcBgMarkStartWorkers.gowrap1()\n"}
+{"Time":"2026-07-21T05:36:43.122595299Z","Action":"output","Package":"github.com/gocolly/colly/v2","Test":"TestNestedUnmarshal","Output":"\t/usr/local/go/src/runtime/mgc.go:1373 +0x28 fp=0x40005097d0 sp=0x40005097b0 pc=0x33598\n"}
+{"Time":"2026-07-21T05:36:43.122597795Z","Action":"output","Package":"github.com/gocolly/colly/v2","Test":"TestNestedUnmarshal","Output":"runtime.goexit({})\n"}
+{"Time":"2026-07-21T05:36:43.122600344Z","Action":"output","Package":"github.com/gocolly/colly/v2","Test":"TestNestedUnmarshal","Output":"\t/usr/local/go/src/runtime/asm_arm64.s:1268 +0x4 fp=0x40005097d0 sp=0x40005097d0 pc=0x92234\n"}
+{"Time":"2026-07-21T05:36:43.122602924Z","Action":"output","Package":"github.com/gocolly/colly/v2","Test":"TestNestedUnmarshal","Output":"created by runtime.gcBgMarkStartWorkers in goroutine 30\n"}
+{"Time":"2026-07-21T05:36:43.122605352Z","Action":"output","Package":"github.com/gocolly/colly/v2","Test":"TestNestedUnmarshal","Output":"\t/usr/local/go/src/runtime/mgc.go:1373 +0x140\n"}
+{"Time":"2026-07-21T05:36:43.122607274Z","Action":"output","Package":"github.com/gocolly/colly/v2","Test":"TestNestedUnmarshal","Output":"\n"}
+{"Time":"2026-07-21T05:36:43.122609704Z","Action":"output","Package":"github.com/gocolly/colly/v2","Test":"TestNestedUnmarshal","Output":"goroutine 149 gp=0x40003268c0 m=nil [GC worker (idle)]:\n"}
+{"Time":"2026-07-21T05:36:43.122613992Z","Action":"output","Package":"github.com/gocolly/colly/v2","Test":"TestNestedUnmarshal","Output":"runtime.gopark(0x1fddfb1c3257e?, 0x3?, 0x28?, 0x4?, 0x0?)\n"}
+{"Time":"2026-07-21T05:36:43.122619538Z","Action":"output","Package":"github.com/gocolly/colly/v2","Test":"TestNestedUnmarshal","Output":"\t/usr/local/go/src/runtime/proc.go:460 +0xc0 fp=0x400011af10 sp=0x400011aef0 pc=0x8a390\n"}
+{"Time":"2026-07-21T05:36:43.122622128Z","Action":"output","Package":"github.com/gocolly/colly/v2","Test":"TestNestedUnmarshal","Output":"runtime.gcBgMarkWorker(0x400033cbd0)\n"}
+{"Time":"2026-07-21T05:36:43.122625709Z","Action":"output","Package":"github.com/gocolly/colly/v2","Test":"TestNestedUnmarshal","Output":"\t/usr/local/go/src/runtime/mgc.go:1463 +0xe0 fp=0x400011afb0 sp=0x400011af10 pc=0x336b0\n"}
+{"Time":"2026-07-21T05:36:43.122628174Z","Action":"output","Package":"github.com/gocolly/colly/v2","Test":"TestNestedUnmarshal","Output":"runtime.gcBgMarkStartWorkers.gowrap1()\n"}
+{"Time":"2026-07-21T05:36:43.1226309Z","Action":"output","Package":"github.com/gocolly/colly/v2","Test":"TestNestedUnmarshal","Output":"\t/usr/local/go/src/runtime/mgc.go:1373 +0x28 fp=0x400011afd0 sp=0x400011afb0 pc=0x33598\n"}
+{"Time":"2026-07-21T05:36:43.122633328Z","Action":"output","Package":"github.com/gocolly/colly/v2","Test":"TestNestedUnmarshal","Output":"runtime.goexit({})\n"}
+{"Time":"2026-07-21T05:36:43.122637324Z","Action":"output","Package":"github.com/gocolly/colly/v2","Test":"TestNestedUnmarshal","Output":"\t/usr/local/go/src/runtime/asm_arm64.s:1268 +0x4 fp=0x400011afd0 sp=0x400011afd0 pc=0x92234\n"}
+{"Time":"2026-07-21T05:36:43.122639828Z","Action":"output","Package":"github.com/gocolly/colly/v2","Test":"TestNestedUnmarshal","Output":"created by runtime.gcBgMarkStartWorkers in goroutine 30\n"}
+{"Time":"2026-07-21T05:36:43.122642322Z","Action":"output","Package":"github.com/gocolly/colly/v2","Test":"TestNestedUnmarshal","Output":"\t/usr/local/go/src/runtime/mgc.go:1373 +0x140\n"}
+{"Time":"2026-07-21T05:36:43.122644288Z","Action":"output","Package":"github.com/gocolly/colly/v2","Test":"TestNestedUnmarshal","Output":"\n"}
+{"Time":"2026-07-21T05:36:43.122646829Z","Action":"output","Package":"github.com/gocolly/colly/v2","Test":"TestNestedUnmarshal","Output":"goroutine 150 gp=0x4000326a80 m=nil [GC worker (idle)]:\n"}
+{"Time":"2026-07-21T05:36:43.12265084Z","Action":"output","Package":"github.com/gocolly/colly/v2","Test":"TestNestedUnmarshal","Output":"runtime.gopark(0x1fddfb1c1810a?, 0x4000351e00?, 0x1c?, 0xa?, 0x0?)\n"}
+{"Time":"2026-07-21T05:36:43.122656788Z","Action":"output","Package":"github.com/gocolly/colly/v2","Test":"TestNestedUnmarshal","Output":"\t/usr/local/go/src/runtime/proc.go:460 +0xc0 fp=0x400050a710 sp=0x400050a6f0 pc=0x8a390\n"}
+{"Time":"2026-07-21T05:36:43.122659236Z","Action":"output","Package":"github.com/gocolly/colly/v2","Test":"TestNestedUnmarshal","Output":"runtime.gcBgMarkWorker(0x400033cbd0)\n"}
+{"Time":"2026-07-21T05:36:43.122663116Z","Action":"output","Package":"github.com/gocolly/colly/v2","Test":"TestNestedUnmarshal","Output":"\t/usr/local/go/src/runtime/mgc.go:1463 +0xe0 fp=0x400050a7b0 sp=0x400050a710 pc=0x336b0\n"}
+{"Time":"2026-07-21T05:36:43.122665591Z","Action":"output","Package":"github.com/gocolly/colly/v2","Test":"TestNestedUnmarshal","Output":"runtime.gcBgMarkStartWorkers.gowrap1()\n"}
+{"Time":"2026-07-21T05:36:43.122668939Z","Action":"output","Package":"github.com/gocolly/colly/v2","Test":"TestNestedUnmarshal","Output":"\t/usr/local/go/src/runtime/mgc.go:1373 +0x28 fp=0x400050a7d0 sp=0x400050a7b0 pc=0x33598\n"}
+{"Time":"2026-07-21T05:36:43.12267139Z","Action":"output","Package":"github.com/gocolly/colly/v2","Test":"TestNestedUnmarshal","Output":"runtime.goexit({})\n"}
+{"Time":"2026-07-21T05:36:43.122675382Z","Action":"output","Package":"github.com/gocolly/colly/v2","Test":"TestNestedUnmarshal","Output":"\t/usr/local/go/src/runtime/asm_arm64.s:1268 +0x4 fp=0x400050a7d0 sp=0x400050a7d0 pc=0x92234\n"}
+{"Time":"2026-07-21T05:36:43.122678695Z","Action":"output","Package":"github.com/gocolly/colly/v2","Test":"TestNestedUnmarshal","Output":"created by runtime.gcBgMarkStartWorkers in goroutine 30\n"}
+{"Time":"2026-07-21T05:36:43.122681257Z","Action":"output","Package":"github.com/gocolly/colly/v2","Test":"TestNestedUnmarshal","Output":"\t/usr/local/go/src/runtime/mgc.go:1373 +0x140\n"}
+{"Time":"2026-07-21T05:36:43.122683212Z","Action":"output","Package":"github.com/gocolly/colly/v2","Test":"TestNestedUnmarshal","Output":"\n"}
+{"Time":"2026-07-21T05:36:43.122685811Z","Action":"output","Package":"github.com/gocolly/colly/v2","Test":"TestNestedUnmarshal","Output":"goroutine 151 gp=0x4000326c40 m=nil [GC worker (idle)]:\n"}
+{"Time":"2026-07-21T05:36:43.122688315Z","Action":"output","Package":"github.com/gocolly/colly/v2","Test":"TestNestedUnmarshal","Output":"runtime.gopark(0xb2a680?, 0x1?, 0xb4?, 0xf3?, 0x0?)\n"}
+{"Time":"2026-07-21T05:36:43.122692839Z","Action":"output","Package":"github.com/gocolly/colly/v2","Test":"TestNestedUnmarshal","Output":"\t/usr/local/go/src/runtime/proc.go:460 +0xc0 fp=0x400050af10 sp=0x400050aef0 pc=0x8a390\n"}
+{"Time":"2026-07-21T05:36:43.122695554Z","Action":"output","Package":"github.com/gocolly/colly/v2","Test":"TestNestedUnmarshal","Output":"runtime.gcBgMarkWorker(0x400033cbd0)\n"}
+{"Time":"2026-07-21T05:36:43.122698196Z","Action":"output","Package":"github.com/gocolly/colly/v2","Test":"TestNestedUnmarshal","Output":"\t/usr/local/go/src/runtime/mgc.go:1463 +0xe0 fp=0x400050afb0 sp=0x400050af10 pc=0x336b0\n"}
+{"Time":"2026-07-21T05:36:43.122700795Z","Action":"output","Package":"github.com/gocolly/colly/v2","Test":"TestNestedUnmarshal","Output":"runtime.gcBgMarkStartWorkers.gowrap1()\n"}
+{"Time":"2026-07-21T05:36:43.122703585Z","Action":"output","Package":"github.com/gocolly/colly/v2","Test":"TestNestedUnmarshal","Output":"\t/usr/local/go/src/runtime/mgc.go:1373 +0x28 fp=0x400050afd0 sp=0x400050afb0 pc=0x33598\n"}
+{"Time":"2026-07-21T05:36:43.12270604Z","Action":"output","Package":"github.com/gocolly/colly/v2","Test":"TestNestedUnmarshal","Output":"runtime.goexit({})\n"}
+{"Time":"2026-07-21T05:36:43.122709921Z","Action":"output","Package":"github.com/gocolly/colly/v2","Test":"TestNestedUnmarshal","Output":"\t/usr/local/go/src/runtime/asm_arm64.s:1268 +0x4 fp=0x400050afd0 sp=0x400050afd0 pc=0x92234\n"}
+{"Time":"2026-07-21T05:36:43.122712535Z","Action":"output","Package":"github.com/gocolly/colly/v2","Test":"TestNestedUnmarshal","Output":"created by runtime.gcBgMarkStartWorkers in goroutine 30\n"}
+{"Time":"2026-07-21T05:36:43.122716266Z","Action":"output","Package":"github.com/gocolly/colly/v2","Test":"TestNestedUnmarshal","Output":"\t/usr/local/go/src/runtime/mgc.go:1373 +0x140\n"}
+{"Time":"2026-07-21T05:36:43.122718251Z","Action":"output","Package":"github.com/gocolly/colly/v2","Test":"TestNestedUnmarshal","Output":"\n"}
+{"Time":"2026-07-21T05:36:43.122720777Z","Action":"output","Package":"github.com/gocolly/colly/v2","Test":"TestNestedUnmarshal","Output":"goroutine 152 gp=0x4000326e00 m=nil [GC worker (idle)]:\n"}
+{"Time":"2026-07-21T05:36:43.122724166Z","Action":"output","Package":"github.com/gocolly/colly/v2","Test":"TestNestedUnmarshal","Output":"runtime.gopark(0x1fddfb1c17659?, 0x1?, 0x7c?, 0x43?, 0x0?)\n"}
+{"Time":"2026-07-21T05:36:43.122727001Z","Action":"output","Package":"github.com/gocolly/colly/v2","Test":"TestNestedUnmarshal","Output":"\t/usr/local/go/src/runtime/proc.go:460 +0xc0 fp=0x400050b710 sp=0x400050b6f0 pc=0x8a390\n"}
+{"Time":"2026-07-21T05:36:43.122729568Z","Action":"output","Package":"github.com/gocolly/colly/v2","Test":"TestNestedUnmarshal","Output":"runtime.gcBgMarkWorker(0x400033cbd0)\n"}
+{"Time":"2026-07-21T05:36:43.122733042Z","Action":"output","Package":"github.com/gocolly/colly/v2","Test":"TestNestedUnmarshal","Output":"\t/usr/local/go/src/runtime/mgc.go:1463 +0xe0 fp=0x400050b7b0 sp=0x400050b710 pc=0x336b0\n"}
+{"Time":"2026-07-21T05:36:43.122736547Z","Action":"output","Package":"github.com/gocolly/colly/v2","Test":"TestNestedUnmarshal","Output":"runtime.gcBgMarkStartWorkers.gowrap1()\n"}
+{"Time":"2026-07-21T05:36:43.122739461Z","Action":"output","Package":"github.com/gocolly/colly/v2","Test":"TestNestedUnmarshal","Output":"\t/usr/local/go/src/runtime/mgc.go:1373 +0x28 fp=0x400050b7d0 sp=0x400050b7b0 pc=0x33598\n"}
+{"Time":"2026-07-21T05:36:43.122742117Z","Action":"output","Package":"github.com/gocolly/colly/v2","Test":"TestNestedUnmarshal","Output":"runtime.goexit({})\n"}
+{"Time":"2026-07-21T05:36:43.122744801Z","Action":"output","Package":"github.com/gocolly/colly/v2","Test":"TestNestedUnmarshal","Output":"\t/usr/local/go/src/runtime/asm_arm64.s:1268 +0x4 fp=0x400050b7d0 sp=0x400050b7d0 pc=0x92234\n"}
+{"Time":"2026-07-21T05:36:43.122747552Z","Action":"output","Package":"github.com/gocolly/colly/v2","Test":"TestNestedUnmarshal","Output":"created by runtime.gcBgMarkStartWorkers in goroutine 30\n"}
+{"Time":"2026-07-21T05:36:43.122749485Z","Action":"output","Package":"github.com/gocolly/colly/v2","Test":"TestNestedUnmarshal","Output":"\t/usr/local/go/src/runtime/mgc.go:1373 +0x140\n"}
+{"Time":"2026-07-21T05:36:43.122752213Z","Action":"output","Package":"github.com/gocolly/colly/v2","Test":"TestNestedUnmarshal","Output":"\n"}
+{"Time":"2026-07-21T05:36:43.122754376Z","Action":"output","Package":"github.com/gocolly/colly/v2","Test":"TestNestedUnmarshal","Output":"goroutine 153 gp=0x4000326fc0 m=nil [GC worker (idle)]:\n"}
+{"Time":"2026-07-21T05:36:43.122756894Z","Action":"output","Package":"github.com/gocolly/colly/v2","Test":"TestNestedUnmarshal","Output":"runtime.gopark(0x1fddfb1c1794e?, 0x3?, 0xbe?, 0x1?, 0x0?)\n"}
+{"Time":"2026-07-21T05:36:43.122760894Z","Action":"output","Package":"github.com/gocolly/colly/v2","Test":"TestNestedUnmarshal","Output":"\t/usr/local/go/src/runtime/proc.go:460 +0xc0 fp=0x400050bf10 sp=0x400050bef0 pc=0x8a390\n"}
+{"Time":"2026-07-21T05:36:43.122763443Z","Action":"output","Package":"github.com/gocolly/colly/v2","Test":"TestNestedUnmarshal","Output":"runtime.gcBgMarkWorker(0x400033cbd0)\n"}
+{"Time":"2026-07-21T05:36:43.1227667Z","Action":"output","Package":"github.com/gocolly/colly/v2","Test":"TestNestedUnmarshal","Output":"\t/usr/local/go/src/runtime/mgc.go:1463 +0xe0 fp=0x400050bfb0 sp=0x400050bf10 pc=0x336b0\n"}
+{"Time":"2026-07-21T05:36:43.122769422Z","Action":"output","Package":"github.com/gocolly/colly/v2","Test":"TestNestedUnmarshal","Output":"runtime.gcBgMarkStartWorkers.gowrap1()\n"}
+{"Time":"2026-07-21T05:36:43.122772212Z","Action":"output","Package":"github.com/gocolly/colly/v2","Test":"TestNestedUnmarshal","Output":"\t/usr/local/go/src/runtime/mgc.go:1373 +0x28 fp=0x400050bfd0 sp=0x400050bfb0 pc=0x33598\n"}
+{"Time":"2026-07-21T05:36:43.122775887Z","Action":"output","Package":"github.com/gocolly/colly/v2","Test":"TestNestedUnmarshal","Output":"runtime.goexit({})\n"}
+{"Time":"2026-07-21T05:36:43.122778656Z","Action":"output","Package":"github.com/gocolly/colly/v2","Test":"TestNestedUnmarshal","Output":"\t/usr/local/go/src/runtime/asm_arm64.s:1268 +0x4 fp=0x400050bfd0 sp=0x400050bfd0 pc=0x92234\n"}
+{"Time":"2026-07-21T05:36:43.122781372Z","Action":"output","Package":"github.com/gocolly/colly/v2","Test":"TestNestedUnmarshal","Output":"created by runtime.gcBgMarkStartWorkers in goroutine 30\n"}
+{"Time":"2026-07-21T05:36:43.122783223Z","Action":"output","Package":"github.com/gocolly/colly/v2","Test":"TestNestedUnmarshal","Output":"\t/usr/local/go/src/runtime/mgc.go:1373 +0x140\n"}
+{"Time":"2026-07-21T05:36:43.122785814Z","Action":"output","Package":"github.com/gocolly/colly/v2","Test":"TestNestedUnmarshal","Output":"\n"}
+{"Time":"2026-07-21T05:36:43.122787935Z","Action":"output","Package":"github.com/gocolly/colly/v2","Test":"TestNestedUnmarshal","Output":"goroutine 154 gp=0x4000327180 m=nil [GC worker (idle)]:\n"}
+{"Time":"2026-07-21T05:36:43.122791131Z","Action":"output","Package":"github.com/gocolly/colly/v2","Test":"TestNestedUnmarshal","Output":"runtime.gopark(0x1fddfb1c18fcc?, 0x3?, 0x9d?, 0x2?, 0x0?)\n"}
+{"Time":"2026-07-21T05:36:43.122794473Z","Action":"output","Package":"github.com/gocolly/colly/v2","Test":"TestNestedUnmarshal","Output":"\t/usr/local/go/src/runtime/proc.go:460 +0xc0 fp=0x4000119f10 sp=0x4000119ef0 pc=0x8a390\n"}
+{"Time":"2026-07-21T05:36:43.122796917Z","Action":"output","Package":"github.com/gocolly/colly/v2","Test":"TestNestedUnmarshal","Output":"runtime.gcBgMarkWorker(0x400033cbd0)\n"}
+{"Time":"2026-07-21T05:36:43.122800908Z","Action":"output","Package":"github.com/gocolly/colly/v2","Test":"TestNestedUnmarshal","Output":"\t/usr/local/go/src/runtime/mgc.go:1463 +0xe0 fp=0x4000119fb0 sp=0x4000119f10 pc=0x336b0\n"}
+{"Time":"2026-07-21T05:36:43.122803355Z","Action":"output","Package":"github.com/gocolly/colly/v2","Test":"TestNestedUnmarshal","Output":"runtime.gcBgMarkStartWorkers.gowrap1()\n"}
+{"Time":"2026-07-21T05:36:43.122805947Z","Action":"output","Package":"github.com/gocolly/colly/v2","Test":"TestNestedUnmarshal","Output":"\t/usr/local/go/src/runtime/mgc.go:1373 +0x28 fp=0x4000119fd0 sp=0x4000119fb0 pc=0x33598\n"}
+{"Time":"2026-07-21T05:36:43.122808464Z","Action":"output","Package":"github.com/gocolly/colly/v2","Test":"TestNestedUnmarshal","Output":"runtime.goexit({})\n"}
+{"Time":"2026-07-21T05:36:43.122812841Z","Action":"output","Package":"github.com/gocolly/colly/v2","Test":"TestNestedUnmarshal","Output":"\t/usr/local/go/src/runtime/asm_arm64.s:1268 +0x4 fp=0x4000119fd0 sp=0x4000119fd0 pc=0x92234\n"}
+{"Time":"2026-07-21T05:36:43.122815438Z","Action":"output","Package":"github.com/gocolly/colly/v2","Test":"TestNestedUnmarshal","Output":"created by runtime.gcBgMarkStartWorkers in goroutine 30\n"}
+{"Time":"2026-07-21T05:36:43.12281725Z","Action":"output","Package":"github.com/gocolly/colly/v2","Test":"TestNestedUnmarshal","Output":"\t/usr/local/go/src/runtime/mgc.go:1373 +0x140\n"}
+{"Time":"2026-07-21T05:36:43.122819718Z","Action":"output","Package":"github.com/gocolly/colly/v2","Test":"TestNestedUnmarshal","Output":"\n"}
+{"Time":"2026-07-21T05:36:43.122821523Z","Action":"output","Package":"github.com/gocolly/colly/v2","Test":"TestNestedUnmarshal","Output":"goroutine 155 gp=0x4000327340 m=nil [GC worker (idle)]:\n"}
+{"Time":"2026-07-21T05:36:43.122824186Z","Action":"output","Package":"github.com/gocolly/colly/v2","Test":"TestNestedUnmarshal","Output":"runtime.gopark(0x1fddfb1c17711?, 0x1?, 0x7?, 0x2a?, 0x0?)\n"}
+{"Time":"2026-07-21T05:36:43.122829608Z","Action":"output","Package":"github.com/gocolly/colly/v2","Test":"TestNestedUnmarshal","Output":"\t/usr/local/go/src/runtime/proc.go:460 +0xc0 fp=0x4000694f10 sp=0x4000694ef0 pc=0x8a390\n"}
+{"Time":"2026-07-21T05:36:43.122833064Z","Action":"output","Package":"github.com/gocolly/colly/v2","Test":"TestNestedUnmarshal","Output":"runtime.gcBgMarkWorker(0x400033cbd0)\n"}
+{"Time":"2026-07-21T05:36:43.122836101Z","Action":"output","Package":"github.com/gocolly/colly/v2","Test":"TestNestedUnmarshal","Output":"\t/usr/local/go/src/runtime/mgc.go:1463 +0xe0 fp=0x4000694fb0 sp=0x4000694f10 pc=0x336b0\n"}
+{"Time":"2026-07-21T05:36:43.122838735Z","Action":"output","Package":"github.com/gocolly/colly/v2","Test":"TestNestedUnmarshal","Output":"runtime.gcBgMarkStartWorkers.gowrap1()\n"}
+{"Time":"2026-07-21T05:36:43.122841384Z","Action":"output","Package":"github.com/gocolly/colly/v2","Test":"TestNestedUnmarshal","Output":"\t/usr/local/go/src/runtime/mgc.go:1373 +0x28 fp=0x4000694fd0 sp=0x4000694fb0 pc=0x33598\n"}
+{"Time":"2026-07-21T05:36:43.122844399Z","Action":"output","Package":"github.com/gocolly/colly/v2","Test":"TestNestedUnmarshal","Output":"runtime.goexit({})\n"}
+{"Time":"2026-07-21T05:36:43.122847019Z","Action":"output","Package":"github.com/gocolly/colly/v2","Test":"TestNestedUnmarshal","Output":"\t/usr/local/go/src/runtime/asm_arm64.s:1268 +0x4 fp=0x4000694fd0 sp=0x4000694fd0 pc=0x92234\n"}
+{"Time":"2026-07-21T05:36:43.122849563Z","Action":"output","Package":"github.com/gocolly/colly/v2","Test":"TestNestedUnmarshal","Output":"created by runtime.gcBgMarkStartWorkers in goroutine 30\n"}
+{"Time":"2026-07-21T05:36:43.122852169Z","Action":"output","Package":"github.com/gocolly/colly/v2","Test":"TestNestedUnmarshal","Output":"\t/usr/local/go/src/runtime/mgc.go:1373 +0x140\n"}
+{"Time":"2026-07-21T05:36:43.12285404Z","Action":"output","Package":"github.com/gocolly/colly/v2","Test":"TestNestedUnmarshal","Output":"\n"}
+{"Time":"2026-07-21T05:36:43.122857274Z","Action":"output","Package":"github.com/gocolly/colly/v2","Test":"TestNestedUnmarshal","Output":"goroutine 156 gp=0x4000327500 m=nil [GC worker (idle)]:\n"}
+{"Time":"2026-07-21T05:36:43.12285977Z","Action":"output","Package":"github.com/gocolly/colly/v2","Test":"TestNestedUnmarshal","Output":"runtime.gopark(0x1fddfb1c181d3?, 0x3?, 0x7a?, 0x2?, 0x0?)\n"}
+{"Time":"2026-07-21T05:36:43.122864168Z","Action":"output","Package":"github.com/gocolly/colly/v2","Test":"TestNestedUnmarshal","Output":"\t/usr/local/go/src/runtime/proc.go:460 +0xc0 fp=0x400011df10 sp=0x400011def0 pc=0x8a390\n"}
+{"Time":"2026-07-21T05:36:43.122866479Z","Action":"output","Package":"github.com/gocolly/colly/v2","Test":"TestNestedUnmarshal","Output":"runtime.gcBgMarkWorker(0x400033cbd0)\n"}
+{"Time":"2026-07-21T05:36:43.122869834Z","Action":"output","Package":"github.com/gocolly/colly/v2","Test":"TestNestedUnmarshal","Output":"\t/usr/local/go/src/runtime/mgc.go:1463 +0xe0 fp=0x400011dfb0 sp=0x400011df10 pc=0x336b0\n"}
+{"Time":"2026-07-21T05:36:43.122872375Z","Action":"output","Package":"github.com/gocolly/colly/v2","Test":"TestNestedUnmarshal","Output":"runtime.gcBgMarkStartWorkers.gowrap1()\n"}
+{"Time":"2026-07-21T05:36:43.122875081Z","Action":"output","Package":"github.com/gocolly/colly/v2","Test":"TestNestedUnmarshal","Output":"\t/usr/local/go/src/runtime/mgc.go:1373 +0x28 fp=0x400011dfd0 sp=0x400011dfb0 pc=0x33598\n"}
+{"Time":"2026-07-21T05:36:43.122877663Z","Action":"output","Package":"github.com/gocolly/colly/v2","Test":"TestNestedUnmarshal","Output":"runtime.goexit({})\n"}
+{"Time":"2026-07-21T05:36:43.122881446Z","Action":"output","Package":"github.com/gocolly/colly/v2","Test":"TestNestedUnmarshal","Output":"\t/usr/local/go/src/runtime/asm_arm64.s:1268 +0x4 fp=0x400011dfd0 sp=0x400011dfd0 pc=0x92234\n"}
+{"Time":"2026-07-21T05:36:43.122884132Z","Action":"output","Package":"github.com/gocolly/colly/v2","Test":"TestNestedUnmarshal","Output":"created by runtime.gcBgMarkStartWorkers in goroutine 30\n"}
+{"Time":"2026-07-21T05:36:43.122886755Z","Action":"output","Package":"github.com/gocolly/colly/v2","Test":"TestNestedUnmarshal","Output":"\t/usr/local/go/src/runtime/mgc.go:1373 +0x140\n"}
+{"Time":"2026-07-21T05:36:43.12288869Z","Action":"output","Package":"github.com/gocolly/colly/v2","Test":"TestNestedUnmarshal","Output":"\n"}
+{"Time":"2026-07-21T05:36:43.122892128Z","Action":"output","Package":"github.com/gocolly/colly/v2","Test":"TestNestedUnmarshal","Output":"goroutine 157 gp=0x40003276c0 m=nil [GC worker (idle)]:\n"}
+{"Time":"2026-07-21T05:36:43.122894649Z","Action":"output","Package":"github.com/gocolly/colly/v2","Test":"TestNestedUnmarshal","Output":"runtime.gopark(0x1fddfb1c21c91?, 0x3?, 0xed?, 0x21?, 0x0?)\n"}
+{"Time":"2026-07-21T05:36:43.122900473Z","Action":"output","Package":"github.com/gocolly/colly/v2","Test":"TestNestedUnmarshal","Output":"\t/usr/local/go/src/runtime/proc.go:460 +0xc0 fp=0x4000521f10 sp=0x4000521ef0 pc=0x8a390\n"}
+{"Time":"2026-07-21T05:36:43.1229029Z","Action":"output","Package":"github.com/gocolly/colly/v2","Test":"TestNestedUnmarshal","Output":"runtime.gcBgMarkWorker(0x400033cbd0)\n"}
+{"Time":"2026-07-21T05:36:43.122912094Z","Action":"output","Package":"github.com/gocolly/colly/v2","Test":"TestNestedUnmarshal","Output":"\t/usr/local/go/src/runtime/mgc.go:1463 +0xe0 fp=0x4000521fb0 sp=0x4000521f10 pc=0x336b0\n"}
+{"Time":"2026-07-21T05:36:43.122914127Z","Action":"output","Package":"github.com/gocolly/colly/v2","Test":"TestNestedUnmarshal","Output":"runtime.gcBgMarkStartWorkers.gowrap1()\n"}
+{"Time":"2026-07-21T05:36:43.122916147Z","Action":"output","Package":"github.com/gocolly/colly/v2","Test":"TestNestedUnmarshal","Output":"\t/usr/local/go/src/runtime/mgc.go:1373 +0x28 fp=0x4000521fd0 sp=0x4000521fb0 pc=0x33598\n"}
+{"Time":"2026-07-21T05:36:43.12291887Z","Action":"output","Package":"github.com/gocolly/colly/v2","Test":"TestNestedUnmarshal","Output":"runtime.goexit({})\n"}
+{"Time":"2026-07-21T05:36:43.122920795Z","Action":"output","Package":"github.com/gocolly/colly/v2","Test":"TestNestedUnmarshal","Output":"\t/usr/local/go/src/runtime/asm_arm64.s:1268 +0x4 fp=0x4000521fd0 sp=0x4000521fd0 pc=0x92234\n"}
+{"Time":"2026-07-21T05:36:43.122922653Z","Action":"output","Package":"github.com/gocolly/colly/v2","Test":"TestNestedUnmarshal","Output":"created by runtime.gcBgMarkStartWorkers in goroutine 30\n"}
+{"Time":"2026-07-21T05:36:43.12292526Z","Action":"output","Package":"github.com/gocolly/colly/v2","Test":"TestNestedUnmarshal","Output":"\t/usr/local/go/src/runtime/mgc.go:1373 +0x140\n"}
+{"Time":"2026-07-21T05:36:43.122927174Z","Action":"output","Package":"github.com/gocolly/colly/v2","Test":"TestNestedUnmarshal","Output":"\n"}
+{"Time":"2026-07-21T05:36:43.12292898Z","Action":"output","Package":"github.com/gocolly/colly/v2","Test":"TestNestedUnmarshal","Output":"goroutine 158 gp=0x4000327880 m=nil [GC worker (idle)]:\n"}
+{"Time":"2026-07-21T05:36:43.122931659Z","Action":"output","Package":"github.com/gocolly/colly/v2","Test":"TestNestedUnmarshal","Output":"runtime.gopark(0x1fddfb1c1ed2f?, 0x3?, 0xdc?, 0xb1?, 0x0?)\n"}
+{"Time":"2026-07-21T05:36:43.122934267Z","Action":"output","Package":"github.com/gocolly/colly/v2","Test":"TestNestedUnmarshal","Output":"\t/usr/local/go/src/runtime/proc.go:460 +0xc0 fp=0x400051ff10 sp=0x400051fef0 pc=0x8a390\n"}
+{"Time":"2026-07-21T05:36:43.12293677Z","Action":"output","Package":"github.com/gocolly/colly/v2","Test":"TestNestedUnmarshal","Output":"runtime.gcBgMarkWorker(0x400033cbd0)\n"}
+{"Time":"2026-07-21T05:36:43.122939377Z","Action":"output","Package":"github.com/gocolly/colly/v2","Test":"TestNestedUnmarshal","Output":"\t/usr/local/go/src/runtime/mgc.go:1463 +0xe0 fp=0x400051ffb0 sp=0x400051ff10 pc=0x336b0\n"}
+{"Time":"2026-07-21T05:36:43.122941867Z","Action":"output","Package":"github.com/gocolly/colly/v2","Test":"TestNestedUnmarshal","Output":"runtime.gcBgMarkStartWorkers.gowrap1()\n"}
+{"Time":"2026-07-21T05:36:43.1229445Z","Action":"output","Package":"github.com/gocolly/colly/v2","Test":"TestNestedUnmarshal","Output":"\t/usr/local/go/src/runtime/mgc.go:1373 +0x28 fp=0x400051ffd0 sp=0x400051ffb0 pc=0x33598\n"}
+{"Time":"2026-07-21T05:36:43.122947012Z","Action":"output","Package":"github.com/gocolly/colly/v2","Test":"TestNestedUnmarshal","Output":"runtime.goexit({})\n"}
+{"Time":"2026-07-21T05:36:43.12295029Z","Action":"output","Package":"github.com/gocolly/colly/v2","Test":"TestNestedUnmarshal","Output":"\t/usr/local/go/src/runtime/asm_arm64.s:1268 +0x4 fp=0x400051ffd0 sp=0x400051ffd0 pc=0x92234\n"}
+{"Time":"2026-07-21T05:36:43.122953636Z","Action":"output","Package":"github.com/gocolly/colly/v2","Test":"TestNestedUnmarshal","Output":"created by runtime.gcBgMarkStartWorkers in goroutine 30\n"}
+{"Time":"2026-07-21T05:36:43.12295621Z","Action":"output","Package":"github.com/gocolly/colly/v2","Test":"TestNestedUnmarshal","Output":"\t/usr/local/go/src/runtime/mgc.go:1373 +0x140\n"}
+{"Time":"2026-07-21T05:36:43.12295813Z","Action":"output","Package":"github.com/gocolly/colly/v2","Test":"TestNestedUnmarshal","Output":"\n"}
+{"Time":"2026-07-21T05:36:43.122960737Z","Action":"output","Package":"github.com/gocolly/colly/v2","Test":"TestNestedUnmarshal","Output":"goroutine 159 gp=0x4000327a40 m=nil [GC worker (idle)]:\n"}
+{"Time":"2026-07-21T05:36:43.12296327Z","Action":"output","Package":"github.com/gocolly/colly/v2","Test":"TestNestedUnmarshal","Output":"runtime.gopark(0x1fddfb1c1c6af?, 0x3?, 0xf9?, 0x32?, 0x0?)\n"}
+{"Time":"2026-07-21T05:36:43.122968343Z","Action":"output","Package":"github.com/gocolly/colly/v2","Test":"TestNestedUnmarshal","Output":"\t/usr/local/go/src/runtime/proc.go:460 +0xc0 fp=0x400011ef10 sp=0x400011eef0 pc=0x8a390\n"}
+{"Time":"2026-07-21T05:36:43.122970904Z","Action":"output","Package":"github.com/gocolly/colly/v2","Test":"TestNestedUnmarshal","Output":"runtime.gcBgMarkWorker(0x400033cbd0)\n"}
+{"Time":"2026-07-21T05:36:43.122974508Z","Action":"output","Package":"github.com/gocolly/colly/v2","Test":"TestNestedUnmarshal","Output":"\t/usr/local/go/src/runtime/mgc.go:1463 +0xe0 fp=0x400011efb0 sp=0x400011ef10 pc=0x336b0\n"}
+{"Time":"2026-07-21T05:36:43.122976935Z","Action":"output","Package":"github.com/gocolly/colly/v2","Test":"TestNestedUnmarshal","Output":"runtime.gcBgMarkStartWorkers.gowrap1()\n"}
+{"Time":"2026-07-21T05:36:43.122979517Z","Action":"output","Package":"github.com/gocolly/colly/v2","Test":"TestNestedUnmarshal","Output":"\t/usr/local/go/src/runtime/mgc.go:1373 +0x28 fp=0x400011efd0 sp=0x400011efb0 pc=0x33598\n"}
+{"Time":"2026-07-21T05:36:43.122981866Z","Action":"output","Package":"github.com/gocolly/colly/v2","Test":"TestNestedUnmarshal","Output":"runtime.goexit({})\n"}
+{"Time":"2026-07-21T05:36:43.122986173Z","Action":"output","Package":"github.com/gocolly/colly/v2","Test":"TestNestedUnmarshal","Output":"\t/usr/local/go/src/runtime/asm_arm64.s:1268 +0x4 fp=0x400011efd0 sp=0x400011efd0 pc=0x92234\n"}
+{"Time":"2026-07-21T05:36:43.122988832Z","Action":"output","Package":"github.com/gocolly/colly/v2","Test":"TestNestedUnmarshal","Output":"created by runtime.gcBgMarkStartWorkers in goroutine 30\n"}
+{"Time":"2026-07-21T05:36:43.122991199Z","Action":"output","Package":"github.com/gocolly/colly/v2","Test":"TestNestedUnmarshal","Output":"\t/usr/local/go/src/runtime/mgc.go:1373 +0x140\n"}
+{"Time":"2026-07-21T05:36:43.189878126Z","Action":"output","Package":"github.com/gocolly/colly/v2","Output":"FAIL\tgithub.com/gocolly/colly/v2\t41.943s\n"}
+{"Time":"2026-07-21T05:36:43.190120128Z","Action":"fail","Package":"github.com/gocolly/colly/v2","Elapsed":41.943}

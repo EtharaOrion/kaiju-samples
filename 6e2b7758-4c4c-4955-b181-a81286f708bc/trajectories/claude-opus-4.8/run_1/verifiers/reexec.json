@@ -1,0 +1,6 @@
+{
+  "num_passed": 1825,
+  "num_tests": 1923,
+  "status": "OK",
+  "detail": "from report.json (pytest --json-report)"
+}

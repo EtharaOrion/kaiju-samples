@@ -1,0 +1,73 @@
+{
+  "solution": {
+    "passed": 14,
+    "failed": 2,
+    "errors": 0,
+    "skipped": 0,
+    "collected": 16,
+    "status": "OK",
+    "detail": "========================= 2 failed, 14 passed in 0.05s =========================",
+    "total": 16,
+    "pass_rate": 0.875,
+    "log": ""
+  },
+  "anchors": {
+    "golden": {
+      "passed": 16,
+      "failed": 0,
+      "errors": 0,
+      "skipped": 0,
+      "collected": 16,
+      "status": "OK",
+      "detail": "============================== 16 passed in 0.03s ==============================",
+      "total": 16,
+      "pass_rate": 1.0,
+      "log": ""
+    },
+    "stub": {
+      "passed": 0,
+      "failed": 16,
+      "errors": 0,
+      "skipped": 0,
+      "collected": 16,
+      "status": "OK",
+      "detail": "============================== 16 failed in 0.08s ==============================",
+      "total": 16,
+      "pass_rate": 0.0,
+      "log": ""
+    }
+  },
+  "analysis": {
+    "n_total": 16,
+    "n_sound": 16,
+    "sound_subset": [
+      "test_bezier_guards_division_by_zero",
+      "test_bezier_length_samples_curve",
+      "test_dispatch_event_returns_delegated_result",
+      "test_event_target_constructs_with_document_fallback",
+      "test_point_defaults_pressure_and_time",
+      "test_point_equals_compares_all_four_fields",
+      "test_point_validates_nan_and_coerces",
+      "test_point_velocity_guards_equal_time",
+      "test_signature_pad_begin_stroke_is_cancelable",
+      "test_signature_pad_dispatches_all_lifecycle_events",
+      "test_signature_pad_option_defaults_present",
+      "test_signature_pad_toDataURL_type_guards_svg",
+      "test_signature_pad_toggles_touch_and_selection_styles",
+      "test_signature_pad_touch_preventdefault_gated_on_cancelable",
+      "test_signature_pad_uses_nullish_coalescing_for_zero_preserving_options",
+      "test_throttle_returns_wrapper_and_rate_limits"
+    ],
+    "wrong_oracle_dropped": [],
+    "non_discriminating_dropped": [],
+    "inconclusive_on_stub": [],
+    "solution_pass_on_sound": 0.875,
+    "gap_vs_golden": 0.125,
+    "golden_status": "OK",
+    "stub_status": "OK",
+    "solution_status": "OK",
+    "infra_failures": [],
+    "stub_import_broken": false,
+    "stub_note": ""
+  }
+}

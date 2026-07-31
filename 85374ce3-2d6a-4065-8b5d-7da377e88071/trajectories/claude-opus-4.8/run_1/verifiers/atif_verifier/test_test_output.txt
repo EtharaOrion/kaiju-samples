@@ -1,0 +1,1056 @@
+============================= test session starts ==============================
+platform linux -- Python 3.8.20, pytest-8.3.5, pluggy-1.5.0 -- /usr/local/bin/python
+cachedir: .pytest_cache
+metadata: {'Python': '3.8.20', 'Platform': 'Linux-6.1.166-197.305.amzn2023.aarch64-aarch64-with-glibc2.34', 'Packages': {'pytest': '8.3.5', 'pluggy': '1.5.0'}, 'Plugins': {'cov': '5.0.0', 'json-report': '1.5.0', 'metadata': '3.1.1'}, 'AWS_REGION': 'us-east-1'}
+rootdir: /tmp/commit0-inplace-2burpyqv/tree
+configfile: pyproject.toml
+plugins: cov-5.0.0, json-report-1.5.0, metadata-3.1.1
+collecting ... collected 513 items
+
+tests/test_activation.py::test_sigmoid PASSED                            [  0%]
+tests/test_activation.py::test_tanh PASSED                               [  0%]
+tests/test_activation.py::test_sin PASSED                                [  0%]
+tests/test_activation.py::test_gauss PASSED                              [  0%]
+tests/test_activation.py::test_relu PASSED                               [  0%]
+tests/test_activation.py::test_softplus PASSED                           [  1%]
+tests/test_activation.py::test_identity PASSED                           [  1%]
+tests/test_activation.py::test_clamped PASSED                            [  1%]
+tests/test_activation.py::test_inv PASSED                                [  1%]
+tests/test_activation.py::test_log PASSED                                [  1%]
+tests/test_activation.py::test_exp PASSED                                [  2%]
+tests/test_activation.py::test_abs PASSED                                [  2%]
+tests/test_activation.py::test_hat PASSED                                [  2%]
+tests/test_activation.py::test_square PASSED                             [  2%]
+tests/test_activation.py::test_cube PASSED                               [  2%]
+tests/test_activation.py::test_add_plus PASSED                           [  3%]
+tests/test_activation.py::test_function_set PASSED                       [  3%]
+tests/test_activation.py::test_bad_add1 PASSED                           [  3%]
+tests/test_activation.py::test_bad_add2 PASSED                           [  3%]
+tests/test_aggregation.py::test_sum PASSED                               [  3%]
+tests/test_aggregation.py::test_product PASSED                           [  4%]
+tests/test_aggregation.py::test_max PASSED                               [  4%]
+tests/test_aggregation.py::test_min PASSED                               [  4%]
+tests/test_aggregation.py::test_maxabs PASSED                            [  4%]
+tests/test_aggregation.py::test_median PASSED                            [  4%]
+tests/test_aggregation.py::test_mean PASSED                              [  5%]
+tests/test_aggregation.py::test_add_minabs PASSED                        [  5%]
+tests/test_aggregation.py::test_function_set PASSED                      [  5%]
+tests/test_aggregation.py::test_bad_add1 PASSED                          [  5%]
+tests/test_aggregation.py::test_bad_add2 PASSED                          [  5%]
+tests/test_attributes.py::TestFloatAttribute::test_clamping_to_bounds PASSED [  6%]
+tests/test_attributes.py::TestFloatAttribute::test_gaussian_initialization PASSED [  6%]
+tests/test_attributes.py::TestFloatAttribute::test_init_value_clamping PASSED [  6%]
+tests/test_attributes.py::TestFloatAttribute::test_mutation_rate_one PASSED [  6%]
+tests/test_attributes.py::TestFloatAttribute::test_mutation_vs_replacement PASSED [  6%]
+tests/test_attributes.py::TestFloatAttribute::test_uniform_initialization PASSED [  7%]
+tests/test_attributes.py::TestFloatAttribute::test_validation_invalid_min_max PASSED [  7%]
+tests/test_attributes.py::TestFloatAttribute::test_validation_valid_min_max PASSED [  7%]
+tests/test_attributes.py::TestFloatAttribute::test_very_large_mutate_power PASSED [  7%]
+tests/test_attributes.py::TestFloatAttribute::test_very_small_mutate_power PASSED [  7%]
+tests/test_attributes.py::TestFloatAttribute::test_zero_mutation_rate PASSED [  7%]
+tests/test_attributes.py::TestIntegerAttribute::test_integer_clamping PASSED [  8%]
+tests/test_attributes.py::TestIntegerAttribute::test_integer_initialization PASSED [  8%]
+tests/test_attributes.py::TestIntegerAttribute::test_integer_mutation PASSED [  8%]
+tests/test_attributes.py::TestIntegerAttribute::test_integer_replacement PASSED [  8%]
+tests/test_attributes.py::TestIntegerAttribute::test_integer_validation_invalid_min_max PASSED [  8%]
+tests/test_attributes.py::TestIntegerAttribute::test_integer_zero_mutation_rate PASSED [  9%]
+tests/test_attributes.py::TestBoolAttribute::test_bool_initialization_false PASSED [  9%]
+tests/test_attributes.py::TestBoolAttribute::test_bool_initialization_random PASSED [  9%]
+tests/test_attributes.py::TestBoolAttribute::test_bool_initialization_true PASSED [  9%]
+tests/test_attributes.py::TestBoolAttribute::test_bool_mutation_returns_random_value PASSED [  9%]
+tests/test_attributes.py::TestBoolAttribute::test_bool_mutation_with_rate_to_false_add PASSED [ 10%]
+tests/test_attributes.py::TestBoolAttribute::test_bool_mutation_with_rate_to_true_add PASSED [ 10%]
+tests/test_attributes.py::TestBoolAttribute::test_bool_validation_invalid_default PASSED [ 10%]
+tests/test_attributes.py::TestBoolAttribute::test_bool_validation_valid_defaults PASSED [ 10%]
+tests/test_attributes.py::TestBoolAttribute::test_bool_zero_mutation_rate PASSED [ 10%]
+tests/test_attributes.py::TestStringAttribute::test_string_initialization_none PASSED [ 11%]
+tests/test_attributes.py::TestStringAttribute::test_string_initialization_random PASSED [ 11%]
+tests/test_attributes.py::TestStringAttribute::test_string_initialization_specific_default PASSED [ 11%]
+tests/test_attributes.py::TestStringAttribute::test_string_many_options PASSED [ 11%]
+tests/test_attributes.py::TestStringAttribute::test_string_mutation_changes_value PASSED [ 11%]
+tests/test_attributes.py::TestStringAttribute::test_string_single_option PASSED [ 12%]
+tests/test_attributes.py::TestStringAttribute::test_string_validation_invalid_default PASSED [ 12%]
+tests/test_attributes.py::TestStringAttribute::test_string_validation_valid_defaults PASSED [ 12%]
+tests/test_attributes.py::TestStringAttribute::test_string_zero_mutation_rate PASSED [ 12%]
+tests/test_attributes.py::TestAttributeEdgeCases::test_combined_mutation_and_replacement_rates PASSED [ 12%]
+tests/test_attributes.py::TestAttributeEdgeCases::test_config_item_name_generation PASSED [ 13%]
+tests/test_attributes.py::TestAttributeEdgeCases::test_float_attribute_with_equal_min_max PASSED [ 13%]
+tests/test_attributes.py::TestAttributeEdgeCases::test_float_extreme_negative_values PASSED [ 13%]
+tests/test_attributes.py::TestAttributeEdgeCases::test_float_extreme_positive_values PASSED [ 13%]
+tests/test_attributes.py::TestAttributeEdgeCases::test_integer_attribute_with_single_value_range PASSED [ 13%]
+tests/test_checkpoint.py::TestCheckpointIntegrity::test_checkpoint_after_first_generation PASSED [ 14%]
+tests/test_checkpoint.py::TestCheckpointIntegrity::test_checkpoint_can_restore_any_generation PASSED [ 14%]
+tests/test_checkpoint.py::TestCheckpointIntegrity::test_checkpoint_file_format_is_gzipped_pickle PASSED [ 14%]
+tests/test_checkpoint.py::TestCheckpointIntegrity::test_checkpoint_generation_preserved PASSED [ 14%]
+tests/test_checkpoint.py::TestCheckpointIntegrity::test_checkpoint_genome_indexer_continues PASSED [ 14%]
+tests/test_checkpoint.py::TestCheckpointIntegrity::test_checkpoint_innovation_numbers_continue PASSED [ 15%]
+tests/test_checkpoint.py::TestCheckpointIntegrity::test_checkpoint_multiple_generations FAILED [ 15%]
+tests/test_checkpoint.py::TestCheckpointIntegrity::test_checkpoint_no_id_collisions_after_restore PASSED [ 15%]
+tests/test_checkpoint.py::TestCheckpointIntegrity::test_checkpoint_preserves_fitness_values PASSED [ 15%]
+tests/test_checkpoint.py::TestCheckpointIntegrity::test_checkpoint_preserves_genome_keys PASSED [ 15%]
+tests/test_checkpoint.py::TestCheckpointIntegrity::test_checkpoint_preserves_genome_structure PASSED [ 15%]
+tests/test_checkpoint.py::TestCheckpointIntegrity::test_checkpoint_preserves_innovation_tracker PASSED [ 16%]
+tests/test_checkpoint.py::TestCheckpointIntegrity::test_checkpoint_preserves_population_size PASSED [ 16%]
+tests/test_checkpoint.py::TestCheckpointIntegrity::test_checkpoint_preserves_random_state PASSED [ 16%]
+tests/test_checkpoint.py::TestCheckpointIntegrity::test_checkpoint_preserves_species_count PASSED [ 16%]
+tests/test_checkpoint.py::TestCheckpointIntegrity::test_checkpoint_preserves_species_membership PASSED [ 16%]
+tests/test_checkpoint.py::TestCheckpointIntegrity::test_checkpoint_restore_succeeds PASSED [ 17%]
+tests/test_checkpoint.py::TestCheckpointIntegrity::test_checkpoint_restore_with_new_config PASSED [ 17%]
+tests/test_checkpoint.py::TestCheckpointIntegrity::test_checkpoint_restore_with_same_config PASSED [ 17%]
+tests/test_checkpoint.py::TestCheckpointIntegrity::test_checkpoint_resumed_run_matches_uninterrupted_run PASSED [ 17%]
+tests/test_checkpoint.py::TestCheckpointIntegrity::test_checkpoint_save_creates_file PASSED [ 17%]
+tests/test_config.py::test_nonexistent_config PASSED                     [ 18%]
+tests/test_config.py::test_bad_config_default_activation PASSED          [ 18%]
+tests/test_config.py::test_bad_config_unknown_option PASSED              [ 18%]
+tests/test_config.py::test_bad_config_RuntimeError PASSED                [ 18%]
+tests/test_config.py::test_bad_config5 PASSED                            [ 18%]
+tests/test_config.py::test_bad_config6 PASSED                            [ 19%]
+tests/test_config.py::test_bad_config7 PASSED                            [ 19%]
+tests/test_config.py::test_bad_config8 PASSED                            [ 19%]
+tests/test_config.py::test_bad_config9 PASSED                            [ 19%]
+tests/test_config_save_restore.py::ConfigTests::test_config_save_error PASSED [ 19%]
+tests/test_config_save_restore.py::ConfigTests::test_config_save_restore PASSED [ 20%]
+tests/test_config_save_restore.py::ConfigTests::test_config_save_restore1 PASSED [ 20%]
+tests/test_ctrnn.py::test_basic_two_neuron_dynamics PASSED               [ 20%]
+tests/test_ctrnn.py::test_reset_and_deterministic_trajectory PASSED      [ 20%]
+tests/test_ctrnn.py::test_advance_input_validation PASSED                [ 20%]
+tests/test_ctrnn.py::test_ctrnn_create_from_genome_prunes_and_builds_expected_structure PASSED [ 21%]
+tests/test_disable_rule.py::Test75PercentDisableRule::test_disable_rule_both_parents_disabled PASSED [ 21%]
+tests/test_disable_rule.py::Test75PercentDisableRule::test_disable_rule_both_parents_enabled PASSED [ 21%]
+tests/test_disable_rule.py::Test75PercentDisableRule::test_disable_rule_is_applied_correctly PASSED [ 21%]
+tests/test_disable_rule.py::Test75PercentDisableRule::test_disable_rule_one_parent_disabled PASSED [ 21%]
+tests/test_disable_rule.py::Test75PercentDisableRule::test_disable_rule_preserves_other_attributes PASSED [ 22%]
+tests/test_disable_rule.py::Test75PercentDisableRule::test_disable_rule_symmetry PASSED [ 22%]
+tests/test_disable_rule.py::TestDisableRuleImplementation::test_enabled_offspring_probability PASSED [ 22%]
+tests/test_disable_rule.py::TestDisableRuleImplementation::test_mathematical_model_accuracy PASSED [ 22%]
+tests/test_disable_rule.py::TestDisableRuleImplementation::test_no_false_enabling PASSED [ 22%]
+tests/test_disable_rule.py::TestDisableRuleImplementation::test_rule_applied_after_attribute_inheritance PASSED [ 23%]
+tests/test_export.py::test_feedforward_export PASSED                     [ 23%]
+tests/test_export.py::test_recurrent_export PASSED                       [ 23%]
+tests/test_export.py::test_ctrnn_export PASSED                           [ 23%]
+tests/test_export.py::test_iznn_export PASSED                            [ 23%]
+tests/test_export.py::test_json_validation PASSED                        [ 23%]
+tests/test_export.py::test_metadata_inclusion PASSED                     [ 24%]
+tests/test_export.py::test_export_to_file PASSED                         [ 24%]
+tests/test_export.py::test_builtin_activation_detection PASSED           [ 24%]
+tests/test_export.py::test_builtin_aggregation_detection PASSED          [ 24%]
+tests/test_export.py::test_activation_functions_marked_correctly PASSED  [ 24%]
+tests/test_export.py::test_aggregation_functions_marked_correctly PASSED [ 25%]
+tests/test_export.py::test_node_structure PASSED                         [ 25%]
+tests/test_export.py::test_connection_structure PASSED                   [ 25%]
+tests/test_export.py::test_export_without_metadata PASSED                [ 25%]
+tests/test_export.py::test_invalid_network_type PASSED                   [ 25%]
+tests/test_export.py::test_json_is_well_formatted PASSED                 [ 26%]
+tests/test_export.py::test_numeric_precision PASSED                      [ 26%]
+tests/test_extinction.py::TestCompleteExtinction::test_extinction_after_successful_evolution PASSED [ 26%]
+tests/test_extinction.py::TestCompleteExtinction::test_extinction_callback_receives_correct_state PASSED [ 26%]
+tests/test_extinction.py::TestCompleteExtinction::test_extinction_custom_reporter_callback_order PASSED [ 26%]
+tests/test_extinction.py::TestCompleteExtinction::test_extinction_exception_raised PASSED [ 27%]
+tests/test_extinction.py::TestCompleteExtinction::test_extinction_exception_type PASSED [ 27%]
+tests/test_extinction.py::TestCompleteExtinction::test_extinction_generation_counter_continues PASSED [ 27%]
+tests/test_extinction.py::TestCompleteExtinction::test_extinction_in_first_generation PASSED [ 27%]
+tests/test_extinction.py::TestCompleteExtinction::test_extinction_innovation_tracker_reset PASSED [ 27%]
+tests/test_extinction.py::TestCompleteExtinction::test_extinction_multiple_times PASSED [ 28%]
+tests/test_extinction.py::TestCompleteExtinction::test_extinction_population_reset_creates_new_genomes PASSED [ 28%]
+tests/test_extinction.py::TestCompleteExtinction::test_extinction_population_size_maintained PASSED [ 28%]
+tests/test_extinction.py::TestCompleteExtinction::test_extinction_preserves_best_genome PASSED [ 28%]
+tests/test_extinction.py::TestCompleteExtinction::test_extinction_recovery_with_reset PASSED [ 28%]
+tests/test_extinction.py::TestCompleteExtinction::test_extinction_reporter_notified PASSED [ 29%]
+tests/test_extinction.py::TestCompleteExtinction::test_extinction_species_recreated PASSED [ 29%]
+tests/test_extinction.py::TestCompleteExtinction::test_extinction_statistics_collection PASSED [ 29%]
+tests/test_extinction.py::TestCompleteExtinction::test_extinction_with_checkpointer PASSED [ 29%]
+tests/test_extinction.py::TestCompleteExtinction::test_extinction_with_elitism_zero PASSED [ 29%]
+tests/test_extinction.py::TestCompleteExtinction::test_extinction_with_fitness_threshold PASSED [ 30%]
+tests/test_extinction.py::TestCompleteExtinction::test_extinction_with_negative_fitness PASSED [ 30%]
+tests/test_extinction.py::TestCompleteExtinction::test_extinction_with_small_population PASSED [ 30%]
+tests/test_extinction.py::TestCompleteExtinction::test_extinction_without_reset_preserves_state PASSED [ 30%]
+tests/test_extinction.py::TestCompleteExtinction::test_no_extinction_with_improving_fitness PASSED [ 30%]
+tests/test_extinction.py::TestExtinctionEdgeCases::test_extinction_exception_inheritance PASSED [ 30%]
+tests/test_extinction.py::TestExtinctionEdgeCases::test_extinction_exception_message PASSED [ 31%]
+tests/test_extinction.py::TestExtinctionEdgeCases::test_extinction_with_single_species PASSED [ 31%]
+tests/test_extinction.py::TestExtinctionEdgeCases::test_no_fitness_termination_with_extinction PASSED [ 31%]
+tests/test_feedforward_network.py::test_unconnected PASSED               [ 31%]
+tests/test_feedforward_network.py::test_basic PASSED                     [ 31%]
+tests/test_feedforward_network.py::test_simple_nohidden_from_genome PASSED [ 32%]
+tests/test_feedforward_network.py::test_simple_hidden_from_genome PASSED [ 32%]
+tests/test_fitness_evaluation.py::TestFitnessEvaluation::test_all_same_fitness PASSED [ 32%]
+tests/test_fitness_evaluation.py::TestFitnessEvaluation::test_best_genome_returned PASSED [ 32%]
+tests/test_fitness_evaluation.py::TestFitnessEvaluation::test_best_genome_tracked_across_generations PASSED [ 32%]
+tests/test_fitness_evaluation.py::TestFitnessEvaluation::test_fitness_criterion_max PASSED [ 33%]
+tests/test_fitness_evaluation.py::TestFitnessEvaluation::test_fitness_criterion_mean PASSED [ 33%]
+tests/test_fitness_evaluation.py::TestFitnessEvaluation::test_fitness_criterion_min PASSED [ 33%]
+tests/test_fitness_evaluation.py::TestFitnessEvaluation::test_fitness_function_called_each_generation PASSED [ 33%]
+tests/test_fitness_evaluation.py::TestFitnessEvaluation::test_fitness_function_exception_propagates PASSED [ 33%]
+tests/test_fitness_evaluation.py::TestFitnessEvaluation::test_fitness_function_receives_correct_arguments PASSED [ 34%]
+tests/test_fitness_evaluation.py::TestFitnessEvaluation::test_fitness_function_with_valid_values PASSED [ 34%]
+tests/test_fitness_evaluation.py::TestFitnessEvaluation::test_fitness_improving_over_generations PASSED [ 34%]
+tests/test_fitness_evaluation.py::TestFitnessEvaluation::test_fitness_not_assigned_raises_error PASSED [ 34%]
+tests/test_fitness_evaluation.py::TestFitnessEvaluation::test_fitness_set_to_none_raises_error PASSED [ 34%]
+tests/test_fitness_evaluation.py::TestFitnessEvaluation::test_fitness_type_validation PASSED [ 35%]
+tests/test_fitness_evaluation.py::TestFitnessEvaluation::test_floating_point_precision PASSED [ 35%]
+tests/test_fitness_evaluation.py::TestFitnessEvaluation::test_invalid_fitness_criterion_raises_error PASSED [ 35%]
+tests/test_fitness_evaluation.py::TestFitnessEvaluation::test_negative_fitness_values PASSED [ 35%]
+tests/test_fitness_evaluation.py::TestFitnessEvaluation::test_no_fitness_termination_requires_generation_limit PASSED [ 35%]
+tests/test_fitness_evaluation.py::TestFitnessEvaluation::test_no_fitness_termination_runs_all_generations PASSED [ 36%]
+tests/test_fitness_evaluation.py::TestFitnessEvaluation::test_population_size_maintained PASSED [ 36%]
+tests/test_fitness_evaluation.py::TestFitnessEvaluation::test_some_genomes_high_fitness_some_low PASSED [ 36%]
+tests/test_fitness_evaluation.py::TestFitnessEvaluation::test_threshold_not_reached_runs_all_generations PASSED [ 36%]
+tests/test_fitness_evaluation.py::TestFitnessEvaluation::test_threshold_termination_stops_evolution PASSED [ 36%]
+tests/test_fitness_evaluation.py::TestFitnessEvaluation::test_very_large_fitness_values PASSED [ 37%]
+tests/test_fitness_evaluation.py::TestFitnessEvaluation::test_zero_fitness_values PASSED [ 37%]
+tests/test_genes.py::TestDefaultNodeGene::test_copy_preserves_key_and_attributes PASSED [ 37%]
+tests/test_genes.py::TestDefaultNodeGene::test_crossover_randomly_inherits_attributes PASSED [ 37%]
+tests/test_genes.py::TestDefaultNodeGene::test_distance_respects_activation_aggregation_and_scaling PASSED [ 37%]
+tests/test_genes.py::TestDefaultNodeGene::test_init_requires_int_key PASSED [ 38%]
+tests/test_genes.py::TestDefaultNodeGene::test_lt_compares_by_key_and_rejects_mismatched_key_types PASSED [ 38%]
+tests/test_genes.py::TestDefaultNodeGene::test_str_includes_key_and_attributes PASSED [ 38%]
+tests/test_genes.py::TestDefaultConnectionGene::test_copy_preserves_key_innovation_and_attributes PASSED [ 38%]
+tests/test_genes.py::TestDefaultConnectionGene::test_crossover_preserves_innovation_and_key PASSED [ 38%]
+tests/test_genes.py::TestDefaultConnectionGene::test_crossover_requires_matching_innovations_for_connection_genes FAILED [ 38%]
+tests/test_genes.py::TestDefaultConnectionGene::test_distance_includes_weight_difference_and_enabled_flag PASSED [ 39%]
+tests/test_genes.py::TestDefaultConnectionGene::test_equality_and_hash_based_on_innovation_only PASSED [ 39%]
+tests/test_genes.py::TestDefaultConnectionGene::test_init_requires_tuple_key_and_int_innovation PASSED [ 39%]
+tests/test_genome.py::TestCreateNew::test_fs_neat_hidden PASSED          [ 39%]
+tests/test_genome.py::TestCreateNew::test_fs_neat_hidden_old PASSED      [ 39%]
+tests/test_genome.py::TestCreateNew::test_fs_neat_no_hidden PASSED       [ 40%]
+tests/test_genome.py::TestCreateNew::test_fs_neat_nohidden PASSED        [ 40%]
+tests/test_genome.py::TestCreateNew::test_fully_connected_hidden_direct PASSED [ 40%]
+tests/test_genome.py::TestCreateNew::test_fully_connected_hidden_nodirect PASSED [ 40%]
+tests/test_genome.py::TestCreateNew::test_fully_connected_hidden_nodirect_old PASSED [ 40%]
+tests/test_genome.py::TestCreateNew::test_fully_connected_no_hidden PASSED [ 41%]
+tests/test_genome.py::TestCreateNew::test_partially_connected_hidden_direct PASSED [ 41%]
+tests/test_genome.py::TestCreateNew::test_partially_connected_hidden_nodirect PASSED [ 41%]
+tests/test_genome.py::TestCreateNew::test_partially_connected_hidden_nodirect_old PASSED [ 41%]
+tests/test_genome.py::TestCreateNew::test_partially_connected_no_hidden PASSED [ 41%]
+tests/test_genome.py::TestCreateNew::test_unconnected_hidden PASSED      [ 42%]
+tests/test_genome.py::TestCreateNew::test_unconnected_no_hidden PASSED   [ 42%]
+tests/test_genome.py::TestPruning::test_empty_network PASSED             [ 42%]
+tests/test_genome.py::TestPruning::test_get_new_node_key_empty_nodes_starts_at_num_outputs PASSED [ 42%]
+tests/test_genome.py::TestPruning::test_nothing_to_prune PASSED          [ 42%]
+tests/test_genome.py::TestPruning::test_unused_node PASSED               [ 43%]
+tests/test_genome_crossover.py::TestGenomeCrossover::test_crossover_creates_offspring PASSED [ 43%]
+tests/test_genome_crossover.py::TestGenomeCrossover::test_crossover_equal_fitness_includes_parent1_genes PASSED [ 43%]
+tests/test_genome_crossover.py::TestGenomeCrossover::test_crossover_fitness_determines_parent_priority PASSED [ 43%]
+tests/test_genome_crossover.py::TestGenomeCrossover::test_crossover_handles_disjoint_genes PASSED [ 43%]
+tests/test_genome_crossover.py::TestGenomeCrossover::test_crossover_handles_excess_genes PASSED [ 44%]
+tests/test_genome_crossover.py::TestGenomeCrossover::test_crossover_identical_genomes PASSED [ 44%]
+tests/test_genome_crossover.py::TestGenomeCrossover::test_crossover_inherits_from_fitter_parent PASSED [ 44%]
+tests/test_genome_crossover.py::TestGenomeCrossover::test_crossover_matches_by_innovation_number PASSED [ 44%]
+tests/test_genome_crossover.py::TestGenomeCrossover::test_crossover_matching_genes_from_both_parents PASSED [ 44%]
+tests/test_genome_crossover.py::TestGenomeCrossover::test_crossover_maximally_different_genomes PASSED [ 45%]
+tests/test_genome_crossover.py::TestGenomeCrossover::test_crossover_multiple_times_produces_variation PASSED [ 45%]
+tests/test_genome_crossover.py::TestGenomeCrossover::test_crossover_node_inheritance PASSED [ 45%]
+tests/test_genome_crossover.py::TestGenomeCrossover::test_crossover_preserves_innovation_numbers PASSED [ 45%]
+tests/test_genome_crossover.py::TestGenomeCrossover::test_crossover_preserves_node_consistency PASSED [ 45%]
+tests/test_genome_crossover.py::TestGenomeCrossover::test_crossover_swaps_parent_order_by_fitness PASSED [ 46%]
+tests/test_genome_crossover.py::TestGenomeCrossover::test_crossover_with_disabled_connections PASSED [ 46%]
+tests/test_genome_crossover.py::TestGenomeCrossover::test_crossover_with_no_common_genes PASSED [ 46%]
+tests/test_genome_mutations.py::TestGenomeMutations::test_activation_mutation_changes_function SKIPPED [ 46%]
+tests/test_genome_mutations.py::TestGenomeMutations::test_add_connection_creates_new_connection PASSED [ 46%]
+tests/test_genome_mutations.py::TestGenomeMutations::test_add_connection_no_cycles_in_feedforward PASSED [ 46%]
+tests/test_genome_mutations.py::TestGenomeMutations::test_add_connection_no_duplicates PASSED [ 47%]
+tests/test_genome_mutations.py::TestGenomeMutations::test_add_connection_no_output_to_output PASSED [ 47%]
+tests/test_genome_mutations.py::TestGenomeMutations::test_add_connection_valid_endpoints PASSED [ 47%]
+tests/test_genome_mutations.py::TestGenomeMutations::test_add_connection_with_innovation_tracking PASSED [ 47%]
+tests/test_genome_mutations.py::TestGenomeMutations::test_add_node_creates_new_node PASSED [ 47%]
+tests/test_genome_mutations.py::TestGenomeMutations::test_add_node_creates_valid_connections PASSED [ 48%]
+tests/test_genome_mutations.py::TestGenomeMutations::test_add_node_disables_original_connection PASSED [ 48%]
+tests/test_genome_mutations.py::TestGenomeMutations::test_add_node_initial_bias_zero PASSED [ 48%]
+tests/test_genome_mutations.py::TestGenomeMutations::test_add_node_preserves_weight_path PASSED [ 48%]
+tests/test_genome_mutations.py::TestGenomeMutations::test_add_node_splits_connection PASSED [ 48%]
+tests/test_genome_mutations.py::TestGenomeMutations::test_add_node_with_no_connections PASSED [ 49%]
+tests/test_genome_mutations.py::TestGenomeMutations::test_aggregation_mutation_changes_function SKIPPED [ 49%]
+tests/test_genome_mutations.py::TestGenomeMutations::test_fully_connected_network_add_connection PASSED [ 49%]
+tests/test_genome_mutations.py::TestGenomeMutations::test_multiple_structural_mutations_sequence PASSED [ 49%]
+tests/test_genome_mutations.py::TestGenomeMutations::test_mutate_respects_single_structural_mutation_flag PASSED [ 49%]
+tests/test_genome_mutations.py::TestGenomeMutations::test_mutation_on_large_genome PASSED [ 50%]
+tests/test_genome_mutations.py::TestGenomeMutations::test_mutation_on_minimal_genome PASSED [ 50%]
+tests/test_genome_mutations.py::TestGenomeMutations::test_mutation_preserves_genome_validity PASSED [ 50%]
+tests/test_genome_mutations.py::TestGenomeMutations::test_remove_connection_deletes_connection PASSED [ 50%]
+tests/test_genome_mutations.py::TestGenomeMutations::test_remove_connection_on_empty_genome PASSED [ 50%]
+tests/test_genome_mutations.py::TestGenomeMutations::test_remove_connection_preserves_nodes PASSED [ 51%]
+tests/test_genome_mutations.py::TestGenomeMutations::test_remove_node_deletes_associated_connections PASSED [ 51%]
+tests/test_genome_mutations.py::TestGenomeMutations::test_remove_node_deletes_node PASSED [ 51%]
+tests/test_genome_mutations.py::TestGenomeMutations::test_remove_node_on_minimal_genome PASSED [ 51%]
+tests/test_genome_mutations.py::TestGenomeMutations::test_remove_node_protects_output_nodes PASSED [ 51%]
+tests/test_genome_mutations.py::TestGenomeMutations::test_weight_mutation_changes_values PASSED [ 52%]
+tests/test_genome_mutations.py::TestGenomeMutations::test_weight_mutation_respects_bounds PASSED [ 52%]
+tests/test_graphs.py::test_creates_cycle PASSED                          [ 52%]
+tests/test_graphs.py::test_required_for_output PASSED                    [ 52%]
+tests/test_graphs.py::test_fuzz_required PASSED                          [ 52%]
+tests/test_graphs.py::test_feed_forward_layers PASSED                    [ 53%]
+tests/test_graphs.py::test_fuzz_feed_forward_layers PASSED               [ 53%]
+tests/test_graphs.py::test_orphaned_single_node PASSED                   [ 53%]
+tests/test_graphs.py::test_orphaned_multiple_nodes PASSED                [ 53%]
+tests/test_graphs.py::test_orphaned_mixed PASSED                         [ 53%]
+tests/test_graphs.py::test_orphaned_output_node PASSED                   [ 53%]
+tests/test_graphs.py::test_orphaned_with_self_loop_prevention PASSED     [ 54%]
+tests/test_graphs_edge_cases.py::TestCycleDetection::test_complex_network_no_cycle PASSED [ 54%]
+tests/test_graphs_edge_cases.py::TestCycleDetection::test_complex_network_with_cycle PASSED [ 54%]
+tests/test_graphs_edge_cases.py::TestCycleDetection::test_cycle_through_long_path PASSED [ 54%]
+tests/test_graphs_edge_cases.py::TestCycleDetection::test_diamond_pattern PASSED [ 54%]
+tests/test_graphs_edge_cases.py::TestCycleDetection::test_direct_cycle PASSED [ 55%]
+tests/test_graphs_edge_cases.py::TestCycleDetection::test_disconnected_components PASSED [ 55%]
+tests/test_graphs_edge_cases.py::TestCycleDetection::test_empty_graph PASSED [ 55%]
+tests/test_graphs_edge_cases.py::TestCycleDetection::test_multi_step_cycle PASSED [ 55%]
+tests/test_graphs_edge_cases.py::TestCycleDetection::test_self_loop PASSED [ 55%]
+tests/test_graphs_edge_cases.py::TestCycleDetection::test_single_connection PASSED [ 56%]
+tests/test_graphs_edge_cases.py::TestRequiredForOutput::test_complex_branching_merging PASSED [ 56%]
+tests/test_graphs_edge_cases.py::TestRequiredForOutput::test_direct_connection PASSED [ 56%]
+tests/test_graphs_edge_cases.py::TestRequiredForOutput::test_disconnected_nodes PASSED [ 56%]
+tests/test_graphs_edge_cases.py::TestRequiredForOutput::test_empty_connections PASSED [ 56%]
+tests/test_graphs_edge_cases.py::TestRequiredForOutput::test_multiple_outputs PASSED [ 57%]
+tests/test_graphs_edge_cases.py::TestRequiredForOutput::test_partially_connected_outputs PASSED [ 57%]
+tests/test_graphs_edge_cases.py::TestRequiredForOutput::test_recurrent_connections PASSED [ 57%]
+tests/test_graphs_edge_cases.py::TestRequiredForOutput::test_redundant_connections PASSED [ 57%]
+tests/test_graphs_edge_cases.py::TestRequiredForOutput::test_single_input_single_output PASSED [ 57%]
+tests/test_graphs_edge_cases.py::TestRequiredForOutput::test_single_intermediate_layer PASSED [ 58%]
+tests/test_graphs_edge_cases.py::TestRequiredForOutput::test_unused_intermediate_nodes PASSED [ 58%]
+tests/test_graphs_edge_cases.py::TestFeedForwardLayers::test_asymmetric_dependencies PASSED [ 58%]
+tests/test_graphs_edge_cases.py::TestFeedForwardLayers::test_bottleneck_structure PASSED [ 58%]
+tests/test_graphs_edge_cases.py::TestFeedForwardLayers::test_complex_merge_points PASSED [ 58%]
+tests/test_graphs_edge_cases.py::TestFeedForwardLayers::test_deep_network PASSED [ 59%]
+tests/test_graphs_edge_cases.py::TestFeedForwardLayers::test_dependent_layers PASSED [ 59%]
+tests/test_graphs_edge_cases.py::TestFeedForwardLayers::test_diamond_structure PASSED [ 59%]
+tests/test_graphs_edge_cases.py::TestFeedForwardLayers::test_empty_network PASSED [ 59%]
+tests/test_graphs_edge_cases.py::TestFeedForwardLayers::test_excludes_unused_nodes PASSED [ 59%]
+tests/test_graphs_edge_cases.py::TestFeedForwardLayers::test_linear_chain PASSED [ 60%]
+tests/test_graphs_edge_cases.py::TestFeedForwardLayers::test_multiple_outputs_different_depths PASSED [ 60%]
+tests/test_graphs_edge_cases.py::TestFeedForwardLayers::test_parallel_paths PASSED [ 60%]
+tests/test_graphs_edge_cases.py::TestFeedForwardLayers::test_partial_input_usage PASSED [ 60%]
+tests/test_graphs_edge_cases.py::TestFeedForwardLayers::test_single_layer PASSED [ 60%]
+tests/test_graphs_edge_cases.py::TestFeedForwardLayers::test_wide_network PASSED [ 61%]
+tests/test_graphs_edge_cases.py::TestGraphAlgorithmsEdgeCases::test_all_nodes_required PASSED [ 61%]
+tests/test_graphs_edge_cases.py::TestGraphAlgorithmsEdgeCases::test_duplicate_connections PASSED [ 61%]
+tests/test_graphs_edge_cases.py::TestGraphAlgorithmsEdgeCases::test_large_node_ids PASSED [ 61%]
+tests/test_graphs_edge_cases.py::TestGraphAlgorithmsEdgeCases::test_negative_node_ids PASSED [ 61%]
+tests/test_graphs_edge_cases.py::TestGraphAlgorithmsEdgeCases::test_single_node_network PASSED [ 61%]
+tests/test_graphs_edge_cases.py::TestGraphAlgorithmsEdgeCases::test_sparse_node_ids PASSED [ 62%]
+tests/test_innovation.py::TestInnovationTracker::test_add_node_mutations_tracked_separately PASSED [ 62%]
+tests/test_innovation.py::TestInnovationTracker::test_different_mutations_different_innovations PASSED [ 62%]
+tests/test_innovation.py::TestInnovationTracker::test_first_innovation_number_is_one PASSED [ 62%]
+tests/test_innovation.py::TestInnovationTracker::test_global_counter_increments PASSED [ 62%]
+tests/test_innovation.py::TestInnovationTracker::test_pickle_preserves_generation_tracking PASSED [ 63%]
+tests/test_innovation.py::TestInnovationTracker::test_pickle_serialization PASSED [ 63%]
+tests/test_innovation.py::TestInnovationTracker::test_reset_generation_clears_tracking PASSED [ 63%]
+tests/test_innovation.py::TestInnovationTracker::test_reset_generation_preserves_global_counter PASSED [ 63%]
+tests/test_innovation.py::TestInnovationTracker::test_same_connection_different_mutation_types PASSED [ 63%]
+tests/test_innovation.py::TestInnovationTracker::test_same_mutation_same_generation_same_innovation PASSED [ 64%]
+tests/test_innovation.py::TestGenomeInnovationTracking::test_initial_connections_have_innovations PASSED [ 64%]
+tests/test_innovation.py::TestGenomeInnovationTracking::test_initial_connections_unique_innovations PASSED [ 64%]
+tests/test_innovation.py::TestGenomeInnovationTracking::test_mutate_add_connection_assigns_innovation PASSED [ 64%]
+tests/test_innovation.py::TestGenomeInnovationTracking::test_mutate_add_connection_deduplication PASSED [ 64%]
+tests/test_innovation.py::TestGenomeInnovationTracking::test_mutate_add_node_assigns_two_innovations PASSED [ 65%]
+tests/test_innovation.py::TestCrossoverInnovationMatching::test_crossover_matches_by_innovation PASSED [ 65%]
+tests/test_innovation.py::TestCrossoverInnovationMatching::test_crossover_preserves_innovation_numbers PASSED [ 65%]
+tests/test_innovation.py::TestCrossoverInnovationMatching::test_matching_genes_same_innovation PASSED [ 65%]
+tests/test_innovation.py::TestInnovationCheckpointing::test_checkpoint_preserves_innovation_counter PASSED [ 65%]
+tests/test_innovation_integration.py::TestXORWithInnovationTracking::test_crossover_preserves_innovations PASSED [ 66%]
+tests/test_innovation_integration.py::TestXORWithInnovationTracking::test_generation_reset_clears_deduplication PASSED [ 66%]
+tests/test_innovation_integration.py::TestXORWithInnovationTracking::test_innovation_counter_increases_monotonically PASSED [ 66%]
+tests/test_innovation_integration.py::TestXORWithInnovationTracking::test_innovation_tracking_during_evolution PASSED [ 66%]
+tests/test_innovation_integration.py::TestXORWithInnovationTracking::test_no_innovation_collisions PASSED [ 66%]
+tests/test_innovation_integration.py::TestXORWithInnovationTracking::test_same_mutation_same_generation_same_innovation PASSED [ 67%]
+tests/test_issue_188.py::TestIssue188AttributeIsolation::test_bool_attribute_isolation PASSED [ 67%]
+tests/test_issue_188.py::TestIssue188AttributeIsolation::test_float_attribute_isolation PASSED [ 67%]
+tests/test_issue_188.py::TestIssue188AttributeIsolation::test_genes_pattern PASSED [ 67%]
+tests/test_issue_188.py::TestIssue188AttributeIsolation::test_integer_attribute_isolation PASSED [ 67%]
+tests/test_issue_188.py::TestIssue188AttributeIsolation::test_mixed_attribute_types_isolation PASSED [ 68%]
+tests/test_issue_188.py::TestIssue188AttributeIsolation::test_string_attribute_isolation PASSED [ 68%]
+tests/test_issue_188.py::TestIssue188AttributeIsolation::test_string_attribute_mutation_isolation PASSED [ 68%]
+tests/test_iznn.py::test_single_neuron_regular_spiking_pulse_response PASSED [ 68%]
+tests/test_iznn.py::test_izneuron_reset_restores_initial_state PASSED    [ 68%]
+tests/test_iznn.py::test_iznn_uses_external_inputs_and_resets_neurons PASSED [ 69%]
+tests/test_iznn.py::test_iznn_set_inputs_length_mismatch_raises PASSED   [ 69%]
+tests/test_iznn.py::test_get_time_step_positive PASSED                   [ 69%]
+tests/test_nn.py::test_orphaned_node_network PASSED                      [ 69%]
+tests/test_nn.py::test_feedforward_input_length_mismatch_raises PASSED   [ 69%]
+tests/test_nn.py::test_recurrent_input_length_mismatch_raises PASSED     [ 69%]
+tests/test_nn.py::test_recurrent_reset_zeros_state_and_resets_active PASSED [ 70%]
+tests/test_nn.py::test_recurrent_create_from_genome_prunes_unused_nodes PASSED [ 70%]
+tests/test_nn.py::test_feedforward_create_unique_value_sets_all_weights_and_affects_output PASSED [ 70%]
+tests/test_nn.py::test_feedforward_create_random_values_assigns_weights_in_range PASSED [ 70%]
+tests/test_parallel_evaluator.py::test_parallel_evaluator_context_manager PASSED [ 70%]
+tests/test_parallel_evaluator.py::test_parallel_evaluator_explicit_close PASSED [ 71%]
+tests/test_parallel_evaluator.py::test_parallel_evaluator_backward_compatibility PASSED [ 71%]
+tests/test_population.py::PopulationTests::test_checkpoint_generation_matches_population_generation PASSED [ 71%]
+tests/test_population.py::PopulationTests::test_count_after_checkpoint_restore PASSED [ 71%]
+tests/test_population.py::PopulationTests::test_invalid_fitness_criterion PASSED [ 71%]
+tests/test_population.py::PopulationTests::test_reporter_consistency_after_checkpoint_restore PASSED [ 72%]
+tests/test_population.py::PopulationTests::test_valid_fitness_criterion PASSED [ 72%]
+tests/test_recurrent_network.py::test_unconnected PASSED                 [ 72%]
+tests/test_recurrent_network.py::test_basic PASSED                       [ 72%]
+tests/test_reproducibility.py::TestBasicReproducibility::test_different_seeds_produce_different_results PASSED [ 72%]
+tests/test_reproducibility.py::TestBasicReproducibility::test_no_seed_still_works PASSED [ 73%]
+tests/test_reproducibility.py::TestBasicReproducibility::test_same_seed_produces_same_results PASSED [ 73%]
+tests/test_reproducibility.py::TestBasicReproducibility::test_seed_from_config PASSED [ 73%]
+tests/test_reproducibility.py::TestBasicReproducibility::test_seed_parameter_overrides_config PASSED [ 73%]
+tests/test_reproducibility.py::TestParallelReproducibility::test_parallel_different_seeds PASSED [ 73%]
+tests/test_reproducibility.py::TestParallelReproducibility::test_parallel_no_seed_still_works PASSED [ 74%]
+tests/test_reproducibility.py::TestParallelReproducibility::test_parallel_same_seed_produces_same_results PASSED [ 74%]
+tests/test_reproducibility.py::TestParallelReproducibility::test_parallel_with_random_fitness PASSED [ 74%]
+tests/test_reproduction.py::TestSpawnComputation::test_spawn_adjust1 PASSED [ 74%]
+tests/test_reproduction.py::TestSpawnComputation::test_spawn_adjust2 PASSED [ 74%]
+tests/test_reproduction.py::TestSpawnComputation::test_spawn_adjust3 PASSED [ 75%]
+tests/test_reproduction.py::TestReproducePopulationSize::test_reproduce_respects_pop_size PASSED [ 75%]
+tests/test_reproduction.py::TestElitism::test_elites_may_disappear_only_when_species_extinct SKIPPED [ 75%]
+tests/test_reproduction.py::TestElitism::test_elites_preserved_for_surviving_species PASSED [ 75%]
+tests/test_simple_run.py::test_serial PASSED                             [ 75%]
+tests/test_simple_run.py::test_serial_bad_input PASSED                   [ 76%]
+tests/test_simple_run.py::test_serial_random FAILED                      [ 76%]
+tests/test_simple_run.py::test_serial3 FAILED                            [ 76%]
+tests/test_simple_run.py::test_serial4 FAILED                            [ 76%]
+tests/test_simple_run.py::test_serial5 FAILED                            [ 76%]
+tests/test_simple_run.py::test_serial4_bad PASSED                        [ 76%]
+tests/test_simple_run.py::test_serial_bad_config PASSED                  [ 77%]
+tests/test_simple_run.py::test_serial_bad_configA PASSED                 [ 77%]
+tests/test_simple_run.py::test_serial_extinction_exception PASSED        [ 77%]
+tests/test_simple_run.py::test_serial_extinction_no_exception PASSED     [ 77%]
+tests/test_simple_run.py::test_parallel PASSED                           [ 77%]
+tests/test_simple_run.py::test_run_nn_recurrent PASSED                   [ 78%]
+tests/test_simple_run.py::test_run_nn_recurrent_bad PASSED               [ 78%]
+tests/test_simple_run.py::test_run_ctrnn PASSED                          [ 78%]
+tests/test_simple_run.py::test_run_ctrnn_bad PASSED                      [ 78%]
+tests/test_simple_run.py::test_run_iznn PASSED                           [ 78%]
+tests/test_simple_run.py::test_run_iznn_bad PASSED                       [ 79%]
+tests/test_species.py::TestSpeciesManagement::test_all_genomes_identical PASSED [ 79%]
+tests/test_species.py::TestSpeciesManagement::test_all_genomes_mapped PASSED [ 79%]
+tests/test_species.py::TestSpeciesManagement::test_all_genomes_maximally_different PASSED [ 79%]
+tests/test_species.py::TestSpeciesManagement::test_cache_consistency PASSED [ 79%]
+tests/test_species.py::TestSpeciesManagement::test_cache_hit_on_repeat_query PASSED [ 80%]
+tests/test_species.py::TestSpeciesManagement::test_cache_miss_on_first_query PASSED [ 80%]
+tests/test_species.py::TestSpeciesManagement::test_cache_multiple_pairs PASSED [ 80%]
+tests/test_species.py::TestSpeciesManagement::test_cache_symmetry PASSED [ 80%]
+tests/test_species.py::TestSpeciesManagement::test_config_from_file PASSED [ 80%]
+tests/test_species.py::TestSpeciesManagement::test_different_compatibility_thresholds PASSED [ 81%]
+tests/test_species.py::TestSpeciesManagement::test_distance_diverse_structures PASSED [ 81%]
+tests/test_species.py::TestSpeciesManagement::test_distance_empty_connections PASSED [ 81%]
+tests/test_species.py::TestSpeciesManagement::test_distance_identical_genomes PASSED [ 81%]
+tests/test_species.py::TestSpeciesManagement::test_distance_minimal_nodes PASSED [ 81%]
+tests/test_species.py::TestSpeciesManagement::test_distance_self PASSED  [ 82%]
+tests/test_species.py::TestSpeciesManagement::test_distance_symmetry PASSED [ 82%]
+tests/test_species.py::TestSpeciesManagement::test_empty_genome_connections PASSED [ 82%]
+tests/test_species.py::TestSpeciesManagement::test_large_population PASSED [ 82%]
+tests/test_species.py::TestSpeciesManagement::test_mapping_after_speciation PASSED [ 82%]
+tests/test_species.py::TestSpeciesManagement::test_mapping_integrity PASSED [ 83%]
+tests/test_species.py::TestSpeciesManagement::test_mapping_synchronized_with_species PASSED [ 83%]
+tests/test_species.py::TestSpeciesManagement::test_multiple_generations_tracking PASSED [ 83%]
+tests/test_species.py::TestSpeciesManagement::test_new_species_when_incompatible PASSED [ 83%]
+tests/test_species.py::TestSpeciesManagement::test_no_orphaned_mappings PASSED [ 83%]
+tests/test_species.py::TestSpeciesManagement::test_representative_initial_selection PASSED [ 84%]
+tests/test_species.py::TestSpeciesManagement::test_representative_selection_from_compatible_members PASSED [ 84%]
+tests/test_species.py::TestSpeciesManagement::test_representative_updated_across_generations PASSED [ 84%]
+tests/test_species.py::TestSpeciesManagement::test_single_genome_population PASSED [ 84%]
+tests/test_species.py::TestSpeciesManagement::test_species_assignment_compatible PASSED [ 84%]
+tests/test_species.py::TestSpeciesManagement::test_species_assignment_multiple_genomes PASSED [ 84%]
+tests/test_species.py::TestSpeciesManagement::test_species_creation_first_genome PASSED [ 85%]
+tests/test_species.py::TestSpeciesManagement::test_species_fitness_tracking PASSED [ 85%]
+tests/test_species.py::TestSpeciesManagement::test_species_get_methods PASSED [ 85%]
+tests/test_species.py::TestSpeciesManagement::test_species_id_stability PASSED [ 85%]
+tests/test_species.py::TestSpeciesManagement::test_species_persists_with_compatible_members PASSED [ 85%]
+tests/test_species.py::TestSpeciesManagement::test_species_with_single_member PASSED [ 86%]
+tests/test_stagnation.py::TestStagnationDetection::test_all_species_stagnant PASSED [ 86%]
+tests/test_stagnation.py::TestStagnationDetection::test_elitism_protects_top_species PASSED [ 86%]
+tests/test_stagnation.py::TestStagnationDetection::test_elitism_removes_lowest_fitness_first PASSED [ 86%]
+tests/test_stagnation.py::TestStagnationDetection::test_elitism_with_all_species_stagnant PASSED [ 86%]
+tests/test_stagnation.py::TestStagnationDetection::test_elitism_zero_allows_all_stagnation PASSED [ 87%]
+tests/test_stagnation.py::TestStagnationDetection::test_empty_fitness_history PASSED [ 87%]
+tests/test_stagnation.py::TestStagnationDetection::test_fitness_function_affects_improvement_detection PASSED [ 87%]
+tests/test_stagnation.py::TestStagnationDetection::test_fitness_history_appended PASSED [ 87%]
+tests/test_stagnation.py::TestStagnationDetection::test_fitness_history_with_fluctuations PASSED [ 87%]
+tests/test_stagnation.py::TestStagnationDetection::test_improvement_just_before_threshold PASSED [ 88%]
+tests/test_stagnation.py::TestStagnationDetection::test_improvement_resets_stagnation PASSED [ 88%]
+tests/test_stagnation.py::TestStagnationDetection::test_last_improved_tracks_max_fitness PASSED [ 88%]
+tests/test_stagnation.py::TestStagnationDetection::test_last_improved_updated_on_improvement PASSED [ 88%]
+tests/test_stagnation.py::TestStagnationDetection::test_max_fitness_function PASSED [ 88%]
+tests/test_stagnation.py::TestStagnationDetection::test_mean_fitness_function PASSED [ 89%]
+tests/test_stagnation.py::TestStagnationDetection::test_median_fitness_function PASSED [ 89%]
+tests/test_stagnation.py::TestStagnationDetection::test_min_fitness_function PASSED [ 89%]
+tests/test_stagnation.py::TestStagnationDetection::test_negative_fitness_values PASSED [ 89%]
+tests/test_stagnation.py::TestStagnationDetection::test_no_improvement_multiple_generations PASSED [ 89%]
+tests/test_stagnation.py::TestStagnationDetection::test_single_species_population PASSED [ 90%]
+tests/test_stagnation.py::TestStagnationDetection::test_species_with_identical_fitness PASSED [ 90%]
+tests/test_stagnation.py::TestStagnationDetection::test_stagnation_at_exact_threshold PASSED [ 90%]
+tests/test_stagnation.py::TestStagnationDetection::test_stagnation_with_multiple_species_complex PASSED [ 90%]
+tests/test_stagnation.py::TestStagnationDetection::test_very_large_fitness_values PASSED [ 90%]
+tests/test_stagnation.py::TestStagnationDetection::test_zero_fitness_values PASSED [ 91%]
+tests/test_statistics_and_reporting.py::TestReporterSet::test_add_multiple_reporters PASSED [ 91%]
+tests/test_statistics_and_reporting.py::TestReporterSet::test_add_reporter PASSED [ 91%]
+tests/test_statistics_and_reporting.py::TestReporterSet::test_complete_extinction_dispatches_to_all PASSED [ 91%]
+tests/test_statistics_and_reporting.py::TestReporterSet::test_end_generation_dispatches_to_all PASSED [ 91%]
+tests/test_statistics_and_reporting.py::TestReporterSet::test_found_solution_dispatches_to_all PASSED [ 92%]
+tests/test_statistics_and_reporting.py::TestReporterSet::test_info_dispatches_to_all PASSED [ 92%]
+tests/test_statistics_and_reporting.py::TestReporterSet::test_post_evaluate_dispatches_to_all PASSED [ 92%]
+tests/test_statistics_and_reporting.py::TestReporterSet::test_post_reproduction_dispatches_to_all PASSED [ 92%]
+tests/test_statistics_and_reporting.py::TestReporterSet::test_remove_reporter PASSED [ 92%]
+tests/test_statistics_and_reporting.py::TestReporterSet::test_species_stagnant_dispatches_to_all PASSED [ 92%]
+tests/test_statistics_and_reporting.py::TestReporterSet::test_start_generation_dispatches_to_all PASSED [ 93%]
+tests/test_statistics_and_reporting.py::TestStdOutReporter::test_complete_extinction_output PASSED [ 93%]
+tests/test_statistics_and_reporting.py::TestStdOutReporter::test_end_generation_basic_output PASSED [ 93%]
+tests/test_statistics_and_reporting.py::TestStdOutReporter::test_end_generation_detailed_output PASSED [ 93%]
+tests/test_statistics_and_reporting.py::TestStdOutReporter::test_end_generation_limits_timing_history PASSED [ 93%]
+tests/test_statistics_and_reporting.py::TestStdOutReporter::test_end_generation_tracks_timing PASSED [ 94%]
+tests/test_statistics_and_reporting.py::TestStdOutReporter::test_found_solution_output PASSED [ 94%]
+tests/test_statistics_and_reporting.py::TestStdOutReporter::test_info_output PASSED [ 94%]
+tests/test_statistics_and_reporting.py::TestStdOutReporter::test_initialization_with_detail PASSED [ 94%]
+tests/test_statistics_and_reporting.py::TestStdOutReporter::test_initialization_without_detail PASSED [ 94%]
+tests/test_statistics_and_reporting.py::TestStdOutReporter::test_post_evaluate_output PASSED [ 95%]
+tests/test_statistics_and_reporting.py::TestStdOutReporter::test_species_stagnant_with_detail PASSED [ 95%]
+tests/test_statistics_and_reporting.py::TestStdOutReporter::test_species_stagnant_without_detail PASSED [ 95%]
+tests/test_statistics_and_reporting.py::TestStdOutReporter::test_start_generation_output PASSED [ 95%]
+tests/test_statistics_and_reporting.py::TestStatisticsReporter::test_best_genome PASSED [ 95%]
+tests/test_statistics_and_reporting.py::TestStatisticsReporter::test_best_genomes_more_than_available PASSED [ 96%]
+tests/test_statistics_and_reporting.py::TestStatisticsReporter::test_best_genomes_multiple PASSED [ 96%]
+tests/test_statistics_and_reporting.py::TestStatisticsReporter::test_best_unique_genomes PASSED [ 96%]
+tests/test_statistics_and_reporting.py::TestStatisticsReporter::test_get_fitness_mean PASSED [ 96%]
+tests/test_statistics_and_reporting.py::TestStatisticsReporter::test_get_fitness_median PASSED [ 96%]
+tests/test_statistics_and_reporting.py::TestStatisticsReporter::test_get_fitness_stdev PASSED [ 97%]
+tests/test_statistics_and_reporting.py::TestStatisticsReporter::test_get_species_fitness PASSED [ 97%]
+tests/test_statistics_and_reporting.py::TestStatisticsReporter::test_get_species_fitness_with_null_value PASSED [ 97%]
+tests/test_statistics_and_reporting.py::TestStatisticsReporter::test_get_species_sizes PASSED [ 97%]
+tests/test_statistics_and_reporting.py::TestStatisticsReporter::test_initialization PASSED [ 97%]
+tests/test_statistics_and_reporting.py::TestStatisticsReporter::test_post_evaluate_deep_copies_genome PASSED [ 98%]
+tests/test_statistics_and_reporting.py::TestStatisticsReporter::test_post_evaluate_multiple_generations PASSED [ 98%]
+tests/test_statistics_and_reporting.py::TestStatisticsReporter::test_post_evaluate_stores_best_genome PASSED [ 98%]
+tests/test_statistics_and_reporting.py::TestStatisticsReporter::test_post_evaluate_stores_species_stats PASSED [ 98%]
+tests/test_statistics_and_reporting.py::TestStatisticsReporter::test_save_all PASSED [ 98%]
+tests/test_statistics_and_reporting.py::TestStatisticsReporter::test_save_genome_fitness PASSED [ 99%]
+tests/test_statistics_and_reporting.py::TestStatisticsReporter::test_save_species_count PASSED [ 99%]
+tests/test_statistics_and_reporting.py::TestStatisticsReporter::test_save_species_fitness PASSED [ 99%]
+tests/test_utils.py::test_softmax PASSED                                 [ 99%]
+tests/test_xor_example.py::test_xor_example_uniform_weights PASSED       [ 99%]
+tests/test_xor_example.py::test_xor_example PASSED                       [100%]
+
+=================================== FAILURES ===================================
+_________ TestCheckpointIntegrity.test_checkpoint_multiple_generations _________
+
+self = <test_checkpoint.TestCheckpointIntegrity testMethod=test_checkpoint_multiple_generations>
+
+    def test_checkpoint_multiple_generations(self):
+        """
+        Test that checkpoints are saved at correct intervals.
+    
+        Should create checkpoint files at specified generation intervals.
+        """
+        pop = neat.Population(self.config)
+        checkpointer = neat.Checkpointer(2, filename_prefix=self.checkpoint_prefix)
+        pop.add_reporter(checkpointer)
+    
+        pop.run(self.simple_fitness_function, 5)
+    
+        # With interval=2 starting from generation 0: saves at 2, 4, ...
+>       self.assertFalse(os.path.exists(f'{self.checkpoint_prefix}1'),
+                        "Checkpoint at generation 1 should not exist")
+E       AssertionError: True is not false : Checkpoint at generation 1 should not exist
+
+tests/test_checkpoint.py:605: AssertionError
+----------------------------- Captured stdout call -----------------------------
+Saving checkpoint to /tmp/neat_checkpoint_test_1ndra1t3/test-checkpoint-1
+Saving checkpoint to /tmp/neat_checkpoint_test_1ndra1t3/test-checkpoint-3
+Saving checkpoint to /tmp/neat_checkpoint_test_1ndra1t3/test-checkpoint-5
+_ TestDefaultConnectionGene.test_crossover_requires_matching_innovations_for_connection_genes _
+
+self = <test_genes.TestDefaultConnectionGene testMethod=test_crossover_requires_matching_innovations_for_connection_genes>
+
+    def test_crossover_requires_matching_innovations_for_connection_genes(self):
+        """Connection gene crossover should assert if innovation numbers disagree."""
+        g1 = DefaultConnectionGene((0, 1), innovation=1)
+        g2 = DefaultConnectionGene((0, 1), innovation=2)
+    
+        g1.weight = 0.5
+        g1.enabled = True
+        g2.weight = 0.5
+        g2.enabled = True
+    
+        with self.assertRaises(AssertionError):
+>           g1.crossover(g2)
+E           AssertionError: AssertionError not raised
+
+tests/test_genes.py:193: AssertionError
+______________________________ test_serial_random ______________________________
+
+    def test_serial_random():
+        """Test basic (dummy fitness function) non-parallel run w/random activation, aggregation init."""
+        # Load configuration.
+        local_dir = os.path.dirname(__file__)
+        config_path = os.path.join(local_dir, 'test_configuration2')
+        config = neat.Config(neat.DefaultGenome, neat.DefaultReproduction,
+                             neat.DefaultSpeciesSet, neat.DefaultStagnation,
+                             config_path)
+    
+        if VERBOSE:
+            print("config.genome_config.__dict__: {!r}".format(
+                config.genome_config.__dict__))
+    
+        # Create the population, which is the top-level object for a NEAT run.
+        p = neat.Population(config)
+    
+        # Add a stdout reporter to show progress in the terminal.
+        p.add_reporter(neat.StdOutReporter(VERBOSE))
+        stats = neat.StatisticsReporter()
+        p.add_reporter(stats)
+        p.add_reporter(neat.Checkpointer(15, 1))
+    
+        # Run for up to 45 generations.
+>       p.run(eval_dummy_genomes_nn, 45)
+
+tests/test_simple_run.py:106: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+/testbed/neat/population.py:75: in run
+    fitness_function(list(self.population.items()), self.config)
+tests/test_simple_run.py:17: in eval_dummy_genomes_nn
+    genome.fitness = eval_dummy_genome_nn(genome, config)
+tests/test_simple_run.py:11: in eval_dummy_genome_nn
+    ignored_output = net.activate((0.5, 0.5))
+/testbed/neat/nn/feed_forward.py:28: in activate
+    s = agg_func(node_inputs)
+/testbed/neat/aggregations.py:34: in mean_aggregation
+    return mean(x)
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+values = []
+
+    def mean(values: Iterable[float]) -> float:
+        """Return the arithmetic mean of *values* as a float.
+    
+        This mirrors the original implementation's behaviour, including
+        accepting any value that ``float`` can convert.
+        """
+        vals: List[float] = [float(v) for v in values]
+>       return sum(vals) / len(vals)
+E       ZeroDivisionError: division by zero
+
+/testbed/neat/math_util.py:14: ZeroDivisionError
+----------------------------- Captured stdout call -----------------------------
+config.genome_config.__dict__: {'activation_defs': <neat.activations.ActivationFunctionSet object at 0xffffb08d4700>, 'aggregation_function_defs': <neat.aggregations.AggregationFunctionSet object at 0xffffb08d42e0>, 'aggregation_defs': <neat.aggregations.AggregationFunctionSet object at 0xffffb08d42e0>, '_params': [ConfigParameter('num_inputs', <class 'int'>), ConfigParameter('num_outputs', <class 'int'>), ConfigParameter('num_hidden', <class 'int'>), ConfigParameter('feed_forward', <class 'bool'>), ConfigParameter('compatibility_disjoint_coefficient', <class 'float'>), ConfigParameter('compatibility_weight_coefficient', <class 'float'>), ConfigParameter('conn_add_prob', <class 'float'>), ConfigParameter('conn_delete_prob', <class 'float'>), ConfigParameter('node_add_prob', <class 'float'>), ConfigParameter('node_delete_prob', <class 'float'>), ConfigParameter('single_structural_mutation', <class 'bool'>, 'false'), ConfigParameter('structural_mutation_surer', <class 'str'>, 'default'), ConfigParameter('initial_connection', <class 'str'>, 'unconnected'), ConfigParameter('bias_init_mean', <class 'float'>), ConfigParameter('bias_init_stdev', <class 'float'>), ConfigParameter('bias_init_type', <class 'str'>, 'gaussian'), ConfigParameter('bias_replace_rate', <class 'float'>), ConfigParameter('bias_mutate_rate', <class 'float'>), ConfigParameter('bias_mutate_power', <class 'float'>), ConfigParameter('bias_max_value', <class 'float'>), ConfigParameter('bias_min_value', <class 'float'>), ConfigParameter('response_init_mean', <class 'float'>), ConfigParameter('response_init_stdev', <class 'float'>), ConfigParameter('response_init_type', <class 'str'>, 'gaussian'), ConfigParameter('response_replace_rate', <class 'float'>), ConfigParameter('response_mutate_rate', <class 'float'>), ConfigParameter('response_mutate_power', <class 'float'>), ConfigParameter('response_max_value', <class 'float'>), ConfigParameter('response_min_value', <class 'float'>), ConfigParameter('activation_default', <class 'str'>, 'random'), ConfigParameter('activation_options', <class 'list'>, ''), ConfigParameter('activation_mutate_rate', <class 'float'>), ConfigParameter('aggregation_default', <class 'str'>, 'random'), ConfigParameter('aggregation_options', <class 'list'>, ''), ConfigParameter('aggregation_mutate_rate', <class 'float'>), ConfigParameter('time_constant_init_mean', <class 'float'>, 1.0), ConfigParameter('time_constant_init_stdev', <class 'float'>, 0.0), ConfigParameter('time_constant_init_type', <class 'str'>, 'gaussian'), ConfigParameter('time_constant_replace_rate', <class 'float'>, 0.0), ConfigParameter('time_constant_mutate_rate', <class 'float'>, 0.0), ConfigParameter('time_constant_mutate_power', <class 'float'>, 0.0), ConfigParameter('time_constant_max_value', <class 'float'>, 10.0), ConfigParameter('time_constant_min_value', <class 'float'>, 0.01), ConfigParameter('weight_init_mean', <class 'float'>), ConfigParameter('weight_init_stdev', <class 'float'>), ConfigParameter('weight_init_type', <class 'str'>, 'gaussian'), ConfigParameter('weight_replace_rate', <class 'float'>), ConfigParameter('weight_mutate_rate', <class 'float'>), ConfigParameter('weight_mutate_power', <class 'float'>), ConfigParameter('weight_max_value', <class 'float'>), ConfigParameter('weight_min_value', <class 'float'>), ConfigParameter('enabled_default', <class 'str'>), ConfigParameter('enabled_mutate_rate', <class 'float'>), ConfigParameter('enabled_rate_to_true_add', <class 'float'>, 0.0), ConfigParameter('enabled_rate_to_false_add', <class 'float'>, 0.0)], 'node_gene_type': <class 'neat.genes.DefaultNodeGene'>, 'connection_gene_type': <class 'neat.genes.DefaultConnectionGene'>, 'num_inputs': 2, 'num_outputs': 1, 'num_hidden': 0, 'feed_forward': True, 'compatibility_disjoint_coefficient': 1.0, 'compatibility_weight_coefficient': 0.5, 'conn_add_prob': 0.5, 'conn_delete_prob': 0.5, 'node_add_prob': 0.2, 'node_delete_prob': 0.2, 'single_structural_mutation': True, 'structural_mutation_surer': 'default', 'initial_connection': 'partial', 'bias_init_mean': 0.0, 'bias_init_stdev': 1.0, 'bias_init_type': 'gaussian', 'bias_replace_rate': 0.1, 'bias_mutate_rate': 0.7, 'bias_mutate_power': 0.5, 'bias_max_value': 30.0, 'bias_min_value': -30.0, 'response_init_mean': 1.0, 'response_init_stdev': 0.0, 'response_init_type': 'gaussian', 'response_replace_rate': 0.0, 'response_mutate_rate': 0.0, 'response_mutate_power': 0.0, 'response_max_value': 30.0, 'response_min_value': -30.0, 'activation_default': 'random', 'activation_options': ['sigmoid', 'tanh', 'relu'], 'activation_mutate_rate': 0.5, 'aggregation_default': 'random', 'aggregation_options': ['sum', 'product', 'max', 'min', 'maxabs', 'median', 'mean'], 'aggregation_mutate_rate': 0.5, 'time_constant_init_mean': 1.0, 'time_constant_init_stdev': 0.0, 'time_constant_init_type': 'gaussian', 'time_constant_replace_rate': 0.0, 'time_constant_mutate_rate': 0.0, 'time_constant_mutate_power': 0.0, 'time_constant_max_value': 10.0, 'time_constant_min_value': 0.01, 'weight_init_mean': 0.0, 'weight_init_stdev': 1.0, 'weight_init_type': 'uniform', 'weight_replace_rate': 0.1, 'weight_mutate_rate': 0.8, 'weight_mutate_power': 0.5, 'weight_max_value': 30.0, 'weight_min_value': -30.0, 'enabled_default': 'True', 'enabled_mutate_rate': 0.05, 'enabled_rate_to_true_add': 0.5, 'enabled_rate_to_false_add': 0.0, 'input_keys': [-1, -2], 'output_keys': [0], 'connection_fraction': 0.5, 'node_indexer': None, 'innovation_tracker': None}
+
+ ****** Running generation 0 ****** 
+
+Population's average fitness: 0.00000 stdev: 0.00000
+Best fitness: 0.00000 - size: (1, 1) - species 1 - id 1
+Average adjusted fitness: 0.000
+Mean genetic distance 2.442, standard deviation 0.749
+Population of 150 members in 4 species:
+   ID   age  size   fitness   adj fit  stag
+  ====  ===  ====  =========  =======  ====
+     1    0    53      0.000    0.000     0
+     2    0    63      0.000    0.000     0
+     3    0    33      0.000    0.000     0
+     4    0     1         --       --     0
+Total extinctions: 0
+Generation time: 0.006 sec
+
+ ****** Running generation 1 ****** 
+
+_________________________________ test_serial3 _________________________________
+
+    def test_serial3():
+        """Test more configuration variations for simple serial run."""
+        # Load configuration.
+        local_dir = os.path.dirname(__file__)
+        config_path = os.path.join(local_dir, 'test_configuration3')
+        config = neat.Config(neat.DefaultGenome, neat.DefaultReproduction,
+                             neat.DefaultSpeciesSet, neat.DefaultStagnation,
+                             config_path)
+    
+        if VERBOSE:
+            print("config.genome_config.__dict__: {!r}".format(
+                config.genome_config.__dict__))
+    
+        # Create the population, which is the top-level object for a NEAT run.
+        p = neat.Population(config)
+    
+        # Add a stdout reporter to show progress in the terminal.
+        p.add_reporter(neat.StdOutReporter(VERBOSE))
+        stats = neat.StatisticsReporter()
+        p.add_reporter(stats)
+        p.add_reporter(neat.Checkpointer(15, 1))
+    
+        # Run for up to 45 generations.
+>       p.run(eval_dummy_genomes_nn, 45)
+
+tests/test_simple_run.py:142: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+/testbed/neat/population.py:75: in run
+    fitness_function(list(self.population.items()), self.config)
+tests/test_simple_run.py:17: in eval_dummy_genomes_nn
+    genome.fitness = eval_dummy_genome_nn(genome, config)
+tests/test_simple_run.py:11: in eval_dummy_genome_nn
+    ignored_output = net.activate((0.5, 0.5))
+/testbed/neat/nn/feed_forward.py:28: in activate
+    s = agg_func(node_inputs)
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+x = []
+
+    def maxabs_aggregation(x):
+>       return max(x, key=abs)
+E       ValueError: max() arg is an empty sequence
+
+/testbed/neat/aggregations.py:26: ValueError
+----------------------------- Captured stdout call -----------------------------
+config.genome_config.__dict__: {'activation_defs': <neat.activations.ActivationFunctionSet object at 0xffffb07fc100>, 'aggregation_function_defs': <neat.aggregations.AggregationFunctionSet object at 0xffffb07fc1f0>, 'aggregation_defs': <neat.aggregations.AggregationFunctionSet object at 0xffffb07fc1f0>, '_params': [ConfigParameter('num_inputs', <class 'int'>), ConfigParameter('num_outputs', <class 'int'>), ConfigParameter('num_hidden', <class 'int'>), ConfigParameter('feed_forward', <class 'bool'>), ConfigParameter('compatibility_disjoint_coefficient', <class 'float'>), ConfigParameter('compatibility_weight_coefficient', <class 'float'>), ConfigParameter('conn_add_prob', <class 'float'>), ConfigParameter('conn_delete_prob', <class 'float'>), ConfigParameter('node_add_prob', <class 'float'>), ConfigParameter('node_delete_prob', <class 'float'>), ConfigParameter('single_structural_mutation', <class 'bool'>, 'false'), ConfigParameter('structural_mutation_surer', <class 'str'>, 'default'), ConfigParameter('initial_connection', <class 'str'>, 'unconnected'), ConfigParameter('bias_init_mean', <class 'float'>), ConfigParameter('bias_init_stdev', <class 'float'>), ConfigParameter('bias_init_type', <class 'str'>, 'gaussian'), ConfigParameter('bias_replace_rate', <class 'float'>), ConfigParameter('bias_mutate_rate', <class 'float'>), ConfigParameter('bias_mutate_power', <class 'float'>), ConfigParameter('bias_max_value', <class 'float'>), ConfigParameter('bias_min_value', <class 'float'>), ConfigParameter('response_init_mean', <class 'float'>), ConfigParameter('response_init_stdev', <class 'float'>), ConfigParameter('response_init_type', <class 'str'>, 'gaussian'), ConfigParameter('response_replace_rate', <class 'float'>), ConfigParameter('response_mutate_rate', <class 'float'>), ConfigParameter('response_mutate_power', <class 'float'>), ConfigParameter('response_max_value', <class 'float'>), ConfigParameter('response_min_value', <class 'float'>), ConfigParameter('activation_default', <class 'str'>, 'random'), ConfigParameter('activation_options', <class 'list'>, ''), ConfigParameter('activation_mutate_rate', <class 'float'>), ConfigParameter('aggregation_default', <class 'str'>, 'random'), ConfigParameter('aggregation_options', <class 'list'>, ''), ConfigParameter('aggregation_mutate_rate', <class 'float'>), ConfigParameter('time_constant_init_mean', <class 'float'>, 1.0), ConfigParameter('time_constant_init_stdev', <class 'float'>, 0.0), ConfigParameter('time_constant_init_type', <class 'str'>, 'gaussian'), ConfigParameter('time_constant_replace_rate', <class 'float'>, 0.0), ConfigParameter('time_constant_mutate_rate', <class 'float'>, 0.0), ConfigParameter('time_constant_mutate_power', <class 'float'>, 0.0), ConfigParameter('time_constant_max_value', <class 'float'>, 10.0), ConfigParameter('time_constant_min_value', <class 'float'>, 0.01), ConfigParameter('weight_init_mean', <class 'float'>), ConfigParameter('weight_init_stdev', <class 'float'>), ConfigParameter('weight_init_type', <class 'str'>, 'gaussian'), ConfigParameter('weight_replace_rate', <class 'float'>), ConfigParameter('weight_mutate_rate', <class 'float'>), ConfigParameter('weight_mutate_power', <class 'float'>), ConfigParameter('weight_max_value', <class 'float'>), ConfigParameter('weight_min_value', <class 'float'>), ConfigParameter('enabled_default', <class 'str'>), ConfigParameter('enabled_mutate_rate', <class 'float'>), ConfigParameter('enabled_rate_to_true_add', <class 'float'>, 0.0), ConfigParameter('enabled_rate_to_false_add', <class 'float'>, 0.0)], 'node_gene_type': <class 'neat.genes.DefaultNodeGene'>, 'connection_gene_type': <class 'neat.genes.DefaultConnectionGene'>, 'num_inputs': 2, 'num_outputs': 1, 'num_hidden': 0, 'feed_forward': True, 'compatibility_disjoint_coefficient': 1.0, 'compatibility_weight_coefficient': 0.5, 'conn_add_prob': 0.5, 'conn_delete_prob': 0.5, 'node_add_prob': 0.2, 'node_delete_prob': 0.2, 'single_structural_mutation': True, 'structural_mutation_surer': 'true', 'initial_connection': 'partial', 'bias_init_mean': 0.0, 'bias_init_stdev': 1.0, 'bias_init_type': 'gaussian', 'bias_replace_rate': 0.1, 'bias_mutate_rate': 0.7, 'bias_mutate_power': 0.5, 'bias_max_value': 30.0, 'bias_min_value': -30.0, 'response_init_mean': 1.0, 'response_init_stdev': 0.0, 'response_init_type': 'gaussian', 'response_replace_rate': 0.0, 'response_mutate_rate': 0.0, 'response_mutate_power': 0.0, 'response_max_value': 30.0, 'response_min_value': -30.0, 'activation_default': 'random', 'activation_options': ['sigmoid', 'tanh', 'relu', 'softplus'], 'activation_mutate_rate': 0.5, 'aggregation_default': 'random', 'aggregation_options': ['sum', 'product', 'max', 'min', 'maxabs', 'median', 'mean'], 'aggregation_mutate_rate': 0.5, 'time_constant_init_mean': 1.0, 'time_constant_init_stdev': 0.0, 'time_constant_init_type': 'gaussian', 'time_constant_replace_rate': 0.0, 'time_constant_mutate_rate': 0.0, 'time_constant_mutate_power': 0.0, 'time_constant_max_value': 10.0, 'time_constant_min_value': 0.01, 'weight_init_mean': 0.0, 'weight_init_stdev': 1.0, 'weight_init_type': 'uniform', 'weight_replace_rate': 0.1, 'weight_mutate_rate': 0.8, 'weight_mutate_power': 0.5, 'weight_max_value': 30.0, 'weight_min_value': -30.0, 'enabled_default': '1', 'enabled_mutate_rate': 0.05, 'enabled_rate_to_true_add': 0.0, 'enabled_rate_to_false_add': 0.05, 'input_keys': [-1, -2], 'output_keys': [0], 'connection_fraction': 0.5, 'node_indexer': None, 'innovation_tracker': None}
+
+ ****** Running generation 0 ****** 
+
+Population's average fitness: 0.00000 stdev: 0.00000
+Best fitness: 0.00000 - size: (1, 1) - species 1 - id 1
+Average adjusted fitness: 0.000
+Mean genetic distance 2.372, standard deviation 0.688
+Population of 150 members in 3 species:
+   ID   age  size   fitness   adj fit  stag
+  ====  ===  ====  =========  =======  ====
+     1    0    37      0.000    0.000     0
+     2    0    55      0.000    0.000     0
+     3    0    58      0.000    0.000     0
+Total extinctions: 0
+Generation time: 0.006 sec
+
+ ****** Running generation 1 ****** 
+
+_________________________________ test_serial4 _________________________________
+
+    def test_serial4():
+        """Test more configuration variations for simple serial run."""
+        # Load configuration.
+        local_dir = os.path.dirname(__file__)
+        config_path = os.path.join(local_dir, 'test_configuration4')
+        config = neat.Config(neat.DefaultGenome, neat.DefaultReproduction,
+                             neat.DefaultSpeciesSet, neat.DefaultStagnation,
+                             config_path)
+    
+        if VERBOSE:
+            print("config.genome_config.__dict__: {!r}".format(
+                config.genome_config.__dict__))
+    
+        # Create the population, which is the top-level object for a NEAT run.
+        p = neat.Population(config)
+    
+        # Add a stdout reporter to show progress in the terminal.
+        p.add_reporter(neat.StdOutReporter(VERBOSE))
+        stats = neat.StatisticsReporter()
+        p.add_reporter(stats)
+        p.add_reporter(neat.Checkpointer(15, 1))
+    
+        # Run for up to 45 generations.
+>       p.run(eval_dummy_genomes_nn, 45)
+
+tests/test_simple_run.py:178: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+/testbed/neat/population.py:75: in run
+    fitness_function(list(self.population.items()), self.config)
+tests/test_simple_run.py:17: in eval_dummy_genomes_nn
+    genome.fitness = eval_dummy_genome_nn(genome, config)
+tests/test_simple_run.py:11: in eval_dummy_genome_nn
+    ignored_output = net.activate((0.5, 0.5))
+/testbed/neat/nn/feed_forward.py:28: in activate
+    s = agg_func(node_inputs)
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+x = []
+
+    def max_aggregation(x):
+>       return max(x)
+E       ValueError: max() arg is an empty sequence
+
+/testbed/neat/aggregations.py:18: ValueError
+----------------------------- Captured stdout call -----------------------------
+config.genome_config.__dict__: {'activation_defs': <neat.activations.ActivationFunctionSet object at 0xffffb0741bb0>, 'aggregation_function_defs': <neat.aggregations.AggregationFunctionSet object at 0xffffb0741c40>, 'aggregation_defs': <neat.aggregations.AggregationFunctionSet object at 0xffffb0741c40>, '_params': [ConfigParameter('num_inputs', <class 'int'>), ConfigParameter('num_outputs', <class 'int'>), ConfigParameter('num_hidden', <class 'int'>), ConfigParameter('feed_forward', <class 'bool'>), ConfigParameter('compatibility_disjoint_coefficient', <class 'float'>), ConfigParameter('compatibility_weight_coefficient', <class 'float'>), ConfigParameter('conn_add_prob', <class 'float'>), ConfigParameter('conn_delete_prob', <class 'float'>), ConfigParameter('node_add_prob', <class 'float'>), ConfigParameter('node_delete_prob', <class 'float'>), ConfigParameter('single_structural_mutation', <class 'bool'>, 'false'), ConfigParameter('structural_mutation_surer', <class 'str'>, 'default'), ConfigParameter('initial_connection', <class 'str'>, 'unconnected'), ConfigParameter('bias_init_mean', <class 'float'>), ConfigParameter('bias_init_stdev', <class 'float'>), ConfigParameter('bias_init_type', <class 'str'>, 'gaussian'), ConfigParameter('bias_replace_rate', <class 'float'>), ConfigParameter('bias_mutate_rate', <class 'float'>), ConfigParameter('bias_mutate_power', <class 'float'>), ConfigParameter('bias_max_value', <class 'float'>), ConfigParameter('bias_min_value', <class 'float'>), ConfigParameter('response_init_mean', <class 'float'>), ConfigParameter('response_init_stdev', <class 'float'>), ConfigParameter('response_init_type', <class 'str'>, 'gaussian'), ConfigParameter('response_replace_rate', <class 'float'>), ConfigParameter('response_mutate_rate', <class 'float'>), ConfigParameter('response_mutate_power', <class 'float'>), ConfigParameter('response_max_value', <class 'float'>), ConfigParameter('response_min_value', <class 'float'>), ConfigParameter('activation_default', <class 'str'>, 'random'), ConfigParameter('activation_options', <class 'list'>, ''), ConfigParameter('activation_mutate_rate', <class 'float'>), ConfigParameter('aggregation_default', <class 'str'>, 'random'), ConfigParameter('aggregation_options', <class 'list'>, ''), ConfigParameter('aggregation_mutate_rate', <class 'float'>), ConfigParameter('time_constant_init_mean', <class 'float'>, 1.0), ConfigParameter('time_constant_init_stdev', <class 'float'>, 0.0), ConfigParameter('time_constant_init_type', <class 'str'>, 'gaussian'), ConfigParameter('time_constant_replace_rate', <class 'float'>, 0.0), ConfigParameter('time_constant_mutate_rate', <class 'float'>, 0.0), ConfigParameter('time_constant_mutate_power', <class 'float'>, 0.0), ConfigParameter('time_constant_max_value', <class 'float'>, 10.0), ConfigParameter('time_constant_min_value', <class 'float'>, 0.01), ConfigParameter('weight_init_mean', <class 'float'>), ConfigParameter('weight_init_stdev', <class 'float'>), ConfigParameter('weight_init_type', <class 'str'>, 'gaussian'), ConfigParameter('weight_replace_rate', <class 'float'>), ConfigParameter('weight_mutate_rate', <class 'float'>), ConfigParameter('weight_mutate_power', <class 'float'>), ConfigParameter('weight_max_value', <class 'float'>), ConfigParameter('weight_min_value', <class 'float'>), ConfigParameter('enabled_default', <class 'str'>), ConfigParameter('enabled_mutate_rate', <class 'float'>), ConfigParameter('enabled_rate_to_true_add', <class 'float'>, 0.0), ConfigParameter('enabled_rate_to_false_add', <class 'float'>, 0.0)], 'node_gene_type': <class 'neat.genes.DefaultNodeGene'>, 'connection_gene_type': <class 'neat.genes.DefaultConnectionGene'>, 'num_inputs': 2, 'num_outputs': 1, 'num_hidden': 0, 'feed_forward': True, 'compatibility_disjoint_coefficient': 1.0, 'compatibility_weight_coefficient': 0.5, 'conn_add_prob': 0.5, 'conn_delete_prob': 0.5, 'node_add_prob': 0.2, 'node_delete_prob': 0.2, 'single_structural_mutation': True, 'structural_mutation_surer': 'false', 'initial_connection': 'partial', 'bias_init_mean': 0.0, 'bias_init_stdev': 1.0, 'bias_init_type': 'gaussian', 'bias_replace_rate': 0.1, 'bias_mutate_rate': 0.7, 'bias_mutate_power': 0.5, 'bias_max_value': 30.0, 'bias_min_value': -30.0, 'response_init_mean': 1.0, 'response_init_stdev': 0.0, 'response_init_type': 'gaussian', 'response_replace_rate': 0.0, 'response_mutate_rate': 0.0, 'response_mutate_power': 0.0, 'response_max_value': 30.0, 'response_min_value': -30.0, 'activation_default': 'random', 'activation_options': ['sigmoid', 'tanh', 'relu'], 'activation_mutate_rate': 0.5, 'aggregation_default': 'random', 'aggregation_options': ['sum', 'product', 'max', 'min', 'maxabs', 'median', 'mean'], 'aggregation_mutate_rate': 0.5, 'time_constant_init_mean': 1.0, 'time_constant_init_stdev': 0.0, 'time_constant_init_type': 'gaussian', 'time_constant_replace_rate': 0.0, 'time_constant_mutate_rate': 0.0, 'time_constant_mutate_power': 0.0, 'time_constant_max_value': 10.0, 'time_constant_min_value': 0.01, 'weight_init_mean': 0.0, 'weight_init_stdev': 1.0, 'weight_init_type': 'uniform', 'weight_replace_rate': 0.1, 'weight_mutate_rate': 0.8, 'weight_mutate_power': 0.5, 'weight_max_value': 30.0, 'weight_min_value': -30.0, 'enabled_default': 'random', 'enabled_mutate_rate': 0.05, 'enabled_rate_to_true_add': 0.5, 'enabled_rate_to_false_add': 0.0, 'input_keys': [-1, -2], 'output_keys': [0], 'connection_fraction': 0.5, 'node_indexer': None, 'innovation_tracker': None}
+
+ ****** Running generation 0 ****** 
+
+_________________________________ test_serial5 _________________________________
+
+    def test_serial5():
+        """Test more configuration variations for simple serial run."""
+        # Load configuration.
+        local_dir = os.path.dirname(__file__)
+        config_path = os.path.join(local_dir, 'test_configuration5')
+        config = neat.Config(neat.DefaultGenome, neat.DefaultReproduction,
+                             neat.DefaultSpeciesSet, neat.DefaultStagnation,
+                             config_path)
+    
+        if VERBOSE:
+            print("config.genome_config.__dict__: {!r}".format(
+                config.genome_config.__dict__))
+    
+        # Create the population, which is the top-level object for a NEAT run.
+        p = neat.Population(config)
+    
+        # Add a stdout reporter to show progress in the terminal.
+        p.add_reporter(neat.StdOutReporter(VERBOSE))
+        stats = neat.StatisticsReporter()
+        p.add_reporter(stats)
+        p.add_reporter(neat.Checkpointer(15, 1))
+    
+        # Run for up to 45 generations.
+>       p.run(eval_dummy_genomes_nn, 45)
+
+tests/test_simple_run.py:214: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+/testbed/neat/population.py:75: in run
+    fitness_function(list(self.population.items()), self.config)
+tests/test_simple_run.py:17: in eval_dummy_genomes_nn
+    genome.fitness = eval_dummy_genome_nn(genome, config)
+tests/test_simple_run.py:11: in eval_dummy_genome_nn
+    ignored_output = net.activate((0.5, 0.5))
+/testbed/neat/nn/feed_forward.py:28: in activate
+    s = agg_func(node_inputs)
+/testbed/neat/aggregations.py:34: in mean_aggregation
+    return mean(x)
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+values = []
+
+    def mean(values: Iterable[float]) -> float:
+        """Return the arithmetic mean of *values* as a float.
+    
+        This mirrors the original implementation's behaviour, including
+        accepting any value that ``float`` can convert.
+        """
+        vals: List[float] = [float(v) for v in values]
+>       return sum(vals) / len(vals)
+E       ZeroDivisionError: division by zero
+
+/testbed/neat/math_util.py:14: ZeroDivisionError
+----------------------------- Captured stdout call -----------------------------
+config.genome_config.__dict__: {'activation_defs': <neat.activations.ActivationFunctionSet object at 0xffffb0751d00>, 'aggregation_function_defs': <neat.aggregations.AggregationFunctionSet object at 0xffffb0751a60>, 'aggregation_defs': <neat.aggregations.AggregationFunctionSet object at 0xffffb0751a60>, '_params': [ConfigParameter('num_inputs', <class 'int'>), ConfigParameter('num_outputs', <class 'int'>), ConfigParameter('num_hidden', <class 'int'>), ConfigParameter('feed_forward', <class 'bool'>), ConfigParameter('compatibility_disjoint_coefficient', <class 'float'>), ConfigParameter('compatibility_weight_coefficient', <class 'float'>), ConfigParameter('conn_add_prob', <class 'float'>), ConfigParameter('conn_delete_prob', <class 'float'>), ConfigParameter('node_add_prob', <class 'float'>), ConfigParameter('node_delete_prob', <class 'float'>), ConfigParameter('single_structural_mutation', <class 'bool'>, 'false'), ConfigParameter('structural_mutation_surer', <class 'str'>, 'default'), ConfigParameter('initial_connection', <class 'str'>, 'unconnected'), ConfigParameter('bias_init_mean', <class 'float'>), ConfigParameter('bias_init_stdev', <class 'float'>), ConfigParameter('bias_init_type', <class 'str'>, 'gaussian'), ConfigParameter('bias_replace_rate', <class 'float'>), ConfigParameter('bias_mutate_rate', <class 'float'>), ConfigParameter('bias_mutate_power', <class 'float'>), ConfigParameter('bias_max_value', <class 'float'>), ConfigParameter('bias_min_value', <class 'float'>), ConfigParameter('response_init_mean', <class 'float'>), ConfigParameter('response_init_stdev', <class 'float'>), ConfigParameter('response_init_type', <class 'str'>, 'gaussian'), ConfigParameter('response_replace_rate', <class 'float'>), ConfigParameter('response_mutate_rate', <class 'float'>), ConfigParameter('response_mutate_power', <class 'float'>), ConfigParameter('response_max_value', <class 'float'>), ConfigParameter('response_min_value', <class 'float'>), ConfigParameter('activation_default', <class 'str'>, 'random'), ConfigParameter('activation_options', <class 'list'>, ''), ConfigParameter('activation_mutate_rate', <class 'float'>), ConfigParameter('aggregation_default', <class 'str'>, 'random'), ConfigParameter('aggregation_options', <class 'list'>, ''), ConfigParameter('aggregation_mutate_rate', <class 'float'>), ConfigParameter('time_constant_init_mean', <class 'float'>, 1.0), ConfigParameter('time_constant_init_stdev', <class 'float'>, 0.0), ConfigParameter('time_constant_init_type', <class 'str'>, 'gaussian'), ConfigParameter('time_constant_replace_rate', <class 'float'>, 0.0), ConfigParameter('time_constant_mutate_rate', <class 'float'>, 0.0), ConfigParameter('time_constant_mutate_power', <class 'float'>, 0.0), ConfigParameter('time_constant_max_value', <class 'float'>, 10.0), ConfigParameter('time_constant_min_value', <class 'float'>, 0.01), ConfigParameter('weight_init_mean', <class 'float'>), ConfigParameter('weight_init_stdev', <class 'float'>), ConfigParameter('weight_init_type', <class 'str'>, 'gaussian'), ConfigParameter('weight_replace_rate', <class 'float'>), ConfigParameter('weight_mutate_rate', <class 'float'>), ConfigParameter('weight_mutate_power', <class 'float'>), ConfigParameter('weight_max_value', <class 'float'>), ConfigParameter('weight_min_value', <class 'float'>), ConfigParameter('enabled_default', <class 'str'>), ConfigParameter('enabled_mutate_rate', <class 'float'>), ConfigParameter('enabled_rate_to_true_add', <class 'float'>, 0.0), ConfigParameter('enabled_rate_to_false_add', <class 'float'>, 0.0)], 'node_gene_type': <class 'neat.genes.DefaultNodeGene'>, 'connection_gene_type': <class 'neat.genes.DefaultConnectionGene'>, 'num_inputs': 2, 'num_outputs': 1, 'num_hidden': 0, 'feed_forward': True, 'compatibility_disjoint_coefficient': 1.0, 'compatibility_weight_coefficient': 0.5, 'conn_add_prob': 0.5, 'conn_delete_prob': 0.5, 'node_add_prob': 0.2, 'node_delete_prob': 0.2, 'single_structural_mutation': True, 'structural_mutation_surer': 'false', 'initial_connection': 'partial', 'bias_init_mean': 0.0, 'bias_init_stdev': 1.0, 'bias_init_type': 'gaussian', 'bias_replace_rate': 0.1, 'bias_mutate_rate': 0.7, 'bias_mutate_power': 0.5, 'bias_max_value': 30.0, 'bias_min_value': -30.0, 'response_init_mean': 1.0, 'response_init_stdev': 0.0, 'response_init_type': 'gaussian', 'response_replace_rate': 0.0, 'response_mutate_rate': 0.0, 'response_mutate_power': 0.0, 'response_max_value': 30.0, 'response_min_value': -30.0, 'activation_default': 'random', 'activation_options': ['sigmoid', 'tanh', 'relu'], 'activation_mutate_rate': 0.5, 'aggregation_default': 'random', 'aggregation_options': ['sum', 'product', 'max', 'min', 'maxabs', 'median', 'mean'], 'aggregation_mutate_rate': 0.5, 'time_constant_init_mean': 1.0, 'time_constant_init_stdev': 0.0, 'time_constant_init_type': 'gaussian', 'time_constant_replace_rate': 0.0, 'time_constant_mutate_rate': 0.0, 'time_constant_mutate_power': 0.0, 'time_constant_max_value': 10.0, 'time_constant_min_value': 0.01, 'weight_init_mean': 0.0, 'weight_init_stdev': 1.0, 'weight_init_type': 'uniform', 'weight_replace_rate': 0.1, 'weight_mutate_rate': 0.8, 'weight_mutate_power': 0.5, 'weight_max_value': 30.0, 'weight_min_value': -30.0, 'enabled_default': 'no', 'enabled_mutate_rate': 0.05, 'enabled_rate_to_true_add': 0.75, 'enabled_rate_to_false_add': 0.0, 'input_keys': [-1, -2], 'output_keys': [0], 'connection_fraction': 0.5, 'node_indexer': None, 'innovation_tracker': None}
+
+ ****** Running generation 0 ****** 
+
+=============================== warnings summary ===============================
+tests/test_activation.py: 3 warnings
+tests/test_aggregation.py: 3 warnings
+tests/test_checkpoint.py: 22 warnings
+tests/test_config.py: 1 warning
+tests/test_config_save_restore.py: 3 warnings
+tests/test_ctrnn.py: 1 warning
+tests/test_disable_rule.py: 6 warnings
+tests/test_export.py: 13 warnings
+tests/test_extinction.py: 52 warnings
+tests/test_feedforward_network.py: 2 warnings
+tests/test_fitness_evaluation.py: 25 warnings
+tests/test_genome.py: 32 warnings
+tests/test_genome_crossover.py: 17 warnings
+tests/test_genome_mutations.py: 30 warnings
+tests/test_innovation.py: 9 warnings
+tests/test_innovation_integration.py: 6 warnings
+tests/test_nn.py: 4 warnings
+tests/test_parallel_evaluator.py: 3 warnings
+tests/test_population.py: 7 warnings
+tests/test_reproducibility.py: 11 warnings
+tests/test_reproduction.py: 3 warnings
+tests/test_simple_run.py: 15 warnings
+tests/test_species.py: 39 warnings
+tests/test_stagnation.py: 25 warnings
+tests/test_xor_example.py: 2 warnings
+  /testbed/neat/config.py:45: DeprecationWarning: Using default 1.0 for 'time_constant_init_mean'
+    warnings.warn(
+
+tests/test_activation.py: 3 warnings
+tests/test_aggregation.py: 3 warnings
+tests/test_checkpoint.py: 22 warnings
+tests/test_config.py: 1 warning
+tests/test_config_save_restore.py: 3 warnings
+tests/test_ctrnn.py: 1 warning
+tests/test_disable_rule.py: 6 warnings
+tests/test_export.py: 13 warnings
+tests/test_extinction.py: 52 warnings
+tests/test_feedforward_network.py: 2 warnings
+tests/test_fitness_evaluation.py: 25 warnings
+tests/test_genome.py: 32 warnings
+tests/test_genome_crossover.py: 17 warnings
+tests/test_genome_mutations.py: 30 warnings
+tests/test_innovation.py: 9 warnings
+tests/test_innovation_integration.py: 6 warnings
+tests/test_nn.py: 4 warnings
+tests/test_parallel_evaluator.py: 3 warnings
+tests/test_population.py: 7 warnings
+tests/test_reproducibility.py: 11 warnings
+tests/test_reproduction.py: 3 warnings
+tests/test_simple_run.py: 15 warnings
+tests/test_species.py: 39 warnings
+tests/test_stagnation.py: 25 warnings
+tests/test_xor_example.py: 2 warnings
+  /testbed/neat/config.py:45: DeprecationWarning: Using default 0.0 for 'time_constant_init_stdev'
+    warnings.warn(
+
+tests/test_activation.py: 3 warnings
+tests/test_aggregation.py: 3 warnings
+tests/test_checkpoint.py: 22 warnings
+tests/test_config.py: 1 warning
+tests/test_config_save_restore.py: 3 warnings
+tests/test_ctrnn.py: 1 warning
+tests/test_disable_rule.py: 6 warnings
+tests/test_export.py: 13 warnings
+tests/test_extinction.py: 52 warnings
+tests/test_feedforward_network.py: 2 warnings
+tests/test_fitness_evaluation.py: 25 warnings
+tests/test_genome.py: 32 warnings
+tests/test_genome_crossover.py: 17 warnings
+tests/test_genome_mutations.py: 30 warnings
+tests/test_innovation.py: 9 warnings
+tests/test_innovation_integration.py: 6 warnings
+tests/test_nn.py: 4 warnings
+tests/test_parallel_evaluator.py: 3 warnings
+tests/test_population.py: 7 warnings
+tests/test_reproducibility.py: 11 warnings
+tests/test_reproduction.py: 3 warnings
+tests/test_simple_run.py: 15 warnings
+tests/test_species.py: 39 warnings
+tests/test_stagnation.py: 25 warnings
+tests/test_xor_example.py: 2 warnings
+  /testbed/neat/config.py:45: DeprecationWarning: Using default 'gaussian' for 'time_constant_init_type'
+    warnings.warn(
+
+tests/test_activation.py: 3 warnings
+tests/test_aggregation.py: 3 warnings
+tests/test_checkpoint.py: 22 warnings
+tests/test_config.py: 1 warning
+tests/test_config_save_restore.py: 3 warnings
+tests/test_ctrnn.py: 1 warning
+tests/test_disable_rule.py: 6 warnings
+tests/test_export.py: 13 warnings
+tests/test_extinction.py: 52 warnings
+tests/test_feedforward_network.py: 2 warnings
+tests/test_fitness_evaluation.py: 25 warnings
+tests/test_genome.py: 32 warnings
+tests/test_genome_crossover.py: 17 warnings
+tests/test_genome_mutations.py: 30 warnings
+tests/test_innovation.py: 9 warnings
+tests/test_innovation_integration.py: 6 warnings
+tests/test_nn.py: 4 warnings
+tests/test_parallel_evaluator.py: 3 warnings
+tests/test_population.py: 7 warnings
+tests/test_reproducibility.py: 11 warnings
+tests/test_reproduction.py: 3 warnings
+tests/test_simple_run.py: 15 warnings
+tests/test_species.py: 39 warnings
+tests/test_stagnation.py: 25 warnings
+tests/test_xor_example.py: 2 warnings
+  /testbed/neat/config.py:45: DeprecationWarning: Using default 0.0 for 'time_constant_replace_rate'
+    warnings.warn(
+
+tests/test_activation.py: 3 warnings
+tests/test_aggregation.py: 3 warnings
+tests/test_checkpoint.py: 22 warnings
+tests/test_config.py: 1 warning
+tests/test_config_save_restore.py: 3 warnings
+tests/test_ctrnn.py: 1 warning
+tests/test_disable_rule.py: 6 warnings
+tests/test_export.py: 13 warnings
+tests/test_extinction.py: 52 warnings
+tests/test_feedforward_network.py: 2 warnings
+tests/test_fitness_evaluation.py: 25 warnings
+tests/test_genome.py: 32 warnings
+tests/test_genome_crossover.py: 17 warnings
+tests/test_genome_mutations.py: 30 warnings
+tests/test_innovation.py: 9 warnings
+tests/test_innovation_integration.py: 6 warnings
+tests/test_nn.py: 4 warnings
+tests/test_parallel_evaluator.py: 3 warnings
+tests/test_population.py: 7 warnings
+tests/test_reproducibility.py: 11 warnings
+tests/test_reproduction.py: 3 warnings
+tests/test_simple_run.py: 15 warnings
+tests/test_species.py: 39 warnings
+tests/test_stagnation.py: 25 warnings
+tests/test_xor_example.py: 2 warnings
+  /testbed/neat/config.py:45: DeprecationWarning: Using default 0.0 for 'time_constant_mutate_rate'
+    warnings.warn(
+
+tests/test_activation.py: 3 warnings
+tests/test_aggregation.py: 3 warnings
+tests/test_checkpoint.py: 22 warnings
+tests/test_config.py: 1 warning
+tests/test_config_save_restore.py: 3 warnings
+tests/test_ctrnn.py: 1 warning
+tests/test_disable_rule.py: 6 warnings
+tests/test_export.py: 13 warnings
+tests/test_extinction.py: 52 warnings
+tests/test_feedforward_network.py: 2 warnings
+tests/test_fitness_evaluation.py: 25 warnings
+tests/test_genome.py: 32 warnings
+tests/test_genome_crossover.py: 17 warnings
+tests/test_genome_mutations.py: 30 warnings
+tests/test_innovation.py: 9 warnings
+tests/test_innovation_integration.py: 6 warnings
+tests/test_nn.py: 4 warnings
+tests/test_parallel_evaluator.py: 3 warnings
+tests/test_population.py: 7 warnings
+tests/test_reproducibility.py: 11 warnings
+tests/test_reproduction.py: 3 warnings
+tests/test_simple_run.py: 15 warnings
+tests/test_species.py: 39 warnings
+tests/test_stagnation.py: 25 warnings
+tests/test_xor_example.py: 2 warnings
+  /testbed/neat/config.py:45: DeprecationWarning: Using default 0.0 for 'time_constant_mutate_power'
+    warnings.warn(
+
+tests/test_activation.py: 3 warnings
+tests/test_aggregation.py: 3 warnings
+tests/test_checkpoint.py: 22 warnings
+tests/test_config.py: 1 warning
+tests/test_config_save_restore.py: 3 warnings
+tests/test_ctrnn.py: 1 warning
+tests/test_disable_rule.py: 6 warnings
+tests/test_export.py: 13 warnings
+tests/test_extinction.py: 52 warnings
+tests/test_feedforward_network.py: 2 warnings
+tests/test_fitness_evaluation.py: 25 warnings
+tests/test_genome.py: 32 warnings
+tests/test_genome_crossover.py: 17 warnings
+tests/test_genome_mutations.py: 30 warnings
+tests/test_innovation.py: 9 warnings
+tests/test_innovation_integration.py: 6 warnings
+tests/test_nn.py: 4 warnings
+tests/test_parallel_evaluator.py: 3 warnings
+tests/test_population.py: 7 warnings
+tests/test_reproducibility.py: 11 warnings
+tests/test_reproduction.py: 3 warnings
+tests/test_simple_run.py: 15 warnings
+tests/test_species.py: 39 warnings
+tests/test_stagnation.py: 25 warnings
+tests/test_xor_example.py: 2 warnings
+  /testbed/neat/config.py:45: DeprecationWarning: Using default 10.0 for 'time_constant_max_value'
+    warnings.warn(
+
+tests/test_activation.py: 3 warnings
+tests/test_aggregation.py: 3 warnings
+tests/test_checkpoint.py: 22 warnings
+tests/test_config.py: 1 warning
+tests/test_config_save_restore.py: 3 warnings
+tests/test_ctrnn.py: 1 warning
+tests/test_disable_rule.py: 6 warnings
+tests/test_export.py: 13 warnings
+tests/test_extinction.py: 52 warnings
+tests/test_feedforward_network.py: 2 warnings
+tests/test_fitness_evaluation.py: 25 warnings
+tests/test_genome.py: 32 warnings
+tests/test_genome_crossover.py: 17 warnings
+tests/test_genome_mutations.py: 30 warnings
+tests/test_innovation.py: 9 warnings
+tests/test_innovation_integration.py: 6 warnings
+tests/test_nn.py: 4 warnings
+tests/test_parallel_evaluator.py: 3 warnings
+tests/test_population.py: 7 warnings
+tests/test_reproducibility.py: 11 warnings
+tests/test_reproduction.py: 3 warnings
+tests/test_simple_run.py: 15 warnings
+tests/test_species.py: 39 warnings
+tests/test_stagnation.py: 25 warnings
+tests/test_xor_example.py: 2 warnings
+  /testbed/neat/config.py:45: DeprecationWarning: Using default 0.01 for 'time_constant_min_value'
+    warnings.warn(
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+--------------------------------- JSON report ----------------------------------
+report saved to: report.json
+=========================== short test summary info ============================
+FAILED tests/test_checkpoint.py::TestCheckpointIntegrity::test_checkpoint_multiple_generations
+FAILED tests/test_genes.py::TestDefaultConnectionGene::test_crossover_requires_matching_innovations_for_connection_genes
+FAILED tests/test_simple_run.py::test_serial_random - ZeroDivisionError: divi...
+FAILED tests/test_simple_run.py::test_serial3 - ValueError: max() arg is an e...
+FAILED tests/test_simple_run.py::test_serial4 - ValueError: max() arg is an e...
+FAILED tests/test_simple_run.py::test_serial5 - ZeroDivisionError: division b...
+=========== 6 failed, 504 passed, 3 skipped, 2672 warnings in 8.01s ============

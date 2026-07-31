@@ -1,0 +1,24 @@
+{
+  "instance_id": "commit-0/promptui",
+  "id": "f6db632b-08ba-43f8-86cd-b95d3a6a4880",
+  "repo": "Shivansh9411/promptui",
+  "base_commit": "4752994aea2818e348f0a7a879ac532cb27ce79c",
+  "reference_commit": "c2e487d3597f59bcf76b24c9e80679740a72212b",
+  "setup": {
+    "install": "go mod download && go build ./...",
+    "packages": "",
+    "pip_packages": "",
+    "pre_install": [],
+    "go_version": "1.12",
+    "specification": "https://pkg.go.dev/github.com/manifoldco/promptui",
+    "version_source": "go.mod[go]",
+    "version_conflicts": []
+  },
+  "test": {
+    "test_cmd": "go test -json -count=1 ./...",
+    "test_dir": "."
+  },
+  "src_dir": ".",
+  "language": "go",
+  "base_compiles": true
+}

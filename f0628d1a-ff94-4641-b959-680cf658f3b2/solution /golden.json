@@ -1,0 +1,9 @@
+{
+  "kind": "commit0-golden-ref",
+  "repo": "Shivansh9411/uuid",
+  "base_commit": "e91597e7a9265650a29369b5633c798d917e5199",
+  "reference_commit": "2d3c2a9cc518326daf99a383f07c4d3c44317e4d",
+  "src_dir": ".",
+  "language": "go",
+  "note": "Golden solution = the repo at reference_commit; solve.sh fetches+resets to it."
+}

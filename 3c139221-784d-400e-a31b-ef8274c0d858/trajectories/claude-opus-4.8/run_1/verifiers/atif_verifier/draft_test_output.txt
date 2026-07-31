@@ -1,0 +1,195 @@
+    Updating crates.io index
+     Locking 145 packages to latest compatible versions
+      Adding async-channel v1.9.0 (available: v2.5.0)
+      Adding async-global-executor v2.4.1 (available: v3.1.0)
+      Adding async-io v1.13.0 (available: v2.6.0)
+      Adding futures-lite v1.13.0 (available: v2.6.1)
+      Adding pretty_assertions v0.6.1 (available: v1.4.1)
+   Compiling proc-macro2 v1.0.107
+   Compiling quote v1.0.47
+   Compiling unicode-ident v1.0.24
+   Compiling crossbeam-utils v0.8.22
+   Compiling pin-project-lite v0.2.17
+   Compiling parking v2.2.1
+   Compiling stable_deref_trait v1.2.1
+   Compiling libc v0.2.188
+   Compiling autocfg v1.5.1
+   Compiling futures-io v0.3.33
+   Compiling cfg-if v1.0.4
+   Compiling futures-core v0.3.33
+   Compiling litemap v0.8.2
+   Compiling serde_core v1.0.229
+   Compiling writeable v0.6.3
+   Compiling icu_normalizer_data v2.2.0
+   Compiling utf8_iter v1.0.4
+   Compiling icu_properties_data v2.2.0
+   Compiling fastrand v2.5.0
+   Compiling rustix v1.1.4
+   Compiling serde v1.0.229
+   Compiling zerocopy v0.8.55
+   Compiling getrandom v0.1.16
+   Compiling slab v0.4.12
+   Compiling linux-raw-sys v0.12.1
+   Compiling futures-lite v2.6.1
+   Compiling memchr v2.8.3
+   Compiling value-bag v1.13.1
+   Compiling percent-encoding v2.3.2
+   Compiling event-listener v2.5.3
+   Compiling bitflags v2.13.1
+   Compiling smallvec v1.15.2
+   Compiling async-io v2.6.0
+   Compiling io-lifetimes v1.0.11
+   Compiling log v0.4.33
+   Compiling thiserror v1.0.69
+   Compiling async-task v4.7.1
+   Compiling concurrent-queue v2.5.0
+   Compiling atomic-waker v1.1.2
+   Compiling zmij v1.0.23
+   Compiling piper v0.2.5
+   Compiling form_urlencoded v1.2.2
+   Compiling event-listener v5.4.1
+   Compiling polling v2.8.0
+   Compiling anyhow v1.0.104
+   Compiling itoa v1.0.18
+   Compiling waker-fn v1.2.0
+   Compiling rustix v0.37.28
+   Compiling fastrand v1.9.0
+   Compiling serde_json v1.0.151
+   Compiling syn v1.0.109
+   Compiling event-listener-strategy v0.5.4
+   Compiling async-executor v1.14.0
+   Compiling async-channel v1.9.0
+   Compiling syn v2.0.119
+   Compiling syn v3.0.2
+   Compiling async-lock v3.4.2
+   Compiling async-channel v2.5.0
+   Compiling futures-lite v1.13.0
+   Compiling async-io v1.13.0
+   Compiling once_cell v1.21.4
+   Compiling bitflags v1.3.2
+   Compiling blocking v1.6.2
+   Compiling httparse v1.10.1
+   Compiling ryu v1.0.23
+   Compiling http-types v2.12.0
+   Compiling linux-raw-sys v0.3.8
+   Compiling async-lock v2.8.0
+   Compiling base64 v0.13.1
+   Compiling socket2 v0.4.10
+   Compiling infer v0.2.3
+   Compiling rand_core v0.5.1
+   Compiling async-dup v1.2.4
+   Compiling kv-log-macro v1.0.7
+   Compiling ansi_term v0.11.0
+   Compiling difference v2.0.0
+   Compiling pin-utils v0.1.0
+   Compiling pretty_assertions v0.6.1
+   Compiling serde_derive v1.0.229
+   Compiling async-attributes v1.1.2
+   Compiling ppv-lite86 v0.2.21
+   Compiling rand_chacha v0.2.2
+   Compiling rand v0.7.3
+   Compiling synstructure v0.13.2
+   Compiling polling v3.11.0
+   Compiling zerofrom-derive v0.1.7
+   Compiling yoke-derive v0.8.2
+   Compiling zerovec-derive v0.11.3
+   Compiling displaydoc v0.2.6
+   Compiling thiserror-impl v1.0.69
+   Compiling pin-project-internal v1.1.13
+   Compiling async-global-executor v2.4.1
+   Compiling async-std v1.13.2
+   Compiling serde_urlencoded v0.7.1
+   Compiling zerofrom v0.1.8
+   Compiling pin-project v1.1.13
+   Compiling yoke v0.8.3
+   Compiling serde_qs v0.8.5
+   Compiling zerovec v0.11.6
+   Compiling zerotrie v0.2.4
+   Compiling tinystr v0.8.3
+   Compiling potential_utf v0.1.5
+   Compiling icu_collections v2.2.0
+   Compiling icu_locale_core v2.2.0
+   Compiling icu_provider v2.2.0
+   Compiling icu_properties v2.2.0
+   Compiling icu_normalizer v2.2.0
+   Compiling idna_adapter v1.2.2
+   Compiling idna v1.1.0
+   Compiling url v2.5.8
+   Compiling async-h1 v2.3.3 (/tmp/commit0-inplace-71rjwc3i/tree)
+warning: unused import: `crate::read_to_end`
+  --> src/client/encode.rs:10:5
+   |
+10 | use crate::read_to_end;
+   |     ^^^^^^^^^^^^^^^^^^
+   |
+   = note: `#[warn(unused_imports)]` (part of `#[warn(unused)]`) on by default
+
+warning: unused import: `crate::read_to_end`
+  --> src/server/encode.rs:13:5
+   |
+13 | use crate::read_to_end;
+   |     ^^^^^^^^^^^^^^^^^^
+
+error[E0308]: mismatched types
+  --> src/server/encode.rs:49:74
+   |
+49 |                         self.state = EncoderState::Body(BodyEncoder::new(response));
+   |                                                         ---------------- ^^^^^^^^ expected `Body`, found `Response`
+   |                                                         |
+   |                                                         arguments to this function are incorrect
+   |
+note: associated function defined here
+  --> src/body_encoder.rs:19:19
+   |
+19 |     pub(crate) fn new(body: Body) -> Self {
+   |                   ^^^ ----------
+
+error[E0596]: cannot borrow data in dereference of `async_dup::Arc<async_dup::Mutex<ChunkedDecoder<futures_lite::io::BufReader<IO>>>>` as mutable
+  --> src/server/body_reader.rs:34:48
+   |
+34 |             BodyReader::Chunked(r) => Pin::new(&mut *r.clone()).poll_read(cx, buf),
+   |                                                ^^^^^^^^^^^^^^^ cannot borrow as mutable
+   |
+   = help: trait `DerefMut` is required to modify through a dereference, but it is not implemented for `async_dup::Arc<async_dup::Mutex<ChunkedDecoder<futures_lite::io::BufReader<IO>>>>`
+
+error[E0596]: cannot borrow data in dereference of `async_dup::Arc<async_dup::Mutex<futures_lite::io::Take<futures_lite::io::BufReader<IO>>>>` as mutable
+  --> src/server/body_reader.rs:35:46
+   |
+35 |             BodyReader::Fixed(r) => Pin::new(&mut *r.clone()).poll_read(cx, buf),
+   |                                              ^^^^^^^^^^^^^^^ cannot borrow as mutable
+   |
+   = help: trait `DerefMut` is required to modify through a dereference, but it is not implemented for `async_dup::Arc<async_dup::Mutex<futures_lite::io::Take<futures_lite::io::BufReader<IO>>>>`
+
+error: unused import: `crate::read_to_end`
+  --> src/client/encode.rs:10:5
+   |
+10 | use crate::read_to_end;
+   |     ^^^^^^^^^^^^^^^^^^
+   |
+note: the lint level is defined here
+  --> src/lib.rs:5:24
+   |
+ 5 | #![cfg_attr(test, deny(warnings))]
+   |                        ^^^^^^^^
+   = note: `#[deny(unused_imports)]` implied by `#[deny(warnings)]`
+
+error: unused import: `crate::read_to_end`
+  --> src/server/encode.rs:13:5
+   |
+13 | use crate::read_to_end;
+   |     ^^^^^^^^^^^^^^^^^^
+
+Some errors have detailed explanations: E0308, E0596.
+For more information about an error, try `rustc --explain E0308`.
+warning: `async-h1` (lib) generated 2 warnings
+error: could not compile `async-h1` (lib) due to 3 previous errors; 2 warnings emitted
+warning: build failed, waiting for other jobs to finish...
+error[E0596]: cannot borrow data in dereference of `async_dup::Arc<async_dup::Mutex<decoder::ChunkedDecoder<futures_lite::io::BufReader<IO>>>>` as mutable
+  --> src/server/body_reader.rs:34:48
+   |
+34 |             BodyReader::Chunked(r) => Pin::new(&mut *r.clone()).poll_read(cx, buf),
+   |                                                ^^^^^^^^^^^^^^^ cannot borrow as mutable
+   |
+   = help: trait `DerefMut` is required to modify through a dereference, but it is not implemented for `async_dup::Arc<async_dup::Mutex<decoder::ChunkedDecoder<futures_lite::io::BufReader<IO>>>>`
+
+error: could not compile `async-h1` (lib test) due to 5 previous errors

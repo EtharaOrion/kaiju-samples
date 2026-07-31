@@ -1,0 +1,6 @@
+{
+  "num_passed": 12,
+  "num_tests": 13,
+  "status": "OK",
+  "detail": "in-container eval.sh; go test -json"
+}

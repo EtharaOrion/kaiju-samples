@@ -1,0 +1,9 @@
+{
+  "kind": "commit0-golden-ref",
+  "repo": "Zahgon/viper",
+  "base_commit": "4aa475c1c8cfe41938452783b8cb34a40b5cc78f",
+  "reference_commit": "528f7416c4b56a4948673984b190bf8713f0c3c4",
+  "src_dir": ".",
+  "language": "go",
+  "note": "Golden solution = the repo at reference_commit; solve.sh fetches+resets to it."
+}

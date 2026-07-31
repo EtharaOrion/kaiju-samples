@@ -1,0 +1,548 @@
+============================= test session starts ==============================
+platform linux -- Python 3.11.15, pytest-9.1.1, pluggy-1.6.0
+rootdir: /tmp/commit0-inplace-eoh9k3br/tree
+configfile: pyproject.toml
+plugins: cov-7.1.0, json-report-1.5.0, metadata-3.1.1, xdist-3.8.0
+created: 16/16 workers
+16 workers [297 items]
+
+..................................F.........F...................F....... [ 24%]
+.......F................................................................ [ 48%]
+...............FFF.....................................F................ [ 72%]
+..............................F......................................... [ 96%]
+F........                                                                [100%]
+=================================== FAILURES ===================================
+_________________________________ test_slip132 _________________________________
+[gw4] linux -- Python 3.11.15 /usr/local/bin/python
+
+    def test_slip132() -> None:
+        mnemonic = "enough regret erode news field main wild jar erupt bronze velvet ugly"
+        mxprv = bip39.mxprv_from_mnemonic(mnemonic)
+    
+        xprv = slip132.p2pkh_xkey(mxprv)
+        assert (
+            xprv
+            == "xprv9y7Yxxyy7wn5ktGVzAmgatW1vu7daX4V8ddWMcSbKJyK6TzkBbZDimAMCLoogpf4GEp2ThmBZ476vwe7xVC9sPsNfJcyu5isQixgF95HS31"
+        )
+        with pytest.raises(BTClibValueError, match="not a public key: "):
+            slip132.address_from_xpub(xprv)
+        xpub = bip32.xpub_from_xprv(xprv)
+        assert (
+            xpub
+            == "xpub6C6uNUWrxKLNyNLy6CJgx2SkUvx7yynLVrZ79zrCseWHyGKtj8sUGZUq3dw9fqJGETSEeX1iztXAfRvxh6Gk2m7yVjDCx5cbRP2So559Hb5"
+        )
+        address = slip132.address_from_xpub(xpub)
+        assert slip132.address_from_xkey(xprv) == address
+        assert address == "1DjfiAgNyvRXhYXiDgE9K7bfB82hVUPTm1"
+>       with pytest.raises(BTClibValueError, match="not a root key: "):
+E       AssertionError: Regex pattern did not match.
+E         Expected regex: 'not a root key: '
+E         Actual message: 'extended key is not a root key'
+
+tests/bip32/test_slip132.py:42: AssertionError
+____________________________ test_pub_key_recovery _____________________________
+[gw11] linux -- Python 3.11.15 /usr/local/bin/python
+
+    def test_pub_key_recovery() -> None:
+        ec = CURVES["secp112r2"]
+    
+        q = 0x10
+        Q = mult(q, ec.G, ec)
+    
+        msg = b"Satoshi Nakamoto"
+        sig = dsa.sign(msg, q, ec=ec)
+        dsa.assert_as_valid(msg, Q, sig)
+        assert dsa.verify(msg, Q, sig)
+    
+        keys = dsa.recover_pub_keys(msg, sig)
+>       assert len(keys) == 4
+E       assert 6 == 4
+E        +  where 6 = len([(537416091195383570996744546272210, 1766922181326602652338562188272190), (3838895390233328948049943042418414, 2861805...1389253, 1221229312096333279416759948662369), (3946638954218798406793650838098256, 3978592018881848192846121201509248)])
+
+tests/ecc/test_dsa.py:206: AssertionError
+_____________________________ test_low_cardinality _____________________________
+[gw2] linux -- Python 3.11.15 /usr/local/bin/python
+
+    def test_low_cardinality() -> None:
+        """Test low-cardinality curves for all msg/key pairs."""
+        # pylint: disable=protected-access
+    
+        # ec.n has to be prime to sign
+        test_curves = [
+            low_card_curves["ec13_11"],
+            # low_card_curves["ec13_19"],
+            # low_card_curves["ec17_13"],
+            low_card_curves["ec17_23"],
+            low_card_curves["ec19_13"],
+            # low_card_curves["ec19_23"],
+            low_card_curves["ec23_19"],
+            low_card_curves["ec23_31"],
+        ]
+    
+        lower_s = True
+        # only low cardinality test curves or it would take forever
+        for ec in test_curves:
+            for q in range(1, ec.n):  # all possible private keys
+                QJ = _mult(q, ec.GJ, ec)  # public key
+                for k in range(1, ec.n):  # all possible ephemeral keys
+                    RJ = _mult(k, ec.GJ, ec)
+                    r = ec.x_aff_from_jac(RJ) % ec.n
+                    k_inv = mod_inv(k, ec.n)
+                    for e in range(ec.n):  # all possible challenges
+                        s = k_inv * (e + q * r) % ec.n
+                        # bitcoin canonical 'low-s' encoding for ECDSA
+                        if lower_s and s > ec.n / 2:
+                            s = ec.n - s
+                        if r == 0 or s == 0:
+                            err_msg = "failed to sign: "
+                            with pytest.raises(BTClibRuntimeError, match=err_msg):
+                                dsa._sign_(e, q, k, lower_s, ec)
+                        else:
+                            sig = dsa._sign_(e, q, k, lower_s, ec)
+                            assert r == sig.r
+                            assert s == sig.s
+                            assert ec == sig.ec
+                            # valid signature must pass verification
+                            dsa._assert_as_valid_(e, QJ, r, s, lower_s, ec)
+    
+                            jac_keys = dsa._recover_pub_keys_(e, r, s, lower_s, ec)
+                            # FIXME speed this up
+                            Qs = [ec.aff_from_jac(key) for key in jac_keys]
+                            assert ec.aff_from_jac(QJ) in Qs
+>                           assert len(jac_keys) in {2, 4}
+E                           assert 1 in {2, 4}
+E                            +  where 1 = len([(10, 8, 6)])
+
+tests/ecc/test_dsa.py:191: AssertionError
+_____________________________ test_vectors_bip174 ______________________________
+[gw11] linux -- Python 3.11.15 /usr/local/bin/python
+
+    def test_vectors_bip174() -> None:
+        """Test https://github.com/bitcoin/bips/blob/master/bip-0174.mediawiki."""
+        data_folder = path.join(path.dirname(__file__), "_data")
+        filename = path.join(data_folder, "bip174_test_vectors.json")
+        with open(filename, encoding="ascii") as file_:
+            # json.dump(test_vectors, f, indent=4)
+            test_vectors = json.load(file_)
+    
+        for i, test_vector in enumerate(test_vectors["valid psbts"]):
+            try:
+                psbt_decoded = Psbt.b64decode(test_vector["encoded psbt"])
+            except Exception as e:  # pragma: no cover # pylint: disable=broad-except
+                print(f"valid case {i+1}: {test_vector['description']}")  # pragma: no cover
+                raise e  # pragma: no cover
+            assert test_vector["encoded psbt"] == Psbt.b64encode(psbt_decoded)
+    
+        for i, test_vector in enumerate(test_vectors["invalid psbts"]):
+            with pytest.raises(BTClibValueError) as excinfo:
+                Psbt.b64decode(test_vector["encoded psbt"])
+            assert test_vector["error message"] in str(
+                excinfo.value
+            ), f"invalid case {i+1}: {test_vector['description']}\n{excinfo.value}"
+    
+        for i, test_vector in enumerate(test_vectors["signer check failures"]):
+            psbt_decoded = Psbt.b64decode(test_vector["encoded psbt"])
+>           with pytest.raises(BTClibValueError) as excinfo:
+E           Failed: DID NOT RAISE BTClibValueError
+
+tests/psbt/test_psbt.py:55: Failed
+______________________________ test_native_p2wsh _______________________________
+[gw2] linux -- Python 3.11.15 /usr/local/bin/python
+
+    def test_native_p2wsh() -> None:
+        tx_bytes = "0100000002fe3dc9208094f3ffd12645477b3dc56f60ec4fa8e6f5d67c565d1c6b9216b36e0000000000ffffffff0815cf020f013ed6cf91d29f4202e8a58726b1ac6c79da47c23d1bee0a6925f80000000000ffffffff0100f2052a010000001976a914a30741f8145e5acadf23f751864167f32e0963f788ac00000000"
+        tx = Tx.parse(tx_bytes)
+        tx.vin[1].script_witness = Witness(
+            [
+                "21026dccc749adc2a9d0d89497ac511f760f45c47dc5ed9cf352a58ac706453880aeadab210255a9626aebf5e29c0e6538428ba0d1dcf6ca98ffdf086aa8ced5e0d0215ea465ac"
+            ]
+        )
+    
+        utxo_0 = TxOut(
+            156250000,
+            "21036d5c20fa14fb2f635474c1dc4ef5909d4568e5569b79fc94d3448486e14685f8ac",
+        )
+        utxo_1 = TxOut(
+            4900000000,
+            "00205d1b56b63d714eebe542309525f484b7e9d6f686b3781b6f61ef925d66d6f6a0",
+        )
+    
+        hash_ = sig_hash.from_tx([utxo_0, utxo_1], tx, 1, sig_hash.SINGLE)
+        assert hash_ == bytes.fromhex(
+            "82dde6e4f1e94d02c2b7ad03d2115d691f48d064e9d52f58194a6637e4194391"
+        )
+    
+        script_ = sig_hash.witness_v0_script(tx.vin[1].script_witness.stack[-1])[1]
+        hash_ = sig_hash.segwit_v0(script_, tx, 1, sig_hash.SINGLE, utxo_1.value)
+>       assert hash_ == bytes.fromhex(
+            "fef7bd749cce710c5c052bd796df1af0d935e59cea63736268bcbe2d2134fc47"
+        )
+E       AssertionError: assert b'\x82\xdd\xe...\xe4\x19C\x91' == b'\xfe\xf7\xb...c\xbe-!4\xfcG'
+E         
+E         At index 0 diff: b'\x82' != b'\xfe'
+E         Use -v to get more diff
+
+tests/script/test_sig_hash_segwitv0.py:74: AssertionError
+_______________________________ test_exceptions ________________________________
+[gw15] linux -- Python 3.11.15 /usr/local/bin/python
+
+    def test_exceptions() -> None:
+        msg = b"test"
+        wif = "KwELaABegYxcKApCb3kJR9ymecfZZskL9BzVUkQhsqFiUKftb4tu"
+        address = b58.p2pkh(wif)
+        exp_sig = "IHdKsFF1bUrapA8GMoQUbgI+Ad0ZXyX1c/yAZHmJn5hSNBi7J+TrI1615FG3g9JEOPGVvcfDWIFWrg2exLNtoVc="
+        bms.assert_as_valid(msg, address, exp_sig)
+        bms_sig = bms.Sig.b64decode(exp_sig)
+    
+        err_msg = "not a p2wpkh address: "
+        with pytest.raises(BTClibValueError, match=err_msg):
+            bms.assert_as_valid(msg, b32.p2wsh(32 * b"\x00"), exp_sig)
+    
+        err_msg = "invalid recovery flag: "
+        with pytest.raises(BTClibValueError, match=err_msg):
+            bms.Sig(26, bms_sig.dsa_sig)
+    
+        exp_sig = "IHdKsFF1bUrapA8GMoQUbgI+Ad0ZXyX1c/yAZHmJn5hNBi7J+TrI1615FG3g9JEOPGVvcfDWIFWrg2exLoVc="
+        err_msg = "invalid decoded length: "
+        with pytest.raises(BTClibValueError, match=err_msg):
+            bms.assert_as_valid(msg, address, exp_sig)
+        assert not bms.verify(msg, address, exp_sig)
+    
+        exp_sig = "GpNLHqEKSzwXV+KwwBfQthQ848mn5qSkmGDXpqshDuPYJELOnSuRYGQQgBR4PpI+w2tJdD4v+hxElvAaUSqv2eU="
+        err_msg = "invalid recovery flag: "
+        with pytest.raises(BTClibValueError, match=err_msg):
+            bms.assert_as_valid(msg, address, exp_sig)
+        assert not bms.verify(msg, address, exp_sig)
+        exp_sig = "QpNLHqEKSzwXV+KwwBfQthQ848mn5qSkmGDXpqshDuPYJELOnSuRYGQQgBR4PpI+w2tJdD4v+hxElvAaUSqv2eU="
+        with pytest.raises(BTClibValueError, match=err_msg):
+            bms.assert_as_valid(msg, address, exp_sig)
+        assert not bms.verify(msg, address, exp_sig)
+    
+        # compressed wif, uncompressed address
+        wif = "Ky1XfDK2v6wHPazA6ECaD8UctEoShXdchgABjpU9GWGZDxVRDBMJ"
+        address = "19f7adDYqhHSJm2v7igFWZAqxXHj1vUa3T"
+        err_msg = "mismatch between private key and address"
+        with pytest.raises(BTClibValueError, match=err_msg):
+            bms.sign(msg, wif, address)
+    
+        # uncompressed wif, compressed address
+        wif = "5JDopdKaxz5bXVYXcAnfno6oeSL8dpipxtU1AhfKe3Z58X48srn"
+        address = "1DAag8qiPLHh6hMFVu9qJQm9ro1HtwuyK5"
+        err_msg = "not a private or compressed public key for mainnet: "
+        # FIXME puzzling error message
+        with pytest.raises(BTClibValueError, match=err_msg):
+            bms.sign(msg, wif, address)
+    
+        msg = b"test"
+        wif = "L4xAvhKR35zFcamyHME2ZHfhw5DEyeJvEMovQHQ7DttPTM8NLWCK"
+        b58_p2pkh = b58.p2pkh(wif)
+        b32_p2wpkh = b32.p2wpkh(wif)
+        b58_p2wpkh_p2sh = b58.p2wpkh_p2sh(wif)
+    
+        wif = "Ky1XfDK2v6wHPazA6ECaD8UctEoShXdchgABjpU9GWGZDxVRDBMJ"
+        err_msg = "mismatch between private key and address"
+        with pytest.raises(BTClibValueError, match=err_msg):
+            bms.sign(msg, wif, b58_p2pkh)
+        with pytest.raises(BTClibValueError, match=err_msg):
+            bms.sign(msg, wif, b32_p2wpkh)
+        with pytest.raises(BTClibValueError, match=err_msg):
+            bms.sign(msg, wif, b58_p2wpkh_p2sh)
+    
+        # Invalid recovery flag (39) for base58 p2pkh address
+        exp_sig = "IHdKsFF1bUrapA8GMoQUbgI+Ad0ZXyX1c/yAZHmJn5hSNBi7J+TrI1615FG3g9JEOPGVvcfDWIFWrg2exLNtoVc="
+        bms_sig = bms.Sig.b64decode(exp_sig)
+        bms_sig = bms.Sig(39, bms_sig.dsa_sig, check_validity=False)
+        sig_encoded = bms_sig.b64encode(check_validity=False)
+        err_msg = "invalid p2pkh address recovery flag: "
+        with pytest.raises(BTClibValueError, match=err_msg):
+            bms.assert_as_valid(msg, b58_p2pkh, sig_encoded)
+    
+        # Invalid recovery flag (35) for bech32 p2wpkh address
+        exp_sig = "IBFyn+h9m3pWYbB4fBFKlRzBD4eJKojgCIZSNdhLKKHPSV2/WkeV7R7IOI0dpo3uGAEpCz9eepXLrA5kF35MXuU="
+        bms_sig = bms.Sig.b64decode(exp_sig)
+        bms_sig = bms.Sig(35, bms_sig.dsa_sig, check_validity=False)
+        err_msg = "invalid p2wpkh address recovery flag: "
+>       with pytest.raises(BTClibValueError, match=err_msg):
+E       AssertionError: Regex pattern did not match.
+E         Expected regex: 'invalid p2wpkh address recovery flag: '
+E         Actual message: 'invalid p2wpkh address: bc1qz0knqc5dhlgvalc3z77898thhvqek6v6j0j5zj'
+
+tests/ecc/test_bms.py:155: AssertionError
+_____________________________ test_native_p2wsh_2 ______________________________
+[gw2] linux -- Python 3.11.15 /usr/local/bin/python
+
+    def test_native_p2wsh_2() -> None:
+        tx_bytes = "0100000002e9b542c5176808107ff1df906f46bb1f2583b16112b95ee5380665ba7fcfc0010000000000ffffffff80e68831516392fcd100d186b3c2c7b95c80b53c77e77c35ba03a66b429a2a1b0000000000ffffffff0280969800000000001976a914de4b231626ef508c9a74a8517e6783c0546d6b2888ac80969800000000001976a9146648a8cd4531e1ec47f35916de8e259237294d1e88ac00000000"
+        tx = Tx.parse(tx_bytes)
+        tx.vin[0].script_witness = Witness(
+            [
+                "0063ab68210392972e2eb617b2388771abe27235fd5ac44af8e61693261550447a4c3e39da98ac"
+            ]
+        )
+        tx.vin[1].script_witness = Witness(
+            [
+                "5163ab68210392972e2eb617b2388771abe27235fd5ac44af8e61693261550447a4c3e39da98ac"
+            ]
+        )
+    
+        previous_txout_1 = TxOut(
+            16777215, "0020ba468eea561b26301e4cf69fa34bde4ad60c81e70f059f045ca9a79931004a4d"
+        )
+        previous_txout_2 = TxOut(
+            16777215, "0020d9bbfbe56af7c4b7f960a70d7ea107156913d9e5a26b0a71429df5e097ca6537"
+        )
+        hash_ = sig_hash.from_tx(
+            [previous_txout_1, previous_txout_2],
+            tx,
+            0,
+            sig_hash.ANYONECANPAY | sig_hash.SINGLE,
+        )
+        assert hash_ == bytes.fromhex(
+            "e9071e75e25b8a1e298a72f0d2e9f4f95a0f5cdf86a533cda597eb402ed13b3a"
+        )
+    
+        script_ = sig_hash.witness_v0_script(tx.vin[1].script_witness.stack[-1])[1]
+        hash_ = sig_hash.segwit_v0(
+            script_,
+            tx,
+            1,
+            sig_hash.ANYONECANPAY | sig_hash.SINGLE,
+            previous_txout_2.value,
+        )
+>       assert hash_ == bytes.fromhex(
+            "cd72f1f1a433ee9df816857fad88d8ebd97e09a75cd481583eb841c330275e54"
+        )
+E       assert b'\x17\xda\xe...cc+%\t3O\x9a ' == b"\xcdr\xf1\x...\xb8A\xc30'^T"
+E         
+E         At index 0 diff: b'\x17' != b'\xcd'
+E         Use -v to get more diff
+
+tests/script/test_sig_hash_segwitv0.py:117: AssertionError
+_________________________________ test_script __________________________________
+[gw13] linux -- Python 3.11.15 /usr/local/bin/python
+
+    def test_script() -> None:
+        fname = "script_tests.json"
+        filename = path.join(path.dirname(__file__), "_data", fname)
+        with open(filename, encoding="ascii") as file_:
+            data = json.load(file_)
+    
+        def test(stack, amount, script_sig_str, script_pub_key_str, flags, result):
+            coinbase_input = TxIn(
+                sequence=0xFFFFFFFF, prev_out=OutPoint(), script_sig=b"\x00\x00"
+            )
+            script_pub_key = parse_script(script_pub_key_str)
+            coinbase_output = TxOut(
+                value=amount, script_pub_key=ScriptPubKey(script_pub_key)
+            )
+            coinbase = Tx(
+                version=1, lock_time=0, vin=[coinbase_input], vout=[coinbase_output]
+            )
+    
+            script_sig = parse_script(script_sig_str)
+            spending_input = TxIn(
+                sequence=0xFFFFFFFF,
+                prev_out=OutPoint(tx_id=coinbase.id, vout=0),
+                script_sig=script_sig,
+                script_witness=Witness(stack),
+            )
+            spending = Tx(
+                version=1,
+                lock_time=0,
+                vin=[spending_input],
+                vout=[TxOut(amount, ScriptPubKey(""))],
+            )
+    
+            verify_input([coinbase_output], spending, 0, flags)
+    
+        for x in data:
+            if len(x) == 1 and isinstance(x[0], str):
+                continue
+    
+            amount = 0
+            if isinstance(x[0], str):
+                i = 0
+                stack = []
+            else:
+                i = 1
+                stack = x[0]
+                if isinstance(stack[-1], (int, float)):
+                    amount = int(stack[-1] * 10**8)
+                    stack = stack[:-1]
+            script_sig_str = x[i]
+            script_pub_key_str = x[i + 1]
+            flags = x[i + 2]
+            result = x[i + 3] == "OK"
+    
+            with warnings.catch_warnings():
+                warnings.simplefilter("ignore")
+                if result:
+>                   test(stack, amount, script_sig_str, script_pub_key_str, flags, result)
+
+tests/script_engine/test_script.py:83: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+tests/script_engine/test_script.py:39: in test
+    value=amount, script_pub_key=ScriptPubKey(script_pub_key)
+                                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+btclib/script/script_pub_key.py:304: in __init__
+    super().__init__(script, check_validity=check_validity)
+btclib/script/script.py:341: in __init__
+    self.assert_valid()
+btclib/script/script_pub_key.py:309: in assert_valid
+    super().assert_valid()
+btclib/script/script.py:344: in assert_valid
+    serialize(self.asm)
+              ^^^^^^^^
+btclib/script/script.py:329: in asm
+    return parse(self.script)
+           ^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+stream = b'c\xbbgQh', accept_unknown = False
+
+    def parse(stream: BinaryData, accept_unknown: bool = False) -> ScriptList:
+        s = bytesio_from_binarydata(stream)
+        r: ScriptList = []  # initialize the result list
+    
+        while True:
+            t = s.read(1)  # get one byte
+            if not t:
+                break
+            i = t[0]  # convert the first byte to an integer
+            if 0 < i <= 78:  # push
+                data_length = i  # 0 < i < 76 -> 1-byte-data-length | data
+                if 75 < i < 79:
+                    x = i - 75
+                    if i == 78:  # OP_PUSHDATA4 | 4-byte-data-length | data
+                        x = 4
+                    y = s.read(x)
+                    if len(y) != x:
+                        raise BTClibValueError("Not enough data for pushdata length")
+                    data_length = int.from_bytes(y, byteorder="little")
+                if data_length > 520:
+                    raise BTClibValueError(f"Invalid pushdata length: {data_length}")
+                data = s.read(data_length)
+                if len(data) != data_length:
+                    raise BTClibValueError("Not enough data for pushdata")
+                command = data.hex().upper()
+            elif i in OP_CODE_NAME_FROM_INT:  # OP_CODE
+                command = OP_CODE_NAME_FROM_INT[i]
+            elif accept_unknown:
+                command = f"UNKNOWN_OP_CODE_{i}"
+    
+            else:
+>               raise BTClibValueError("Unknown op code")
+E               btclib.exceptions.BTClibValueError: Unknown op code
+
+btclib/script/script.py:317: BTClibValueError
+_____________________ test_one_prv_key_multiple_addresses ______________________
+[gw15] linux -- Python 3.11.15 /usr/local/bin/python
+
+    def test_one_prv_key_multiple_addresses() -> None:
+        msg = b"Paolo is afraid of ephemeral random numbers"
+    
+        # Compressed WIF
+        wif = "Kx45GeUBSMPReYQwgXiKhG9FzNXrnCeutJp4yjTd5kKxCitadm3C"
+        b58_p2pkh_compressed = b58.p2pkh(wif)
+        b58_p2wpkh_p2sh = b58.p2wpkh_p2sh(wif)
+        b32_p2wpkh = b32.p2wpkh(wif)
+    
+        # sign with no address
+        sig1 = bms.sign(msg, wif)
+        # True for Bitcoin Core
+        bms.assert_as_valid(msg, b58_p2pkh_compressed, sig1)
+        assert bms.verify(msg, b58_p2pkh_compressed, sig1)
+        # True for Electrum p2wpkh_p2sh
+        bms.assert_as_valid(msg, b58_p2wpkh_p2sh, sig1)
+        assert bms.verify(msg, b58_p2wpkh_p2sh, sig1)
+        # True for Electrum p2wpkh
+        bms.assert_as_valid(msg, b32_p2wpkh, sig1)
+        assert bms.verify(msg, b32_p2wpkh, sig1)
+    
+        # sign with p2pkh address
+        sig1 = bms.sign(msg, wif, b58_p2pkh_compressed)
+        # True for Bitcoin Core
+        bms.assert_as_valid(msg, b58_p2pkh_compressed, sig1)
+        assert bms.verify(msg, b58_p2pkh_compressed, sig1)
+        # True for Electrum p2wpkh_p2sh
+        bms.assert_as_valid(msg, b58_p2wpkh_p2sh, sig1)
+        assert bms.verify(msg, b58_p2wpkh_p2sh, sig1)
+        # True for Electrum p2wpkh
+        bms.assert_as_valid(msg, b32_p2wpkh, sig1)
+        assert bms.verify(msg, b32_p2wpkh, sig1)
+        assert sig1 == bms.sign(msg, wif, b58_p2pkh_compressed.encode("ascii"))
+    
+        # sign with p2wpkh_p2sh address (BIP137)
+        sig2 = bms.sign(msg, wif, b58_p2wpkh_p2sh)
+        # False for Bitcoin Core
+        err_msg = "invalid p2pkh address recovery flag: "
+        with pytest.raises(BTClibValueError, match=err_msg):
+            bms.assert_as_valid(msg, b58_p2pkh_compressed, sig2)
+        assert not bms.verify(msg, b58_p2pkh_compressed, sig2)
+        # True for BIP137 p2wpkh_p2sh
+        bms.assert_as_valid(msg, b58_p2wpkh_p2sh, sig2)
+        assert bms.verify(msg, b58_p2wpkh_p2sh, sig2)
+        # False for BIP137 p2wpkh
+        err_msg = "invalid p2wpkh address recovery flag: "
+>       with pytest.raises(BTClibValueError, match=err_msg):
+E       Failed: DID NOT RAISE BTClibValueError
+
+tests/ecc/test_bms.py:205: Failed
+_____________________________ test_invalid_legacy ______________________________
+[gw7] linux -- Python 3.11.15 /usr/local/bin/python
+
+    def test_invalid_legacy() -> None:
+        fname = "tx_invalid_legacy.json"
+        filename = path.join(path.dirname(__file__), "_data", fname)
+        with open(filename, encoding="ascii") as file_:
+            data = json.load(file_)
+    
+        for x in data:
+            if isinstance(x[0], str):
+                continue
+    
+            try:
+                tx = Tx.parse(x[1])
+            except BTClibValueError as e:
+                if "invalid satoshi amount:" not in str(e):
+                    continue
+                if "missing outputs" not in str(e):
+                    continue
+    
+            flags = x[2].split(",")  # different flags handling
+    
+            prevouts = []
+            for i in x[0]:
+                amount = 0 if len(i) == 3 else i[3]
+                with warnings.catch_warnings():
+                    warnings.simplefilter("ignore")
+                    script_pub_key = parse_script(i[2])
+                prevouts.append(TxOut(amount, ScriptPubKey(script_pub_key)))
+    
+>           with pytest.raises((BTClibValueError, IndexError, KeyError)):
+E           Failed: DID NOT RAISE any of (BTClibValueError, IndexError, KeyError)
+
+tests/script_engine/test_transactions.py:147: Failed
+--------------------------------- JSON report ----------------------------------
+report saved to: report.json
+============================= slowest 8 durations ==============================
+2.06s call     tests/ecc/test_rfc6979.py::test_rfc6979_nonce_tv
+1.54s call     tests/script_engine/test_transactions.py::test_valid_taproot
+1.46s call     tests/ec/test_curve_group.py::test_mult_aff
+1.23s call     tests/ec/test_curve_group.py::test_mult_recursive_aff
+0.87s call     tests/block/test_block.py::test_block_481824
+0.82s call     tests/script_engine/test_transactions.py::test_invalid_taproot
+0.70s call     tests/ec/test_curve_group.py::test_mult_jac
+0.63s call     tests/ecc/test_dsa.py::test_libsecp256k1_py_vectors_ecdsa_nonce
+=========================== short test summary info ============================
+FAILED tests/bip32/test_slip132.py::test_slip132 - AssertionError: Regex patt...
+FAILED tests/ecc/test_dsa.py::test_pub_key_recovery - assert 6 == 4
+FAILED tests/ecc/test_dsa.py::test_low_cardinality - assert 1 in {2, 4}
+FAILED tests/psbt/test_psbt.py::test_vectors_bip174 - Failed: DID NOT RAISE B...
+FAILED tests/script/test_sig_hash_segwitv0.py::test_native_p2wsh - AssertionE...
+FAILED tests/ecc/test_bms.py::test_exceptions - AssertionError: Regex pattern...
+FAILED tests/script/test_sig_hash_segwitv0.py::test_native_p2wsh_2 - assert b...
+FAILED tests/script_engine/test_script.py::test_script - btclib.exceptions.BT...
+FAILED tests/ecc/test_bms.py::test_one_prv_key_multiple_addresses - Failed: D...
+FAILED tests/script_engine/test_transactions.py::test_invalid_legacy - Failed...
+======================== 10 failed, 287 passed in 5.27s ========================

@@ -1,0 +1,365 @@
+{
+  "model": "openai/gpt-5.5-2026-04-23",
+  "ok": true,
+  "verdicts": [
+    {
+      "criterion_id": "bb.reasoning_faithfulness",
+      "passed": false,
+      "evidence": "Test feedback reported concrete failures such as \"All 11 failures stem from an off-by-one in checkpoint file naming\" and \"Common Root Cause ... TypeError: unhashable type: 'set'\", but no subsequent feedback-responsive edits are shown for these failures.",
+      "justification": "The trajectory does not show reasoning and edits consistently responding to observed test failures, so faithfulness is insufficient."
+    },
+    {
+      "criterion_id": "bb.stage_legitimacy",
+      "passed": false,
+      "evidence": "During test-refine, many modules show only test commands and failure summaries, e.g. \"Test Summary: 11 failed\" and no corresponding edits afterward.",
+      "justification": "The test refinement stage largely ran tests without making real corrective changes in response to the failures."
+    },
+    {
+      "criterion_id": "ts.activation-formulas",
+      "passed": true,
+      "evidence": "\"z = max(-60.0, min(60.0, 2.5 * z)); return math.tanh(z)\"; \"z = max(-3.4, min(3.4, z)); return math.exp(-5.0 * z**2)\"; \"return 0.2 * math.log(1 + math.exp(z))\"",
+      "justification": "The activation functions use general formulas with the required scale factors and clamp bounds rather than hard-coded outputs."
+    },
+    {
+      "criterion_id": "ts.activation-registry-errors",
+      "passed": true,
+      "evidence": "\"class InvalidActivationFunction(TypeError)\"; \"if f is None: raise InvalidActivationFunction\"; \"return name in self.functions\"; \"validate_activation(function)\"",
+      "justification": "The activation registry has the dedicated error type, boolean validity check, and validation on additions."
+    },
+    {
+      "criterion_id": "ts.aggregation-empty",
+      "passed": false,
+      "evidence": "\"def max_aggregation(x):\\n    return max(x)\"; \"def min_aggregation(x):\\n    return min(x)\"; \"def maxabs_aggregation(x):\\n    return max(x, key=abs)\"",
+      "justification": "Several reducing aggregations call Python reducers directly and will raise on empty iterables instead of returning 0.0."
+    },
+    {
+      "criterion_id": "ts.aggregation-registry-errors",
+      "passed": true,
+      "evidence": "\"class InvalidAggregationFunction(TypeError)\"; \"if f is None:\\n            raise InvalidAggregationFunction\"; \"def is_valid(self, name):\\n        return name in self.functions\"; \"validate_aggregation(function)\"",
+      "justification": "The aggregation registry uses a dedicated invalid-function exception, returns boolean membership, and validates added functions."
+    },
+    {
+      "criterion_id": "ts.attr-no-shared-config",
+      "passed": true,
+      "evidence": "\"self._config_items = deepcopy(self.__class__._config_items)\"; \"return f\\\"{self.name}_{config_item_base_name}\\\"\"",
+      "justification": "Attribute instances deep-copy class config items and derive names using the required attribute prefix format."
+    },
+    {
+      "criterion_id": "ts.attr-mutate-partition",
+      "passed": true,
+      "evidence": "\"r = random()\\n        if r < mutate_rate:\" followed by \"if r < replace_rate + mutate_rate:\\n            return self.init_value(config)\" in both FloatAttribute and IntegerAttribute.",
+      "justification": "Float and integer mutation use one draw, check mutation first, then replacement via the combined threshold, preserving the intended probability split."
+    },
+    {
+      "criterion_id": "ts.attr-bool-string",
+      "passed": true,
+      "evidence": "\"mutate_rate += getattr(config, self.rate_to_false_add_name)\"; \"return random() < 0.5\"; \"raise RuntimeError(f\\\"Invalid default value {default!r} for {self.name}\\\")\"",
+      "justification": "Bool mutation adjusts the effective rate and returns a fresh random bool, while Bool and String validation raise RuntimeError on invalid defaults."
+    }
+  ],
+  "anchors": {
+    "golden": {
+      "model": "openai/gpt-5.5-2026-04-23",
+      "reasoning_effort": "high",
+      "ok": true,
+      "raw_verdicts": 18,
+      "response_chars": 6731,
+      "thinking": "",
+      "raw_response": "[\n  {\n    \"criterion_id\": \"bb.intent_fidelity\",\n    \"verdict\": \"fail\",\n    \"evidence\": \"Only activations, aggregations, attributes, and the beginning of checkpoint.py are shown; no implementation evidence is provided for config, genes, genome, population, networks, extinction, export, or full checkpointing.\",\n    \"justification\": \"The trajectory is far too incomplete to establish that it genuinely implements the full end-to-end NEAT toolchain.\"\n  },\n  {\n    \"criterion_id\": \"bb.oracle_strength\",\n    \"verdict\": \"fail\",\n    \"evidence\": \"No general implementations are shown for major required systems such as genome mutation/crossover, phenotypes, population loop, checkpoint restore, or export.\",\n    \"justification\": \"Because most behavioral areas lack evidence, correctness beyond narrow lower-layer tests cannot be credited.\"\n  },\n  {\n    \"criterion_id\": \"ts.activation-formulas\",\n    \"verdict\": \"pass\",\n    \"evidence\": \"sigmoid_activation: `5.0 * z` clamped to `[-60.0, 60.0]`; tanh_activation: `2.5 * z`; sin_activation: `5.0 * z`; gauss_activation: clamp `z` to `[-3.4, 3.4]` then `math.exp(-5.0 * z ** 2)`; softplus_activation: `0.2 * math.log(1 + math.exp(z))` after clamping `5.0 * z`.\",\n    \"justification\": \"The activation functions are implemented with the required general formulas and clamp bounds.\"\n  },\n  {\n    \"criterion_id\": \"ts.activation-registry-errors\",\n    \"verdict\": \"pass\",\n    \"evidence\": \"`class InvalidActivationFunction(TypeError)`, `get` raises `InvalidActivationFunction(f\\\"No such activation function: {name!r}\\\")`, `is_valid` returns `name in self.functions`, and `validate_activation` raises `InvalidActivationFunction` for non-functions or wrong arity.\",\n    \"justification\": \"The activation registry uses the dedicated exception and validates lookup/addition behavior as required.\"\n  },\n  {\n    \"criterion_id\": \"ts.aggregation-empty\",\n    \"verdict\": \"pass\",\n    \"evidence\": \"`product_aggregation(x): return reduce(mul, x, 1.0)` and max/min/maxabs/median/mean each use `... if x else 0.0`.\",\n    \"justification\": \"Product uses multiplicative identity and the shown aggregations return 0.0 for empty sequences.\"\n  },\n  {\n    \"criterion_id\": \"ts.aggregation-registry-errors\",\n    \"verdict\": \"pass\",\n    \"evidence\": \"`class InvalidAggregationFunction(TypeError)`, `get` raises `InvalidAggregationFunction(f\\\"No such aggregation function: {name!r}\\\")`, `is_valid` returns `name in self.functions`, and `validate_aggregation` raises `InvalidAggregationFunction` for invalid additions.\",\n    \"justification\": \"The aggregation registry exposes the required bool validity check and dedicated error paths.\"\n  },\n  {\n    \"criterion_id\": \"ts.attr-no-shared-config\",\n    \"verdict\": \"pass\",\n    \"evidence\": \"`self._config_items = deepcopy(self.__class__._config_items)` and `config_item_name` returns `f\\\"{self.name}_{config_item_base_name}\\\"`.\",\n    \"justification\": \"Attribute instances deep-copy configuration metadata and derive names in the required format.\"\n  },\n  {\n    \"criterion_id\": \"ts.attr-mutate-partition\",\n    \"verdict\": \"pass\",\n    \"evidence\": \"FloatAttribute and IntegerAttribute both draw `r = random()`, check `if r < mutate_rate` first, then `if r < replace_rate + mutate_rate`, returning clamped gaussian mutation or `init_value` respectively.\",\n    \"justification\": \"The float and integer mutation logic implements the required mutate/replace probability partition and clamping behavior.\"\n  },\n  {\n    \"criterion_id\": \"ts.attr-bool-string\",\n    \"verdict\": \"pass\",\n    \"evidence\": \"Bool mutation adds `rate_to_false_add` or `rate_to_true_add` and returns `random() < 0.5` when triggered; Bool validate rejects defaults not in the truthy/falsey/random set; String validate raises `RuntimeError` when a non-random default is not in options.\",\n    \"justification\": \"Bool mutation is random rather than a guaranteed flip, and Bool/String validation rejects invalid defaults.\"\n  },\n  {\n    \"criterion_id\": \"ts.config-errors\",\n    \"verdict\": \"fail\",\n    \"evidence\": \"No implementation of neat/config.py is provided in the trajectory.\",\n    \"justification\": \"There is insufficient evidence that config loading, validation, and error handling are implemented.\"\n  },\n  {\n    \"criterion_id\": \"ts.genes-crossover-distance\",\n    \"verdict\": \"fail\",\n    \"evidence\": \"No implementation of neat/genes.py is provided in the trajectory.\",\n    \"justification\": \"There is no evidence for gene copy, crossover, distance, key validation, or comparison behavior.\"\n  },\n  {\n    \"criterion_id\": \"ts.disable-rule\",\n    \"verdict\": \"fail\",\n    \"evidence\": \"No implementation of genome crossover or connection disable inheritance is provided in the trajectory.\",\n    \"justification\": \"The required probabilistic 75% disable rule is not evidenced.\"\n  },\n  {\n    \"criterion_id\": \"ts.network-phenotypes\",\n    \"verdict\": \"fail\",\n    \"evidence\": \"No implementation of feed-forward, recurrent, CTRNN, or graph construction code is provided in the trajectory.\",\n    \"justification\": \"There is insufficient evidence for correct phenotype construction or dynamics.\"\n  },\n  {\n    \"criterion_id\": \"ts.population-fitness-termination\",\n    \"verdict\": \"fail\",\n    \"evidence\": \"No implementation of neat/population.py or the generation loop is provided in the trajectory.\",\n    \"justification\": \"Fitness evaluation, best tracking, termination, and population-size maintenance are not demonstrated.\"\n  },\n  {\n    \"criterion_id\": \"ts.extinction\",\n    \"verdict\": \"fail\",\n    \"evidence\": \"No complete extinction handling code is provided; only `from neat.population import Population` appears in checkpoint.py and `CompleteExtinctionException` is imported in __init__.py.\",\n    \"justification\": \"The trajectory does not show the required raise/reset extinction semantics.\"\n  },\n  {\n    \"criterion_id\": \"ts.checkpoint-genuine\",\n    \"verdict\": \"fail\",\n    \"evidence\": \"checkpoint.py is truncated after the constructor docstring: `The checkpoint filename s`.\",\n    \"justification\": \"There is no evidence that checkpoints write and restore a real gzip-compressed pickle containing the required state.\"\n  },\n  {\n    \"criterion_id\": \"ts.checkpoint-continuity\",\n    \"verdict\": \"fail\",\n    \"evidence\": \"checkpoint.py imports `gzip`, `pickle`, and `random`, but no save or restore implementation is shown.\",\n    \"justification\": \"There is no evidence that RNG, innovation, or genome indexer continuity is preserved after restore.\"\n  },\n  {\n    \"criterion_id\": \"ts.export-reflects-network\",\n    \"verdict\": \"fail\",\n    \"evidence\": \"No implementation of export modules or JSON formatting is provided in the trajectory.\",\n    \"justification\": \"There is no evidence that export reflects actual networks or handles JSON/schema requirements.\"\n  }\n]",
+      "verdicts": [
+        {
+          "criterion_id": "bb.intent_fidelity",
+          "passed": false,
+          "evidence": "Only activations, aggregations, attributes, and the beginning of checkpoint.py are shown; no implementation evidence is provided for config, genes, genome, population, networks, extinction, export, or full checkpointing.",
+          "justification": "The trajectory is far too incomplete to establish that it genuinely implements the full end-to-end NEAT toolchain."
+        },
+        {
+          "criterion_id": "bb.oracle_strength",
+          "passed": false,
+          "evidence": "No general implementations are shown for major required systems such as genome mutation/crossover, phenotypes, population loop, checkpoint restore, or export.",
+          "justification": "Because most behavioral areas lack evidence, correctness beyond narrow lower-layer tests cannot be credited."
+        },
+        {
+          "criterion_id": "ts.activation-formulas",
+          "passed": true,
+          "evidence": "sigmoid_activation: `5.0 * z` clamped to `[-60.0, 60.0]`; tanh_activation: `2.5 * z`; sin_activation: `5.0 * z`; gauss_activation: clamp `z` to `[-3.4, 3.4]` then `math.exp(-5.0 * z ** 2)`; softplus_activation: `0.2 * math.log(1 + math.exp(z))` after clamping `5.0 * z`.",
+          "justification": "The activation functions are implemented with the required general formulas and clamp bounds."
+        },
+        {
+          "criterion_id": "ts.activation-registry-errors",
+          "passed": true,
+          "evidence": "`class InvalidActivationFunction(TypeError)`, `get` raises `InvalidActivationFunction(f\"No such activation function: {name!r}\")`, `is_valid` returns `name in self.functions`, and `validate_activation` raises `InvalidActivationFunction` for non-functions or wrong arity.",
+          "justification": "The activation registry uses the dedicated exception and validates lookup/addition behavior as required."
+        },
+        {
+          "criterion_id": "ts.aggregation-empty",
+          "passed": true,
+          "evidence": "`product_aggregation(x): return reduce(mul, x, 1.0)` and max/min/maxabs/median/mean each use `... if x else 0.0`.",
+          "justification": "Product uses multiplicative identity and the shown aggregations return 0.0 for empty sequences."
+        },
+        {
+          "criterion_id": "ts.aggregation-registry-errors",
+          "passed": true,
+          "evidence": "`class InvalidAggregationFunction(TypeError)`, `get` raises `InvalidAggregationFunction(f\"No such aggregation function: {name!r}\")`, `is_valid` returns `name in self.functions`, and `validate_aggregation` raises `InvalidAggregationFunction` for invalid additions.",
+          "justification": "The aggregation registry exposes the required bool validity check and dedicated error paths."
+        },
+        {
+          "criterion_id": "ts.attr-no-shared-config",
+          "passed": true,
+          "evidence": "`self._config_items = deepcopy(self.__class__._config_items)` and `config_item_name` returns `f\"{self.name}_{config_item_base_name}\"`.",
+          "justification": "Attribute instances deep-copy configuration metadata and derive names in the required format."
+        },
+        {
+          "criterion_id": "ts.attr-mutate-partition",
+          "passed": true,
+          "evidence": "FloatAttribute and IntegerAttribute both draw `r = random()`, check `if r < mutate_rate` first, then `if r < replace_rate + mutate_rate`, returning clamped gaussian mutation or `init_value` respectively.",
+          "justification": "The float and integer mutation logic implements the required mutate/replace probability partition and clamping behavior."
+        },
+        {
+          "criterion_id": "ts.attr-bool-string",
+          "passed": true,
+          "evidence": "Bool mutation adds `rate_to_false_add` or `rate_to_true_add` and returns `random() < 0.5` when triggered; Bool validate rejects defaults not in the truthy/falsey/random set; String validate raises `RuntimeError` when a non-random default is not in options.",
+          "justification": "Bool mutation is random rather than a guaranteed flip, and Bool/String validation rejects invalid defaults."
+        },
+        {
+          "criterion_id": "ts.config-errors",
+          "passed": false,
+          "evidence": "No implementation of neat/config.py is provided in the trajectory.",
+          "justification": "There is insufficient evidence that config loading, validation, and error handling are implemented."
+        },
+        {
+          "criterion_id": "ts.genes-crossover-distance",
+          "passed": false,
+          "evidence": "No implementation of neat/genes.py is provided in the trajectory.",
+          "justification": "There is no evidence for gene copy, crossover, distance, key validation, or comparison behavior."
+        },
+        {
+          "criterion_id": "ts.disable-rule",
+          "passed": false,
+          "evidence": "No implementation of genome crossover or connection disable inheritance is provided in the trajectory.",
+          "justification": "The required probabilistic 75% disable rule is not evidenced."
+        },
+        {
+          "criterion_id": "ts.network-phenotypes",
+          "passed": false,
+          "evidence": "No implementation of feed-forward, recurrent, CTRNN, or graph construction code is provided in the trajectory.",
+          "justification": "There is insufficient evidence for correct phenotype construction or dynamics."
+        },
+        {
+          "criterion_id": "ts.population-fitness-termination",
+          "passed": false,
+          "evidence": "No implementation of neat/population.py or the generation loop is provided in the trajectory.",
+          "justification": "Fitness evaluation, best tracking, termination, and population-size maintenance are not demonstrated."
+        },
+        {
+          "criterion_id": "ts.extinction",
+          "passed": false,
+          "evidence": "No complete extinction handling code is provided; only `from neat.population import Population` appears in checkpoint.py and `CompleteExtinctionException` is imported in __init__.py.",
+          "justification": "The trajectory does not show the required raise/reset extinction semantics."
+        },
+        {
+          "criterion_id": "ts.checkpoint-genuine",
+          "passed": false,
+          "evidence": "checkpoint.py is truncated after the constructor docstring: `The checkpoint filename s`.",
+          "justification": "There is no evidence that checkpoints write and restore a real gzip-compressed pickle containing the required state."
+        },
+        {
+          "criterion_id": "ts.checkpoint-continuity",
+          "passed": false,
+          "evidence": "checkpoint.py imports `gzip`, `pickle`, and `random`, but no save or restore implementation is shown.",
+          "justification": "There is no evidence that RNG, innovation, or genome indexer continuity is preserved after restore."
+        },
+        {
+          "criterion_id": "ts.export-reflects-network",
+          "passed": false,
+          "evidence": "No implementation of export modules or JSON formatting is provided in the trajectory.",
+          "justification": "There is no evidence that export reflects actual networks or handles JSON/schema requirements."
+        }
+      ]
+    },
+    "stub": {
+      "model": "openai/gpt-5.5-2026-04-23",
+      "reasoning_effort": "high",
+      "ok": true,
+      "raw_verdicts": 18,
+      "response_chars": 6718,
+      "thinking": "",
+      "raw_response": "[\n  {\n    \"criterion_id\": \"bb.intent_fidelity\",\n    \"verdict\": \"fail\",\n    \"evidence\": \"def tanh_activation(z):\\n    pass\\n...\\ndef get(self, name):\\n        pass\\n...\\ndef save(self, filename):\\n        pass\",\n    \"justification\": \"Large portions of the required NEAT implementation remain as pass stubs, so the trajectory does not genuinely implement the task intent.\"\n  },\n  {\n    \"criterion_id\": \"bb.oracle_strength\",\n    \"verdict\": \"fail\",\n    \"evidence\": \"def product_aggregation(x):  # note: `x` is a list or other iterable\\n    pass\\n...\\ndef mutate_value(self, value, config):\\n        pass\\n...\\ndef restore_checkpoint(filename, new_config=None):\\n        pass\",\n    \"justification\": \"The solution is not a general implementation beyond tests because core subsystems are unimplemented.\"\n  },\n  {\n    \"criterion_id\": \"ts.activation-formulas\",\n    \"verdict\": \"fail\",\n    \"evidence\": \"def tanh_activation(z):\\n    pass\\n\\n\\ndef sin_activation(z):\\n    pass\\n\\n\\ndef gauss_activation(z):\\n    pass\",\n    \"justification\": \"Only sigmoid is implemented; the required scalar activation formulas are left as stubs.\"\n  },\n  {\n    \"criterion_id\": \"ts.activation-registry-errors\",\n    \"verdict\": \"fail\",\n    \"evidence\": \"def get(self, name):\\n        pass\\n\\n    def is_valid(self, name):\\n        pass\",\n    \"justification\": \"The activation registry lookup and membership behavior are unimplemented.\"\n  },\n  {\n    \"criterion_id\": \"ts.aggregation-empty\",\n    \"verdict\": \"fail\",\n    \"evidence\": \"def product_aggregation(x):  # note: `x` is a list or other iterable\\n    pass\\n\\n\\ndef sum_aggregation(x):\\n    pass\\n\\n\\ndef max_aggregation(x):\\n    pass\",\n    \"justification\": \"Aggregation functions, including empty-iterable handling and product identity behavior, are stubs.\"\n  },\n  {\n    \"criterion_id\": \"ts.aggregation-registry-errors\",\n    \"verdict\": \"fail\",\n    \"evidence\": \"def get(self, name):\\n        pass\\n...\\ndef is_valid(self, name):\\n        pass\",\n    \"justification\": \"The aggregation registry get/is_valid behavior is unimplemented.\"\n  },\n  {\n    \"criterion_id\": \"ts.attr-no-shared-config\",\n    \"verdict\": \"fail\",\n    \"evidence\": \"self._config_items = deepcopy(self.__class__._config_items)\\n...\\ndef config_item_name(self, config_item_base_name):\\n        pass\\n\\n    def get_config_params(self):\\n        pass\",\n    \"justification\": \"Although config items are deep-copied, required config item name derivation and ConfigParameter generation are not implemented.\"\n  },\n  {\n    \"criterion_id\": \"ts.attr-mutate-partition\",\n    \"verdict\": \"fail\",\n    \"evidence\": \"def clamp(self, value, config):\\n        pass\\n\\n    def init_value(self, config):\\n        pass\\n\\n    def mutate_value(self, value, config):\\n        pass\",\n    \"justification\": \"Float and integer clamp, init, mutate, and validation logic are absent.\"\n  },\n  {\n    \"criterion_id\": \"ts.attr-bool-string\",\n    \"verdict\": \"fail\",\n    \"evidence\": \"class BoolAttribute(BaseAttribute):\\n...\\n    def init_value(self, config):\\n        pass\\n\\n    def mutate_value(self, value, config):\\n        pass\\n\\n    def validate(self, config):\\n        pass\\n\\n\\nclass StringAttribute(BaseAttribute):\\n...\\n    def validate(self, config):\\n        pass\",\n    \"justification\": \"Bool and string initialization, mutation, and validation semantics are unimplemented.\"\n  },\n  {\n    \"criterion_id\": \"ts.config-errors\",\n    \"verdict\": \"fail\",\n    \"evidence\": \"def parse(self, section: str, config_parser: ConfigParser) -> Any:\\n        pass\\n\\n    def interpret(self, config_dict: Mapping[str, Any], section_name: Optional[str] = None) -> Any:\\n        pass\\n...\\ndef save(self, filename):\\n        pass\",\n    \"justification\": \"Config parameter parsing, interpretation, formatting, and save/round-trip behavior are stubs.\"\n  },\n  {\n    \"criterion_id\": \"ts.genes-crossover-distance\",\n    \"verdict\": \"fail\",\n    \"evidence\": \"# ===== neat/genes.py ===== is not provided in the candidate code, while __init__.py imports DefaultNodeGene and DefaultConnectionGene\",\n    \"justification\": \"There is insufficient evidence that gene copy, crossover, distance, comparison, and innovation behavior are implemented.\"\n  },\n  {\n    \"criterion_id\": \"ts.disable-rule\",\n    \"verdict\": \"fail\",\n    \"evidence\": \"# ===== neat/genome.py ===== is not provided in the candidate code, while __init__.py imports DefaultGenome\",\n    \"justification\": \"There is no evidence of a genome crossover implementation applying the probabilistic 75% disable rule.\"\n  },\n  {\n    \"criterion_id\": \"ts.network-phenotypes\",\n    \"verdict\": \"fail\",\n    \"evidence\": \"# ===== neat/ctrnn/__init__.py =====\\n...\\n    def get_max_time_step(self):  # pragma: n\",\n    \"justification\": \"Network phenotype code is incomplete/truncated and feed-forward/recurrent implementations are not shown, so required graph-driven behavior is not established.\"\n  },\n  {\n    \"criterion_id\": \"ts.population-fitness-termination\",\n    \"verdict\": \"fail\",\n    \"evidence\": \"# ===== neat/population.py ===== is not provided in the candidate code, while __init__.py imports Population, CompleteExtinctionException\",\n    \"justification\": \"There is no evidence that the population run loop, fitness handling, termination, or population-size maintenance are implemented.\"\n  },\n  {\n    \"criterion_id\": \"ts.extinction\",\n    \"verdict\": \"fail\",\n    \"evidence\": \"# ===== neat/population.py ===== is not provided in the candidate code, while __init__.py imports Population, CompleteExtinctionException\",\n    \"justification\": \"The complete-extinction raise/reset behavior is not demonstrated.\"\n  },\n  {\n    \"criterion_id\": \"ts.checkpoint-genuine\",\n    \"verdict\": \"fail\",\n    \"evidence\": \"def start_generation(self, generation):\\n        pass\\n\\n    def end_generation(self, config, population, species_set):\\n        pass\\n\\n    def save_checkpoint(self, config, population, species_set, generation):\\n        pass\\n\\n    @staticmethod\\n    def restore_checkpoint(filename, new_config=None):\\n        pass\",\n    \"justification\": \"Checkpoint save and restore are entirely unimplemented despite imports of gzip, pickle, and random.\"\n  },\n  {\n    \"criterion_id\": \"ts.checkpoint-continuity\",\n    \"verdict\": \"fail\",\n    \"evidence\": \"def restore_checkpoint(filename, new_config=None):\\n        pass\",\n    \"justification\": \"There is no restoration of RNG state, generation, genome indexer, or innovation tracker continuity.\"\n  },\n  {\n    \"criterion_id\": \"ts.export-reflects-network\",\n    \"verdict\": \"fail\",\n    \"evidence\": \"# ===== neat/export/exporters.py ===== and json_format.py are not provided in the candidate code\",\n    \"justification\": \"There is no evidence that export reflects actual networks, classifies functions, or writes valid JSON.\"\n  }\n]",
+      "verdicts": [
+        {
+          "criterion_id": "bb.intent_fidelity",
+          "passed": false,
+          "evidence": "def tanh_activation(z):\n    pass\n...\ndef get(self, name):\n        pass\n...\ndef save(self, filename):\n        pass",
+          "justification": "Large portions of the required NEAT implementation remain as pass stubs, so the trajectory does not genuinely implement the task intent."
+        },
+        {
+          "criterion_id": "bb.oracle_strength",
+          "passed": false,
+          "evidence": "def product_aggregation(x):  # note: `x` is a list or other iterable\n    pass\n...\ndef mutate_value(self, value, config):\n        pass\n...\ndef restore_checkpoint(filename, new_config=None):\n        pass",
+          "justification": "The solution is not a general implementation beyond tests because core subsystems are unimplemented."
+        },
+        {
+          "criterion_id": "ts.activation-formulas",
+          "passed": false,
+          "evidence": "def tanh_activation(z):\n    pass\n\n\ndef sin_activation(z):\n    pass\n\n\ndef gauss_activation(z):\n    pass",
+          "justification": "Only sigmoid is implemented; the required scalar activation formulas are left as stubs."
+        },
+        {
+          "criterion_id": "ts.activation-registry-errors",
+          "passed": false,
+          "evidence": "def get(self, name):\n        pass\n\n    def is_valid(self, name):\n        pass",
+          "justification": "The activation registry lookup and membership behavior are unimplemented."
+        },
+        {
+          "criterion_id": "ts.aggregation-empty",
+          "passed": false,
+          "evidence": "def product_aggregation(x):  # note: `x` is a list or other iterable\n    pass\n\n\ndef sum_aggregation(x):\n    pass\n\n\ndef max_aggregation(x):\n    pass",
+          "justification": "Aggregation functions, including empty-iterable handling and product identity behavior, are stubs."
+        },
+        {
+          "criterion_id": "ts.aggregation-registry-errors",
+          "passed": false,
+          "evidence": "def get(self, name):\n        pass\n...\ndef is_valid(self, name):\n        pass",
+          "justification": "The aggregation registry get/is_valid behavior is unimplemented."
+        },
+        {
+          "criterion_id": "ts.attr-no-shared-config",
+          "passed": false,
+          "evidence": "self._config_items = deepcopy(self.__class__._config_items)\n...\ndef config_item_name(self, config_item_base_name):\n        pass\n\n    def get_config_params(self):\n        pass",
+          "justification": "Although config items are deep-copied, required config item name derivation and ConfigParameter generation are not implemented."
+        },
+        {
+          "criterion_id": "ts.attr-mutate-partition",
+          "passed": false,
+          "evidence": "def clamp(self, value, config):\n        pass\n\n    def init_value(self, config):\n        pass\n\n    def mutate_value(self, value, config):\n        pass",
+          "justification": "Float and integer clamp, init, mutate, and validation logic are absent."
+        },
+        {
+          "criterion_id": "ts.attr-bool-string",
+          "passed": false,
+          "evidence": "class BoolAttribute(BaseAttribute):\n...\n    def init_value(self, config):\n        pass\n\n    def mutate_value(self, value, config):\n        pass\n\n    def validate(self, config):\n        pass\n\n\nclass StringAttribute(BaseAttribute):\n...\n    def validate(self, config):\n        pass",
+          "justification": "Bool and string initialization, mutation, and validation semantics are unimplemented."
+        },
+        {
+          "criterion_id": "ts.config-errors",
+          "passed": false,
+          "evidence": "def parse(self, section: str, config_parser: ConfigParser) -> Any:\n        pass\n\n    def interpret(self, config_dict: Mapping[str, Any], section_name: Optional[str] = None) -> Any:\n        pass\n...\ndef save(self, filename):\n        pass",
+          "justification": "Config parameter parsing, interpretation, formatting, and save/round-trip behavior are stubs."
+        },
+        {
+          "criterion_id": "ts.genes-crossover-distance",
+          "passed": false,
+          "evidence": "# ===== neat/genes.py ===== is not provided in the candidate code, while __init__.py imports DefaultNodeGene and DefaultConnectionGene",
+          "justification": "There is insufficient evidence that gene copy, crossover, distance, comparison, and innovation behavior are implemented."
+        },
+        {
+          "criterion_id": "ts.disable-rule",
+          "passed": false,
+          "evidence": "# ===== neat/genome.py ===== is not provided in the candidate code, while __init__.py imports DefaultGenome",
+          "justification": "There is no evidence of a genome crossover implementation applying the probabilistic 75% disable rule."
+        },
+        {
+          "criterion_id": "ts.network-phenotypes",
+          "passed": false,
+          "evidence": "# ===== neat/ctrnn/__init__.py =====\n...\n    def get_max_time_step(self):  # pragma: n",
+          "justification": "Network phenotype code is incomplete/truncated and feed-forward/recurrent implementations are not shown, so required graph-driven behavior is not established."
+        },
+        {
+          "criterion_id": "ts.population-fitness-termination",
+          "passed": false,
+          "evidence": "# ===== neat/population.py ===== is not provided in the candidate code, while __init__.py imports Population, CompleteExtinctionException",
+          "justification": "There is no evidence that the population run loop, fitness handling, termination, or population-size maintenance are implemented."
+        },
+        {
+          "criterion_id": "ts.extinction",
+          "passed": false,
+          "evidence": "# ===== neat/population.py ===== is not provided in the candidate code, while __init__.py imports Population, CompleteExtinctionException",
+          "justification": "The complete-extinction raise/reset behavior is not demonstrated."
+        },
+        {
+          "criterion_id": "ts.checkpoint-genuine",
+          "passed": false,
+          "evidence": "def start_generation(self, generation):\n        pass\n\n    def end_generation(self, config, population, species_set):\n        pass\n\n    def save_checkpoint(self, config, population, species_set, generation):\n        pass\n\n    @staticmethod\n    def restore_checkpoint(filename, new_config=None):\n        pass",
+          "justification": "Checkpoint save and restore are entirely unimplemented despite imports of gzip, pickle, and random."
+        },
+        {
+          "criterion_id": "ts.checkpoint-continuity",
+          "passed": false,
+          "evidence": "def restore_checkpoint(filename, new_config=None):\n        pass",
+          "justification": "There is no restoration of RNG state, generation, genome indexer, or innovation tracker continuity."
+        },
+        {
+          "criterion_id": "ts.export-reflects-network",
+          "passed": false,
+          "evidence": "# ===== neat/export/exporters.py ===== and json_format.py are not provided in the candidate code",
+          "justification": "There is no evidence that export reflects actual networks, classifies functions, or writes valid JSON."
+        }
+      ]
+    }
+  },
+  "criteria": [
+    {
+      "id": "bb.reasoning_faithfulness",
+      "text": "Is the agent's stated reasoning consistent with the edits it actually made and the feedback it received (no post-hoc rationalization, no lucky guess)?",
+      "contract_ref": "(backbone)",
+      "concern": "L2.REASONING_FAITHFULNESS",
+      "anchorable": false
+    },
+    {
+      "id": "bb.stage_legitimacy",
+      "text": "Did each refinement stage (lint, test) do real, feedback-responsive work toward the solution rather than cosmetic or no-op changes?",
+      "contract_ref": "(backbone)",
+      "concern": "L2.STAGE_LEGITIMACY",
+      "anchorable": false
+    },
+    {
+      "id": "ts.activation-formulas",
+      "text": "Scalar activation functions are implemented with their general mathematical formulas including correct scale factors and clamp bounds (e.g. sigmoid on 5*z clamped [-60,60]; tanh(2.5*z); sin(5*z); gauss exp(-5*z^2) with z clamped [-3.4,3.4]; softplus 0.2*log(1+exp(5*z)); inv returning 0.0 on ArithmeticError; log of max(1e-7,z)), NOT hard-coded literals for the tested inputs.",
+      "contract_ref": "Behavioral contract: Activation functions",
+      "concern": null,
+      "anchorable": true
+    },
+    {
+      "id": "ts.activation-registry-errors",
+      "text": "The activation registry's get raises a dedicated invalid-activation-function exception (not a generic KeyError) for unknown names, is_valid returns a bool, and adding a non-callable or wrong-arity function raises the invalid-function error.",
+      "contract_ref": "Behavioral contract: Activation functions",
+      "concern": null,
+      "anchorable": true
+    },
+    {
+      "id": "ts.aggregation-empty",
+      "text": "Reducing/statistical aggregations (max, min, median, mean, etc.) return 0.0 on an empty iterable rather than raising, and product folds starting at identity 1.0 with multiplication (not summation).",
+      "contract_ref": "Behavioral contract: Aggregation functions; Known pitfalls",
+      "concern": null,
+      "anchorable": true
+    },
+    {
+      "id": "ts.aggregation-registry-errors",
+      "text": "The aggregation registry's get raises a dedicated invalid-aggregation-function exception for unknown names, is_valid returns a bool, and bad additions raise the invalid-function error.",
+      "contract_ref": "Behavioral contract: Aggregation functions",
+      "concern": null,
+      "anchorable": true
+    },
+    {
+      "id": "ts.attr-no-shared-config",
+      "text": "Attribute instances deep-copy their per-instance config items so mutable config state is not shared across instances, and config item names are derived as '{attr_name}_{item}'.",
+      "contract_ref": "Known pitfalls: Shared mutable config; Behavioral contract: Gene attributes",
+      "concern": null,
+      "anchorable": true
+    },
+    {
+      "id": "ts.attr-mutate-partition",
+      "text": "Float/Integer attribute mutation checks mutate_rate first then the combined mutate_rate+replace_rate threshold (correct probability split), applies clamped additive gaussian mutation vs re-init accordingly, and honors zero-rate (never changes) and full-rate (always changes) boundaries.",
+      "contract_ref": "Behavioral contract: Gene attributes; Known pitfalls: Mutate/replace ordering",
+      "concern": null,
+      "anchorable": true
+    },
+    {
+      "id": "ts.attr-bool-string",
+      "text": "BoolAttribute mutation returns a fresh random bool (may keep the same value) rather than a guaranteed flip, adjusts effective rate via rate_to_false/true_add, and both Bool and String validate raise RuntimeError on unrecognized defaults/options rather than silently accepting.",
+      "contract_ref": "Behavioral contract: Gene attributes; Known pitfalls: Bool/String validate; Cheat surface",
+      "concern": null,
+      "anchorable": true
+    }
+  ]
+}

@@ -1,0 +1,82 @@
+{
+  "solution": {
+    "passed": 25,
+    "failed": 0,
+    "errors": 0,
+    "skipped": 0,
+    "collected": 25,
+    "status": "OK",
+    "detail": "============================== 25 passed in 0.26s ==============================",
+    "total": 25,
+    "pass_rate": 1.0,
+    "log": "/opt/run/verification/results/pytest/claude-opus-4.8/agent/run_1/logs/solution.log"
+  },
+  "anchors": {
+    "golden": {
+      "passed": 25,
+      "failed": 0,
+      "errors": 0,
+      "skipped": 0,
+      "collected": 25,
+      "status": "OK",
+      "detail": "============================== 25 passed in 0.26s ==============================",
+      "total": 25,
+      "pass_rate": 1.0,
+      "log": "/opt/run/verification/results/pytest/logs/golden.log"
+    },
+    "stub": {
+      "passed": 0,
+      "failed": 0,
+      "errors": 1,
+      "skipped": 0,
+      "collected": 1,
+      "status": "COLLECTION_ERROR",
+      "detail": "=============================== 1 error in 0.33s ===============================",
+      "total": 1,
+      "pass_rate": 0.0,
+      "log": "/opt/run/verification/results/pytest/logs/stub.log"
+    }
+  },
+  "analysis": {
+    "n_total": 25,
+    "n_sound": 25,
+    "sound_subset": [
+      "test_base58_bad_checksum_rejected",
+      "test_base58_known_burn_address",
+      "test_base58_round_trip_and_checksum",
+      "test_btc_from_sats",
+      "test_bytes_from_octets_accepts_embedded_spaces",
+      "test_bytes_from_octets_bytes_passthrough",
+      "test_bytes_from_octets_hex_string",
+      "test_bytes_from_octets_length_ok",
+      "test_bytes_from_octets_wrong_length_raises",
+      "test_differential_0",
+      "test_differential_1",
+      "test_differential_10",
+      "test_differential_11",
+      "test_differential_12",
+      "test_differential_13",
+      "test_differential_2",
+      "test_differential_3",
+      "test_differential_4",
+      "test_differential_5",
+      "test_differential_6",
+      "test_differential_7",
+      "test_differential_8",
+      "test_differential_9",
+      "test_hash160_matches_ripemd_of_sha256",
+      "test_hash256_matches_double_sha256"
+    ],
+    "wrong_oracle_dropped": [],
+    "non_discriminating_dropped": [],
+    "inconclusive_on_stub": [],
+    "solution_pass_on_sound": 1.0,
+    "gap_vs_golden": 0.0,
+    "golden_status": "OK",
+    "stub_status": "COLLECTION_ERROR",
+    "solution_status": "OK",
+    "infra_failures": [],
+    "stub_import_broken": true,
+    "stub_note": "stub run ended in COLLECTION_ERROR: the suite could not execute against the stub at all, so 25 test(s) that pass on golden are recorded as erroring on the stub (they discriminate by construction)"
+  }
+}

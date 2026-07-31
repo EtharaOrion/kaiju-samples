@@ -1,0 +1,196 @@
+ts-jest[ts-jest-transformer] (WARN) Define `ts-jest` config under `globals` is deprecated. Please do
+transform: {
+    <transform_regex>: ['ts-jest', { /* ts-jest config goes here in Jest */ }],
+},
+PASS __tests__/host.spec.ts
+PASS __tests__/get-options-overrides.spec.ts
+FAIL __tests__/integration/errors.spec.ts (5.411 s)
+  ● integration - semantic error - abortOnError: false / check: false
+
+    expect(received).toBeTruthy()
+
+    Received: undefined
+
+      44 |   const files = ["index.js", "semantic.d.ts", "semantic.d.ts.map"];
+      45 |   files.forEach(file => {
+    > 46 |     expect(findName(output, file)).toBeTruthy();
+         |                                    ^
+      47 |   });
+      48 |   expect(output.length).toEqual(files.length); // no other files
+      49 |   expect(onwarn).toBeCalledTimes(1);
+
+      at __tests__/integration/errors.spec.ts:46:36
+          at Array.forEach (<anonymous>)
+      at __tests__/integration/errors.spec.ts:45:9
+      at fulfilled (__tests__/integration/errors.spec.ts:28:58)
+
+  ● integration - type-only import error
+
+    expect(received).rejects.toThrow()
+
+    Received promise resolved instead of rejected
+    Resolved to value: {"output": [{"code": "// this file has no errors itself; it is used an entry file to test an error in a type-only import
+    // some code so this file isn't empty
+    function sum(a, b) {
+        return a + b;
+    }·
+    export { sum };
+    ", "dynamicImports": [], "exports": ["sum"], "facadeModuleId": "/tmp/commit0-inplace-8q2_czii/tree/__tests__/integration/fixtures/errors/import-type-error.ts", "fileName": "index.js", "implicitlyLoadedBefore": [], "importedBindings": {}, "imports": [], "isDynamicEntry": false, "isEntry": true, "isImplicitEntry": false, "map": null, "modules": {"/tmp/commit0-inplace-8q2_czii/tree/__tests__/integration/fixtures/errors/import-type-error.ts": {"code": "// this file has no errors itself; it is used an entry file to test an error in a type-only import
+    // some code so this file isn't empty
+    function sum(a, b) {
+        return a + b;
+    }", "originalLength": 265, "removedExports": [], "renderedExports": ["sum"], "renderedLength": 177}}, "name": "import-type-error", "referencedFiles": [], "type": "chunk"}, {"fileName": "__tests__/integration/__temp/errors/rpt2-cache/placeholder/import-type-error.d.ts", "name": undefined, "source": "export type { typeError } from \"./type-only-import-with-error\";
+    export declare function sum(a: number, b: number): number;
+    //# sourceMappingURL=import-type-error.d.ts.map", "type": "asset"}, {"fileName": "__tests__/integration/__temp/errors/rpt2-cache/placeholder/import-type-error.d.ts.map", "name": undefined, "source": "{\"version\":3,\"file\":\"import-type-error.d.ts\",\"sourceRoot\":\"\",\"sources\":[\"../../../../fixtures/errors/import-type-error.ts\"],\"names\":[],\"mappings\":\"AAEA,YAAY,EAAE,SAAS,EAAE,MAAM,+BAA+B,CAAC;AAG/D,wBAAgB,GAAG,CAAC,CAAC,EAAE,MAAM,EAAE,CAAC,EAAE,MAAM,UAEvC\"}", "type": "asset"}, {"fileName": "__tests__/integration/__temp/errors/rpt2-cache/placeholder/type-only-import-with-error.d.ts", "name": undefined, "source": "type someObj = {};
+    export type typeError = someObj['nonexistent'];
+    export {};
+    //# sourceMappingURL=type-only-import-with-error.d.ts.map", "type": "asset"}, {"fileName": "__tests__/integration/__temp/errors/rpt2-cache/placeholder/type-only-import-with-error.d.ts.map", "name": undefined, "source": "{\"version\":3,\"file\":\"type-only-import-with-error.d.ts\",\"sourceRoot\":\"\",\"sources\":[\"../../../../fixtures/errors/type-only-import-with-error.ts\"],\"names\":[],\"mappings\":\"AAAA,KAAK,OAAO,GAAG,EAAE,CAAC;AAClB,MAAM,MAAM,SAAS,GAAG,OAAO,CAAC,aAAa,CAAC,CAAC\"}", "type": "asset"}]}
+
+      64 |
+      65 | test("integration - type-only import error", async () => {
+    > 66 |   await expect(genBundle("import-type-error.ts", {
+         |               ^
+      67 |     include: typeOnlyIncludes,
+      68 |   })).rejects.toThrow("Property 'nonexistent' does not exist on type 'someObj'.");
+      69 | });
+
+      at expect (../../../testbed/node_modules/jest-circus/node_modules/expect/build/index.js:113:15)
+      at __tests__/integration/errors.spec.ts:66:15
+      at __tests__/integration/errors.spec.ts:31:71
+      at Object.<anonymous>.__awaiter (__tests__/integration/errors.spec.ts:27:12)
+      at Object.<anonymous> (__tests__/integration/errors.spec.ts:65:57)
+
+  ● integration - type-only import error - abortOnError: false / check: false
+
+    expect(received).toBeTruthy()
+
+    Received: undefined
+
+      84 |   const files = ["index.js", "import-type-error.d.ts", "import-type-error.d.ts.map", "type-only-import-with-error.d.ts.map", "type-only-import-with-error.d.ts.map"];
+      85 |   files.forEach(file => {
+    > 86 |     expect(findName(output, file)).toBeTruthy();
+         |                                    ^
+      87 |   });
+      88 |   expect(output.length).toEqual(files.length); // no other files
+      89 |   expect(onwarn).toBeCalledTimes(1);
+
+      at __tests__/integration/errors.spec.ts:86:36
+          at Array.forEach (<anonymous>)
+      at __tests__/integration/errors.spec.ts:85:9
+      at fulfilled (__tests__/integration/errors.spec.ts:28:58)
+
+FAIL __tests__/integration/no-errors.spec.ts
+  ● Console
+
+    console.warn
+      Generated an empty chunk: "some-js-import"
+
+      at Object.defaultOnWarn [as onwarn] (../../../testbed/node_modules/rollup/dist/shared/rollup.js:542:42)
+      at Chunk.preRender (../../../testbed/node_modules/rollup/dist/shared/rollup.js:14873:31)
+      at Bundle.prerenderChunks (../../../testbed/node_modules/rollup/dist/shared/rollup.js:16190:19)
+      at Bundle.generate (../../../testbed/node_modules/rollup/dist/shared/rollup.js:16050:18)
+      at ../../../testbed/node_modules/rollup/dist/shared/rollup.js:23679:27
+      at catchUnfinishedHookActions (../../../testbed/node_modules/rollup/dist/shared/rollup.js:23121:20)
+
+  ● integration - no errors
+
+    Unexpected token (Note that you need plugins to import files that are not JavaScript)
+
+      at error (../../../testbed/node_modules/rollup/dist/shared/rollup.js:198:30)
+      at Module.error (../../../testbed/node_modules/rollup/dist/shared/rollup.js:12521:16)
+      at Module.tryParse (../../../testbed/node_modules/rollup/dist/shared/rollup.js:12897:25)
+      at Module.setSource (../../../testbed/node_modules/rollup/dist/shared/rollup.js:12800:24)
+      at ModuleLoader.addModuleSource (../../../testbed/node_modules/rollup/dist/shared/rollup.js:22264:20)
+
+  ● integration - no errors - using files list
+
+    Unexpected token (Note that you need plugins to import files that are not JavaScript)
+
+      at error (../../../testbed/node_modules/rollup/dist/shared/rollup.js:198:30)
+      at Module.error (../../../testbed/node_modules/rollup/dist/shared/rollup.js:12521:16)
+      at Module.tryParse (../../../testbed/node_modules/rollup/dist/shared/rollup.js:12897:25)
+      at Module.setSource (../../../testbed/node_modules/rollup/dist/shared/rollup.js:12800:24)
+      at ModuleLoader.addModuleSource (../../../testbed/node_modules/rollup/dist/shared/rollup.js:22264:20)
+
+  ● integration - no errors - no declaration maps
+
+    Unexpected token (Note that you need plugins to import files that are not JavaScript)
+
+      at error (../../../testbed/node_modules/rollup/dist/shared/rollup.js:198:30)
+      at Module.error (../../../testbed/node_modules/rollup/dist/shared/rollup.js:12521:16)
+      at Module.tryParse (../../../testbed/node_modules/rollup/dist/shared/rollup.js:12897:25)
+      at Module.setSource (../../../testbed/node_modules/rollup/dist/shared/rollup.js:12800:24)
+      at ModuleLoader.addModuleSource (../../../testbed/node_modules/rollup/dist/shared/rollup.js:22264:20)
+
+  ● integration - no errors - no declarations
+
+    Unexpected token (Note that you need plugins to import files that are not JavaScript)
+
+      at error (../../../testbed/node_modules/rollup/dist/shared/rollup.js:198:30)
+      at Module.error (../../../testbed/node_modules/rollup/dist/shared/rollup.js:12521:16)
+      at Module.tryParse (../../../testbed/node_modules/rollup/dist/shared/rollup.js:12897:25)
+      at Module.setSource (../../../testbed/node_modules/rollup/dist/shared/rollup.js:12800:24)
+      at ModuleLoader.addModuleSource (../../../testbed/node_modules/rollup/dist/shared/rollup.js:22264:20)
+
+  ● integration - no errors - allowJs + emitDeclarationOnly
+
+    expect(received).toBeTruthy()
+
+    Received: undefined
+
+      100 |   const files = ["index.js", "some-js-import.d.ts", "some-js-import.d.ts.map"];
+      101 |   files.forEach(file => {
+    > 102 |     expect(findName(output, file)).toBeTruthy();
+          |                                    ^
+      103 |   });
+      104 |   expect(output.length).toEqual(files.length); // no other files
+      105 |
+
+      at __tests__/integration/no-errors.spec.ts:102:36
+          at Array.forEach (<anonymous>)
+      at __tests__/integration/no-errors.spec.ts:101:9
+      at fulfilled (__tests__/integration/no-errors.spec.ts:28:58)
+
+FAIL __tests__/integration/watch.spec.ts
+  ● integration - watch
+
+    Unexpected token (Note that you need plugins to import files that are not JavaScript)
+
+      at error (../../../testbed/node_modules/rollup/dist/shared/rollup.js:198:30)
+      at Module.error (../../../testbed/node_modules/rollup/dist/shared/rollup.js:12521:16)
+      at Module.tryParse (../../../testbed/node_modules/rollup/dist/shared/rollup.js:12897:25)
+      at Module.setSource (../../../testbed/node_modules/rollup/dist/shared/rollup.js:12800:24)
+      at ModuleLoader.addModuleSource (../../../testbed/node_modules/rollup/dist/shared/rollup.js:22264:20)
+
+PASS __tests__/diagnostics.spec.ts
+FAIL __tests__/rollingcache.spec.ts
+  ● RollingCache, rolled
+
+    expect(received).toBeFalsy()
+
+    Received: true
+
+      57 | 	cache.roll();
+      58 | 	expect(cache.exists("anything")).toBeFalsy();
+    > 59 | 	expect(cache.match([])).toBeFalsy();
+         | 	                        ^
+      60 |
+      61 | 	cache.write("whatever.json", {whatever: true});
+      62 | 	expect(await pathExists(`${oldCacheDir}/whatever.json`)).toBeFalsy();
+
+      at __tests__/rollingcache.spec.ts:59:26
+      at __tests__/rollingcache.spec.ts:31:71
+      at Object.<anonymous>.__awaiter (__tests__/rollingcache.spec.ts:27:12)
+      at Object.<anonymous> (__tests__/rollingcache.spec.ts:52:41)
+
+PASS __tests__/context.spec.ts
+PASS __tests__/parse-tsconfig.spec.ts
+PASS __tests__/tslib.spec.ts
+PASS __tests__/diagnostics-format-host.spec.ts
+
+Test Suites: 4 failed, 7 passed, 11 total
+Tests:       10 failed, 34 passed, 44 total
+Snapshots:   0 total
+Time:        8.921 s
+Ran all test suites matching /__tests__/i.
+Test results written to: report.json

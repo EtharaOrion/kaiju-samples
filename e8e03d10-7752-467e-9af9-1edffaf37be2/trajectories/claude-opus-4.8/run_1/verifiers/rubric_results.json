@@ -1,0 +1,300 @@
+{
+  "model": "openai/gpt-5.5-2026-04-23",
+  "ok": true,
+  "verdicts": [
+    {
+      "criterion_id": "bb.reasoning_faithfulness",
+      "passed": false,
+      "evidence": "reasoning: \"I'll reconstruct the implementations... inferring internal APIs...\" / \"A note on assumptions I made (inferred, not verifiable...)\"",
+      "justification": "The trajectory repeatedly relies on unverifiable assumptions and later rationalizes incomplete or guessed implementations rather than demonstrating reasoning grounded in confirmed feedback."
+    },
+    {
+      "criterion_id": "bb.stage_legitimacy",
+      "passed": false,
+      "evidence": "reasoning: \"The reported errors are all in test files... There are no changes I can make... No edits to propose.\"",
+      "justification": "The refinement stages largely perform no source-level corrective work and repeatedly dismiss feedback as test-only rather than iterating meaningfully on the implementation."
+    },
+    {
+      "criterion_id": "ts.termination_leaf_first",
+      "passed": true,
+      "evidence": "pub fn terminate<A: Actor>(&self, actor: &mut Option<A>) { ... if self.has_children() { for child in self.inner.children.iter() { self.stop(&child); } } else { post_stop(actor); self.kernel().terminate(&self.inner.system); } } ... death_watch ... if self.inner.is_terminating.load(Ordering::Relaxed) && !self.has_children() { post_stop(actor); self.kernel().terminate(&self.inner.system); }",
+      "justification": "The implementation stops children first and only runs the actor's own post_stop/termination after child termination notifications remove the remaining children."
+    },
+    {
+      "criterion_id": "ts.escalate_climbs_tree",
+      "passed": true,
+      "evidence": "Strategy::Escalate => self.escalate_failure() ... pub fn escalate_failure(&self) { if let Some(p) = self.inner.parent.as_ref() { p.sys_tell(SystemMsg::Failed(self.myself())); } }",
+      "justification": "Escalation is propagated to the parent supervisor via a failure system message instead of reapplying the same strategy locally."
+    }
+  ],
+  "anchors": {
+    "golden": {
+      "model": "openai/gpt-5.5-2026-04-23",
+      "reasoning_effort": "high",
+      "ok": true,
+      "raw_verdicts": 18,
+      "response_chars": 6483,
+      "thinking": "",
+      "raw_response": "[\n  {\n    \"criterion_id\": \"bb.intent_fidelity\",\n    \"verdict\": \"fail\",\n    \"evidence\": \"fn tmp_actor_of_props... unimplemented!() ... fn tmp_actor_of... unimplemented!() ... fn tmp_actor_of_args... unimplemented!()\",\n    \"justification\": \"Reachable actor factory methods remain unimplemented, so the trajectory does not genuinely restore the actor runtime.\"\n  },\n  {\n    \"criterion_id\": \"bb.oracle_strength\",\n    \"verdict\": \"fail\",\n    \"evidence\": \"Only partial actor_cell.rs code is shown, with several `unimplemented!()` bodies and no evidence for kernel, system, timer, selection, logging, or config completeness.\",\n    \"justification\": \"There is insufficient evidence of a general implementation beyond narrow exercised paths.\"\n  },\n  {\n    \"criterion_id\": \"ts.lifecycle_create_errors\",\n    \"verdict\": \"fail\",\n    \"evidence\": \"Context::actor_of_props delegates to `self.system.provider.create_actor(...)`; no duplicate-name, invalid-name, pre_start panic, or system error handling logic is shown.\",\n    \"justification\": \"The trajectory lacks concrete evidence that actor creation distinguishes the required CreateError variants.\"\n  },\n  {\n    \"criterion_id\": \"ts.termination_leaf_first\",\n    \"verdict\": \"pass\",\n    \"evidence\": \"`terminate` sets terminating, stops children when present, and only calls `self.kernel().terminate(...); post_stop(actor);` immediately when `!self.has_children()`, while `death_watch` removes terminated children and then terminates/post_stops when no children remain.\",\n    \"justification\": \"The shown termination path stops children first and defers the actor's own post_stop until child death notifications have removed all children.\"\n  },\n  {\n    \"criterion_id\": \"ts.restart_rebuilds_state\",\n    \"verdict\": \"fail\",\n    \"evidence\": \"`pub fn restart(&self) { if !self.has_children() { self.kernel().restart(&self.inner.system); } ... }`\",\n    \"justification\": \"The code delegates to kernel restart but provides no evidence that Props are used to rebuild fresh actor state with the required lifecycle ordering.\"\n  },\n  {\n    \"criterion_id\": \"ts.pre_start_panic_special\",\n    \"verdict\": \"fail\",\n    \"evidence\": \"No pre_start actor creation logic or panic handling is shown; creation simply delegates to `provider.create_actor(...)`.\",\n    \"justification\": \"There is insufficient evidence that pre_start panics produce CreateError::Panicked without supervision.\"\n  },\n  {\n    \"criterion_id\": \"ts.supervisor_default_restart\",\n    \"verdict\": \"fail\",\n    \"evidence\": \"No Actor trait default implementations or Box<A> delegating implementations are shown.\",\n    \"justification\": \"The trajectory gives no evidence that the default strategy is Restart or that boxed actors delegate lifecycle/strategy methods.\"\n  },\n  {\n    \"criterion_id\": \"ts.escalate_climbs_tree\",\n    \"verdict\": \"pass\",\n    \"evidence\": \"`Strategy::Escalate => self.escalate_failure()` and `escalate_failure` sends `SystemMsg::Failed(self.myself())` to `self.inner.parent.as_ref().unwrap().sys_tell(...)`.\",\n    \"justification\": \"The shown escalation path reports the supervisor itself as failed to its parent, which climbs the supervision tree.\"\n  },\n  {\n    \"criterion_id\": \"ts.channel_general_routing\",\n    \"verdict\": \"fail\",\n    \"evidence\": \"No Channel implementation is shown except publishing dead letters with fixed topic `\\\"dead_letter\\\"`.\",\n    \"justification\": \"There is no evidence of general topic routing or all-topic subscription behavior.\"\n  },\n  {\n    \"criterion_id\": \"ts.channel_unsubscribe_terminate\",\n    \"verdict\": \"fail\",\n    \"evidence\": \"No unsubscribe or termination cleanup logic for channel subscribers is shown.\",\n    \"justification\": \"The trajectory lacks evidence that unsubscribed or terminated actors stop receiving channel messages.\"\n  },\n  {\n    \"criterion_id\": \"ts.dead_letter_routing\",\n    \"verdict\": \"fail\",\n    \"evidence\": \"`send_msg(...).map_err(|e| { ... self.cell.inner.system.dead_letters().tell(Publish { topic: \\\"dead_letter\\\".into(), msg: dl }, None); e })`\",\n    \"justification\": \"Dead letters are only shown for mailbox dispatch errors, with no evidence for nonexistent actor sends or try_tell type mismatch error behavior.\"\n  },\n  {\n    \"criterion_id\": \"ts.selection_path_resolution\",\n    \"verdict\": \"fail\",\n    \"evidence\": \"Context selection only strips a user-root prefix for absolute paths and calls `ActorSelection::new(anchor, path_str)`; no resolver implementation is shown.\",\n    \"justification\": \"There is insufficient evidence of general parsing and resolution for nested, wildcard, relative, and absolute selections.\"\n  },\n  {\n    \"criterion_id\": \"ts.timer_real_scheduling\",\n    \"verdict\": \"fail\",\n    \"evidence\": \"Context creates `RepeatJob`/`OnceJob` and sends them to `self.system.timer`, but the timer implementation and cancellation behavior are not shown.\",\n    \"justification\": \"The trajectory does not demonstrate that real one-shot, repeat, at-time scheduling or cancellation works.\"\n  },\n  {\n    \"criterion_id\": \"ts.futures_panic_isolation\",\n    \"verdict\": \"fail\",\n    \"evidence\": \"`Context::run` simply delegates to `self.system.run(future)`; no executor or panic containment implementation is shown.\",\n    \"justification\": \"There is insufficient evidence that futures execute asynchronously with panic isolation.\"\n  },\n  {\n    \"criterion_id\": \"ts.config_merging\",\n    \"verdict\": \"fail\",\n    \"evidence\": \"No system configuration loading or merge implementation is shown.\",\n    \"justification\": \"The trajectory provides no evidence that defaults and user configuration are merged and exposed.\"\n  },\n  {\n    \"criterion_id\": \"ts.logging_bridge\",\n    \"verdict\": \"fail\",\n    \"evidence\": \"No logger implementation or log/slog facade installation is shown.\",\n    \"justification\": \"There is no evidence of a genuine logging bridge.\"\n  },\n  {\n    \"criterion_id\": \"ts.guardian_bootstrap\",\n    \"verdict\": \"fail\",\n    \"evidence\": \"ActorCell references `self.inner.system.user_root()` but no ActorSystem construction or guardian bootstrap code is shown.\",\n    \"justification\": \"The trajectory lacks evidence that root, user, and system guardians are created before actor_of is usable.\"\n  },\n  {\n    \"criterion_id\": \"ts.no_stub_or_hardcode\",\n    \"verdict\": \"fail\",\n    \"evidence\": \"`fn tmp_actor_of_props... unimplemented!()`, `fn tmp_actor_of... unimplemented!()`, and `fn tmp_actor_of_args... unimplemented!()` remain in the code.\",\n    \"justification\": \"Reachable unimplemented stubs remain, violating the no-stub requirement.\"\n  }\n]",
+      "verdicts": [
+        {
+          "criterion_id": "bb.intent_fidelity",
+          "passed": false,
+          "evidence": "fn tmp_actor_of_props... unimplemented!() ... fn tmp_actor_of... unimplemented!() ... fn tmp_actor_of_args... unimplemented!()",
+          "justification": "Reachable actor factory methods remain unimplemented, so the trajectory does not genuinely restore the actor runtime."
+        },
+        {
+          "criterion_id": "bb.oracle_strength",
+          "passed": false,
+          "evidence": "Only partial actor_cell.rs code is shown, with several `unimplemented!()` bodies and no evidence for kernel, system, timer, selection, logging, or config completeness.",
+          "justification": "There is insufficient evidence of a general implementation beyond narrow exercised paths."
+        },
+        {
+          "criterion_id": "ts.lifecycle_create_errors",
+          "passed": false,
+          "evidence": "Context::actor_of_props delegates to `self.system.provider.create_actor(...)`; no duplicate-name, invalid-name, pre_start panic, or system error handling logic is shown.",
+          "justification": "The trajectory lacks concrete evidence that actor creation distinguishes the required CreateError variants."
+        },
+        {
+          "criterion_id": "ts.termination_leaf_first",
+          "passed": true,
+          "evidence": "`terminate` sets terminating, stops children when present, and only calls `self.kernel().terminate(...); post_stop(actor);` immediately when `!self.has_children()`, while `death_watch` removes terminated children and then terminates/post_stops when no children remain.",
+          "justification": "The shown termination path stops children first and defers the actor's own post_stop until child death notifications have removed all children."
+        },
+        {
+          "criterion_id": "ts.restart_rebuilds_state",
+          "passed": false,
+          "evidence": "`pub fn restart(&self) { if !self.has_children() { self.kernel().restart(&self.inner.system); } ... }`",
+          "justification": "The code delegates to kernel restart but provides no evidence that Props are used to rebuild fresh actor state with the required lifecycle ordering."
+        },
+        {
+          "criterion_id": "ts.pre_start_panic_special",
+          "passed": false,
+          "evidence": "No pre_start actor creation logic or panic handling is shown; creation simply delegates to `provider.create_actor(...)`.",
+          "justification": "There is insufficient evidence that pre_start panics produce CreateError::Panicked without supervision."
+        },
+        {
+          "criterion_id": "ts.supervisor_default_restart",
+          "passed": false,
+          "evidence": "No Actor trait default implementations or Box<A> delegating implementations are shown.",
+          "justification": "The trajectory gives no evidence that the default strategy is Restart or that boxed actors delegate lifecycle/strategy methods."
+        },
+        {
+          "criterion_id": "ts.escalate_climbs_tree",
+          "passed": true,
+          "evidence": "`Strategy::Escalate => self.escalate_failure()` and `escalate_failure` sends `SystemMsg::Failed(self.myself())` to `self.inner.parent.as_ref().unwrap().sys_tell(...)`.",
+          "justification": "The shown escalation path reports the supervisor itself as failed to its parent, which climbs the supervision tree."
+        },
+        {
+          "criterion_id": "ts.channel_general_routing",
+          "passed": false,
+          "evidence": "No Channel implementation is shown except publishing dead letters with fixed topic `\"dead_letter\"`.",
+          "justification": "There is no evidence of general topic routing or all-topic subscription behavior."
+        },
+        {
+          "criterion_id": "ts.channel_unsubscribe_terminate",
+          "passed": false,
+          "evidence": "No unsubscribe or termination cleanup logic for channel subscribers is shown.",
+          "justification": "The trajectory lacks evidence that unsubscribed or terminated actors stop receiving channel messages."
+        },
+        {
+          "criterion_id": "ts.dead_letter_routing",
+          "passed": false,
+          "evidence": "`send_msg(...).map_err(|e| { ... self.cell.inner.system.dead_letters().tell(Publish { topic: \"dead_letter\".into(), msg: dl }, None); e })`",
+          "justification": "Dead letters are only shown for mailbox dispatch errors, with no evidence for nonexistent actor sends or try_tell type mismatch error behavior."
+        },
+        {
+          "criterion_id": "ts.selection_path_resolution",
+          "passed": false,
+          "evidence": "Context selection only strips a user-root prefix for absolute paths and calls `ActorSelection::new(anchor, path_str)`; no resolver implementation is shown.",
+          "justification": "There is insufficient evidence of general parsing and resolution for nested, wildcard, relative, and absolute selections."
+        },
+        {
+          "criterion_id": "ts.timer_real_scheduling",
+          "passed": false,
+          "evidence": "Context creates `RepeatJob`/`OnceJob` and sends them to `self.system.timer`, but the timer implementation and cancellation behavior are not shown.",
+          "justification": "The trajectory does not demonstrate that real one-shot, repeat, at-time scheduling or cancellation works."
+        },
+        {
+          "criterion_id": "ts.futures_panic_isolation",
+          "passed": false,
+          "evidence": "`Context::run` simply delegates to `self.system.run(future)`; no executor or panic containment implementation is shown.",
+          "justification": "There is insufficient evidence that futures execute asynchronously with panic isolation."
+        },
+        {
+          "criterion_id": "ts.config_merging",
+          "passed": false,
+          "evidence": "No system configuration loading or merge implementation is shown.",
+          "justification": "The trajectory provides no evidence that defaults and user configuration are merged and exposed."
+        },
+        {
+          "criterion_id": "ts.logging_bridge",
+          "passed": false,
+          "evidence": "No logger implementation or log/slog facade installation is shown.",
+          "justification": "There is no evidence of a genuine logging bridge."
+        },
+        {
+          "criterion_id": "ts.guardian_bootstrap",
+          "passed": false,
+          "evidence": "ActorCell references `self.inner.system.user_root()` but no ActorSystem construction or guardian bootstrap code is shown.",
+          "justification": "The trajectory lacks evidence that root, user, and system guardians are created before actor_of is usable."
+        },
+        {
+          "criterion_id": "ts.no_stub_or_hardcode",
+          "passed": false,
+          "evidence": "`fn tmp_actor_of_props... unimplemented!()`, `fn tmp_actor_of... unimplemented!()`, and `fn tmp_actor_of_args... unimplemented!()` remain in the code.",
+          "justification": "Reachable unimplemented stubs remain, violating the no-stub requirement."
+        }
+      ]
+    },
+    "stub": {
+      "model": "openai/gpt-5.5-2026-04-23",
+      "reasoning_effort": "high",
+      "ok": true,
+      "raw_verdicts": 18,
+      "response_chars": 5847,
+      "thinking": "",
+      "raw_response": "[\n  {\n    \"criterion_id\": \"bb.intent_fidelity\",\n    \"verdict\": \"fail\",\n    \"evidence\": \"pub(crate) fn new(...) -> ActorCell { panic!(\\\"STUB: not implemented\\\") }\",\n    \"justification\": \"The trajectory leaves core actor runtime functions as stub panics rather than implementing the task intent.\"\n  },\n  {\n    \"criterion_id\": \"bb.oracle_strength\",\n    \"verdict\": \"fail\",\n    \"evidence\": \"pub fn receive_cmd<A: Actor>(&self, cmd: SystemCmd, actor: &mut Option<A>) { panic!(\\\"STUB: not implemented\\\") }\",\n    \"justification\": \"No general implementation is present for core behavior beyond tests; major runtime paths still panic.\"\n  },\n  {\n    \"criterion_id\": \"ts.lifecycle_create_errors\",\n    \"verdict\": \"fail\",\n    \"evidence\": \"fn actor_of_props<A>(...) -> Result<ActorRef<A::Msg>, CreateError> ... { panic!(\\\"STUB: not implemented\\\") }\",\n    \"justification\": \"Actor creation is not implemented, so there is no evidence of duplicate-name, invalid-name, pre_start panic, or system error handling.\"\n  },\n  {\n    \"criterion_id\": \"ts.termination_leaf_first\",\n    \"verdict\": \"fail\",\n    \"evidence\": \"pub fn terminate<A: Actor>(&self, actor: &mut Option<A>) { panic!(\\\"STUB: not implemented\\\") }\",\n    \"justification\": \"Termination logic is entirely stubbed, so leaf-first stopping and parent child-set cleanup are not implemented.\"\n  },\n  {\n    \"criterion_id\": \"ts.restart_rebuilds_state\",\n    \"verdict\": \"fail\",\n    \"evidence\": \"pub fn restart(&self) { panic!(\\\"STUB: not implemented\\\") }\",\n    \"justification\": \"Restart behavior is stubbed, so actor state rebuilding from Props with lifecycle hooks is absent.\"\n  },\n  {\n    \"criterion_id\": \"ts.pre_start_panic_special\",\n    \"verdict\": \"fail\",\n    \"evidence\": \"fn actor_of_props<A>(...) -> Result<ActorRef<A::Msg>, CreateError> ... { panic!(\\\"STUB: not implemented\\\") }\",\n    \"justification\": \"Creation and pre_start handling are unimplemented, so pre_start panic cannot be specially converted into a CreateError.\"\n  },\n  {\n    \"criterion_id\": \"ts.supervisor_default_restart\",\n    \"verdict\": \"fail\",\n    \"evidence\": \"pub fn handle_failure(&self, failed: BasicActorRef, strategy: Strategy) { panic!(\\\"STUB: not implemented\\\") }\",\n    \"justification\": \"The provided trajectory does not show working supervisor strategy defaults or delegation, and failure handling is stubbed.\"\n  },\n  {\n    \"criterion_id\": \"ts.escalate_climbs_tree\",\n    \"verdict\": \"fail\",\n    \"evidence\": \"pub fn escalate_failure(&self) { panic!(\\\"STUB: not implemented\\\") }\",\n    \"justification\": \"Escalation is explicitly unimplemented, so there is no tree-climbing supervision behavior.\"\n  },\n  {\n    \"criterion_id\": \"ts.channel_general_routing\",\n    \"verdict\": \"fail\",\n    \"evidence\": \"The shown runtime still contains pervasive `panic!(\\\"STUB: not implemented\\\")` in message sending paths such as `send_any_msg` and `Tell::tell`.\",\n    \"justification\": \"With core message dispatch stubbed, there is insufficient evidence of general channel publish/subscribe routing.\"\n  },\n  {\n    \"criterion_id\": \"ts.channel_unsubscribe_terminate\",\n    \"verdict\": \"fail\",\n    \"evidence\": \"pub fn remove_child(&self, actor: &BasicActorRef) { panic!(\\\"STUB: not implemented\\\") }\",\n    \"justification\": \"Termination and subscription cleanup cannot be verified because relevant actor lifecycle/message mechanisms remain stubbed.\"\n  },\n  {\n    \"criterion_id\": \"ts.dead_letter_routing\",\n    \"verdict\": \"fail\",\n    \"evidence\": \"pub fn try_tell<Msg>(...) -> Result<(), AnyEnqueueError> ... { panic!(\\\"STUB: not implemented\\\") }\",\n    \"justification\": \"try_tell and send paths are unimplemented, so dead-letter routing and type mismatch errors are absent.\"\n  },\n  {\n    \"criterion_id\": \"ts.selection_path_resolution\",\n    \"verdict\": \"fail\",\n    \"evidence\": \"fn select(&self, path: &str) -> Result<ActorSelection, InvalidPath> { panic!(\\\"STUB: not implemented\\\") }\",\n    \"justification\": \"Actor selection from context is stubbed, so path parsing and resolution are not implemented.\"\n  },\n  {\n    \"criterion_id\": \"ts.timer_real_scheduling\",\n    \"verdict\": \"fail\",\n    \"evidence\": \"fn schedule_once<T, M>(...) -> ScheduleId ... { panic!(\\\"STUB: not implemented\\\") }\",\n    \"justification\": \"Timer scheduling and cancellation methods are stubbed, so no real scheduling behavior exists.\"\n  },\n  {\n    \"criterion_id\": \"ts.futures_panic_isolation\",\n    \"verdict\": \"fail\",\n    \"evidence\": \"fn run<Fut>(&self, future: Fut) -> Result<RemoteHandle<<Fut as Future>::Output>, SpawnError> ... { panic!(\\\"STUB: not implemented\\\") }\",\n    \"justification\": \"Future execution is not implemented, so panic isolation on the executor is not provided.\"\n  },\n  {\n    \"criterion_id\": \"ts.config_merging\",\n    \"verdict\": \"fail\",\n    \"evidence\": \"The supplied code only shows actor cell/ref/context stubs and no implemented system configuration loading or merging.\",\n    \"justification\": \"There is insufficient evidence of default/user configuration merging, and the shown system-facing methods are still stubbed.\"\n  },\n  {\n    \"criterion_id\": \"ts.logging_bridge\",\n    \"verdict\": \"fail\",\n    \"evidence\": \"The supplied code does not include an implemented logger bridge and still leaves core system/runtime methods as stubs.\",\n    \"justification\": \"No evidence demonstrates a genuine log/slog facade installation.\"\n  },\n  {\n    \"criterion_id\": \"ts.guardian_bootstrap\",\n    \"verdict\": \"fail\",\n    \"evidence\": \"pub(crate) fn user_root(&self) -> BasicActorRef { panic!(\\\"STUB: not implemented\\\") }\",\n    \"justification\": \"Guardian/root accessors are stubbed, so bootstrapping of the root/user/system hierarchy is not shown.\"\n  },\n  {\n    \"criterion_id\": \"ts.no_stub_or_hardcode\",\n    \"verdict\": \"fail\",\n    \"evidence\": \"panic!(\\\"STUB: not implemented\\\")\",\n    \"justification\": \"Reachable stub panics remain throughout the core actor, reference, lifecycle, timer, and selection paths.\"\n  }\n]",
+      "verdicts": [
+        {
+          "criterion_id": "bb.intent_fidelity",
+          "passed": false,
+          "evidence": "pub(crate) fn new(...) -> ActorCell { panic!(\"STUB: not implemented\") }",
+          "justification": "The trajectory leaves core actor runtime functions as stub panics rather than implementing the task intent."
+        },
+        {
+          "criterion_id": "bb.oracle_strength",
+          "passed": false,
+          "evidence": "pub fn receive_cmd<A: Actor>(&self, cmd: SystemCmd, actor: &mut Option<A>) { panic!(\"STUB: not implemented\") }",
+          "justification": "No general implementation is present for core behavior beyond tests; major runtime paths still panic."
+        },
+        {
+          "criterion_id": "ts.lifecycle_create_errors",
+          "passed": false,
+          "evidence": "fn actor_of_props<A>(...) -> Result<ActorRef<A::Msg>, CreateError> ... { panic!(\"STUB: not implemented\") }",
+          "justification": "Actor creation is not implemented, so there is no evidence of duplicate-name, invalid-name, pre_start panic, or system error handling."
+        },
+        {
+          "criterion_id": "ts.termination_leaf_first",
+          "passed": false,
+          "evidence": "pub fn terminate<A: Actor>(&self, actor: &mut Option<A>) { panic!(\"STUB: not implemented\") }",
+          "justification": "Termination logic is entirely stubbed, so leaf-first stopping and parent child-set cleanup are not implemented."
+        },
+        {
+          "criterion_id": "ts.restart_rebuilds_state",
+          "passed": false,
+          "evidence": "pub fn restart(&self) { panic!(\"STUB: not implemented\") }",
+          "justification": "Restart behavior is stubbed, so actor state rebuilding from Props with lifecycle hooks is absent."
+        },
+        {
+          "criterion_id": "ts.pre_start_panic_special",
+          "passed": false,
+          "evidence": "fn actor_of_props<A>(...) -> Result<ActorRef<A::Msg>, CreateError> ... { panic!(\"STUB: not implemented\") }",
+          "justification": "Creation and pre_start handling are unimplemented, so pre_start panic cannot be specially converted into a CreateError."
+        },
+        {
+          "criterion_id": "ts.supervisor_default_restart",
+          "passed": false,
+          "evidence": "pub fn handle_failure(&self, failed: BasicActorRef, strategy: Strategy) { panic!(\"STUB: not implemented\") }",
+          "justification": "The provided trajectory does not show working supervisor strategy defaults or delegation, and failure handling is stubbed."
+        },
+        {
+          "criterion_id": "ts.escalate_climbs_tree",
+          "passed": false,
+          "evidence": "pub fn escalate_failure(&self) { panic!(\"STUB: not implemented\") }",
+          "justification": "Escalation is explicitly unimplemented, so there is no tree-climbing supervision behavior."
+        },
+        {
+          "criterion_id": "ts.channel_general_routing",
+          "passed": false,
+          "evidence": "The shown runtime still contains pervasive `panic!(\"STUB: not implemented\")` in message sending paths such as `send_any_msg` and `Tell::tell`.",
+          "justification": "With core message dispatch stubbed, there is insufficient evidence of general channel publish/subscribe routing."
+        },
+        {
+          "criterion_id": "ts.channel_unsubscribe_terminate",
+          "passed": false,
+          "evidence": "pub fn remove_child(&self, actor: &BasicActorRef) { panic!(\"STUB: not implemented\") }",
+          "justification": "Termination and subscription cleanup cannot be verified because relevant actor lifecycle/message mechanisms remain stubbed."
+        },
+        {
+          "criterion_id": "ts.dead_letter_routing",
+          "passed": false,
+          "evidence": "pub fn try_tell<Msg>(...) -> Result<(), AnyEnqueueError> ... { panic!(\"STUB: not implemented\") }",
+          "justification": "try_tell and send paths are unimplemented, so dead-letter routing and type mismatch errors are absent."
+        },
+        {
+          "criterion_id": "ts.selection_path_resolution",
+          "passed": false,
+          "evidence": "fn select(&self, path: &str) -> Result<ActorSelection, InvalidPath> { panic!(\"STUB: not implemented\") }",
+          "justification": "Actor selection from context is stubbed, so path parsing and resolution are not implemented."
+        },
+        {
+          "criterion_id": "ts.timer_real_scheduling",
+          "passed": false,
+          "evidence": "fn schedule_once<T, M>(...) -> ScheduleId ... { panic!(\"STUB: not implemented\") }",
+          "justification": "Timer scheduling and cancellation methods are stubbed, so no real scheduling behavior exists."
+        },
+        {
+          "criterion_id": "ts.futures_panic_isolation",
+          "passed": false,
+          "evidence": "fn run<Fut>(&self, future: Fut) -> Result<RemoteHandle<<Fut as Future>::Output>, SpawnError> ... { panic!(\"STUB: not implemented\") }",
+          "justification": "Future execution is not implemented, so panic isolation on the executor is not provided."
+        },
+        {
+          "criterion_id": "ts.config_merging",
+          "passed": false,
+          "evidence": "The supplied code only shows actor cell/ref/context stubs and no implemented system configuration loading or merging.",
+          "justification": "There is insufficient evidence of default/user configuration merging, and the shown system-facing methods are still stubbed."
+        },
+        {
+          "criterion_id": "ts.logging_bridge",
+          "passed": false,
+          "evidence": "The supplied code does not include an implemented logger bridge and still leaves core system/runtime methods as stubs.",
+          "justification": "No evidence demonstrates a genuine log/slog facade installation."
+        },
+        {
+          "criterion_id": "ts.guardian_bootstrap",
+          "passed": false,
+          "evidence": "pub(crate) fn user_root(&self) -> BasicActorRef { panic!(\"STUB: not implemented\") }",
+          "justification": "Guardian/root accessors are stubbed, so bootstrapping of the root/user/system hierarchy is not shown."
+        },
+        {
+          "criterion_id": "ts.no_stub_or_hardcode",
+          "passed": false,
+          "evidence": "panic!(\"STUB: not implemented\")",
+          "justification": "Reachable stub panics remain throughout the core actor, reference, lifecycle, timer, and selection paths."
+        }
+      ]
+    }
+  },
+  "criteria": [
+    {
+      "id": "bb.reasoning_faithfulness",
+      "text": "Is the agent's stated reasoning consistent with the edits it actually made and the feedback it received (no post-hoc rationalization, no lucky guess)?",
+      "contract_ref": "(backbone)",
+      "concern": "L2.REASONING_FAITHFULNESS",
+      "anchorable": false
+    },
+    {
+      "id": "bb.stage_legitimacy",
+      "text": "Did each refinement stage (lint, test) do real, feedback-responsive work toward the solution rather than cosmetic or no-op changes?",
+      "contract_ref": "(backbone)",
+      "concern": "L2.STAGE_LEGITIMACY",
+      "anchorable": false
+    },
+    {
+      "id": "ts.termination_leaf_first",
+      "text": "Stopping an actor terminates its children first and waits for their termination before running the actor's own post_stop and removing it from its parent's child set (leaf-first ordering), rather than terminating an actor while its children are still active.",
+      "contract_ref": "Known pitfalls: Termination ordering",
+      "concern": null,
+      "anchorable": true
+    },
+    {
+      "id": "ts.escalate_climbs_tree",
+      "text": "Strategy::Escalate propagates the failure to the parent's supervisor and applies the parent's strategy (not re-applying the child's strategy at the same level).",
+      "contract_ref": "Known pitfalls: Escalation",
+      "concern": null,
+      "anchorable": true
+    }
+  ]
+}

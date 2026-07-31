@@ -1,0 +1,63 @@
+{
+  "language": "go",
+  "model": "claude-opus-4.8",
+  "model_short": "claude-opus-4.8",
+  "model_name": "anthropic/claude-opus-4-8",
+  "branch": "aider-go-claude-opus-4.8-dataset",
+  "backend": "local_inplace",
+  "repo_split": "viper",
+  "dataset": "dataset.json",
+  "dataset_short": "dataset",
+  "max_iteration": 1,
+  "cache_prompts": "true",
+  "start_time": "2026-07-20 18:38:55",
+  "sample_index": 1,
+  "num_samples": 1,
+  "stage1": {
+    "name": "Draft (no feedback)",
+    "elapsed_s": 2545,
+    "eval_time_s": 3,
+    "cost_usd": 8.6267,
+    "cost_source": "output_json:11",
+    "returncode": 0,
+    "runtime": 0.021,
+    "num_passed": 22,
+    "num_tests": 99,
+    "pass_rate": 0.222222,
+    "eval_status": "OK"
+  },
+  "warnings_by_type": {},
+  "warning_scan_stats": {
+    "files_scanned": 235,
+    "bytes_scanned": 14610454
+  },
+  "stage2": {
+    "name": "Lint refine (goimports+staticcheck+govet)",
+    "elapsed_s": 16,
+    "eval_time_s": 1,
+    "cost_usd_incremental": 0,
+    "cost_usd_cumulative": 8.6267,
+    "cost_source": "output_json:11",
+    "returncode": 0,
+    "runtime": 0.013000000000000001,
+    "num_passed": 22,
+    "num_tests": 99,
+    "pass_rate": 0.222222,
+    "eval_status": "OK"
+  },
+  "stage3": {
+    "name": "Test refine (go test -json)",
+    "elapsed_s": 1291,
+    "eval_time_s": 1,
+    "cost_usd_incremental": 51.2656,
+    "cost_usd_cumulative": 59.8923,
+    "cost_source": "output_json:93",
+    "returncode": 0,
+    "runtime": 0.008,
+    "num_passed": 16,
+    "num_tests": 99,
+    "pass_rate": 0.161616,
+    "eval_status": "OK"
+  },
+  "end_time": "2026-07-20 19:43:13"
+}

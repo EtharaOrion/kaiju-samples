@@ -1,0 +1,11 @@
+============================= test session starts ==============================
+platform linux -- Python 3.7.17, pytest-7.4.4, pluggy-1.2.0
+rootdir: /tmp/commit0-inplace-17dnaox2/tree
+plugins: cov-4.1.0, metadata-3.0.0, json-report-1.5.0
+collected 0 items
+
+--------------------------------- JSON report ----------------------------------
+report saved to: report.json
+============================ no tests ran in 0.00s =============================
+ERROR: file or directory not found: tests
+

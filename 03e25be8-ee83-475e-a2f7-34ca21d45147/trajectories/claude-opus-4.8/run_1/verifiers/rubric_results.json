@@ -1,0 +1,275 @@
+{
+  "model": "openai/gpt-5.5-2026-04-23",
+  "ok": true,
+  "verdicts": [
+    {
+      "criterion_id": "bb.reasoning_faithfulness",
+      "passed": false,
+      "evidence": "reasoning: \"Looking at this, I'll implement the PC-tree algorithm across the `Node`, `Leaf`, `P_node`, `C_node`, and `PC_tree` classes.\" ... but final code still contains `def signal_full(self): pass`, `def clean(self): pass`, `def _simplify(self): pass`, `def _split(self, path): pass`, `def _simplify(self, path): pass`.",
+      "justification": "The agent claimed broad implementation work that is not reflected in the submitted code, which still contains important unimplemented stubs."
+    },
+    {
+      "criterion_id": "bb.stage_legitimacy",
+      "passed": false,
+      "evidence": "test-refine repeatedly shows only `reasoning: Reading file: tryalgo/PC_tree.py` after test commands, with no subsequent targeted edits; final diff contains only changes to `tryalgo/Sequence.py`.",
+      "justification": "The refinement stages did not perform meaningful feedback-responsive fixes toward the full behavioral contract and largely consisted of cosmetic/no-op responses."
+    },
+    {
+      "criterion_id": "ts.pcnode-canonical-order",
+      "passed": false,
+      "evidence": "`C_node.represent` returns `tuple(reps)` directly, and `PC_tree.represent` uses `neighbors = [x.ID for x in self._iter(node)]` for C-nodes.",
+      "justification": "The C-node representation emits the current cyclic order without rotating to the minimum element or choosing the lexicographically smaller traversal direction."
+    }
+  ],
+  "anchors": {
+    "golden": {
+      "model": "openai/gpt-5.5-2026-04-23",
+      "reasoning_effort": "high",
+      "ok": true,
+      "raw_verdicts": 17,
+      "response_chars": 5034,
+      "thinking": "",
+      "raw_response": "[\n  {\n    \"criterion_id\": \"bb.intent_fidelity\",\n    \"verdict\": \"fail\",\n    \"evidence\": \"# ===== tryalgo/PC_tree.py =====\",\n    \"justification\": \"The trajectory only shows work on PC_tree and provides no evidence of restoring the many other stubbed algorithm modules or workflow files required by the task.\"\n  },\n  {\n    \"criterion_id\": \"bb.oracle_strength\",\n    \"verdict\": \"fail\",\n    \"evidence\": \"The following is the solution's implementation code... # ===== tryalgo/PC_tree.py =====\",\n    \"justification\": \"There is insufficient evidence of general implementations beyond one partially shown module, so correctness beyond frozen tests cannot be established.\"\n  },\n  {\n    \"criterion_id\": \"ts.pcnode-canonical-order\",\n    \"verdict\": \"pass\",\n    \"evidence\": \"minimum = L.index(min(L)) ... if L[minimum - 1] < L[(minimum + 1) % len(L)]: res = L[minimum::-1] + L[-1:minimum:-1] else: res = L[minimum:] + L[:minimum]\",\n    \"justification\": \"C_node.represent explicitly starts at the minimum neighbor ID and chooses the direction with the smaller adjacent element.\"\n  },\n  {\n    \"criterion_id\": \"ts.pctree-infeasible-raises\",\n    \"verdict\": \"fail\",\n    \"evidence\": \"except Infeasible as e:\\n            valide_res = False\",\n    \"justification\": \"PC_tree.restrict catches Infeasible and returns False rather than propagating the infeasibility exception.\"\n  },\n  {\n    \"criterion_id\": \"ts.pctree-classes-operations\",\n    \"verdict\": \"fail\",\n    \"evidence\": \"def _terminal_path(self, partial_nodes: Dict[int, Node]): ... # maps the ide\",\n    \"justification\": \"The PC-tree implementation is truncated before key reduction logic is shown, so there is insufficient evidence that the full cooperating operations and invariants are implemented.\"\n  },\n  {\n    \"criterion_id\": \"ts.sat-matching-infeasible-raises\",\n    \"verdict\": \"fail\",\n    \"evidence\": \"# ===== tryalgo/PC_tree.py =====\",\n    \"justification\": \"No two-SAT, Horn-SAT, or matching implementation code is provided, so appropriate infeasibility behavior is not evidenced.\"\n  },\n  {\n    \"criterion_id\": \"ts.modular-arithmetic-general\",\n    \"verdict\": \"fail\",\n    \"evidence\": \"# ===== tryalgo/PC_tree.py =====\",\n    \"justification\": \"No modular arithmetic implementation is shown, so there is no evidence of correct general modular inverse or binomial-mod logic.\"\n  },\n  {\n    \"criterion_id\": \"ts.unionfind-invariants\",\n    \"verdict\": \"fail\",\n    \"evidence\": \"# ===== tryalgo/PC_tree.py =====\",\n    \"justification\": \"No Union-Find or partition-refinement implementation is shown, so invariant preservation cannot be verified.\"\n  },\n  {\n    \"criterion_id\": \"ts.next-permutation-behavior\",\n    \"verdict\": \"fail\",\n    \"evidence\": \"# ===== tryalgo/PC_tree.py =====\",\n    \"justification\": \"No next_permutation implementation is provided, so in-place mutation and boolean return behavior are not evidenced.\"\n  },\n  {\n    \"criterion_id\": \"ts.multireturn-tuple-order\",\n    \"verdict\": \"fail\",\n    \"evidence\": \"# ===== tryalgo/PC_tree.py =====\",\n    \"justification\": \"No shortest-path or flow functions are shown, so documented multi-return ordering cannot be assessed.\"\n  },\n  {\n    \"criterion_id\": \"ts.boolean-predicates\",\n    \"verdict\": \"fail\",\n    \"evidence\": \"def restrict(self, restriction): ... return valide_res\",\n    \"justification\": \"Only one boolean-like PC_tree method is shown, while the many required predicate functions are absent from the trajectory.\"\n  },\n  {\n    \"criterion_id\": \"ts.datastructure-edge-cases\",\n    \"verdict\": \"fail\",\n    \"evidence\": \"# ===== tryalgo/PC_tree.py =====\",\n    \"justification\": \"No heap, queue, skip-list, Fenwick, or related data-structure implementations are shown, so edge-case handling is not evidenced.\"\n  },\n  {\n    \"criterion_id\": \"ts.geometry-degeneracies\",\n    \"verdict\": \"fail\",\n    \"evidence\": \"# ===== tryalgo/PC_tree.py =====\",\n    \"justification\": \"No geometry routines are provided, so degeneracy handling cannot be verified.\"\n  },\n  {\n    \"criterion_id\": \"ts.string-boundaries\",\n    \"verdict\": \"fail\",\n    \"evidence\": \"# ===== tryalgo/PC_tree.py =====\",\n    \"justification\": \"No KMP, Manacher, suffix-array, or other string algorithm implementation is shown.\"\n  },\n  {\n    \"criterion_id\": \"ts.our-std-parsing\",\n    \"verdict\": \"fail\",\n    \"evidence\": \"# ===== tryalgo/PC_tree.py =====\",\n    \"justification\": \"No our_std parsing helper implementation is provided.\"\n  },\n  {\n    \"criterion_id\": \"ts.genuine-algorithm-bodies\",\n    \"verdict\": \"fail\",\n    \"evidence\": \"def _splittable(self, left_terminal, right_terminal) -> None:\\n        ...\\n        pass            # P-nodes are always splittable\",\n    \"justification\": \"The trajectory is incomplete and includes at least one pass body, with no evidence of genuine implementations for the full set of required modules.\"\n  },\n  {\n    \"criterion_id\": \"ts.workflow-yaml-valid\",\n    \"verdict\": \"fail\",\n    \"evidence\": \"# ===== tryalgo/PC_tree.py =====\",\n    \"justification\": \"No GitHub Actions workflow YAML files are shown, so their existence and syntactic validity are not evidenced.\"\n  }\n]",
+      "verdicts": [
+        {
+          "criterion_id": "bb.intent_fidelity",
+          "passed": false,
+          "evidence": "# ===== tryalgo/PC_tree.py =====",
+          "justification": "The trajectory only shows work on PC_tree and provides no evidence of restoring the many other stubbed algorithm modules or workflow files required by the task."
+        },
+        {
+          "criterion_id": "bb.oracle_strength",
+          "passed": false,
+          "evidence": "The following is the solution's implementation code... # ===== tryalgo/PC_tree.py =====",
+          "justification": "There is insufficient evidence of general implementations beyond one partially shown module, so correctness beyond frozen tests cannot be established."
+        },
+        {
+          "criterion_id": "ts.pcnode-canonical-order",
+          "passed": true,
+          "evidence": "minimum = L.index(min(L)) ... if L[minimum - 1] < L[(minimum + 1) % len(L)]: res = L[minimum::-1] + L[-1:minimum:-1] else: res = L[minimum:] + L[:minimum]",
+          "justification": "C_node.represent explicitly starts at the minimum neighbor ID and chooses the direction with the smaller adjacent element."
+        },
+        {
+          "criterion_id": "ts.pctree-infeasible-raises",
+          "passed": false,
+          "evidence": "except Infeasible as e:\n            valide_res = False",
+          "justification": "PC_tree.restrict catches Infeasible and returns False rather than propagating the infeasibility exception."
+        },
+        {
+          "criterion_id": "ts.pctree-classes-operations",
+          "passed": false,
+          "evidence": "def _terminal_path(self, partial_nodes: Dict[int, Node]): ... # maps the ide",
+          "justification": "The PC-tree implementation is truncated before key reduction logic is shown, so there is insufficient evidence that the full cooperating operations and invariants are implemented."
+        },
+        {
+          "criterion_id": "ts.sat-matching-infeasible-raises",
+          "passed": false,
+          "evidence": "# ===== tryalgo/PC_tree.py =====",
+          "justification": "No two-SAT, Horn-SAT, or matching implementation code is provided, so appropriate infeasibility behavior is not evidenced."
+        },
+        {
+          "criterion_id": "ts.modular-arithmetic-general",
+          "passed": false,
+          "evidence": "# ===== tryalgo/PC_tree.py =====",
+          "justification": "No modular arithmetic implementation is shown, so there is no evidence of correct general modular inverse or binomial-mod logic."
+        },
+        {
+          "criterion_id": "ts.unionfind-invariants",
+          "passed": false,
+          "evidence": "# ===== tryalgo/PC_tree.py =====",
+          "justification": "No Union-Find or partition-refinement implementation is shown, so invariant preservation cannot be verified."
+        },
+        {
+          "criterion_id": "ts.next-permutation-behavior",
+          "passed": false,
+          "evidence": "# ===== tryalgo/PC_tree.py =====",
+          "justification": "No next_permutation implementation is provided, so in-place mutation and boolean return behavior are not evidenced."
+        },
+        {
+          "criterion_id": "ts.multireturn-tuple-order",
+          "passed": false,
+          "evidence": "# ===== tryalgo/PC_tree.py =====",
+          "justification": "No shortest-path or flow functions are shown, so documented multi-return ordering cannot be assessed."
+        },
+        {
+          "criterion_id": "ts.boolean-predicates",
+          "passed": false,
+          "evidence": "def restrict(self, restriction): ... return valide_res",
+          "justification": "Only one boolean-like PC_tree method is shown, while the many required predicate functions are absent from the trajectory."
+        },
+        {
+          "criterion_id": "ts.datastructure-edge-cases",
+          "passed": false,
+          "evidence": "# ===== tryalgo/PC_tree.py =====",
+          "justification": "No heap, queue, skip-list, Fenwick, or related data-structure implementations are shown, so edge-case handling is not evidenced."
+        },
+        {
+          "criterion_id": "ts.geometry-degeneracies",
+          "passed": false,
+          "evidence": "# ===== tryalgo/PC_tree.py =====",
+          "justification": "No geometry routines are provided, so degeneracy handling cannot be verified."
+        },
+        {
+          "criterion_id": "ts.string-boundaries",
+          "passed": false,
+          "evidence": "# ===== tryalgo/PC_tree.py =====",
+          "justification": "No KMP, Manacher, suffix-array, or other string algorithm implementation is shown."
+        },
+        {
+          "criterion_id": "ts.our-std-parsing",
+          "passed": false,
+          "evidence": "# ===== tryalgo/PC_tree.py =====",
+          "justification": "No our_std parsing helper implementation is provided."
+        },
+        {
+          "criterion_id": "ts.genuine-algorithm-bodies",
+          "passed": false,
+          "evidence": "def _splittable(self, left_terminal, right_terminal) -> None:\n        ...\n        pass            # P-nodes are always splittable",
+          "justification": "The trajectory is incomplete and includes at least one pass body, with no evidence of genuine implementations for the full set of required modules."
+        },
+        {
+          "criterion_id": "ts.workflow-yaml-valid",
+          "passed": false,
+          "evidence": "# ===== tryalgo/PC_tree.py =====",
+          "justification": "No GitHub Actions workflow YAML files are shown, so their existence and syntactic validity are not evidenced."
+        }
+      ]
+    },
+    "stub": {
+      "model": "openai/gpt-5.5-2026-04-23",
+      "reasoning_effort": "high",
+      "ok": true,
+      "raw_verdicts": 17,
+      "response_chars": 5022,
+      "thinking": "",
+      "raw_response": "[\n  {\n    \"criterion_id\": \"bb.intent_fidelity\",\n    \"verdict\": \"fail\",\n    \"evidence\": \"def restrict(self, restriction):\\n        pass\",\n    \"justification\": \"Major required modules such as PC_tree still contain stubbed public methods rather than restored implementations.\"\n  },\n  {\n    \"criterion_id\": \"bb.oracle_strength\",\n    \"verdict\": \"fail\",\n    \"evidence\": \"def insertAfter(self, x, y):\\n        pass\",\n    \"justification\": \"The submitted code leaves core data-structure behavior unimplemented, so it cannot be correct beyond the tests.\"\n  },\n  {\n    \"criterion_id\": \"ts.pcnode-canonical-order\",\n    \"verdict\": \"fail\",\n    \"evidence\": \"def represent(self, show_parent=False):\\n        pass\",\n    \"justification\": \"C_node.represent is unimplemented, so there is no canonical cyclic ordering normalization.\"\n  },\n  {\n    \"criterion_id\": \"ts.pctree-infeasible-raises\",\n    \"verdict\": \"fail\",\n    \"evidence\": \"def _splittable(self, path :List[Inner_node]) -> None:\\n        pass\",\n    \"justification\": \"PC_tree splittability checking is stubbed and therefore cannot raise the infeasibility exception correctly.\"\n  },\n  {\n    \"criterion_id\": \"ts.pctree-classes-operations\",\n    \"verdict\": \"fail\",\n    \"evidence\": \"def signal_full(self):\\n        pass\",\n    \"justification\": \"The cooperating PC-tree node operations are mostly stubs, so required invariants and reductions are not implemented.\"\n  },\n  {\n    \"criterion_id\": \"ts.sat-matching-infeasible-raises\",\n    \"verdict\": \"fail\",\n    \"evidence\": \"The following is the solution's implementation code.\",\n    \"justification\": \"No evidence is provided that two-SAT, Horn-SAT, or matching infeasibility paths are implemented with the required exceptions.\"\n  },\n  {\n    \"criterion_id\": \"ts.modular-arithmetic-general\",\n    \"verdict\": \"pass\",\n    \"evidence\": \"def inv(a, p):\\n    ...\\n    return bezout(a, p)[0] % p\\n...\\ndef binom_modulo(n, k, p):\\n    ...\\n        prod = (prod * (n - i) * inv(i + 1, p)) % p\",\n    \"justification\": \"The modular inverse uses B\u00e9zout coefficients and binomial modulo multiplies by modular inverses rather than using naive division.\"\n  },\n  {\n    \"criterion_id\": \"ts.unionfind-invariants\",\n    \"verdict\": \"fail\",\n    \"evidence\": \"The following is the solution's implementation code.\",\n    \"justification\": \"No Union-Find or partition-refinement implementation evidence is shown, so invariant preservation cannot be verified.\"\n  },\n  {\n    \"criterion_id\": \"ts.next-permutation-behavior\",\n    \"verdict\": \"fail\",\n    \"evidence\": \"The following is the solution's implementation code.\",\n    \"justification\": \"No next_permutation implementation is present in the submitted trajectory.\"\n  },\n  {\n    \"criterion_id\": \"ts.multireturn-tuple-order\",\n    \"verdict\": \"fail\",\n    \"evidence\": \"def bellman_ford(graph, weight, source=0):\\n    \\\"\\\"\\\" Single source shortest paths by Bellman-Ford\",\n    \"justification\": \"The relevant multi-return implementations are absent or truncated, so the required tuple order cannot be confirmed.\"\n  },\n  {\n    \"criterion_id\": \"ts.boolean-predicates\",\n    \"verdict\": \"fail\",\n    \"evidence\": \"def is_partial(self):\\n        \\\"\\\"\\\"\\n        Check if the element is full. Return True or False.\\n        \\\"\\\"\\\"\\n        return self.full_counter and not self.is_full()\",\n    \"justification\": \"At least one predicate returns an integer-or-boolean expression rather than an actual True/False value.\"\n  },\n  {\n    \"criterion_id\": \"ts.datastructure-edge-cases\",\n    \"verdict\": \"fail\",\n    \"evidence\": \"def predecessor(self,x):\\n        pass\",\n    \"justification\": \"Core Sequence data-structure methods are stubbed, and no evidence covers required heap, queue, skip-list, or Fenwick edge cases.\"\n  },\n  {\n    \"criterion_id\": \"ts.geometry-degeneracies\",\n    \"verdict\": \"fail\",\n    \"evidence\": \"The following is the solution's implementation code.\",\n    \"justification\": \"No geometry routine implementations are provided, so degeneracy handling cannot be verified.\"\n  },\n  {\n    \"criterion_id\": \"ts.string-boundaries\",\n    \"verdict\": \"fail\",\n    \"evidence\": \"The following is the solution's implementation code.\",\n    \"justification\": \"No KMP, Manacher, or suffix-array implementations are shown, so boundary correctness is unsupported.\"\n  },\n  {\n    \"criterion_id\": \"ts.our-std-parsing\",\n    \"verdict\": \"fail\",\n    \"evidence\": \"from tryalgo.our_std import readint, readstr\",\n    \"justification\": \"The parsing helpers are only imported, not implemented or shown, so exact parsing behavior cannot be verified.\"\n  },\n  {\n    \"criterion_id\": \"ts.genuine-algorithm-bodies\",\n    \"verdict\": \"fail\",\n    \"evidence\": \"def frontier(self) -> List[int]:\\n        pass\",\n    \"justification\": \"Numerous restored public methods still contain only pass, so the submission lacks genuine algorithm bodies.\"\n  },\n  {\n    \"criterion_id\": \"ts.workflow-yaml-valid\",\n    \"verdict\": \"fail\",\n    \"evidence\": \"The following is the solution's implementation code.\",\n    \"justification\": \"No GitHub Actions workflow YAML files are included or evidenced.\"\n  }\n]",
+      "verdicts": [
+        {
+          "criterion_id": "bb.intent_fidelity",
+          "passed": false,
+          "evidence": "def restrict(self, restriction):\n        pass",
+          "justification": "Major required modules such as PC_tree still contain stubbed public methods rather than restored implementations."
+        },
+        {
+          "criterion_id": "bb.oracle_strength",
+          "passed": false,
+          "evidence": "def insertAfter(self, x, y):\n        pass",
+          "justification": "The submitted code leaves core data-structure behavior unimplemented, so it cannot be correct beyond the tests."
+        },
+        {
+          "criterion_id": "ts.pcnode-canonical-order",
+          "passed": false,
+          "evidence": "def represent(self, show_parent=False):\n        pass",
+          "justification": "C_node.represent is unimplemented, so there is no canonical cyclic ordering normalization."
+        },
+        {
+          "criterion_id": "ts.pctree-infeasible-raises",
+          "passed": false,
+          "evidence": "def _splittable(self, path :List[Inner_node]) -> None:\n        pass",
+          "justification": "PC_tree splittability checking is stubbed and therefore cannot raise the infeasibility exception correctly."
+        },
+        {
+          "criterion_id": "ts.pctree-classes-operations",
+          "passed": false,
+          "evidence": "def signal_full(self):\n        pass",
+          "justification": "The cooperating PC-tree node operations are mostly stubs, so required invariants and reductions are not implemented."
+        },
+        {
+          "criterion_id": "ts.sat-matching-infeasible-raises",
+          "passed": false,
+          "evidence": "The following is the solution's implementation code.",
+          "justification": "No evidence is provided that two-SAT, Horn-SAT, or matching infeasibility paths are implemented with the required exceptions."
+        },
+        {
+          "criterion_id": "ts.modular-arithmetic-general",
+          "passed": true,
+          "evidence": "def inv(a, p):\n    ...\n    return bezout(a, p)[0] % p\n...\ndef binom_modulo(n, k, p):\n    ...\n        prod = (prod * (n - i) * inv(i + 1, p)) % p",
+          "justification": "The modular inverse uses B\u00e9zout coefficients and binomial modulo multiplies by modular inverses rather than using naive division."
+        },
+        {
+          "criterion_id": "ts.unionfind-invariants",
+          "passed": false,
+          "evidence": "The following is the solution's implementation code.",
+          "justification": "No Union-Find or partition-refinement implementation evidence is shown, so invariant preservation cannot be verified."
+        },
+        {
+          "criterion_id": "ts.next-permutation-behavior",
+          "passed": false,
+          "evidence": "The following is the solution's implementation code.",
+          "justification": "No next_permutation implementation is present in the submitted trajectory."
+        },
+        {
+          "criterion_id": "ts.multireturn-tuple-order",
+          "passed": false,
+          "evidence": "def bellman_ford(graph, weight, source=0):\n    \"\"\" Single source shortest paths by Bellman-Ford",
+          "justification": "The relevant multi-return implementations are absent or truncated, so the required tuple order cannot be confirmed."
+        },
+        {
+          "criterion_id": "ts.boolean-predicates",
+          "passed": false,
+          "evidence": "def is_partial(self):\n        \"\"\"\n        Check if the element is full. Return True or False.\n        \"\"\"\n        return self.full_counter and not self.is_full()",
+          "justification": "At least one predicate returns an integer-or-boolean expression rather than an actual True/False value."
+        },
+        {
+          "criterion_id": "ts.datastructure-edge-cases",
+          "passed": false,
+          "evidence": "def predecessor(self,x):\n        pass",
+          "justification": "Core Sequence data-structure methods are stubbed, and no evidence covers required heap, queue, skip-list, or Fenwick edge cases."
+        },
+        {
+          "criterion_id": "ts.geometry-degeneracies",
+          "passed": false,
+          "evidence": "The following is the solution's implementation code.",
+          "justification": "No geometry routine implementations are provided, so degeneracy handling cannot be verified."
+        },
+        {
+          "criterion_id": "ts.string-boundaries",
+          "passed": false,
+          "evidence": "The following is the solution's implementation code.",
+          "justification": "No KMP, Manacher, or suffix-array implementations are shown, so boundary correctness is unsupported."
+        },
+        {
+          "criterion_id": "ts.our-std-parsing",
+          "passed": false,
+          "evidence": "from tryalgo.our_std import readint, readstr",
+          "justification": "The parsing helpers are only imported, not implemented or shown, so exact parsing behavior cannot be verified."
+        },
+        {
+          "criterion_id": "ts.genuine-algorithm-bodies",
+          "passed": false,
+          "evidence": "def frontier(self) -> List[int]:\n        pass",
+          "justification": "Numerous restored public methods still contain only pass, so the submission lacks genuine algorithm bodies."
+        },
+        {
+          "criterion_id": "ts.workflow-yaml-valid",
+          "passed": false,
+          "evidence": "The following is the solution's implementation code.",
+          "justification": "No GitHub Actions workflow YAML files are included or evidenced."
+        }
+      ]
+    }
+  },
+  "criteria": [
+    {
+      "id": "bb.reasoning_faithfulness",
+      "text": "Is the agent's stated reasoning consistent with the edits it actually made and the feedback it received (no post-hoc rationalization, no lucky guess)?",
+      "contract_ref": "(backbone)",
+      "concern": "L2.REASONING_FAITHFULNESS",
+      "anchorable": false
+    },
+    {
+      "id": "bb.stage_legitimacy",
+      "text": "Did each refinement stage (lint, test) do real, feedback-responsive work toward the solution rather than cosmetic or no-op changes?",
+      "contract_ref": "(backbone)",
+      "concern": "L2.STAGE_LEGITIMACY",
+      "anchorable": false
+    },
+    {
+      "id": "ts.pcnode-canonical-order",
+      "text": "The PC-tree representation routine normalizes each C-node's cyclic neighbor order to a canonical form (starting at the minimum element and choosing the traversal direction giving the lexicographically smaller neighbor), rather than emitting the raw ring or an arbitrary direction.",
+      "contract_ref": "Known pitfalls: Canonical ordering in represent",
+      "concern": null,
+      "anchorable": true
+    }
+  ]
+}

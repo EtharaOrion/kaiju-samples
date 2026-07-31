@@ -1,0 +1,31 @@
+{
+  "instance_id": "commit-0/neat-python",
+  "id": "85374ce3-2d6a-4065-8b5d-7da377e88071",
+  "repo": "Zahgon/neat-python",
+  "base_commit": "c59d829cb32a41f06bfae8591be76048640e2d8a",
+  "reference_commit": "043cddfcb83012d145095915d903790c556dda2a",
+  "setup": {
+    "install": "pip install -e \".[dev]\"",
+    "packages": "",
+    "pip_packages": [
+      "coveralls>=3.0",
+      "pytest",
+      "pytest-cov>=4.0",
+      "pytest-json-report"
+    ],
+    "pre_install": [],
+    "python": "3.8",
+    "specification": "https://neat-python.readthedocs.io",
+    "version_source": "pyproject.toml[project.requires-python]",
+    "version_conflicts": [],
+    "system_deps_hint": []
+  },
+  "test": {
+    "test_cmd": "pytest",
+    "test_dir": "tests"
+  },
+  "src_dir": "neat",
+  "base_compiles": null,
+  "language": "python",
+  "ecr_image_uri": "426628337772.dkr.ecr.ap-south-1.amazonaws.com/kaiju_q2:python_codereclaimers_neat_python"
+}

@@ -1,0 +1,378 @@
+{
+  "model": "openai/gpt-5.5-2026-04-23",
+  "ok": true,
+  "verdicts": [
+    {
+      "criterion_id": "bb.reasoning_faithfulness",
+      "passed": false,
+      "evidence": "reasoning: Looking at the stubs, I'll implement the chunked transfer-encoding decoder state machine... You can run the decoder tests with:",
+      "justification": "The trajectory mostly states intended implementations and test commands, but provides insufficient concrete feedback-to-edit linkage to verify faithful reasoning rather than post-hoc claims."
+    },
+    {
+      "criterion_id": "bb.stage_legitimacy",
+      "passed": false,
+      "evidence": "feedback: [tool:cmd_test] ... [digest truncated]",
+      "justification": "The lint and test stages do not show specific failures being addressed with concrete responsive edits, so their legitimacy cannot be confidently established."
+    },
+    {
+      "criterion_id": "ts.body-encoder-selection",
+      "passed": true,
+      "evidence": "match body.len() {\n            Some(_) => Self::Fixed(body),\n            None => Self::Chunked(ChunkedEncoder::new(body)),\n        }",
+      "justification": "The body encoder genuinely selects fixed encoding for known lengths and chunked encoding for unknown lengths using Body::len()."
+    },
+    {
+      "criterion_id": "ts.body-encoder-delegation",
+      "passed": true,
+      "evidence": "match self.project() {\n            BodyEncoderProjection::Chunked(encoder) => encoder.poll_read(cx, buf),\n            BodyEncoderProjection::Fixed(body) => body.poll_read(cx, buf),\n        }",
+      "justification": "poll_read projects the pinned enum and delegates directly to the selected inner reader."
+    },
+    {
+      "criterion_id": "ts.chunked-decode-size-parse",
+      "passed": true,
+      "evidence": "b'0'..=b'9' ... b'a'..=b'f' ... b'A'..=b'F' ... b'\\r' => this.state = State::ChunkSizeExpectLf",
+      "justification": "The decoder accepts decimal and both lowercase and uppercase hexadecimal digits, terminates the size line on CRLF, reads at most chunk_size bytes, decrements the remaining size, and then consumes CRLF."
+    },
+    {
+      "criterion_id": "ts.chunked-decode-trailers",
+      "passed": true,
+      "evidence": "if this.chunk_size == 0 {\n                        this.state = State::Trailers(0, Box::new([0u8; 8192]));\n                    }",
+      "justification": "A zero-size chunk enters trailer parsing, parses headers into Trailers, sends them through the sender, and then transitions to Done where Ok(0) is returned."
+    },
+    {
+      "criterion_id": "ts.chunked-decode-errors",
+      "passed": false,
+      "evidence": "if bytes_read == 0 {\n                                    if *count == 0 {\n                                        ... treat this as an empty set of trailers.\n                                        completed = Some(Trailers::new());",
+      "justification": "The decoder treats EOF immediately after the terminating chunk as empty trailers instead of requiring the trailer-section CRLF and reporting UnexpectedEof mid-frame."
+    },
+    {
+      "criterion_id": "ts.chunked-decode-overflow",
+      "passed": true,
+      "evidence": ".checked_mul(16)\n                                .and_then(|v| v.checked_add((byte - b'0') as u64))\n                                .ok_or_else(overflow)?",
+      "justification": "Chunk-size accumulation uses checked multiplication and addition and maps overflow to an InvalidData error."
+    },
+    {
+      "criterion_id": "ts.chunked-encode-framing",
+      "passed": true,
+      "evidence": "let start = format!(\"{:X}\\r\\n\", bytes);\n...\nbuf[total - 2..total].copy_from_slice(b\"\\r\\n\");",
+      "justification": "Each read is framed as hex length plus CRLF, data, and CRLF, and when the source returns zero the encoder marks done so subsequent reads return Ok(0)."
+    },
+    {
+      "criterion_id": "ts.max-bytes-to-read",
+      "passed": true,
+      "evidence": "let bytes_remaining = buf_len - 5;\n    let max_bytes_of_hex_framing = format!(\"{:X}\", bytes_remaining).len();\n    buf_len - 4 - max_bytes_of_hex_framing",
+      "justification": "The calculation is general rather than table-hardcoded and accounts for the current hexadecimal digit width when reserving framing space."
+    }
+  ],
+  "anchors": {
+    "golden": {
+      "model": "openai/gpt-5.5-2026-04-23",
+      "reasoning_effort": "high",
+      "ok": true,
+      "raw_verdicts": 18,
+      "response_chars": 6171,
+      "thinking": "",
+      "raw_response": "[\n  {\n    \"criterion_id\": \"bb.intent_fidelity\",\n    \"verdict\": \"fail\",\n    \"evidence\": \"The provided solution code only contains `src/body_encoder.rs`, `src/chunked/decoder.rs`, and `src/chunked/encoder.rs`.\",\n    \"justification\": \"The task requires implementing date, server, client, accept-loop, and read-notifier behavior, but the trajectory provides no evidence those were implemented.\"\n  },\n  {\n    \"criterion_id\": \"bb.oracle_strength\",\n    \"verdict\": \"fail\",\n    \"evidence\": \"No code is shown for server decode/encode/accept, client encode/decode/connect, date handling, or read notifier.\",\n    \"justification\": \"Because large required parts of the HTTP implementation are absent, there is insufficient evidence of correctness beyond the limited chunked/body tests.\"\n  },\n  {\n    \"criterion_id\": \"ts.body-encoder-selection\",\n    \"verdict\": \"pass\",\n    \"evidence\": \"match body.len() { Some(_) => Self::Fixed(body), None => Self::Chunked(ChunkedEncoder::new(body)), }\",\n    \"justification\": \"The encoder genuinely selects fixed framing for known lengths and chunked framing for unknown lengths.\"\n  },\n  {\n    \"criterion_id\": \"ts.body-encoder-delegation\",\n    \"verdict\": \"pass\",\n    \"evidence\": \"match self.project() { BodyEncoderProjection::Chunked(encoder) => encoder.poll_read(cx, buf), BodyEncoderProjection::Fixed(body) => body.poll_read(cx, buf), }\",\n    \"justification\": \"The pinned enum is projected and poll_read delegates directly to the selected inner reader.\"\n  },\n  {\n    \"criterion_id\": \"ts.chunked-decode-size-parse\",\n    \"verdict\": \"pass\",\n    \"evidence\": \"b'0'..=b'9' => byte - b'0', b'a'..=b'f' => 10 + byte - b'a', b'A'..=b'F' => 10 + byte - b'A', b'\\\\r' => { this.state = State::ChunkSizeExpectLf; ... }\",\n    \"justification\": \"The decoder accepts decimal/lowercase/uppercase hex digits, requires LF after CR, reads exactly the remaining chunk bytes, and then consumes CRLF.\"\n  },\n  {\n    \"criterion_id\": \"ts.chunked-decode-trailers\",\n    \"verdict\": \"pass\",\n    \"evidence\": \"if this.chunk_size == 0 { this.state = State::Trailers(0, Box::new([0u8; 8192])); } ... this.send_trailers(trailers); ... State::Done => return Poll::Ready(Ok(0))\",\n    \"justification\": \"A zero chunk transitions to trailer parsing, sends parsed trailers, and then reaches EOF behavior.\"\n  },\n  {\n    \"criterion_id\": \"ts.chunked-decode-errors\",\n    \"verdict\": \"pass\",\n    \"evidence\": \"unexpected(byte, \\\"hex digit or CR\\\") ... io::ErrorKind::InvalidData ... eof() ... io::ErrorKind::UnexpectedEof\",\n    \"justification\": \"The decoder reports InvalidData for unexpected grammar bytes and UnexpectedEof when required bytes cannot be read.\"\n  },\n  {\n    \"criterion_id\": \"ts.chunked-decode-overflow\",\n    \"verdict\": \"pass\",\n    \"evidence\": \".checked_mul(16).ok_or_else(overflow)?.checked_add(digit as u64).ok_or_else(overflow)?\",\n    \"justification\": \"Chunk-size arithmetic uses checked multiply and add and maps overflow to InvalidData.\"\n  },\n  {\n    \"criterion_id\": \"ts.chunked-encode-framing\",\n    \"verdict\": \"pass\",\n    \"evidence\": \"let start = format!(\\\"{:X}\\\\r\\\\n\\\", bytes); ... buf[total - 2..total].copy_from_slice(b\\\"\\\\r\\\\n\\\"); ... if bytes == 0 { self.done = true; } ... if self.done { return Poll::Ready(Ok(0)); }\",\n    \"justification\": \"Each read is framed as hex length, CRLF, data, CRLF, and the zero chunk is emitted once before subsequent EOF.\"\n  },\n  {\n    \"criterion_id\": \"ts.max-bytes-to-read\",\n    \"verdict\": \"pass\",\n    \"evidence\": \"let bytes_remaining_after_two_cr_lns = (buf_len - 4) as f64; ... let max_bytes_of_hex_framing = bytes_remaining_after_two_cr_lns.log2() / 4f64; ... (bytes_remaining_after_two_cr_lns - max_bytes_of_hex_framing.ceil()) as usize\",\n    \"justification\": \"The implementation computes a general framing budget based on available bytes and hex digit width rather than hard-coding table rows.\"\n  },\n  {\n    \"criterion_id\": \"ts.date-format-roundtrip\",\n    \"verdict\": \"fail\",\n    \"evidence\": \"No date implementation is included in the provided solution code.\",\n    \"justification\": \"There is no evidence that RFC 1123 formatting or parsing round-trip behavior was implemented.\"\n  },\n  {\n    \"criterion_id\": \"ts.server-decode-url\",\n    \"verdict\": \"fail\",\n    \"evidence\": \"No server decode implementation is included in the provided solution code.\",\n    \"justification\": \"There is no evidence of URL construction for request-target forms or malformed-path rejection.\"\n  },\n  {\n    \"criterion_id\": \"ts.server-decode-body-expect\",\n    \"verdict\": \"fail\",\n    \"evidence\": \"No server decode or server body reader implementation is included in the provided solution code.\",\n    \"justification\": \"There is no evidence that request body framing selection or Expect: 100-continue handling was implemented.\"\n  },\n  {\n    \"criterion_id\": \"ts.server-encode-framing\",\n    \"verdict\": \"fail\",\n    \"evidence\": \"No server encode implementation is included in the provided solution code.\",\n    \"justification\": \"There is no evidence of response status/header/body serialization, Date insertion, or body framing.\"\n  },\n  {\n    \"criterion_id\": \"ts.head-no-body\",\n    \"verdict\": \"fail\",\n    \"evidence\": \"No server encode implementation is included in the provided solution code.\",\n    \"justification\": \"There is no evidence that HEAD responses suppress body bytes while retaining headers.\"\n  },\n  {\n    \"criterion_id\": \"ts.accept-keepalive-drain\",\n    \"verdict\": \"fail\",\n    \"evidence\": \"No server accept-loop implementation is included in the provided solution code.\",\n    \"justification\": \"There is no evidence of keep-alive handling, body draining, or close semantics.\"\n  },\n  {\n    \"criterion_id\": \"ts.client-decode-multivalue-closure\",\n    \"verdict\": \"fail\",\n    \"evidence\": \"No client decode implementation is included in the provided solution code.\",\n    \"justification\": \"There is no evidence that response decoding preserves duplicate headers or handles closure-framed bodies.\"\n  },\n  {\n    \"criterion_id\": \"ts.read-notifier\",\n    \"verdict\": \"fail\",\n    \"evidence\": \"No read-notifier implementation is included in the provided solution code.\",\n    \"justification\": \"There is no evidence of a transparent reader wrapper that signals completion.\"\n  }\n]",
+      "verdicts": [
+        {
+          "criterion_id": "bb.intent_fidelity",
+          "passed": false,
+          "evidence": "The provided solution code only contains `src/body_encoder.rs`, `src/chunked/decoder.rs`, and `src/chunked/encoder.rs`.",
+          "justification": "The task requires implementing date, server, client, accept-loop, and read-notifier behavior, but the trajectory provides no evidence those were implemented."
+        },
+        {
+          "criterion_id": "bb.oracle_strength",
+          "passed": false,
+          "evidence": "No code is shown for server decode/encode/accept, client encode/decode/connect, date handling, or read notifier.",
+          "justification": "Because large required parts of the HTTP implementation are absent, there is insufficient evidence of correctness beyond the limited chunked/body tests."
+        },
+        {
+          "criterion_id": "ts.body-encoder-selection",
+          "passed": true,
+          "evidence": "match body.len() { Some(_) => Self::Fixed(body), None => Self::Chunked(ChunkedEncoder::new(body)), }",
+          "justification": "The encoder genuinely selects fixed framing for known lengths and chunked framing for unknown lengths."
+        },
+        {
+          "criterion_id": "ts.body-encoder-delegation",
+          "passed": true,
+          "evidence": "match self.project() { BodyEncoderProjection::Chunked(encoder) => encoder.poll_read(cx, buf), BodyEncoderProjection::Fixed(body) => body.poll_read(cx, buf), }",
+          "justification": "The pinned enum is projected and poll_read delegates directly to the selected inner reader."
+        },
+        {
+          "criterion_id": "ts.chunked-decode-size-parse",
+          "passed": true,
+          "evidence": "b'0'..=b'9' => byte - b'0', b'a'..=b'f' => 10 + byte - b'a', b'A'..=b'F' => 10 + byte - b'A', b'\\r' => { this.state = State::ChunkSizeExpectLf; ... }",
+          "justification": "The decoder accepts decimal/lowercase/uppercase hex digits, requires LF after CR, reads exactly the remaining chunk bytes, and then consumes CRLF."
+        },
+        {
+          "criterion_id": "ts.chunked-decode-trailers",
+          "passed": true,
+          "evidence": "if this.chunk_size == 0 { this.state = State::Trailers(0, Box::new([0u8; 8192])); } ... this.send_trailers(trailers); ... State::Done => return Poll::Ready(Ok(0))",
+          "justification": "A zero chunk transitions to trailer parsing, sends parsed trailers, and then reaches EOF behavior."
+        },
+        {
+          "criterion_id": "ts.chunked-decode-errors",
+          "passed": true,
+          "evidence": "unexpected(byte, \"hex digit or CR\") ... io::ErrorKind::InvalidData ... eof() ... io::ErrorKind::UnexpectedEof",
+          "justification": "The decoder reports InvalidData for unexpected grammar bytes and UnexpectedEof when required bytes cannot be read."
+        },
+        {
+          "criterion_id": "ts.chunked-decode-overflow",
+          "passed": true,
+          "evidence": ".checked_mul(16).ok_or_else(overflow)?.checked_add(digit as u64).ok_or_else(overflow)?",
+          "justification": "Chunk-size arithmetic uses checked multiply and add and maps overflow to InvalidData."
+        },
+        {
+          "criterion_id": "ts.chunked-encode-framing",
+          "passed": true,
+          "evidence": "let start = format!(\"{:X}\\r\\n\", bytes); ... buf[total - 2..total].copy_from_slice(b\"\\r\\n\"); ... if bytes == 0 { self.done = true; } ... if self.done { return Poll::Ready(Ok(0)); }",
+          "justification": "Each read is framed as hex length, CRLF, data, CRLF, and the zero chunk is emitted once before subsequent EOF."
+        },
+        {
+          "criterion_id": "ts.max-bytes-to-read",
+          "passed": true,
+          "evidence": "let bytes_remaining_after_two_cr_lns = (buf_len - 4) as f64; ... let max_bytes_of_hex_framing = bytes_remaining_after_two_cr_lns.log2() / 4f64; ... (bytes_remaining_after_two_cr_lns - max_bytes_of_hex_framing.ceil()) as usize",
+          "justification": "The implementation computes a general framing budget based on available bytes and hex digit width rather than hard-coding table rows."
+        },
+        {
+          "criterion_id": "ts.date-format-roundtrip",
+          "passed": false,
+          "evidence": "No date implementation is included in the provided solution code.",
+          "justification": "There is no evidence that RFC 1123 formatting or parsing round-trip behavior was implemented."
+        },
+        {
+          "criterion_id": "ts.server-decode-url",
+          "passed": false,
+          "evidence": "No server decode implementation is included in the provided solution code.",
+          "justification": "There is no evidence of URL construction for request-target forms or malformed-path rejection."
+        },
+        {
+          "criterion_id": "ts.server-decode-body-expect",
+          "passed": false,
+          "evidence": "No server decode or server body reader implementation is included in the provided solution code.",
+          "justification": "There is no evidence that request body framing selection or Expect: 100-continue handling was implemented."
+        },
+        {
+          "criterion_id": "ts.server-encode-framing",
+          "passed": false,
+          "evidence": "No server encode implementation is included in the provided solution code.",
+          "justification": "There is no evidence of response status/header/body serialization, Date insertion, or body framing."
+        },
+        {
+          "criterion_id": "ts.head-no-body",
+          "passed": false,
+          "evidence": "No server encode implementation is included in the provided solution code.",
+          "justification": "There is no evidence that HEAD responses suppress body bytes while retaining headers."
+        },
+        {
+          "criterion_id": "ts.accept-keepalive-drain",
+          "passed": false,
+          "evidence": "No server accept-loop implementation is included in the provided solution code.",
+          "justification": "There is no evidence of keep-alive handling, body draining, or close semantics."
+        },
+        {
+          "criterion_id": "ts.client-decode-multivalue-closure",
+          "passed": false,
+          "evidence": "No client decode implementation is included in the provided solution code.",
+          "justification": "There is no evidence that response decoding preserves duplicate headers or handles closure-framed bodies."
+        },
+        {
+          "criterion_id": "ts.read-notifier",
+          "passed": false,
+          "evidence": "No read-notifier implementation is included in the provided solution code.",
+          "justification": "There is no evidence of a transparent reader wrapper that signals completion."
+        }
+      ]
+    },
+    "stub": {
+      "model": "openai/gpt-5.5-2026-04-23",
+      "reasoning_effort": "high",
+      "ok": true,
+      "raw_verdicts": 18,
+      "response_chars": 5525,
+      "thinking": "",
+      "raw_response": "[\n  {\n    \"criterion_id\": \"bb.intent_fidelity\",\n    \"verdict\": \"fail\",\n    \"evidence\": \"pub(crate) fn new(body: Body) -> Self { panic!(\\\"STUB: not implemented\\\") }\",\n    \"justification\": \"The trajectory leaves core required functionality as stub panics rather than implementing the task intent.\"\n  },\n  {\n    \"criterion_id\": \"bb.oracle_strength\",\n    \"verdict\": \"fail\",\n    \"evidence\": \"pub async fn decode<R>(reader: R) -> http_types::Result<Response> ... { panic!(\\\"STUB: not implemented\\\") }\",\n    \"justification\": \"A solution with unimplemented client decoding cannot be correct beyond or even within the tests.\"\n  },\n  {\n    \"criterion_id\": \"ts.body-encoder-selection\",\n    \"verdict\": \"fail\",\n    \"evidence\": \"impl BodyEncoder { pub(crate) fn new(body: Body) -> Self { panic!(\\\"STUB: not implemented\\\") } }\",\n    \"justification\": \"Body encoder construction does not select fixed versus chunked encoding.\"\n  },\n  {\n    \"criterion_id\": \"ts.body-encoder-delegation\",\n    \"verdict\": \"fail\",\n    \"evidence\": \"fn poll_read(...) -> Poll<io::Result<usize>> { panic!(\\\"STUB: not implemented\\\") }\",\n    \"justification\": \"BodyEncoder::poll_read does not delegate to any selected inner encoder.\"\n  },\n  {\n    \"criterion_id\": \"ts.chunked-decode-size-parse\",\n    \"verdict\": \"fail\",\n    \"evidence\": \"impl<R: Read + Unpin> Read for ChunkedDecoder<R> ... fn poll_read(...) -> Poll<io::Result<usize>> { panic!(\\\"STUB: not implemented\\\") }\",\n    \"justification\": \"The chunked decoder state machine is unimplemented and cannot parse chunk sizes or bodies.\"\n  },\n  {\n    \"criterion_id\": \"ts.chunked-decode-trailers\",\n    \"verdict\": \"fail\",\n    \"evidence\": \"fn send_trailers(&mut self, trailers: Trailers) { panic!(\\\"STUB: not implemented\\\") }\",\n    \"justification\": \"Trailer parsing and delivery are not implemented.\"\n  },\n  {\n    \"criterion_id\": \"ts.chunked-decode-errors\",\n    \"verdict\": \"fail\",\n    \"evidence\": \"fn eof<T>() -> Poll<io::Result<T>> { panic!(\\\"STUB: not implemented\\\") }\\n\\nfn unexpected<T>(byte: u8, expected: &'static str) -> Poll<io::Result<T>> { panic!(\\\"STUB: not implemented\\\") }\",\n    \"justification\": \"The required EOF and invalid grammar error handling functions are stubs.\"\n  },\n  {\n    \"criterion_id\": \"ts.chunked-decode-overflow\",\n    \"verdict\": \"fail\",\n    \"evidence\": \"fn overflow() -> io::Error { panic!(\\\"STUB: not implemented\\\") }\",\n    \"justification\": \"Overflow handling is explicitly unimplemented.\"\n  },\n  {\n    \"criterion_id\": \"ts.chunked-encode-framing\",\n    \"verdict\": \"fail\",\n    \"evidence\": \"impl<R: Read + Unpin> Read for ChunkedEncoder<R> ... fn poll_read(...) -> Poll<io::Result<usize>> { panic!(\\\"STUB: not implemented\\\") }\",\n    \"justification\": \"Chunk framing and final zero chunk emission are not implemented.\"\n  },\n  {\n    \"criterion_id\": \"ts.max-bytes-to-read\",\n    \"verdict\": \"fail\",\n    \"evidence\": \"fn max_bytes_to_read(buf_len: usize) -> usize { panic!(\\\"STUB: not implemented\\\") }\",\n    \"justification\": \"The framing budget computation remains a stub.\"\n  },\n  {\n    \"criterion_id\": \"ts.date-format-roundtrip\",\n    \"verdict\": \"fail\",\n    \"evidence\": \"pub(crate) fn parse_http_date(s: &str) -> http_types::Result<SystemTime> { panic!(\\\"STUB: not implemented\\\") }\\n\\npub(crate) fn fmt_http_date(d: SystemTime) -> String { panic!(\\\"STUB: not implemented\\\") }\",\n    \"justification\": \"Date parsing and formatting are unimplemented.\"\n  },\n  {\n    \"criterion_id\": \"ts.server-decode-url\",\n    \"verdict\": \"fail\",\n    \"evidence\": \"The provided solution code contains no implemented server/decode.rs logic and many other decode paths are stubbed.\",\n    \"justification\": \"There is insufficient evidence of any server URL parsing implementation.\"\n  },\n  {\n    \"criterion_id\": \"ts.server-decode-body-expect\",\n    \"verdict\": \"fail\",\n    \"evidence\": \"The provided solution code contains no implemented server decode or body reader logic.\",\n    \"justification\": \"There is insufficient evidence that body framing selection or Expect handling is implemented.\"\n  },\n  {\n    \"criterion_id\": \"ts.server-encode-framing\",\n    \"verdict\": \"fail\",\n    \"evidence\": \"The provided solution code contains no implemented server/encode.rs logic.\",\n    \"justification\": \"There is insufficient evidence that server response status lines, headers, framing, or bodies are encoded.\"\n  },\n  {\n    \"criterion_id\": \"ts.head-no-body\",\n    \"verdict\": \"fail\",\n    \"evidence\": \"The provided solution code contains no implemented server/encode.rs logic.\",\n    \"justification\": \"There is no evidence that HEAD responses suppress body bytes while emitting headers.\"\n  },\n  {\n    \"criterion_id\": \"ts.accept-keepalive-drain\",\n    \"verdict\": \"fail\",\n    \"evidence\": \"The provided solution code contains no implemented server accept loop, and read_notifier.rs is truncated/unimplemented.\",\n    \"justification\": \"There is insufficient evidence of keep-alive looping, unread body draining, or connection close semantics.\"\n  },\n  {\n    \"criterion_id\": \"ts.client-decode-multivalue-closure\",\n    \"verdict\": \"fail\",\n    \"evidence\": \"pub async fn decode<R>(reader: R) -> http_types::Result<Response> ... { panic!(\\\"STUB: not implemented\\\") }\",\n    \"justification\": \"Client response decoding is entirely unimplemented.\"\n  },\n  {\n    \"criterion_id\": \"ts.read-notifier\",\n    \"verdict\": \"fail\",\n    \"evidence\": \"# ===== src/read_notifier.rs =====\\nuse std::fmt;\\nuse std::pin::Pin;\\nuse std::task::{\",\n    \"justification\": \"The read notifier implementation is absent/incomplete, with no evidence of forwarding reads or signaling completion.\"\n  }\n]",
+      "verdicts": [
+        {
+          "criterion_id": "bb.intent_fidelity",
+          "passed": false,
+          "evidence": "pub(crate) fn new(body: Body) -> Self { panic!(\"STUB: not implemented\") }",
+          "justification": "The trajectory leaves core required functionality as stub panics rather than implementing the task intent."
+        },
+        {
+          "criterion_id": "bb.oracle_strength",
+          "passed": false,
+          "evidence": "pub async fn decode<R>(reader: R) -> http_types::Result<Response> ... { panic!(\"STUB: not implemented\") }",
+          "justification": "A solution with unimplemented client decoding cannot be correct beyond or even within the tests."
+        },
+        {
+          "criterion_id": "ts.body-encoder-selection",
+          "passed": false,
+          "evidence": "impl BodyEncoder { pub(crate) fn new(body: Body) -> Self { panic!(\"STUB: not implemented\") } }",
+          "justification": "Body encoder construction does not select fixed versus chunked encoding."
+        },
+        {
+          "criterion_id": "ts.body-encoder-delegation",
+          "passed": false,
+          "evidence": "fn poll_read(...) -> Poll<io::Result<usize>> { panic!(\"STUB: not implemented\") }",
+          "justification": "BodyEncoder::poll_read does not delegate to any selected inner encoder."
+        },
+        {
+          "criterion_id": "ts.chunked-decode-size-parse",
+          "passed": false,
+          "evidence": "impl<R: Read + Unpin> Read for ChunkedDecoder<R> ... fn poll_read(...) -> Poll<io::Result<usize>> { panic!(\"STUB: not implemented\") }",
+          "justification": "The chunked decoder state machine is unimplemented and cannot parse chunk sizes or bodies."
+        },
+        {
+          "criterion_id": "ts.chunked-decode-trailers",
+          "passed": false,
+          "evidence": "fn send_trailers(&mut self, trailers: Trailers) { panic!(\"STUB: not implemented\") }",
+          "justification": "Trailer parsing and delivery are not implemented."
+        },
+        {
+          "criterion_id": "ts.chunked-decode-errors",
+          "passed": false,
+          "evidence": "fn eof<T>() -> Poll<io::Result<T>> { panic!(\"STUB: not implemented\") }\n\nfn unexpected<T>(byte: u8, expected: &'static str) -> Poll<io::Result<T>> { panic!(\"STUB: not implemented\") }",
+          "justification": "The required EOF and invalid grammar error handling functions are stubs."
+        },
+        {
+          "criterion_id": "ts.chunked-decode-overflow",
+          "passed": false,
+          "evidence": "fn overflow() -> io::Error { panic!(\"STUB: not implemented\") }",
+          "justification": "Overflow handling is explicitly unimplemented."
+        },
+        {
+          "criterion_id": "ts.chunked-encode-framing",
+          "passed": false,
+          "evidence": "impl<R: Read + Unpin> Read for ChunkedEncoder<R> ... fn poll_read(...) -> Poll<io::Result<usize>> { panic!(\"STUB: not implemented\") }",
+          "justification": "Chunk framing and final zero chunk emission are not implemented."
+        },
+        {
+          "criterion_id": "ts.max-bytes-to-read",
+          "passed": false,
+          "evidence": "fn max_bytes_to_read(buf_len: usize) -> usize { panic!(\"STUB: not implemented\") }",
+          "justification": "The framing budget computation remains a stub."
+        },
+        {
+          "criterion_id": "ts.date-format-roundtrip",
+          "passed": false,
+          "evidence": "pub(crate) fn parse_http_date(s: &str) -> http_types::Result<SystemTime> { panic!(\"STUB: not implemented\") }\n\npub(crate) fn fmt_http_date(d: SystemTime) -> String { panic!(\"STUB: not implemented\") }",
+          "justification": "Date parsing and formatting are unimplemented."
+        },
+        {
+          "criterion_id": "ts.server-decode-url",
+          "passed": false,
+          "evidence": "The provided solution code contains no implemented server/decode.rs logic and many other decode paths are stubbed.",
+          "justification": "There is insufficient evidence of any server URL parsing implementation."
+        },
+        {
+          "criterion_id": "ts.server-decode-body-expect",
+          "passed": false,
+          "evidence": "The provided solution code contains no implemented server decode or body reader logic.",
+          "justification": "There is insufficient evidence that body framing selection or Expect handling is implemented."
+        },
+        {
+          "criterion_id": "ts.server-encode-framing",
+          "passed": false,
+          "evidence": "The provided solution code contains no implemented server/encode.rs logic.",
+          "justification": "There is insufficient evidence that server response status lines, headers, framing, or bodies are encoded."
+        },
+        {
+          "criterion_id": "ts.head-no-body",
+          "passed": false,
+          "evidence": "The provided solution code contains no implemented server/encode.rs logic.",
+          "justification": "There is no evidence that HEAD responses suppress body bytes while emitting headers."
+        },
+        {
+          "criterion_id": "ts.accept-keepalive-drain",
+          "passed": false,
+          "evidence": "The provided solution code contains no implemented server accept loop, and read_notifier.rs is truncated/unimplemented.",
+          "justification": "There is insufficient evidence of keep-alive looping, unread body draining, or connection close semantics."
+        },
+        {
+          "criterion_id": "ts.client-decode-multivalue-closure",
+          "passed": false,
+          "evidence": "pub async fn decode<R>(reader: R) -> http_types::Result<Response> ... { panic!(\"STUB: not implemented\") }",
+          "justification": "Client response decoding is entirely unimplemented."
+        },
+        {
+          "criterion_id": "ts.read-notifier",
+          "passed": false,
+          "evidence": "# ===== src/read_notifier.rs =====\nuse std::fmt;\nuse std::pin::Pin;\nuse std::task::{",
+          "justification": "The read notifier implementation is absent/incomplete, with no evidence of forwarding reads or signaling completion."
+        }
+      ]
+    }
+  },
+  "criteria": [
+    {
+      "id": "bb.reasoning_faithfulness",
+      "text": "Is the agent's stated reasoning consistent with the edits it actually made and the feedback it received (no post-hoc rationalization, no lucky guess)?",
+      "contract_ref": "(backbone)",
+      "concern": "L2.REASONING_FAITHFULNESS",
+      "anchorable": false
+    },
+    {
+      "id": "bb.stage_legitimacy",
+      "text": "Did each refinement stage (lint, test) do real, feedback-responsive work toward the solution rather than cosmetic or no-op changes?",
+      "contract_ref": "(backbone)",
+      "concern": "L2.STAGE_LEGITIMACY",
+      "anchorable": false
+    },
+    {
+      "id": "ts.body-encoder-selection",
+      "text": "The body encoder chooses fixed-length streaming when the body advertises a known length and chunked framing when the length is unknown, based on a genuine length check (e.g. matching Option<usize>), not on recognizing specific test inputs.",
+      "contract_ref": "Behavioral contract \u00a71 (Body encoder selection)",
+      "concern": null,
+      "anchorable": true
+    },
+    {
+      "id": "ts.body-encoder-delegation",
+      "text": "The body encoder's poll_read delegates to the selected inner encoder via correct pin projection, re-polling the inner reader through Pin::new.",
+      "contract_ref": "Behavioral contract \u00a71 / Known pitfalls (Pin/projection correctness)",
+      "concern": null,
+      "anchorable": true
+    },
+    {
+      "id": "ts.chunked-decode-size-parse",
+      "text": "The chunked decoder parses hexadecimal chunk sizes accepting 0-9, a-f, and A-F, terminated by CRLF, and reads exactly chunk_size body bytes per chunk followed by consuming the trailing CRLF.",
+      "contract_ref": "Behavioral contract \u00a72 (Chunked decoding)",
+      "concern": null,
+      "anchorable": true
+    },
+    {
+      "id": "ts.chunked-decode-trailers",
+      "text": "A zero-size chunk transitions the decoder into trailer parsing; trailer headers are parsed and delivered via the trailer channel (including an empty/bare-CRLF trailer section), after which the decoder reports EOF (Ok(0)).",
+      "contract_ref": "Behavioral contract \u00a72 / Known pitfalls (Trailers)",
+      "concern": null,
+      "anchorable": true
+    },
+    {
+      "id": "ts.chunked-decode-errors",
+      "text": "The decoder surfaces InvalidData on grammar violations (non-hex/non-CR where a digit or CR is expected, missing CR/LF, malformed trailers) and UnexpectedEof when the stream ends mid-frame \u2014 it does not silently swallow these as Ok(0) or skip malformed bytes.",
+      "contract_ref": "Behavioral contract \u00a72 / Known pitfalls (CRLF discipline, EOF vs graceful end)",
+      "concern": null,
+      "anchorable": true
+    },
+    {
+      "id": "ts.chunked-decode-overflow",
+      "text": "Chunk-size accumulation uses checked (multiply-by-16-then-add) arithmetic and reports InvalidData on overflow beyond 64 bits rather than wrapping.",
+      "contract_ref": "Behavioral contract \u00a72 / Known pitfalls (Chunk size arithmetic)",
+      "concern": null,
+      "anchorable": true
+    },
+    {
+      "id": "ts.chunked-encode-framing",
+      "text": "Each chunked-encoder read produces framing of the form {hex-len}\\r\\n{data}\\r\\n, and a single terminating zero-length chunk (0\\r\\n\\r\\n) is emitted exactly once after the source is exhausted, with all subsequent reads returning Ok(0) (not another zero chunk).",
+      "contract_ref": "Behavioral contract \u00a73 / Known pitfalls (terminating zero chunk)",
+      "concern": null,
+      "anchorable": true
+    },
+    {
+      "id": "ts.max-bytes-to-read",
+      "text": "max_bytes_to_read computes the largest content read size that still fits after reserving room for the hex length prefix and two CRLFs, correctly handling order-of-magnitude boundaries where a larger content size adds a framing byte (F\u219210, FF\u2192100, etc.) \u2014 computed generally, not hard-coded to the test table.",
+      "contract_ref": "Behavioral contract \u00a74 / Known pitfalls (Off-by-one in chunk framing) / Cheat surface",
+      "concern": null,
+      "anchorable": true
+    }
+  ]
+}

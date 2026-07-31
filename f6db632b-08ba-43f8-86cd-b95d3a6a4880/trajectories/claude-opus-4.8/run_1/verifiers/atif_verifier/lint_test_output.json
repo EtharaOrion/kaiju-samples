@@ -1,0 +1,229 @@
+{"Time":"2026-07-28T10:51:03.895416615Z","Action":"start","Package":"github.com/manifoldco/promptui"}
+{"Time":"2026-07-28T10:51:03.895569362Z","Action":"start","Package":"github.com/manifoldco/promptui/list"}
+{"Time":"2026-07-28T10:51:03.895760169Z","Action":"start","Package":"github.com/manifoldco/promptui/screenbuf"}
+{"Time":"2026-07-28T10:51:03.896707605Z","Action":"run","Package":"github.com/manifoldco/promptui/list","Test":"TestListNew"}
+{"Time":"2026-07-28T10:51:03.896769221Z","Action":"output","Package":"github.com/manifoldco/promptui/list","Test":"TestListNew","Output":"=== RUN   TestListNew\n"}
+{"Time":"2026-07-28T10:51:03.896778296Z","Action":"run","Package":"github.com/manifoldco/promptui/list","Test":"TestListNew/when_items_a_slice_nil"}
+{"Time":"2026-07-28T10:51:03.896781164Z","Action":"output","Package":"github.com/manifoldco/promptui/list","Test":"TestListNew/when_items_a_slice_nil","Output":"=== RUN   TestListNew/when_items_a_slice_nil\n"}
+{"Time":"2026-07-28T10:51:03.896787792Z","Action":"output","Package":"github.com/manifoldco/promptui/list","Test":"TestListNew/when_items_a_slice_nil","Output":"--- PASS: TestListNew/when_items_a_slice_nil (0.00s)\n"}
+{"Time":"2026-07-28T10:51:03.896790558Z","Action":"pass","Package":"github.com/manifoldco/promptui/list","Test":"TestListNew/when_items_a_slice_nil","Elapsed":0}
+{"Time":"2026-07-28T10:51:03.896794458Z","Action":"run","Package":"github.com/manifoldco/promptui/list","Test":"TestListNew/when_items_is_nil"}
+{"Time":"2026-07-28T10:51:03.896796742Z","Action":"output","Package":"github.com/manifoldco/promptui/list","Test":"TestListNew/when_items_is_nil","Output":"=== RUN   TestListNew/when_items_is_nil\n"}
+{"Time":"2026-07-28T10:51:03.89680012Z","Action":"output","Package":"github.com/manifoldco/promptui/list","Test":"TestListNew/when_items_is_nil","Output":"--- PASS: TestListNew/when_items_is_nil (0.00s)\n"}
+{"Time":"2026-07-28T10:51:03.896802352Z","Action":"pass","Package":"github.com/manifoldco/promptui/list","Test":"TestListNew/when_items_is_nil","Elapsed":0}
+{"Time":"2026-07-28T10:51:03.896804566Z","Action":"run","Package":"github.com/manifoldco/promptui/list","Test":"TestListNew/when_items_is_not_a_slice"}
+{"Time":"2026-07-28T10:51:03.896806449Z","Action":"output","Package":"github.com/manifoldco/promptui/list","Test":"TestListNew/when_items_is_not_a_slice","Output":"=== RUN   TestListNew/when_items_is_not_a_slice\n"}
+{"Time":"2026-07-28T10:51:03.896808865Z","Action":"output","Package":"github.com/manifoldco/promptui/list","Test":"TestListNew/when_items_is_not_a_slice","Output":"--- PASS: TestListNew/when_items_is_not_a_slice (0.00s)\n"}
+{"Time":"2026-07-28T10:51:03.896810913Z","Action":"pass","Package":"github.com/manifoldco/promptui/list","Test":"TestListNew/when_items_is_not_a_slice","Elapsed":0}
+{"Time":"2026-07-28T10:51:03.896813696Z","Action":"output","Package":"github.com/manifoldco/promptui/list","Test":"TestListNew","Output":"--- PASS: TestListNew (0.00s)\n"}
+{"Time":"2026-07-28T10:51:03.896815977Z","Action":"pass","Package":"github.com/manifoldco/promptui/list","Test":"TestListNew","Elapsed":0}
+{"Time":"2026-07-28T10:51:03.896818003Z","Action":"run","Package":"github.com/manifoldco/promptui/list","Test":"TestListMovement"}
+{"Time":"2026-07-28T10:51:03.896819734Z","Action":"output","Package":"github.com/manifoldco/promptui/list","Test":"TestListMovement","Output":"=== RUN   TestListMovement\n"}
+{"Time":"2026-07-28T10:51:03.896821835Z","Action":"run","Package":"github.com/manifoldco/promptui/list","Test":"TestListMovement/list_next"}
+{"Time":"2026-07-28T10:51:03.896823584Z","Action":"output","Package":"github.com/manifoldco/promptui/list","Test":"TestListMovement/list_next","Output":"=== RUN   TestListMovement/list_next\n"}
+{"Time":"2026-07-28T10:51:03.896827461Z","Action":"output","Package":"github.com/manifoldco/promptui/list","Test":"TestListMovement/list_next","Output":"--- PASS: TestListMovement/list_next (0.00s)\n"}
+{"Time":"2026-07-28T10:51:03.896829774Z","Action":"pass","Package":"github.com/manifoldco/promptui/list","Test":"TestListMovement/list_next","Elapsed":0}
+{"Time":"2026-07-28T10:51:03.896838261Z","Action":"run","Package":"github.com/manifoldco/promptui/list","Test":"TestListMovement/list_prev"}
+{"Time":"2026-07-28T10:51:03.896840069Z","Action":"output","Package":"github.com/manifoldco/promptui/list","Test":"TestListMovement/list_prev","Output":"=== RUN   TestListMovement/list_prev\n"}
+{"Time":"2026-07-28T10:51:03.896843432Z","Action":"output","Package":"github.com/manifoldco/promptui/list","Test":"TestListMovement/list_prev","Output":"--- PASS: TestListMovement/list_prev (0.00s)\n"}
+{"Time":"2026-07-28T10:51:03.896845543Z","Action":"pass","Package":"github.com/manifoldco/promptui/list","Test":"TestListMovement/list_prev","Elapsed":0}
+{"Time":"2026-07-28T10:51:03.896847565Z","Action":"run","Package":"github.com/manifoldco/promptui/list","Test":"TestListMovement/list_prev#01"}
+{"Time":"2026-07-28T10:51:03.896849377Z","Action":"output","Package":"github.com/manifoldco/promptui/list","Test":"TestListMovement/list_prev#01","Output":"=== RUN   TestListMovement/list_prev#01\n"}
+{"Time":"2026-07-28T10:51:03.896851658Z","Action":"output","Package":"github.com/manifoldco/promptui/list","Test":"TestListMovement/list_prev#01","Output":"--- PASS: TestListMovement/list_prev#01 (0.00s)\n"}
+{"Time":"2026-07-28T10:51:03.896853649Z","Action":"pass","Package":"github.com/manifoldco/promptui/list","Test":"TestListMovement/list_prev#01","Elapsed":0}
+{"Time":"2026-07-28T10:51:03.896855671Z","Action":"run","Package":"github.com/manifoldco/promptui/list","Test":"TestListMovement/list_next#01"}
+{"Time":"2026-07-28T10:51:03.89685742Z","Action":"output","Package":"github.com/manifoldco/promptui/list","Test":"TestListMovement/list_next#01","Output":"=== RUN   TestListMovement/list_next#01\n"}
+{"Time":"2026-07-28T10:51:03.896859738Z","Action":"output","Package":"github.com/manifoldco/promptui/list","Test":"TestListMovement/list_next#01","Output":"--- PASS: TestListMovement/list_next#01 (0.00s)\n"}
+{"Time":"2026-07-28T10:51:03.896861629Z","Action":"pass","Package":"github.com/manifoldco/promptui/list","Test":"TestListMovement/list_next#01","Elapsed":0}
+{"Time":"2026-07-28T10:51:03.896864892Z","Action":"run","Package":"github.com/manifoldco/promptui/list","Test":"TestListMovement/list_next#02"}
+{"Time":"2026-07-28T10:51:03.896866605Z","Action":"output","Package":"github.com/manifoldco/promptui/list","Test":"TestListMovement/list_next#02","Output":"=== RUN   TestListMovement/list_next#02\n"}
+{"Time":"2026-07-28T10:51:03.896868862Z","Action":"output","Package":"github.com/manifoldco/promptui/list","Test":"TestListMovement/list_next#02","Output":"--- PASS: TestListMovement/list_next#02 (0.00s)\n"}
+{"Time":"2026-07-28T10:51:03.896870841Z","Action":"pass","Package":"github.com/manifoldco/promptui/list","Test":"TestListMovement/list_next#02","Elapsed":0}
+{"Time":"2026-07-28T10:51:03.89687283Z","Action":"run","Package":"github.com/manifoldco/promptui/list","Test":"TestListMovement/list_next#03"}
+{"Time":"2026-07-28T10:51:03.896874537Z","Action":"output","Package":"github.com/manifoldco/promptui/list","Test":"TestListMovement/list_next#03","Output":"=== RUN   TestListMovement/list_next#03\n"}
+{"Time":"2026-07-28T10:51:03.896876602Z","Action":"output","Package":"github.com/manifoldco/promptui/list","Test":"TestListMovement/list_next#03","Output":"--- PASS: TestListMovement/list_next#03 (0.00s)\n"}
+{"Time":"2026-07-28T10:51:03.896878565Z","Action":"pass","Package":"github.com/manifoldco/promptui/list","Test":"TestListMovement/list_next#03","Elapsed":0}
+{"Time":"2026-07-28T10:51:03.896880907Z","Action":"run","Package":"github.com/manifoldco/promptui/list","Test":"TestListMovement/list_next#04"}
+{"Time":"2026-07-28T10:51:03.896882679Z","Action":"output","Package":"github.com/manifoldco/promptui/list","Test":"TestListMovement/list_next#04","Output":"=== RUN   TestListMovement/list_next#04\n"}
+{"Time":"2026-07-28T10:51:03.896885054Z","Action":"output","Package":"github.com/manifoldco/promptui/list","Test":"TestListMovement/list_next#04","Output":"--- PASS: TestListMovement/list_next#04 (0.00s)\n"}
+{"Time":"2026-07-28T10:51:03.896888869Z","Action":"pass","Package":"github.com/manifoldco/promptui/list","Test":"TestListMovement/list_next#04","Elapsed":0}
+{"Time":"2026-07-28T10:51:03.896890842Z","Action":"run","Package":"github.com/manifoldco/promptui/list","Test":"TestListMovement/list_prev#02"}
+{"Time":"2026-07-28T10:51:03.896892532Z","Action":"output","Package":"github.com/manifoldco/promptui/list","Test":"TestListMovement/list_prev#02","Output":"=== RUN   TestListMovement/list_prev#02\n"}
+{"Time":"2026-07-28T10:51:03.896896119Z","Action":"output","Package":"github.com/manifoldco/promptui/list","Test":"TestListMovement/list_prev#02","Output":"--- PASS: TestListMovement/list_prev#02 (0.00s)\n"}
+{"Time":"2026-07-28T10:51:03.896898167Z","Action":"pass","Package":"github.com/manifoldco/promptui/list","Test":"TestListMovement/list_prev#02","Elapsed":0}
+{"Time":"2026-07-28T10:51:03.896899989Z","Action":"run","Package":"github.com/manifoldco/promptui/list","Test":"TestListMovement/list_up"}
+{"Time":"2026-07-28T10:51:03.896901765Z","Action":"output","Package":"github.com/manifoldco/promptui/list","Test":"TestListMovement/list_up","Output":"=== RUN   TestListMovement/list_up\n"}
+{"Time":"2026-07-28T10:51:03.896904402Z","Action":"output","Package":"github.com/manifoldco/promptui/list","Test":"TestListMovement/list_up","Output":"--- PASS: TestListMovement/list_up (0.00s)\n"}
+{"Time":"2026-07-28T10:51:03.896906329Z","Action":"pass","Package":"github.com/manifoldco/promptui/list","Test":"TestListMovement/list_up","Elapsed":0}
+{"Time":"2026-07-28T10:51:03.896908437Z","Action":"run","Package":"github.com/manifoldco/promptui/list","Test":"TestListMovement/list_up#01"}
+{"Time":"2026-07-28T10:51:03.896910119Z","Action":"output","Package":"github.com/manifoldco/promptui/list","Test":"TestListMovement/list_up#01","Output":"=== RUN   TestListMovement/list_up#01\n"}
+{"Time":"2026-07-28T10:51:03.896918083Z","Action":"output","Package":"github.com/manifoldco/promptui/list","Test":"TestListMovement/list_up#01","Output":"--- PASS: TestListMovement/list_up#01 (0.00s)\n"}
+{"Time":"2026-07-28T10:51:03.896921417Z","Action":"pass","Package":"github.com/manifoldco/promptui/list","Test":"TestListMovement/list_up#01","Elapsed":0}
+{"Time":"2026-07-28T10:51:03.896892297Z","Action":"run","Package":"github.com/manifoldco/promptui/screenbuf","Test":"TestScreen"}
+{"Time":"2026-07-28T10:51:03.896946225Z","Action":"output","Package":"github.com/manifoldco/promptui/screenbuf","Test":"TestScreen","Output":"=== RUN   TestScreen\n"}
+{"Time":"2026-07-28T10:51:03.896963382Z","Action":"run","Package":"github.com/manifoldco/promptui/screenbuf","Test":"TestScreen/initial_write"}
+{"Time":"2026-07-28T10:51:03.89696667Z","Action":"output","Package":"github.com/manifoldco/promptui/screenbuf","Test":"TestScreen/initial_write","Output":"=== RUN   TestScreen/initial_write\n"}
+{"Time":"2026-07-28T10:51:03.89697068Z","Action":"output","Package":"github.com/manifoldco/promptui/screenbuf","Test":"TestScreen/initial_write","Output":"    screenbuf_test.go:126: expected \"\\\\cLine One\\n\", got \"\\\\cLine One\"\n"}
+{"Time":"2026-07-28T10:51:03.896976148Z","Action":"output","Package":"github.com/manifoldco/promptui/screenbuf","Test":"TestScreen/initial_write","Output":"--- FAIL: TestScreen/initial_write (0.00s)\n"}
+{"Time":"2026-07-28T10:51:03.896978676Z","Action":"fail","Package":"github.com/manifoldco/promptui/screenbuf","Test":"TestScreen/initial_write","Elapsed":0}
+{"Time":"2026-07-28T10:51:03.896982175Z","Action":"run","Package":"github.com/manifoldco/promptui/screenbuf","Test":"TestScreen/write_of_with_same_number_of_lines"}
+{"Time":"2026-07-28T10:51:03.896984358Z","Action":"output","Package":"github.com/manifoldco/promptui/screenbuf","Test":"TestScreen/write_of_with_same_number_of_lines","Output":"=== RUN   TestScreen/write_of_with_same_number_of_lines\n"}
+{"Time":"2026-07-28T10:51:03.896989641Z","Action":"output","Package":"github.com/manifoldco/promptui/screenbuf","Test":"TestScreen/write_of_with_same_number_of_lines","Output":"    screenbuf_test.go:126: expected \"\\\\u\\\\cLine One\\\\d\", got \"\\\\d\\\\cLine One\"\n"}
+{"Time":"2026-07-28T10:51:03.896996663Z","Action":"output","Package":"github.com/manifoldco/promptui/screenbuf","Test":"TestScreen/write_of_with_same_number_of_lines","Output":"--- FAIL: TestScreen/write_of_with_same_number_of_lines (0.00s)\n"}
+{"Time":"2026-07-28T10:51:03.896999128Z","Action":"fail","Package":"github.com/manifoldco/promptui/screenbuf","Test":"TestScreen/write_of_with_same_number_of_lines","Elapsed":0}
+{"Time":"2026-07-28T10:51:03.897001723Z","Action":"run","Package":"github.com/manifoldco/promptui/screenbuf","Test":"TestScreen/write_of_with_more_lines"}
+{"Time":"2026-07-28T10:51:03.89700348Z","Action":"output","Package":"github.com/manifoldco/promptui/screenbuf","Test":"TestScreen/write_of_with_more_lines","Output":"=== RUN   TestScreen/write_of_with_more_lines\n"}
+{"Time":"2026-07-28T10:51:03.897006914Z","Action":"output","Package":"github.com/manifoldco/promptui/screenbuf","Test":"TestScreen/write_of_with_more_lines","Output":"    screenbuf_test.go:126: expected \"\\\\u\\\\cLine One\\\\d\\\\cLine Two\\n\", got \"\\\\d\\\\cLine One\\\\d\\\\cLine Two\"\n"}
+{"Time":"2026-07-28T10:51:03.896923832Z","Action":"run","Package":"github.com/manifoldco/promptui/list","Test":"TestListMovement/list_down"}
+{"Time":"2026-07-28T10:51:03.897010802Z","Action":"output","Package":"github.com/manifoldco/promptui/screenbuf","Test":"TestScreen/write_of_with_more_lines","Output":"--- FAIL: TestScreen/write_of_with_more_lines (0.00s)\n"}
+{"Time":"2026-07-28T10:51:03.897013673Z","Action":"output","Package":"github.com/manifoldco/promptui/list","Test":"TestListMovement/list_down","Output":"=== RUN   TestListMovement/list_down\n"}
+{"Time":"2026-07-28T10:51:03.89701566Z","Action":"fail","Package":"github.com/manifoldco/promptui/screenbuf","Test":"TestScreen/write_of_with_more_lines","Elapsed":0}
+{"Time":"2026-07-28T10:51:03.897017135Z","Action":"output","Package":"github.com/manifoldco/promptui/list","Test":"TestListMovement/list_down","Output":"--- PASS: TestListMovement/list_down (0.00s)\n"}
+{"Time":"2026-07-28T10:51:03.897020888Z","Action":"pass","Package":"github.com/manifoldco/promptui/list","Test":"TestListMovement/list_down","Elapsed":0}
+{"Time":"2026-07-28T10:51:03.897023963Z","Action":"run","Package":"github.com/manifoldco/promptui/list","Test":"TestListMovement/list_down#01"}
+{"Time":"2026-07-28T10:51:03.897026409Z","Action":"output","Package":"github.com/manifoldco/promptui/list","Test":"TestListMovement/list_down#01","Output":"=== RUN   TestListMovement/list_down#01\n"}
+{"Time":"2026-07-28T10:51:03.897028807Z","Action":"output","Package":"github.com/manifoldco/promptui/list","Test":"TestListMovement/list_down#01","Output":"--- PASS: TestListMovement/list_down#01 (0.00s)\n"}
+{"Time":"2026-07-28T10:51:03.897031082Z","Action":"pass","Package":"github.com/manifoldco/promptui/list","Test":"TestListMovement/list_down#01","Elapsed":0}
+{"Time":"2026-07-28T10:51:03.897033097Z","Action":"run","Package":"github.com/manifoldco/promptui/list","Test":"TestListMovement/list_down#02"}
+{"Time":"2026-07-28T10:51:03.897034952Z","Action":"output","Package":"github.com/manifoldco/promptui/list","Test":"TestListMovement/list_down#02","Output":"=== RUN   TestListMovement/list_down#02\n"}
+{"Time":"2026-07-28T10:51:03.897018631Z","Action":"run","Package":"github.com/manifoldco/promptui/screenbuf","Test":"TestScreen/write_of_with_fewer_lines"}
+{"Time":"2026-07-28T10:51:03.897046832Z","Action":"output","Package":"github.com/manifoldco/promptui/screenbuf","Test":"TestScreen/write_of_with_fewer_lines","Output":"=== RUN   TestScreen/write_of_with_fewer_lines\n"}
+{"Time":"2026-07-28T10:51:03.897057441Z","Action":"output","Package":"github.com/manifoldco/promptui/screenbuf","Test":"TestScreen/write_of_with_fewer_lines","Output":"    screenbuf_test.go:126: expected \"\\\\u\\\\u\\\\cline One\\\\d\\\\c\\\\d\", got \"\\\\d\\\\cline One\\\\d\\\\c\"\n"}
+{"Time":"2026-07-28T10:51:03.89706513Z","Action":"output","Package":"github.com/manifoldco/promptui/screenbuf","Test":"TestScreen/write_of_with_fewer_lines","Output":"--- FAIL: TestScreen/write_of_with_fewer_lines (0.00s)\n"}
+{"Time":"2026-07-28T10:51:03.897072337Z","Action":"fail","Package":"github.com/manifoldco/promptui/screenbuf","Test":"TestScreen/write_of_with_fewer_lines","Elapsed":0}
+{"Time":"2026-07-28T10:51:03.897076048Z","Action":"run","Package":"github.com/manifoldco/promptui/screenbuf","Test":"TestScreen/write_of_way_more_lines"}
+{"Time":"2026-07-28T10:51:03.897078658Z","Action":"output","Package":"github.com/manifoldco/promptui/screenbuf","Test":"TestScreen/write_of_way_more_lines","Output":"=== RUN   TestScreen/write_of_way_more_lines\n"}
+{"Time":"2026-07-28T10:51:03.897081243Z","Action":"output","Package":"github.com/manifoldco/promptui/screenbuf","Test":"TestScreen/write_of_way_more_lines","Output":"    screenbuf_test.go:126: expected \"\\\\u\\\\u\\\\cline one\\\\d\\\\cline two\\\\d\\\\cline three\\n\\\\cline four\\n\\\\cline five\\n\", got \"\\\\d\\\\cline one\\\\d\\\\cline two\\\\d\\\\cline three\\\\d\\\\cline four\\\\d\\\\cline five\"\n"}
+{"Time":"2026-07-28T10:51:03.897085102Z","Action":"output","Package":"github.com/manifoldco/promptui/screenbuf","Test":"TestScreen/write_of_way_more_lines","Output":"--- FAIL: TestScreen/write_of_way_more_lines (0.00s)\n"}
+{"Time":"2026-07-28T10:51:03.897038367Z","Action":"output","Package":"github.com/manifoldco/promptui/list","Test":"TestListMovement/list_down#02","Output":"--- PASS: TestListMovement/list_down#02 (0.00s)\n"}
+{"Time":"2026-07-28T10:51:03.897090627Z","Action":"pass","Package":"github.com/manifoldco/promptui/list","Test":"TestListMovement/list_down#02","Elapsed":0}
+{"Time":"2026-07-28T10:51:03.897094125Z","Action":"output","Package":"github.com/manifoldco/promptui/list","Test":"TestListMovement","Output":"--- PASS: TestListMovement (0.00s)\n"}
+{"Time":"2026-07-28T10:51:03.89709697Z","Action":"pass","Package":"github.com/manifoldco/promptui/list","Test":"TestListMovement","Elapsed":0}
+{"Time":"2026-07-28T10:51:03.897099225Z","Action":"run","Package":"github.com/manifoldco/promptui/list","Test":"TestListPageDown"}
+{"Time":"2026-07-28T10:51:03.897101304Z","Action":"output","Package":"github.com/manifoldco/promptui/list","Test":"TestListPageDown","Output":"=== RUN   TestListPageDown\n"}
+{"Time":"2026-07-28T10:51:03.897103559Z","Action":"run","Package":"github.com/manifoldco/promptui/list","Test":"TestListPageDown/when_list_has_fewer_items_than_page_size"}
+{"Time":"2026-07-28T10:51:03.897105613Z","Action":"output","Package":"github.com/manifoldco/promptui/list","Test":"TestListPageDown/when_list_has_fewer_items_than_page_size","Output":"=== RUN   TestListPageDown/when_list_has_fewer_items_than_page_size\n"}
+{"Time":"2026-07-28T10:51:03.897108729Z","Action":"output","Package":"github.com/manifoldco/promptui/list","Test":"TestListPageDown/when_list_has_fewer_items_than_page_size","Output":"--- PASS: TestListPageDown/when_list_has_fewer_items_than_page_size (0.00s)\n"}
+{"Time":"2026-07-28T10:51:03.89711107Z","Action":"pass","Package":"github.com/manifoldco/promptui/list","Test":"TestListPageDown/when_list_has_fewer_items_than_page_size","Elapsed":0}
+{"Time":"2026-07-28T10:51:03.897113523Z","Action":"output","Package":"github.com/manifoldco/promptui/list","Test":"TestListPageDown","Output":"--- PASS: TestListPageDown (0.00s)\n"}
+{"Time":"2026-07-28T10:51:03.897115566Z","Action":"pass","Package":"github.com/manifoldco/promptui/list","Test":"TestListPageDown","Elapsed":0}
+{"Time":"2026-07-28T10:51:03.897117588Z","Action":"run","Package":"github.com/manifoldco/promptui/list","Test":"TestListComparion"}
+{"Time":"2026-07-28T10:51:03.897119406Z","Action":"output","Package":"github.com/manifoldco/promptui/list","Test":"TestListComparion","Output":"=== RUN   TestListComparion\n"}
+{"Time":"2026-07-28T10:51:03.897121578Z","Action":"run","Package":"github.com/manifoldco/promptui/list","Test":"TestListComparion/when_item_supports_comparison"}
+{"Time":"2026-07-28T10:51:03.897123449Z","Action":"output","Package":"github.com/manifoldco/promptui/list","Test":"TestListComparion/when_item_supports_comparison","Output":"=== RUN   TestListComparion/when_item_supports_comparison\n"}
+{"Time":"2026-07-28T10:51:03.897117999Z","Action":"run","Package":"github.com/manifoldco/promptui","Test":"TestStyler"}
+{"Time":"2026-07-28T10:51:03.897135528Z","Action":"output","Package":"github.com/manifoldco/promptui","Test":"TestStyler","Output":"=== RUN   TestStyler\n"}
+{"Time":"2026-07-28T10:51:03.897143926Z","Action":"run","Package":"github.com/manifoldco/promptui","Test":"TestStyler/renders_a_single_code"}
+{"Time":"2026-07-28T10:51:03.897147762Z","Action":"output","Package":"github.com/manifoldco/promptui","Test":"TestStyler/renders_a_single_code","Output":"=== RUN   TestStyler/renders_a_single_code\n"}
+{"Time":"2026-07-28T10:51:03.897153399Z","Action":"output","Package":"github.com/manifoldco/promptui","Test":"TestStyler/renders_a_single_code","Output":"--- PASS: TestStyler/renders_a_single_code (0.00s)\n"}
+{"Time":"2026-07-28T10:51:03.897157197Z","Action":"pass","Package":"github.com/manifoldco/promptui","Test":"TestStyler/renders_a_single_code","Elapsed":0}
+{"Time":"2026-07-28T10:51:03.897160275Z","Action":"run","Package":"github.com/manifoldco/promptui","Test":"TestStyler/combines_multiple_codes"}
+{"Time":"2026-07-28T10:51:03.897162724Z","Action":"output","Package":"github.com/manifoldco/promptui","Test":"TestStyler/combines_multiple_codes","Output":"=== RUN   TestStyler/combines_multiple_codes\n"}
+{"Time":"2026-07-28T10:51:03.89716718Z","Action":"output","Package":"github.com/manifoldco/promptui","Test":"TestStyler/combines_multiple_codes","Output":"--- PASS: TestStyler/combines_multiple_codes (0.00s)\n"}
+{"Time":"2026-07-28T10:51:03.897170481Z","Action":"pass","Package":"github.com/manifoldco/promptui","Test":"TestStyler/combines_multiple_codes","Elapsed":0}
+{"Time":"2026-07-28T10:51:03.897173304Z","Action":"run","Package":"github.com/manifoldco/promptui","Test":"TestStyler/should_not_repeat_reset_codes_for_nested_styles"}
+{"Time":"2026-07-28T10:51:03.897176154Z","Action":"output","Package":"github.com/manifoldco/promptui","Test":"TestStyler/should_not_repeat_reset_codes_for_nested_styles","Output":"=== RUN   TestStyler/should_not_repeat_reset_codes_for_nested_styles\n"}
+{"Time":"2026-07-28T10:51:03.897179113Z","Action":"output","Package":"github.com/manifoldco/promptui","Test":"TestStyler/should_not_repeat_reset_codes_for_nested_styles","Output":"--- PASS: TestStyler/should_not_repeat_reset_codes_for_nested_styles (0.00s)\n"}
+{"Time":"2026-07-28T10:51:03.897183644Z","Action":"pass","Package":"github.com/manifoldco/promptui","Test":"TestStyler/should_not_repeat_reset_codes_for_nested_styles","Elapsed":0}
+{"Time":"2026-07-28T10:51:03.897186734Z","Action":"output","Package":"github.com/manifoldco/promptui","Test":"TestStyler","Output":"--- PASS: TestStyler (0.00s)\n"}
+{"Time":"2026-07-28T10:51:03.89718927Z","Action":"pass","Package":"github.com/manifoldco/promptui","Test":"TestStyler","Elapsed":0}
+{"Time":"2026-07-28T10:51:03.89719148Z","Action":"run","Package":"github.com/manifoldco/promptui","Test":"TestDefinedCursors"}
+{"Time":"2026-07-28T10:51:03.897193571Z","Action":"output","Package":"github.com/manifoldco/promptui","Test":"TestDefinedCursors","Output":"=== RUN   TestDefinedCursors\n"}
+{"Time":"2026-07-28T10:51:03.89712767Z","Action":"output","Package":"github.com/manifoldco/promptui/list","Test":"TestListComparion/when_item_supports_comparison","Output":"--- PASS: TestListComparion/when_item_supports_comparison (0.00s)\n"}
+{"Time":"2026-07-28T10:51:03.897227024Z","Action":"pass","Package":"github.com/manifoldco/promptui/list","Test":"TestListComparion/when_item_supports_comparison","Elapsed":0}
+{"Time":"2026-07-28T10:51:03.897235712Z","Action":"run","Package":"github.com/manifoldco/promptui/list","Test":"TestListComparion/when_item_doesn't_support_comparison"}
+{"Time":"2026-07-28T10:51:03.897238713Z","Action":"output","Package":"github.com/manifoldco/promptui/list","Test":"TestListComparion/when_item_doesn't_support_comparison","Output":"=== RUN   TestListComparion/when_item_doesn't_support_comparison\n"}
+{"Time":"2026-07-28T10:51:03.897243047Z","Action":"output","Package":"github.com/manifoldco/promptui/list","Test":"TestListComparion/when_item_doesn't_support_comparison","Output":"--- PASS: TestListComparion/when_item_doesn't_support_comparison (0.00s)\n"}
+{"Time":"2026-07-28T10:51:03.897253625Z","Action":"pass","Package":"github.com/manifoldco/promptui/list","Test":"TestListComparion/when_item_doesn't_support_comparison","Elapsed":0}
+{"Time":"2026-07-28T10:51:03.897256766Z","Action":"output","Package":"github.com/manifoldco/promptui/list","Test":"TestListComparion","Output":"--- PASS: TestListComparion (0.00s)\n"}
+{"Time":"2026-07-28T10:51:03.897259084Z","Action":"pass","Package":"github.com/manifoldco/promptui/list","Test":"TestListComparion","Elapsed":0}
+{"Time":"2026-07-28T10:51:03.897261682Z","Action":"output","Package":"github.com/manifoldco/promptui/list","Output":"PASS\n"}
+{"Time":"2026-07-28T10:51:03.897087541Z","Action":"fail","Package":"github.com/manifoldco/promptui/screenbuf","Test":"TestScreen/write_of_way_more_lines","Elapsed":0}
+{"Time":"2026-07-28T10:51:03.897269455Z","Action":"run","Package":"github.com/manifoldco/promptui/screenbuf","Test":"TestScreen/write_of_way_less_lines"}
+{"Time":"2026-07-28T10:51:03.897271729Z","Action":"output","Package":"github.com/manifoldco/promptui/screenbuf","Test":"TestScreen/write_of_way_less_lines","Output":"=== RUN   TestScreen/write_of_way_less_lines\n"}
+{"Time":"2026-07-28T10:51:03.897273981Z","Action":"output","Package":"github.com/manifoldco/promptui/screenbuf","Test":"TestScreen/write_of_way_less_lines","Output":"    screenbuf_test.go:126: expected \"\\\\u\\\\u\\\\u\\\\u\\\\u\\\\cline one\\\\d\\\\cline two\\\\d\\\\c\\\\d\\\\c\\\\d\\\\c\\\\d\", got \"\\\\d\\\\cline one\\\\d\\\\cline two\\\\d\\\\c\\\\d\\\\c\\\\d\\\\c\"\n"}
+{"Time":"2026-07-28T10:51:03.897277829Z","Action":"output","Package":"github.com/manifoldco/promptui/screenbuf","Test":"TestScreen/write_of_way_less_lines","Output":"--- FAIL: TestScreen/write_of_way_less_lines (0.00s)\n"}
+{"Time":"2026-07-28T10:51:03.897280064Z","Action":"fail","Package":"github.com/manifoldco/promptui/screenbuf","Test":"TestScreen/write_of_way_less_lines","Elapsed":0}
+{"Time":"2026-07-28T10:51:03.89728224Z","Action":"run","Package":"github.com/manifoldco/promptui/screenbuf","Test":"TestScreen/write_of_way_more_lines#01"}
+{"Time":"2026-07-28T10:51:03.897284206Z","Action":"output","Package":"github.com/manifoldco/promptui/screenbuf","Test":"TestScreen/write_of_way_more_lines#01","Output":"=== RUN   TestScreen/write_of_way_more_lines#01\n"}
+{"Time":"2026-07-28T10:51:03.897286908Z","Action":"output","Package":"github.com/manifoldco/promptui/screenbuf","Test":"TestScreen/write_of_way_more_lines#01","Output":"    screenbuf_test.go:126: expected \"\\\\u\\\\u\\\\u\\\\u\\\\u\\\\cline one\\\\d\\\\cline two\\\\d\\\\cline three\\\\d\\\\cline four\\\\d\\\\cline five\\\\d\", got \"\\\\d\\\\cline one\\\\d\\\\cline two\\\\d\\\\cline three\\\\d\\\\cline four\\\\d\\\\cline five\"\n"}
+{"Time":"2026-07-28T10:51:03.897295716Z","Action":"output","Package":"github.com/manifoldco/promptui/screenbuf","Test":"TestScreen/write_of_way_more_lines#01","Output":"--- FAIL: TestScreen/write_of_way_more_lines#01 (0.00s)\n"}
+{"Time":"2026-07-28T10:51:03.897299347Z","Action":"fail","Package":"github.com/manifoldco/promptui/screenbuf","Test":"TestScreen/write_of_way_more_lines#01","Elapsed":0}
+{"Time":"2026-07-28T10:51:03.897301432Z","Action":"run","Package":"github.com/manifoldco/promptui/screenbuf","Test":"TestScreen/reset_and_write"}
+{"Time":"2026-07-28T10:51:03.897303369Z","Action":"output","Package":"github.com/manifoldco/promptui/screenbuf","Test":"TestScreen/reset_and_write","Output":"=== RUN   TestScreen/reset_and_write\n"}
+{"Time":"2026-07-28T10:51:03.89730555Z","Action":"output","Package":"github.com/manifoldco/promptui/screenbuf","Test":"TestScreen/reset_and_write","Output":"    screenbuf_test.go:126: expected \"\\\\u\\\\c\\\\u\\\\c\\\\u\\\\c\\\\u\\\\c\\\\u\\\\c\\\\cline one\\n\\\\cline two\\n\", got \"\\\\u\\\\c\\\\u\\\\c\\\\u\\\\c\\\\u\\\\c\\\\u\\\\c\\\\cline one\\\\d\\\\cline two\"\n"}
+{"Time":"2026-07-28T10:51:03.897310122Z","Action":"output","Package":"github.com/manifoldco/promptui/screenbuf","Test":"TestScreen/reset_and_write","Output":"--- FAIL: TestScreen/reset_and_write (0.00s)\n"}
+{"Time":"2026-07-28T10:51:03.897312373Z","Action":"fail","Package":"github.com/manifoldco/promptui/screenbuf","Test":"TestScreen/reset_and_write","Elapsed":0}
+{"Time":"2026-07-28T10:51:03.897314413Z","Action":"run","Package":"github.com/manifoldco/promptui/screenbuf","Test":"TestScreen/clear_all_previous_lines"}
+{"Time":"2026-07-28T10:51:03.897316324Z","Action":"output","Package":"github.com/manifoldco/promptui/screenbuf","Test":"TestScreen/clear_all_previous_lines","Output":"=== RUN   TestScreen/clear_all_previous_lines\n"}
+{"Time":"2026-07-28T10:51:03.897318404Z","Action":"output","Package":"github.com/manifoldco/promptui/screenbuf","Test":"TestScreen/clear_all_previous_lines","Output":"    screenbuf_test.go:126: expected \"\\\\u\\\\u\\\\cline one\\\\d\\\\cline two\\\\d\\\\u\\\\c\\\\u\\\\c\", got \"\\\\d\\\\cline one\\\\d\\\\cline two\\\\u\\\\c\\\\u\\\\c\"\n"}
+{"Time":"2026-07-28T10:51:03.897322067Z","Action":"output","Package":"github.com/manifoldco/promptui/screenbuf","Test":"TestScreen/clear_all_previous_lines","Output":"--- FAIL: TestScreen/clear_all_previous_lines (0.00s)\n"}
+{"Time":"2026-07-28T10:51:03.897324282Z","Action":"fail","Package":"github.com/manifoldco/promptui/screenbuf","Test":"TestScreen/clear_all_previous_lines","Elapsed":0}
+{"Time":"2026-07-28T10:51:03.897326826Z","Action":"output","Package":"github.com/manifoldco/promptui/screenbuf","Test":"TestScreen","Output":"--- FAIL: TestScreen (0.00s)\n"}
+{"Time":"2026-07-28T10:51:03.897329028Z","Action":"fail","Package":"github.com/manifoldco/promptui/screenbuf","Test":"TestScreen","Elapsed":0}
+{"Time":"2026-07-28T10:51:03.897331184Z","Action":"output","Package":"github.com/manifoldco/promptui/screenbuf","Output":"FAIL\n"}
+{"Time":"2026-07-28T10:51:03.897196128Z","Action":"run","Package":"github.com/manifoldco/promptui","Test":"TestDefinedCursors/pipeCursor"}
+{"Time":"2026-07-28T10:51:03.897346054Z","Action":"output","Package":"github.com/manifoldco/promptui","Test":"TestDefinedCursors/pipeCursor","Output":"=== RUN   TestDefinedCursors/pipeCursor\n"}
+{"Time":"2026-07-28T10:51:03.897354132Z","Action":"output","Package":"github.com/manifoldco/promptui","Test":"TestDefinedCursors/pipeCursor","Output":"--- PASS: TestDefinedCursors/pipeCursor (0.00s)\n"}
+{"Time":"2026-07-28T10:51:03.897357428Z","Action":"pass","Package":"github.com/manifoldco/promptui","Test":"TestDefinedCursors/pipeCursor","Elapsed":0}
+{"Time":"2026-07-28T10:51:03.897361082Z","Action":"output","Package":"github.com/manifoldco/promptui","Test":"TestDefinedCursors","Output":"--- PASS: TestDefinedCursors (0.00s)\n"}
+{"Time":"2026-07-28T10:51:03.897363669Z","Action":"pass","Package":"github.com/manifoldco/promptui","Test":"TestDefinedCursors","Elapsed":0}
+{"Time":"2026-07-28T10:51:03.897364598Z","Action":"output","Package":"github.com/manifoldco/promptui/screenbuf","Output":"FAIL\tgithub.com/manifoldco/promptui/screenbuf\t0.002s\n"}
+{"Time":"2026-07-28T10:51:03.897366126Z","Action":"run","Package":"github.com/manifoldco/promptui","Test":"TestCursor"}
+{"Time":"2026-07-28T10:51:03.897368997Z","Action":"output","Package":"github.com/manifoldco/promptui","Test":"TestCursor","Output":"=== RUN   TestCursor\n"}
+{"Time":"2026-07-28T10:51:03.897369712Z","Action":"fail","Package":"github.com/manifoldco/promptui/screenbuf","Elapsed":0.002}
+{"Time":"2026-07-28T10:51:03.897341463Z","Action":"output","Package":"github.com/manifoldco/promptui/list","Output":"ok  \tgithub.com/manifoldco/promptui/list\t0.002s\n"}
+{"Time":"2026-07-28T10:51:03.89737732Z","Action":"pass","Package":"github.com/manifoldco/promptui/list","Elapsed":0.002}
+{"Time":"2026-07-28T10:51:03.897371417Z","Action":"run","Package":"github.com/manifoldco/promptui","Test":"TestCursor/empty"}
+{"Time":"2026-07-28T10:51:03.897390981Z","Action":"output","Package":"github.com/manifoldco/promptui","Test":"TestCursor/empty","Output":"=== RUN   TestCursor/empty\n"}
+{"Time":"2026-07-28T10:51:03.897405103Z","Action":"output","Package":"github.com/manifoldco/promptui","Test":"TestCursor/empty","Output":"--- PASS: TestCursor/empty (0.00s)\n"}
+{"Time":"2026-07-28T10:51:03.897412564Z","Action":"pass","Package":"github.com/manifoldco/promptui","Test":"TestCursor/empty","Elapsed":0}
+{"Time":"2026-07-28T10:51:03.897415849Z","Action":"run","Package":"github.com/manifoldco/promptui","Test":"TestCursor/Cursor_at_end,_append_additional"}
+{"Time":"2026-07-28T10:51:03.897418275Z","Action":"output","Package":"github.com/manifoldco/promptui","Test":"TestCursor/Cursor_at_end,_append_additional","Output":"=== RUN   TestCursor/Cursor_at_end,_append_additional\n"}
+{"Time":"2026-07-28T10:51:03.89742144Z","Action":"output","Package":"github.com/manifoldco/promptui","Test":"TestCursor/Cursor_at_end,_append_additional","Output":"--- PASS: TestCursor/Cursor_at_end,_append_additional (0.00s)\n"}
+{"Time":"2026-07-28T10:51:03.897423923Z","Action":"pass","Package":"github.com/manifoldco/promptui","Test":"TestCursor/Cursor_at_end,_append_additional","Elapsed":0}
+{"Time":"2026-07-28T10:51:03.897426564Z","Action":"run","Package":"github.com/manifoldco/promptui","Test":"TestCursor/Cursor_at_at_end,_backspace"}
+{"Time":"2026-07-28T10:51:03.897428584Z","Action":"output","Package":"github.com/manifoldco/promptui","Test":"TestCursor/Cursor_at_at_end,_backspace","Output":"=== RUN   TestCursor/Cursor_at_at_end,_backspace\n"}
+{"Time":"2026-07-28T10:51:03.897430994Z","Action":"output","Package":"github.com/manifoldco/promptui","Test":"TestCursor/Cursor_at_at_end,_backspace","Output":"--- PASS: TestCursor/Cursor_at_at_end,_backspace (0.00s)\n"}
+{"Time":"2026-07-28T10:51:03.897433402Z","Action":"pass","Package":"github.com/manifoldco/promptui","Test":"TestCursor/Cursor_at_at_end,_backspace","Elapsed":0}
+{"Time":"2026-07-28T10:51:03.897435794Z","Action":"run","Package":"github.com/manifoldco/promptui","Test":"TestCursor/Cursor_at_beginning,_append_additional"}
+{"Time":"2026-07-28T10:51:03.897437771Z","Action":"output","Package":"github.com/manifoldco/promptui","Test":"TestCursor/Cursor_at_beginning,_append_additional","Output":"=== RUN   TestCursor/Cursor_at_beginning,_append_additional\n"}
+{"Time":"2026-07-28T10:51:03.897440006Z","Action":"output","Package":"github.com/manifoldco/promptui","Test":"TestCursor/Cursor_at_beginning,_append_additional","Output":"    cursor_test.go:60: init Cursor: |, input default, Position 0\n"}
+{"Time":"2026-07-28T10:51:03.897442113Z","Action":"output","Package":"github.com/manifoldco/promptui","Test":"TestCursor/Cursor_at_beginning,_append_additional","Output":"    cursor_test.go:67: after add Cursor: |, input hi default, Position 3\n"}
+{"Time":"2026-07-28T10:51:03.897444497Z","Action":"output","Package":"github.com/manifoldco/promptui","Test":"TestCursor/Cursor_at_beginning,_append_additional","Output":"    cursor_test.go:72: after backspace Cursor: |, input hidefault, Position 2\n"}
+{"Time":"2026-07-28T10:51:03.897446677Z","Action":"output","Package":"github.com/manifoldco/promptui","Test":"TestCursor/Cursor_at_beginning,_append_additional","Output":"    cursor_test.go:78: after backspace Cursor: |, input hdefault, Position 1\n"}
+{"Time":"2026-07-28T10:51:03.89744937Z","Action":"output","Package":"github.com/manifoldco/promptui","Test":"TestCursor/Cursor_at_beginning,_append_additional","Output":"--- PASS: TestCursor/Cursor_at_beginning,_append_additional (0.00s)\n"}
+{"Time":"2026-07-28T10:51:03.897451505Z","Action":"pass","Package":"github.com/manifoldco/promptui","Test":"TestCursor/Cursor_at_beginning,_append_additional","Elapsed":0}
+{"Time":"2026-07-28T10:51:03.897453489Z","Action":"run","Package":"github.com/manifoldco/promptui","Test":"TestCursor/Move"}
+{"Time":"2026-07-28T10:51:03.897455611Z","Action":"output","Package":"github.com/manifoldco/promptui","Test":"TestCursor/Move","Output":"=== RUN   TestCursor/Move\n"}
+{"Time":"2026-07-28T10:51:03.897458132Z","Action":"output","Package":"github.com/manifoldco/promptui","Test":"TestCursor/Move","Output":"--- PASS: TestCursor/Move (0.00s)\n"}
+{"Time":"2026-07-28T10:51:03.897461816Z","Action":"pass","Package":"github.com/manifoldco/promptui","Test":"TestCursor/Move","Elapsed":0}
+{"Time":"2026-07-28T10:51:03.897464484Z","Action":"output","Package":"github.com/manifoldco/promptui","Test":"TestCursor","Output":"--- PASS: TestCursor (0.00s)\n"}
+{"Time":"2026-07-28T10:51:03.897466735Z","Action":"pass","Package":"github.com/manifoldco/promptui","Test":"TestCursor","Elapsed":0}
+{"Time":"2026-07-28T10:51:03.897469034Z","Action":"run","Package":"github.com/manifoldco/promptui","Test":"TestSelectTemplateRender"}
+{"Time":"2026-07-28T10:51:03.897471079Z","Action":"output","Package":"github.com/manifoldco/promptui","Test":"TestSelectTemplateRender","Output":"=== RUN   TestSelectTemplateRender\n"}
+{"Time":"2026-07-28T10:51:03.897473411Z","Action":"run","Package":"github.com/manifoldco/promptui","Test":"TestSelectTemplateRender/when_using_default_style"}
+{"Time":"2026-07-28T10:51:03.897475428Z","Action":"output","Package":"github.com/manifoldco/promptui","Test":"TestSelectTemplateRender/when_using_default_style","Output":"=== RUN   TestSelectTemplateRender/when_using_default_style\n"}
+{"Time":"2026-07-28T10:51:03.897483212Z","Action":"output","Package":"github.com/manifoldco/promptui","Test":"TestSelectTemplateRender/when_using_default_style","Output":"--- PASS: TestSelectTemplateRender/when_using_default_style (0.00s)\n"}
+{"Time":"2026-07-28T10:51:03.8974857Z","Action":"pass","Package":"github.com/manifoldco/promptui","Test":"TestSelectTemplateRender/when_using_default_style","Elapsed":0}
+{"Time":"2026-07-28T10:51:03.897487814Z","Action":"run","Package":"github.com/manifoldco/promptui","Test":"TestSelectTemplateRender/when_using_custom_style"}
+{"Time":"2026-07-28T10:51:03.897489841Z","Action":"output","Package":"github.com/manifoldco/promptui","Test":"TestSelectTemplateRender/when_using_custom_style","Output":"=== RUN   TestSelectTemplateRender/when_using_custom_style\n"}
+{"Time":"2026-07-28T10:51:03.897544538Z","Action":"output","Package":"github.com/manifoldco/promptui","Test":"TestSelectTemplateRender/when_using_custom_style","Output":"--- PASS: TestSelectTemplateRender/when_using_custom_style (0.00s)\n"}
+{"Time":"2026-07-28T10:51:03.897561454Z","Action":"pass","Package":"github.com/manifoldco/promptui","Test":"TestSelectTemplateRender/when_using_custom_style","Elapsed":0}
+{"Time":"2026-07-28T10:51:03.89756572Z","Action":"run","Package":"github.com/manifoldco/promptui","Test":"TestSelectTemplateRender/when_a_template_is_invalid"}
+{"Time":"2026-07-28T10:51:03.89756862Z","Action":"output","Package":"github.com/manifoldco/promptui","Test":"TestSelectTemplateRender/when_a_template_is_invalid","Output":"=== RUN   TestSelectTemplateRender/when_a_template_is_invalid\n"}
+{"Time":"2026-07-28T10:51:03.897582964Z","Action":"output","Package":"github.com/manifoldco/promptui","Test":"TestSelectTemplateRender/when_a_template_is_invalid","Output":"--- PASS: TestSelectTemplateRender/when_a_template_is_invalid (0.00s)\n"}
+{"Time":"2026-07-28T10:51:03.897586516Z","Action":"pass","Package":"github.com/manifoldco/promptui","Test":"TestSelectTemplateRender/when_a_template_is_invalid","Elapsed":0}
+{"Time":"2026-07-28T10:51:03.897589055Z","Action":"run","Package":"github.com/manifoldco/promptui","Test":"TestSelectTemplateRender/when_a_template_render_fails"}
+{"Time":"2026-07-28T10:51:03.897591158Z","Action":"output","Package":"github.com/manifoldco/promptui","Test":"TestSelectTemplateRender/when_a_template_render_fails","Output":"=== RUN   TestSelectTemplateRender/when_a_template_render_fails\n"}
+{"Time":"2026-07-28T10:51:03.8976665Z","Action":"output","Package":"github.com/manifoldco/promptui","Test":"TestSelectTemplateRender/when_a_template_render_fails","Output":"--- PASS: TestSelectTemplateRender/when_a_template_render_fails (0.00s)\n"}
+{"Time":"2026-07-28T10:51:03.897674211Z","Action":"pass","Package":"github.com/manifoldco/promptui","Test":"TestSelectTemplateRender/when_a_template_render_fails","Elapsed":0}
+{"Time":"2026-07-28T10:51:03.897677429Z","Action":"output","Package":"github.com/manifoldco/promptui","Test":"TestSelectTemplateRender","Output":"--- PASS: TestSelectTemplateRender (0.00s)\n"}
+{"Time":"2026-07-28T10:51:03.897684523Z","Action":"pass","Package":"github.com/manifoldco/promptui","Test":"TestSelectTemplateRender","Elapsed":0}
+{"Time":"2026-07-28T10:51:03.897687334Z","Action":"run","Package":"github.com/manifoldco/promptui","Test":"TestClearScreen"}
+{"Time":"2026-07-28T10:51:03.897689259Z","Action":"output","Package":"github.com/manifoldco/promptui","Test":"TestClearScreen","Output":"=== RUN   TestClearScreen\n"}
+{"Time":"2026-07-28T10:51:03.897692528Z","Action":"output","Package":"github.com/manifoldco/promptui","Test":"TestClearScreen","Output":"--- PASS: TestClearScreen (0.00s)\n"}
+{"Time":"2026-07-28T10:51:03.897694888Z","Action":"pass","Package":"github.com/manifoldco/promptui","Test":"TestClearScreen","Elapsed":0}
+{"Time":"2026-07-28T10:51:03.897698461Z","Action":"output","Package":"github.com/manifoldco/promptui","Output":"PASS\n"}
+{"Time":"2026-07-28T10:51:03.898009496Z","Action":"output","Package":"github.com/manifoldco/promptui","Output":"ok  \tgithub.com/manifoldco/promptui\t0.002s\n"}
+{"Time":"2026-07-28T10:51:03.898016198Z","Action":"pass","Package":"github.com/manifoldco/promptui","Elapsed":0.003}

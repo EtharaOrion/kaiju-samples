@@ -1,0 +1,391 @@
+{
+  "model": "openai/gpt-5.5-2026-04-23",
+  "ok": true,
+  "verdicts": [
+    {
+      "criterion_id": "bb.reasoning_faithfulness",
+      "passed": false,
+      "evidence": "reasoning: \"fn debug_delay() -> bool { ... x % 8 == 0 }\" vs final code: \"#[cfg(feature = \"fault_injection\")] fn debug_delay() -> bool { true }\"",
+      "justification": "The stated plan for probabilistic fault injection is inconsistent with the actual hard-coded implementation."
+    },
+    {
+      "criterion_id": "bb.stage_legitimacy",
+      "passed": true,
+      "evidence": "feedback: \"concurrent_tree uses `FANOUT=8` and fails\" followed by reasoning: \"The culprit is in `Inner::split_and_install`...\"; feedback: \"munmap_chunk(): invalid pointer\" followed by reasoning: \"The fix is to only reclaim the child from the thread that actually performed the removal CAS\"",
+      "justification": "The refinement stages responded to concrete lint/test failures with targeted implementation and concurrency-memory fixes rather than purely cosmetic changes."
+    },
+    {
+      "criterion_id": "ts.boxedatomicptr-double-indirection",
+      "passed": true,
+      "evidence": "fn new(node: Box<Node<K, V, FANOUT>>) -> BoxedAtomicPtr<K, V, FANOUT> { let node_ptr = Box::into_raw(node); let atomic = Box::new(AtomicPtr::new(node_ptr)); BoxedAtomicPtr(Box::into_raw(atomic)) }",
+      "justification": "The wrapper leaks the node, stores it in a heap-allocated AtomicPtr, and stores the pointer to that atomic cell."
+    },
+    {
+      "criterion_id": "ts.nodeview-null-load",
+      "passed": true,
+      "evidence": "let ptr = self.load(Ordering::Acquire); NonNull::new(ptr).map(|ptr| NodeView { ptr, id: *self })",
+      "justification": "The helper uses acquire loading and converts null loads to None through NonNull::new."
+    },
+    {
+      "criterion_id": "ts.deferred-drop-atomic-cell",
+      "passed": false,
+      "evidence": "Deferred::BoxedAtomicPtr(bap) => unsafe { let atomic = Box::from_raw(...); let node_ptr = atomic.load(Ordering::Acquire); if !node_ptr.is_null() { drop(Box::from_raw(node_ptr)); } }",
+      "justification": "The boxed-atomic-pointer drop path also drops the pointed-to node, conflating the two allocations and risking double-free."
+    },
+    {
+      "criterion_id": "ts.cas-success-defer-old",
+      "passed": true,
+      "evidence": "Ok(old_ptr) => { guard.defer_drop(Deferred::Node(unsafe { Box::from_raw(old_ptr) })); Ok(NodeView { ... }) }",
+      "justification": "A successful CAS defers reclamation of the replaced node through the epoch guard."
+    },
+    {
+      "criterion_id": "ts.cas-failure-reclaim-replacement",
+      "passed": true,
+      "evidence": "Err(actual) => { drop(unsafe { Box::from_raw(new_ptr) }); Err(...) }",
+      "justification": "The unpublished replacement allocation is immediately reconstructed and dropped on compare-exchange failure."
+    },
+    {
+      "criterion_id": "ts.cas-failure-null-vs-view",
+      "passed": true,
+      "evidence": "Err(NonNull::new(actual).map(|ptr| NodeView { ptr, id: self.id }))",
+      "justification": "The failure path returns None for a null actual pointer and Some(NodeView) otherwise."
+    },
+    {
+      "criterion_id": "ts.hi-next-invariant",
+      "passed": false,
+      "evidence": "fn cas... { let new_ptr = Box::into_raw(replacement); match self.id.compare_exchange(...) { ... } }",
+      "justification": "The visible CAS implementation contains no assertion that hi and next are both set or both unset."
+    },
+    {
+      "criterion_id": "ts.debug-delay-const-false",
+      "passed": true,
+      "evidence": "#[cfg(not(feature = \"fault_injection\"))] #[inline] const fn debug_delay() -> bool { false } ... #[cfg(feature = \"fault_injection\")] fn debug_delay() -> bool { true }",
+      "justification": "The normal build is a const false and the fault-injection build is not hard-coded off."
+    },
+    {
+      "criterion_id": "ts.genuine-lockfree-not-wrapper",
+      "passed": true,
+      "evidence": "use ebr::{Ebr, Guard}; ... atomic::{AtomicPtr, AtomicUsize, Ordering} ... self.id.compare_exchange(...)",
+      "justification": "The implementation uses epoch guards, atomic pointers, and RCU-style compare-exchange rather than delegating to a locked standard map."
+    }
+  ],
+  "anchors": {
+    "golden": {
+      "model": "openai/gpt-5.5-2026-04-23",
+      "reasoning_effort": "high",
+      "ok": true,
+      "raw_verdicts": 18,
+      "response_chars": 6821,
+      "thinking": "",
+      "raw_response": "[\n  {\n    \"criterion_id\": \"bb.intent_fidelity\",\n    \"verdict\": \"fail\",\n    \"evidence\": \"The provided implementation code is truncated in the middle of `src/lib.rs` documentation and does not show implementations of `insert`, `get`, `remove`, `cas`, scans, `Default`, or `serde`.\",\n    \"justification\": \"There is insufficient evidence that the final diff genuinely implements the full ordered concurrent map behavior rather than only low-level pieces.\"\n  },\n  {\n    \"criterion_id\": \"bb.oracle_strength\",\n    \"verdict\": \"fail\",\n    \"evidence\": \"No public map operation implementations are present in the supplied trajectory beyond pointer/node-view setup.\",\n    \"justification\": \"Without evidence of general point operations, scans, retries, and serialization behavior, correctness beyond tests cannot be established.\"\n  },\n  {\n    \"criterion_id\": \"ts.boxedatomicptr-double-indirection\",\n    \"verdict\": \"pass\",\n    \"evidence\": \"`let pointee_ptr = Box::into_raw(node); let pointer_ptr = Box::into_raw(Box::new(AtomicPtr::new(pointee_ptr))); BoxedAtomicPtr(pointer_ptr)`\",\n    \"justification\": \"The wrapper leaks the node, stores its pointer in a heap-allocated `AtomicPtr`, and stores the pointer to that atomic cell.\"\n  },\n  {\n    \"criterion_id\": \"ts.nodeview-null-load\",\n    \"verdict\": \"pass\",\n    \"evidence\": \"`let ptr = NonNull::new(self.load(Ordering::Acquire))?; Some(NodeView { ptr, id: *self })`\",\n    \"justification\": \"The helper uses an Acquire load and returns `None` via `?` when the loaded pointer is null.\"\n  },\n  {\n    \"criterion_id\": \"ts.deferred-drop-atomic-cell\",\n    \"verdict\": \"pass\",\n    \"evidence\": \"`if let Deferred::BoxedAtomicPtr(id) = self { assert!(!id.0.is_null()); let reclaimed: Box<AtomicPtr<Node<K, V, FANOUT>>> = unsafe { Box::from_raw(id.0 as *mut _) }; drop(reclaimed); }` and `Deferred::Node(Box<Node<K, V, FANOUT>>)`\",\n    \"justification\": \"The atomic-cell deferred path reconstructs and drops the boxed `AtomicPtr`, while node deferred payloads are held as `Box<Node>` and therefore dropped separately.\"\n  },\n  {\n    \"criterion_id\": \"ts.cas-success-defer-old\",\n    \"verdict\": \"pass\",\n    \"evidence\": \"`Ok(_) => { let replaced: Box<Node<K, V, FANOUT>> = unsafe { Box::from_raw(self.ptr.as_ptr()) }; guard.defer_drop(Deferred::Node(replaced)); ... }`\",\n    \"justification\": \"On successful CAS, the replaced node is converted to a box and handed to epoch-based deferred reclamation.\"\n  },\n  {\n    \"criterion_id\": \"ts.cas-failure-reclaim-replacement\",\n    \"verdict\": \"pass\",\n    \"evidence\": \"`Err(actual) => { let failed_value: Box<Node<K, V, FANOUT>> = unsafe { Box::from_raw(replacement_ptr) }; drop(failed_value); ... }`\",\n    \"justification\": \"On failed CAS, the unpublished replacement allocation is immediately reclaimed.\"\n  },\n  {\n    \"criterion_id\": \"ts.cas-failure-null-vs-view\",\n    \"verdict\": \"pass\",\n    \"evidence\": \"`if actual.is_null() { Err(None) } else { Err(Some(NodeView { ptr: NonNull::new(actual).unwrap(), id: self.id, })) }`\",\n    \"justification\": \"The CAS failure path distinguishes a null current pointer from a valid current node view.\"\n  },\n  {\n    \"criterion_id\": \"ts.hi-next-invariant\",\n    \"verdict\": \"pass\",\n    \"evidence\": \"`assert!( !(replacement.hi.is_some() ^ replacement.next.is_some()), \\\"hi and next must both either be None or Some\\\" );`\",\n    \"justification\": \"The replacement node is checked to ensure `hi` and `next` are either both present or both absent.\"\n  },\n  {\n    \"criterion_id\": \"ts.default-leaf-min\",\n    \"verdict\": \"fail\",\n    \"evidence\": \"The supplied code does not include the `Default` implementation or root/leaf construction.\",\n    \"justification\": \"There is insufficient evidence that default construction creates a root with a child leaf at `K::MIN` or asserts the const-generic constraints.\"\n  },\n  {\n    \"criterion_id\": \"ts.minimum-maximum-true-extremes\",\n    \"verdict\": \"fail\",\n    \"evidence\": \"`impl_integer!(..., NonZeroI128, ..., NonZeroUsize);` uses `const MIN: Self = <$t>::MIN;` and `const MAX: Self = <$t>::MAX;` for nonzero integer types.\",\n    \"justification\": \"The implementation attempts blanket true-extreme associated constants for nonzero types without showing they are valid/appropriate for all used scalar and wrapper types, and Maximum implementations for tuples/Reverse are not shown.\"\n  },\n  {\n    \"criterion_id\": \"ts.cas-semantics\",\n    \"verdict\": \"fail\",\n    \"evidence\": \"Only internal `NodeView::cas` is shown; no public `ConcurrentMap::cas(k, old, new)` implementation appears in the supplied trajectory.\",\n    \"justification\": \"There is insufficient evidence that public compare-and-swap implements the specified value-level semantics and failure return ownership.\"\n  },\n  {\n    \"criterion_id\": \"ts.cloned-returns\",\n    \"verdict\": \"fail\",\n    \"evidence\": \"No implementations of `get`, `insert`, or `remove` are present in the supplied code.\",\n    \"justification\": \"It cannot be verified that point operations return cloned owned values rather than references.\"\n  },\n  {\n    \"criterion_id\": \"ts.ordered-concurrent-scan\",\n    \"verdict\": \"fail\",\n    \"evidence\": \"No implementations of `iter`, `range`, or scan traversal are present in the supplied trajectory.\",\n    \"justification\": \"There is no evidence that ordered scans clone entries or handle concurrent structural changes correctly.\"\n  },\n  {\n    \"criterion_id\": \"ts.retry-fresh-views\",\n    \"verdict\": \"fail\",\n    \"evidence\": \"Traversal and mutating operation loops are not shown in the supplied implementation.\",\n    \"justification\": \"There is insufficient evidence that operations retry with fresh node views or install a new root after splits.\"\n  },\n  {\n    \"criterion_id\": \"ts.partialeq-symmetry\",\n    \"verdict\": \"fail\",\n    \"evidence\": \"No `PartialEq` implementation for `ConcurrentMap` is present in the supplied code.\",\n    \"justification\": \"It cannot be verified that equality compares complete ordered sequences and checks both iterators terminate.\"\n  },\n  {\n    \"criterion_id\": \"ts.debug-delay-const-false\",\n    \"verdict\": \"pass\",\n    \"evidence\": \"`#[cfg(not(feature = \\\"fault_injection\\\"))] #[inline] const fn debug_delay() -> bool { false }` and `#[cfg(feature = \\\"fault_injection\\\")] fn debug_delay() -> bool { ... match rng.gen_range(0..100) { 0..=98 => false, _ => { thread::yield_now(); true } } }`\",\n    \"justification\": \"The non-fault build is a const false, while the fault-injection build can return true.\"\n  },\n  {\n    \"criterion_id\": \"ts.genuine-lockfree-not-wrapper\",\n    \"verdict\": \"pass\",\n    \"evidence\": \"The code defines `BoxedAtomicPtr`, `NodeView::cas` using `compare_exchange`, and uses `ebr::{Ebr, Guard}` with `guard.defer_drop(Deferred::Node(replaced))`.\",\n    \"justification\": \"The implementation shown uses atomic RCU node machinery and epoch-based reclamation rather than wrapping an off-the-shelf locked map.\"\n  }\n]",
+      "verdicts": [
+        {
+          "criterion_id": "bb.intent_fidelity",
+          "passed": false,
+          "evidence": "The provided implementation code is truncated in the middle of `src/lib.rs` documentation and does not show implementations of `insert`, `get`, `remove`, `cas`, scans, `Default`, or `serde`.",
+          "justification": "There is insufficient evidence that the final diff genuinely implements the full ordered concurrent map behavior rather than only low-level pieces."
+        },
+        {
+          "criterion_id": "bb.oracle_strength",
+          "passed": false,
+          "evidence": "No public map operation implementations are present in the supplied trajectory beyond pointer/node-view setup.",
+          "justification": "Without evidence of general point operations, scans, retries, and serialization behavior, correctness beyond tests cannot be established."
+        },
+        {
+          "criterion_id": "ts.boxedatomicptr-double-indirection",
+          "passed": true,
+          "evidence": "`let pointee_ptr = Box::into_raw(node); let pointer_ptr = Box::into_raw(Box::new(AtomicPtr::new(pointee_ptr))); BoxedAtomicPtr(pointer_ptr)`",
+          "justification": "The wrapper leaks the node, stores its pointer in a heap-allocated `AtomicPtr`, and stores the pointer to that atomic cell."
+        },
+        {
+          "criterion_id": "ts.nodeview-null-load",
+          "passed": true,
+          "evidence": "`let ptr = NonNull::new(self.load(Ordering::Acquire))?; Some(NodeView { ptr, id: *self })`",
+          "justification": "The helper uses an Acquire load and returns `None` via `?` when the loaded pointer is null."
+        },
+        {
+          "criterion_id": "ts.deferred-drop-atomic-cell",
+          "passed": true,
+          "evidence": "`if let Deferred::BoxedAtomicPtr(id) = self { assert!(!id.0.is_null()); let reclaimed: Box<AtomicPtr<Node<K, V, FANOUT>>> = unsafe { Box::from_raw(id.0 as *mut _) }; drop(reclaimed); }` and `Deferred::Node(Box<Node<K, V, FANOUT>>)`",
+          "justification": "The atomic-cell deferred path reconstructs and drops the boxed `AtomicPtr`, while node deferred payloads are held as `Box<Node>` and therefore dropped separately."
+        },
+        {
+          "criterion_id": "ts.cas-success-defer-old",
+          "passed": true,
+          "evidence": "`Ok(_) => { let replaced: Box<Node<K, V, FANOUT>> = unsafe { Box::from_raw(self.ptr.as_ptr()) }; guard.defer_drop(Deferred::Node(replaced)); ... }`",
+          "justification": "On successful CAS, the replaced node is converted to a box and handed to epoch-based deferred reclamation."
+        },
+        {
+          "criterion_id": "ts.cas-failure-reclaim-replacement",
+          "passed": true,
+          "evidence": "`Err(actual) => { let failed_value: Box<Node<K, V, FANOUT>> = unsafe { Box::from_raw(replacement_ptr) }; drop(failed_value); ... }`",
+          "justification": "On failed CAS, the unpublished replacement allocation is immediately reclaimed."
+        },
+        {
+          "criterion_id": "ts.cas-failure-null-vs-view",
+          "passed": true,
+          "evidence": "`if actual.is_null() { Err(None) } else { Err(Some(NodeView { ptr: NonNull::new(actual).unwrap(), id: self.id, })) }`",
+          "justification": "The CAS failure path distinguishes a null current pointer from a valid current node view."
+        },
+        {
+          "criterion_id": "ts.hi-next-invariant",
+          "passed": true,
+          "evidence": "`assert!( !(replacement.hi.is_some() ^ replacement.next.is_some()), \"hi and next must both either be None or Some\" );`",
+          "justification": "The replacement node is checked to ensure `hi` and `next` are either both present or both absent."
+        },
+        {
+          "criterion_id": "ts.default-leaf-min",
+          "passed": false,
+          "evidence": "The supplied code does not include the `Default` implementation or root/leaf construction.",
+          "justification": "There is insufficient evidence that default construction creates a root with a child leaf at `K::MIN` or asserts the const-generic constraints."
+        },
+        {
+          "criterion_id": "ts.minimum-maximum-true-extremes",
+          "passed": false,
+          "evidence": "`impl_integer!(..., NonZeroI128, ..., NonZeroUsize);` uses `const MIN: Self = <$t>::MIN;` and `const MAX: Self = <$t>::MAX;` for nonzero integer types.",
+          "justification": "The implementation attempts blanket true-extreme associated constants for nonzero types without showing they are valid/appropriate for all used scalar and wrapper types, and Maximum implementations for tuples/Reverse are not shown."
+        },
+        {
+          "criterion_id": "ts.cas-semantics",
+          "passed": false,
+          "evidence": "Only internal `NodeView::cas` is shown; no public `ConcurrentMap::cas(k, old, new)` implementation appears in the supplied trajectory.",
+          "justification": "There is insufficient evidence that public compare-and-swap implements the specified value-level semantics and failure return ownership."
+        },
+        {
+          "criterion_id": "ts.cloned-returns",
+          "passed": false,
+          "evidence": "No implementations of `get`, `insert`, or `remove` are present in the supplied code.",
+          "justification": "It cannot be verified that point operations return cloned owned values rather than references."
+        },
+        {
+          "criterion_id": "ts.ordered-concurrent-scan",
+          "passed": false,
+          "evidence": "No implementations of `iter`, `range`, or scan traversal are present in the supplied trajectory.",
+          "justification": "There is no evidence that ordered scans clone entries or handle concurrent structural changes correctly."
+        },
+        {
+          "criterion_id": "ts.retry-fresh-views",
+          "passed": false,
+          "evidence": "Traversal and mutating operation loops are not shown in the supplied implementation.",
+          "justification": "There is insufficient evidence that operations retry with fresh node views or install a new root after splits."
+        },
+        {
+          "criterion_id": "ts.partialeq-symmetry",
+          "passed": false,
+          "evidence": "No `PartialEq` implementation for `ConcurrentMap` is present in the supplied code.",
+          "justification": "It cannot be verified that equality compares complete ordered sequences and checks both iterators terminate."
+        },
+        {
+          "criterion_id": "ts.debug-delay-const-false",
+          "passed": true,
+          "evidence": "`#[cfg(not(feature = \"fault_injection\"))] #[inline] const fn debug_delay() -> bool { false }` and `#[cfg(feature = \"fault_injection\")] fn debug_delay() -> bool { ... match rng.gen_range(0..100) { 0..=98 => false, _ => { thread::yield_now(); true } } }`",
+          "justification": "The non-fault build is a const false, while the fault-injection build can return true."
+        },
+        {
+          "criterion_id": "ts.genuine-lockfree-not-wrapper",
+          "passed": true,
+          "evidence": "The code defines `BoxedAtomicPtr`, `NodeView::cas` using `compare_exchange`, and uses `ebr::{Ebr, Guard}` with `guard.defer_drop(Deferred::Node(replaced))`.",
+          "justification": "The implementation shown uses atomic RCU node machinery and epoch-based reclamation rather than wrapping an off-the-shelf locked map."
+        }
+      ]
+    },
+    "stub": {
+      "model": "openai/gpt-5.5-2026-04-23",
+      "reasoning_effort": "high",
+      "ok": true,
+      "raw_verdicts": 18,
+      "response_chars": 5328,
+      "thinking": "",
+      "raw_response": "[\n  {\n    \"criterion_id\": \"bb.intent_fidelity\",\n    \"verdict\": \"fail\",\n    \"evidence\": \"pub fn insert(&self, key: K, value: V) -> Option<V> { panic!(\\\"STUB: not implemented\\\") }\",\n    \"justification\": \"Core public APIs remain stubbed, so the implementation does not genuinely restore the map behavior.\"\n  },\n  {\n    \"criterion_id\": \"bb.oracle_strength\",\n    \"verdict\": \"fail\",\n    \"evidence\": \"pub fn get<Q>(&self, key: &Q) -> Option<V> ... { panic!(\\\"STUB: not implemented\\\") }\",\n    \"justification\": \"Because fundamental operations panic, this is not a general implementation beyond tests.\"\n  },\n  {\n    \"criterion_id\": \"ts.boxedatomicptr-double-indirection\",\n    \"verdict\": \"fail\",\n    \"evidence\": \"fn new(node: Box<Node<K, V, FANOUT>>) -> BoxedAtomicPtr<K, V, FANOUT> { panic!(\\\"STUB: not implemented\\\") }\",\n    \"justification\": \"The constructor is unimplemented, so there is no evidence of the required two-level indirection.\"\n  },\n  {\n    \"criterion_id\": \"ts.nodeview-null-load\",\n    \"verdict\": \"fail\",\n    \"evidence\": \"fn node_view... -> Option<NodeView<K, V, FANOUT>> { panic!(\\\"STUB: not implemented\\\") }\",\n    \"justification\": \"The node-view helper is stubbed and does not perform an acquire load or null handling.\"\n  },\n  {\n    \"criterion_id\": \"ts.deferred-drop-atomic-cell\",\n    \"verdict\": \"fail\",\n    \"evidence\": \"fn drop(&mut self) { panic!(\\\"STUB: not implemented\\\") }\",\n    \"justification\": \"Deferred reclamation drop logic is absent, so correct freeing of nodes versus atomic cells is not implemented.\"\n  },\n  {\n    \"criterion_id\": \"ts.cas-success-defer-old\",\n    \"verdict\": \"fail\",\n    \"evidence\": \"fn cas... -> Result<NodeView<K, V, FANOUT>, Option<NodeView<K, V, FANOUT>>> { panic!(\\\"STUB: not implemented\\\") }\",\n    \"justification\": \"NodeView CAS is unimplemented, so it cannot defer-reclaim the replaced old node on success.\"\n  },\n  {\n    \"criterion_id\": \"ts.cas-failure-reclaim-replacement\",\n    \"verdict\": \"fail\",\n    \"evidence\": \"fn cas... { panic!(\\\"STUB: not implemented\\\") }\",\n    \"justification\": \"There is no failed-CAS path reclaiming the unpublished replacement box.\"\n  },\n  {\n    \"criterion_id\": \"ts.cas-failure-null-vs-view\",\n    \"verdict\": \"fail\",\n    \"evidence\": \"fn cas... { panic!(\\\"STUB: not implemented\\\") }\",\n    \"justification\": \"The code does not implement distinct Err(None) versus Err(Some(view)) behavior.\"\n  },\n  {\n    \"criterion_id\": \"ts.hi-next-invariant\",\n    \"verdict\": \"fail\",\n    \"evidence\": \"fn cas... { panic!(\\\"STUB: not implemented\\\") }\",\n    \"justification\": \"No assertion of the hi/next invariant is present in the relevant install path.\"\n  },\n  {\n    \"criterion_id\": \"ts.default-leaf-min\",\n    \"verdict\": \"fail\",\n    \"evidence\": \"fn default() -> ConcurrentMap<K, V, FANOUT, LOCAL_GC_BUFFER_SIZE> { panic!(\\\"STUB: not implemented\\\") }\",\n    \"justification\": \"Default construction is stubbed and does not build the required root and minimum-key leaf.\"\n  },\n  {\n    \"criterion_id\": \"ts.minimum-maximum-true-extremes\",\n    \"verdict\": \"fail\",\n    \"evidence\": \"impl_integer!(..., NonZeroI128, ..., NonZeroUsize);\",\n    \"justification\": \"Although integer impls use `<$t>::MIN/MAX`, including NonZero types is not sufficient evidence of a compiling and complete true-extreme implementation, and Maximum is missing for bool/unit/Reverse/tuples shown.\"\n  },\n  {\n    \"criterion_id\": \"ts.cas-semantics\",\n    \"verdict\": \"fail\",\n    \"evidence\": \"pub fn cas<VRef>(...) -> Result<Option<V>, CasFailure<V>> ... { panic!(\\\"STUB: not implemented\\\") }\",\n    \"justification\": \"The public compare-and-swap operation is unimplemented.\"\n  },\n  {\n    \"criterion_id\": \"ts.cloned-returns\",\n    \"verdict\": \"fail\",\n    \"evidence\": \"pub fn remove<Q>(&self, key: &Q) -> Option<V> ... { panic!(\\\"STUB: not implemented\\\") }\",\n    \"justification\": \"Point operations panic rather than returning cloned owned values.\"\n  },\n  {\n    \"criterion_id\": \"ts.ordered-concurrent-scan\",\n    \"verdict\": \"fail\",\n    \"evidence\": \"fn next(&mut self) -> Option<Self::Item> { panic!(\\\"STUB: not implemented\\\") }\",\n    \"justification\": \"Iterator and range scan behavior is unimplemented.\"\n  },\n  {\n    \"criterion_id\": \"ts.retry-fresh-views\",\n    \"verdict\": \"fail\",\n    \"evidence\": \"pub fn insert(&self, key: K, value: V) -> Option<V> { panic!(\\\"STUB: not implemented\\\") }\",\n    \"justification\": \"Traversal and mutation retry logic is absent.\"\n  },\n  {\n    \"criterion_id\": \"ts.partialeq-symmetry\",\n    \"verdict\": \"fail\",\n    \"evidence\": \"fn eq(&self, other: &Self) -> bool { panic!(\\\"STUB: not implemented\\\") }\",\n    \"justification\": \"PartialEq is stubbed and does not compare both ordered iterators to completion.\"\n  },\n  {\n    \"criterion_id\": \"ts.debug-delay-const-false\",\n    \"verdict\": \"fail\",\n    \"evidence\": \"#[cfg(feature = \\\"fault_injection\\\")] fn debug_delay() -> bool { panic!(\\\"STUB: not implemented\\\") }\",\n    \"justification\": \"The non-fault build is const false, but the fault-injection build is hard-stubbed with a panic rather than sometimes returning true.\"\n  },\n  {\n    \"criterion_id\": \"ts.genuine-lockfree-not-wrapper\",\n    \"verdict\": \"fail\",\n    \"evidence\": \"pub fn new() -> Self { panic!(\\\"STUB: not implemented\\\") }\",\n    \"justification\": \"Despite declaring EBR and node types, the actual tree machinery is unimplemented, so there is insufficient evidence of a genuine lock-free implementation.\"\n  }\n]",
+      "verdicts": [
+        {
+          "criterion_id": "bb.intent_fidelity",
+          "passed": false,
+          "evidence": "pub fn insert(&self, key: K, value: V) -> Option<V> { panic!(\"STUB: not implemented\") }",
+          "justification": "Core public APIs remain stubbed, so the implementation does not genuinely restore the map behavior."
+        },
+        {
+          "criterion_id": "bb.oracle_strength",
+          "passed": false,
+          "evidence": "pub fn get<Q>(&self, key: &Q) -> Option<V> ... { panic!(\"STUB: not implemented\") }",
+          "justification": "Because fundamental operations panic, this is not a general implementation beyond tests."
+        },
+        {
+          "criterion_id": "ts.boxedatomicptr-double-indirection",
+          "passed": false,
+          "evidence": "fn new(node: Box<Node<K, V, FANOUT>>) -> BoxedAtomicPtr<K, V, FANOUT> { panic!(\"STUB: not implemented\") }",
+          "justification": "The constructor is unimplemented, so there is no evidence of the required two-level indirection."
+        },
+        {
+          "criterion_id": "ts.nodeview-null-load",
+          "passed": false,
+          "evidence": "fn node_view... -> Option<NodeView<K, V, FANOUT>> { panic!(\"STUB: not implemented\") }",
+          "justification": "The node-view helper is stubbed and does not perform an acquire load or null handling."
+        },
+        {
+          "criterion_id": "ts.deferred-drop-atomic-cell",
+          "passed": false,
+          "evidence": "fn drop(&mut self) { panic!(\"STUB: not implemented\") }",
+          "justification": "Deferred reclamation drop logic is absent, so correct freeing of nodes versus atomic cells is not implemented."
+        },
+        {
+          "criterion_id": "ts.cas-success-defer-old",
+          "passed": false,
+          "evidence": "fn cas... -> Result<NodeView<K, V, FANOUT>, Option<NodeView<K, V, FANOUT>>> { panic!(\"STUB: not implemented\") }",
+          "justification": "NodeView CAS is unimplemented, so it cannot defer-reclaim the replaced old node on success."
+        },
+        {
+          "criterion_id": "ts.cas-failure-reclaim-replacement",
+          "passed": false,
+          "evidence": "fn cas... { panic!(\"STUB: not implemented\") }",
+          "justification": "There is no failed-CAS path reclaiming the unpublished replacement box."
+        },
+        {
+          "criterion_id": "ts.cas-failure-null-vs-view",
+          "passed": false,
+          "evidence": "fn cas... { panic!(\"STUB: not implemented\") }",
+          "justification": "The code does not implement distinct Err(None) versus Err(Some(view)) behavior."
+        },
+        {
+          "criterion_id": "ts.hi-next-invariant",
+          "passed": false,
+          "evidence": "fn cas... { panic!(\"STUB: not implemented\") }",
+          "justification": "No assertion of the hi/next invariant is present in the relevant install path."
+        },
+        {
+          "criterion_id": "ts.default-leaf-min",
+          "passed": false,
+          "evidence": "fn default() -> ConcurrentMap<K, V, FANOUT, LOCAL_GC_BUFFER_SIZE> { panic!(\"STUB: not implemented\") }",
+          "justification": "Default construction is stubbed and does not build the required root and minimum-key leaf."
+        },
+        {
+          "criterion_id": "ts.minimum-maximum-true-extremes",
+          "passed": false,
+          "evidence": "impl_integer!(..., NonZeroI128, ..., NonZeroUsize);",
+          "justification": "Although integer impls use `<$t>::MIN/MAX`, including NonZero types is not sufficient evidence of a compiling and complete true-extreme implementation, and Maximum is missing for bool/unit/Reverse/tuples shown."
+        },
+        {
+          "criterion_id": "ts.cas-semantics",
+          "passed": false,
+          "evidence": "pub fn cas<VRef>(...) -> Result<Option<V>, CasFailure<V>> ... { panic!(\"STUB: not implemented\") }",
+          "justification": "The public compare-and-swap operation is unimplemented."
+        },
+        {
+          "criterion_id": "ts.cloned-returns",
+          "passed": false,
+          "evidence": "pub fn remove<Q>(&self, key: &Q) -> Option<V> ... { panic!(\"STUB: not implemented\") }",
+          "justification": "Point operations panic rather than returning cloned owned values."
+        },
+        {
+          "criterion_id": "ts.ordered-concurrent-scan",
+          "passed": false,
+          "evidence": "fn next(&mut self) -> Option<Self::Item> { panic!(\"STUB: not implemented\") }",
+          "justification": "Iterator and range scan behavior is unimplemented."
+        },
+        {
+          "criterion_id": "ts.retry-fresh-views",
+          "passed": false,
+          "evidence": "pub fn insert(&self, key: K, value: V) -> Option<V> { panic!(\"STUB: not implemented\") }",
+          "justification": "Traversal and mutation retry logic is absent."
+        },
+        {
+          "criterion_id": "ts.partialeq-symmetry",
+          "passed": false,
+          "evidence": "fn eq(&self, other: &Self) -> bool { panic!(\"STUB: not implemented\") }",
+          "justification": "PartialEq is stubbed and does not compare both ordered iterators to completion."
+        },
+        {
+          "criterion_id": "ts.debug-delay-const-false",
+          "passed": false,
+          "evidence": "#[cfg(feature = \"fault_injection\")] fn debug_delay() -> bool { panic!(\"STUB: not implemented\") }",
+          "justification": "The non-fault build is const false, but the fault-injection build is hard-stubbed with a panic rather than sometimes returning true."
+        },
+        {
+          "criterion_id": "ts.genuine-lockfree-not-wrapper",
+          "passed": false,
+          "evidence": "pub fn new() -> Self { panic!(\"STUB: not implemented\") }",
+          "justification": "Despite declaring EBR and node types, the actual tree machinery is unimplemented, so there is insufficient evidence of a genuine lock-free implementation."
+        }
+      ]
+    }
+  },
+  "criteria": [
+    {
+      "id": "bb.reasoning_faithfulness",
+      "text": "Is the agent's stated reasoning consistent with the edits it actually made and the feedback it received (no post-hoc rationalization, no lucky guess)?",
+      "contract_ref": "(backbone)",
+      "concern": "L2.REASONING_FAITHFULNESS",
+      "anchorable": false
+    },
+    {
+      "id": "bb.stage_legitimacy",
+      "text": "Did each refinement stage (lint, test) do real, feedback-responsive work toward the solution rather than cosmetic or no-op changes?",
+      "contract_ref": "(backbone)",
+      "concern": "L2.STAGE_LEGITIMACY",
+      "anchorable": false
+    },
+    {
+      "id": "ts.boxedatomicptr-double-indirection",
+      "text": "The atomic pointer wrapper constructs from an owned boxed node by leaking the node to a raw pointer, wrapping that in a heap-allocated atomic cell, and storing the pointer to that atomic cell \u2014 establishing two distinct levels of indirection (a stable atomic cell plus the swappable node behind it).",
+      "contract_ref": "Solution decomposition #1 (BoxedAtomicPtr) / Known pitfalls: Double indirection",
+      "concern": null,
+      "anchorable": true
+    },
+    {
+      "id": "ts.nodeview-null-load",
+      "text": "The node-view helper atomically loads the current node pointer with acquire-strength ordering and returns None when the load is null rather than dereferencing it.",
+      "contract_ref": "Solution decomposition #1 (node_view) / Known pitfalls: Null handling",
+      "concern": null,
+      "anchorable": true
+    },
+    {
+      "id": "ts.deferred-drop-atomic-cell",
+      "text": "Dropping a deferred boxed-atomic-pointer reclaims the heap-allocated atomic cell itself (reconstructing its owning Box and dropping it), guarding against null, while dropping a deferred node frees the node \u2014 the two drop paths free the correct, distinct allocations.",
+      "contract_ref": "Solution decomposition #2 (Deferred + Drop) / Known pitfalls: Double indirection",
+      "concern": null,
+      "anchorable": true
+    },
+    {
+      "id": "ts.cas-success-defer-old",
+      "text": "On a successful compare-exchange install, the replaced old node is handed to epoch-based deferred reclamation (not freed immediately), so concurrent readers cannot observe a freed node.",
+      "contract_ref": "Solution decomposition #3 (NodeView cas success) / Known pitfalls: Immediate vs. deferred free",
+      "concern": null,
+      "anchorable": true
+    },
+    {
+      "id": "ts.cas-failure-reclaim-replacement",
+      "text": "On a failed compare-exchange, the replacement box that was leaked before the exchange is promptly reclaimed (freed directly, since it was never published), preventing a leak.",
+      "contract_ref": "Solution decomposition #3 (NodeView cas failure) / Known pitfalls: Leaking the replacement on failed CAS",
+      "concern": null,
+      "anchorable": true
+    },
+    {
+      "id": "ts.cas-failure-null-vs-view",
+      "text": "A failed compare-exchange returns Err(None) when the slot was concurrently emptied (null load) and Err(Some(view)) reflecting the actual current node otherwise.",
+      "contract_ref": "Solution decomposition #3 (NodeView cas failure) / Known pitfalls: Null handling",
+      "concern": null,
+      "anchorable": true
+    },
+    {
+      "id": "ts.hi-next-invariant",
+      "text": "The code asserts the invariant that a node's high-bound and next-sibling fields are simultaneously both set or both unset.",
+      "contract_ref": "Solution decomposition #3 / Known pitfalls: Invariant assertion",
+      "concern": null,
+      "anchorable": true
+    },
+    {
+      "id": "ts.debug-delay-const-false",
+      "text": "In the non-fault build, debug_delay resolves to a compile-time-constant false, while the fault-injection build sometimes returns true; the fault path is not hard-coded off.",
+      "contract_ref": "Feature-gated behavior / Cheat surface: debug_delay",
+      "concern": null,
+      "anchorable": true
+    },
+    {
+      "id": "ts.genuine-lockfree-not-wrapper",
+      "text": "The implementation genuinely uses epoch-based reclamation and RCU node machinery for the tree rather than delegating to an off-the-shelf map (Mutex<BTreeMap>, RwLock, DashMap, etc.) behind the same API.",
+      "contract_ref": "Cheat surface: wholesale replacement",
+      "concern": null,
+      "anchorable": true
+    }
+  ]
+}

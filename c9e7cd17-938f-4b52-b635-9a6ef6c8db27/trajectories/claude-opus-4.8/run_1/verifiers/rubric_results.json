@@ -1,0 +1,352 @@
+{
+  "model": "openai/gpt-5.5-2026-04-23",
+  "ok": true,
+  "verdicts": [
+    {
+      "criterion_id": "bb.reasoning_faithfulness",
+      "passed": true,
+      "evidence": "reasoning: \"I'll implement all the BigCache methods based on the standard bigcache v3 behavior\"; final diff replaces BigCache stubs with validation, shard routing, cleanup, stats, callbacks, and eviction logic.",
+      "justification": "The stated plan to implement standard BigCache behavior is reflected in the substantive methods added to bigcache.go and other modules."
+    },
+    {
+      "criterion_id": "bb.stage_legitimacy",
+      "passed": false,
+      "evidence": "Stage: lint-refine contains only repeated \"feedback: [tool:cmd_lint]\" entries with no edits; Stage: test-refine contains repeated passing test outputs and no code changes.",
+      "justification": "The refinement stages shown do not perform feedback-responsive fixes, only lint/test invocations without demonstrated corrective work."
+    },
+    {
+      "criterion_id": "ts.config-validation-rejects",
+      "passed": true,
+      "evidence": "if config.Shards <= 0 || (config.Shards&(config.Shards-1)) != 0 { return nil, errors.New(\"Shards number must be power of two\") } ... if config.MaxEntrySize < 0 ... if config.MaxEntriesInWindow < 0 ... if config.HardMaxCacheSize < 0",
+      "justification": "Construction explicitly returns errors for non-power-of-two shard counts and the required negative config values."
+    },
+    {
+      "criterion_id": "ts.lifewindow-rounding",
+      "passed": true,
+      "evidence": "lifeWindowSeconds := uint64(config.LifeWindow.Seconds()); if config.CleanWindow > 0 && lifeWindowSeconds == 0 { return nil, errors.New(\"LifeWindow must be >= 1s when CleanWindow is set\") }",
+      "justification": "The check only rejects a rounded-zero life window when CleanWindow is positive, allowing sub-second life windows when CleanWindow is zero."
+    },
+    {
+      "criterion_id": "ts.nil-hasher-default",
+      "passed": true,
+      "evidence": "if config.Hasher == nil { config.Hasher = newDefaultHasher() }",
+      "justification": "A nil hasher is replaced before cache construction proceeds."
+    },
+    {
+      "criterion_id": "ts.cleanup-goroutine-termination",
+      "passed": true,
+      "evidence": "if config.CleanWindow > 0 { go func() { ticker := time.NewTicker(config.CleanWindow) ... select { case <-ctx.Done(): return ... case <-cache.close: return } }() }",
+      "justification": "A ticker-based cleanup goroutine is started when configured and exits on both context cancellation and cache close."
+    },
+    {
+      "criterion_id": "ts.time-eviction-underflow",
+      "passed": true,
+      "evidence": "oldestTimestamp := readTimestampFromEntry(oldestEntry); if currentTimestamp < oldestTimestamp { return false }; if currentTimestamp-oldestTimestamp > c.lifeWindow { evict(Expired); return true }",
+      "justification": "Eviction avoids unsigned underflow by checking timestamp ordering before subtraction and uses the seconds-based lifeWindow."
+    },
+    {
+      "criterion_id": "ts.onremove-dispatch-precedence",
+      "passed": true,
+      "evidence": "if config.OnRemoveWithMetadata != nil { onRemove = cache.providedOnRemoveWithMetadata } else if config.OnRemove != nil { onRemove = cache.providedOnRemove } else if config.OnRemoveWithReason != nil { onRemove = cache.providedOnRemoveWithReason } ... if c.config.onRemoveFilter == 0 || (1<<uint(reason))&c.config.onRemoveFilter > 0",
+      "justification": "The dispatch order matches the required precedence, and the reason callback checks the configured filter bitmask before invocation."
+    }
+  ],
+  "anchors": {
+    "golden": {
+      "model": "openai/gpt-5.5-2026-04-23",
+      "reasoning_effort": "high",
+      "ok": true,
+      "raw_verdicts": 18,
+      "response_chars": 5786,
+      "thinking": "",
+      "raw_response": "[\n  {\n    \"criterion_id\": \"bb.intent_fidelity\",\n    \"verdict\": \"fail\",\n    \"evidence\": \"Only cache facade code is shown, while the trajectory includes test files such as `# ===== bigcache_test.go =====` and no implementations for shard, queue, encoding, or server behavior.\",\n    \"justification\": \"The submitted trajectory does not provide enough implementation evidence across the required packages to show genuine completion of the task intent.\"\n  },\n  {\n    \"criterion_id\": \"bb.oracle_strength\",\n    \"verdict\": \"fail\",\n    \"evidence\": \"No code is shown for core behavioral components like `cacheShard`, `BytesQueue`, encoding, iterator, or HTTP server handlers.\",\n    \"justification\": \"Without the missing behavioral core, the solution cannot be judged as a general implementation beyond tests.\"\n  },\n  {\n    \"criterion_id\": \"ts.config-validation-rejects\",\n    \"verdict\": \"pass\",\n    \"evidence\": \"`if !isPowerOfTwo(config.Shards) { return nil, errors.New(...) }`, `if config.MaxEntrySize < 0`, `if config.MaxEntriesInWindow < 0`, `if config.HardMaxCacheSize < 0`\",\n    \"justification\": \"Construction explicitly returns errors for non-power-of-two shards and the specified negative config values.\"\n  },\n  {\n    \"criterion_id\": \"ts.lifewindow-rounding\",\n    \"verdict\": \"pass\",\n    \"evidence\": \"`lifeWindowSeconds := uint64(config.LifeWindow.Seconds())` and `if config.CleanWindow > 0 && lifeWindowSeconds == 0 { return nil, errors.New(...) }`\",\n    \"justification\": \"The validation rejects only when CleanWindow is positive and the life window rounds to zero seconds.\"\n  },\n  {\n    \"criterion_id\": \"ts.nil-hasher-default\",\n    \"verdict\": \"pass\",\n    \"evidence\": \"`if config.Hasher == nil { config.Hasher = newDefaultHasher() }`\",\n    \"justification\": \"A nil hasher is replaced with the default hasher during construction.\"\n  },\n  {\n    \"criterion_id\": \"ts.cleanup-goroutine-termination\",\n    \"verdict\": \"pass\",\n    \"evidence\": \"`if config.CleanWindow > 0 { go func() { ticker := time.NewTicker(config.CleanWindow) ... select { case <-ctx.Done(): return ... case <-cache.close: return } }() }`\",\n    \"justification\": \"The cleanup goroutine runs on a ticker and exits on either context cancellation or cache close.\"\n  },\n  {\n    \"criterion_id\": \"ts.close-once\",\n    \"verdict\": \"fail\",\n    \"evidence\": \"`func (c *BigCache) Close() error { close(c.close); return nil }`\",\n    \"justification\": \"Closing the channel unconditionally will panic if Close is called more than once.\"\n  },\n  {\n    \"criterion_id\": \"ts.get-returns-copy\",\n    \"verdict\": \"fail\",\n    \"evidence\": \"`return shard.get(key, hashedKey)`\",\n    \"justification\": \"The copy semantics depend entirely on unseen shard code, so there is insufficient evidence.\"\n  },\n  {\n    \"criterion_id\": \"ts.nil-value-storable\",\n    \"verdict\": \"fail\",\n    \"evidence\": \"`return shard.set(key, hashedKey, entry)`\",\n    \"justification\": \"Nil-value storage behavior is delegated to unseen shard code with no evidence of correctness.\"\n  },\n  {\n    \"criterion_id\": \"ts.collision-detection\",\n    \"verdict\": \"fail\",\n    \"evidence\": \"`return shard.get(key, hashedKey)` and `return shard.del(hashedKey)`\",\n    \"justification\": \"Collision detection and collision statistics are delegated to unseen shard code, and Delete does not even pass the original key.\"\n  },\n  {\n    \"criterion_id\": \"ts.time-eviction-underflow\",\n    \"verdict\": \"pass\",\n    \"evidence\": \"`if currentTimestamp < oldestTimestamp { return false }` and `if currentTimestamp-oldestTimestamp > c.lifeWindow { evict(Expired); return true }`\",\n    \"justification\": \"The eviction check avoids unsigned underflow and compares second-resolution timestamps against the stored life window.\"\n  },\n  {\n    \"criterion_id\": \"ts.no-space-eviction\",\n    \"verdict\": \"fail\",\n    \"evidence\": \"`return shard.set(key, hashedKey, entry)`\",\n    \"justification\": \"No-space eviction and oversized-entry rejection are implemented, if at all, only in unseen shard/queue code.\"\n  },\n  {\n    \"criterion_id\": \"ts.onremove-dispatch-precedence\",\n    \"verdict\": \"pass\",\n    \"evidence\": \"`if config.OnRemoveWithMetadata != nil { ... } else if config.OnRemove != nil { ... } else if config.OnRemoveWithReason != nil { ... } else { ... }` and `if c.config.onRemoveFilter == 0 || (1<<uint(reason))&c.config.onRemoveFilter > 0`\",\n    \"justification\": \"The callback selection order matches the required precedence and the reason callback applies the configured filter.\"\n  },\n  {\n    \"criterion_id\": \"ts.append-behavior\",\n    \"verdict\": \"fail\",\n    \"evidence\": \"`return shard.append(key, hashedKey, entry)`\",\n    \"justification\": \"Append semantics and concurrency safety are delegated to unseen shard code.\"\n  },\n  {\n    \"criterion_id\": \"ts.queue-index-preservation\",\n    \"verdict\": \"fail\",\n    \"evidence\": \"No implementation of the byte queue is shown.\",\n    \"justification\": \"There is insufficient evidence that queue growth preserves previously returned indexes.\"\n  },\n  {\n    \"criterion_id\": \"ts.queue-bounds-and-limits\",\n    \"verdict\": \"fail\",\n    \"evidence\": \"No implementation of the byte queue is shown.\",\n    \"justification\": \"There is insufficient evidence for queue bounds checking, max-capacity rejection, or growth behavior.\"\n  },\n  {\n    \"criterion_id\": \"ts.encode-decode-roundtrip\",\n    \"verdict\": \"fail\",\n    \"evidence\": \"No encoding implementation is shown; only calls like `readTimestampFromEntry(oldestEntry)` and `readEntry(wrappedEntry)` appear.\",\n    \"justification\": \"The trajectory lacks evidence of lossless entry encoding and decoding.\"\n  },\n  {\n    \"criterion_id\": \"ts.server-status-codes\",\n    \"verdict\": \"fail\",\n    \"evidence\": \"No HTTP server handler implementation is shown.\",\n    \"justification\": \"There is insufficient evidence that the required REST status-code behavior is implemented.\"\n  }\n]",
+      "verdicts": [
+        {
+          "criterion_id": "bb.intent_fidelity",
+          "passed": false,
+          "evidence": "Only cache facade code is shown, while the trajectory includes test files such as `# ===== bigcache_test.go =====` and no implementations for shard, queue, encoding, or server behavior.",
+          "justification": "The submitted trajectory does not provide enough implementation evidence across the required packages to show genuine completion of the task intent."
+        },
+        {
+          "criterion_id": "bb.oracle_strength",
+          "passed": false,
+          "evidence": "No code is shown for core behavioral components like `cacheShard`, `BytesQueue`, encoding, iterator, or HTTP server handlers.",
+          "justification": "Without the missing behavioral core, the solution cannot be judged as a general implementation beyond tests."
+        },
+        {
+          "criterion_id": "ts.config-validation-rejects",
+          "passed": true,
+          "evidence": "`if !isPowerOfTwo(config.Shards) { return nil, errors.New(...) }`, `if config.MaxEntrySize < 0`, `if config.MaxEntriesInWindow < 0`, `if config.HardMaxCacheSize < 0`",
+          "justification": "Construction explicitly returns errors for non-power-of-two shards and the specified negative config values."
+        },
+        {
+          "criterion_id": "ts.lifewindow-rounding",
+          "passed": true,
+          "evidence": "`lifeWindowSeconds := uint64(config.LifeWindow.Seconds())` and `if config.CleanWindow > 0 && lifeWindowSeconds == 0 { return nil, errors.New(...) }`",
+          "justification": "The validation rejects only when CleanWindow is positive and the life window rounds to zero seconds."
+        },
+        {
+          "criterion_id": "ts.nil-hasher-default",
+          "passed": true,
+          "evidence": "`if config.Hasher == nil { config.Hasher = newDefaultHasher() }`",
+          "justification": "A nil hasher is replaced with the default hasher during construction."
+        },
+        {
+          "criterion_id": "ts.cleanup-goroutine-termination",
+          "passed": true,
+          "evidence": "`if config.CleanWindow > 0 { go func() { ticker := time.NewTicker(config.CleanWindow) ... select { case <-ctx.Done(): return ... case <-cache.close: return } }() }`",
+          "justification": "The cleanup goroutine runs on a ticker and exits on either context cancellation or cache close."
+        },
+        {
+          "criterion_id": "ts.close-once",
+          "passed": false,
+          "evidence": "`func (c *BigCache) Close() error { close(c.close); return nil }`",
+          "justification": "Closing the channel unconditionally will panic if Close is called more than once."
+        },
+        {
+          "criterion_id": "ts.get-returns-copy",
+          "passed": false,
+          "evidence": "`return shard.get(key, hashedKey)`",
+          "justification": "The copy semantics depend entirely on unseen shard code, so there is insufficient evidence."
+        },
+        {
+          "criterion_id": "ts.nil-value-storable",
+          "passed": false,
+          "evidence": "`return shard.set(key, hashedKey, entry)`",
+          "justification": "Nil-value storage behavior is delegated to unseen shard code with no evidence of correctness."
+        },
+        {
+          "criterion_id": "ts.collision-detection",
+          "passed": false,
+          "evidence": "`return shard.get(key, hashedKey)` and `return shard.del(hashedKey)`",
+          "justification": "Collision detection and collision statistics are delegated to unseen shard code, and Delete does not even pass the original key."
+        },
+        {
+          "criterion_id": "ts.time-eviction-underflow",
+          "passed": true,
+          "evidence": "`if currentTimestamp < oldestTimestamp { return false }` and `if currentTimestamp-oldestTimestamp > c.lifeWindow { evict(Expired); return true }`",
+          "justification": "The eviction check avoids unsigned underflow and compares second-resolution timestamps against the stored life window."
+        },
+        {
+          "criterion_id": "ts.no-space-eviction",
+          "passed": false,
+          "evidence": "`return shard.set(key, hashedKey, entry)`",
+          "justification": "No-space eviction and oversized-entry rejection are implemented, if at all, only in unseen shard/queue code."
+        },
+        {
+          "criterion_id": "ts.onremove-dispatch-precedence",
+          "passed": true,
+          "evidence": "`if config.OnRemoveWithMetadata != nil { ... } else if config.OnRemove != nil { ... } else if config.OnRemoveWithReason != nil { ... } else { ... }` and `if c.config.onRemoveFilter == 0 || (1<<uint(reason))&c.config.onRemoveFilter > 0`",
+          "justification": "The callback selection order matches the required precedence and the reason callback applies the configured filter."
+        },
+        {
+          "criterion_id": "ts.append-behavior",
+          "passed": false,
+          "evidence": "`return shard.append(key, hashedKey, entry)`",
+          "justification": "Append semantics and concurrency safety are delegated to unseen shard code."
+        },
+        {
+          "criterion_id": "ts.queue-index-preservation",
+          "passed": false,
+          "evidence": "No implementation of the byte queue is shown.",
+          "justification": "There is insufficient evidence that queue growth preserves previously returned indexes."
+        },
+        {
+          "criterion_id": "ts.queue-bounds-and-limits",
+          "passed": false,
+          "evidence": "No implementation of the byte queue is shown.",
+          "justification": "There is insufficient evidence for queue bounds checking, max-capacity rejection, or growth behavior."
+        },
+        {
+          "criterion_id": "ts.encode-decode-roundtrip",
+          "passed": false,
+          "evidence": "No encoding implementation is shown; only calls like `readTimestampFromEntry(oldestEntry)` and `readEntry(wrappedEntry)` appear.",
+          "justification": "The trajectory lacks evidence of lossless entry encoding and decoding."
+        },
+        {
+          "criterion_id": "ts.server-status-codes",
+          "passed": false,
+          "evidence": "No HTTP server handler implementation is shown.",
+          "justification": "There is insufficient evidence that the required REST status-code behavior is implemented."
+        }
+      ]
+    },
+    "stub": {
+      "model": "openai/gpt-5.5-2026-04-23",
+      "reasoning_effort": "high",
+      "ok": true,
+      "raw_verdicts": 18,
+      "response_chars": 5793,
+      "thinking": "",
+      "raw_response": "[\n  {\n    \"criterion_id\": \"bb.intent_fidelity\",\n    \"verdict\": \"fail\",\n    \"evidence\": \"func New(ctx context.Context, config Config) (*BigCache, error) {\\n\\t_ = \\\"STUB: not implemented\\\"\\n\\treturn nil, nil\\n}\",\n    \"justification\": \"Core implementation remains stubbed and returns zero values rather than implementing the cache behavior.\"\n  },\n  {\n    \"criterion_id\": \"bb.oracle_strength\",\n    \"verdict\": \"fail\",\n    \"evidence\": \"func (c *BigCache) Get(key string) ([]byte, error) { _ = \\\"STUB: not implemented\\\"; return nil, nil }\",\n    \"justification\": \"The solution is not a general implementation and would incorrectly report successful empty results for all gets.\"\n  },\n  {\n    \"criterion_id\": \"ts.config-validation-rejects\",\n    \"verdict\": \"fail\",\n    \"evidence\": \"func New(ctx context.Context, config Config) (*BigCache, error) {\\n\\t_ = \\\"STUB: not implemented\\\"\\n\\treturn nil, nil\\n}\",\n    \"justification\": \"Construction does not validate invalid shard counts or negative config values and returns no error.\"\n  },\n  {\n    \"criterion_id\": \"ts.lifewindow-rounding\",\n    \"verdict\": \"fail\",\n    \"evidence\": \"func newBigCache(ctx context.Context, config Config, clock clock) (*BigCache, error) {\\n\\t_ = \\\"STUB: not implemented\\\"\\n\\treturn nil, nil\\n}\",\n    \"justification\": \"There is no LifeWindow/CleanWindow validation logic.\"\n  },\n  {\n    \"criterion_id\": \"ts.nil-hasher-default\",\n    \"verdict\": \"fail\",\n    \"evidence\": \"func newBigCache(ctx context.Context, config Config, clock clock) (*BigCache, error) {\\n\\t_ = \\\"STUB: not implemented\\\"\\n\\treturn nil, nil\\n}\",\n    \"justification\": \"The builder never constructs a cache or replaces a nil hasher with a default hasher.\"\n  },\n  {\n    \"criterion_id\": \"ts.cleanup-goroutine-termination\",\n    \"verdict\": \"fail\",\n    \"evidence\": \"func newBigCache(ctx context.Context, config Config, clock clock) (*BigCache, error) {\\n\\t_ = \\\"STUB: not implemented\\\"\\n\\treturn nil, nil\\n}\",\n    \"justification\": \"No cleanup goroutine or termination handling is implemented.\"\n  },\n  {\n    \"criterion_id\": \"ts.close-once\",\n    \"verdict\": \"fail\",\n    \"evidence\": \"func (c *BigCache) Close() error { _ = \\\"STUB: not implemented\\\"; return nil }\",\n    \"justification\": \"Close does not close or guard the shutdown channel at all.\"\n  },\n  {\n    \"criterion_id\": \"ts.get-returns-copy\",\n    \"verdict\": \"fail\",\n    \"evidence\": \"func (c *BigCache) Get(key string) ([]byte, error) { _ = \\\"STUB: not implemented\\\"; return nil, nil }\",\n    \"justification\": \"Get does not retrieve stored data, let alone return an independent copy.\"\n  },\n  {\n    \"criterion_id\": \"ts.nil-value-storable\",\n    \"verdict\": \"fail\",\n    \"evidence\": \"func (c *BigCache) Set(key string, entry []byte) error { _ = \\\"STUB: not implemented\\\"; return nil }\",\n    \"justification\": \"Set does not store any value, including nil or empty values.\"\n  },\n  {\n    \"criterion_id\": \"ts.collision-detection\",\n    \"verdict\": \"fail\",\n    \"evidence\": \"func (c *BigCache) Stats() Stats { _ = \\\"STUB: not implemented\\\"; return *new(Stats) }\",\n    \"justification\": \"There is no key comparison, collision handling, or collision statistic implementation.\"\n  },\n  {\n    \"criterion_id\": \"ts.time-eviction-underflow\",\n    \"verdict\": \"fail\",\n    \"evidence\": \"func (c *BigCache) onEvict(oldestEntry []byte, currentTimestamp uint64, evict func(reason RemoveReason) error) bool {\\n\\t_ = \\\"STUB: not implemented\\\"\\n\\treturn false\\n}\",\n    \"justification\": \"Eviction logic is absent and always reports no eviction.\"\n  },\n  {\n    \"criterion_id\": \"ts.no-space-eviction\",\n    \"verdict\": \"fail\",\n    \"evidence\": \"func (c *BigCache) Set(key string, entry []byte) error { _ = \\\"STUB: not implemented\\\"; return nil }\",\n    \"justification\": \"Set never checks shard capacity, evicts oldest entries, or rejects oversized entries.\"\n  },\n  {\n    \"criterion_id\": \"ts.onremove-dispatch-precedence\",\n    \"verdict\": \"fail\",\n    \"evidence\": \"func (c *BigCache) providedOnRemoveWithReason(wrappedEntry []byte, reason RemoveReason) {\\n\\t_ = \\\"STUB: not implemented\\\"\\n\\treturn\\n}\",\n    \"justification\": \"The on-remove callback variants are empty and no precedence or filter behavior is implemented.\"\n  },\n  {\n    \"criterion_id\": \"ts.append-behavior\",\n    \"verdict\": \"fail\",\n    \"evidence\": \"func (c *BigCache) Append(key string, entry []byte) error { _ = \\\"STUB: not implemented\\\"; return nil }\",\n    \"justification\": \"Append does not store, concatenate, or provide concurrency-safe accumulation.\"\n  },\n  {\n    \"criterion_id\": \"ts.queue-index-preservation\",\n    \"verdict\": \"fail\",\n    \"evidence\": \"The provided implementation excerpt contains no implemented byte queue logic and core cache methods remain stubbed.\",\n    \"justification\": \"There is insufficient evidence of any queue growth or index-preservation implementation.\"\n  },\n  {\n    \"criterion_id\": \"ts.queue-bounds-and-limits\",\n    \"verdict\": \"fail\",\n    \"evidence\": \"The provided implementation excerpt contains no implemented byte queue logic and core cache methods remain stubbed.\",\n    \"justification\": \"There is insufficient evidence of bounds checking, max-capacity rejection, or safe queue errors.\"\n  },\n  {\n    \"criterion_id\": \"ts.encode-decode-roundtrip\",\n    \"verdict\": \"fail\",\n    \"evidence\": \"The provided implementation excerpt shows cache methods with `_ = \\\"STUB: not implemented\\\"` and provides no implemented encoding functions.\",\n    \"justification\": \"There is insufficient evidence that entry encoding and decoding are implemented.\"\n  },\n  {\n    \"criterion_id\": \"ts.server-status-codes\",\n    \"verdict\": \"fail\",\n    \"evidence\": \"The provided implementation excerpt contains no implemented server handlers, while cache construction and operations are stubbed.\",\n    \"justification\": \"There is insufficient evidence that HTTP handlers return the required status codes.\"\n  }\n]",
+      "verdicts": [
+        {
+          "criterion_id": "bb.intent_fidelity",
+          "passed": false,
+          "evidence": "func New(ctx context.Context, config Config) (*BigCache, error) {\n\t_ = \"STUB: not implemented\"\n\treturn nil, nil\n}",
+          "justification": "Core implementation remains stubbed and returns zero values rather than implementing the cache behavior."
+        },
+        {
+          "criterion_id": "bb.oracle_strength",
+          "passed": false,
+          "evidence": "func (c *BigCache) Get(key string) ([]byte, error) { _ = \"STUB: not implemented\"; return nil, nil }",
+          "justification": "The solution is not a general implementation and would incorrectly report successful empty results for all gets."
+        },
+        {
+          "criterion_id": "ts.config-validation-rejects",
+          "passed": false,
+          "evidence": "func New(ctx context.Context, config Config) (*BigCache, error) {\n\t_ = \"STUB: not implemented\"\n\treturn nil, nil\n}",
+          "justification": "Construction does not validate invalid shard counts or negative config values and returns no error."
+        },
+        {
+          "criterion_id": "ts.lifewindow-rounding",
+          "passed": false,
+          "evidence": "func newBigCache(ctx context.Context, config Config, clock clock) (*BigCache, error) {\n\t_ = \"STUB: not implemented\"\n\treturn nil, nil\n}",
+          "justification": "There is no LifeWindow/CleanWindow validation logic."
+        },
+        {
+          "criterion_id": "ts.nil-hasher-default",
+          "passed": false,
+          "evidence": "func newBigCache(ctx context.Context, config Config, clock clock) (*BigCache, error) {\n\t_ = \"STUB: not implemented\"\n\treturn nil, nil\n}",
+          "justification": "The builder never constructs a cache or replaces a nil hasher with a default hasher."
+        },
+        {
+          "criterion_id": "ts.cleanup-goroutine-termination",
+          "passed": false,
+          "evidence": "func newBigCache(ctx context.Context, config Config, clock clock) (*BigCache, error) {\n\t_ = \"STUB: not implemented\"\n\treturn nil, nil\n}",
+          "justification": "No cleanup goroutine or termination handling is implemented."
+        },
+        {
+          "criterion_id": "ts.close-once",
+          "passed": false,
+          "evidence": "func (c *BigCache) Close() error { _ = \"STUB: not implemented\"; return nil }",
+          "justification": "Close does not close or guard the shutdown channel at all."
+        },
+        {
+          "criterion_id": "ts.get-returns-copy",
+          "passed": false,
+          "evidence": "func (c *BigCache) Get(key string) ([]byte, error) { _ = \"STUB: not implemented\"; return nil, nil }",
+          "justification": "Get does not retrieve stored data, let alone return an independent copy."
+        },
+        {
+          "criterion_id": "ts.nil-value-storable",
+          "passed": false,
+          "evidence": "func (c *BigCache) Set(key string, entry []byte) error { _ = \"STUB: not implemented\"; return nil }",
+          "justification": "Set does not store any value, including nil or empty values."
+        },
+        {
+          "criterion_id": "ts.collision-detection",
+          "passed": false,
+          "evidence": "func (c *BigCache) Stats() Stats { _ = \"STUB: not implemented\"; return *new(Stats) }",
+          "justification": "There is no key comparison, collision handling, or collision statistic implementation."
+        },
+        {
+          "criterion_id": "ts.time-eviction-underflow",
+          "passed": false,
+          "evidence": "func (c *BigCache) onEvict(oldestEntry []byte, currentTimestamp uint64, evict func(reason RemoveReason) error) bool {\n\t_ = \"STUB: not implemented\"\n\treturn false\n}",
+          "justification": "Eviction logic is absent and always reports no eviction."
+        },
+        {
+          "criterion_id": "ts.no-space-eviction",
+          "passed": false,
+          "evidence": "func (c *BigCache) Set(key string, entry []byte) error { _ = \"STUB: not implemented\"; return nil }",
+          "justification": "Set never checks shard capacity, evicts oldest entries, or rejects oversized entries."
+        },
+        {
+          "criterion_id": "ts.onremove-dispatch-precedence",
+          "passed": false,
+          "evidence": "func (c *BigCache) providedOnRemoveWithReason(wrappedEntry []byte, reason RemoveReason) {\n\t_ = \"STUB: not implemented\"\n\treturn\n}",
+          "justification": "The on-remove callback variants are empty and no precedence or filter behavior is implemented."
+        },
+        {
+          "criterion_id": "ts.append-behavior",
+          "passed": false,
+          "evidence": "func (c *BigCache) Append(key string, entry []byte) error { _ = \"STUB: not implemented\"; return nil }",
+          "justification": "Append does not store, concatenate, or provide concurrency-safe accumulation."
+        },
+        {
+          "criterion_id": "ts.queue-index-preservation",
+          "passed": false,
+          "evidence": "The provided implementation excerpt contains no implemented byte queue logic and core cache methods remain stubbed.",
+          "justification": "There is insufficient evidence of any queue growth or index-preservation implementation."
+        },
+        {
+          "criterion_id": "ts.queue-bounds-and-limits",
+          "passed": false,
+          "evidence": "The provided implementation excerpt contains no implemented byte queue logic and core cache methods remain stubbed.",
+          "justification": "There is insufficient evidence of bounds checking, max-capacity rejection, or safe queue errors."
+        },
+        {
+          "criterion_id": "ts.encode-decode-roundtrip",
+          "passed": false,
+          "evidence": "The provided implementation excerpt shows cache methods with `_ = \"STUB: not implemented\"` and provides no implemented encoding functions.",
+          "justification": "There is insufficient evidence that entry encoding and decoding are implemented."
+        },
+        {
+          "criterion_id": "ts.server-status-codes",
+          "passed": false,
+          "evidence": "The provided implementation excerpt contains no implemented server handlers, while cache construction and operations are stubbed.",
+          "justification": "There is insufficient evidence that HTTP handlers return the required status codes."
+        }
+      ]
+    }
+  },
+  "criteria": [
+    {
+      "id": "bb.reasoning_faithfulness",
+      "text": "Is the agent's stated reasoning consistent with the edits it actually made and the feedback it received (no post-hoc rationalization, no lucky guess)?",
+      "contract_ref": "(backbone)",
+      "concern": "L2.REASONING_FAITHFULNESS",
+      "anchorable": false
+    },
+    {
+      "id": "bb.stage_legitimacy",
+      "text": "Did each refinement stage (lint, test) do real, feedback-responsive work toward the solution rather than cosmetic or no-op changes?",
+      "contract_ref": "(backbone)",
+      "concern": "L2.STAGE_LEGITIMACY",
+      "anchorable": false
+    },
+    {
+      "id": "ts.config-validation-rejects",
+      "text": "Cache construction returns an error (never panics) for a Shards value that is not a power of two and for negative MaxEntrySize, MaxEntriesInWindow, or HardMaxCacheSize.",
+      "contract_ref": "Cache construction & validation",
+      "concern": null,
+      "anchorable": true
+    },
+    {
+      "id": "ts.lifewindow-rounding",
+      "text": "Construction returns an error when CleanWindow > 0 but LifeWindow rounds down to 0 seconds, yet does NOT reject a sub-second LifeWindow when CleanWindow is 0.",
+      "contract_ref": "Known pitfalls: LifeWindow seconds rounding",
+      "concern": null,
+      "anchorable": true
+    },
+    {
+      "id": "ts.nil-hasher-default",
+      "text": "A nil Hasher in the config is replaced with the default FNV64 hasher so construction still succeeds.",
+      "contract_ref": "Cache construction & validation",
+      "concern": null,
+      "anchorable": true
+    },
+    {
+      "id": "ts.cleanup-goroutine-termination",
+      "text": "When CleanWindow > 0 a background cleanup goroutine runs on a ticker and reliably terminates on both context cancellation and cache close, without leaking.",
+      "contract_ref": "Cache construction & validation / Known pitfalls: Double close",
+      "concern": null,
+      "anchorable": true
+    },
+    {
+      "id": "ts.time-eviction-underflow",
+      "text": "Time-based expiry treats an entry as expired only when current timestamp minus stored timestamp exceeds the life window, and returns not-expired (no unsigned underflow) when current precedes stored; comparisons use second resolution.",
+      "contract_ref": "Known pitfalls: Eviction ordering / Life window unit",
+      "concern": null,
+      "anchorable": true
+    },
+    {
+      "id": "ts.onremove-dispatch-precedence",
+      "text": "The onRemove handler is selected with correct precedence (metadata callback, then plain OnRemove, then OnRemoveWithReason, else no-op), and the reason-based callback honors the onRemoveFilter bitmask.",
+      "contract_ref": "Eviction & callbacks / Known pitfalls: OnRemove unwrapping cost",
+      "concern": null,
+      "anchorable": true
+    }
+  ]
+}

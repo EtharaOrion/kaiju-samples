@@ -1,0 +1,6 @@
+{
+  "repo": "Zahgon/concurrent-map",
+  "base_commit": "12ae13f021197636754401eba4628ed8bf4d1601",
+  "reference_commit": "5ad21228232e15affae146f7d71852ada8b18e6c",
+  "docker_image": "426628337772.dkr.ecr.ap-south-1.amazonaws.com/kaiju_q2:rust_komora_io_concurrent_map"
+}

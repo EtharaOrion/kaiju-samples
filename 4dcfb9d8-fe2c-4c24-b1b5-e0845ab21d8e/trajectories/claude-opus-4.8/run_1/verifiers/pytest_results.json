@@ -1,0 +1,74 @@
+{
+  "solution": {
+    "passed": 16,
+    "failed": 0,
+    "errors": 0,
+    "skipped": 0,
+    "collected": 16,
+    "status": "OK",
+    "detail": "============================== 16 passed in 0.14s ==============================",
+    "total": 16,
+    "pass_rate": 1.0,
+    "log": ""
+  },
+  "anchors": {
+    "golden": {
+      "passed": 16,
+      "failed": 0,
+      "errors": 0,
+      "skipped": 0,
+      "collected": 16,
+      "status": "OK",
+      "detail": "============================== 16 passed in 0.14s ==============================",
+      "total": 16,
+      "pass_rate": 1.0,
+      "log": ""
+    },
+    "stub": {
+      "passed": 14,
+      "failed": 2,
+      "errors": 0,
+      "skipped": 0,
+      "collected": 16,
+      "status": "OK",
+      "detail": "========================= 2 failed, 14 passed in 0.16s =========================",
+      "total": 16,
+      "pass_rate": 0.875,
+      "log": ""
+    }
+  },
+  "analysis": {
+    "n_total": 16,
+    "n_sound": 2,
+    "sound_subset": [
+      "test_json_serializable_from_json",
+      "test_json_serializable_json_property_matches_dump"
+    ],
+    "wrong_oracle_dropped": [],
+    "non_discriminating_dropped": [
+      "test_differential_0",
+      "test_differential_1",
+      "test_differential_10",
+      "test_differential_11",
+      "test_differential_12",
+      "test_differential_13",
+      "test_differential_2",
+      "test_differential_3",
+      "test_differential_4",
+      "test_differential_5",
+      "test_differential_6",
+      "test_differential_7",
+      "test_differential_8",
+      "test_differential_9"
+    ],
+    "inconclusive_on_stub": [],
+    "solution_pass_on_sound": 1.0,
+    "gap_vs_golden": 0.0,
+    "golden_status": "OK",
+    "stub_status": "OK",
+    "solution_status": "OK",
+    "infra_failures": [],
+    "stub_import_broken": false,
+    "stub_note": ""
+  }
+}

@@ -1,0 +1,92 @@
+    Updating crates.io index
+     Locking 29 packages to latest compatible versions
+      Adding rand v0.8.7 (available: v0.10.2)
+ Downloading crates ...
+  Downloaded libc v0.2.187
+   Compiling libc v0.2.187
+   Compiling parking_lot_core v0.9.12
+   Compiling parking_lot v0.12.5
+   Compiling shared-local-state v0.1.4
+   Compiling ebr v0.2.13
+   Compiling concurrent-map v5.0.37 (/tmp/commit0-inplace-clk_kpiw/tree)
+warning: value assigned to `left` is never read
+    --> src/lib.rs:1225:21
+     |
+1225 |                     left = v;
+     |                     ^^^^^^^^
+     |
+     = help: maybe it is overwritten before being read?
+     = note: `#[warn(unused_assignments)]` (part of `#[warn(unused)]`) on by default
+
+warning: function `debug_delay` is never used
+  --> src/lib.rs:84:10
+   |
+84 | const fn debug_delay() -> bool {
+   |          ^^^^^^^^^^^
+   |
+   = note: `#[warn(dead_code)]` (part of `#[warn(unused)]`) on by default
+
+warning: method `get_mut` is never used
+   --> src/lib.rs:276:15
+    |
+244 | / impl<K, V, const FANOUT: usize> NodeView<K, V, FANOUT>
+245 | | where
+246 | |     K: 'static + Clone + Minimum + Ord + Send + Sync,
+247 | |     V: 'static + Clone + Send + Sync,
+    | |_____________________________________- method in this implementation
+...
+276 |       unsafe fn get_mut(&mut self) -> &mut Node<K, V, FANOUT> {
+    |                 ^^^^^^^
+
+warning: `concurrent-map` (lib) generated 3 warnings
+warning: `concurrent-map` (lib test) generated 3 warnings (3 duplicates)
+    Finished `test` profile [optimized + debuginfo] target(s) in 6.70s
+     Running unittests src/lib.rs (target/debug/deps/concurrent_map-7152df8f3f00647f)
+
+running 2 tests
+test basic_map ... ok
+test timing_map ... ok
+
+test result: ok. 2 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.56s
+
+     Running tests/concurrent.rs (target/debug/deps/concurrent-25874fe32f9d3097)
+
+running 3 tests
+test big_scan ... ok
+test bulk_load ... ok
+test concurrent_tree ... FAILED
+
+failures:
+
+---- concurrent_tree stdout ----
+
+thread '<unnamed>' (43718) panicked at tests/concurrent.rs:40:13:
+assertion `left == right` failed: failed to get key 32746
+  left: None
+ right: Some(65482)
+note: run with `RUST_BACKTRACE=1` environment variable to display a backtrace
+
+thread '<unnamed>' (43716) panicked at tests/concurrent.rs:40:13:
+assertion `left == right` failed: failed to get key 32744
+  left: None
+ right: Some(65480)
+
+thread '<unnamed>' (43739) panicked at /usr/local/cargo/registry/src/index.crates.io-1949cf8c6b5b557f/stack-map-1.0.5/src/lib.rs:124:17:
+assertion failed: self.len() < FANOUT
+
+thread '<unnamed>' (43734) panicked at /usr/local/cargo/registry/src/index.crates.io-1949cf8c6b5b557f/stack-map-1.0.5/src/lib.rs:124:17:
+assertion failed: self.len() < FANOUT
+
+thread '<unnamed>' (43731) panicked at /usr/local/cargo/registry/src/index.crates.io-1949cf8c6b5b557f/stack-map-1.0.5/src/lib.rs:124:17:
+assertion failed: self.len() < FANOUT
+
+thread 'concurrent_tree' (43707) panicked at tests/concurrent.rs:73:31:
+called `Result::unwrap()` on an `Err` value: Any { .. }
+
+
+failures:
+    concurrent_tree
+
+test result: FAILED. 2 passed; 1 failed; 0 ignored; 0 measured; 0 filtered out; finished in 2.84s
+
+error: test failed, to rerun pass `--test concurrent`

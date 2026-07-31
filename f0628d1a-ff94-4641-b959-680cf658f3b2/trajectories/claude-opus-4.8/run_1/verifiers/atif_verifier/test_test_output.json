@@ -1,0 +1,72 @@
+{"Time":"2026-07-28T16:00:18.686403293Z","Action":"start","Package":"github.com/google/uuid"}
+{"Time":"2026-07-28T16:00:18.688141516Z","Action":"run","Package":"github.com/google/uuid","Test":"TestJSON"}
+{"Time":"2026-07-28T16:00:18.68817422Z","Action":"output","Package":"github.com/google/uuid","Test":"TestJSON","Output":"=== RUN   TestJSON\n"}
+{"Time":"2026-07-28T16:00:18.688186041Z","Action":"output","Package":"github.com/google/uuid","Test":"TestJSON","Output":"--- PASS: TestJSON (0.00s)\n"}
+{"Time":"2026-07-28T16:00:18.688191481Z","Action":"pass","Package":"github.com/google/uuid","Test":"TestJSON","Elapsed":0}
+{"Time":"2026-07-28T16:00:18.688196764Z","Action":"run","Package":"github.com/google/uuid","Test":"TestJSONUnmarshal"}
+{"Time":"2026-07-28T16:00:18.688199304Z","Action":"output","Package":"github.com/google/uuid","Test":"TestJSONUnmarshal","Output":"=== RUN   TestJSONUnmarshal\n"}
+{"Time":"2026-07-28T16:00:18.688202083Z","Action":"run","Package":"github.com/google/uuid","Test":"TestJSONUnmarshal/null"}
+{"Time":"2026-07-28T16:00:18.688204078Z","Action":"output","Package":"github.com/google/uuid","Test":"TestJSONUnmarshal/null","Output":"=== RUN   TestJSONUnmarshal/null\n"}
+{"Time":"2026-07-28T16:00:18.688216295Z","Action":"output","Package":"github.com/google/uuid","Test":"TestJSONUnmarshal/null","Output":"--- PASS: TestJSONUnmarshal/null (0.00s)\n"}
+{"Time":"2026-07-28T16:00:18.688219901Z","Action":"pass","Package":"github.com/google/uuid","Test":"TestJSONUnmarshal/null","Elapsed":0}
+{"Time":"2026-07-28T16:00:18.688222167Z","Action":"run","Package":"github.com/google/uuid","Test":"TestJSONUnmarshal/empty"}
+{"Time":"2026-07-28T16:00:18.688223877Z","Action":"output","Package":"github.com/google/uuid","Test":"TestJSONUnmarshal/empty","Output":"=== RUN   TestJSONUnmarshal/empty\n"}
+{"Time":"2026-07-28T16:00:18.688227423Z","Action":"output","Package":"github.com/google/uuid","Test":"TestJSONUnmarshal/empty","Output":"--- PASS: TestJSONUnmarshal/empty (0.00s)\n"}
+{"Time":"2026-07-28T16:00:18.688230921Z","Action":"pass","Package":"github.com/google/uuid","Test":"TestJSONUnmarshal/empty","Elapsed":0}
+{"Time":"2026-07-28T16:00:18.6882337Z","Action":"run","Package":"github.com/google/uuid","Test":"TestJSONUnmarshal/omitempty"}
+{"Time":"2026-07-28T16:00:18.688235574Z","Action":"output","Package":"github.com/google/uuid","Test":"TestJSONUnmarshal/omitempty","Output":"=== RUN   TestJSONUnmarshal/omitempty\n"}
+{"Time":"2026-07-28T16:00:18.688241585Z","Action":"output","Package":"github.com/google/uuid","Test":"TestJSONUnmarshal/omitempty","Output":"--- PASS: TestJSONUnmarshal/omitempty (0.00s)\n"}
+{"Time":"2026-07-28T16:00:18.688244639Z","Action":"pass","Package":"github.com/google/uuid","Test":"TestJSONUnmarshal/omitempty","Elapsed":0}
+{"Time":"2026-07-28T16:00:18.688247344Z","Action":"run","Package":"github.com/google/uuid","Test":"TestJSONUnmarshal/success"}
+{"Time":"2026-07-28T16:00:18.688249221Z","Action":"output","Package":"github.com/google/uuid","Test":"TestJSONUnmarshal/success","Output":"=== RUN   TestJSONUnmarshal/success\n"}
+{"Time":"2026-07-28T16:00:18.688253337Z","Action":"output","Package":"github.com/google/uuid","Test":"TestJSONUnmarshal/success","Output":"--- PASS: TestJSONUnmarshal/success (0.00s)\n"}
+{"Time":"2026-07-28T16:00:18.688255992Z","Action":"pass","Package":"github.com/google/uuid","Test":"TestJSONUnmarshal/success","Elapsed":0}
+{"Time":"2026-07-28T16:00:18.688259161Z","Action":"run","Package":"github.com/google/uuid","Test":"TestJSONUnmarshal/zero"}
+{"Time":"2026-07-28T16:00:18.68826087Z","Action":"output","Package":"github.com/google/uuid","Test":"TestJSONUnmarshal/zero","Output":"=== RUN   TestJSONUnmarshal/zero\n"}
+{"Time":"2026-07-28T16:00:18.688266237Z","Action":"output","Package":"github.com/google/uuid","Test":"TestJSONUnmarshal/zero","Output":"--- PASS: TestJSONUnmarshal/zero (0.00s)\n"}
+{"Time":"2026-07-28T16:00:18.688269013Z","Action":"pass","Package":"github.com/google/uuid","Test":"TestJSONUnmarshal/zero","Elapsed":0}
+{"Time":"2026-07-28T16:00:18.688271749Z","Action":"output","Package":"github.com/google/uuid","Test":"TestJSONUnmarshal","Output":"--- PASS: TestJSONUnmarshal (0.00s)\n"}
+{"Time":"2026-07-28T16:00:18.688280573Z","Action":"pass","Package":"github.com/google/uuid","Test":"TestJSONUnmarshal","Elapsed":0}
+{"Time":"2026-07-28T16:00:18.68828271Z","Action":"run","Package":"github.com/google/uuid","Test":"TestNullUUIDScan"}
+{"Time":"2026-07-28T16:00:18.688284391Z","Action":"output","Package":"github.com/google/uuid","Test":"TestNullUUIDScan","Output":"=== RUN   TestNullUUIDScan\n"}
+{"Time":"2026-07-28T16:00:18.68828825Z","Action":"output","Package":"github.com/google/uuid","Test":"TestNullUUIDScan","Output":"--- PASS: TestNullUUIDScan (0.00s)\n"}
+{"Time":"2026-07-28T16:00:18.688290753Z","Action":"pass","Package":"github.com/google/uuid","Test":"TestNullUUIDScan","Elapsed":0}
+{"Time":"2026-07-28T16:00:18.688293286Z","Action":"run","Package":"github.com/google/uuid","Test":"TestNullUUIDValue"}
+{"Time":"2026-07-28T16:00:18.688294931Z","Action":"output","Package":"github.com/google/uuid","Test":"TestNullUUIDValue","Output":"=== RUN   TestNullUUIDValue\n"}
+{"Time":"2026-07-28T16:00:18.68829858Z","Action":"output","Package":"github.com/google/uuid","Test":"TestNullUUIDValue","Output":"--- PASS: TestNullUUIDValue (0.00s)\n"}
+{"Time":"2026-07-28T16:00:18.688301055Z","Action":"pass","Package":"github.com/google/uuid","Test":"TestNullUUIDValue","Elapsed":0}
+{"Time":"2026-07-28T16:00:18.688304753Z","Action":"run","Package":"github.com/google/uuid","Test":"TestNullUUIDMarshalText"}
+{"Time":"2026-07-28T16:00:18.688306675Z","Action":"output","Package":"github.com/google/uuid","Test":"TestNullUUIDMarshalText","Output":"=== RUN   TestNullUUIDMarshalText\n"}
+{"Time":"2026-07-28T16:00:18.688315947Z","Action":"output","Package":"github.com/google/uuid","Test":"TestNullUUIDMarshalText","Output":"--- PASS: TestNullUUIDMarshalText (0.00s)\n"}
+{"Time":"2026-07-28T16:00:18.688318652Z","Action":"pass","Package":"github.com/google/uuid","Test":"TestNullUUIDMarshalText","Elapsed":0}
+{"Time":"2026-07-28T16:00:18.688320776Z","Action":"run","Package":"github.com/google/uuid","Test":"TestNullUUIDUnmarshalText"}
+{"Time":"2026-07-28T16:00:18.688324188Z","Action":"output","Package":"github.com/google/uuid","Test":"TestNullUUIDUnmarshalText","Output":"=== RUN   TestNullUUIDUnmarshalText\n"}
+{"Time":"2026-07-28T16:00:18.688327234Z","Action":"output","Package":"github.com/google/uuid","Test":"TestNullUUIDUnmarshalText","Output":"--- PASS: TestNullUUIDUnmarshalText (0.00s)\n"}
+{"Time":"2026-07-28T16:00:18.688329853Z","Action":"pass","Package":"github.com/google/uuid","Test":"TestNullUUIDUnmarshalText","Elapsed":0}
+{"Time":"2026-07-28T16:00:18.688332446Z","Action":"run","Package":"github.com/google/uuid","Test":"TestNullUUIDMarshalBinary"}
+{"Time":"2026-07-28T16:00:18.688334307Z","Action":"output","Package":"github.com/google/uuid","Test":"TestNullUUIDMarshalBinary","Output":"=== RUN   TestNullUUIDMarshalBinary\n"}
+{"Time":"2026-07-28T16:00:18.688339757Z","Action":"output","Package":"github.com/google/uuid","Test":"TestNullUUIDMarshalBinary","Output":"--- PASS: TestNullUUIDMarshalBinary (0.00s)\n"}
+{"Time":"2026-07-28T16:00:18.688342641Z","Action":"pass","Package":"github.com/google/uuid","Test":"TestNullUUIDMarshalBinary","Elapsed":0}
+{"Time":"2026-07-28T16:00:18.688344797Z","Action":"run","Package":"github.com/google/uuid","Test":"TestNullUUIDMarshalJSON"}
+{"Time":"2026-07-28T16:00:18.688346765Z","Action":"output","Package":"github.com/google/uuid","Test":"TestNullUUIDMarshalJSON","Output":"=== RUN   TestNullUUIDMarshalJSON\n"}
+{"Time":"2026-07-28T16:00:18.688366994Z","Action":"output","Package":"github.com/google/uuid","Test":"TestNullUUIDMarshalJSON","Output":"--- FAIL: TestNullUUIDMarshalJSON (0.00s)\n"}
+{"Time":"2026-07-28T16:00:18.690484895Z","Action":"output","Package":"github.com/google/uuid","Test":"TestNullUUIDMarshalJSON","Output":"panic: uuid: Parse(\"12345678-abcd-1234-abcd-0123456789ab\"): invalid bracketed UUID format [recovered, repanicked]\n"}
+{"Time":"2026-07-28T16:00:18.690488708Z","Action":"output","Package":"github.com/google/uuid","Test":"TestNullUUIDMarshalJSON","Output":"\n"}
+{"Time":"2026-07-28T16:00:18.690494051Z","Action":"output","Package":"github.com/google/uuid","Test":"TestNullUUIDMarshalJSON","Output":"goroutine 20 [running]:\n"}
+{"Time":"2026-07-28T16:00:18.690496975Z","Action":"output","Package":"github.com/google/uuid","Test":"TestNullUUIDMarshalJSON","Output":"testing.tRunner.func1.2({0x1d8620, 0x40000229d0})\n"}
+{"Time":"2026-07-28T16:00:18.690499401Z","Action":"output","Package":"github.com/google/uuid","Test":"TestNullUUIDMarshalJSON","Output":"\t/usr/local/go/src/testing/testing.go:1872 +0x190\n"}
+{"Time":"2026-07-28T16:00:18.690501377Z","Action":"output","Package":"github.com/google/uuid","Test":"TestNullUUIDMarshalJSON","Output":"testing.tRunner.func1()\n"}
+{"Time":"2026-07-28T16:00:18.690504357Z","Action":"output","Package":"github.com/google/uuid","Test":"TestNullUUIDMarshalJSON","Output":"\t/usr/local/go/src/testing/testing.go:1875 +0x31c\n"}
+{"Time":"2026-07-28T16:00:18.690506551Z","Action":"output","Package":"github.com/google/uuid","Test":"TestNullUUIDMarshalJSON","Output":"panic({0x1d8620?, 0x40000229d0?})\n"}
+{"Time":"2026-07-28T16:00:18.690509379Z","Action":"output","Package":"github.com/google/uuid","Test":"TestNullUUIDMarshalJSON","Output":"\t/usr/local/go/src/runtime/panic.go:783 +0x120\n"}
+{"Time":"2026-07-28T16:00:18.690511504Z","Action":"output","Package":"github.com/google/uuid","Test":"TestNullUUIDMarshalJSON","Output":"github.com/google/uuid.MustParse({0x400001c390, 0x26})\n"}
+{"Time":"2026-07-28T16:00:18.690514928Z","Action":"output","Package":"github.com/google/uuid","Test":"TestNullUUIDMarshalJSON","Output":"\t/tmp/commit0-inplace-3qugg0cg/tree/uuid.go:176 +0xa0\n"}
+{"Time":"2026-07-28T16:00:18.690517146Z","Action":"output","Package":"github.com/google/uuid","Test":"TestNullUUIDMarshalJSON","Output":"github.com/google/uuid.TestNullUUIDMarshalJSON(0x40000d9a40)\n"}
+{"Time":"2026-07-28T16:00:18.690519118Z","Action":"output","Package":"github.com/google/uuid","Test":"TestNullUUIDMarshalJSON","Output":"\t/tmp/commit0-inplace-3qugg0cg/tree/null_test.go:183 +0x88\n"}
+{"Time":"2026-07-28T16:00:18.690521794Z","Action":"output","Package":"github.com/google/uuid","Test":"TestNullUUIDMarshalJSON","Output":"testing.tRunner(0x40000d9a40, 0x236d50)\n"}
+{"Time":"2026-07-28T16:00:18.690523777Z","Action":"output","Package":"github.com/google/uuid","Test":"TestNullUUIDMarshalJSON","Output":"\t/usr/local/go/src/testing/testing.go:1934 +0xc8\n"}
+{"Time":"2026-07-28T16:00:18.690526255Z","Action":"output","Package":"github.com/google/uuid","Test":"TestNullUUIDMarshalJSON","Output":"created by testing.(*T).Run in goroutine 1\n"}
+{"Time":"2026-07-28T16:00:18.690528909Z","Action":"output","Package":"github.com/google/uuid","Test":"TestNullUUIDMarshalJSON","Output":"\t/usr/local/go/src/testing/testing.go:1997 +0x364\n"}
+{"Time":"2026-07-28T16:00:18.690914211Z","Action":"fail","Package":"github.com/google/uuid","Test":"TestNullUUIDMarshalJSON","Elapsed":0}
+{"Time":"2026-07-28T16:00:18.691051812Z","Action":"output","Package":"github.com/google/uuid","Output":"FAIL\tgithub.com/google/uuid\t0.004s\n"}
+{"Time":"2026-07-28T16:00:18.691060211Z","Action":"fail","Package":"github.com/google/uuid","Elapsed":0.005}

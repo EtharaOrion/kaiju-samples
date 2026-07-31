@@ -1,0 +1,9 @@
+{
+  "kind": "commit0-golden-ref",
+  "repo": "V1ibh1vsingh/signature_pad",
+  "base_commit": "cdc9b61e72f95e43bcef235cb450c57cec992777",
+  "reference_commit": "f6218ffa05540438f6db71051fe0ee12bfd6489c",
+  "src_dir": "src",
+  "language": "typescript",
+  "note": "Golden solution = the repo at reference_commit; solve.sh fetches+resets to it."
+}

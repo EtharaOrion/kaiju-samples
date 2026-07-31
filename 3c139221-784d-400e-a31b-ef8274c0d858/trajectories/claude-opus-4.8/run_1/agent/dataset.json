@@ -1,0 +1,26 @@
+{
+  "instance_id": "commit-0/async-h1",
+  "id": "3c139221-784d-400e-a31b-ef8274c0d858",
+  "repo": "Zahgon/async-h1",
+  "base_commit": "5054a44f41a6341c3962e692f9a8cca934a7e4a0",
+  "reference_commit": "4de64c18de36d63e3f422e0c88187534a7e11e2e",
+  "base_compiles": true,
+  "setup": {
+    "rust_version": "nightly",
+    "edition": "2018",
+    "packages": "pkg-config libssl-dev",
+    "pre_install": [],
+    "install": "cargo fetch",
+    "specification": "https://github.com/Zahgon/async-h1",
+    "spec_source": "readme",
+    "version_source": ".github/workflows/*.yml[matrix.rust]",
+    "version_conflicts": [],
+    "base_compiles": true
+  },
+  "test": {
+    "test_cmd": "cargo test",
+    "test_dir": "tests"
+  },
+  "src_dir": "src",
+  "language": "rust"
+}

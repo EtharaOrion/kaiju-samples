@@ -1,0 +1,365 @@
+{
+  "model": "openai/gpt-5.5-2026-04-23",
+  "ok": true,
+  "verdicts": [
+    {
+      "criterion_id": "bb.reasoning_faithfulness",
+      "passed": false,
+      "evidence": "Final diff only shows changes to `src/atomic.rs`, while the trajectory claims broad implementations such as \u201cAll stubs in `src/signal/signal.rs` are now implemented\u201d and the candidate final code includes many other files.",
+      "justification": "The stated reasoning and claimed edits are not reliably consistent with the actual cumulative diff shown."
+    },
+    {
+      "criterion_id": "bb.stage_legitimacy",
+      "passed": false,
+      "evidence": "Repeated lint-refine messages say \u201cAll of the reported errors are in test files... There are no changes I can make\u201d and \u201cNo edits are needed or possible on my end here.\u201d",
+      "justification": "The refinement stages largely refused or avoided feedback-responsive source work rather than making concrete fixes."
+    },
+    {
+      "criterion_id": "ts.atomic-null-pointer-opt",
+      "passed": true,
+      "evidence": "`Some(value) => Box::into_raw(Box::new(value)), None => ptr::null_mut()`",
+      "justification": "The implementation represents `None` as a null raw pointer and boxes only present values."
+    },
+    {
+      "criterion_id": "ts.atomic-no-double-free",
+      "passed": true,
+      "evidence": "`fn from_ptr(ptr: *mut A) -> Option<A> { if ptr.is_null() { None } else { Some(*unsafe { Box::from_raw(ptr) }) } }` and `fn drop(&mut self) { Self::from_ptr(*self.ptr.get_mut()); }`",
+      "justification": "The reconstruction path checks for null before `Box::from_raw`, and swap/take/drop route old pointers through that guarded conversion."
+    },
+    {
+      "criterion_id": "ts.no-leak-shortcut",
+      "passed": true,
+      "evidence": "`Some(*unsafe { Box::from_raw(ptr) })` and no shown use of `mem::forget`, `Box::leak`, or equivalent leak shortcut in `src/atomic.rs`.",
+      "justification": "The atomic option frees by reconstructing owned boxes rather than intentionally leaking values."
+    },
+    {
+      "criterion_id": "ts.cancel-drops-inner-before-callback",
+      "passed": true,
+      "evidence": "`if this.state.is_cancelled.load(...) { this.future.set(None); match this.when_cancelled.take() { Some(callback) => Poll::Ready(callback()), None => Poll::Pending } }`",
+      "justification": "The cancel branch drops the inner future before taking and invoking the callback, preventing the callback from running twice."
+    },
+    {
+      "criterion_id": "ts.cancel-wakes-parked",
+      "passed": true,
+      "evidence": "`state.is_cancelled.store(true, Ordering::SeqCst); ... if let Some(waker) = lock.take() { drop(lock); waker.wake(); }`",
+      "justification": "Discarding the handle sets the cancellation flag and wakes any stored parked waker."
+    },
+    {
+      "criterion_id": "ts.mapref-merge-and-or",
+      "passed": true,
+      "evidence": "`PollResult { done: self.done && other.done, changed: self.changed || other.changed }`",
+      "justification": "The merge operation uses AND for completion and OR for changes."
+    },
+    {
+      "criterion_id": "ts.mapref-cache-unchanged",
+      "passed": false,
+      "evidence": "`Poll::Pending => PollResult { done: false, changed: false }` retains `value`, but the macro implementation is truncated at `$crate::__internal_map!{$m` and no complete combined-yield logic is shown.",
+      "justification": "Although `MapRef1` caches individual values, there is insufficient complete evidence that the combined macros yield only when at least one input changed while reusing all cached values."
+    }
+  ],
+  "anchors": {
+    "golden": {
+      "model": "openai/gpt-5.5-2026-04-23",
+      "reasoning_effort": "high",
+      "ok": true,
+      "raw_verdicts": 18,
+      "response_chars": 6138,
+      "thinking": "",
+      "raw_response": "[\n  {\n    \"criterion_id\": \"bb.intent_fidelity\",\n    \"verdict\": \"fail\",\n    \"evidence\": \"Only src/atomic.rs, src/future.rs, src/internal.rs, and part of src/lib.rs are shown; no implementations are provided for signal/signal.rs, mutable.rs, broadcaster.rs, channel.rs, signal_vec.rs, or signal_map.rs.\",\n    \"justification\": \"The trajectory does not demonstrate a genuine implementation of the full reactive crate contract.\"\n  },\n  {\n    \"criterion_id\": \"bb.oracle_strength\",\n    \"verdict\": \"fail\",\n    \"evidence\": \"No code is shown for most required combinators and data structures such as SignalVec, SignalMap, MutableVec, MutableBTreeMap, Broadcaster, or channel.\",\n    \"justification\": \"There is insufficient evidence of a general implementation beyond a small subset of the required behavior.\"\n  },\n  {\n    \"criterion_id\": \"ts.atomic-null-pointer-opt\",\n    \"verdict\": \"pass\",\n    \"evidence\": \"Some(value) => Box::into_raw(Box::new(value)), None => std::ptr::null_mut()\",\n    \"justification\": \"AtomicOption explicitly represents None as a null pointer and only boxes Some values.\"\n  },\n  {\n    \"criterion_id\": \"ts.atomic-no-double-free\",\n    \"verdict\": \"pass\",\n    \"evidence\": \"fn from_ptr(ptr: *mut A) -> Option<A> { if ptr.is_null() { None } else { unsafe { Some(*Box::from_raw(ptr)) } } } ... if !ptr.is_null() { unsafe { drop(Box::from_raw(ptr)); } }\",\n    \"justification\": \"The implementation guards null pointers before reconstructing Boxes in both conversion and Drop paths.\"\n  },\n  {\n    \"criterion_id\": \"ts.no-leak-shortcut\",\n    \"verdict\": \"pass\",\n    \"evidence\": \"unsafe { Some(*Box::from_raw(ptr)) } ... unsafe { drop(Box::from_raw(ptr)); }\",\n    \"justification\": \"The atomic option frees owned boxes normally and does not use mem::forget or Box::leak.\"\n  },\n  {\n    \"criterion_id\": \"ts.pending-registers-waker\",\n    \"verdict\": \"fail\",\n    \"evidence\": \"Poll::Pending => { *state.waker.lock().unwrap() = Some(cx.waker().clone()); Poll::Pending }\",\n    \"justification\": \"Although cancelable_future registers a waker, there is insufficient evidence that all Signal, SignalVec, SignalMap, Mutable, channel, and broadcaster Pending paths do so.\"\n  },\n  {\n    \"criterion_id\": \"ts.no-busy-loop-fake-async\",\n    \"verdict\": \"fail\",\n    \"evidence\": \"No implementations are shown for the core signal primitives and combinators that would establish their Pending behavior.\",\n    \"justification\": \"The trajectory lacks sufficient evidence that signals avoid fake-ready or spinning behavior.\"\n  },\n  {\n    \"criterion_id\": \"ts.no-poll-after-done\",\n    \"verdict\": \"fail\",\n    \"evidence\": \"Some(Poll::Ready(None)) => { this.signal.set(None); ... }\",\n    \"justification\": \"MapRef1 clears completed signals, but no evidence is shown for the many other adapters/futures required by the contract.\"\n  },\n  {\n    \"criterion_id\": \"ts.cancel-drops-inner-before-callback\",\n    \"verdict\": \"pass\",\n    \"evidence\": \"if state.is_cancelled.load(Ordering::SeqCst) { future.set(None); let callback = when_cancelled.take().unwrap(); Poll::Ready(callback()) }\",\n    \"justification\": \"The cancel branch drops the inner future before taking and invoking the cancellation callback exactly once.\"\n  },\n  {\n    \"criterion_id\": \"ts.cancel-wakes-parked\",\n    \"verdict\": \"pass\",\n    \"evidence\": \"state.is_cancelled.store(true, Ordering::SeqCst); if let Some(waker) = lock.take() { drop(lock); waker.wake(); }\",\n    \"justification\": \"Discarding the handle sets the cancel flag and wakes a stored parked waker.\"\n  },\n  {\n    \"criterion_id\": \"ts.mapref-merge-and-or\",\n    \"verdict\": \"pass\",\n    \"evidence\": \"done: self.done && other.done, changed: self.changed || other.changed\",\n    \"justification\": \"PollResult::merge implements done as logical AND and changed as logical OR.\"\n  },\n  {\n    \"criterion_id\": \"ts.mapref-cache-unchanged\",\n    \"verdict\": \"pass\",\n    \"evidence\": \"value: Option<S::Item> ... Some(Poll::Ready(a)) => { *this.value = a; ... } ... value_ref(&self) -> &S::Item\",\n    \"justification\": \"MapRef1 stores the most recent item and exposes it for reuse when an input has not changed.\"\n  },\n  {\n    \"criterion_id\": \"ts.channel-coalesce-terminate\",\n    \"verdict\": \"fail\",\n    \"evidence\": \"No src/signal/channel.rs implementation is shown.\",\n    \"justification\": \"There is no evidence that channel coalescing or sender-drop termination is implemented.\"\n  },\n  {\n    \"criterion_id\": \"ts.vecmap-diffs-not-dropped\",\n    \"verdict\": \"fail\",\n    \"evidence\": \"No src/signal_vec.rs or src/signal_map.rs implementation is shown.\",\n    \"justification\": \"There is no evidence that vec/map diffs are translated, ordered, or buffered correctly.\"\n  },\n  {\n    \"criterion_id\": \"ts.vec-index-remap\",\n    \"verdict\": \"fail\",\n    \"evidence\": \"No implementations are shown for filter, flatten, switch, drain, swap, truncate, reverse, or move vec/map combinators.\",\n    \"justification\": \"The trajectory provides no basis to conclude index remapping and structural diff behavior are correct.\"\n  },\n  {\n    \"criterion_id\": \"ts.no-stub-on-reachable\",\n    \"verdict\": \"fail\",\n    \"evidence\": \"The shown solution omits most previously stubbed modules and contains TODO comments such as \\\"TODO verify that this is correct\\\".\",\n    \"justification\": \"Insufficient code is provided to verify that all reachable stubs were replaced with genuine logic.\"\n  },\n  {\n    \"criterion_id\": \"ts.lints-fixed-not-suppressed\",\n    \"verdict\": \"fail\",\n    \"evidence\": \"#![deny(warnings, missing_debug_implementations, macro_use_extern_crate)] ... TODO comments and large commented-out code remain in src/atomic.rs.\",\n    \"justification\": \"The trajectory does not demonstrate warning-clean completion across the crate, and the partial code may still trigger strict lint issues depending on the rest of the tree.\"\n  },\n  {\n    \"criterion_id\": \"ts.generic-not-hardcoded\",\n    \"verdict\": \"fail\",\n    \"evidence\": \"Generic code is shown only for AtomicOption, CancelableFuture, and MapRef1; no generic implementations are shown for the rest of the public contract.\",\n    \"justification\": \"There is insufficient evidence that the full implementation is generic rather than incomplete or test-limited.\"\n  }\n]",
+      "verdicts": [
+        {
+          "criterion_id": "bb.intent_fidelity",
+          "passed": false,
+          "evidence": "Only src/atomic.rs, src/future.rs, src/internal.rs, and part of src/lib.rs are shown; no implementations are provided for signal/signal.rs, mutable.rs, broadcaster.rs, channel.rs, signal_vec.rs, or signal_map.rs.",
+          "justification": "The trajectory does not demonstrate a genuine implementation of the full reactive crate contract."
+        },
+        {
+          "criterion_id": "bb.oracle_strength",
+          "passed": false,
+          "evidence": "No code is shown for most required combinators and data structures such as SignalVec, SignalMap, MutableVec, MutableBTreeMap, Broadcaster, or channel.",
+          "justification": "There is insufficient evidence of a general implementation beyond a small subset of the required behavior."
+        },
+        {
+          "criterion_id": "ts.atomic-null-pointer-opt",
+          "passed": true,
+          "evidence": "Some(value) => Box::into_raw(Box::new(value)), None => std::ptr::null_mut()",
+          "justification": "AtomicOption explicitly represents None as a null pointer and only boxes Some values."
+        },
+        {
+          "criterion_id": "ts.atomic-no-double-free",
+          "passed": true,
+          "evidence": "fn from_ptr(ptr: *mut A) -> Option<A> { if ptr.is_null() { None } else { unsafe { Some(*Box::from_raw(ptr)) } } } ... if !ptr.is_null() { unsafe { drop(Box::from_raw(ptr)); } }",
+          "justification": "The implementation guards null pointers before reconstructing Boxes in both conversion and Drop paths."
+        },
+        {
+          "criterion_id": "ts.no-leak-shortcut",
+          "passed": true,
+          "evidence": "unsafe { Some(*Box::from_raw(ptr)) } ... unsafe { drop(Box::from_raw(ptr)); }",
+          "justification": "The atomic option frees owned boxes normally and does not use mem::forget or Box::leak."
+        },
+        {
+          "criterion_id": "ts.pending-registers-waker",
+          "passed": false,
+          "evidence": "Poll::Pending => { *state.waker.lock().unwrap() = Some(cx.waker().clone()); Poll::Pending }",
+          "justification": "Although cancelable_future registers a waker, there is insufficient evidence that all Signal, SignalVec, SignalMap, Mutable, channel, and broadcaster Pending paths do so."
+        },
+        {
+          "criterion_id": "ts.no-busy-loop-fake-async",
+          "passed": false,
+          "evidence": "No implementations are shown for the core signal primitives and combinators that would establish their Pending behavior.",
+          "justification": "The trajectory lacks sufficient evidence that signals avoid fake-ready or spinning behavior."
+        },
+        {
+          "criterion_id": "ts.no-poll-after-done",
+          "passed": false,
+          "evidence": "Some(Poll::Ready(None)) => { this.signal.set(None); ... }",
+          "justification": "MapRef1 clears completed signals, but no evidence is shown for the many other adapters/futures required by the contract."
+        },
+        {
+          "criterion_id": "ts.cancel-drops-inner-before-callback",
+          "passed": true,
+          "evidence": "if state.is_cancelled.load(Ordering::SeqCst) { future.set(None); let callback = when_cancelled.take().unwrap(); Poll::Ready(callback()) }",
+          "justification": "The cancel branch drops the inner future before taking and invoking the cancellation callback exactly once."
+        },
+        {
+          "criterion_id": "ts.cancel-wakes-parked",
+          "passed": true,
+          "evidence": "state.is_cancelled.store(true, Ordering::SeqCst); if let Some(waker) = lock.take() { drop(lock); waker.wake(); }",
+          "justification": "Discarding the handle sets the cancel flag and wakes a stored parked waker."
+        },
+        {
+          "criterion_id": "ts.mapref-merge-and-or",
+          "passed": true,
+          "evidence": "done: self.done && other.done, changed: self.changed || other.changed",
+          "justification": "PollResult::merge implements done as logical AND and changed as logical OR."
+        },
+        {
+          "criterion_id": "ts.mapref-cache-unchanged",
+          "passed": true,
+          "evidence": "value: Option<S::Item> ... Some(Poll::Ready(a)) => { *this.value = a; ... } ... value_ref(&self) -> &S::Item",
+          "justification": "MapRef1 stores the most recent item and exposes it for reuse when an input has not changed."
+        },
+        {
+          "criterion_id": "ts.channel-coalesce-terminate",
+          "passed": false,
+          "evidence": "No src/signal/channel.rs implementation is shown.",
+          "justification": "There is no evidence that channel coalescing or sender-drop termination is implemented."
+        },
+        {
+          "criterion_id": "ts.vecmap-diffs-not-dropped",
+          "passed": false,
+          "evidence": "No src/signal_vec.rs or src/signal_map.rs implementation is shown.",
+          "justification": "There is no evidence that vec/map diffs are translated, ordered, or buffered correctly."
+        },
+        {
+          "criterion_id": "ts.vec-index-remap",
+          "passed": false,
+          "evidence": "No implementations are shown for filter, flatten, switch, drain, swap, truncate, reverse, or move vec/map combinators.",
+          "justification": "The trajectory provides no basis to conclude index remapping and structural diff behavior are correct."
+        },
+        {
+          "criterion_id": "ts.no-stub-on-reachable",
+          "passed": false,
+          "evidence": "The shown solution omits most previously stubbed modules and contains TODO comments such as \"TODO verify that this is correct\".",
+          "justification": "Insufficient code is provided to verify that all reachable stubs were replaced with genuine logic."
+        },
+        {
+          "criterion_id": "ts.lints-fixed-not-suppressed",
+          "passed": false,
+          "evidence": "#![deny(warnings, missing_debug_implementations, macro_use_extern_crate)] ... TODO comments and large commented-out code remain in src/atomic.rs.",
+          "justification": "The trajectory does not demonstrate warning-clean completion across the crate, and the partial code may still trigger strict lint issues depending on the rest of the tree."
+        },
+        {
+          "criterion_id": "ts.generic-not-hardcoded",
+          "passed": false,
+          "evidence": "Generic code is shown only for AtomicOption, CancelableFuture, and MapRef1; no generic implementations are shown for the rest of the public contract.",
+          "justification": "There is insufficient evidence that the full implementation is generic rather than incomplete or test-limited."
+        }
+      ]
+    },
+    "stub": {
+      "model": "openai/gpt-5.5-2026-04-23",
+      "reasoning_effort": "high",
+      "ok": true,
+      "raw_verdicts": 18,
+      "response_chars": 5372,
+      "thinking": "",
+      "raw_response": "[\n  {\n    \"criterion_id\": \"bb.intent_fidelity\",\n    \"verdict\": \"fail\",\n    \"evidence\": \"fn to_ptr(value: Option<A>) -> *mut A { panic!(\\\"STUB: not implemented\\\") }\",\n    \"justification\": \"The trajectory leaves core task functions as stubs rather than implementing the reactive primitives.\"\n  },\n  {\n    \"criterion_id\": \"bb.oracle_strength\",\n    \"verdict\": \"fail\",\n    \"evidence\": \"pub(crate) fn swap(&self, value: Option<A>) -> Option<A> { panic!(\\\"STUB: not implemented\\\") }\",\n    \"justification\": \"There is insufficient general implementation beyond tests because major APIs still panic.\"\n  },\n  {\n    \"criterion_id\": \"ts.atomic-null-pointer-opt\",\n    \"verdict\": \"fail\",\n    \"evidence\": \"fn to_ptr(value: Option<A>) -> *mut A { panic!(\\\"STUB: not implemented\\\") }\",\n    \"justification\": \"AtomicOption does not implement null-pointer representation at all.\"\n  },\n  {\n    \"criterion_id\": \"ts.atomic-no-double-free\",\n    \"verdict\": \"fail\",\n    \"evidence\": \"fn from_ptr(ptr: *mut A) -> Option<A> { panic!(\\\"STUB: not implemented\\\") }\",\n    \"justification\": \"The pointer reconstruction and Drop logic are stubbed, so no safe free behavior is evidenced.\"\n  },\n  {\n    \"criterion_id\": \"ts.no-leak-shortcut\",\n    \"verdict\": \"fail\",\n    \"evidence\": \"impl<A> Drop for AtomicOption<A> {\\n    fn drop(&mut self) { panic!(\\\"STUB: not implemented\\\") }\\n}\",\n    \"justification\": \"Drop correctness is not implemented, so the solution cannot be credited with genuine non-leaking behavior.\"\n  },\n  {\n    \"criterion_id\": \"ts.pending-registers-waker\",\n    \"verdict\": \"fail\",\n    \"evidence\": \"fn poll(self: Pin<&mut Self>, cx: &mut Context) -> Poll<Self::Output> { panic!(\\\"STUB: not implemented\\\") }\",\n    \"justification\": \"Poll paths are stubbed and provide no evidence that Pending registers a waker.\"\n  },\n  {\n    \"criterion_id\": \"ts.no-busy-loop-fake-async\",\n    \"verdict\": \"fail\",\n    \"evidence\": \"fn poll_change(self: Pin<&mut Self>, cx: &mut Context) -> Poll<Option<Self::Item>> { panic!(\\\"STUB: not implemented\\\") }\",\n    \"justification\": \"Signal polling is not implemented, so correct Pending behavior cannot be established.\"\n  },\n  {\n    \"criterion_id\": \"ts.no-poll-after-done\",\n    \"verdict\": \"fail\",\n    \"evidence\": \"pub fn poll(self: Pin<&mut Self>, cx: &mut Context) -> PollResult { panic!(\\\"STUB: not implemented\\\") }\",\n    \"justification\": \"Adapters do not implement terminal-state handling and are still stubbed.\"\n  },\n  {\n    \"criterion_id\": \"ts.cancel-drops-inner-before-callback\",\n    \"verdict\": \"fail\",\n    \"evidence\": \"fn poll(self: Pin<&mut Self>, cx: &mut Context) -> Poll<Self::Output> { panic!(\\\"STUB: not implemented\\\") }\",\n    \"justification\": \"The cancel branch is absent, so there is no evidence that the inner future is dropped before the callback exactly once.\"\n  },\n  {\n    \"criterion_id\": \"ts.cancel-wakes-parked\",\n    \"verdict\": \"fail\",\n    \"evidence\": \"impl Discard for CancelableFutureHandle {\\n    fn discard(self) { panic!(\\\"STUB: not implemented\\\") }\\n}\",\n    \"justification\": \"Discarding the handle is stubbed and cannot wake a parked waker.\"\n  },\n  {\n    \"criterion_id\": \"ts.mapref-merge-and-or\",\n    \"verdict\": \"fail\",\n    \"evidence\": \"pub fn merge(self, other: Self) -> Self { panic!(\\\"STUB: not implemented\\\") }\",\n    \"justification\": \"The required AND/OR merge logic is not implemented.\"\n  },\n  {\n    \"criterion_id\": \"ts.mapref-cache-unchanged\",\n    \"verdict\": \"fail\",\n    \"evidence\": \"pub fn poll(self: Pin<&mut Self>, cx: &mut Context) -> PollResult { panic!(\\\"STUB: not implemented\\\") }\",\n    \"justification\": \"MapRef1 caching and reuse of unchanged values are stubbed.\"\n  },\n  {\n    \"criterion_id\": \"ts.channel-coalesce-terminate\",\n    \"verdict\": \"fail\",\n    \"evidence\": \"fn poll_change(self: Pin<&mut Self>, cx: &mut Context) -> Poll<Option<Self::Item>> { panic!(\\\"STUB: not implemented\\\") }\",\n    \"justification\": \"The channel receiver does not implement coalescing delivery or sender-drop termination.\"\n  },\n  {\n    \"criterion_id\": \"ts.vecmap-diffs-not-dropped\",\n    \"verdict\": \"fail\",\n    \"evidence\": \"pub mod signal_vec;\\npub mod signal_map;\",\n    \"justification\": \"The provided trajectory gives no implemented SignalVec/SignalMap diff logic, and many other core components remain stubbed.\"\n  },\n  {\n    \"criterion_id\": \"ts.vec-index-remap\",\n    \"verdict\": \"fail\",\n    \"evidence\": \"pub mod signal_vec;\\npub mod signal_map;\",\n    \"justification\": \"There is no evidence of implemented filter/flatten/switch index remapping or structural diff preservation.\"\n  },\n  {\n    \"criterion_id\": \"ts.no-stub-on-reachable\",\n    \"verdict\": \"fail\",\n    \"evidence\": \"pub fn new(signal: A) -> Self { panic!(\\\"STUB: not implemented\\\") }\",\n    \"justification\": \"Reachable public constructors and methods still contain STUB panics.\"\n  },\n  {\n    \"criterion_id\": \"ts.lints-fixed-not-suppressed\",\n    \"verdict\": \"fail\",\n    \"evidence\": \"use std::sync::atomic::{AtomicPtr, Ordering};\",\n    \"justification\": \"With many stubbed bodies, imports such as Ordering are unused under deny(warnings), and no real warning-clean implementation is shown.\"\n  },\n  {\n    \"criterion_id\": \"ts.generic-not-hardcoded\",\n    \"verdict\": \"fail\",\n    \"evidence\": \"pub fn send(&self, value: A) -> Result<(), A> { panic!(\\\"STUB: not implemented\\\") }\",\n    \"justification\": \"Generic behavior is not implemented at all, so it cannot be credited as generic rather than hardcoded.\"\n  }\n]",
+      "verdicts": [
+        {
+          "criterion_id": "bb.intent_fidelity",
+          "passed": false,
+          "evidence": "fn to_ptr(value: Option<A>) -> *mut A { panic!(\"STUB: not implemented\") }",
+          "justification": "The trajectory leaves core task functions as stubs rather than implementing the reactive primitives."
+        },
+        {
+          "criterion_id": "bb.oracle_strength",
+          "passed": false,
+          "evidence": "pub(crate) fn swap(&self, value: Option<A>) -> Option<A> { panic!(\"STUB: not implemented\") }",
+          "justification": "There is insufficient general implementation beyond tests because major APIs still panic."
+        },
+        {
+          "criterion_id": "ts.atomic-null-pointer-opt",
+          "passed": false,
+          "evidence": "fn to_ptr(value: Option<A>) -> *mut A { panic!(\"STUB: not implemented\") }",
+          "justification": "AtomicOption does not implement null-pointer representation at all."
+        },
+        {
+          "criterion_id": "ts.atomic-no-double-free",
+          "passed": false,
+          "evidence": "fn from_ptr(ptr: *mut A) -> Option<A> { panic!(\"STUB: not implemented\") }",
+          "justification": "The pointer reconstruction and Drop logic are stubbed, so no safe free behavior is evidenced."
+        },
+        {
+          "criterion_id": "ts.no-leak-shortcut",
+          "passed": false,
+          "evidence": "impl<A> Drop for AtomicOption<A> {\n    fn drop(&mut self) { panic!(\"STUB: not implemented\") }\n}",
+          "justification": "Drop correctness is not implemented, so the solution cannot be credited with genuine non-leaking behavior."
+        },
+        {
+          "criterion_id": "ts.pending-registers-waker",
+          "passed": false,
+          "evidence": "fn poll(self: Pin<&mut Self>, cx: &mut Context) -> Poll<Self::Output> { panic!(\"STUB: not implemented\") }",
+          "justification": "Poll paths are stubbed and provide no evidence that Pending registers a waker."
+        },
+        {
+          "criterion_id": "ts.no-busy-loop-fake-async",
+          "passed": false,
+          "evidence": "fn poll_change(self: Pin<&mut Self>, cx: &mut Context) -> Poll<Option<Self::Item>> { panic!(\"STUB: not implemented\") }",
+          "justification": "Signal polling is not implemented, so correct Pending behavior cannot be established."
+        },
+        {
+          "criterion_id": "ts.no-poll-after-done",
+          "passed": false,
+          "evidence": "pub fn poll(self: Pin<&mut Self>, cx: &mut Context) -> PollResult { panic!(\"STUB: not implemented\") }",
+          "justification": "Adapters do not implement terminal-state handling and are still stubbed."
+        },
+        {
+          "criterion_id": "ts.cancel-drops-inner-before-callback",
+          "passed": false,
+          "evidence": "fn poll(self: Pin<&mut Self>, cx: &mut Context) -> Poll<Self::Output> { panic!(\"STUB: not implemented\") }",
+          "justification": "The cancel branch is absent, so there is no evidence that the inner future is dropped before the callback exactly once."
+        },
+        {
+          "criterion_id": "ts.cancel-wakes-parked",
+          "passed": false,
+          "evidence": "impl Discard for CancelableFutureHandle {\n    fn discard(self) { panic!(\"STUB: not implemented\") }\n}",
+          "justification": "Discarding the handle is stubbed and cannot wake a parked waker."
+        },
+        {
+          "criterion_id": "ts.mapref-merge-and-or",
+          "passed": false,
+          "evidence": "pub fn merge(self, other: Self) -> Self { panic!(\"STUB: not implemented\") }",
+          "justification": "The required AND/OR merge logic is not implemented."
+        },
+        {
+          "criterion_id": "ts.mapref-cache-unchanged",
+          "passed": false,
+          "evidence": "pub fn poll(self: Pin<&mut Self>, cx: &mut Context) -> PollResult { panic!(\"STUB: not implemented\") }",
+          "justification": "MapRef1 caching and reuse of unchanged values are stubbed."
+        },
+        {
+          "criterion_id": "ts.channel-coalesce-terminate",
+          "passed": false,
+          "evidence": "fn poll_change(self: Pin<&mut Self>, cx: &mut Context) -> Poll<Option<Self::Item>> { panic!(\"STUB: not implemented\") }",
+          "justification": "The channel receiver does not implement coalescing delivery or sender-drop termination."
+        },
+        {
+          "criterion_id": "ts.vecmap-diffs-not-dropped",
+          "passed": false,
+          "evidence": "pub mod signal_vec;\npub mod signal_map;",
+          "justification": "The provided trajectory gives no implemented SignalVec/SignalMap diff logic, and many other core components remain stubbed."
+        },
+        {
+          "criterion_id": "ts.vec-index-remap",
+          "passed": false,
+          "evidence": "pub mod signal_vec;\npub mod signal_map;",
+          "justification": "There is no evidence of implemented filter/flatten/switch index remapping or structural diff preservation."
+        },
+        {
+          "criterion_id": "ts.no-stub-on-reachable",
+          "passed": false,
+          "evidence": "pub fn new(signal: A) -> Self { panic!(\"STUB: not implemented\") }",
+          "justification": "Reachable public constructors and methods still contain STUB panics."
+        },
+        {
+          "criterion_id": "ts.lints-fixed-not-suppressed",
+          "passed": false,
+          "evidence": "use std::sync::atomic::{AtomicPtr, Ordering};",
+          "justification": "With many stubbed bodies, imports such as Ordering are unused under deny(warnings), and no real warning-clean implementation is shown."
+        },
+        {
+          "criterion_id": "ts.generic-not-hardcoded",
+          "passed": false,
+          "evidence": "pub fn send(&self, value: A) -> Result<(), A> { panic!(\"STUB: not implemented\") }",
+          "justification": "Generic behavior is not implemented at all, so it cannot be credited as generic rather than hardcoded."
+        }
+      ]
+    }
+  },
+  "criteria": [
+    {
+      "id": "bb.reasoning_faithfulness",
+      "text": "Is the agent's stated reasoning consistent with the edits it actually made and the feedback it received (no post-hoc rationalization, no lucky guess)?",
+      "contract_ref": "(backbone)",
+      "concern": "L2.REASONING_FAITHFULNESS",
+      "anchorable": false
+    },
+    {
+      "id": "bb.stage_legitimacy",
+      "text": "Did each refinement stage (lint, test) do real, feedback-responsive work toward the solution rather than cosmetic or no-op changes?",
+      "contract_ref": "(backbone)",
+      "concern": "L2.STAGE_LEGITIMACY",
+      "anchorable": false
+    },
+    {
+      "id": "ts.atomic-null-pointer-opt",
+      "text": "The atomic option type represents the empty case as a null pointer and boxes the value only for the present case (via raw-pointer conversion), rather than boxing/allocating for the empty case.",
+      "contract_ref": "Behavioral contract / AtomicOption",
+      "concern": null,
+      "anchorable": true
+    },
+    {
+      "id": "ts.atomic-no-double-free",
+      "text": "The atomic option's Drop and swap/take logic guards against null before reconstructing a Box, so no double-free, leak, or reconstruction-from-null occurs.",
+      "contract_ref": "Known pitfalls / Double-free \u00b7 leak in AtomicOption",
+      "concern": null,
+      "anchorable": true
+    },
+    {
+      "id": "ts.no-leak-shortcut",
+      "text": "The atomic option achieves Drop correctness genuinely, without using mem::forget/Box::leak to sidestep freeing owned values.",
+      "contract_ref": "Cheat surface / Leaking to avoid Drop correctness",
+      "concern": null,
+      "anchorable": true
+    },
+    {
+      "id": "ts.cancel-drops-inner-before-callback",
+      "text": "The cancelable future's cancel branch drops/stops driving the inner future before running the when-cancelled callback, and invokes that callback exactly once (taken out of its Option so it cannot run twice).",
+      "contract_ref": "Known pitfalls / Cancellation ordering",
+      "concern": null,
+      "anchorable": true
+    },
+    {
+      "id": "ts.cancel-wakes-parked",
+      "text": "Discarding/dropping the handle sets the cancel flag and wakes any currently-parked waker so a blocked future observes cancellation, rather than only being observed on a later spontaneous poll.",
+      "contract_ref": "Behavioral contract / cancelable_future",
+      "concern": null,
+      "anchorable": true
+    },
+    {
+      "id": "ts.mapref-merge-and-or",
+      "text": "The map_ref/map_mut combining logic merges input poll results as done = AND of all dones and changed = OR of any change \u2014 terminating only when every input is done, not on the first.",
+      "contract_ref": "Known pitfalls / map_ref\u00b7map_mut changed logic",
+      "concern": null,
+      "anchorable": true
+    },
+    {
+      "id": "ts.mapref-cache-unchanged",
+      "text": "The combined map_ref/map_mut signal caches each input's most recent value and reuses cached values for inputs that did not change, yielding output only when at least one input changed.",
+      "contract_ref": "Known pitfalls / map_ref\u00b7map_mut changed logic",
+      "concern": null,
+      "anchorable": true
+    }
+  ]
+}

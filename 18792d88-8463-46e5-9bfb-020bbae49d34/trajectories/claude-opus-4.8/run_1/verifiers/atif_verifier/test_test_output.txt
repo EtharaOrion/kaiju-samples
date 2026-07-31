@@ -1,0 +1,404 @@
+PASS src/__tests__/variables.test.ts
+PASS src/__tests__/directives.test.ts
+PASS src/__tests__/execution.test.ts
+FAIL src/__tests__/resolve-info.test.ts
+  ● resolver info › Field Expansion › interfaces › compute interface field nodes
+
+    expect(received).toMatchInlineSnapshot(snapshot)
+
+    Snapshot name: `resolver info Field Expansion interfaces compute interface field nodes 1`
+
+    - Snapshot  - 16
+    + Received  +  0
+
+    @@ -1,22 +1,6 @@
+      {
+    -   "Bar1": {
+    -     "id": {
+    -       Symbol(LeafFieldSymbol): true,
+    -     },
+    -     "title": {
+    -       Symbol(LeafFieldSymbol): true,
+    -     },
+    -   },
+    -   "Bar2": {
+    -     "id": {
+    -       Symbol(LeafFieldSymbol): true,
+    -     },
+    -     "title": {
+    -       Symbol(LeafFieldSymbol): true,
+    -     },
+    -   },
+        "IBar": {
+          "id": {
+            Symbol(LeafFieldSymbol): true,
+          },
+          "title": {
+
+      379 |         expect(result.errors).not.toBeDefined();
+      380 |
+    > 381 |         expect(inf.fieldExpansion).toMatchInlineSnapshot(`
+          |                                    ^
+      382 |           {
+      383 |             "Bar1": {
+      384 |               "id": {
+
+      at Object.toMatchInlineSnapshot (src/__tests__/resolve-info.test.ts:381:36)
+
+  ● resolver info › Field Expansion › interfaces › aggregate multiple selections of the same field
+
+    expect(received).toMatchInlineSnapshot(snapshot)
+
+    Snapshot name: `resolver info Field Expansion interfaces aggregate multiple selections of the same field 1`
+
+    - Snapshot  - 12
+    + Received  +  0
+
+    @@ -1,25 +1,13 @@
+      {
+        "Bar1": {
+          "b1": {
+            Symbol(LeafFieldSymbol): true,
+          },
+    -     "id": {
+    -       Symbol(LeafFieldSymbol): true,
+    -     },
+    -     "title": {
+    -       Symbol(LeafFieldSymbol): true,
+    -     },
+        },
+        "Bar2": {
+          "b2": {
+    -       Symbol(LeafFieldSymbol): true,
+    -     },
+    -     "id": {
+    -       Symbol(LeafFieldSymbol): true,
+    -     },
+    -     "title": {
+            Symbol(LeafFieldSymbol): true,
+          },
+        },
+        "IBar": {
+          "id": {
+
+      563 |         expect(result.errors).not.toBeDefined();
+      564 |
+    > 565 |         expect(inf.fieldExpansion).toMatchInlineSnapshot(`
+          |                                    ^
+      566 |           {
+      567 |             "Bar1": {
+      568 |               "b1": {
+
+      at Object.toMatchInlineSnapshot (src/__tests__/resolve-info.test.ts:565:36)
+
+  ● resolver info › Field Expansion › unions › __typename
+
+    expect(received).toMatchInlineSnapshot(snapshot)
+
+    Snapshot name: `resolver info Field Expansion unions __typename 1`
+
+    - Snapshot  - 4
+    + Received  + 1
+
+    - {
+    -   "Bar": {},
+    -   "Foo": {},
+    - }
+    + {}
+
+      724 |         );
+      725 |         expect(result.errors).not.toBeDefined();
+    > 726 |         expect(inf.fieldExpansion).toMatchInlineSnapshot(`
+          |                                    ^
+      727 |           {
+      728 |             "Bar": {},
+      729 |             "Foo": {},
+
+      at Object.toMatchInlineSnapshot (src/__tests__/resolve-info.test.ts:726:36)
+
+  ● resolver info › Field Expansion › lists, inputs, unions and interfaces 2 › node
+
+    expect(received).toMatchInlineSnapshot(snapshot)
+
+    Snapshot name: `resolver info Field Expansion lists, inputs, unions and interfaces 2 node 1`
+
+    - Snapshot  - 15
+    + Received  +  5
+
+    @@ -1,6 +1,7 @@
+      {
+    +   "DocumentElement": {},
+        "Image": {
+          "id": {
+            Symbol(LeafFieldSymbol): true,
+          },
+          "tags": {
+    @@ -24,31 +25,20 @@
+          "tags": {
+            "Tag": {
+              "id": {
+                Symbol(LeafFieldSymbol): true,
+              },
+    +         "name": {
+    +           Symbol(LeafFieldSymbol): true,
+              },
+            },
+          },
+    -   "Node": {
+    -     "id": {
+    +     "url": {
+            Symbol(LeafFieldSymbol): true,
+          },
+        },
+    -   "Tag": {
+    -     "id": {
+    -       Symbol(LeafFieldSymbol): true,
+    -     },
+    -   },
+    -   "Video": {
+    +   "Node": {
+          "id": {
+            Symbol(LeafFieldSymbol): true,
+    -     },
+    -     "tags": {
+    -       "Tag": {
+    -         "id": {
+    -           Symbol(LeafFieldSymbol): true,
+    -         },
+    -       },
+          },
+        },
+      }
+
+      932 |         expect(validationErrors.length).toBe(0);
+      933 |         expect(result.errors).not.toBeDefined();
+    > 934 |         expect(infNode.fieldExpansion).toMatchInlineSnapshot(`
+          |                                        ^
+      935 |           {
+      936 |             "Image": {
+      937 |               "id": {
+
+      at Object.toMatchInlineSnapshot (src/__tests__/resolve-info.test.ts:934:40)
+
+  ● resolver info › Field Expansion › lists, inputs, unions and interfaces 2 › elements
+
+    expect(received).toMatchInlineSnapshot(snapshot)
+
+    Snapshot name: `resolver info Field Expansion lists, inputs, unions and interfaces 2 elements 1`
+
+    - Snapshot  - 39
+    + Received  +  0
+
+      {
+        "Div": {
+          "children": {
+            "Div": {
+              "children": {
+    -           "Div": {},
+    -           "Image": {
+    -             "url": {
+    -               Symbol(LeafFieldSymbol): true,
+    -             },
+    -           },
+                "Media": {
+                  "url": {
+                    Symbol(LeafFieldSymbol): true,
+                  },
+                },
+    -           "Node": {},
+    -           "Video": {
+    -             "url": {
+    -               Symbol(LeafFieldSymbol): true,
+              },
+            },
+    -         },
+    -       },
+    -       "Image": {
+    -         "id": {
+    -           Symbol(LeafFieldSymbol): true,
+    -         },
+    -       },
+    -       "Media": {},
+            "Node": {
+              "id": {
+                Symbol(LeafFieldSymbol): true,
+              },
+            },
+    -       "Video": {
+    -         "id": {
+    -           Symbol(LeafFieldSymbol): true,
+    -         },
+    -       },
+          },
+        },
+    -   "Image": {
+    -     "id": {
+    -       Symbol(LeafFieldSymbol): true,
+    -     },
+    -     "url": {
+    -       Symbol(LeafFieldSymbol): true,
+    -     },
+    -   },
+        "Media": {
+          "url": {
+            Symbol(LeafFieldSymbol): true,
+          },
+        },
+        "Node": {
+          "id": {
+    -       Symbol(LeafFieldSymbol): true,
+    -     },
+    -   },
+    -   "Video": {
+    -     "id": {
+    -       Symbol(LeafFieldSymbol): true,
+    -     },
+    -     "url": {
+            Symbol(LeafFieldSymbol): true,
+          },
+        },
+      }
+
+      1027 |
+      1028 |         expect(result.errors).not.toBeDefined();
+    > 1029 |         expect(infElements.fieldExpansion).toMatchInlineSnapshot(`
+           |                                            ^
+      1030 |           {
+      1031 |             "Div": {
+      1032 |               "children": {
+
+      at Object.toMatchInlineSnapshot (src/__tests__/resolve-info.test.ts:1029:44)
+
+  ● resolver info › Field Expansion › lists, inputs, unions and interfaces 2 › alias 1
+
+    expect(received).toMatchInlineSnapshot(snapshot)
+
+    Snapshot name: `resolver info Field Expansion lists, inputs, unions and interfaces 2 alias 1 1`
+
+    - Snapshot  - 11
+    + Received  +  0
+
+      {
+    -   "Image": {
+    -     "id": {
+    -       Symbol(LeafFieldSymbol): true,
+    -     },
+    -   },
+    -   "Media": {},
+        "Node": {
+          "id": {
+            Symbol(LeafFieldSymbol): true,
+          },
+        },
+        "Tag": {
+          "id": {
+            Symbol(LeafFieldSymbol): true,
+          },
+          "name": {
+    -       Symbol(LeafFieldSymbol): true,
+    -     },
+    -   },
+    -   "Video": {
+    -     "id": {
+            Symbol(LeafFieldSymbol): true,
+          },
+        },
+      }
+
+      1121 |         expect(validationErrors.length).toBe(0);
+      1122 |         expect(result.errors).not.toBeDefined();
+    > 1123 |         expect(infNode.fieldExpansion).toMatchInlineSnapshot(`
+           |                                        ^
+      1124 |           {
+      1125 |             "Image": {
+      1126 |               "id": {
+
+      at Object.toMatchInlineSnapshot (src/__tests__/resolve-info.test.ts:1123:40)
+
+  ● resolver info › Field Expansion › lists, inputs, unions and interfaces 2 › aliases and __typename should not be included in resolveInfo
+
+    expect(received).toMatchInlineSnapshot(snapshot)
+
+    Snapshot name: `resolver info Field Expansion lists, inputs, unions and interfaces 2 aliases and __typename should not be included in resolveInfo 1`
+
+    - Snapshot  - 24
+    + Received  +  1
+
+    @@ -1,18 +1,7 @@
+      {
+    -   "Image": {
+    -     "id": {
+    -       Symbol(LeafFieldSymbol): true,
+    -     },
+    -     "tags": {
+    -       "Tag": {
+    -         "name": {
+    -           Symbol(LeafFieldSymbol): true,
+    -         },
+    -       },
+    -     },
+    -   },
+    +   "DocumentElement": {},
+        "Media": {
+          "tags": {
+            "Tag": {
+              "name": {
+                Symbol(LeafFieldSymbol): true,
+    @@ -29,20 +18,8 @@
+          "id": {
+            Symbol(LeafFieldSymbol): true,
+          },
+          "name": {
+            Symbol(LeafFieldSymbol): true,
+    -     },
+    -   },
+    -   "Video": {
+    -     "id": {
+    -       Symbol(LeafFieldSymbol): true,
+    -     },
+    -     "tags": {
+    -       "Tag": {
+    -         "name": {
+    -           Symbol(LeafFieldSymbol): true,
+    -         },
+    -       },
+          },
+        },
+      }
+
+      1184 |         expect(validationErrors.length).toBe(0);
+      1185 |         expect(result.errors).not.toBeDefined();
+    > 1186 |         expect(infNode.fieldExpansion).toMatchInlineSnapshot(`
+           |                                        ^
+      1187 |           {
+      1188 |             "Image": {
+      1189 |               "id": {
+
+      at Object.toMatchInlineSnapshot (src/__tests__/resolve-info.test.ts:1186:40)
+
+ › 7 snapshots failed.
+PASS src/__tests__/subscription.test.ts
+PASS src/__tests__/nonnull.test.ts
+PASS src/__tests__/abstract.test.ts
+PASS src/__tests__/lists.test.ts
+PASS src/__tests__/schema.test.ts
+PASS src/__tests__/union-interface.test.ts
+PASS src/__tests__/scalars.test.ts
+PASS src/__tests__/mutations.test.ts
+PASS src/__tests__/alias.test.ts
+PASS src/__tests__/inspect.test.ts
+PASS src/__tests__/json.test.ts
+PASS src/__tests__/sync.test.ts
+PASS src/__tests__/resolve.test.ts
+PASS src/__tests__/error.test.ts
+PASS src/__tests__/memoize.test.ts
+
+Snapshot Summary
+ › 7 snapshots failed from 1 test suite. Inspect your code changes or re-run jest with `-u` to update them.
+
+Test Suites: 1 failed, 18 passed, 19 total
+Tests:       7 failed, 389 passed, 396 total
+Snapshots:   7 failed, 12 passed, 19 total
+Time:        2.423 s
+Ran all test suites matching /src\/__tests__/i.
+Test results written to: report.json

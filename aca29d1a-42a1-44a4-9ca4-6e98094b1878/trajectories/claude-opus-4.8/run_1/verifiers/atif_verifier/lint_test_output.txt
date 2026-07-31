@@ -1,0 +1,356 @@
+    Updating crates.io index
+     Locking 29 packages to latest compatible versions
+      Adding rand v0.8.7 (available: v0.10.2)
+   Compiling scopeguard v1.2.0
+   Compiling cfg-if v1.0.4
+   Compiling smallvec v1.15.2
+   Compiling stack-map v1.0.5
+   Compiling libc v0.2.186
+   Compiling lock_api v0.4.14
+   Compiling parking_lot_core v0.9.12
+   Compiling parking_lot v0.12.5
+   Compiling shared-local-state v0.1.4
+   Compiling ebr v0.2.13
+   Compiling concurrent-map v5.0.37 (/tmp/commit0-inplace-1a5roh18/tree)
+warning: function `debug_delay` is never used
+  --> src/lib.rs:82:10
+   |
+82 | const fn debug_delay() -> bool {
+   |          ^^^^^^^^^^^
+   |
+   = note: `#[warn(dead_code)]` (part of `#[warn(unused)]`) on by default
+
+warning: variant `BoxedAtomicPtr` is never constructed
+   --> src/lib.rs:124:5
+    |
+117 | enum Deferred<
+    |      -------- variant in this enum
+...
+124 |     BoxedAtomicPtr(BoxedAtomicPtr<K, V, FANOUT>),
+    |     ^^^^^^^^^^^^^^
+    |
+    = note: `Deferred` has a derived impl for the trait `Debug`, but this is intentionally ignored during dead code analysis
+
+warning: method `get_mut` is never used
+   --> src/lib.rs:273:15
+    |
+241 | / impl<K, V, const FANOUT: usize> NodeView<K, V, FANOUT>
+242 | | where
+243 | |     K: 'static + Clone + Minimum + Ord + Send + Sync,
+244 | |     V: 'static + Clone + Send + Sync,
+    | |_____________________________________- method in this implementation
+...
+273 |       unsafe fn get_mut(&mut self) -> &mut Node<K, V, FANOUT> {
+    |                 ^^^^^^^
+
+warning: methods `install_parent_merge` and `merge_child` are never used
+    --> src/lib.rs:1051:8
+     |
+ 980 | / impl<K, V, const FANOUT: usize, const LOCAL_GC_BUFFER_SIZE: usize>
+ 981 | |     Inner<K, V, FANOUT, LOCAL_GC_BUFFER_SIZE>
+ 982 | | where
+ 983 | |     K: 'static + Clone + Minimum + Ord + Send + Sync,
+ 984 | |     V: 'static + Clone + Send + Sync,
+     | |_____________________________________- methods in this implementation
+...
+1051 |       fn install_parent_merge<'a>(
+     |          ^^^^^^^^^^^^^^^^^^^^
+...
+1060 |       fn merge_child<'a>(
+     |          ^^^^^^^^^^^
+
+warning: methods `should_merge`, `merge`, and `is_viable_parent_for` are never used
+    --> src/lib.rs:1369:14
+     |
+1254 | / impl<K, V, const FANOUT: usize> Node<K, V, FANOUT>
+1255 | | where
+1256 | |     K: 'static + Clone + Minimum + Ord + Send + Sync,
+1257 | |     V: 'static + Clone + Send + Sync,
+     | |_____________________________________- methods in this implementation
+...
+1369 |       const fn should_merge(&self) -> bool {
+     |                ^^^^^^^^^^^^
+...
+1442 |       fn merge(&mut self, rhs: &NodeView<K, V, FANOUT>) {
+     |          ^^^^^
+...
+1466 |       fn is_viable_parent_for(&self, possible_child: &NodeView<K, V, FANOUT>) -> bool {
+     |          ^^^^^^^^^^^^^^^^^^^^
+
+warning: `concurrent-map` (lib) generated 5 warnings
+error: missing documentation for the crate
+    --> src/lib.rs:1:1
+     |
+   1 | / #![cfg_attr(
+   2 | |     test,
+   3 | |     deny(
+   4 | |         missing_docs,
+...    |
+1619 | |     );
+1620 | | }
+     | |_^
+     |
+note: the lint level is defined here
+    --> src/lib.rs:4:9
+     |
+   4 |         missing_docs,
+     |         ^^^^^^^^^^^^
+
+error: missing documentation for a struct
+   --> src/lib.rs:224:1
+    |
+224 | pub struct CasFailure<V> {
+    | ^^^^^^^^^^^^^^^^^^^^^^^^
+
+error: missing documentation for a struct field
+   --> src/lib.rs:226:5
+    |
+226 |     pub actual: Option<V>,
+    |     ^^^^^^^^^^^^^^^^^^^^^
+
+error: missing documentation for a struct field
+   --> src/lib.rs:228:5
+    |
+228 |     pub returned_new_value: Option<V>,
+    |     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+error: missing documentation for a trait
+   --> src/lib.rs:290:1
+    |
+290 | pub trait Minimum: Ord {
+    | ^^^^^^^^^^^^^^^^^^^^^^
+
+error: missing documentation for an associated constant
+   --> src/lib.rs:292:5
+    |
+292 |     const MIN: Self;
+    |     ^^^^^^^^^^^^^^^
+
+error: missing documentation for a trait
+   --> src/lib.rs:295:1
+    |
+295 | pub trait Maximum: Ord {
+    | ^^^^^^^^^^^^^^^^^^^^^^
+
+error: missing documentation for an associated constant
+   --> src/lib.rs:297:5
+    |
+297 |     const MAX: Self;
+    |     ^^^^^^^^^^^^^^^
+
+error: missing documentation for a struct
+   --> src/lib.rs:392:1
+    |
+392 | pub struct ConcurrentMap<K, V, const FANOUT: usize = 64, const LOCAL_GC_BUFFER_SIZE: usize = 128>
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+error: missing documentation for an associated function
+   --> src/lib.rs:502:5
+    |
+502 |     pub fn new() -> Self {
+    |     ^^^^^^^^^^^^^^^^^^^^
+
+error: missing documentation for a method
+   --> src/lib.rs:506:5
+    |
+506 | /     pub fn get<Q>(&self, key: &Q) -> Option<V>
+507 | |     where
+508 | |         K: Borrow<Q>,
+509 | |         Q: Ord + ?Sized,
+    | |________________________^
+
+error: missing documentation for a method
+   --> src/lib.rs:516:5
+    |
+516 | /     pub fn contains_key<Q>(&self, key: &Q) -> bool
+517 | |     where
+518 | |         K: Borrow<Q>,
+519 | |         Q: Ord + ?Sized,
+    | |________________________^
+
+error: missing documentation for a method
+   --> src/lib.rs:524:5
+    |
+524 | /     pub fn get_lt<Q>(&self, key: &Q) -> Option<(K, V)>
+525 | |     where
+526 | |         K: Borrow<Q>,
+527 | |         Q: ?Sized + Ord + PartialEq,
+    | |____________________________________^
+
+error: missing documentation for a method
+   --> src/lib.rs:533:5
+    |
+533 | /     pub fn get_lte<Q>(&self, key: &Q) -> Option<(K, V)>
+534 | |     where
+535 | |         K: Borrow<Q>,
+536 | |         Q: ?Sized + Ord + PartialEq,
+    | |____________________________________^
+
+error: missing documentation for a method
+   --> src/lib.rs:542:5
+    |
+542 | /     pub fn get_gt<Q>(&self, key: &Q) -> Option<(K, V)>
+543 | |     where
+544 | |         K: Borrow<Q>,
+545 | |         Q: ?Sized + Ord + PartialEq,
+    | |____________________________________^
+
+error: missing documentation for a method
+   --> src/lib.rs:550:5
+    |
+550 | /     pub fn get_gte<Q>(&self, key: &Q) -> Option<(K, V)>
+551 | |     where
+552 | |         K: Borrow<Q>,
+553 | |         Q: ?Sized + Ord + PartialEq,
+    | |____________________________________^
+
+error: missing documentation for a method
+   --> src/lib.rs:558:5
+    |
+558 |     pub fn first(&self) -> Option<(K, V)> {
+    |     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+error: missing documentation for a method
+   --> src/lib.rs:562:5
+    |
+562 | /     pub fn pop_first(&self) -> Option<(K, V)>
+563 | |     where
+564 | |         V: PartialEq,
+    | |_____________________^
+
+error: missing documentation for a method
+   --> src/lib.rs:574:5
+    |
+574 | /     pub fn pop_first_in_range<Q, R>(&self, range: R) -> Option<(K, V)>
+575 | |     where
+576 | |         R: std::ops::RangeBounds<Q> + Clone,
+577 | |         K: Borrow<Q>,
+578 | |         V: PartialEq,
+579 | |         Q: ?Sized + Ord + PartialEq,
+    | |____________________________________^
+
+error: missing documentation for a method
+   --> src/lib.rs:589:5
+    |
+589 |     pub fn last(&self) -> Option<(K, V)> {
+    |     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+error: missing documentation for a method
+   --> src/lib.rs:593:5
+    |
+593 | /     pub fn pop_last(&self) -> Option<(K, V)>
+594 | |     where
+595 | |         V: PartialEq,
+    | |_____________________^
+
+error: missing documentation for a method
+   --> src/lib.rs:605:5
+    |
+605 | /     pub fn pop_last_in_range<Q, R>(&self, range: R) -> Option<(K, V)>
+606 | |     where
+607 | |         R: std::ops::RangeBounds<Q> + Clone,
+608 | |         K: Borrow<Q>,
+609 | |         V: PartialEq,
+610 | |         Q: ?Sized + Ord + PartialEq,
+    | |____________________________________^
+
+error: missing documentation for a method
+   --> src/lib.rs:620:5
+    |
+620 |     pub fn insert(&self, key: K, value: V) -> Option<V> {
+    |     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+error: missing documentation for a method
+   --> src/lib.rs:635:5
+    |
+635 | /     pub fn remove<Q>(&self, key: &Q) -> Option<V>
+636 | |     where
+637 | |         K: Borrow<Q>,
+638 | |         Q: Ord + ?Sized,
+    | |________________________^
+
+error: missing documentation for a method
+   --> src/lib.rs:658:5
+    |
+658 | /     pub fn cas<VRef>(
+659 | |         &self,
+660 | |         key: K,
+661 | |         old: Option<&VRef>,
+...   |
+665 | |         V: Borrow<VRef>,
+666 | |         VRef: PartialEq + ?Sized,
+    | |_________________________________^
+
+error: missing documentation for a method
+   --> src/lib.rs:690:5
+    |
+690 |     pub fn len(&self) -> usize {
+    |     ^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+error: missing documentation for a method
+   --> src/lib.rs:694:5
+    |
+694 |     pub fn is_empty(&self) -> bool {
+    |     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+error: missing documentation for a method
+   --> src/lib.rs:698:5
+    |
+698 |     pub fn iter(&self) -> Iter<'_, K, V, FANOUT, LOCAL_GC_BUFFER_SIZE> {
+    |     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+error: missing documentation for a method
+   --> src/lib.rs:702:5
+    |
+702 | /     pub fn range<Q, R>(&self, range: R) -> Iter<'_, K, V, FANOUT, LOCAL_GC_BUFFER_SIZE, R, Q>
+703 | |     where
+704 | |         R: std::ops::RangeBounds<Q>,
+705 | |         K: Borrow<Q>,
+706 | |         Q: ?Sized + Ord + PartialEq,
+    | |____________________________________^
+
+error: missing documentation for a method
+   --> src/lib.rs:738:5
+    |
+738 | /     pub fn update_and_fetch<F>(&self, key: K, mut f: F) -> Option<V>
+739 | |     where
+740 | |         F: FnMut(Option<&V>) -> Option<V>,
+741 | |         V: PartialEq,
+    | |_____________________^
+
+error: missing documentation for a method
+   --> src/lib.rs:752:5
+    |
+752 | /     pub fn fetch_and_update<F>(&self, key: K, mut f: F) -> Option<V>
+753 | |     where
+754 | |         F: FnMut(Option<&V>) -> Option<V>,
+755 | |         V: PartialEq,
+    | |_____________________^
+
+error: missing documentation for a method
+   --> src/lib.rs:774:5
+    |
+774 |     pub fn fetch_min(&self, key: K, value: V) -> Option<V> {
+    |     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+error: missing documentation for a method
+   --> src/lib.rs:789:5
+    |
+789 |     pub fn fetch_max(&self, key: K, value: V) -> Option<V> {
+    |     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+error: missing documentation for a struct
+   --> src/lib.rs:805:1
+    |
+805 | / pub struct Iter<
+806 | |     'a,
+807 | |     K,
+808 | |     V,
+...   |
+812 | |     Q = K,
+813 | | > where
+    | |_^
+
+warning: `concurrent-map` (lib test) generated 5 warnings (5 duplicates)
+error: could not compile `concurrent-map` (lib test) due to 34 previous errors; 5 warnings emitted
+warning: build failed, waiting for other jobs to finish...

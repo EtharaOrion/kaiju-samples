@@ -1,0 +1,6 @@
+{
+  "repo": "Zahgon/SpectralCluster",
+  "base_commit": "91210be045717ad3614f1ec8ddc0c92b8c7cc01e",
+  "reference_commit": "f00d5d7ee6aa3e61b18922597010595c32ca0dea",
+  "docker_image": "426628337772.dkr.ecr.ap-south-1.amazonaws.com/kaiju_q2:python_wq2012_spectralcluster_91210be"
+}

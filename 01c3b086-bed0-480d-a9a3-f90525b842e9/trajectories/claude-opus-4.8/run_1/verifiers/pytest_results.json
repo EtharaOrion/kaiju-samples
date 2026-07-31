@@ -1,0 +1,71 @@
+{
+  "solution": {
+    "passed": 1,
+    "failed": 13,
+    "errors": 0,
+    "skipped": 0,
+    "collected": 14,
+    "status": "OK",
+    "detail": "========================= 13 failed, 1 passed in 0.69s =========================",
+    "total": 14,
+    "pass_rate": 0.07142857142857142,
+    "log": ""
+  },
+  "anchors": {
+    "golden": {
+      "passed": 14,
+      "failed": 0,
+      "errors": 0,
+      "skipped": 0,
+      "collected": 14,
+      "status": "OK",
+      "detail": "============================== 14 passed in 0.55s ==============================",
+      "total": 14,
+      "pass_rate": 1.0,
+      "log": ""
+    },
+    "stub": {
+      "passed": 0,
+      "failed": 14,
+      "errors": 0,
+      "skipped": 0,
+      "collected": 14,
+      "status": "OK",
+      "detail": "============================== 14 failed in 0.68s ==============================",
+      "total": 14,
+      "pass_rate": 0.0,
+      "log": ""
+    }
+  },
+  "analysis": {
+    "n_total": 14,
+    "n_sound": 14,
+    "sound_subset": [
+      "test_affinity_matrix_range",
+      "test_affinity_matrix_values_and_symmetry",
+      "test_crop_diagonal_uses_row_max_offdiagonal",
+      "test_enforce_ordered_labels",
+      "test_enforce_ordered_labels_idempotent",
+      "test_get_cluster_centroids",
+      "test_laplacian_affinity_unchanged",
+      "test_laplacian_graphcut",
+      "test_laplacian_randomwalk",
+      "test_laplacian_unnormalized",
+      "test_number_of_clusters_eigengap",
+      "test_number_of_clusters_respects_max",
+      "test_sorted_eigenvectors_ascending",
+      "test_sorted_eigenvectors_descending"
+    ],
+    "wrong_oracle_dropped": [],
+    "non_discriminating_dropped": [],
+    "inconclusive_on_stub": [],
+    "solution_pass_on_sound": 0.07142857142857142,
+    "gap_vs_golden": 0.9286,
+    "golden_status": "OK",
+    "stub_status": "OK",
+    "solution_status": "OK",
+    "infra_failures": [],
+    "stub_import_broken": false,
+    "stub_note": ""
+  }
+}

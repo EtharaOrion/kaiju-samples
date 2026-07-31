@@ -1,0 +1,378 @@
+{
+  "model": "openai/gpt-5.5-2026-04-23",
+  "ok": true,
+  "verdicts": [
+    {
+      "criterion_id": "bb.reasoning_faithfulness",
+      "passed": false,
+      "evidence": "reasoning: \"The first computes the quality of each sub-selector list (max quality among its tokens).\"",
+      "justification": "The stated reasoning includes an implementation intent that conflicts with the required nested minimum behavior, so the trajectory is not reliably faithful."
+    },
+    {
+      "criterion_id": "bb.stage_legitimacy",
+      "passed": false,
+      "evidence": "Stage: test-refine ... feedback: [tool:cmd_test] ... with no subsequent edits shown in that stage",
+      "justification": "The test-refine stage appears to only run tests without making feedback-responsive refinements."
+    },
+    {
+      "criterion_id": "ts.attr-absent-handling",
+      "passed": true,
+      "evidence": "equals: \"attribute != null && ...\"; hyphen: \"attribute != null && ...\"; element: \"attribute != null && ...\"; start/end/any use \"adapter.getAttributeValue(element, name)?.startsWith/endsWith/includes\" or explicit \"attribute != null\"; exists: \"adapter.hasAttrib(element, name)\"",
+      "justification": "The attribute rules consistently use adapter access and absent attributes fail for non-negation operators, with exists using the adapter's presence method."
+    },
+    {
+      "criterion_id": "ts.attr-not-missing-matches",
+      "passed": true,
+      "evidence": "not empty: \"if (value === '') { return (element) => !!adapter.getAttributeValue(element, name) && next(element); }\"; not case-insensitive: \"attribute == null || ... attribute.toLowerCase() !== value\"; not case-sensitive: \"adapter.getAttributeValue(element, name) !== value && next(element)\"",
+      "justification": "Missing attributes match non-empty not-equal selectors, while empty-value not-equal requires a present non-empty attribute."
+    },
+    {
+      "criterion_id": "ts.attr-degenerate-values",
+      "passed": true,
+      "evidence": "element: \"if (whitespaceRe.test(value)) { return boolbase.falseFunc; }\"; start: \"if (length === 0) { return boolbase.falseFunc; }\"; end: \"if (length === 0) { return boolbase.falseFunc; }\"; any: \"if (value === '') { return boolbase.falseFunc; }\"",
+      "justification": "The degenerate empty or whitespace-containing selector values are explicitly short-circuited to never match."
+    },
+    {
+      "criterion_id": "ts.attr-hyphen-boundary",
+      "passed": true,
+      "evidence": "hyphen: \"(attribute.length === length || attribute.charAt(length) === '-') && attribute.substr(0, length) === value\"",
+      "justification": "The hyphen operator accepts only exact equality or a prefix followed immediately by a hyphen."
+    },
+    {
+      "criterion_id": "ts.attr-element-token",
+      "passed": true,
+      "evidence": "const regex = new RegExp(`(?:^|\\\\s)${escapeRegex(value)}(?:$|\\\\s)`, shouldIgnoreCase(data, options) ? \"i\" : \"\")",
+      "justification": "The element operator uses whitespace-boundary regular expression matching rather than plain substring matching."
+    },
+    {
+      "criterion_id": "ts.attr-case-insensitive",
+      "passed": true,
+      "evidence": "function shouldIgnoreCase... \"typeof selector.ignoreCase === 'boolean' ? selector.ignoreCase : selector.ignoreCase === 'quirks' ? !!options.quirksMode : !options.xmlMode && caseInsensitiveAttributes.has(selector.name)\"; equals branch: \"value = value.toLowerCase()\" and \"attribute.toLowerCase() === value\"",
+      "justification": "Case-insensitive matching is gated by explicit flags, quirks mode, and xml mode, and implemented by lowercasing or regex flags."
+    },
+    {
+      "criterion_id": "ts.compile-has-parents",
+      "passed": true,
+      "evidence": "const hasContext = !!context?.every((element) => element === PLACEHOLDER_ELEMENT || (!!adapter.isTag(element) && !!adapter.getParent(element)))",
+      "justification": "The context parent check treats elements as having parents only when every context node is the placeholder or a tag with a non-null parent."
+    },
+    {
+      "criterion_id": "ts.relative-guard-first-token",
+      "passed": true,
+      "evidence": "else if (token.some((t) => t.length > 0 && isTraversal(t[0]))) { throw new Error(\"Relative selectors are not allowed when the `relativeSelector` option is disabled\") }",
+      "justification": "The relative-selector-disabled guard checks only the first token of each selector branch before throwing."
+    }
+  ],
+  "anchors": {
+    "golden": {
+      "model": "openai/gpt-5.5-2026-04-23",
+      "reasoning_effort": "high",
+      "ok": true,
+      "raw_verdicts": 18,
+      "response_chars": 7396,
+      "thinking": "",
+      "raw_response": "[\n  {\n    \"criterion_id\": \"bb.intent_fidelity\",\n    \"verdict\": \"fail\",\n    \"evidence\": \"case SelectorType.Descendant: { ... while ((current = get\",\n    \"justification\": \"The provided trajectory is truncated before major combinator, cache, index, selector-helper, and pseudo-subsystem implementations, so there is insufficient evidence that the task intent was fully implemented.\"\n  },\n  {\n    \"criterion_id\": \"bb.oracle_strength\",\n    \"verdict\": \"fail\",\n    \"evidence\": \"# ===== src/attributes.ts ===== ... # ===== src/compile.ts ===== ... # ===== src/general.ts ===== ... while ((current = get\",\n    \"justification\": \"Only partial source is shown, with no complete implementation for many required generic behaviors such as pseudo-selectors, caching, and API wiring.\"\n  },\n  {\n    \"criterion_id\": \"ts.attr-absent-handling\",\n    \"verdict\": \"pass\",\n    \"evidence\": \"attribute != null && ... next(element); ... exists(next, { name }, { adapter }) { return (element) => adapter.hasAttrib(element, name) && next(element); } ... adapter.getAttributeValue(element, name)?.startsWith(value) ... ?.endsWith(value) ... ?.includes(value)\",\n    \"justification\": \"Each non-negation attribute operator either explicitly checks `attribute != null`, uses `hasAttrib` for existence, or optional-chains `getAttributeValue` so absent attributes do not match.\"\n  },\n  {\n    \"criterion_id\": \"ts.attr-not-missing-matches\",\n    \"verdict\": \"pass\",\n    \"evidence\": \"if (value === \\\"\\\") { return (element) => !!adapter.getAttributeValue(element, name) && next(element); } ... return (element) => adapter.getAttributeValue(element, name) !== value && next(element);\",\n    \"justification\": \"The not-equal operator matches missing attributes for non-empty values and for empty values only matches truthy present attribute values.\"\n  },\n  {\n    \"criterion_id\": \"ts.attr-degenerate-values\",\n    \"verdict\": \"pass\",\n    \"evidence\": \"if (length === 0) { return boolbase.falseFunc; } ... if (value === \\\"\\\") { return boolbase.falseFunc; } ... if (whitespaceRe.test(value)) { return boolbase.falseFunc; }\",\n    \"justification\": \"The implementation returns an always-false predicate for empty prefix/suffix/substring values and whitespace-containing element-token values.\"\n  },\n  {\n    \"criterion_id\": \"ts.attr-hyphen-boundary\",\n    \"verdict\": \"pass\",\n    \"evidence\": \"(attribute.length === length || attribute.charAt(length) === \\\"-\\\") && attribute.substr(0, length) === value\",\n    \"justification\": \"The hyphen operator requires either exact length equality or a hyphen immediately after the matched prefix.\"\n  },\n  {\n    \"criterion_id\": \"ts.attr-element-token\",\n    \"verdict\": \"pass\",\n    \"evidence\": \"const regex = new RegExp(`(?:^|\\\\\\\\s)${escapeRegex(value)}(?:$|\\\\\\\\s)`, shouldIgnoreCase(data, options) ? \\\"i\\\" : \\\"\\\");\",\n    \"justification\": \"The element operator uses whitespace-boundary regular expression matching rather than plain substring search.\"\n  },\n  {\n    \"criterion_id\": \"ts.attr-case-insensitive\",\n    \"verdict\": \"pass\",\n    \"evidence\": \"function shouldIgnoreCase... typeof selector.ignoreCase === \\\"boolean\\\" ? selector.ignoreCase : selector.ignoreCase === \\\"quirks\\\" ? !!options.quirksMode : !options.xmlMode && caseInsensitiveAttributes.has(selector.name); ... value = value.toLowerCase(); ... new RegExp(..., shouldIgnoreCase(data, options) ? \\\"i\\\" : \\\"\\\")\",\n    \"justification\": \"Case-insensitivity is gated by explicit flags, quirks mode, and xml/html mode, and is implemented by lowercasing or case-insensitive regexes.\"\n  },\n  {\n    \"criterion_id\": \"ts.combinator-next-chain\",\n    \"verdict\": \"fail\",\n    \"evidence\": \"case SelectorType.Descendant: { ... while ((current = get\",\n    \"justification\": \"The combinator implementation is incomplete in the provided trajectory, so there is insufficient evidence that every combinator chains `next`.\"\n  },\n  {\n    \"criterion_id\": \"ts.descendant-tag-filter\",\n    \"verdict\": \"fail\",\n    \"evidence\": \"case SelectorType.Descendant: { ... while ((current = get\",\n    \"justification\": \"The traversal implementations are truncated, so there is insufficient evidence that all descendant, child, sibling, adjacent, and parent traversals filter through `adapter.isTag`.\"\n  },\n  {\n    \"criterion_id\": \"ts.flexible-descendant-self\",\n    \"verdict\": \"fail\",\n    \"evidence\": \"const FLEXIBLE_DESCENDANT_TOKEN: InternalSelector = { type: \\\"_flexibleDescendant\\\" }; ... case SelectorType.Descendant: { ... while ((current = get\",\n    \"justification\": \"Although a flexible-descendant token is introduced, the predicate implementation showing that it includes the element itself is not provided.\"\n  },\n  {\n    \"criterion_id\": \"ts.sibling-stop-equals\",\n    \"verdict\": \"fail\",\n    \"evidence\": \"const { adapter, equals, cacheResults } = options; ... case SelectorType.Descendant: { ... while ((current = get\",\n    \"justification\": \"The sibling and adjacent scanning code is not shown, so there is no evidence that it stops using the configured equals function and breaks at the boundary.\"\n  },\n  {\n    \"criterion_id\": \"ts.adjacent-two-strategies\",\n    \"verdict\": \"fail\",\n    \"evidence\": \"case SelectorType.Descendant: { ... while ((current = get\",\n    \"justification\": \"No adjacent-sibling implementation is visible, so the required prevElementSibling and fallback-scan branches cannot be verified.\"\n  },\n  {\n    \"criterion_id\": \"ts.compile-has-parents\",\n    \"verdict\": \"pass\",\n    \"evidence\": \"const hasContext = !!context?.every((element) => element === PLACEHOLDER_ELEMENT || (adapter.isTag(element) && getElementParent(element, adapter) !== null));\",\n    \"justification\": \"The absolutization logic treats context as having parents only when every context node is the placeholder or a tag with a non-null element parent.\"\n  },\n  {\n    \"criterion_id\": \"ts.relative-guard-first-token\",\n    \"verdict\": \"pass\",\n    \"evidence\": \"} else if (token.some((t) => t.length > 0 && isTraversal(t[0]))) { throw new Error(\\\"Relative selectors are not allowed when the `relativeSelector` option is disabled\\\"); }\",\n    \"justification\": \"The guard checks only `t[0]` for each branch and throws only when that first token is a traversal.\"\n  },\n  {\n    \"criterion_id\": \"ts.cache-propagation\",\n    \"verdict\": \"fail\",\n    \"evidence\": \"cacheResults === false || typeof WeakMap === \\\"undefined\\\" ... case SelectorType.Descendant: { ... while ((current = get\",\n    \"justification\": \"The caching implementation is truncated and no helper/cache code is shown, so propagation of cached ancestor results to the current element cannot be verified.\"\n  },\n  {\n    \"criterion_id\": \"ts.pseudo-errors-thrown\",\n    \"verdict\": \"fail\",\n    \"evidence\": \"case SelectorType.PseudoElement: { throw new Error(\\\"Pseudo-elements are not supported by css-select\\\"); } ... case SelectorType.ColumnCombinator: { throw new Error(...); } ... if (selector.namespace != null) { throw new Error(...); }\",\n    \"justification\": \"Some unsupported selector errors are shown, but there is insufficient evidence for unknown pseudo-class and pseudo-arity mismatch errors.\"\n  },\n  {\n    \"criterion_id\": \"ts.subselect-option-propagation\",\n    \"verdict\": \"fail\",\n    \"evidence\": \"return compilePseudoSelector(next, selector, options, context, compileToken);\",\n    \"justification\": \"Passing options into pseudo dispatch is shown, but no subselect implementation is provided to verify option propagation or unsatisfiable-selector handling.\"\n  }\n]",
+      "verdicts": [
+        {
+          "criterion_id": "bb.intent_fidelity",
+          "passed": false,
+          "evidence": "case SelectorType.Descendant: { ... while ((current = get",
+          "justification": "The provided trajectory is truncated before major combinator, cache, index, selector-helper, and pseudo-subsystem implementations, so there is insufficient evidence that the task intent was fully implemented."
+        },
+        {
+          "criterion_id": "bb.oracle_strength",
+          "passed": false,
+          "evidence": "# ===== src/attributes.ts ===== ... # ===== src/compile.ts ===== ... # ===== src/general.ts ===== ... while ((current = get",
+          "justification": "Only partial source is shown, with no complete implementation for many required generic behaviors such as pseudo-selectors, caching, and API wiring."
+        },
+        {
+          "criterion_id": "ts.attr-absent-handling",
+          "passed": true,
+          "evidence": "attribute != null && ... next(element); ... exists(next, { name }, { adapter }) { return (element) => adapter.hasAttrib(element, name) && next(element); } ... adapter.getAttributeValue(element, name)?.startsWith(value) ... ?.endsWith(value) ... ?.includes(value)",
+          "justification": "Each non-negation attribute operator either explicitly checks `attribute != null`, uses `hasAttrib` for existence, or optional-chains `getAttributeValue` so absent attributes do not match."
+        },
+        {
+          "criterion_id": "ts.attr-not-missing-matches",
+          "passed": true,
+          "evidence": "if (value === \"\") { return (element) => !!adapter.getAttributeValue(element, name) && next(element); } ... return (element) => adapter.getAttributeValue(element, name) !== value && next(element);",
+          "justification": "The not-equal operator matches missing attributes for non-empty values and for empty values only matches truthy present attribute values."
+        },
+        {
+          "criterion_id": "ts.attr-degenerate-values",
+          "passed": true,
+          "evidence": "if (length === 0) { return boolbase.falseFunc; } ... if (value === \"\") { return boolbase.falseFunc; } ... if (whitespaceRe.test(value)) { return boolbase.falseFunc; }",
+          "justification": "The implementation returns an always-false predicate for empty prefix/suffix/substring values and whitespace-containing element-token values."
+        },
+        {
+          "criterion_id": "ts.attr-hyphen-boundary",
+          "passed": true,
+          "evidence": "(attribute.length === length || attribute.charAt(length) === \"-\") && attribute.substr(0, length) === value",
+          "justification": "The hyphen operator requires either exact length equality or a hyphen immediately after the matched prefix."
+        },
+        {
+          "criterion_id": "ts.attr-element-token",
+          "passed": true,
+          "evidence": "const regex = new RegExp(`(?:^|\\\\s)${escapeRegex(value)}(?:$|\\\\s)`, shouldIgnoreCase(data, options) ? \"i\" : \"\");",
+          "justification": "The element operator uses whitespace-boundary regular expression matching rather than plain substring search."
+        },
+        {
+          "criterion_id": "ts.attr-case-insensitive",
+          "passed": true,
+          "evidence": "function shouldIgnoreCase... typeof selector.ignoreCase === \"boolean\" ? selector.ignoreCase : selector.ignoreCase === \"quirks\" ? !!options.quirksMode : !options.xmlMode && caseInsensitiveAttributes.has(selector.name); ... value = value.toLowerCase(); ... new RegExp(..., shouldIgnoreCase(data, options) ? \"i\" : \"\")",
+          "justification": "Case-insensitivity is gated by explicit flags, quirks mode, and xml/html mode, and is implemented by lowercasing or case-insensitive regexes."
+        },
+        {
+          "criterion_id": "ts.combinator-next-chain",
+          "passed": false,
+          "evidence": "case SelectorType.Descendant: { ... while ((current = get",
+          "justification": "The combinator implementation is incomplete in the provided trajectory, so there is insufficient evidence that every combinator chains `next`."
+        },
+        {
+          "criterion_id": "ts.descendant-tag-filter",
+          "passed": false,
+          "evidence": "case SelectorType.Descendant: { ... while ((current = get",
+          "justification": "The traversal implementations are truncated, so there is insufficient evidence that all descendant, child, sibling, adjacent, and parent traversals filter through `adapter.isTag`."
+        },
+        {
+          "criterion_id": "ts.flexible-descendant-self",
+          "passed": false,
+          "evidence": "const FLEXIBLE_DESCENDANT_TOKEN: InternalSelector = { type: \"_flexibleDescendant\" }; ... case SelectorType.Descendant: { ... while ((current = get",
+          "justification": "Although a flexible-descendant token is introduced, the predicate implementation showing that it includes the element itself is not provided."
+        },
+        {
+          "criterion_id": "ts.sibling-stop-equals",
+          "passed": false,
+          "evidence": "const { adapter, equals, cacheResults } = options; ... case SelectorType.Descendant: { ... while ((current = get",
+          "justification": "The sibling and adjacent scanning code is not shown, so there is no evidence that it stops using the configured equals function and breaks at the boundary."
+        },
+        {
+          "criterion_id": "ts.adjacent-two-strategies",
+          "passed": false,
+          "evidence": "case SelectorType.Descendant: { ... while ((current = get",
+          "justification": "No adjacent-sibling implementation is visible, so the required prevElementSibling and fallback-scan branches cannot be verified."
+        },
+        {
+          "criterion_id": "ts.compile-has-parents",
+          "passed": true,
+          "evidence": "const hasContext = !!context?.every((element) => element === PLACEHOLDER_ELEMENT || (adapter.isTag(element) && getElementParent(element, adapter) !== null));",
+          "justification": "The absolutization logic treats context as having parents only when every context node is the placeholder or a tag with a non-null element parent."
+        },
+        {
+          "criterion_id": "ts.relative-guard-first-token",
+          "passed": true,
+          "evidence": "} else if (token.some((t) => t.length > 0 && isTraversal(t[0]))) { throw new Error(\"Relative selectors are not allowed when the `relativeSelector` option is disabled\"); }",
+          "justification": "The guard checks only `t[0]` for each branch and throws only when that first token is a traversal."
+        },
+        {
+          "criterion_id": "ts.cache-propagation",
+          "passed": false,
+          "evidence": "cacheResults === false || typeof WeakMap === \"undefined\" ... case SelectorType.Descendant: { ... while ((current = get",
+          "justification": "The caching implementation is truncated and no helper/cache code is shown, so propagation of cached ancestor results to the current element cannot be verified."
+        },
+        {
+          "criterion_id": "ts.pseudo-errors-thrown",
+          "passed": false,
+          "evidence": "case SelectorType.PseudoElement: { throw new Error(\"Pseudo-elements are not supported by css-select\"); } ... case SelectorType.ColumnCombinator: { throw new Error(...); } ... if (selector.namespace != null) { throw new Error(...); }",
+          "justification": "Some unsupported selector errors are shown, but there is insufficient evidence for unknown pseudo-class and pseudo-arity mismatch errors."
+        },
+        {
+          "criterion_id": "ts.subselect-option-propagation",
+          "passed": false,
+          "evidence": "return compilePseudoSelector(next, selector, options, context, compileToken);",
+          "justification": "Passing options into pseudo dispatch is shown, but no subselect implementation is provided to verify option propagation or unsatisfiable-selector handling."
+        }
+      ]
+    },
+    "stub": {
+      "model": "openai/gpt-5.5-2026-04-23",
+      "reasoning_effort": "high",
+      "ok": true,
+      "raw_verdicts": 18,
+      "response_chars": 6029,
+      "thinking": "",
+      "raw_response": "[\n  {\n    \"criterion_id\": \"bb.intent_fidelity\",\n    \"verdict\": \"fail\",\n    \"evidence\": \"throw new Error(\\\"STUB\\\")\",\n    \"justification\": \"The trajectory leaves core selector behavior stubbed rather than implementing the engine.\"\n  },\n  {\n    \"criterion_id\": \"bb.oracle_strength\",\n    \"verdict\": \"fail\",\n    \"evidence\": \"equals(next, data, options) { ... return (element) => { throw new Error(\\\"STUB\\\"); }; }\",\n    \"justification\": \"A solution with reachable stubs is not a general implementation beyond the tests.\"\n  },\n  {\n    \"criterion_id\": \"ts.attr-absent-handling\",\n    \"verdict\": \"fail\",\n    \"evidence\": \"equals(next, data, options) { ... throw new Error(\\\"STUB\\\"); }, hyphen(next, data, options) { throw new Error(\\\"STUB\\\"); }, element(next, data, options) { throw new Error(\\\"STUB\\\"); }\",\n    \"justification\": \"Attribute operators do not show implemented per-operator null handling through the adapter.\"\n  },\n  {\n    \"criterion_id\": \"ts.attr-not-missing-matches\",\n    \"verdict\": \"fail\",\n    \"evidence\": \"not(next, data, options) { throw new Error(\\\"STUB\\\"); }\",\n    \"justification\": \"The not-equal attribute operator is unimplemented, so missing and empty-value behavior is not satisfied.\"\n  },\n  {\n    \"criterion_id\": \"ts.attr-degenerate-values\",\n    \"verdict\": \"fail\",\n    \"evidence\": \"start(next, data, options) { throw new Error(\\\"STUB\\\"); }, end(next, data, options) { throw new Error(\\\"STUB\\\"); }, any(next, data, options) { throw new Error(\\\"STUB\\\"); }, element(next, data, options) { throw new Error(\\\"STUB\\\"); }\",\n    \"justification\": \"There is no implemented early false handling for empty prefix/suffix/substring values or whitespace-containing element values.\"\n  },\n  {\n    \"criterion_id\": \"ts.attr-hyphen-boundary\",\n    \"verdict\": \"fail\",\n    \"evidence\": \"hyphen(next, data, options) { throw new Error(\\\"STUB\\\"); }\",\n    \"justification\": \"The hyphen operator is unimplemented, so exact-or-hyphen-boundary matching is absent.\"\n  },\n  {\n    \"criterion_id\": \"ts.attr-element-token\",\n    \"verdict\": \"fail\",\n    \"evidence\": \"element(next, data, options) { throw new Error(\\\"STUB\\\"); }\",\n    \"justification\": \"The whitespace-token attribute operator is unimplemented.\"\n  },\n  {\n    \"criterion_id\": \"ts.attr-case-insensitive\",\n    \"verdict\": \"fail\",\n    \"evidence\": \"if (shouldIgnoreCase(data, options)) { value = value.toLowerCase(); return (element) => { throw new Error(\\\"STUB\\\"); }; }\",\n    \"justification\": \"Although a helper exists, the actual case-insensitive comparison branches are stubbed.\"\n  },\n  {\n    \"criterion_id\": \"ts.combinator-next-chain\",\n    \"verdict\": \"fail\",\n    \"evidence\": \"return function tag(element: ElementNode): boolean { throw new Error(\\\"STUB\\\"); };\",\n    \"justification\": \"Tag and combinator predicates are stubbed and do not demonstrate chaining with next.\"\n  },\n  {\n    \"criterion_id\": \"ts.descendant-tag-filter\",\n    \"verdict\": \"fail\",\n    \"evidence\": \"return function descendant(element: ElementNode): boolean { throw new Error(\\\"STUB\\\"); };\",\n    \"justification\": \"Traversal predicates are unimplemented and do not show filtering via adapter.isTag.\"\n  },\n  {\n    \"criterion_id\": \"ts.flexible-descendant-self\",\n    \"verdict\": \"fail\",\n    \"evidence\": \"return function flexibleDescendant(element: ElementNode): boolean { throw new Error(\\\"STUB\\\"); };\",\n    \"justification\": \"The flexible descendant predicate is stubbed and does not include the element itself.\"\n  },\n  {\n    \"criterion_id\": \"ts.sibling-stop-equals\",\n    \"verdict\": \"fail\",\n    \"evidence\": \"return function sibling(element: ElementNode): boolean { throw new Error(\\\"STUB\\\"); };\",\n    \"justification\": \"Sibling scanning is unimplemented and shows no equals-based stop condition.\"\n  },\n  {\n    \"criterion_id\": \"ts.adjacent-two-strategies\",\n    \"verdict\": \"fail\",\n    \"evidence\": \"if (adapter.prevElementSibling) { return function adjacent(element: ElementNode): boolean { throw new Error(\\\"STUB\\\"); }; } return function adjacent(element: ElementNode): boolean { throw new Error(\\\"STUB\\\"); };\",\n    \"justification\": \"Both adjacent branches are present syntactically but both are stubbed, so neither strategy is implemented.\"\n  },\n  {\n    \"criterion_id\": \"ts.compile-has-parents\",\n    \"verdict\": \"fail\",\n    \"evidence\": \"const hasContext = !!context?.every((element) => { throw new Error(\\\"STUB\\\"); },);\",\n    \"justification\": \"Context parent detection is left as a stub.\"\n  },\n  {\n    \"criterion_id\": \"ts.relative-guard-first-token\",\n    \"verdict\": \"fail\",\n    \"evidence\": \"} else if (token.some((t) => { throw new Error(\\\"STUB\\\"); })) { throw new Error(\\\"Relative selectors are not allowed when the `relativeSelector` option is disabled\\\",); }\",\n    \"justification\": \"The relative-selector guard predicate is stubbed instead of inspecting only first tokens.\"\n  },\n  {\n    \"criterion_id\": \"ts.cache-propagation\",\n    \"verdict\": \"fail\",\n    \"evidence\": \"# ===== src/helpers/cache.ts =====\\nimport type { CompiledQuery, InternalOptions } from \\\"../types.js\\\";\\nimport { getElementParent } from \\\"./querying.js\\\";\\n\\n/**\\n * Some selectors such as\",\n    \"justification\": \"The cache implementation is not provided in the trajectory, so correct fallback and propagation behavior cannot be verified.\"\n  },\n  {\n    \"criterion_id\": \"ts.pseudo-errors-thrown\",\n    \"verdict\": \"fail\",\n    \"evidence\": \"case SelectorType.PseudoElement: { throw new Error(\\\"Pseudo-elements are not supported by css-select\\\"); } ... case SelectorType.ColumnCombinator: { throw new Error(\\\"Column combinators are not yet supported by css-select\\\"); }\",\n    \"justification\": \"Some general-selector errors are thrown, but there is insufficient evidence for unknown pseudo-class and pseudo-arity error handling.\"\n  },\n  {\n    \"criterion_id\": \"ts.subselect-option-propagation\",\n    \"verdict\": \"fail\",\n    \"evidence\": \"return compilePseudoSelector(next, selector, options, context, compileToken,);\",\n    \"justification\": \"The trajectory does not include subselect implementation evidence for option propagation or unsatisfiable-selector collapsing.\"\n  }\n]",
+      "verdicts": [
+        {
+          "criterion_id": "bb.intent_fidelity",
+          "passed": false,
+          "evidence": "throw new Error(\"STUB\")",
+          "justification": "The trajectory leaves core selector behavior stubbed rather than implementing the engine."
+        },
+        {
+          "criterion_id": "bb.oracle_strength",
+          "passed": false,
+          "evidence": "equals(next, data, options) { ... return (element) => { throw new Error(\"STUB\"); }; }",
+          "justification": "A solution with reachable stubs is not a general implementation beyond the tests."
+        },
+        {
+          "criterion_id": "ts.attr-absent-handling",
+          "passed": false,
+          "evidence": "equals(next, data, options) { ... throw new Error(\"STUB\"); }, hyphen(next, data, options) { throw new Error(\"STUB\"); }, element(next, data, options) { throw new Error(\"STUB\"); }",
+          "justification": "Attribute operators do not show implemented per-operator null handling through the adapter."
+        },
+        {
+          "criterion_id": "ts.attr-not-missing-matches",
+          "passed": false,
+          "evidence": "not(next, data, options) { throw new Error(\"STUB\"); }",
+          "justification": "The not-equal attribute operator is unimplemented, so missing and empty-value behavior is not satisfied."
+        },
+        {
+          "criterion_id": "ts.attr-degenerate-values",
+          "passed": false,
+          "evidence": "start(next, data, options) { throw new Error(\"STUB\"); }, end(next, data, options) { throw new Error(\"STUB\"); }, any(next, data, options) { throw new Error(\"STUB\"); }, element(next, data, options) { throw new Error(\"STUB\"); }",
+          "justification": "There is no implemented early false handling for empty prefix/suffix/substring values or whitespace-containing element values."
+        },
+        {
+          "criterion_id": "ts.attr-hyphen-boundary",
+          "passed": false,
+          "evidence": "hyphen(next, data, options) { throw new Error(\"STUB\"); }",
+          "justification": "The hyphen operator is unimplemented, so exact-or-hyphen-boundary matching is absent."
+        },
+        {
+          "criterion_id": "ts.attr-element-token",
+          "passed": false,
+          "evidence": "element(next, data, options) { throw new Error(\"STUB\"); }",
+          "justification": "The whitespace-token attribute operator is unimplemented."
+        },
+        {
+          "criterion_id": "ts.attr-case-insensitive",
+          "passed": false,
+          "evidence": "if (shouldIgnoreCase(data, options)) { value = value.toLowerCase(); return (element) => { throw new Error(\"STUB\"); }; }",
+          "justification": "Although a helper exists, the actual case-insensitive comparison branches are stubbed."
+        },
+        {
+          "criterion_id": "ts.combinator-next-chain",
+          "passed": false,
+          "evidence": "return function tag(element: ElementNode): boolean { throw new Error(\"STUB\"); };",
+          "justification": "Tag and combinator predicates are stubbed and do not demonstrate chaining with next."
+        },
+        {
+          "criterion_id": "ts.descendant-tag-filter",
+          "passed": false,
+          "evidence": "return function descendant(element: ElementNode): boolean { throw new Error(\"STUB\"); };",
+          "justification": "Traversal predicates are unimplemented and do not show filtering via adapter.isTag."
+        },
+        {
+          "criterion_id": "ts.flexible-descendant-self",
+          "passed": false,
+          "evidence": "return function flexibleDescendant(element: ElementNode): boolean { throw new Error(\"STUB\"); };",
+          "justification": "The flexible descendant predicate is stubbed and does not include the element itself."
+        },
+        {
+          "criterion_id": "ts.sibling-stop-equals",
+          "passed": false,
+          "evidence": "return function sibling(element: ElementNode): boolean { throw new Error(\"STUB\"); };",
+          "justification": "Sibling scanning is unimplemented and shows no equals-based stop condition."
+        },
+        {
+          "criterion_id": "ts.adjacent-two-strategies",
+          "passed": false,
+          "evidence": "if (adapter.prevElementSibling) { return function adjacent(element: ElementNode): boolean { throw new Error(\"STUB\"); }; } return function adjacent(element: ElementNode): boolean { throw new Error(\"STUB\"); };",
+          "justification": "Both adjacent branches are present syntactically but both are stubbed, so neither strategy is implemented."
+        },
+        {
+          "criterion_id": "ts.compile-has-parents",
+          "passed": false,
+          "evidence": "const hasContext = !!context?.every((element) => { throw new Error(\"STUB\"); },);",
+          "justification": "Context parent detection is left as a stub."
+        },
+        {
+          "criterion_id": "ts.relative-guard-first-token",
+          "passed": false,
+          "evidence": "} else if (token.some((t) => { throw new Error(\"STUB\"); })) { throw new Error(\"Relative selectors are not allowed when the `relativeSelector` option is disabled\",); }",
+          "justification": "The relative-selector guard predicate is stubbed instead of inspecting only first tokens."
+        },
+        {
+          "criterion_id": "ts.cache-propagation",
+          "passed": false,
+          "evidence": "# ===== src/helpers/cache.ts =====\nimport type { CompiledQuery, InternalOptions } from \"../types.js\";\nimport { getElementParent } from \"./querying.js\";\n\n/**\n * Some selectors such as",
+          "justification": "The cache implementation is not provided in the trajectory, so correct fallback and propagation behavior cannot be verified."
+        },
+        {
+          "criterion_id": "ts.pseudo-errors-thrown",
+          "passed": false,
+          "evidence": "case SelectorType.PseudoElement: { throw new Error(\"Pseudo-elements are not supported by css-select\"); } ... case SelectorType.ColumnCombinator: { throw new Error(\"Column combinators are not yet supported by css-select\"); }",
+          "justification": "Some general-selector errors are thrown, but there is insufficient evidence for unknown pseudo-class and pseudo-arity error handling."
+        },
+        {
+          "criterion_id": "ts.subselect-option-propagation",
+          "passed": false,
+          "evidence": "return compilePseudoSelector(next, selector, options, context, compileToken,);",
+          "justification": "The trajectory does not include subselect implementation evidence for option propagation or unsatisfiable-selector collapsing."
+        }
+      ]
+    }
+  },
+  "criteria": [
+    {
+      "id": "bb.reasoning_faithfulness",
+      "text": "Is the agent's stated reasoning consistent with the edits it actually made and the feedback it received (no post-hoc rationalization, no lucky guess)?",
+      "contract_ref": "(backbone)",
+      "concern": "L2.REASONING_FAITHFULNESS",
+      "anchorable": false
+    },
+    {
+      "id": "bb.stage_legitimacy",
+      "text": "Did each refinement stage (lint, test) do real, feedback-responsive work toward the solution rather than cosmetic or no-op changes?",
+      "contract_ref": "(backbone)",
+      "concern": "L2.STAGE_LEGITIMACY",
+      "anchorable": false
+    },
+    {
+      "id": "ts.attr-absent-handling",
+      "text": "Attribute operators read via the adapter's attribute-value method and return false when the attribute value is null (absent), for all operators except negation. Cited evidence must show per-operator null handling.",
+      "contract_ref": "Behavioral contract \u00a71 Attribute rules",
+      "concern": null,
+      "anchorable": true
+    },
+    {
+      "id": "ts.attr-not-missing-matches",
+      "text": "The `!=` (not-equal) operator treats a missing attribute as a match (missing is 'not equal'), and with an empty value matches only present, non-empty attributes.",
+      "contract_ref": "Known pitfalls / \u00a71 attribute `not`",
+      "concern": null,
+      "anchorable": true
+    },
+    {
+      "id": "ts.attr-degenerate-values",
+      "text": "The `^=`, `$=`, `*=` operators never match when the value is empty, and `~=` never matches when its value contains whitespace (early always-false path).",
+      "contract_ref": "\u00a71 attribute rules / Known pitfalls empty values",
+      "concern": null,
+      "anchorable": true
+    },
+    {
+      "id": "ts.attr-hyphen-boundary",
+      "text": "The `|=` operator matches only on exact equality or the value followed immediately by a hyphen, not any arbitrary prefix.",
+      "contract_ref": "\u00a71 attribute `hyphen` / Known pitfalls `|=` boundary",
+      "concern": null,
+      "anchorable": true
+    },
+    {
+      "id": "ts.attr-element-token",
+      "text": "The `~=` operator matches the value as a whitespace-separated token via word-boundary logic rather than plain substring.",
+      "contract_ref": "\u00a71 attribute `element`",
+      "concern": null,
+      "anchorable": true
+    },
+    {
+      "id": "ts.attr-case-insensitive",
+      "text": "Case-insensitive attribute matching is applied (lowercasing both sides or case-insensitive regex) and is gated by a helper considering explicit flags plus xml/quirks mode.",
+      "contract_ref": "\u00a71 shouldIgnoreCase",
+      "concern": null,
+      "anchorable": true
+    },
+    {
+      "id": "ts.compile-has-parents",
+      "text": "Context 'has parents' detection treats context as document-level only if every element is the internal placeholder OR a tag with a non-null parent, correctly gating descendant absolutization.",
+      "contract_ref": "\u00a73 absolutize / Known pitfalls context has-parents",
+      "concern": null,
+      "anchorable": true
+    },
+    {
+      "id": "ts.relative-guard-first-token",
+      "text": "The relative-selector-disabled guard inspects only the first token of each branch and throws only when it is a traversal, not eagerly on normal selectors.",
+      "contract_ref": "\u00a73 relativeSelector / Known pitfalls relative-selector guard",
+      "concern": null,
+      "anchorable": true
+    }
+  ]
+}

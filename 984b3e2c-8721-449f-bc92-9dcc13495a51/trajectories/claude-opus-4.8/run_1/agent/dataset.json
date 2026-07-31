@@ -1,0 +1,38 @@
+{
+  "instance_id": "commit-0/oauthlib",
+  "id": "984b3e2c-8721-449f-bc92-9dcc13495a51",
+  "repo": "Zahgon/oauthlib",
+  "base_commit": "228f9d3cce7b32099972e39639f2d5369cf07628",
+  "reference_commit": "a2779c65b3e961f1b49c05a2417c0ae819f3f8c4",
+  "setup": {
+    "install": "pip install -e \".\"",
+    "packages": "",
+    "pip_packages": [
+      "blinker==1.4",
+      "cryptography>=3.0.0",
+      "pyjwt>=2.0.0,<3",
+      "pytest",
+      "pytest-cov>=2.6",
+      "pytest-json-report",
+      "pytest-subtests"
+    ],
+    "pre_install": [
+      "apt-get install -y libffi-dev libssl-dev"
+    ],
+    "python": "3.9",
+    "specification": "",
+    "version_source": "setup.py:python_requires",
+    "version_conflicts": [
+      ".github/workflows/*.yml[matrix.python-version](3.11)"
+    ],
+    "system_deps_hint": []
+  },
+  "test": {
+    "test_cmd": "pytest",
+    "test_dir": "tests"
+  },
+  "src_dir": "oauthlib",
+  "base_compiles": null,
+  "language": "python",
+  "ecr_image_uri": "426628337772.dkr.ecr.ap-south-1.amazonaws.com/kaiju_q2:python_oauthlib_oauthlib"
+}

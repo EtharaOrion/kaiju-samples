@@ -1,0 +1,300 @@
+{
+  "model": "openai/gpt-5.5-2026-04-23",
+  "ok": true,
+  "verdicts": [
+    {
+      "criterion_id": "bb.reasoning_faithfulness",
+      "passed": false,
+      "evidence": "reasoning: \"I'll implement the constraint operations and constraint matrix computation.\" ... final code: \"class ConstraintOperation... def check_input(...): pass\"",
+      "justification": "The stated reasoning claims implementation work that is contradicted by remaining stubs and unresolved failures."
+    },
+    {
+      "criterion_id": "bb.stage_legitimacy",
+      "passed": false,
+      "evidence": "feedback: \"Test Summary: 16 failed in 0.77s\" ... \"Root cause... SpectralClusterer is never computing the affinity matrix\"",
+      "justification": "The test-refine stage surfaced major functional failures but the trajectory shows no responsive fixes before the final solution."
+    },
+    {
+      "criterion_id": "ts.constraint-check-input",
+      "passed": false,
+      "evidence": "def check_input(self, affinity: np.ndarray, constraint_matrix: np.ndarray):\n        pass",
+      "justification": "The required ValueError validation for invalid and mismatched shapes is entirely unimplemented."
+    },
+    {
+      "criterion_id": "ts.constraint-propagation-closedform",
+      "passed": true,
+      "evidence": "degree_norm = 1.0 / np.sqrt(degree + EPS)\nlaplacian_norm = affinity * np.outer(degree_norm, degree_norm)\ninverse = np.linalg.inv(identity - self.alpha * laplacian_norm)\nfv = (1 - self.alpha) * inverse.dot(constraint_matrix)\nfh = (1 - self.alpha) * fv.dot(inverse)\nadjusted_affinity = np.where(\n            fh >= 0, 1 - (1 - fh) * (1 - affinity), (1 + fh) * affinity\n        )",
+      "justification": "The propagation implementation uses symmetric degree normalization with an epsilon guard, forms the inverse, applies the squared propagation factor, and combines positive versus negative propagated constraints appropriately."
+    }
+  ],
+  "anchors": {
+    "golden": {
+      "model": "openai/gpt-5.5-2026-04-23",
+      "reasoning_effort": "high",
+      "ok": true,
+      "raw_verdicts": 18,
+      "response_chars": 6245,
+      "thinking": "",
+      "raw_response": "[\n  {\n    \"criterion_id\": \"bb.intent_fidelity\",\n    \"verdict\": \"fail\",\n    \"evidence\": \"The provided trajectory is truncated at `ConstraintMatrix.__init__` and does not include implementations for many required modules such as `utils.py`, `laplacian.py`, `refinement.py`, `spectral_clusterer.py`, and `multi_stage_clusterer.py`.\",\n    \"justification\": \"There is insufficient evidence that the full task intent was implemented end-to-end.\"\n  },\n  {\n    \"criterion_id\": \"bb.oracle_strength\",\n    \"verdict\": \"fail\",\n    \"evidence\": \"Only partial code is shown, ending inside `constraint.py` before `ConstraintMatrix` behavior and omitting most algorithmic modules.\",\n    \"justification\": \"The trajectory does not demonstrate a general implementation beyond tests.\"\n  },\n  {\n    \"criterion_id\": \"ts.affinity-cosine-mapping\",\n    \"verdict\": \"fail\",\n    \"evidence\": \"No implementation of `utils.compute_affinity_matrix` is included in the provided code.\",\n    \"justification\": \"There is no evidence that cosine normalization and mapping are implemented.\"\n  },\n  {\n    \"criterion_id\": \"ts.eigen-sort-descend\",\n    \"verdict\": \"fail\",\n    \"evidence\": \"No implementation of `utils.compute_sorted_eigenvectors` is included in the provided code.\",\n    \"justification\": \"There is no evidence that eigenvalue/eigenvector sorting semantics are satisfied.\"\n  },\n  {\n    \"criterion_id\": \"ts.eigengap-clustercount\",\n    \"verdict\": \"fail\",\n    \"evidence\": \"No implementation of `utils.compute_number_of_clusters` is included in the provided code.\",\n    \"justification\": \"There is no evidence that maximal eigengap cluster counting is implemented.\"\n  },\n  {\n    \"criterion_id\": \"ts.ordered-first-appearance\",\n    \"verdict\": \"fail\",\n    \"evidence\": \"No implementation of final prediction or `utils.enforce_ordered_labels` is included in the provided code.\",\n    \"justification\": \"There is no evidence final labels are ordered by first appearance.\"\n  },\n  {\n    \"criterion_id\": \"ts.chain-labels-validation\",\n    \"verdict\": \"fail\",\n    \"evidence\": \"No implementation of `utils.chain_labels` is included in the provided code.\",\n    \"justification\": \"There is no evidence malformed label inputs are validated.\"\n  },\n  {\n    \"criterion_id\": \"ts.laplacian-four-variants\",\n    \"verdict\": \"fail\",\n    \"evidence\": \"No implementation of `laplacian.compute_laplacian` is included in the provided code.\",\n    \"justification\": \"There is no evidence the four Laplacian variants or zero-degree guards are implemented.\"\n  },\n  {\n    \"criterion_id\": \"ts.crop-diagonal-offdiagonal\",\n    \"verdict\": \"fail\",\n    \"evidence\": \"No implementation of refinement operations is included in the provided code.\",\n    \"justification\": \"There is no evidence CropDiagonal excludes the diagonal when computing row maxima.\"\n  },\n  {\n    \"criterion_id\": \"ts.rowwise-threshold-types\",\n    \"verdict\": \"fail\",\n    \"evidence\": \"No implementation of `RowWiseThreshold` is included in the provided code.\",\n    \"justification\": \"There is no evidence percentile versus row-max thresholding, binarization, or diagonal preservation are handled.\"\n  },\n  {\n    \"criterion_id\": \"ts.symmetrize-and-diffuse\",\n    \"verdict\": \"fail\",\n    \"evidence\": \"No implementation of `Symmetrize` or `Diffuse` refinement is included in the provided code.\",\n    \"justification\": \"There is no evidence these refinement branches are implemented.\"\n  },\n  {\n    \"criterion_id\": \"ts.constraint-check-input\",\n    \"verdict\": \"pass\",\n    \"evidence\": \"`if len(affinity.shape) != 2: raise ValueError`, `if affinity.shape[0] != affinity.shape[1]: raise ValueError`, `if len(constraint_matrix.shape) != 2: raise ValueError`, `if constraint_matrix.shape[0] != constraint_matrix.shape[1]: raise ValueError`, `if affinity.shape != constraint_matrix.shape: raise ValueError`\",\n    \"justification\": \"The validation explicitly raises `ValueError` for non-2D, non-square, and mismatched affinity/constraint shapes.\"\n  },\n  {\n    \"criterion_id\": \"ts.constraint-propagation-closedform\",\n    \"verdict\": \"pass\",\n    \"evidence\": \"`degree_norm = np.diag(1 / (np.sqrt(np.diag(degree)) + EPS))`, `affinity_norm = degree_norm.dot(affinity).dot(degree_norm)`, `temp_value = np.linalg.inv(np.eye(affinity.shape[0]) - self.alpha * affinity_norm)`, `final_constraint_matrix = (1 - self.alpha)**2 * temp_value.dot(constraint_matrix).dot(temp_value)`, `is_positive = final_constraint_matrix > 0`\",\n    \"justification\": \"The implementation follows the required symmetric normalization, closed-form propagation, positive/negative mask combination, and uses EPS for zero-degree safety.\"\n  },\n  {\n    \"criterion_id\": \"ts.compute-diagonals-sign\",\n    \"verdict\": \"fail\",\n    \"evidence\": \"The provided code cuts off at `ConstraintMatrix.__init__` and does not show `compute_diagonals`.\",\n    \"justification\": \"There is no evidence the constraint diagonal sign logic is implemented.\"\n  },\n  {\n    \"criterion_id\": \"ts.custom-kmeans-dispatch\",\n    \"verdict\": \"fail\",\n    \"evidence\": \"No implementation of `custom_distance_kmeans.py` is included in the provided code.\",\n    \"justification\": \"There is no evidence dispatch to sklearn KMeans or custom-distance KMeans is implemented.\"\n  },\n  {\n    \"criterion_id\": \"ts.autotune-coarse-to-fine\",\n    \"verdict\": \"fail\",\n    \"evidence\": \"`for _ in range(self.search_level): min_ratio = np.inf ... if ratio < min_ratio: ... best_p_percentile = p_percentile`\",\n    \"justification\": \"The tuning loop resets `min_ratio` each level and returns the last level's best rather than explicitly retaining the globally best result across levels.\"\n  },\n  {\n    \"criterion_id\": \"ts.constraint-timing\",\n    \"verdict\": \"fail\",\n    \"evidence\": \"No implementation of `SpectralClusterer.predict` or constraint/refinement orchestration is included in the provided code.\",\n    \"justification\": \"There is no evidence `apply_before_refinement` controls constraint timing.\"\n  },\n  {\n    \"criterion_id\": \"ts.single-cluster-shortcircuit\",\n    \"verdict\": \"fail\",\n    \"evidence\": \"No implementation of `fallback_clusterer.py`, `SpectralClusterer.predict`, or `multi_stage_clusterer.py` behavior is included in the provided code.\",\n    \"justification\": \"There is no evidence single-cluster short-circuiting or streaming label deflickering is implemented.\"\n  }\n]",
+      "verdicts": [
+        {
+          "criterion_id": "bb.intent_fidelity",
+          "passed": false,
+          "evidence": "The provided trajectory is truncated at `ConstraintMatrix.__init__` and does not include implementations for many required modules such as `utils.py`, `laplacian.py`, `refinement.py`, `spectral_clusterer.py`, and `multi_stage_clusterer.py`.",
+          "justification": "There is insufficient evidence that the full task intent was implemented end-to-end."
+        },
+        {
+          "criterion_id": "bb.oracle_strength",
+          "passed": false,
+          "evidence": "Only partial code is shown, ending inside `constraint.py` before `ConstraintMatrix` behavior and omitting most algorithmic modules.",
+          "justification": "The trajectory does not demonstrate a general implementation beyond tests."
+        },
+        {
+          "criterion_id": "ts.affinity-cosine-mapping",
+          "passed": false,
+          "evidence": "No implementation of `utils.compute_affinity_matrix` is included in the provided code.",
+          "justification": "There is no evidence that cosine normalization and mapping are implemented."
+        },
+        {
+          "criterion_id": "ts.eigen-sort-descend",
+          "passed": false,
+          "evidence": "No implementation of `utils.compute_sorted_eigenvectors` is included in the provided code.",
+          "justification": "There is no evidence that eigenvalue/eigenvector sorting semantics are satisfied."
+        },
+        {
+          "criterion_id": "ts.eigengap-clustercount",
+          "passed": false,
+          "evidence": "No implementation of `utils.compute_number_of_clusters` is included in the provided code.",
+          "justification": "There is no evidence that maximal eigengap cluster counting is implemented."
+        },
+        {
+          "criterion_id": "ts.ordered-first-appearance",
+          "passed": false,
+          "evidence": "No implementation of final prediction or `utils.enforce_ordered_labels` is included in the provided code.",
+          "justification": "There is no evidence final labels are ordered by first appearance."
+        },
+        {
+          "criterion_id": "ts.chain-labels-validation",
+          "passed": false,
+          "evidence": "No implementation of `utils.chain_labels` is included in the provided code.",
+          "justification": "There is no evidence malformed label inputs are validated."
+        },
+        {
+          "criterion_id": "ts.laplacian-four-variants",
+          "passed": false,
+          "evidence": "No implementation of `laplacian.compute_laplacian` is included in the provided code.",
+          "justification": "There is no evidence the four Laplacian variants or zero-degree guards are implemented."
+        },
+        {
+          "criterion_id": "ts.crop-diagonal-offdiagonal",
+          "passed": false,
+          "evidence": "No implementation of refinement operations is included in the provided code.",
+          "justification": "There is no evidence CropDiagonal excludes the diagonal when computing row maxima."
+        },
+        {
+          "criterion_id": "ts.rowwise-threshold-types",
+          "passed": false,
+          "evidence": "No implementation of `RowWiseThreshold` is included in the provided code.",
+          "justification": "There is no evidence percentile versus row-max thresholding, binarization, or diagonal preservation are handled."
+        },
+        {
+          "criterion_id": "ts.symmetrize-and-diffuse",
+          "passed": false,
+          "evidence": "No implementation of `Symmetrize` or `Diffuse` refinement is included in the provided code.",
+          "justification": "There is no evidence these refinement branches are implemented."
+        },
+        {
+          "criterion_id": "ts.constraint-check-input",
+          "passed": true,
+          "evidence": "`if len(affinity.shape) != 2: raise ValueError`, `if affinity.shape[0] != affinity.shape[1]: raise ValueError`, `if len(constraint_matrix.shape) != 2: raise ValueError`, `if constraint_matrix.shape[0] != constraint_matrix.shape[1]: raise ValueError`, `if affinity.shape != constraint_matrix.shape: raise ValueError`",
+          "justification": "The validation explicitly raises `ValueError` for non-2D, non-square, and mismatched affinity/constraint shapes."
+        },
+        {
+          "criterion_id": "ts.constraint-propagation-closedform",
+          "passed": true,
+          "evidence": "`degree_norm = np.diag(1 / (np.sqrt(np.diag(degree)) + EPS))`, `affinity_norm = degree_norm.dot(affinity).dot(degree_norm)`, `temp_value = np.linalg.inv(np.eye(affinity.shape[0]) - self.alpha * affinity_norm)`, `final_constraint_matrix = (1 - self.alpha)**2 * temp_value.dot(constraint_matrix).dot(temp_value)`, `is_positive = final_constraint_matrix > 0`",
+          "justification": "The implementation follows the required symmetric normalization, closed-form propagation, positive/negative mask combination, and uses EPS for zero-degree safety."
+        },
+        {
+          "criterion_id": "ts.compute-diagonals-sign",
+          "passed": false,
+          "evidence": "The provided code cuts off at `ConstraintMatrix.__init__` and does not show `compute_diagonals`.",
+          "justification": "There is no evidence the constraint diagonal sign logic is implemented."
+        },
+        {
+          "criterion_id": "ts.custom-kmeans-dispatch",
+          "passed": false,
+          "evidence": "No implementation of `custom_distance_kmeans.py` is included in the provided code.",
+          "justification": "There is no evidence dispatch to sklearn KMeans or custom-distance KMeans is implemented."
+        },
+        {
+          "criterion_id": "ts.autotune-coarse-to-fine",
+          "passed": false,
+          "evidence": "`for _ in range(self.search_level): min_ratio = np.inf ... if ratio < min_ratio: ... best_p_percentile = p_percentile`",
+          "justification": "The tuning loop resets `min_ratio` each level and returns the last level's best rather than explicitly retaining the globally best result across levels."
+        },
+        {
+          "criterion_id": "ts.constraint-timing",
+          "passed": false,
+          "evidence": "No implementation of `SpectralClusterer.predict` or constraint/refinement orchestration is included in the provided code.",
+          "justification": "There is no evidence `apply_before_refinement` controls constraint timing."
+        },
+        {
+          "criterion_id": "ts.single-cluster-shortcircuit",
+          "passed": false,
+          "evidence": "No implementation of `fallback_clusterer.py`, `SpectralClusterer.predict`, or `multi_stage_clusterer.py` behavior is included in the provided code.",
+          "justification": "There is no evidence single-cluster short-circuiting or streaming label deflickering is implemented."
+        }
+      ]
+    },
+    "stub": {
+      "model": "openai/gpt-5.5-2026-04-23",
+      "reasoning_effort": "high",
+      "ok": true,
+      "raw_verdicts": 18,
+      "response_chars": 6083,
+      "thinking": "",
+      "raw_response": "[\n  {\n    \"criterion_id\": \"bb.intent_fidelity\",\n    \"verdict\": \"fail\",\n    \"evidence\": \"def get_percentile_range(self) -> typing.Sequence[float]:\\n    pass\",\n    \"justification\": \"The trajectory leaves many required functions as stubs, so it does not genuinely implement the task intent.\"\n  },\n  {\n    \"criterion_id\": \"bb.oracle_strength\",\n    \"verdict\": \"fail\",\n    \"evidence\": \"def predict(self, embeddings: np.ndarray) -> np.ndarray:\\n    pass\",\n    \"justification\": \"Because broad core behavior is unimplemented, there is insufficient evidence of a general solution beyond tests.\"\n  },\n  {\n    \"criterion_id\": \"ts.affinity-cosine-mapping\",\n    \"verdict\": \"fail\",\n    \"evidence\": \"The provided code excerpt contains no implemented utils.compute_affinity_matrix body.\",\n    \"justification\": \"There is no evidence that affinity computation normalizes rows or applies the required cosine mapping.\"\n  },\n  {\n    \"criterion_id\": \"ts.eigen-sort-descend\",\n    \"verdict\": \"fail\",\n    \"evidence\": \"The provided code excerpt contains no implemented utils.compute_sorted_eigenvectors body.\",\n    \"justification\": \"There is no evidence that eigenvalues/eigenvectors are sorted correctly or that the descend flag is respected.\"\n  },\n  {\n    \"criterion_id\": \"ts.eigengap-clustercount\",\n    \"verdict\": \"fail\",\n    \"evidence\": \"The provided code excerpt contains no implemented utils.compute_number_of_clusters body.\",\n    \"justification\": \"There is no evidence that cluster count is computed via eigengap with caps and stopping thresholds.\"\n  },\n  {\n    \"criterion_id\": \"ts.ordered-first-appearance\",\n    \"verdict\": \"fail\",\n    \"evidence\": \"def streaming_predict(\\n      self,\\n      embedding: np.ndarray\\n  ) -> np.ndarray:\\n    pass\",\n    \"justification\": \"Top-level and streaming prediction logic is unimplemented, so final ordered first-appearance relabeling is not demonstrated.\"\n  },\n  {\n    \"criterion_id\": \"ts.chain-labels-validation\",\n    \"verdict\": \"fail\",\n    \"evidence\": \"The provided code excerpt contains no implemented utils.chain_labels body.\",\n    \"justification\": \"There is no evidence that label chaining validates shapes or raises on malformed inputs.\"\n  },\n  {\n    \"criterion_id\": \"ts.laplacian-four-variants\",\n    \"verdict\": \"fail\",\n    \"evidence\": \"def compute_laplacian(affinity: np.ndarray,\\n                      laplacian_type: LaplacianType = LaplacianType.GraphCut,\\n                      eps: float = EPS) -> np.ndarray:\\n  pass\",\n    \"justification\": \"The Laplacian builder is a stub and implements none of the four required variants.\"\n  },\n  {\n    \"criterion_id\": \"ts.crop-diagonal-offdiagonal\",\n    \"verdict\": \"fail\",\n    \"evidence\": \"class AffinityRefinementOperation(metaclass=abc.ABCMeta):\\n\\n  def check_input(self, affinity: np.ndarray):\\n    pass\",\n    \"justification\": \"The refinement code shown is stubbed, with no evidence CropDiagonal excludes the diagonal when taking row maxima.\"\n  },\n  {\n    \"criterion_id\": \"ts.rowwise-threshold-types\",\n    \"verdict\": \"fail\",\n    \"evidence\": \"class ThresholdType(enum.Enum):\\n  RowMax = enum.auto()\\n\\n  Percentile = enum.auto()\",\n    \"justification\": \"Only the enum exists; no implemented RowWiseThreshold behavior is shown for percentile, row-max, binarization, or diagonal preservation.\"\n  },\n  {\n    \"criterion_id\": \"ts.symmetrize-and-diffuse\",\n    \"verdict\": \"fail\",\n    \"evidence\": \"class SymmetrizeType(enum.Enum):\\n  Max = enum.auto()\\n\\n  Average = enum.auto()\",\n    \"justification\": \"Only option enums are present and there is no implemented Symmetrize or Diffuse operation.\"\n  },\n  {\n    \"criterion_id\": \"ts.constraint-check-input\",\n    \"verdict\": \"fail\",\n    \"evidence\": \"def check_input(self, affinity: np.ndarray, constraint_matrix: np.ndarray):\\n    pass\",\n    \"justification\": \"Constraint input validation is a stub and cannot raise the required ValueError cases.\"\n  },\n  {\n    \"criterion_id\": \"ts.constraint-propagation-closedform\",\n    \"verdict\": \"fail\",\n    \"evidence\": \"def adjust_affinity(self,\\n                      affinity: np.ndarray,\\n                      constraint_matrix: np.ndarray) -> np.ndarray:\\n    pass\",\n    \"justification\": \"Constraint propagation is unimplemented, so the required closed-form normalization and positive/negative combination are absent.\"\n  },\n  {\n    \"criterion_id\": \"ts.compute-diagonals-sign\",\n    \"verdict\": \"fail\",\n    \"evidence\": \"def compute_diagonals(self) -> np.ndarray:\\n    pass\",\n    \"justification\": \"The constraint-matrix diagonal construction is a stub and does not implement the specified sign logic.\"\n  },\n  {\n    \"criterion_id\": \"ts.custom-kmeans-dispatch\",\n    \"verdict\": \"fail\",\n    \"evidence\": \"def run_kmeans(spectral_embeddings: np.ndarray,\\n               n_clusters: int,\\n               custom_dist: typing.Union[str, typing.Callable],\\n               max_iter: int) -> np.ndarray:\\n  pass\",\n    \"justification\": \"KMeans dispatch and the custom assign/recompute loop are unimplemented.\"\n  },\n  {\n    \"criterion_id\": \"ts.autotune-coarse-to-fine\",\n    \"verdict\": \"fail\",\n    \"evidence\": \"def tune(self, p_percentile_to_ratio: typing.Callable) -> (\\n      typing.Tuple[np.ndarray, int, float]):\\n    pass\",\n    \"justification\": \"Autotuning is a stub and does not perform coarse-to-fine search or retain the global best result.\"\n  },\n  {\n    \"criterion_id\": \"ts.constraint-timing\",\n    \"verdict\": \"fail\",\n    \"evidence\": \"class ConstraintOptions:\\n\\n  constraint_name: ConstraintName\\n\\n  apply_before_refinement: bool\",\n    \"justification\": \"The option field exists, but no implemented prediction orchestration is shown applying constraints before or after refinement.\"\n  },\n  {\n    \"criterion_id\": \"ts.single-cluster-shortcircuit\",\n    \"verdict\": \"fail\",\n    \"evidence\": \"def check_single_cluster(fallback_options: FallbackOptions,\\n                         embeddings: typing.Optional[np.ndarray],\\n                         affinity: np.ndarray) -> bool:\\n  pass\",\n    \"justification\": \"Single-cluster detection and multi-stage deflickering are stubbed, so the required short-circuit and label consistency behavior are absent.\"\n  }\n]",
+      "verdicts": [
+        {
+          "criterion_id": "bb.intent_fidelity",
+          "passed": false,
+          "evidence": "def get_percentile_range(self) -> typing.Sequence[float]:\n    pass",
+          "justification": "The trajectory leaves many required functions as stubs, so it does not genuinely implement the task intent."
+        },
+        {
+          "criterion_id": "bb.oracle_strength",
+          "passed": false,
+          "evidence": "def predict(self, embeddings: np.ndarray) -> np.ndarray:\n    pass",
+          "justification": "Because broad core behavior is unimplemented, there is insufficient evidence of a general solution beyond tests."
+        },
+        {
+          "criterion_id": "ts.affinity-cosine-mapping",
+          "passed": false,
+          "evidence": "The provided code excerpt contains no implemented utils.compute_affinity_matrix body.",
+          "justification": "There is no evidence that affinity computation normalizes rows or applies the required cosine mapping."
+        },
+        {
+          "criterion_id": "ts.eigen-sort-descend",
+          "passed": false,
+          "evidence": "The provided code excerpt contains no implemented utils.compute_sorted_eigenvectors body.",
+          "justification": "There is no evidence that eigenvalues/eigenvectors are sorted correctly or that the descend flag is respected."
+        },
+        {
+          "criterion_id": "ts.eigengap-clustercount",
+          "passed": false,
+          "evidence": "The provided code excerpt contains no implemented utils.compute_number_of_clusters body.",
+          "justification": "There is no evidence that cluster count is computed via eigengap with caps and stopping thresholds."
+        },
+        {
+          "criterion_id": "ts.ordered-first-appearance",
+          "passed": false,
+          "evidence": "def streaming_predict(\n      self,\n      embedding: np.ndarray\n  ) -> np.ndarray:\n    pass",
+          "justification": "Top-level and streaming prediction logic is unimplemented, so final ordered first-appearance relabeling is not demonstrated."
+        },
+        {
+          "criterion_id": "ts.chain-labels-validation",
+          "passed": false,
+          "evidence": "The provided code excerpt contains no implemented utils.chain_labels body.",
+          "justification": "There is no evidence that label chaining validates shapes or raises on malformed inputs."
+        },
+        {
+          "criterion_id": "ts.laplacian-four-variants",
+          "passed": false,
+          "evidence": "def compute_laplacian(affinity: np.ndarray,\n                      laplacian_type: LaplacianType = LaplacianType.GraphCut,\n                      eps: float = EPS) -> np.ndarray:\n  pass",
+          "justification": "The Laplacian builder is a stub and implements none of the four required variants."
+        },
+        {
+          "criterion_id": "ts.crop-diagonal-offdiagonal",
+          "passed": false,
+          "evidence": "class AffinityRefinementOperation(metaclass=abc.ABCMeta):\n\n  def check_input(self, affinity: np.ndarray):\n    pass",
+          "justification": "The refinement code shown is stubbed, with no evidence CropDiagonal excludes the diagonal when taking row maxima."
+        },
+        {
+          "criterion_id": "ts.rowwise-threshold-types",
+          "passed": false,
+          "evidence": "class ThresholdType(enum.Enum):\n  RowMax = enum.auto()\n\n  Percentile = enum.auto()",
+          "justification": "Only the enum exists; no implemented RowWiseThreshold behavior is shown for percentile, row-max, binarization, or diagonal preservation."
+        },
+        {
+          "criterion_id": "ts.symmetrize-and-diffuse",
+          "passed": false,
+          "evidence": "class SymmetrizeType(enum.Enum):\n  Max = enum.auto()\n\n  Average = enum.auto()",
+          "justification": "Only option enums are present and there is no implemented Symmetrize or Diffuse operation."
+        },
+        {
+          "criterion_id": "ts.constraint-check-input",
+          "passed": false,
+          "evidence": "def check_input(self, affinity: np.ndarray, constraint_matrix: np.ndarray):\n    pass",
+          "justification": "Constraint input validation is a stub and cannot raise the required ValueError cases."
+        },
+        {
+          "criterion_id": "ts.constraint-propagation-closedform",
+          "passed": false,
+          "evidence": "def adjust_affinity(self,\n                      affinity: np.ndarray,\n                      constraint_matrix: np.ndarray) -> np.ndarray:\n    pass",
+          "justification": "Constraint propagation is unimplemented, so the required closed-form normalization and positive/negative combination are absent."
+        },
+        {
+          "criterion_id": "ts.compute-diagonals-sign",
+          "passed": false,
+          "evidence": "def compute_diagonals(self) -> np.ndarray:\n    pass",
+          "justification": "The constraint-matrix diagonal construction is a stub and does not implement the specified sign logic."
+        },
+        {
+          "criterion_id": "ts.custom-kmeans-dispatch",
+          "passed": false,
+          "evidence": "def run_kmeans(spectral_embeddings: np.ndarray,\n               n_clusters: int,\n               custom_dist: typing.Union[str, typing.Callable],\n               max_iter: int) -> np.ndarray:\n  pass",
+          "justification": "KMeans dispatch and the custom assign/recompute loop are unimplemented."
+        },
+        {
+          "criterion_id": "ts.autotune-coarse-to-fine",
+          "passed": false,
+          "evidence": "def tune(self, p_percentile_to_ratio: typing.Callable) -> (\n      typing.Tuple[np.ndarray, int, float]):\n    pass",
+          "justification": "Autotuning is a stub and does not perform coarse-to-fine search or retain the global best result."
+        },
+        {
+          "criterion_id": "ts.constraint-timing",
+          "passed": false,
+          "evidence": "class ConstraintOptions:\n\n  constraint_name: ConstraintName\n\n  apply_before_refinement: bool",
+          "justification": "The option field exists, but no implemented prediction orchestration is shown applying constraints before or after refinement."
+        },
+        {
+          "criterion_id": "ts.single-cluster-shortcircuit",
+          "passed": false,
+          "evidence": "def check_single_cluster(fallback_options: FallbackOptions,\n                         embeddings: typing.Optional[np.ndarray],\n                         affinity: np.ndarray) -> bool:\n  pass",
+          "justification": "Single-cluster detection and multi-stage deflickering are stubbed, so the required short-circuit and label consistency behavior are absent."
+        }
+      ]
+    }
+  },
+  "criteria": [
+    {
+      "id": "bb.reasoning_faithfulness",
+      "text": "Is the agent's stated reasoning consistent with the edits it actually made and the feedback it received (no post-hoc rationalization, no lucky guess)?",
+      "contract_ref": "(backbone)",
+      "concern": "L2.REASONING_FAITHFULNESS",
+      "anchorable": false
+    },
+    {
+      "id": "bb.stage_legitimacy",
+      "text": "Did each refinement stage (lint, test) do real, feedback-responsive work toward the solution rather than cosmetic or no-op changes?",
+      "contract_ref": "(backbone)",
+      "concern": "L2.STAGE_LEGITIMACY",
+      "anchorable": false
+    },
+    {
+      "id": "ts.constraint-check-input",
+      "text": "Constraint input validation raises ValueError for non-2D, non-square, and mismatched affinity-vs-constraint shapes.",
+      "contract_ref": "Known pitfalls: Constraint check_input",
+      "concern": null,
+      "anchorable": true
+    },
+    {
+      "id": "ts.constraint-propagation-closedform",
+      "text": "Constraint propagation symmetric-normalizes the affinity, forms (I\u2212\u03b1\u00c2)^{-1}, builds (1\u2212\u03b1)\u00b2\u00b7T\u00b7C\u00b7T, and combines so positive propagated constraints raise affinities and negative ones lower them, guarding against zero degrees.",
+      "contract_ref": "Behavioral contract: ConstraintPropagation.adjust_affinity + Known pitfalls: Degree zero",
+      "concern": null,
+      "anchorable": true
+    }
+  ]
+}

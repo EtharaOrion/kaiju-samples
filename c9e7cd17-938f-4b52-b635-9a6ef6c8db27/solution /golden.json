@@ -1,0 +1,9 @@
+{
+  "kind": "commit0-golden-ref",
+  "repo": "Shivansh9411/bigcache",
+  "base_commit": "e035633471d066a1d005b5f474f74f20a490c7a6",
+  "reference_commit": "532eb6410aefb749509084c74f56b8313e200f4a",
+  "src_dir": ".",
+  "language": "go",
+  "note": "Golden solution = the repo at reference_commit; solve.sh fetches+resets to it."
+}

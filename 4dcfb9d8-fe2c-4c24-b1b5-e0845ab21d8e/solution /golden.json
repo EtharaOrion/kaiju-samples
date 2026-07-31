@@ -1,0 +1,9 @@
+{
+  "kind": "commit0-golden-ref",
+  "repo": "Zahgon/jsons",
+  "base_commit": "8d69e8cd3e1322e2225577df5da1da4a3fa32a2f",
+  "reference_commit": "9abbf3a3bd32435ac74bc98c3554ad3c71086036",
+  "src_dir": "jsons",
+  "language": "python",
+  "note": "Golden solution = the repo at reference_commit; solve.sh fetches+resets to it."
+}

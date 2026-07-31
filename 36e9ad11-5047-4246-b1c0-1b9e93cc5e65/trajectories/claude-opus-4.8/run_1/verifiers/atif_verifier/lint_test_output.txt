@@ -1,0 +1,59 @@
+============================= test session starts ==============================
+platform linux -- Python 3.10.20, pytest-9.1.1, pluggy-1.6.0
+rootdir: /tmp/commit0-inplace-8z2dqimp/tree
+configfile: pytest.ini
+plugins: xdist-3.8.0, metadata-3.1.1, cov-7.1.0, json-report-1.5.0
+collected 3191 items
+
+tests/test_add_remove.py ...                                             [  0%]
+tests/test_async.py ..........F
+
+=================================== FAILURES ===================================
+___________________ TestTransitions.test_dispatch_with_error ___________________
+
+self = <tests.test_core.TestTransitions testMethod=test_dispatch_with_error>
+
+    def test_dispatch_with_error(self):
+        s1, s2 = Stuff(), Stuff()
+        states = ['A', 'B', 'C']
+        m = Machine(model=s1, states=states, ignore_invalid_triggers=True,
+                    initial=states[0], transitions=[['go', 'B', 'C']])
+        m.add_model(s2, initial='B')
+        assert not m.dispatch('go')
+        self.assertEqual(s1.state, 'A')
+>       self.assertEqual(s2.state, 'C')
+E       AssertionError: 'B' != 'C'
+E       - B
+E       + C
+
+tests/test_core.py:855: AssertionError
+------------------------------ Captured log call -------------------------------
+WARNING  transitions.core:core.py:944 Skip binding of 'trigger' to model due to model override policy.
+WARNING  transitions.core:core.py:944 Skip binding of 'may_trigger' to model due to model override policy.
+WARNING  transitions.core:core.py:944 Skip binding of 'to_A' to model due to model override policy.
+WARNING  transitions.core:core.py:944 Skip binding of 'may_to_A' to model due to model override policy.
+WARNING  transitions.core:core.py:944 Skip binding of 'to_B' to model due to model override policy.
+WARNING  transitions.core:core.py:944 Skip binding of 'may_to_B' to model due to model override policy.
+WARNING  transitions.core:core.py:944 Skip binding of 'to_C' to model due to model override policy.
+WARNING  transitions.core:core.py:944 Skip binding of 'may_to_C' to model due to model override policy.
+WARNING  transitions.core:core.py:944 Skip binding of 'is_A' to model due to model override policy.
+WARNING  transitions.core:core.py:944 Skip binding of 'is_B' to model due to model override policy.
+WARNING  transitions.core:core.py:944 Skip binding of 'is_C' to model due to model override policy.
+WARNING  transitions.core:core.py:944 Skip binding of 'trigger' to model due to model override policy.
+WARNING  transitions.core:core.py:944 Skip binding of 'may_trigger' to model due to model override policy.
+WARNING  transitions.core:core.py:944 Skip binding of 'to_A' to model due to model override policy.
+WARNING  transitions.core:core.py:944 Skip binding of 'may_to_A' to model due to model override policy.
+WARNING  transitions.core:core.py:944 Skip binding of 'to_B' to model due to model override policy.
+WARNING  transitions.core:core.py:944 Skip binding of 'may_to_B' to model due to model override policy.
+WARNING  transitions.core:core.py:944 Skip binding of 'to_C' to model due to model override policy.
+WARNING  transitions.core:core.py:944 Skip binding of 'may_to_C' to model due to model override policy.
+WARNING  transitions.core:core.py:944 Skip binding of 'is_A' to model due to model override policy.
+WARNING  transitions.core:core.py:944 Skip binding of 'is_B' to model due to model override policy.
+WARNING  transitions.core:core.py:944 Skip binding of 'is_C' to model due to model override policy.
+WARNING  transitions.core:core.py:483 Can't trigger event go from state A!
+--------------------------------- JSON report ----------------------------------
+report saved to: report.json
+=========================== short test summary info ============================
+FAILED tests/test_async.py::TestTransitions::test_dispatch_with_error - Asser...
+!!!!!!!!!!!!!!!!!!!!!!!!!! stopping after 1 failures !!!!!!!!!!!!!!!!!!!!!!!!!!!
+========================= 1 failed, 13 passed in 0.52s =========================

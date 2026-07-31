@@ -1,0 +1,206 @@
+ts-jest[ts-jest-transformer] (WARN) Define `ts-jest` config under `globals` is deprecated. Please do
+transform: {
+    <transform_regex>: ['ts-jest', { /* ts-jest config goes here in Jest */ }],
+},
+PASS __tests__/host.spec.ts
+PASS __tests__/get-options-overrides.spec.ts
+FAIL __tests__/integration/errors.spec.ts
+  ● Test suite failed to run
+
+    [96msrc/index.ts[0m:[93m1[0m:[93m20[0m - [91merror[0m[90m TS6133: [0m'dirname' is declared but its value is never read.
+
+    [7m1[0m import { relative, dirname, normalize as pathNormalize, resolve } from "path";
+    [7m [0m [91m                   ~~~~~~~[0m
+    [96msrc/index.ts[0m:[93m1[0m:[93m57[0m - [91merror[0m[90m TS6133: [0m'resolve' is declared but its value is never read.
+
+    [7m1[0m import { relative, dirname, normalize as pathNormalize, resolve } from "path";
+    [7m [0m [91m                                                        ~~~~~~~[0m
+    [96msrc/index.ts[0m:[93m47[0m:[93m13[0m - [91merror[0m[90m TS2554: [0mExpected 9 arguments, but got 8.
+
+    [7m47[0m    _cache = new TsCache(pluginOptions.clean, servicesHost, pluginOptions.cacheRoot, pluginOptions.check, parsedConfig.options, rollupOptions, parsedConfig.fileNames, context);
+    [7m  [0m [91m            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+
+      [96msrc/tscache.ts[0m:[93m81[0m:[93m251[0m
+        [7m81[0m  constructor(private noCache: boolean, runClean: boolean, hashIgnoreUnknown: boolean, private host: tsTypes.LanguageServiceHost, private cacheRoot: string, private options: tsTypes.CompilerOptions, private rollupConfig: any, rootFilenames: string[], private context: RollupContext)
+        [7m  [0m [96m                                                                                                                                                                                                                                                          ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+        An argument for 'context' was not provided.
+    [96msrc/index.ts[0m:[93m58[0m:[93m3[0m - [91merror[0m[90m TS2322: [0mType 'string | null' is not assignable to type 'string | undefined'.
+      Type 'null' is not assignable to type 'string | undefined'.
+
+    [7m58[0m   cacheRoot: findCacheDir({ name: "rollup-plugin-typescript2" }),
+    [7m  [0m [91m  ~~~~~~~~~[0m
+
+      [96msrc/ioptions.ts[0m:[93m22[0m:[93m2[0m
+        [7m22[0m  cacheRoot: string;
+        [7m  [0m [96m ~~~~~~~~~[0m
+        The expected type comes from property 'cacheRoot' which is declared here on type 'Partial<IOptions>'
+    [96msrc/index.ts[0m:[93m105[0m:[93m4[0m - [91merror[0m[90m TS2739: [0mType '{ parsedTsConfig: ParsedCommandLine; fileName: string | undefined; }' is missing the following properties from type 'ParsedCommandLine': options, fileNames, errors
+
+    [7m105[0m    parsedConfig = parseTsConfig(context, pluginOptions);
+    [7m   [0m [91m   ~~~~~~~~~~~~[0m
+    [96msrc/index.ts[0m:[93m122[0m:[93m12[0m - [91merror[0m[90m TS2341: [0mProperty 'clean' is private and only accessible within class 'TsCache'.
+
+    [7m122[0m    cache().clean();
+    [7m   [0m [91m           ~~~~~[0m
+    [96msrc/index.ts[0m:[93m189[0m:[93m81[0m - [91merror[0m[90m TS2345: [0mArgument of type 'CompilerOptionsValue | TsConfigSourceFile' is not assignable to parameter of type 'boolean | undefined'.
+
+    [7m189[0m      printDiagnostics(contextWrapper, convertDiagnostic("syntax", diagnostics), parsedConfig.options.pretty);
+    [7m   [0m [91m                                                                                ~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+    [96msrc/index.ts[0m:[93m196[0m:[93m50[0m - [91merror[0m[90m TS2554: [0mExpected 1-2 arguments, but got 3.
+
+    [7m196[0m     return convertEmitOutput(output, references, checkedFiles);
+    [7m   [0m [91m                                                 ~~~~~~~~~~~~[0m
+    [96msrc/index.ts[0m:[93m207[0m:[93m51[0m - [91merror[0m[90m TS2345: [0mArgument of type 'CompilerOptionsValue | TsConfigSourceFile' is not assignable to parameter of type 'boolean | undefined'.
+      Type 'null' is not assignable to type 'boolean | undefined'.
+
+    [7m207[0m     printDiagnostics(contextWrapper, diagnostics, parsedConfig.options.pretty);
+    [7m   [0m [91m                                                  ~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+    [96msrc/index.ts[0m:[93m246[0m:[93m47[0m - [91merror[0m[90m TS2554: [0mExpected 1-2 arguments, but got 3.
+
+    [7m246[0m     const out = convertEmitOutput(output, [], checkedFiles);
+    [7m   [0m [91m                                              ~~~~~~~~~~~~[0m
+
+FAIL __tests__/integration/no-errors.spec.ts
+  ● Test suite failed to run
+
+    [96msrc/index.ts[0m:[93m1[0m:[93m20[0m - [91merror[0m[90m TS6133: [0m'dirname' is declared but its value is never read.
+
+    [7m1[0m import { relative, dirname, normalize as pathNormalize, resolve } from "path";
+    [7m [0m [91m                   ~~~~~~~[0m
+    [96msrc/index.ts[0m:[93m1[0m:[93m57[0m - [91merror[0m[90m TS6133: [0m'resolve' is declared but its value is never read.
+
+    [7m1[0m import { relative, dirname, normalize as pathNormalize, resolve } from "path";
+    [7m [0m [91m                                                        ~~~~~~~[0m
+    [96msrc/index.ts[0m:[93m47[0m:[93m13[0m - [91merror[0m[90m TS2554: [0mExpected 9 arguments, but got 8.
+
+    [7m47[0m    _cache = new TsCache(pluginOptions.clean, servicesHost, pluginOptions.cacheRoot, pluginOptions.check, parsedConfig.options, rollupOptions, parsedConfig.fileNames, context);
+    [7m  [0m [91m            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+
+      [96msrc/tscache.ts[0m:[93m81[0m:[93m251[0m
+        [7m81[0m  constructor(private noCache: boolean, runClean: boolean, hashIgnoreUnknown: boolean, private host: tsTypes.LanguageServiceHost, private cacheRoot: string, private options: tsTypes.CompilerOptions, private rollupConfig: any, rootFilenames: string[], private context: RollupContext)
+        [7m  [0m [96m                                                                                                                                                                                                                                                          ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+        An argument for 'context' was not provided.
+    [96msrc/index.ts[0m:[93m58[0m:[93m3[0m - [91merror[0m[90m TS2322: [0mType 'string | null' is not assignable to type 'string | undefined'.
+      Type 'null' is not assignable to type 'string | undefined'.
+
+    [7m58[0m   cacheRoot: findCacheDir({ name: "rollup-plugin-typescript2" }),
+    [7m  [0m [91m  ~~~~~~~~~[0m
+
+      [96msrc/ioptions.ts[0m:[93m22[0m:[93m2[0m
+        [7m22[0m  cacheRoot: string;
+        [7m  [0m [96m ~~~~~~~~~[0m
+        The expected type comes from property 'cacheRoot' which is declared here on type 'Partial<IOptions>'
+    [96msrc/index.ts[0m:[93m105[0m:[93m4[0m - [91merror[0m[90m TS2739: [0mType '{ parsedTsConfig: ParsedCommandLine; fileName: string | undefined; }' is missing the following properties from type 'ParsedCommandLine': options, fileNames, errors
+
+    [7m105[0m    parsedConfig = parseTsConfig(context, pluginOptions);
+    [7m   [0m [91m   ~~~~~~~~~~~~[0m
+    [96msrc/index.ts[0m:[93m122[0m:[93m12[0m - [91merror[0m[90m TS2341: [0mProperty 'clean' is private and only accessible within class 'TsCache'.
+
+    [7m122[0m    cache().clean();
+    [7m   [0m [91m           ~~~~~[0m
+    [96msrc/index.ts[0m:[93m189[0m:[93m81[0m - [91merror[0m[90m TS2345: [0mArgument of type 'CompilerOptionsValue | TsConfigSourceFile' is not assignable to parameter of type 'boolean | undefined'.
+
+    [7m189[0m      printDiagnostics(contextWrapper, convertDiagnostic("syntax", diagnostics), parsedConfig.options.pretty);
+    [7m   [0m [91m                                                                                ~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+    [96msrc/index.ts[0m:[93m196[0m:[93m50[0m - [91merror[0m[90m TS2554: [0mExpected 1-2 arguments, but got 3.
+
+    [7m196[0m     return convertEmitOutput(output, references, checkedFiles);
+    [7m   [0m [91m                                                 ~~~~~~~~~~~~[0m
+    [96msrc/index.ts[0m:[93m207[0m:[93m51[0m - [91merror[0m[90m TS2345: [0mArgument of type 'CompilerOptionsValue | TsConfigSourceFile' is not assignable to parameter of type 'boolean | undefined'.
+      Type 'null' is not assignable to type 'boolean | undefined'.
+
+    [7m207[0m     printDiagnostics(contextWrapper, diagnostics, parsedConfig.options.pretty);
+    [7m   [0m [91m                                                  ~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+    [96msrc/index.ts[0m:[93m246[0m:[93m47[0m - [91merror[0m[90m TS2554: [0mExpected 1-2 arguments, but got 3.
+
+    [7m246[0m     const out = convertEmitOutput(output, [], checkedFiles);
+    [7m   [0m [91m                                              ~~~~~~~~~~~~[0m
+
+FAIL __tests__/integration/watch.spec.ts
+  ● Test suite failed to run
+
+    [96msrc/index.ts[0m:[93m1[0m:[93m20[0m - [91merror[0m[90m TS6133: [0m'dirname' is declared but its value is never read.
+
+    [7m1[0m import { relative, dirname, normalize as pathNormalize, resolve } from "path";
+    [7m [0m [91m                   ~~~~~~~[0m
+    [96msrc/index.ts[0m:[93m1[0m:[93m57[0m - [91merror[0m[90m TS6133: [0m'resolve' is declared but its value is never read.
+
+    [7m1[0m import { relative, dirname, normalize as pathNormalize, resolve } from "path";
+    [7m [0m [91m                                                        ~~~~~~~[0m
+    [96msrc/index.ts[0m:[93m47[0m:[93m13[0m - [91merror[0m[90m TS2554: [0mExpected 9 arguments, but got 8.
+
+    [7m47[0m    _cache = new TsCache(pluginOptions.clean, servicesHost, pluginOptions.cacheRoot, pluginOptions.check, parsedConfig.options, rollupOptions, parsedConfig.fileNames, context);
+    [7m  [0m [91m            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+
+      [96msrc/tscache.ts[0m:[93m81[0m:[93m251[0m
+        [7m81[0m  constructor(private noCache: boolean, runClean: boolean, hashIgnoreUnknown: boolean, private host: tsTypes.LanguageServiceHost, private cacheRoot: string, private options: tsTypes.CompilerOptions, private rollupConfig: any, rootFilenames: string[], private context: RollupContext)
+        [7m  [0m [96m                                                                                                                                                                                                                                                          ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+        An argument for 'context' was not provided.
+    [96msrc/index.ts[0m:[93m58[0m:[93m3[0m - [91merror[0m[90m TS2322: [0mType 'string | null' is not assignable to type 'string | undefined'.
+      Type 'null' is not assignable to type 'string | undefined'.
+
+    [7m58[0m   cacheRoot: findCacheDir({ name: "rollup-plugin-typescript2" }),
+    [7m  [0m [91m  ~~~~~~~~~[0m
+
+      [96msrc/ioptions.ts[0m:[93m22[0m:[93m2[0m
+        [7m22[0m  cacheRoot: string;
+        [7m  [0m [96m ~~~~~~~~~[0m
+        The expected type comes from property 'cacheRoot' which is declared here on type 'Partial<IOptions>'
+    [96msrc/index.ts[0m:[93m105[0m:[93m4[0m - [91merror[0m[90m TS2739: [0mType '{ parsedTsConfig: ParsedCommandLine; fileName: string | undefined; }' is missing the following properties from type 'ParsedCommandLine': options, fileNames, errors
+
+    [7m105[0m    parsedConfig = parseTsConfig(context, pluginOptions);
+    [7m   [0m [91m   ~~~~~~~~~~~~[0m
+    [96msrc/index.ts[0m:[93m122[0m:[93m12[0m - [91merror[0m[90m TS2341: [0mProperty 'clean' is private and only accessible within class 'TsCache'.
+
+    [7m122[0m    cache().clean();
+    [7m   [0m [91m           ~~~~~[0m
+    [96msrc/index.ts[0m:[93m189[0m:[93m81[0m - [91merror[0m[90m TS2345: [0mArgument of type 'CompilerOptionsValue | TsConfigSourceFile' is not assignable to parameter of type 'boolean | undefined'.
+
+    [7m189[0m      printDiagnostics(contextWrapper, convertDiagnostic("syntax", diagnostics), parsedConfig.options.pretty);
+    [7m   [0m [91m                                                                                ~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+    [96msrc/index.ts[0m:[93m196[0m:[93m50[0m - [91merror[0m[90m TS2554: [0mExpected 1-2 arguments, but got 3.
+
+    [7m196[0m     return convertEmitOutput(output, references, checkedFiles);
+    [7m   [0m [91m                                                 ~~~~~~~~~~~~[0m
+    [96msrc/index.ts[0m:[93m207[0m:[93m51[0m - [91merror[0m[90m TS2345: [0mArgument of type 'CompilerOptionsValue | TsConfigSourceFile' is not assignable to parameter of type 'boolean | undefined'.
+      Type 'null' is not assignable to type 'boolean | undefined'.
+
+    [7m207[0m     printDiagnostics(contextWrapper, diagnostics, parsedConfig.options.pretty);
+    [7m   [0m [91m                                                  ~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+    [96msrc/index.ts[0m:[93m246[0m:[93m47[0m - [91merror[0m[90m TS2554: [0mExpected 1-2 arguments, but got 3.
+
+    [7m246[0m     const out = convertEmitOutput(output, [], checkedFiles);
+    [7m   [0m [91m                                              ~~~~~~~~~~~~[0m
+
+PASS __tests__/diagnostics.spec.ts
+FAIL __tests__/rollingcache.spec.ts
+  ● RollingCache, rolled
+
+    expect(received).toBeFalsy()
+
+    Received: true
+
+      57 | 	cache.roll();
+      58 | 	expect(cache.exists("anything")).toBeFalsy();
+    > 59 | 	expect(cache.match([])).toBeFalsy();
+         | 	                        ^
+      60 |
+      61 | 	cache.write("whatever.json", {whatever: true});
+      62 | 	expect(await pathExists(`${oldCacheDir}/whatever.json`)).toBeFalsy();
+
+      at __tests__/rollingcache.spec.ts:59:26
+      at __tests__/rollingcache.spec.ts:31:71
+      at Object.<anonymous>.__awaiter (__tests__/rollingcache.spec.ts:27:12)
+      at Object.<anonymous> (__tests__/rollingcache.spec.ts:52:41)
+
+PASS __tests__/context.spec.ts
+PASS __tests__/parse-tsconfig.spec.ts
+PASS __tests__/tslib.spec.ts
+PASS __tests__/diagnostics-format-host.spec.ts
+
+Test Suites: 4 failed, 7 passed, 11 total
+Tests:       1 failed, 30 passed, 31 total
+Snapshots:   0 total
+Time:        3.038 s
+Ran all test suites matching /__tests__/i.
+Test results written to: report.json

@@ -1,0 +1,71 @@
+{
+  "solution": {
+    "passed": 14,
+    "failed": 0,
+    "errors": 0,
+    "skipped": 0,
+    "collected": 14,
+    "status": "OK",
+    "detail": "============================== 14 passed in 0.02s ==============================",
+    "total": 14,
+    "pass_rate": 1.0,
+    "log": "/opt/run/verification/results/pytest/claude-opus-4.8/agent/run_1/logs/solution.log"
+  },
+  "anchors": {
+    "golden": {
+      "passed": 14,
+      "failed": 0,
+      "errors": 0,
+      "skipped": 0,
+      "collected": 14,
+      "status": "OK",
+      "detail": "============================== 14 passed in 0.02s ==============================",
+      "total": 14,
+      "pass_rate": 1.0,
+      "log": "/opt/run/verification/results/pytest/logs/golden.log"
+    },
+    "stub": {
+      "passed": 14,
+      "failed": 0,
+      "errors": 0,
+      "skipped": 0,
+      "collected": 14,
+      "status": "OK",
+      "detail": "============================== 14 passed in 0.02s ==============================",
+      "total": 14,
+      "pass_rate": 1.0,
+      "log": "/opt/run/verification/results/pytest/logs/stub.log"
+    }
+  },
+  "analysis": {
+    "n_total": 14,
+    "n_sound": 0,
+    "sound_subset": [],
+    "wrong_oracle_dropped": [],
+    "non_discriminating_dropped": [
+      "test_differential_0",
+      "test_differential_1",
+      "test_differential_10",
+      "test_differential_11",
+      "test_differential_12",
+      "test_differential_13",
+      "test_differential_2",
+      "test_differential_3",
+      "test_differential_4",
+      "test_differential_5",
+      "test_differential_6",
+      "test_differential_7",
+      "test_differential_8",
+      "test_differential_9"
+    ],
+    "inconclusive_on_stub": [],
+    "solution_pass_on_sound": null,
+    "gap_vs_golden": null,
+    "golden_status": "OK",
+    "stub_status": "OK",
+    "solution_status": "OK",
+    "infra_failures": [],
+    "stub_import_broken": false,
+    "stub_note": ""
+  }
+}

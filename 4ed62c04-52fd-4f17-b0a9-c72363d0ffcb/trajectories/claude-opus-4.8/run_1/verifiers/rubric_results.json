@@ -1,0 +1,417 @@
+{
+  "model": "openai/gpt-5.5-2026-04-23",
+  "ok": true,
+  "verdicts": [
+    {
+      "criterion_id": "bb.reasoning_faithfulness",
+      "passed": true,
+      "evidence": "reasoning: \"I'll implement the `SignatureEventTarget` class...\" / edit: \"The file src/signature_event_target.ts has been edited.\"; code: \"this._et = new EventTarget(); ... this._et.addEventListener(type, listener, options);\"",
+      "justification": "The stated plan to implement the stubbed files is broadly consistent with the provided edits and no contradictory feedback was ignored."
+    },
+    {
+      "criterion_id": "bb.stage_legitimacy",
+      "passed": true,
+      "evidence": "feedback: \"Usage Error: Couldn't find the node_modules state file - running an install might help\"; reasoning: \"This error is an environment issue, not a code problem.\"",
+      "justification": "The refinement stages attempted lint/test runs and responded to the actual dependency-installation failure rather than making cosmetic changes."
+    },
+    {
+      "criterion_id": "ts.point-nan-throw",
+      "passed": true,
+      "evidence": "if (isNaN(x) || isNaN(y)) {\n      throw new Error(`Point is invalid: (${x}, ${y})`);\n    }",
+      "justification": "The constructor throws an Error on NaN coordinates and includes the coordinate values in the message."
+    },
+    {
+      "criterion_id": "ts.point-coerce-defaults",
+      "passed": true,
+      "evidence": "this.x = +x;\n    this.y = +y;\n    this.pressure = pressure || 0;\n    this.time = time || Date.now();",
+      "justification": "The constructor coerces x/y to numbers and applies the required falsy defaults for pressure and time."
+    },
+    {
+      "criterion_id": "ts.point-geometry",
+      "passed": true,
+      "evidence": "distanceTo... Math.sqrt(Math.pow(this.x - start.x, 2) + Math.pow(this.y - start.y, 2)); ... equals... this.x === other.x && this.y === other.y && this.pressure === other.pressure && this.time === other.time ... velocityFrom... this.time !== start.time ? this.distanceTo(start) / (this.time - start.time) : 0",
+      "justification": "Distance, equality over all four fields, and zero-time velocity behavior are implemented as required."
+    },
+    {
+      "criterion_id": "ts.bezier-control-guard",
+      "passed": true,
+      "evidence": "const k = l2 / (l1 + l2) || 0;",
+      "justification": "The length-ratio division is guarded so a NaN ratio from coincident points falls back to 0."
+    },
+    {
+      "criterion_id": "ts.bezier-construction",
+      "passed": true,
+      "evidence": "return new Bezier(points[1], c2, c3, points[2], widths.start, widths.end); ... start * (1.0 - t) * ... + 3.0 * c1 ... + 3.0 * c2 ... + end * t * t * t ... for (let i = 0; i <= steps; i += 1) ... length += Math.sqrt(xdiff * xdiff + ydiff * ydiff);",
+      "justification": "The curve is built from the intended points and widths, uses the cubic B\u00e9zier polynomial, and approximates length by sampled segment summation."
+    },
+    {
+      "criterion_id": "ts.eventtarget-fallback",
+      "passed": true,
+      "evidence": "try {\n      this._et = new EventTarget();\n    } catch (error) {\n      ... this._et = document.createDocumentFragment();\n    }",
+      "justification": "The wrapper attempts native EventTarget construction and falls back to a valid document-backed EventTarget instead of throwing."
+    },
+    {
+      "criterion_id": "ts.eventtarget-delegate",
+      "passed": true,
+      "evidence": "this._et.addEventListener(type, listener, options); ... return this._et.dispatchEvent(event); ... this._et.removeEventListener(type, callback, options);",
+      "justification": "All three methods delegate to the internal target and dispatchEvent returns the delegated boolean result."
+    },
+    {
+      "criterion_id": "ts.option-nullish",
+      "passed": true,
+      "evidence": "this.throttle = options.throttle ?? 16; ... this.minDistance = options.minDistance ?? 5; ... this.velocityFilterWeight = options.velocityFilterWeight || 0.7; ... this.canvasContextOptions = options.canvasContextOptions ?? {};",
+      "justification": "Throttle and minDistance preserve explicit 0 with nullish coalescing, while the other shown options fall back to documented defaults for undefined."
+    },
+    {
+      "criterion_id": "ts.throttle-bypass",
+      "passed": true,
+      "evidence": "this._strokeMoveUpdate = this.throttle\n      ? throttle(SignaturePad.prototype._strokeUpdate, this.throttle)\n      : SignaturePad.prototype._strokeUpdate;",
+      "justification": "The move updater is throttled only when the configured throttle value is nonzero and otherwise uses the raw update function."
+    },
+    {
+      "criterion_id": "ts.on-off-styles",
+      "passed": false,
+      "evidence": "this.canvas.style.touchAction = 'none';\n    this.canvas.style.userSelect = 'none'; ... style.webkitUserSelect = 'none'; ... this.canvas.style.touchAction = 'auto';\n    this.canvas.style.userSelect = 'auto'; ... style.webkitUserSelect = 'auto';",
+      "justification": "The implementation sets and restores touchAction/userSelect/webkitUserSelect but provides no evidence of handling the required msTouchAction property."
+    },
+    {
+      "criterion_id": "ts.clear-redraw-state",
+      "passed": false,
+      "evidence": "public clear(): void { ... this._data = []; ... this._isEmpty = true; }\n\n  public redraw(): void { ... this._fromData(this._data, ...); }",
+      "justification": "Clear does not show clearing cached data-URL state, and redraw does not show re-rendering cached data URLs or preserving/restoring data through a clear."
+    }
+  ],
+  "anchors": {
+    "golden": {
+      "model": "openai/gpt-5.5-2026-04-23",
+      "reasoning_effort": "high",
+      "ok": true,
+      "raw_verdicts": 18,
+      "response_chars": 7858,
+      "thinking": "",
+      "raw_response": "[\n  {\n    \"criterion_id\": \"bb.intent_fidelity\",\n    \"verdict\": \"fail\",\n    \"evidence\": \"Candidate trajectory is truncated at `y: touch.cl` and does not include `src/throttle.ts`.\",\n    \"justification\": \"The provided trajectory is incomplete, so it cannot clearly demonstrate a genuine full implementation of the task intent.\"\n  },\n  {\n    \"criterion_id\": \"bb.oracle_strength\",\n    \"verdict\": \"fail\",\n    \"evidence\": \"Candidate trajectory is truncated at `y: touch.cl` and omits substantial `SignaturePad` behavior and all throttle implementation.\",\n    \"justification\": \"There is insufficient evidence that the solution is a complete general implementation beyond tests.\"\n  },\n  {\n    \"criterion_id\": \"ts.point-nan-throw\",\n    \"verdict\": \"pass\",\n    \"evidence\": \"constructor(x: number, y: number, pressure?: number, time?: number) {\\n    if (isNaN(x) || isNaN(y)) {\\n      throw new Error(`Point is invalid: (${x}, ${y})`);\\n    }\",\n    \"justification\": \"The constructor throws an Error when either coordinate is NaN and includes the coordinate values in the message.\"\n  },\n  {\n    \"criterion_id\": \"ts.point-coerce-defaults\",\n    \"verdict\": \"pass\",\n    \"evidence\": \"this.x = +x;\\n    this.y = +y;\\n    this.pressure = pressure || 0;\\n    this.time = time || Date.now();\",\n    \"justification\": \"The constructor coerces coordinates to numbers and applies the required falsy defaults for pressure and time.\"\n  },\n  {\n    \"criterion_id\": \"ts.point-geometry\",\n    \"verdict\": \"pass\",\n    \"evidence\": \"public distanceTo(start: BasicPoint): number {\\n    return Math.sqrt(\\n      Math.pow(this.x - start.x, 2) + Math.pow(this.y - start.y, 2),\\n    );\\n  }\\n\\n  public equals(other: BasicPoint): boolean {\\n    return (\\n      this.x === other.x &&\\n      this.y === other.y &&\\n      this.pressure === other.pressure &&\\n      this.time === other.time\\n    );\\n  }\\n\\n  public velocityFrom(start: BasicPoint): number {\\n    return this.time !== start.time\\n      ? this.distanceTo(start) / (this.time - start.time)\\n      : 0;\\n  }\",\n    \"justification\": \"The geometry methods implement Euclidean distance, full-field equality, and zero velocity for equal timestamps.\"\n  },\n  {\n    \"criterion_id\": \"ts.bezier-control-guard\",\n    \"verdict\": \"pass\",\n    \"evidence\": \"const k = l1 + l2 == 0 ? 0 : l2 / (l1 + l2);\",\n    \"justification\": \"The control-point ratio explicitly guards against zero total segment length and uses 0 in that case.\"\n  },\n  {\n    \"criterion_id\": \"ts.bezier-construction\",\n    \"verdict\": \"pass\",\n    \"evidence\": \"return new Bezier(points[1], c2, c3, points[2], widths.start, widths.end);\",\n    \"justification\": \"The curve construction uses the required start/end points and widths, and the shown polynomial and sampled length implementation are standard cubic B\u00e9zier computations.\"\n  },\n  {\n    \"criterion_id\": \"ts.eventtarget-fallback\",\n    \"verdict\": \"pass\",\n    \"evidence\": \"try {\\n      this._et = new EventTarget();\\n    } catch {\\n      // Using document as EventTarget to support iOS 13 and older.\\n      this._et = document;\\n    }\",\n    \"justification\": \"The constructor attempts native EventTarget construction and falls back to document on failure.\"\n  },\n  {\n    \"criterion_id\": \"ts.eventtarget-delegate\",\n    \"verdict\": \"pass\",\n    \"evidence\": \"this._et.addEventListener(type, listener, options); ... return this._et.dispatchEvent(event); ... this._et.removeEventListener(type, callback, options);\",\n    \"justification\": \"All three methods delegate to the internal target and dispatchEvent returns the delegated result.\"\n  },\n  {\n    \"criterion_id\": \"ts.throttle-behavior\",\n    \"verdict\": \"fail\",\n    \"evidence\": \"No `src/throttle.ts` implementation is included in the candidate trajectory.\",\n    \"justification\": \"There is no evidence that throttle satisfies the required rate-limiting and trailing-call behavior.\"\n  },\n  {\n    \"criterion_id\": \"ts.option-nullish\",\n    \"verdict\": \"pass\",\n    \"evidence\": \"this.throttle = options.throttle ?? 16; // in milliseconds\\n    this.minDistance = options.minDistance ?? 5; // in pixels\\n    this.velocityFilterWeight = options.velocityFilterWeight || 0.7;\\n    this.minWidth = options.minWidth || 0.5;\\n    this.maxWidth = options.maxWidth || 2.5; ... this.canvasContextOptions = options.canvasContextOptions ?? {};\",\n    \"justification\": \"Throttle and minDistance preserve explicit 0 with nullish coalescing, while the other options shown fall back to documented defaults for undefined.\"\n  },\n  {\n    \"criterion_id\": \"ts.throttle-bypass\",\n    \"verdict\": \"pass\",\n    \"evidence\": \"this._strokeMoveUpdate = this.throttle\\n      ? throttle(SignaturePad.prototype._strokeUpdate, this.throttle)\\n      : SignaturePad.prototype._strokeUpdate;\",\n    \"justification\": \"The move update is wrapped only when throttle is truthy and uses the raw update when throttle is 0.\"\n  },\n  {\n    \"criterion_id\": \"ts.on-off-styles\",\n    \"verdict\": \"pass\",\n    \"evidence\": \"this.canvas.style.touchAction = 'none'; ... msTouchAction = 'none';\\n    this.canvas.style.userSelect = 'none'; ... this.canvas.style.webkitUserSelect = 'none'; ... this.canvas.style.touchAction = 'auto'; ... msTouchAction = 'auto';\\n    this.canvas.style.userSelect = 'auto';\\n    this.canvas.style.webkitUserSelect = 'auto';\",\n    \"justification\": \"The shown on/off methods set and restore the required standard and prefixed styles and add/remove the initial and move/up listeners.\"\n  },\n  {\n    \"criterion_id\": \"ts.begin-stroke-cancelable\",\n    \"verdict\": \"fail\",\n    \"evidence\": \"Candidate trajectory is truncated before the stroke lifecycle methods are shown.\",\n    \"justification\": \"There is insufficient evidence that beginStroke is cancelable or that lifecycle events are dispatched correctly.\"\n  },\n  {\n    \"criterion_id\": \"ts.pointer-id-tracking\",\n    \"verdict\": \"fail\",\n    \"evidence\": \"private _strokePointerId: number | undefined; ... this._strokePointerId = undefined;\",\n    \"justification\": \"Although a pointer-id field exists and is reset on clear, the trajectory does not show the active-stroke filtering and reset behavior.\"\n  },\n  {\n    \"criterion_id\": \"ts.stroke-end-outofcanvas-cancel\",\n    \"verdict\": \"fail\",\n    \"evidence\": \"Candidate trajectory is truncated before `_handlePointerUp`, `_handleMouseUp`, `_handlePointerCancel`, `_handleTouchCancel`, and touch preventDefault logic are shown.\",\n    \"justification\": \"There is insufficient evidence that out-of-canvas endings, cancel events, and cancelable-only touch preventDefault behavior are correctly implemented.\"\n  },\n  {\n    \"criterion_id\": \"ts.clear-redraw-state\",\n    \"verdict\": \"pass\",\n    \"evidence\": \"ctx.fillStyle = this.backgroundColor;\\n    ctx.clearRect(0, 0, canvas.width, canvas.height);\\n    ctx.fillRect(0, 0, canvas.width, canvas.height);\\n\\n    this._data = [];\\n    this._reset(this._getPointGroupOptions());\\n    this._isEmpty = true;\\n    this._dataUrl = undefined;\\n    this._dataUrlOptions = undefined;\\n    this._strokePointerId = undefined; ... const data = this._data;\\n    const dataUrl = this._dataUrl;\\n    const dataUrlOptions = this._dataUrlOptions;\\n\\n    this.clear();\\n    if (dataUrl) {\\n      this.fromDataURL(dataUrl, dataUrlOptions);\\n    }\\n    this.fromData(data, { clear: false });\",\n    \"justification\": \"The clear and redraw implementations shown reset canvas/data/cache state and preserve data across redraw by saving and reapplying it.\"\n  },\n  {\n    \"criterion_id\": \"ts.datamodel-export-typeguards\",\n    \"verdict\": \"fail\",\n    \"evidence\": \"fromData(pointGroups: PointGroup[], { clear = true }: FromDataOptions = {},): void { ... this._data = this._data.concat(pointGroups); } ... toDataURL(...): string { ... }\",\n    \"justification\": \"Some data-model and toDataURL type-guard behavior is shown, but the trajectory is truncated before `toSVG`, `_fromData`, drawing, and complete fromDataURL behavior can be verified.\"\n  }\n]",
+      "verdicts": [
+        {
+          "criterion_id": "bb.intent_fidelity",
+          "passed": false,
+          "evidence": "Candidate trajectory is truncated at `y: touch.cl` and does not include `src/throttle.ts`.",
+          "justification": "The provided trajectory is incomplete, so it cannot clearly demonstrate a genuine full implementation of the task intent."
+        },
+        {
+          "criterion_id": "bb.oracle_strength",
+          "passed": false,
+          "evidence": "Candidate trajectory is truncated at `y: touch.cl` and omits substantial `SignaturePad` behavior and all throttle implementation.",
+          "justification": "There is insufficient evidence that the solution is a complete general implementation beyond tests."
+        },
+        {
+          "criterion_id": "ts.point-nan-throw",
+          "passed": true,
+          "evidence": "constructor(x: number, y: number, pressure?: number, time?: number) {\n    if (isNaN(x) || isNaN(y)) {\n      throw new Error(`Point is invalid: (${x}, ${y})`);\n    }",
+          "justification": "The constructor throws an Error when either coordinate is NaN and includes the coordinate values in the message."
+        },
+        {
+          "criterion_id": "ts.point-coerce-defaults",
+          "passed": true,
+          "evidence": "this.x = +x;\n    this.y = +y;\n    this.pressure = pressure || 0;\n    this.time = time || Date.now();",
+          "justification": "The constructor coerces coordinates to numbers and applies the required falsy defaults for pressure and time."
+        },
+        {
+          "criterion_id": "ts.point-geometry",
+          "passed": true,
+          "evidence": "public distanceTo(start: BasicPoint): number {\n    return Math.sqrt(\n      Math.pow(this.x - start.x, 2) + Math.pow(this.y - start.y, 2),\n    );\n  }\n\n  public equals(other: BasicPoint): boolean {\n    return (\n      this.x === other.x &&\n      this.y === other.y &&\n      this.pressure === other.pressure &&\n      this.time === other.time\n    );\n  }\n\n  public velocityFrom(start: BasicPoint): number {\n    return this.time !== start.time\n      ? this.distanceTo(start) / (this.time - start.time)\n     ",
+          "justification": "The geometry methods implement Euclidean distance, full-field equality, and zero velocity for equal timestamps."
+        },
+        {
+          "criterion_id": "ts.bezier-control-guard",
+          "passed": true,
+          "evidence": "const k = l1 + l2 == 0 ? 0 : l2 / (l1 + l2);",
+          "justification": "The control-point ratio explicitly guards against zero total segment length and uses 0 in that case."
+        },
+        {
+          "criterion_id": "ts.bezier-construction",
+          "passed": true,
+          "evidence": "return new Bezier(points[1], c2, c3, points[2], widths.start, widths.end);",
+          "justification": "The curve construction uses the required start/end points and widths, and the shown polynomial and sampled length implementation are standard cubic B\u00e9zier computations."
+        },
+        {
+          "criterion_id": "ts.eventtarget-fallback",
+          "passed": true,
+          "evidence": "try {\n      this._et = new EventTarget();\n    } catch {\n      // Using document as EventTarget to support iOS 13 and older.\n      this._et = document;\n    }",
+          "justification": "The constructor attempts native EventTarget construction and falls back to document on failure."
+        },
+        {
+          "criterion_id": "ts.eventtarget-delegate",
+          "passed": true,
+          "evidence": "this._et.addEventListener(type, listener, options); ... return this._et.dispatchEvent(event); ... this._et.removeEventListener(type, callback, options);",
+          "justification": "All three methods delegate to the internal target and dispatchEvent returns the delegated result."
+        },
+        {
+          "criterion_id": "ts.throttle-behavior",
+          "passed": false,
+          "evidence": "No `src/throttle.ts` implementation is included in the candidate trajectory.",
+          "justification": "There is no evidence that throttle satisfies the required rate-limiting and trailing-call behavior."
+        },
+        {
+          "criterion_id": "ts.option-nullish",
+          "passed": true,
+          "evidence": "this.throttle = options.throttle ?? 16; // in milliseconds\n    this.minDistance = options.minDistance ?? 5; // in pixels\n    this.velocityFilterWeight = options.velocityFilterWeight || 0.7;\n    this.minWidth = options.minWidth || 0.5;\n    this.maxWidth = options.maxWidth || 2.5; ... this.canvasContextOptions = options.canvasContextOptions ?? {};",
+          "justification": "Throttle and minDistance preserve explicit 0 with nullish coalescing, while the other options shown fall back to documented defaults for undefined."
+        },
+        {
+          "criterion_id": "ts.throttle-bypass",
+          "passed": true,
+          "evidence": "this._strokeMoveUpdate = this.throttle\n      ? throttle(SignaturePad.prototype._strokeUpdate, this.throttle)\n      : SignaturePad.prototype._strokeUpdate;",
+          "justification": "The move update is wrapped only when throttle is truthy and uses the raw update when throttle is 0."
+        },
+        {
+          "criterion_id": "ts.on-off-styles",
+          "passed": true,
+          "evidence": "this.canvas.style.touchAction = 'none'; ... msTouchAction = 'none';\n    this.canvas.style.userSelect = 'none'; ... this.canvas.style.webkitUserSelect = 'none'; ... this.canvas.style.touchAction = 'auto'; ... msTouchAction = 'auto';\n    this.canvas.style.userSelect = 'auto';\n    this.canvas.style.webkitUserSelect = 'auto';",
+          "justification": "The shown on/off methods set and restore the required standard and prefixed styles and add/remove the initial and move/up listeners."
+        },
+        {
+          "criterion_id": "ts.begin-stroke-cancelable",
+          "passed": false,
+          "evidence": "Candidate trajectory is truncated before the stroke lifecycle methods are shown.",
+          "justification": "There is insufficient evidence that beginStroke is cancelable or that lifecycle events are dispatched correctly."
+        },
+        {
+          "criterion_id": "ts.pointer-id-tracking",
+          "passed": false,
+          "evidence": "private _strokePointerId: number | undefined; ... this._strokePointerId = undefined;",
+          "justification": "Although a pointer-id field exists and is reset on clear, the trajectory does not show the active-stroke filtering and reset behavior."
+        },
+        {
+          "criterion_id": "ts.stroke-end-outofcanvas-cancel",
+          "passed": false,
+          "evidence": "Candidate trajectory is truncated before `_handlePointerUp`, `_handleMouseUp`, `_handlePointerCancel`, `_handleTouchCancel`, and touch preventDefault logic are shown.",
+          "justification": "There is insufficient evidence that out-of-canvas endings, cancel events, and cancelable-only touch preventDefault behavior are correctly implemented."
+        },
+        {
+          "criterion_id": "ts.clear-redraw-state",
+          "passed": true,
+          "evidence": "ctx.fillStyle = this.backgroundColor;\n    ctx.clearRect(0, 0, canvas.width, canvas.height);\n    ctx.fillRect(0, 0, canvas.width, canvas.height);\n\n    this._data = [];\n    this._reset(this._getPointGroupOptions());\n    this._isEmpty = true;\n    this._dataUrl = undefined;\n    this._dataUrlOptions = undefined;\n    this._strokePointerId = undefined; ... const data = this._data;\n    const dataUrl = this._dataUrl;\n    const dataUrlOptions = this._dataUrlOptions;\n\n    this.clear();\n    if (dataUrl) {\n ",
+          "justification": "The clear and redraw implementations shown reset canvas/data/cache state and preserve data across redraw by saving and reapplying it."
+        },
+        {
+          "criterion_id": "ts.datamodel-export-typeguards",
+          "passed": false,
+          "evidence": "fromData(pointGroups: PointGroup[], { clear = true }: FromDataOptions = {},): void { ... this._data = this._data.concat(pointGroups); } ... toDataURL(...): string { ... }",
+          "justification": "Some data-model and toDataURL type-guard behavior is shown, but the trajectory is truncated before `toSVG`, `_fromData`, drawing, and complete fromDataURL behavior can be verified."
+        }
+      ]
+    },
+    "stub": {
+      "model": "openai/gpt-5.5-2026-04-23",
+      "reasoning_effort": "high",
+      "ok": true,
+      "raw_verdicts": 18,
+      "response_chars": 6430,
+      "thinking": "",
+      "raw_response": "[\n  {\n    \"criterion_id\": \"bb.intent_fidelity\",\n    \"verdict\": \"fail\",\n    \"evidence\": \"throw new Error(\\\"STUB\\\");\",\n    \"justification\": \"The submitted code leaves all implementation bodies as stubs rather than implementing the required library behavior.\"\n  },\n  {\n    \"criterion_id\": \"bb.oracle_strength\",\n    \"verdict\": \"fail\",\n    \"evidence\": \"throw new Error(\\\"STUB\\\");\",\n    \"justification\": \"A stub-only solution is not a general implementation beyond the tests.\"\n  },\n  {\n    \"criterion_id\": \"ts.point-nan-throw\",\n    \"verdict\": \"fail\",\n    \"evidence\": \"constructor(x: number, y: number, pressure?: number, time?: number) {\\n      throw new Error(\\\"STUB\\\");\\n  }\",\n    \"justification\": \"The Point constructor unconditionally throws a stub error and does not validate NaN coordinates with an appropriate message.\"\n  },\n  {\n    \"criterion_id\": \"ts.point-coerce-defaults\",\n    \"verdict\": \"fail\",\n    \"evidence\": \"constructor(x: number, y: number, pressure?: number, time?: number) {\\n      throw new Error(\\\"STUB\\\");\\n  }\",\n    \"justification\": \"The Point constructor does not coerce inputs or assign pressure/time defaults.\"\n  },\n  {\n    \"criterion_id\": \"ts.point-geometry\",\n    \"verdict\": \"fail\",\n    \"evidence\": \"public distanceTo(start: BasicPoint): number {\\n      throw new Error(\\\"STUB\\\");\\n  }\\n\\n  public equals(other: BasicPoint): boolean {\\n      throw new Error(\\\"STUB\\\");\\n  }\\n\\n  public velocityFrom(start: BasicPoint): number {\\n      throw new Error(\\\"STUB\\\");\\n  }\",\n    \"justification\": \"The geometry methods are unimplemented stubs.\"\n  },\n  {\n    \"criterion_id\": \"ts.bezier-control-guard\",\n    \"verdict\": \"fail\",\n    \"evidence\": \"private static calculateControlPoints(\\n    s1: BasicPoint,\\n    s2: BasicPoint,\\n    s3: BasicPoint,\\n  ): {\\n    c1: BasicPoint;\\n    c2: BasicPoint;\\n  } {\\n      throw new Error(\\\"STUB\\\");\\n  }\",\n    \"justification\": \"Control point calculation is not implemented, so there is no guard against coincident-point division by zero.\"\n  },\n  {\n    \"criterion_id\": \"ts.bezier-construction\",\n    \"verdict\": \"fail\",\n    \"evidence\": \"public static fromPoints(\\n    points: Point[],\\n    widths: { start: number; end: number },\\n  ): Bezier {\\n      throw new Error(\\\"STUB\\\");\\n  }\",\n    \"justification\": \"Bezier construction, polynomial point evaluation, and length sampling are all left as stubs.\"\n  },\n  {\n    \"criterion_id\": \"ts.eventtarget-fallback\",\n    \"verdict\": \"fail\",\n    \"evidence\": \"constructor() {\\n      throw new Error(\\\"STUB\\\");\\n  }\",\n    \"justification\": \"SignatureEventTarget does not construct an EventTarget or provide any fallback.\"\n  },\n  {\n    \"criterion_id\": \"ts.eventtarget-delegate\",\n    \"verdict\": \"fail\",\n    \"evidence\": \"addEventListener(...): void {\\n      throw new Error(\\\"STUB\\\");\\n  }\\n\\n  dispatchEvent(event: Event): boolean {\\n      throw new Error(\\\"STUB\\\");\\n  }\\n\\n  removeEventListener(...): void {\\n      throw new Error(\\\"STUB\\\");\\n  }\",\n    \"justification\": \"The event methods do not delegate and dispatchEvent does not return the delegated result.\"\n  },\n  {\n    \"criterion_id\": \"ts.throttle-behavior\",\n    \"verdict\": \"fail\",\n    \"evidence\": \"export function throttle(\\n  fn: (...args: any[]) => any,\\n  wait = 250,\\n): (this: any, ...args: any[]) => any {\\n    throw new Error(\\\"STUB\\\");\\n}\",\n    \"justification\": \"The throttle function is unimplemented.\"\n  },\n  {\n    \"criterion_id\": \"ts.option-nullish\",\n    \"verdict\": \"fail\",\n    \"evidence\": \"constructor(\\n    private canvas: HTMLCanvasElement,\\n    options: Options = {},\\n  ) {\\n      throw new Error(\\\"STUB\\\");\\n  }\",\n    \"justification\": \"SignaturePad option resolution is not implemented, including the required nullish handling for throttle and minDistance.\"\n  },\n  {\n    \"criterion_id\": \"ts.throttle-bypass\",\n    \"verdict\": \"fail\",\n    \"evidence\": \"constructor(\\n    private canvas: HTMLCanvasElement,\\n    options: Options = {},\\n  ) {\\n      throw new Error(\\\"STUB\\\");\\n  }\",\n    \"justification\": \"The move handler setup is absent, so there is no throttled path or zero-throttle bypass.\"\n  },\n  {\n    \"criterion_id\": \"ts.on-off-styles\",\n    \"verdict\": \"fail\",\n    \"evidence\": \"public on(): void {\\n      throw new Error(\\\"STUB\\\");\\n  }\\n\\n  public off(): void {\\n      throw new Error(\\\"STUB\\\");\\n  }\",\n    \"justification\": \"on() and off() do not set styles or manage listeners.\"\n  },\n  {\n    \"criterion_id\": \"ts.begin-stroke-cancelable\",\n    \"verdict\": \"fail\",\n    \"evidence\": \"private _strokeBegin(event: SignatureEvent): void {\\n      throw new Error(\\\"STUB\\\");\\n  }\\n\\n  private _strokeUpdate(event: SignatureEvent): void {\\n      throw new Error(\\\"STUB\\\");\\n  }\\n\\n  private _strokeEnd(event: SignatureEvent, shouldUpdate = true): void {\\n      throw new Error(\\\"STUB\\\");\\n  }\",\n    \"justification\": \"Stroke lifecycle dispatch and cancelable begin behavior are unimplemented.\"\n  },\n  {\n    \"criterion_id\": \"ts.pointer-id-tracking\",\n    \"verdict\": \"fail\",\n    \"evidence\": \"private _getPointerId(event: PointerEvent) {\\n      throw new Error(\\\"STUB\\\");\\n  }\\n\\n  private _allowPointerId(\\n    event: PointerEvent,\\n    allowUndefined = false,\\n  ): boolean {\\n      throw new Error(\\\"STUB\\\");\\n  }\",\n    \"justification\": \"Pointer-id filtering and reset behavior are not implemented.\"\n  },\n  {\n    \"criterion_id\": \"ts.stroke-end-outofcanvas-cancel\",\n    \"verdict\": \"fail\",\n    \"evidence\": \"private _handlePointerCancel(event: PointerEvent): void {\\n      throw new Error(\\\"STUB\\\");\\n  }\\n\\n  private _handleTouchCancel(event: TouchEvent): void {\\n      throw new Error(\\\"STUB\\\");\\n  }\",\n    \"justification\": \"Out-of-canvas stroke ending, cancel handling, listener targeting, and touch preventDefault gating are not implemented.\"\n  },\n  {\n    \"criterion_id\": \"ts.clear-redraw-state\",\n    \"verdict\": \"fail\",\n    \"evidence\": \"public clear(): void {\\n      throw new Error(\\\"STUB\\\");\\n  }\\n\\n  public redraw(): void {\\n      throw new Error(\\\"STUB\\\");\\n  }\",\n    \"justification\": \"clear() and redraw() are unimplemented.\"\n  },\n  {\n    \"criterion_id\": \"ts.datamodel-export-typeguards\",\n    \"verdict\": \"fail\",\n    \"evidence\": \"public fromData(...): void {\\n      throw new Error(\\\"STUB\\\");\\n  }\\n\\n  public toData(): PointGroup[] {\\n      throw new Error(\\\"STUB\\\");\\n  }\\n\\n  public toSVG(...): string {\\n      throw new Error(\\\"STUB\\\");\\n  }\",\n    \"justification\": \"Data model import/export, SVG/data URL generation, and encoder option type guards are not implemented.\"\n  }\n]",
+      "verdicts": [
+        {
+          "criterion_id": "bb.intent_fidelity",
+          "passed": false,
+          "evidence": "throw new Error(\"STUB\");",
+          "justification": "The submitted code leaves all implementation bodies as stubs rather than implementing the required library behavior."
+        },
+        {
+          "criterion_id": "bb.oracle_strength",
+          "passed": false,
+          "evidence": "throw new Error(\"STUB\");",
+          "justification": "A stub-only solution is not a general implementation beyond the tests."
+        },
+        {
+          "criterion_id": "ts.point-nan-throw",
+          "passed": false,
+          "evidence": "constructor(x: number, y: number, pressure?: number, time?: number) {\n      throw new Error(\"STUB\");\n  }",
+          "justification": "The Point constructor unconditionally throws a stub error and does not validate NaN coordinates with an appropriate message."
+        },
+        {
+          "criterion_id": "ts.point-coerce-defaults",
+          "passed": false,
+          "evidence": "constructor(x: number, y: number, pressure?: number, time?: number) {\n      throw new Error(\"STUB\");\n  }",
+          "justification": "The Point constructor does not coerce inputs or assign pressure/time defaults."
+        },
+        {
+          "criterion_id": "ts.point-geometry",
+          "passed": false,
+          "evidence": "public distanceTo(start: BasicPoint): number {\n      throw new Error(\"STUB\");\n  }\n\n  public equals(other: BasicPoint): boolean {\n      throw new Error(\"STUB\");\n  }\n\n  public velocityFrom(start: BasicPoint): number {\n      throw new Error(\"STUB\");\n  }",
+          "justification": "The geometry methods are unimplemented stubs."
+        },
+        {
+          "criterion_id": "ts.bezier-control-guard",
+          "passed": false,
+          "evidence": "private static calculateControlPoints(\n    s1: BasicPoint,\n    s2: BasicPoint,\n    s3: BasicPoint,\n  ): {\n    c1: BasicPoint;\n    c2: BasicPoint;\n  } {\n      throw new Error(\"STUB\");\n  }",
+          "justification": "Control point calculation is not implemented, so there is no guard against coincident-point division by zero."
+        },
+        {
+          "criterion_id": "ts.bezier-construction",
+          "passed": false,
+          "evidence": "public static fromPoints(\n    points: Point[],\n    widths: { start: number; end: number },\n  ): Bezier {\n      throw new Error(\"STUB\");\n  }",
+          "justification": "Bezier construction, polynomial point evaluation, and length sampling are all left as stubs."
+        },
+        {
+          "criterion_id": "ts.eventtarget-fallback",
+          "passed": false,
+          "evidence": "constructor() {\n      throw new Error(\"STUB\");\n  }",
+          "justification": "SignatureEventTarget does not construct an EventTarget or provide any fallback."
+        },
+        {
+          "criterion_id": "ts.eventtarget-delegate",
+          "passed": false,
+          "evidence": "addEventListener(...): void {\n      throw new Error(\"STUB\");\n  }\n\n  dispatchEvent(event: Event): boolean {\n      throw new Error(\"STUB\");\n  }\n\n  removeEventListener(...): void {\n      throw new Error(\"STUB\");\n  }",
+          "justification": "The event methods do not delegate and dispatchEvent does not return the delegated result."
+        },
+        {
+          "criterion_id": "ts.throttle-behavior",
+          "passed": false,
+          "evidence": "export function throttle(\n  fn: (...args: any[]) => any,\n  wait = 250,\n): (this: any, ...args: any[]) => any {\n    throw new Error(\"STUB\");\n}",
+          "justification": "The throttle function is unimplemented."
+        },
+        {
+          "criterion_id": "ts.option-nullish",
+          "passed": false,
+          "evidence": "constructor(\n    private canvas: HTMLCanvasElement,\n    options: Options = {},\n  ) {\n      throw new Error(\"STUB\");\n  }",
+          "justification": "SignaturePad option resolution is not implemented, including the required nullish handling for throttle and minDistance."
+        },
+        {
+          "criterion_id": "ts.throttle-bypass",
+          "passed": false,
+          "evidence": "constructor(\n    private canvas: HTMLCanvasElement,\n    options: Options = {},\n  ) {\n      throw new Error(\"STUB\");\n  }",
+          "justification": "The move handler setup is absent, so there is no throttled path or zero-throttle bypass."
+        },
+        {
+          "criterion_id": "ts.on-off-styles",
+          "passed": false,
+          "evidence": "public on(): void {\n      throw new Error(\"STUB\");\n  }\n\n  public off(): void {\n      throw new Error(\"STUB\");\n  }",
+          "justification": "on() and off() do not set styles or manage listeners."
+        },
+        {
+          "criterion_id": "ts.begin-stroke-cancelable",
+          "passed": false,
+          "evidence": "private _strokeBegin(event: SignatureEvent): void {\n      throw new Error(\"STUB\");\n  }\n\n  private _strokeUpdate(event: SignatureEvent): void {\n      throw new Error(\"STUB\");\n  }\n\n  private _strokeEnd(event: SignatureEvent, shouldUpdate = true): void {\n      throw new Error(\"STUB\");\n  }",
+          "justification": "Stroke lifecycle dispatch and cancelable begin behavior are unimplemented."
+        },
+        {
+          "criterion_id": "ts.pointer-id-tracking",
+          "passed": false,
+          "evidence": "private _getPointerId(event: PointerEvent) {\n      throw new Error(\"STUB\");\n  }\n\n  private _allowPointerId(\n    event: PointerEvent,\n    allowUndefined = false,\n  ): boolean {\n      throw new Error(\"STUB\");\n  }",
+          "justification": "Pointer-id filtering and reset behavior are not implemented."
+        },
+        {
+          "criterion_id": "ts.stroke-end-outofcanvas-cancel",
+          "passed": false,
+          "evidence": "private _handlePointerCancel(event: PointerEvent): void {\n      throw new Error(\"STUB\");\n  }\n\n  private _handleTouchCancel(event: TouchEvent): void {\n      throw new Error(\"STUB\");\n  }",
+          "justification": "Out-of-canvas stroke ending, cancel handling, listener targeting, and touch preventDefault gating are not implemented."
+        },
+        {
+          "criterion_id": "ts.clear-redraw-state",
+          "passed": false,
+          "evidence": "public clear(): void {\n      throw new Error(\"STUB\");\n  }\n\n  public redraw(): void {\n      throw new Error(\"STUB\");\n  }",
+          "justification": "clear() and redraw() are unimplemented."
+        },
+        {
+          "criterion_id": "ts.datamodel-export-typeguards",
+          "passed": false,
+          "evidence": "public fromData(...): void {\n      throw new Error(\"STUB\");\n  }\n\n  public toData(): PointGroup[] {\n      throw new Error(\"STUB\");\n  }\n\n  public toSVG(...): string {\n      throw new Error(\"STUB\");\n  }",
+          "justification": "Data model import/export, SVG/data URL generation, and encoder option type guards are not implemented."
+        }
+      ]
+    }
+  },
+  "criteria": [
+    {
+      "id": "bb.reasoning_faithfulness",
+      "text": "Is the agent's stated reasoning consistent with the edits it actually made and the feedback it received (no post-hoc rationalization, no lucky guess)?",
+      "contract_ref": "(backbone)",
+      "concern": "L2.REASONING_FAITHFULNESS",
+      "anchorable": false
+    },
+    {
+      "id": "bb.stage_legitimacy",
+      "text": "Did each refinement stage (lint, test) do real, feedback-responsive work toward the solution rather than cosmetic or no-op changes?",
+      "contract_ref": "(backbone)",
+      "concern": "L2.STAGE_LEGITIMACY",
+      "anchorable": false
+    },
+    {
+      "id": "ts.point-nan-throw",
+      "text": "The Point constructor throws an Error when x or y is NaN, with a message referencing the invalid coordinate value(s).",
+      "contract_ref": "Point (src/point.ts)",
+      "concern": null,
+      "anchorable": true
+    },
+    {
+      "id": "ts.point-coerce-defaults",
+      "text": "The Point constructor coerces string numeric inputs to numbers (stored x/y are of number type), defaults pressure to 0 when falsy/absent, and defaults time to the current timestamp when falsy/absent.",
+      "contract_ref": "Point (src/point.ts)",
+      "concern": null,
+      "anchorable": true
+    },
+    {
+      "id": "ts.point-geometry",
+      "text": "distanceTo returns Euclidean distance; equals compares all four fields (x, y, pressure, time) so differing in any one yields false; velocityFrom returns exactly 0 when times are equal and distance/time-difference otherwise.",
+      "contract_ref": "Point (src/point.ts) / Known pitfalls",
+      "concern": null,
+      "anchorable": true
+    },
+    {
+      "id": "ts.bezier-control-guard",
+      "text": "Bezier control-point computation guards the length-ratio division so coincident adjacent points (l1 + l2 === 0) are treated as ratio 0 and never produce NaN coordinates.",
+      "contract_ref": "Bezier (src/bezier.ts) / Known pitfalls",
+      "concern": null,
+      "anchorable": true
+    },
+    {
+      "id": "ts.bezier-construction",
+      "text": "Bezier.fromPoints builds a curve using points[1] as start, points[2] as end, computed control points between, and carries widths.start/widths.end; the point helper computes the standard cubic B\u00e9zier polynomial and length() sums sampled segment distances.",
+      "contract_ref": "Bezier (src/bezier.ts)",
+      "concern": null,
+      "anchorable": true
+    },
+    {
+      "id": "ts.eventtarget-fallback",
+      "text": "SignatureEventTarget constructs a native EventTarget and degrades to using document (or another valid target) when the EventTarget constructor is unavailable, rather than throwing.",
+      "contract_ref": "SignatureEventTarget (src/signature_event_target.ts)",
+      "concern": null,
+      "anchorable": true
+    },
+    {
+      "id": "ts.eventtarget-delegate",
+      "text": "addEventListener, removeEventListener, and dispatchEvent delegate to the internal target, and dispatchEvent returns the delegated boolean result rather than a constant.",
+      "contract_ref": "SignatureEventTarget / Cheat surface",
+      "concern": null,
+      "anchorable": true
+    },
+    {
+      "id": "ts.option-nullish",
+      "text": "throttle and minDistance options use nullish handling so an explicit 0 is preserved (throttle default 16, minDistance default 5), while all other options fall back to their documented defaults including for explicit undefined.",
+      "contract_ref": "SignaturePad option resolution / Known pitfalls",
+      "concern": null,
+      "anchorable": true
+    },
+    {
+      "id": "ts.throttle-bypass",
+      "text": "The move update goes through the throttled wrapper when throttle > 0 but bypasses throttling (uses the raw update) when throttle is 0.",
+      "contract_ref": "SignaturePad constructor / Known pitfalls",
+      "concern": null,
+      "anchorable": true
+    },
+    {
+      "id": "ts.on-off-styles",
+      "text": "on() sets both standard and vendor-prefixed canvas styles (touchAction/msTouchAction='none', userSelect/webkitUserSelect='none') and attaches input listeners; off() restores those styles to 'auto' and removes all listeners.",
+      "contract_ref": "SignaturePad on()/off() / Known pitfalls",
+      "concern": null,
+      "anchorable": true
+    },
+    {
+      "id": "ts.clear-redraw-state",
+      "text": "clear() fills with background color, empties the data model, resets stroke state including the active pointer id, marks empty, and clears cached data-URL state; redraw() re-renders from cached URL and stored data without permanently discarding them.",
+      "contract_ref": "SignaturePad clear()/redraw() / Known pitfalls",
+      "concern": null,
+      "anchorable": true
+    }
+  ]
+}

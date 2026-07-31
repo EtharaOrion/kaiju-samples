@@ -1,0 +1,6 @@
+{
+  "repo": "Zahgon/rust-signals",
+  "base_commit": "8734fef3f84a5ef33003d92fa8c902ca8eb77633",
+  "reference_commit": "006adaf5b13870c6cec71a2f00fda0d12f1e3b5d",
+  "docker_image": "426628337772.dkr.ecr.ap-south-1.amazonaws.com/kaiju_q2:rust_pauan_rust_signals"
+}

@@ -1,0 +1,1190 @@
+    Updating crates.io index
+     Locking 84 packages to latest compatible versions
+      Adding criterion v0.4.0 (available: v0.8.2)
+ Downloading crates ...
+  Downloaded libc v0.2.188
+   Compiling proc-macro2 v1.0.107
+   Compiling unicode-ident v1.0.24
+   Compiling quote v1.0.47
+   Compiling autocfg v1.5.1
+   Compiling serde_core v1.0.229
+   Compiling crossbeam-utils v0.8.22
+   Compiling zerocopy v0.8.55
+   Compiling crossbeam-epoch v0.9.20
+   Compiling serde v1.0.229
+   Compiling zmij v1.0.23
+   Compiling crossbeam-deque v0.8.7
+   Compiling cfg-if v1.0.4
+   Compiling serde_json v1.0.151
+   Compiling rayon-core v1.13.0
+   Compiling either v1.16.0
+   Compiling libc v0.2.188
+   Compiling futures-core v0.3.33
+   Compiling futures-task v0.3.33
+   Compiling slab v0.4.12
+   Compiling plotters-backend v0.3.7
+   Compiling hashbrown v0.12.3
+   Compiling itoa v1.0.18
+   Compiling memchr v2.8.3
+   Compiling ciborium-io v0.2.2
+   Compiling regex-syntax v0.8.11
+   Compiling os_str_bytes v6.6.1
+   Compiling pin-project-lite v0.2.17
+   Compiling itertools v0.10.5
+   Compiling textwrap v0.16.2
+   Compiling num-traits v0.2.19
+   Compiling indexmap v1.9.3
+   Compiling plotters-svg v0.3.7
+   Compiling cast v0.3.0
+   Compiling clap_lex v0.2.4
+   Compiling bitflags v1.3.2
+   Compiling same-file v1.0.6
+   Compiling futures-channel v0.3.33
+   Compiling discard v1.0.4
+   Compiling lazy_static v1.5.0
+   Compiling walkdir v2.5.0
+   Compiling anes v0.1.6
+   Compiling oorandom v11.1.5
+   Compiling log v0.4.33
+   Compiling indoc v2.0.7
+   Compiling once_cell v1.21.4
+   Compiling pin-utils v0.1.0
+   Compiling syn v2.0.119
+   Compiling syn v3.0.2
+   Compiling clap v3.2.25
+   Compiling atty v0.2.14
+   Compiling plotters v0.3.7
+   Compiling regex-automata v0.4.16
+   Compiling rayon v1.12.0
+   Compiling criterion-plot v0.5.0
+   Compiling serde_derive v1.0.229
+   Compiling regex v1.13.1
+   Compiling zerocopy-derive v0.8.55
+   Compiling futures-macro v0.3.33
+   Compiling pin-project-internal v1.1.13
+   Compiling futures-util v0.3.33
+   Compiling pin-project v1.1.13
+   Compiling tinytemplate v1.2.1
+   Compiling futures-executor v0.3.33
+   Compiling futures-signals v0.3.34 (/tmp/commit0-inplace-y29dli1_/tree)
+error: unused import: `futures_util::stream::StreamExt`
+  --> src/signal_vec.rs:10:5
+   |
+10 | use futures_util::stream::StreamExt;
+   |     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+   |
+note: the lint level is defined here
+  --> src/lib.rs:4:9
+   |
+ 4 | #![deny(warnings, missing_debug_implementations, macro_use_extern_crate)]
+   |         ^^^^^^^^
+   = note: `#[deny(unused_imports)]` implied by `#[deny(warnings)]`
+
+error: unused import: `Bound`
+   --> src/signal_vec.rs:685:54
+    |
+685 |     use std::ops::{Deref, Index, Range, RangeBounds, Bound};
+    |                                                      ^^^^^
+
+error: unused import: `futures_util::stream::StreamExt`
+   --> src/signal_vec.rs:694:9
+    |
+694 |     use futures_util::stream::StreamExt;
+    |         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+error: variable does not need to be mutable
+   --> src/signal/mutable.rs:379:20
+    |
+379 |     fn poll_change(mut self: Pin<&mut Self>, cx: &mut Context) -> Poll<Option<Self::Item>> {
+    |                    ----^^^^
+    |                    |
+    |                    help: remove this `mut`
+    |
+    = note: `#[deny(unused_mut)]` implied by `#[deny(warnings)]`
+
+error: variable does not need to be mutable
+  --> src/signal_vec.rs:52:24
+   |
+52 |     fn map<B, F>(self, mut callback: F) -> VecDiff<B> where F: FnMut(A) -> B { panic!("STUB: not implemented") }
+   |                        ----^^^^^^^^
+   |                        |
+   |                        help: remove this `mut`
+
+error: unused variable: `callback`
+  --> src/signal_vec.rs:52:24
+   |
+52 |     fn map<B, F>(self, mut callback: F) -> VecDiff<B> where F: FnMut(A) -> B { panic!("STUB: not implemented") }
+   |                        ^^^^^^^^^^^^ help: if this is intentional, prefix it with an underscore: `_callback`
+   |
+   = note: `#[deny(unused_variables)]` implied by `#[deny(warnings)]`
+
+error: unused variable: `vec`
+  --> src/signal_vec.rs:54:31
+   |
+54 |     pub fn apply_to_vec(self, vec: &mut Vec<A>) { panic!("STUB: not implemented") }
+   |                               ^^^ help: if this is intentional, prefix it with an underscore: `_vec`
+
+error: variable does not need to be mutable
+  --> src/signal_vec.rs:68:24
+   |
+68 |     fn poll_vec_change(mut self: Pin<&mut Self>, cx: &mut Context) -> Poll<Option<VecDiff<Self::Item>>> { panic!("STUB: not implemen...
+   |                        ----^^^^
+   |                        |
+   |                        help: remove this `mut`
+
+error: unused variable: `cx`
+  --> src/signal_vec.rs:68:50
+   |
+68 |     fn poll_vec_change(mut self: Pin<&mut Self>, cx: &mut Context) -> Poll<Option<VecDiff<Self::Item>>> { panic!("STUB: not implemen...
+   |                                                  ^^ help: if this is intentional, prefix it with an underscore: `_cx`
+
+error: variable does not need to be mutable
+  --> src/signal_vec.rs:75:24
+   |
+75 |     fn poll_vec_change(mut self: Pin<&mut Self>, cx: &mut Context) -> Poll<Option<VecDiff<Self::Item>>> { panic!("STUB: not implemen...
+   |                        ----^^^^
+   |                        |
+   |                        help: remove this `mut`
+
+error: unused variable: `cx`
+  --> src/signal_vec.rs:75:50
+   |
+75 |     fn poll_vec_change(mut self: Pin<&mut Self>, cx: &mut Context) -> Poll<Option<VecDiff<Self::Item>>> { panic!("STUB: not implemen...
+   |                                                  ^^ help: if this is intentional, prefix it with an underscore: `_cx`
+
+error: unused variable: `cx`
+  --> src/signal_vec.rs:84:46
+   |
+84 |     fn poll_vec_change(self: Pin<&mut Self>, cx: &mut Context) -> Poll<Option<VecDiff<Self::Item>>> { panic!("STUB: not implemented") }
+   |                                              ^^ help: if this is intentional, prefix it with an underscore: `_cx`
+
+error: unused variable: `callback`
+  --> src/signal_vec.rs:90:24
+   |
+90 |     fn map<A, F>(self, callback: F) -> Map<Self, F>
+   |                        ^^^^^^^^ help: if this is intentional, prefix it with an underscore: `_callback`
+
+error: unused variable: `callback`
+  --> src/signal_vec.rs:95:31
+   |
+95 |     fn map_signal<A, F>(self, callback: F) -> MapSignal<Self, A, F>
+   |                               ^^^^^^^^ help: if this is intentional, prefix it with an underscore: `_callback`
+
+error: unused variable: `other`
+   --> src/signal_vec.rs:101:23
+    |
+101 |     fn chain<S>(self, other: S) -> Chain<Self, S>
+    |                       ^^^^^ help: if this is intentional, prefix it with an underscore: `_other`
+
+error: unused variable: `callback`
+   --> src/signal_vec.rs:106:34
+    |
+106 |     fn to_signal_map<A, F>(self, callback: F) -> ToSignalMap<Self, F>
+    |                                  ^^^^^^^^ help: if this is intentional, prefix it with an underscore: `_callback`
+
+error: unused variable: `callback`
+   --> src/signal_vec.rs:116:24
+    |
+116 |     fn filter<F>(self, callback: F) -> Filter<Self, F>
+    |                        ^^^^^^^^ help: if this is intentional, prefix it with an underscore: `_callback`
+
+error: unused variable: `callback`
+   --> src/signal_vec.rs:121:41
+    |
+121 |     fn filter_signal_cloned<A, F>(self, callback: F) -> FilterSignalCloned<Self, A, F>
+    |                                         ^^^^^^^^ help: if this is intentional, prefix it with an underscore: `_callback`
+
+error: unused variable: `callback`
+   --> src/signal_vec.rs:127:31
+    |
+127 |     fn filter_map<A, F>(self, callback: F) -> FilterMap<Self, F>
+    |                               ^^^^^^^^ help: if this is intentional, prefix it with an underscore: `_callback`
+
+error: unused variable: `compare`
+   --> src/signal_vec.rs:147:32
+    |
+147 |     fn sort_by_cloned<F>(self, compare: F) -> SortByCloned<Self, F>
+    |                                ^^^^^^^ help: if this is intentional, prefix it with an underscore: `_compare`
+
+error: unused variable: `callback`
+   --> src/signal_vec.rs:156:29
+    |
+156 |     fn for_each<U, F>(self, callback: F) -> ForEach<Self, U, F>
+    |                             ^^^^^^^^ help: if this is intentional, prefix it with an underscore: `_callback`
+
+error: unused variable: `f`
+   --> src/signal_vec.rs:171:33
+    |
+171 |     fn delay_remove<A, F>(self, f: F) -> DelayRemove<Self, A, F>
+    |                                 ^ help: if this is intentional, prefix it with an underscore: `_f`
+
+error: unused variable: `cx`
+   --> src/signal_vec.rs:177:41
+    |
+177 |     fn poll_vec_change_unpin(&mut self, cx: &mut Context) -> Poll<Option<VecDiff<Self::Item>>> where Self: Unpin + Sized { panic!("...
+    |                                         ^^ help: if this is intentional, prefix it with an underscore: `_cx`
+
+error: variable does not need to be mutable
+   --> src/signal_vec.rs:205:24
+    |
+205 |     fn poll_vec_change(mut self: Pin<&mut Self>, _cx: &mut Context) -> Poll<Option<VecDiff<Self::Item>>> { panic!("STUB: not implem...
+    |                        ----^^^^
+    |                        |
+    |                        help: remove this `mut`
+
+error: unused variable: `values`
+   --> src/signal_vec.rs:209:18
+    |
+209 | pub fn always<A>(values: Vec<A>) -> Always<A> { panic!("STUB: not implemented") }
+    |                  ^^^^^^ help: if this is intentional, prefix it with an underscore: `_values`
+
+error: unused variable: `cx`
+   --> src/signal_vec.rs:222:46
+    |
+222 |     fn poll_vec_change(self: Pin<&mut Self>, cx: &mut Context) -> Poll<Option<VecDiff<Self::Item>>> { panic!("STUB: not implemented...
+    |                                              ^^ help: if this is intentional, prefix it with an underscore: `_cx`
+
+error: unused variable: `stream`
+   --> src/signal_vec.rs:226:23
+    |
+226 | pub fn from_stream<S>(stream: S) -> StreamSignalVec<S> { panic!("STUB: not implemented") }
+    |                       ^^^^^^ help: if this is intentional, prefix it with an underscore: `_stream`
+
+error: unused variable: `cx`
+   --> src/signal_vec.rs:243:35
+    |
+243 |     fn poll(self: Pin<&mut Self>, cx: &mut Context) -> Poll<Self::Output> { panic!("STUB: not implemented") }
+    |                                   ^^ help: if this is intentional, prefix it with an underscore: `_cx`
+
+error: unused variable: `cx`
+   --> src/signal_vec.rs:261:46
+    |
+261 |     fn poll_vec_change(self: Pin<&mut Self>, cx: &mut Context) -> Poll<Option<VecDiff<Self::Item>>> { panic!("STUB: not implemented...
+    |                                              ^^ help: if this is intentional, prefix it with an underscore: `_cx`
+
+error: unused variable: `change`
+   --> src/signal_vec.rs:278:19
+    |
+278 |     fn is_replace(change: Option<Poll<Option<VecDiff<A::Item>>>>) -> Result<Vec<A::Item>, Option<Poll<Option<VecDiff<A::Item>>>>> {...
+    |                   ^^^^^^ help: if this is intentional, prefix it with an underscore: `_change`
+
+error: unused variable: `change`
+   --> src/signal_vec.rs:280:17
+    |
+280 |     fn is_clear(change: Option<Poll<Option<VecDiff<A::Item>>>>) -> Result<(), Option<Poll<Option<VecDiff<A::Item>>>>> { panic!("STU...
+    |                 ^^^^^^ help: if this is intentional, prefix it with an underscore: `_change`
+
+error: variable does not need to be mutable
+   --> src/signal_vec.rs:282:35
+    |
+282 |     fn process_replace(&mut self, mut left_values: Vec<A::Item>, cx: &mut Context) -> Option<VecDiff<A::Item>> { panic!("STUB: not ...
+    |                                   ----^^^^^^^^^^^
+    |                                   |
+    |                                   help: remove this `mut`
+
+error: unused variable: `left_values`
+   --> src/signal_vec.rs:282:35
+    |
+282 |     fn process_replace(&mut self, mut left_values: Vec<A::Item>, cx: &mut Context) -> Option<VecDiff<A::Item>> { panic!("STUB: not ...
+    |                                   ^^^^^^^^^^^^^^^ help: if this is intentional, prefix it with an underscore: `_left_values`
+
+error: unused variable: `cx`
+   --> src/signal_vec.rs:282:66
+    |
+282 | ...ut left_values: Vec<A::Item>, cx: &mut Context) -> Option<VecDiff<A::Item>> { panic!("STUB: not implemented") }
+    |                                  ^^ help: if this is intentional, prefix it with an underscore: `_cx`
+
+error: unused variable: `cx`
+   --> src/signal_vec.rs:284:33
+    |
+284 |     fn process_clear(&mut self, cx: &mut Context) -> Option<VecDiff<A::Item>> { panic!("STUB: not implemented") }
+    |                                 ^^ help: if this is intentional, prefix it with an underscore: `_cx`
+
+error: unused variable: `cx`
+   --> src/signal_vec.rs:286:32
+    |
+286 |     fn process_left(&mut self, cx: &mut Context) -> Option<VecDiff<A::Item>> { panic!("STUB: not implemented") }
+    |                                ^^ help: if this is intentional, prefix it with an underscore: `_cx`
+
+error: unused variable: `change`
+   --> src/signal_vec.rs:288:40
+    |
+288 |     fn process_right_change(&mut self, change: Option<Poll<Option<VecDiff<A::Item>>>>) -> Option<VecDiff<A::Item>> { panic!("STUB: ...
+    |                                        ^^^^^^ help: if this is intentional, prefix it with an underscore: `_change`
+
+error: unused variable: `cx`
+   --> src/signal_vec.rs:290:33
+    |
+290 |     fn process_right(&mut self, cx: &mut Context) -> Option<VecDiff<A::Item>> { panic!("STUB: not implemented") }
+    |                                 ^^ help: if this is intentional, prefix it with an underscore: `_cx`
+
+error: unused variable: `cx`
+   --> src/signal_vec.rs:299:46
+    |
+299 |     fn poll_vec_change(self: Pin<&mut Self>, cx: &mut Context) -> Poll<Option<VecDiff<Self::Item>>> { panic!("STUB: not implemented...
+    |                                              ^^ help: if this is intentional, prefix it with an underscore: `_cx`
+
+error: unused variable: `signal_vec`
+   --> src/signal_vec.rs:310:12
+    |
+310 |     fn new(signal_vec: A) -> Self { panic!("STUB: not implemented") }
+    |            ^^^^^^^^^^ help: if this is intentional, prefix it with an underscore: `_signal_vec`
+
+error: unused variable: `diff`
+   --> src/signal_vec.rs:312:30
+    |
+312 |     fn update_len(&mut self, diff: &VecDiff<A::Item>) { panic!("STUB: not implemented") }
+    |                              ^^^^ help: if this is intentional, prefix it with an underscore: `_diff`
+
+error: unused variable: `cx`
+   --> src/signal_vec.rs:314:24
+    |
+314 |     fn poll(&mut self, cx: &mut Context) -> Option<Poll<Option<VecDiff<A::Item>>>> { panic!("STUB: not implemented") }
+    |                        ^^ help: if this is intentional, prefix it with an underscore: `_cx`
+
+error: unused variable: `cx`
+   --> src/signal_vec.rs:316:31
+    |
+316 |     fn poll_values(&mut self, cx: &mut Context) -> Vec<A::Item> { panic!("STUB: not implemented") }
+    |                               ^^ help: if this is intentional, prefix it with an underscore: `_cx`
+
+error: unused variable: `cx`
+   --> src/signal_vec.rs:318:32
+    |
+318 |     fn poll_pending(&mut self, cx: &mut Context, prev_len: usize, pending: &mut PendingBuilder<VecDiff<A::Item>>) -> bool { panic!(...
+    |                                ^^ help: if this is intentional, prefix it with an underscore: `_cx`
+
+error: unused variable: `prev_len`
+   --> src/signal_vec.rs:318:50
+    |
+318 | ...self, cx: &mut Context, prev_len: usize, pending: &mut PendingBuilder<VecDiff<A::Item>>) -> bool { panic!("STUB: not implemented...
+    |                            ^^^^^^^^ help: if this is intentional, prefix it with an underscore: `_prev_len`
+
+error: unused variable: `pending`
+   --> src/signal_vec.rs:318:67
+    |
+318 | ...ontext, prev_len: usize, pending: &mut PendingBuilder<VecDiff<A::Item>>) -> bool { panic!("STUB: not implemented") }
+    |                             ^^^^^^^ help: if this is intentional, prefix it with an underscore: `_pending`
+
+error: unused variable: `f`
+   --> src/signal_vec.rs:334:19
+    |
+334 |     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result { panic!("STUB: not implemented") }
+    |                   ^ help: if this is intentional, prefix it with an underscore: `_f`
+
+error: unused variable: `cx`
+   --> src/signal_vec.rs:342:46
+    |
+342 |     fn poll_vec_change(self: Pin<&mut Self>, cx: &mut Context) -> Poll<Option<VecDiff<Self::Item>>> { panic!("STUB: not implemented...
+    |                                              ^^ help: if this is intentional, prefix it with an underscore: `_cx`
+
+error: unused variable: `f`
+   --> src/signal_vec.rs:353:19
+    |
+353 |     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result { panic!("STUB: not implemented") }
+    |                   ^ help: if this is intentional, prefix it with an underscore: `_f`
+
+error: unused variable: `cx`
+   --> src/signal_vec.rs:361:42
+    |
+361 |     fn poll_change(self: Pin<&mut Self>, cx: &mut Context) -> Poll<Option<Self::Item>> { panic!("STUB: not implemented") }
+    |                                          ^^ help: if this is intentional, prefix it with an underscore: `_cx`
+
+error: unused variable: `cx`
+   --> src/signal_vec.rs:381:42
+    |
+381 |     fn poll_change(self: Pin<&mut Self>, cx: &mut Context) -> Poll<Option<Self::Item>> { panic!("STUB: not implemented") }
+    |                                          ^^ help: if this is intentional, prefix it with an underscore: `_cx`
+
+error: unused variable: `cx`
+   --> src/signal_vec.rs:397:46
+    |
+397 |     fn poll_vec_change(self: Pin<&mut Self>, cx: &mut Context) -> Poll<Option<VecDiff<Self::Item>>> { panic!("STUB: not implemented...
+    |                                              ^^ help: if this is intentional, prefix it with an underscore: `_cx`
+
+error: unused variable: `value`
+   --> src/signal_vec.rs:408:24
+    |
+408 |     fn push(&mut self, value: A) { panic!("STUB: not implemented") }
+    |                        ^^^^^ help: if this is intentional, prefix it with an underscore: `_value`
+
+error: unused variable: `x`
+   --> src/signal_vec.rs:411:14
+    |
+411 | fn unwrap<A>(x: Poll<Option<A>>) -> A { panic!("STUB: not implemented") }
+    |              ^ help: if this is intentional, prefix it with an underscore: `_x`
+
+error: unused variable: `cx`
+   --> src/signal_vec.rs:431:46
+    |
+431 |     fn poll_vec_change(self: Pin<&mut Self>, cx: &mut Context) -> Poll<Option<VecDiff<Self::Item>>> { panic!("STUB: not implemented...
+    |                                              ^^ help: if this is intentional, prefix it with an underscore: `_cx`
+
+error: unused variable: `signals`
+   --> src/signal_vec.rs:454:19
+    |
+454 |     fn find_index(signals: &[FilterSignalClonedState<A::Item, B>], index: usize) -> usize { panic!("STUB: not implemented") }
+    |                   ^^^^^^^ help: if this is intentional, prefix it with an underscore: `_signals`
+
+error: unused variable: `index`
+   --> src/signal_vec.rs:454:68
+    |
+454 |     fn find_index(signals: &[FilterSignalClonedState<A::Item, B>], index: usize) -> usize { panic!("STUB: not implemented") }
+    |                                                                    ^^^^^ help: if this is intentional, prefix it with an underscore: `_index`
+
+error: unused variable: `cx`
+   --> src/signal_vec.rs:464:46
+    |
+464 |     fn poll_vec_change(self: Pin<&mut Self>, cx: &mut Context) -> Poll<Option<VecDiff<Self::Item>>> { panic!("STUB: not implemented...
+    |                                              ^^ help: if this is intentional, prefix it with an underscore: `_cx`
+
+error: unused variable: `cx`
+   --> src/signal_vec.rs:479:42
+    |
+479 |     fn poll_change(self: Pin<&mut Self>, cx: &mut Context) -> Poll<Option<Self::Item>> { panic!("STUB: not implemented") }
+    |                                          ^^ help: if this is intentional, prefix it with an underscore: `_cx`
+
+error: unused variable: `cx`
+   --> src/signal_vec.rs:495:42
+    |
+495 |     fn poll_change(self: Pin<&mut Self>, cx: &mut Context) -> Poll<Option<Self::Item>> { panic!("STUB: not implemented") }
+    |                                          ^^ help: if this is intentional, prefix it with an underscore: `_cx`
+
+error: unused variable: `cx`
+   --> src/signal_vec.rs:510:40
+    |
+510 |     fn poll_next(self: Pin<&mut Self>, cx: &mut Context) -> Poll<Option<Self::Item>> { panic!("STUB: not implemented") }
+    |                                        ^^ help: if this is intentional, prefix it with an underscore: `_cx`
+
+error: unused variable: `indexes`
+   --> src/signal_vec.rs:513:15
+    |
+513 | fn find_index(indexes: &[bool], index: usize) -> usize { panic!("STUB: not implemented") }
+    |               ^^^^^^^ help: if this is intentional, prefix it with an underscore: `_indexes`
+
+error: unused variable: `index`
+   --> src/signal_vec.rs:513:33
+    |
+513 | fn find_index(indexes: &[bool], index: usize) -> usize { panic!("STUB: not implemented") }
+    |                                 ^^^^^ help: if this is intentional, prefix it with an underscore: `_index`
+
+error: variable does not need to be mutable
+   --> src/signal_vec.rs:515:54
+    |
+515 | fn poll_filter_map<A, S, F>(indexes: &mut Vec<bool>, mut signal: Pin<&mut S>, cx: &mut Context, mut callback: F) -> Poll<Option<Vec...
+    |                                                      ----^^^^^^
+    |                                                      |
+    |                                                      help: remove this `mut`
+
+error: variable does not need to be mutable
+   --> src/signal_vec.rs:515:97
+    |
+515 | fn poll_filter_map<A, S, F>(indexes: &mut Vec<bool>, mut signal: Pin<&mut S>, cx: &mut Context, mut callback: F) -> Poll<Option<Vec...
+    |                                                                                                 ----^^^^^^^^
+    |                                                                                                 |
+    |                                                                                                 help: remove this `mut`
+
+error: unused variable: `indexes`
+   --> src/signal_vec.rs:515:29
+    |
+515 | fn poll_filter_map<A, S, F>(indexes: &mut Vec<bool>, mut signal: Pin<&mut S>, cx: &mut Context, mut callback: F) -> Poll<Option<Vec...
+    |                             ^^^^^^^ help: if this is intentional, prefix it with an underscore: `_indexes`
+
+error: unused variable: `signal`
+   --> src/signal_vec.rs:515:54
+    |
+515 | ...ndexes: &mut Vec<bool>, mut signal: Pin<&mut S>, cx: &mut Context, mut callback: F) -> Poll<Option<VecDiff<A>>>
+    |                            ^^^^^^^^^^ help: if this is intentional, prefix it with an underscore: `_signal`
+
+error: unused variable: `cx`
+   --> src/signal_vec.rs:515:79
+    |
+515 | ...ol>, mut signal: Pin<&mut S>, cx: &mut Context, mut callback: F) -> Poll<Option<VecDiff<A>>>
+    |                                  ^^ help: if this is intentional, prefix it with an underscore: `_cx`
+
+error: unused variable: `callback`
+   --> src/signal_vec.rs:515:97
+    |
+515 | ...S>, cx: &mut Context, mut callback: F) -> Poll<Option<VecDiff<A>>>
+    |                          ^^^^^^^^^^^^ help: if this is intentional, prefix it with an underscore: `_callback`
+
+error: unused variable: `cx`
+   --> src/signal_vec.rs:535:46
+    |
+535 |     fn poll_vec_change(self: Pin<&mut Self>, cx: &mut Context) -> Poll<Option<VecDiff<Self::Item>>> { panic!("STUB: not implemented...
+    |                                              ^^ help: if this is intentional, prefix it with an underscore: `_cx`
+
+error: unused variable: `cx`
+   --> src/signal_vec.rs:554:46
+    |
+554 |     fn poll_vec_change(self: Pin<&mut Self>, cx: &mut Context) -> Poll<Option<VecDiff<Self::Item>>> { panic!("STUB: not implemented...
+    |                                              ^^ help: if this is intentional, prefix it with an underscore: `_cx`
+
+error: unused variable: `cx`
+   --> src/signal_vec.rs:572:42
+    |
+572 |     fn poll_change(self: Pin<&mut Self>, cx: &mut Context) -> Poll<Option<Self::Item>> { panic!("STUB: not implemented") }
+    |                                          ^^ help: if this is intentional, prefix it with an underscore: `_cx`
+
+error: unused variable: `cx`
+   --> src/signal_vec.rs:589:46
+    |
+589 |     fn poll_vec_change(self: Pin<&mut Self>, cx: &mut Context) -> Poll<Option<VecDiff<Self::Item>>> { panic!("STUB: not implemented...
+    |                                              ^^ help: if this is intentional, prefix it with an underscore: `_cx`
+
+error: unused variable: `values`
+   --> src/signal_vec.rs:608:22
+    |
+608 |     fn binary_search(values: &[A::Item], indexes: &[usize], compare: &mut F, index: usize) -> Result<usize, usize> { panic!("STUB: ...
+    |                      ^^^^^^ help: if this is intentional, prefix it with an underscore: `_values`
+
+error: unused variable: `indexes`
+   --> src/signal_vec.rs:608:42
+    |
+608 |     fn binary_search(values: &[A::Item], indexes: &[usize], compare: &mut F, index: usize) -> Result<usize, usize> { panic!("STUB: ...
+    |                                          ^^^^^^^ help: if this is intentional, prefix it with an underscore: `_indexes`
+
+error: unused variable: `compare`
+   --> src/signal_vec.rs:608:61
+    |
+608 | ...tem], indexes: &[usize], compare: &mut F, index: usize) -> Result<usize, usize> { panic!("STUB: not implemented") }
+    |                             ^^^^^^^ help: if this is intentional, prefix it with an underscore: `_compare`
+
+error: unused variable: `index`
+   --> src/signal_vec.rs:608:78
+    |
+608 | ...&[usize], compare: &mut F, index: usize) -> Result<usize, usize> { panic!("STUB: not implemented") }
+    |                               ^^^^^ help: if this is intentional, prefix it with an underscore: `_index`
+
+error: unused variable: `values`
+   --> src/signal_vec.rs:610:29
+    |
+610 |     fn binary_search_insert(values: &[A::Item], indexes: &[usize], compare: &mut F, index: usize) -> usize { panic!("STUB: not impl...
+    |                             ^^^^^^ help: if this is intentional, prefix it with an underscore: `_values`
+
+error: unused variable: `indexes`
+   --> src/signal_vec.rs:610:49
+    |
+610 |     fn binary_search_insert(values: &[A::Item], indexes: &[usize], compare: &mut F, index: usize) -> usize { panic!("STUB: not impl...
+    |                                                 ^^^^^^^ help: if this is intentional, prefix it with an underscore: `_indexes`
+
+error: unused variable: `compare`
+   --> src/signal_vec.rs:610:68
+    |
+610 | ...tem], indexes: &[usize], compare: &mut F, index: usize) -> usize { panic!("STUB: not implemented") }
+    |                             ^^^^^^^ help: if this is intentional, prefix it with an underscore: `_compare`
+
+error: unused variable: `index`
+   --> src/signal_vec.rs:610:85
+    |
+610 | ...&[usize], compare: &mut F, index: usize) -> usize { panic!("STUB: not implemented") }
+    |                               ^^^^^ help: if this is intentional, prefix it with an underscore: `_index`
+
+error: unused variable: `values`
+   --> src/signal_vec.rs:612:29
+    |
+612 |     fn binary_search_remove(values: &[A::Item], indexes: &[usize], compare: &mut F, index: usize) -> usize { panic!("STUB: not impl...
+    |                             ^^^^^^ help: if this is intentional, prefix it with an underscore: `_values`
+
+error: unused variable: `indexes`
+   --> src/signal_vec.rs:612:49
+    |
+612 |     fn binary_search_remove(values: &[A::Item], indexes: &[usize], compare: &mut F, index: usize) -> usize { panic!("STUB: not impl...
+    |                                                 ^^^^^^^ help: if this is intentional, prefix it with an underscore: `_indexes`
+
+error: unused variable: `compare`
+   --> src/signal_vec.rs:612:68
+    |
+612 | ...tem], indexes: &[usize], compare: &mut F, index: usize) -> usize { panic!("STUB: not implemented") }
+    |                             ^^^^^^^ help: if this is intentional, prefix it with an underscore: `_compare`
+
+error: unused variable: `index`
+   --> src/signal_vec.rs:612:85
+    |
+612 | ...&[usize], compare: &mut F, index: usize) -> usize { panic!("STUB: not implemented") }
+    |                               ^^^^^ help: if this is intentional, prefix it with an underscore: `_index`
+
+error: unused variable: `indexes`
+   --> src/signal_vec.rs:614:26
+    |
+614 |     fn increment_indexes(indexes: &mut Vec<usize>, start: usize) { panic!("STUB: not implemented") }
+    |                          ^^^^^^^ help: if this is intentional, prefix it with an underscore: `_indexes`
+
+error: unused variable: `start`
+   --> src/signal_vec.rs:614:52
+    |
+614 |     fn increment_indexes(indexes: &mut Vec<usize>, start: usize) { panic!("STUB: not implemented") }
+    |                                                    ^^^^^ help: if this is intentional, prefix it with an underscore: `_start`
+
+error: unused variable: `indexes`
+   --> src/signal_vec.rs:616:26
+    |
+616 |     fn decrement_indexes(indexes: &mut Vec<usize>, start: usize) { panic!("STUB: not implemented") }
+    |                          ^^^^^^^ help: if this is intentional, prefix it with an underscore: `_indexes`
+
+error: unused variable: `start`
+   --> src/signal_vec.rs:616:52
+    |
+616 |     fn decrement_indexes(indexes: &mut Vec<usize>, start: usize) { panic!("STUB: not implemented") }
+    |                                                    ^^^^^ help: if this is intentional, prefix it with an underscore: `_start`
+
+error: unused variable: `indexes`
+   --> src/signal_vec.rs:618:18
+    |
+618 |     fn insert_at(indexes: &mut Vec<usize>, sorted_index: usize, index: usize, value: A::Item) -> VecDiff<A::Item> { panic!("STUB: n...
+    |                  ^^^^^^^ help: if this is intentional, prefix it with an underscore: `_indexes`
+
+error: unused variable: `sorted_index`
+   --> src/signal_vec.rs:618:44
+    |
+618 | ...s: &mut Vec<usize>, sorted_index: usize, index: usize, value: A::Item) -> VecDiff<A::Item> { panic!("STUB: not implemented") }
+    |                        ^^^^^^^^^^^^ help: if this is intentional, prefix it with an underscore: `_sorted_index`
+
+error: unused variable: `index`
+   --> src/signal_vec.rs:618:65
+    |
+618 | ...ize>, sorted_index: usize, index: usize, value: A::Item) -> VecDiff<A::Item> { panic!("STUB: not implemented") }
+    |                               ^^^^^ help: if this is intentional, prefix it with an underscore: `_index`
+
+error: unused variable: `value`
+   --> src/signal_vec.rs:618:79
+    |
+618 | ...ndex: usize, index: usize, value: A::Item) -> VecDiff<A::Item> { panic!("STUB: not implemented") }
+    |                               ^^^^^ help: if this is intentional, prefix it with an underscore: `_value`
+
+error: unused variable: `indexes`
+   --> src/signal_vec.rs:620:18
+    |
+620 |     fn remove_at(indexes: &mut Vec<usize>, sorted_index: usize) -> Poll<Option<VecDiff<A::Item>>> { panic!("STUB: not implemented") }
+    |                  ^^^^^^^ help: if this is intentional, prefix it with an underscore: `_indexes`
+
+error: unused variable: `sorted_index`
+   --> src/signal_vec.rs:620:44
+    |
+620 |     fn remove_at(indexes: &mut Vec<usize>, sorted_index: usize) -> Poll<Option<VecDiff<A::Item>>> { panic!("STUB: not implemented") }
+    |                                            ^^^^^^^^^^^^ help: if this is intentional, prefix it with an underscore: `_sorted_index`
+
+error: unused variable: `cx`
+   --> src/signal_vec.rs:629:46
+    |
+629 |     fn poll_vec_change(self: Pin<&mut Self>, cx: &mut Context) -> Poll<Option<VecDiff<Self::Item>>> { panic!("STUB: not implemented...
+    |                                              ^^ help: if this is intentional, prefix it with an underscore: `_cx`
+
+error: unused variable: `future`
+   --> src/signal_vec.rs:641:12
+    |
+641 |     fn new(future: A) -> Self { panic!("STUB: not implemented") }
+    |            ^^^^^^ help: if this is intentional, prefix it with an underscore: `_future`
+
+error: unused variable: `futures`
+   --> src/signal_vec.rs:660:21
+    |
+660 |     fn remove_index(futures: &mut Vec<DelayRemoveState<A>>, index: usize) -> VecDiff<S::Item> { panic!("STUB: not implemented") }
+    |                     ^^^^^^^ help: if this is intentional, prefix it with an underscore: `_futures`
+
+error: unused variable: `index`
+   --> src/signal_vec.rs:660:61
+    |
+660 |     fn remove_index(futures: &mut Vec<DelayRemoveState<A>>, index: usize) -> VecDiff<S::Item> { panic!("STUB: not implemented") }
+    |                                                             ^^^^^ help: if this is intentional, prefix it with an underscore: `_index`
+
+error: unused variable: `state`
+   --> src/signal_vec.rs:662:22
+    |
+662 |     fn should_remove(state: &mut DelayRemoveState<A>, cx: &mut Context) -> bool { panic!("STUB: not implemented") }
+    |                      ^^^^^ help: if this is intentional, prefix it with an underscore: `_state`
+
+error: unused variable: `cx`
+   --> src/signal_vec.rs:662:55
+    |
+662 |     fn should_remove(state: &mut DelayRemoveState<A>, cx: &mut Context) -> bool { panic!("STUB: not implemented") }
+    |                                                       ^^ help: if this is intentional, prefix it with an underscore: `_cx`
+
+error: unused variable: `futures`
+   --> src/signal_vec.rs:664:19
+    |
+664 |     fn find_index(futures: &[DelayRemoveState<A>], parent_index: usize) -> Option<usize> { panic!("STUB: not implemented") }
+    |                   ^^^^^^^ help: if this is intentional, prefix it with an underscore: `_futures`
+
+error: unused variable: `parent_index`
+   --> src/signal_vec.rs:664:52
+    |
+664 |     fn find_index(futures: &[DelayRemoveState<A>], parent_index: usize) -> Option<usize> { panic!("STUB: not implemented") }
+    |                                                    ^^^^^^^^^^^^ help: if this is intentional, prefix it with an underscore: `_parent_index`
+
+error: unused variable: `futures`
+   --> src/signal_vec.rs:666:24
+    |
+666 |     fn find_last_index(futures: &[DelayRemoveState<A>]) -> Option<usize> { panic!("STUB: not implemented") }
+    |                        ^^^^^^^ help: if this is intentional, prefix it with an underscore: `_futures`
+
+error: unused variable: `futures`
+   --> src/signal_vec.rs:668:32
+    |
+668 |     fn remove_existing_futures(futures: &mut Vec<DelayRemoveState<A>>, pending: &mut PendingBuilder<VecDiff<S::Item>>, cx: &mut Con...
+    |                                ^^^^^^^ help: if this is intentional, prefix it with an underscore: `_futures`
+
+error: unused variable: `pending`
+   --> src/signal_vec.rs:668:72
+    |
+668 | ...ec<DelayRemoveState<A>>, pending: &mut PendingBuilder<VecDiff<S::Item>>, cx: &mut Context) { panic!("STUB: not implemented") }
+    |                             ^^^^^^^ help: if this is intentional, prefix it with an underscore: `_pending`
+
+error: unused variable: `cx`
+   --> src/signal_vec.rs:668:120
+    |
+668 | ...ingBuilder<VecDiff<S::Item>>, cx: &mut Context) { panic!("STUB: not implemented") }
+    |                                  ^^ help: if this is intentional, prefix it with an underscore: `_cx`
+
+error: unused variable: `cx`
+   --> src/signal_vec.rs:677:46
+    |
+677 |     fn poll_vec_change(self: Pin<&mut Self>, cx: &mut Context) -> Poll<Option<VecDiff<Self::Item>>> { panic!("STUB: not implemented...
+    |                                              ^^ help: if this is intentional, prefix it with an underscore: `_cx`
+
+error: unused variable: `range`
+   --> src/signal_vec.rs:696:25
+    |
+696 |     fn convert_range<R>(range: R, len: usize) -> Range<usize> where R: RangeBounds<usize> { panic!("STUB: not implemented") }
+    |                         ^^^^^ help: if this is intentional, prefix it with an underscore: `_range`
+
+error: unused variable: `len`
+   --> src/signal_vec.rs:696:35
+    |
+696 |     fn convert_range<R>(range: R, len: usize) -> Range<usize> where R: RangeBounds<usize> { panic!("STUB: not implemented") }
+    |                                   ^^^ help: if this is intentional, prefix it with an underscore: `_len`
+
+error: variable does not need to be mutable
+   --> src/signal_vec.rs:707:56
+    |
+707 |         fn notify<B: FnMut() -> VecDiff<A>>(&mut self, mut change: B) { panic!("STUB: not implemented") }
+    |                                                        ----^^^^^^
+    |                                                        |
+    |                                                        help: remove this `mut`
+
+error: unused variable: `change`
+   --> src/signal_vec.rs:707:56
+    |
+707 |         fn notify<B: FnMut() -> VecDiff<A>>(&mut self, mut change: B) { panic!("STUB: not implemented") }
+    |                                                        ^^^^^^^^^^ help: if this is intentional, prefix it with an underscore: `_change`
+
+error: variable does not need to be mutable
+   --> src/signal_vec.rs:709:57
+    |
+709 |         fn notify_with<B, C, D, E>(&mut self, value: B, mut clone: C, change: D, mut notify: E)
+    |                                                         ----^^^^^
+    |                                                         |
+    |                                                         help: remove this `mut`
+
+error: variable does not need to be mutable
+   --> src/signal_vec.rs:709:82
+    |
+709 |         fn notify_with<B, C, D, E>(&mut self, value: B, mut clone: C, change: D, mut notify: E)
+    |                                                                                  ----^^^^^^
+    |                                                                                  |
+    |                                                                                  help: remove this `mut`
+
+error: unused variable: `value`
+   --> src/signal_vec.rs:709:47
+    |
+709 |         fn notify_with<B, C, D, E>(&mut self, value: B, mut clone: C, change: D, mut notify: E)
+    |                                               ^^^^^ help: if this is intentional, prefix it with an underscore: `_value`
+
+error: unused variable: `clone`
+   --> src/signal_vec.rs:709:57
+    |
+709 |         fn notify_with<B, C, D, E>(&mut self, value: B, mut clone: C, change: D, mut notify: E)
+    |                                                         ^^^^^^^^^ help: if this is intentional, prefix it with an underscore: `_clone`
+
+error: unused variable: `change`
+   --> src/signal_vec.rs:709:71
+    |
+709 |         fn notify_with<B, C, D, E>(&mut self, value: B, mut clone: C, change: D, mut notify: E)
+    |                                                                       ^^^^^^ help: if this is intentional, prefix it with an underscore: `_change`
+
+error: unused variable: `notify`
+   --> src/signal_vec.rs:709:82
+    |
+709 |         fn notify_with<B, C, D, E>(&mut self, value: B, mut clone: C, change: D, mut notify: E)
+    |                                                                                  ^^^^^^^^^^ help: if this is intentional, prefix it with an underscore: `_notify`
+
+error: unused variable: `index`
+   --> src/signal_vec.rs:716:30
+    |
+716 |         fn remove(&mut self, index: usize) -> A { panic!("STUB: not implemented") }
+    |                              ^^^^^ help: if this is intentional, prefix it with an underscore: `_index`
+
+error: unused variable: `old_index`
+   --> src/signal_vec.rs:718:36
+    |
+718 |         fn move_from_to(&mut self, old_index: usize, new_index: usize) { panic!("STUB: not implemented") }
+    |                                    ^^^^^^^^^ help: if this is intentional, prefix it with an underscore: `_old_index`
+
+error: unused variable: `new_index`
+   --> src/signal_vec.rs:718:54
+    |
+718 |         fn move_from_to(&mut self, old_index: usize, new_index: usize) { panic!("STUB: not implemented") }
+    |                                                      ^^^^^^^^^ help: if this is intentional, prefix it with an underscore: `_new_index`
+
+error: variable does not need to be mutable
+   --> src/signal_vec.rs:722:33
+    |
+722 |         fn retain<F>(&mut self, mut f: F) where F: FnMut(&A) -> bool { panic!("STUB: not implemented") }
+    |                                 ----^
+    |                                 |
+    |                                 help: remove this `mut`
+
+error: unused variable: `f`
+   --> src/signal_vec.rs:722:33
+    |
+722 |         fn retain<F>(&mut self, mut f: F) where F: FnMut(&A) -> bool { panic!("STUB: not implemented") }
+    |                                 ^^^^^ help: if this is intentional, prefix it with an underscore: `_f`
+
+error: variable does not need to be mutable
+   --> src/signal_vec.rs:724:57
+    |
+724 |         fn remove_range(&mut self, range: Range<usize>, mut len: usize) { panic!("STUB: not implemented") }
+    |                                                         ----^^^
+    |                                                         |
+    |                                                         help: remove this `mut`
+
+error: unused variable: `range`
+   --> src/signal_vec.rs:724:36
+    |
+724 |         fn remove_range(&mut self, range: Range<usize>, mut len: usize) { panic!("STUB: not implemented") }
+    |                                    ^^^^^ help: if this is intentional, prefix it with an underscore: `_range`
+
+error: unused variable: `len`
+   --> src/signal_vec.rs:724:57
+    |
+724 |         fn remove_range(&mut self, range: Range<usize>, mut len: usize) { panic!("STUB: not implemented") }
+    |                                                         ^^^^^^^ help: if this is intentional, prefix it with an underscore: `_len`
+
+error: unused variable: `range`
+   --> src/signal_vec.rs:726:32
+    |
+726 |         fn drain<R>(&mut self, range: R) -> Drain<'_, A> where R: RangeBounds<usize> { panic!("STUB: not implemented") }
+    |                                ^^^^^ help: if this is intentional, prefix it with an underscore: `_range`
+
+error: unused variable: `len`
+   --> src/signal_vec.rs:728:32
+    |
+728 |         fn truncate(&mut self, len: usize) { panic!("STUB: not implemented") }
+    |                                ^^^ help: if this is intentional, prefix it with an underscore: `_len`
+
+error: unused variable: `values`
+   --> src/signal_vec.rs:733:24
+    |
+733 |         fn copy_values(values: &Vec<A>) -> Vec<A> { panic!("STUB: not implemented") }
+    |                        ^^^^^^ help: if this is intentional, prefix it with an underscore: `_values`
+
+error: unused variable: `value`
+   --> src/signal_vec.rs:737:33
+    |
+737 |         fn push_copy(&mut self, value: A) { panic!("STUB: not implemented") }
+    |                                 ^^^^^ help: if this is intentional, prefix it with an underscore: `_value`
+
+error: unused variable: `index`
+   --> src/signal_vec.rs:739:35
+    |
+739 |         fn insert_copy(&mut self, index: usize, value: A) { panic!("STUB: not implemented") }
+    |                                   ^^^^^ help: if this is intentional, prefix it with an underscore: `_index`
+
+error: unused variable: `value`
+   --> src/signal_vec.rs:739:49
+    |
+739 |         fn insert_copy(&mut self, index: usize, value: A) { panic!("STUB: not implemented") }
+    |                                                 ^^^^^ help: if this is intentional, prefix it with an underscore: `_value`
+
+error: unused variable: `index`
+   --> src/signal_vec.rs:741:32
+    |
+741 |         fn set_copy(&mut self, index: usize, value: A) { panic!("STUB: not implemented") }
+    |                                ^^^^^ help: if this is intentional, prefix it with an underscore: `_index`
+
+error: unused variable: `value`
+   --> src/signal_vec.rs:741:46
+    |
+741 |         fn set_copy(&mut self, index: usize, value: A) { panic!("STUB: not implemented") }
+    |                                              ^^^^^ help: if this is intentional, prefix it with an underscore: `_value`
+
+error: unused variable: `values`
+   --> src/signal_vec.rs:743:36
+    |
+743 |         fn replace_copy(&mut self, values: Vec<A>) { panic!("STUB: not implemented") }
+    |                                    ^^^^^^ help: if this is intentional, prefix it with an underscore: `_values`
+
+error: unused variable: `value`
+   --> src/signal_vec.rs:748:45
+    |
+748 |         fn notify_clone<B, C, D>(&mut self, value: B, change: C, notify: D)
+    |                                             ^^^^^ help: if this is intentional, prefix it with an underscore: `_value`
+
+error: unused variable: `change`
+   --> src/signal_vec.rs:748:55
+    |
+748 |         fn notify_clone<B, C, D>(&mut self, value: B, change: C, notify: D)
+    |                                                       ^^^^^^ help: if this is intentional, prefix it with an underscore: `_change`
+
+error: unused variable: `notify`
+   --> src/signal_vec.rs:748:66
+    |
+748 |         fn notify_clone<B, C, D>(&mut self, value: B, change: C, notify: D)
+    |                                                                  ^^^^^^ help: if this is intentional, prefix it with an underscore: `_notify`
+
+error: unused variable: `value`
+   --> src/signal_vec.rs:755:34
+    |
+755 |         fn push_clone(&mut self, value: A) { panic!("STUB: not implemented") }
+    |                                  ^^^^^ help: if this is intentional, prefix it with an underscore: `_value`
+
+error: unused variable: `index`
+   --> src/signal_vec.rs:757:36
+    |
+757 |         fn insert_clone(&mut self, index: usize, value: A) { panic!("STUB: not implemented") }
+    |                                    ^^^^^ help: if this is intentional, prefix it with an underscore: `_index`
+
+error: unused variable: `value`
+   --> src/signal_vec.rs:757:50
+    |
+757 |         fn insert_clone(&mut self, index: usize, value: A) { panic!("STUB: not implemented") }
+    |                                                  ^^^^^ help: if this is intentional, prefix it with an underscore: `_value`
+
+error: unused variable: `index`
+   --> src/signal_vec.rs:759:33
+    |
+759 |         fn set_clone(&mut self, index: usize, value: A) { panic!("STUB: not implemented") }
+    |                                 ^^^^^ help: if this is intentional, prefix it with an underscore: `_index`
+
+error: unused variable: `value`
+   --> src/signal_vec.rs:759:47
+    |
+759 |         fn set_clone(&mut self, index: usize, value: A) { panic!("STUB: not implemented") }
+    |                                               ^^^^^ help: if this is intentional, prefix it with an underscore: `_value`
+
+error: unused variable: `values`
+   --> src/signal_vec.rs:761:37
+    |
+761 |         fn replace_clone(&mut self, values: Vec<A>) { panic!("STUB: not implemented") }
+    |                                     ^^^^^^ help: if this is intentional, prefix it with an underscore: `_values`
+
+error: unused variable: `iter`
+   --> src/signal_vec.rs:763:33
+    |
+763 |         fn extend<I>(&mut self, iter: I) where I: IntoIterator<Item = A> { panic!("STUB: not implemented") }
+    |                                 ^^^^ help: if this is intentional, prefix it with an underscore: `_iter`
+
+error: unused variable: `index`
+   --> src/signal_vec.rs:871:34
+    |
+871 |         pub fn remove(&mut self, index: usize) -> A { panic!("STUB: not implemented") }
+    |                                  ^^^^^ help: if this is intentional, prefix it with an underscore: `_index`
+
+error: unused variable: `old_index`
+   --> src/signal_vec.rs:877:40
+    |
+877 |         pub fn move_from_to(&mut self, old_index: usize, new_index: usize) { panic!("STUB: not implemented") }
+    |                                        ^^^^^^^^^ help: if this is intentional, prefix it with an underscore: `_old_index`
+
+error: unused variable: `new_index`
+   --> src/signal_vec.rs:877:58
+    |
+877 |         pub fn move_from_to(&mut self, old_index: usize, new_index: usize) { panic!("STUB: not implemented") }
+    |                                                          ^^^^^^^^^ help: if this is intentional, prefix it with an underscore: `_new_index`
+
+error: unused variable: `a`
+   --> src/signal_vec.rs:879:32
+    |
+879 |         pub fn swap(&mut self, a: usize, b: usize) { panic!("STUB: not implemented") }
+    |                                ^ help: if this is intentional, prefix it with an underscore: `_a`
+
+error: unused variable: `b`
+   --> src/signal_vec.rs:879:42
+    |
+879 |         pub fn swap(&mut self, a: usize, b: usize) { panic!("STUB: not implemented") }
+    |                                          ^ help: if this is intentional, prefix it with an underscore: `_b`
+
+error: unused variable: `f`
+   --> src/signal_vec.rs:882:37
+    |
+882 |         pub fn retain<F>(&mut self, f: F) where F: FnMut(&A) -> bool { panic!("STUB: not implemented") }
+    |                                     ^ help: if this is intentional, prefix it with an underscore: `_f`
+
+error: unused variable: `range`
+   --> src/signal_vec.rs:885:36
+    |
+885 |         pub fn drain<R>(&mut self, range: R) -> Drain<'_, A> where R: RangeBounds<usize> { panic!("STUB: not implemented") }
+    |                                    ^^^^^ help: if this is intentional, prefix it with an underscore: `_range`
+
+error: unused variable: `len`
+   --> src/signal_vec.rs:888:36
+    |
+888 |         pub fn truncate(&mut self, len: usize) { panic!("STUB: not implemented") }
+    |                                    ^^^ help: if this is intentional, prefix it with an underscore: `_len`
+
+error: unused variable: `additional`
+   --> src/signal_vec.rs:893:35
+    |
+893 |         pub fn reserve(&mut self, additional: usize) { panic!("STUB: not implemented") }
+    |                                   ^^^^^^^^^^ help: if this is intentional, prefix it with an underscore: `_additional`
+
+error: unused variable: `additional`
+   --> src/signal_vec.rs:896:41
+    |
+896 |         pub fn reserve_exact(&mut self, additional: usize) { panic!("STUB: not implemented") }
+    |                                         ^^^^^^^^^^ help: if this is intentional, prefix it with an underscore: `_additional`
+
+error: unused variable: `value`
+   --> src/signal_vec.rs:904:32
+    |
+904 |         pub fn push(&mut self, value: A) { panic!("STUB: not implemented") }
+    |                                ^^^^^ help: if this is intentional, prefix it with an underscore: `_value`
+
+error: unused variable: `index`
+   --> src/signal_vec.rs:907:34
+    |
+907 |         pub fn insert(&mut self, index: usize, value: A) { panic!("STUB: not implemented") }
+    |                                  ^^^^^ help: if this is intentional, prefix it with an underscore: `_index`
+
+error: unused variable: `value`
+   --> src/signal_vec.rs:907:48
+    |
+907 |         pub fn insert(&mut self, index: usize, value: A) { panic!("STUB: not implemented") }
+    |                                                ^^^^^ help: if this is intentional, prefix it with an underscore: `_value`
+
+error: unused variable: `index`
+   --> src/signal_vec.rs:910:31
+    |
+910 |         pub fn set(&mut self, index: usize, value: A) { panic!("STUB: not implemented") }
+    |                               ^^^^^ help: if this is intentional, prefix it with an underscore: `_index`
+
+error: unused variable: `value`
+   --> src/signal_vec.rs:910:45
+    |
+910 |         pub fn set(&mut self, index: usize, value: A) { panic!("STUB: not implemented") }
+    |                                             ^^^^^ help: if this is intentional, prefix it with an underscore: `_value`
+
+error: unused variable: `values`
+   --> src/signal_vec.rs:913:35
+    |
+913 |         pub fn replace(&mut self, values: Vec<A>) { panic!("STUB: not implemented") }
+    |                                   ^^^^^^ help: if this is intentional, prefix it with an underscore: `_values`
+
+error: unused variable: `value`
+   --> src/signal_vec.rs:918:39
+    |
+918 |         pub fn push_cloned(&mut self, value: A) { panic!("STUB: not implemented") }
+    |                                       ^^^^^ help: if this is intentional, prefix it with an underscore: `_value`
+
+error: unused variable: `index`
+   --> src/signal_vec.rs:921:41
+    |
+921 |         pub fn insert_cloned(&mut self, index: usize, value: A) { panic!("STUB: not implemented") }
+    |                                         ^^^^^ help: if this is intentional, prefix it with an underscore: `_index`
+
+error: unused variable: `value`
+   --> src/signal_vec.rs:921:55
+    |
+921 |         pub fn insert_cloned(&mut self, index: usize, value: A) { panic!("STUB: not implemented") }
+    |                                                       ^^^^^ help: if this is intentional, prefix it with an underscore: `_value`
+
+error: unused variable: `index`
+   --> src/signal_vec.rs:924:38
+    |
+924 |         pub fn set_cloned(&mut self, index: usize, value: A) { panic!("STUB: not implemented") }
+    |                                      ^^^^^ help: if this is intentional, prefix it with an underscore: `_index`
+
+error: unused variable: `value`
+   --> src/signal_vec.rs:924:52
+    |
+924 |         pub fn set_cloned(&mut self, index: usize, value: A) { panic!("STUB: not implemented") }
+    |                                                    ^^^^^ help: if this is intentional, prefix it with an underscore: `_value`
+
+error: unused variable: `values`
+   --> src/signal_vec.rs:927:42
+    |
+927 |         pub fn replace_cloned(&mut self, values: Vec<A>) { panic!("STUB: not implemented") }
+    |                                          ^^^^^^ help: if this is intentional, prefix it with an underscore: `_values`
+
+error: unused variable: `this`
+   --> src/signal_vec.rs:929:31
+    |
+929 |         pub fn apply_vec_diff(this: &mut Self, diff: VecDiff<A>) { panic!("STUB: not implemented") }
+    |                               ^^^^ help: if this is intentional, prefix it with an underscore: `_this`
+
+error: unused variable: `diff`
+   --> src/signal_vec.rs:929:48
+    |
+929 |         pub fn apply_vec_diff(this: &mut Self, diff: VecDiff<A>) { panic!("STUB: not implemented") }
+    |                                                ^^^^ help: if this is intentional, prefix it with an underscore: `_diff`
+
+error: unused variable: `iter`
+   --> src/signal_vec.rs:936:33
+    |
+936 |         fn extend<I>(&mut self, iter: I) where I: IntoIterator<Item = A> { panic!("STUB: not implemented") }
+    |                                 ^^^^ help: if this is intentional, prefix it with an underscore: `_iter`
+
+error: unused variable: `values`
+   --> src/signal_vec.rs:944:32
+    |
+944 |         pub fn new_with_values(values: Vec<A>) -> Self { panic!("STUB: not implemented") }
+    |                                ^^^^^^ help: if this is intentional, prefix it with an underscore: `_values`
+
+error: unused variable: `capacity`
+   --> src/signal_vec.rs:950:30
+    |
+950 |         pub fn with_capacity(capacity: usize) -> Self { panic!("STUB: not implemented") }
+    |                              ^^^^^^^^ help: if this is intentional, prefix it with an underscore: `_capacity`
+
+error: unused variable: `values`
+   --> src/signal_vec.rs:961:17
+    |
+961 |         fn from(values: T) -> Self { panic!("STUB: not implemented") }
+    |                 ^^^^^^ help: if this is intentional, prefix it with an underscore: `_values`
+
+error: unused variable: `fmt`
+   --> src/signal_vec.rs:975:23
+    |
+975 |         fn fmt(&self, fmt: &mut fmt::Formatter) -> fmt::Result { panic!("STUB: not implemented") }
+    |                       ^^^ help: if this is intentional, prefix it with an underscore: `_fmt`
+
+error: unused variable: `serializer`
+   --> src/signal_vec.rs:981:32
+    |
+981 | ...   fn serialize<S>(&self, serializer: S) -> Result<S::Ok, S::Error> where S: serde::Serializer { panic!("STUB: not implemented") }
+    |                              ^^^^^^^^^^ help: if this is intentional, prefix it with an underscore: `_serializer`
+
+error: unused variable: `deserializer`
+   --> src/signal_vec.rs:987:27
+    |
+987 | ...   fn deserialize<D>(deserializer: D) -> Result<Self, D::Error> where D: serde::Deserializer<'de> { panic!("STUB: not implemente...
+    |                         ^^^^^^^^^^^^ help: if this is intentional, prefix it with an underscore: `_deserializer`
+
+error: variable does not need to be mutable
+    --> src/signal_vec.rs:1012:28
+     |
+1012 | ...   fn poll_vec_change(mut self: Pin<&mut Self>, cx: &mut Context) -> Poll<Option<VecDiff<Self::Item>>> { panic!("STUB: not impl...
+     |                          ----^^^^
+     |                          |
+     |                          help: remove this `mut`
+
+error: unused variable: `cx`
+    --> src/signal_vec.rs:1012:54
+     |
+1012 | ...   fn poll_vec_change(mut self: Pin<&mut Self>, cx: &mut Context) -> Poll<Option<VecDiff<Self::Item>>> { panic!("STUB: not impl...
+     |                                                    ^^ help: if this is intentional, prefix it with an underscore: `_cx`
+
+error[E0596]: cannot borrow `this.future` as mutable, as `this` is not declared as mutable
+  --> src/future.rs:57:13
+   |
+57 |             this.future.set(None);
+   |             ^^^^^^^^^^^ cannot borrow as mutable
+   |
+help: consider changing this to be mutable
+   |
+54 |         let mut this = self.project();
+   |             +++
+
+For more information about this error, try `rustc --explain E0596`.
+error: could not compile `futures-signals` (lib) due to 179 previous errors
+warning: build failed, waiting for other jobs to finish...

@@ -1,0 +1,6 @@
+{
+  "repo": "Zahgon/jsons",
+  "base_commit": "8d69e8cd3e1322e2225577df5da1da4a3fa32a2f",
+  "reference_commit": "9abbf3a3bd32435ac74bc98c3554ad3c71086036",
+  "docker_image": "426628337772.dkr.ecr.ap-south-1.amazonaws.com/kaiju_q2:python_ramonhagenaars_jsons"
+}

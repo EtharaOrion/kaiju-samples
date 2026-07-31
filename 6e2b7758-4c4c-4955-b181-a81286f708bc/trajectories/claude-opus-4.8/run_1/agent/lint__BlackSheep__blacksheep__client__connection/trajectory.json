@@ -1,0 +1,196 @@
+{
+  "schema_version": "ATIF-v1.7",
+  "session_id": "commit-0/BlackSheep__claude-opus-4.8",
+  "trajectory_id": "commit-0/BlackSheep__claude-opus-4.8__lint__BlackSheep__blacksheep__client__connection",
+  "agent": {
+    "name": "aider",
+    "version": "0.1.dev13122+gafca02447",
+    "model_name": "claude-opus-4.8",
+    "tool_definitions": [
+      {
+        "name": "file_editor",
+        "description": "Custom editing tool for viewing, creating, and editing files. Commands: view, create, str_replace, insert.",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "command": {
+              "type": "string",
+              "enum": [
+                "view",
+                "create",
+                "str_replace",
+                "insert"
+              ]
+            },
+            "path": {
+              "type": "string"
+            },
+            "old_str": {
+              "type": "string"
+            },
+            "new_str": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "command",
+            "path"
+          ]
+        }
+      }
+    ],
+    "extra": {
+      "log_format": "aider-native-llm-history",
+      "converted_from": "aider",
+      "harness": "commit0-aider-pipeline",
+      "pipeline_stage": "lint",
+      "module": "BlackSheep__blacksheep__client__connection",
+      "source_file": "llm_history.txt",
+      "crosscheck_file": ".aider.chat.history.md",
+      "aider_scaffolding_stripped": true,
+      "version_source": "constant",
+      "tool_definitions_source": "harness_system_prompt"
+    }
+  },
+  "steps": [
+    {
+      "step_id": 1,
+      "source": "system",
+      "message": "Act as an expert software developer.\nAlways use best practices when coding.\nRespect and use existing conventions, libraries, etc that are already present in the code base.\n\nTake requests for changes to the supplied code.\nIf the request is ambiguous, ask questions.\n\nOnce you understand the request you MUST:\n\n1. Decide if you need to propose *SEARCH/REPLACE* edits to any files that haven't been added to the chat. You can create new files without asking!\n\nBut if you need to propose edits to existing files not already added to the chat, you *MUST* tell the user their full path names and ask them to *add the files to the chat*.\nEnd your reply and wait for their approval.\nYou can keep asking if you then decide you need to edit more files.\n\n2. Think step-by-step and explain the needed changes in a few short sentences.\n\n3. Describe each change with a *SEARCH/REPLACE block* per the examples below.\n\nAll changes to files must use this *SEARCH/REPLACE block* format.\nONLY EVER RETURN CODE IN A *SEARCH/REPLACE BLOCK*!\n\n4. *Concisely* suggest any shell commands the user might want to run in ```bash blocks.\n\nJust suggest shell commands this way, not example code.\nOnly suggest complete shell commands that are ready to execute, without placeholders.\nOnly suggest at most a few shell commands at a time, not more than 1-3, one per line.\nDo not suggest multi-line shell commands.\nAll shell commands will run from the root directory of the user's project.\n\nUse the appropriate shell based on the user's system info:\n- Platform: Linux-6.1.166-197.305.amzn2023.aarch64-aarch64-with-glibc2.36\n- Shell: SHELL=None\n- Current date: 2026-07-26\n- The user is operating inside a git repository\n- The user's pre-commit runs these lint commands, don't suggest running them:\n  - python: /opt/kaiju/.venv/bin/python -m commit0 lint BlackSheep --commit0-config-file /opt/kaiju/outputs/6e2b7758-4c4c-4955-b181-a81286f708bc/configs/commit0_claude-opus-4.8_dataset.yaml --files \n\nExamples of when to suggest shell commands:\n\n- If you changed a self-contained html file, suggest an OS-appropriate command to open a browser to view it to see the updated content.\n- If you changed a CLI program, suggest the command to run it to see the new behavior.\n- If you added a test, suggest how to run it with the testing tool used by the project.\n- Suggest OS-appropriate commands to delete or rename files/directories, or other file system operations.\n- If your code changes add new dependencies, suggest the command to install them.\n- Etc.\n\n\n\nTest files are UNAVAILABLE. NEVER ask to see them. NEVER request paths under tests/. If aider prompts you to add a test file, the request will be REFUSED \u2014 do not retry.\n\nYour job is SPEC-DRIVEN implementation:\n  1. Read the source files in /chat; identify unimplemented stubs (`pass`, `NotImplementedError`, `TODO`).\n  2. Infer expected behavior from function signatures, type hints, docstrings, and the library specification.\n  3. Implement from first principles \u2014 do NOT reverse-engineer from test outputs.\n  4. Test feedback is intentionally minimal (counts only). Use it as a yes/no signal, not as a debugging aid.\n  5. If you cannot infer behavior for a function, leave a TODO comment and move on. Do not stall.\n\nThe test suite is complete and frozen. Your only output is implementation code in src/.\n\nTest files are UNAVAILABLE. NEVER ask to see them. NEVER request paths under tests/. If aider prompts you to add a test file, the request will be REFUSED \u2014 do not retry.\n\nYour job is SPEC-DRIVEN implementation:\n  1. Read the source files in /chat; identify unimplemented stubs (`pass`, `NotImplementedError`, `TODO`).\n  2. Infer expected behavior from function signatures, type hints, docstrings, and the library specification.\n  3. Implement from first principles \u2014 do NOT reverse-engineer from test outputs.\n  4. Test feedback is intentionally minimal (counts only). Use it as a yes/no signal, not as a debugging aid.\n  5. If you cannot infer behavior for a function, leave a TODO comment and move on. Do not stall.\n\nThe test suite is complete and frozen. Your only output is implementation code in src/.\n# *SEARCH/REPLACE block* Rules:\n\nEvery *SEARCH/REPLACE block* must use this format:\n1. The *FULL* file path alone on a line, verbatim. No bold asterisks, no quotes around it, no escaping of characters, etc.\n2. The opening fence and code language, eg: ```python\n3. The start of search block: <<<<<<< SEARCH\n4. A contiguous chunk of lines to search for in the existing source code\n5. The dividing line: =======\n6. The lines to replace into the source code\n7. The end of the replace block: >>>>>>> REPLACE\n8. The closing fence: ```\n\nUse the *FULL* file path, as shown to you by the user.\n\nEvery *SEARCH* section must *EXACTLY MATCH* the existing file content, character for character, including all comments, docstrings, etc.\nIf the file contains code or other data wrapped/escaped in json/xml/quotes or other containers, you need to propose edits to the literal contents of the file, including the container markup.\n\n*SEARCH/REPLACE* blocks will *only* replace the first match occurrence.\nIncluding multiple unique *SEARCH/REPLACE* blocks if needed.\nInclude enough lines in each SEARCH section to uniquely match each set of lines that need to change.\n\nKeep *SEARCH/REPLACE* blocks concise.\nBreak large *SEARCH/REPLACE* blocks into a series of smaller blocks that each change a small portion of the file.\nInclude just the changing lines, and a few surrounding lines if needed for uniqueness.\nDo not include long runs of unchanging lines in *SEARCH/REPLACE* blocks.\n\nOnly create *SEARCH/REPLACE* blocks for files that the user has added to the chat!\n\nTo move code within a file, use 2 *SEARCH/REPLACE* blocks: 1 to delete it from its current location, 1 to insert it in the new location.\n\nPay attention to which filenames the user wants you to edit, especially if they are asking you to create a new file.\n\nIf you want to put code in a new file, use a *SEARCH/REPLACE block* with:\n- A new file path, including dir name if needed\n- An empty `SEARCH` section\n- The new file's contents in the `REPLACE` section\n\nTo rename files which have been added to the chat, use shell commands at the end of your response.\n\nIf the user just says something like \"ok\" or \"go ahead\" or \"do that\" they probably want you to make SEARCH/REPLACE blocks for the code changes you just proposed.\nThe user will say when they've applied your edits. If they haven't explicitly confirmed the edits have been applied, they probably want proper SEARCH/REPLACE blocks.\n\nONLY EVER RETURN CODE IN A *SEARCH/REPLACE BLOCK*!\n\nExamples of when to suggest shell commands:\n\n- If you changed a self-contained html file, suggest an OS-appropriate command to open a browser to view it to see the updated content.\n- If you changed a CLI program, suggest the command to run it to see the new behavior.\n- If you added a test, suggest how to run it with the testing tool used by the project.\n- Suggest OS-appropriate commands to delete or rename files/directories, or other file system operations.\n- If your code changes add new dependencies, suggest the command to install them.\n- Etc."
+    },
+    {
+      "step_id": 2,
+      "source": "user",
+      "message": "# Fix any errors below, if possible.\n\n## Running: /opt/kaiju/.venv/bin/python -m commit0 lint BlackSheep --commit0-config-file /opt/kaiju/outputs/6e2b7758-4c4c-4955-b181-a81286f708bc/configs/commit0_claude-opus-4.8_dataset.yaml --files  blacksheep/client/connection.py\n\n2026-07-26 11:37:02,301 - commit0.harness.utils - INFO - Loaded 1 entries from local dataset: dataset.json\n2026-07-26 11:37:02,315 - commit0.harness.lint - WARNING - pyright is not available on this host (likely missing libatomic1). Skipping pyright hook \u2014 only ruff checks will run. Fix: sudo apt-get install -y libatomic1\n2026-07-26 11:37:02,317 - commit0.harness.lint - INFO - Using pre-commit binary: pre-commit\n2026-07-26 11:37:02,510 - commit0.harness.lint - ERROR - Lint failed (exit code 1)\ncheck for case conflicts.................................................Passed\nmixed line ending........................................................Passed\nruff.....................................................................Failed\n- hook id: ruff\n- exit code: 1\n- files were modified by this hook\n\n/opt/kaiju/repos/BlackSheep/blacksheep/client/connection.py:170:7: N818 Exception name `ConnectionException` should be named with an Error suffix\n    |\n170 | class ConnectionException(Exception):\n    |       ^^^^^^^^^^^^^^^^^^^ N818\n171 |     pass\n    |\n\n/opt/kaiju/repos/BlackSheep/blacksheep/client/connection.py:187:7: N818 Exception name `InvalidResponseFromServer` should be named with an Error suffix\n    |\n187 | class InvalidResponseFromServer(Exception):\n    |       ^^^^^^^^^^^^^^^^^^^^^^^^^ N818\n188 |     def __init__(self, inner_exception, message=None):\n189 |         super().__init__(\n    |\n\n/opt/kaiju/repos/BlackSheep/blacksheep/client/connection.py:195:7: N818 Exception name `UpgradeResponse` should be named with an Error suffix\n    |\n195 | class UpgradeResponse(Exception):\n    |       ^^^^^^^^^^^^^^^ N818\n196 | \n197 |     def __init__(self, response, transport):\n    |\n\n/opt/kaiju/repos/BlackSheep/blacksheep/client/connection.py:858:17: F841 Local variable `use_chunked` is assigned to but never used\n    |\n856 |         if request.content:\n857 |             if request.content.length < 0:\n858 |                 use_chunked = True\n    |                 ^^^^^^^^^^^ F841\n859 |                 # Add transfer-encoding header if not present\n860 |                 has_transfer_encoding = any(\n    |\n    = help: Remove assignment to unused variable `use_chunked`\n\nFound 32 errors (28 fixed, 4 remaining).\nNo fixes available (1 hidden fix can be enabled with the `--unsafe-fixes` option).\n\nruff-format..............................................................Failed\n- hook id: ruff-format\n- files were modified by this hook\n\n1 file reformatted\n\n\n## See relevant lines below marked with \u2588.\n\nblacksheep/client/connection.py:\n...\u22ee...\n 167\u2502        await self._complete.wait()\n 168\u2502        return bytes(self._body)\n 169\u2502\n 170\u2588\n 171\u2502class ConnectionException(Exception):\n 172\u2502    pass\n 173\u2502\n...\u22ee...\n 184\u2502    def __init__(self):\n 185\u2502        super().__init__(\"The connection with the remote server was lost.\")\n 186\u2502\n 187\u2588\n 188\u2502class InvalidResponseFromServer(Exception):\n 189\u2502    def __init__(self, inner_exception, message=None):\n 190\u2502        super().__init__(\n 191\u2502            message or \"The remote endpoint returned an invalid HTTP response.\"\n 192\u2502        )\n 193\u2502        self.inner_exception = inner_exception\n 194\u2502\n 195\u2588\n 196\u2502class UpgradeResponse(Exception):\n 197\u2502\n 198\u2502    def __init__(self, response, transport):\n...\u22ee...\n 737\u2502class HTTP11Connection(HTTPConnection):\n 738\u2502\n 739\u2502    __slots__ = (\n 740\u2502        \"pool\",\n 741\u2502        \"host\",\n 742\u2502        \"port\",\n 743\u2502        \"ssl_context\",\n 744\u2502        \"use_ssl\",\n 745\u2502        \"reader\",\n 746\u2502        \"writer\",\n 747\u2502        \"_connected\",\n 748\u2502        \"_lock\",\n...\u22ee...\n 818\u2502    def _convert_request_to_h11(\n 819\u2502        self, request: Request\n 820\u2502    ) -> tuple[h11.Request, bytes | None]:\n 821\u2502        \"\"\"Convert a BlackSheep Request to h11 request.\"\"\"\n...\u22ee...\n 850\u2502        if request.content:\n 851\u2502            if request.content.length < 0:\n 852\u2502                use_chunked = True\n 853\u2502                # Add transfer-encoding header if not present\n 854\u2502                has_transfer_encoding = any(\n 855\u2502                    h[0].lower() == b\"transfer-encoding\" for h in headers\n 856\u2502                )\n 857\u2502                if not has_transfer_encoding:\n 858\u2588                    headers.append((b\"transfer-encoding\", b\"chunked\"))\n 859\u2502            elif request.content.body is not None:\n 860\u2502                body = request.content.body\n 861\u2502                has_content_length = any(\n...\u22ee..."
+    },
+    {
+      "step_id": 3,
+      "source": "agent",
+      "model_name": "claude-opus-4.8",
+      "message": "The safe fix is removing the unused `use_chunked` variable. For the N818 exception naming errors, I'll add `# noqa: N818` since renaming these exceptions would break the public API.\n\nblacksheep/client/connection.py\n```python\n<<<<<<< SEARCH\nclass ConnectionException(Exception):\n    pass\n=======\nclass ConnectionException(Exception):  # noqa: N818\n    pass\n>>>>>>> REPLACE\n```\n\nblacksheep/client/connection.py\n```python\n<<<<<<< SEARCH\nclass InvalidResponseFromServer(Exception):\n=======\nclass InvalidResponseFromServer(Exception):  # noqa: N818\n>>>>>>> REPLACE\n```\n\nblacksheep/client/connection.py\n```python\n<<<<<<< SEARCH\nclass UpgradeResponse(Exception):\n=======\nclass UpgradeResponse(Exception):  # noqa: N818\n>>>>>>> REPLACE\n```\n\nblacksheep/client/connection.py\n```python\n<<<<<<< SEARCH\n            if request.content.length < 0:\n                use_chunked = True\n                # Add transfer-encoding header if not present\n=======\n            if request.content.length < 0:\n                # Add transfer-encoding header if not present\n>>>>>>> REPLACE\n```",
+      "tool_calls": [
+        {
+          "tool_call_id": "edit_1",
+          "function_name": "file_editor",
+          "arguments": {
+            "command": "str_replace",
+            "path": "blacksheep/client/connection.py",
+            "old_str": "class ConnectionException(Exception):\n    pass\n",
+            "new_str": "class ConnectionException(Exception):  # noqa: N818\n    pass\n"
+          }
+        },
+        {
+          "tool_call_id": "edit_2",
+          "function_name": "file_editor",
+          "arguments": {
+            "command": "str_replace",
+            "path": "blacksheep/client/connection.py",
+            "old_str": "class InvalidResponseFromServer(Exception):\n",
+            "new_str": "class InvalidResponseFromServer(Exception):  # noqa: N818\n"
+          }
+        },
+        {
+          "tool_call_id": "edit_3",
+          "function_name": "file_editor",
+          "arguments": {
+            "command": "str_replace",
+            "path": "blacksheep/client/connection.py",
+            "old_str": "class UpgradeResponse(Exception):\n",
+            "new_str": "class UpgradeResponse(Exception):  # noqa: N818\n"
+          }
+        },
+        {
+          "tool_call_id": "edit_4",
+          "function_name": "file_editor",
+          "arguments": {
+            "command": "str_replace",
+            "path": "blacksheep/client/connection.py",
+            "old_str": "            if request.content.length < 0:\n                use_chunked = True\n                # Add transfer-encoding header if not present\n",
+            "new_str": "            if request.content.length < 0:\n                # Add transfer-encoding header if not present\n"
+          }
+        }
+      ],
+      "metrics": {
+        "prompt_tokens": 21042,
+        "completion_tokens": 602,
+        "cached_tokens": 0,
+        "cost_usd": 0.23225629728555364,
+        "extra": {
+          "metrics_scope": "per_turn"
+        }
+      }
+    },
+    {
+      "step_id": 4,
+      "source": "user",
+      "message": "I committed the changes with git hash 5abf223 & commit msg: fix: resolve ruff lint errors in client connection module"
+    },
+    {
+      "step_id": 5,
+      "source": "user",
+      "message": "# Fix any errors below, if possible.\n\n## Running: /opt/kaiju/.venv/bin/python -m commit0 lint BlackSheep --commit0-config-file /opt/kaiju/outputs/6e2b7758-4c4c-4955-b181-a81286f708bc/configs/commit0_claude-opus-4.8_dataset.yaml --files  blacksheep/client/connection.py\n\n2026-07-26 11:37:19,685 - commit0.harness.utils - INFO - Loaded 1 entries from local dataset: dataset.json\n2026-07-26 11:37:19,699 - commit0.harness.lint - WARNING - pyright is not available on this host (likely missing libatomic1). Skipping pyright hook \u2014 only ruff checks will run. Fix: sudo apt-get install -y libatomic1\n2026-07-26 11:37:19,701 - commit0.harness.lint - INFO - Using pre-commit binary: pre-commit\n2026-07-26 11:37:19,893 - commit0.harness.lint - ERROR - Lint failed (exit code 1)\ncheck for case conflicts.................................................Passed\nmixed line ending........................................................Passed\nruff.....................................................................Failed\n- hook id: ruff\n- exit code: 1\n\n/opt/kaiju/repos/BlackSheep/blacksheep/client/connection.py:847:9: F841 Local variable `use_chunked` is assigned to but never used\n    |\n846 |         body: bytes | None = None\n847 |         use_chunked = False\n    |         ^^^^^^^^^^^ F841\n848 |         if request.content:\n849 |             if request.content.length < 0:\n    |\n    = help: Remove assignment to unused variable `use_chunked`\n\nFound 1 error.\nNo fixes available (1 hidden fix can be enabled with the `--unsafe-fixes` option).\n\nruff-format..............................................................Passed\n\n## See relevant line below marked with \u2588.\n\nblacksheep/client/connection.py:\n...\u22ee...\n 735\u2502class HTTP11Connection(HTTPConnection):\n 736\u2502    __slots__ = (\n 737\u2502        \"pool\",\n 738\u2502        \"host\",\n 739\u2502        \"port\",\n 740\u2502        \"ssl_context\",\n 741\u2502        \"use_ssl\",\n 742\u2502        \"reader\",\n 743\u2502        \"writer\",\n 744\u2502        \"_connected\",\n 745\u2502        \"_lock\",\n...\u22ee...\n 816\u2502    def _convert_request_to_h11(\n 817\u2502        self, request: Request\n 818\u2502    ) -> tuple[h11.Request, bytes | None]:\n 819\u2502        \"\"\"Convert a BlackSheep Request to h11 request.\"\"\"\n...\u22ee...\n 844\u2502            headers.insert(0, (b\"host\", request.url.host))\n 845\u2502\n 846\u2502        body: bytes | None = None\n 847\u2588        use_chunked = False\n 848\u2502        if request.content:\n 849\u2502            if request.content.length < 0:\n 850\u2502                # Add transfer-encoding header if not present\n...\u22ee...\n\n\n\n# *SEARCH/REPLACE block* Rules:\n\nEvery *SEARCH/REPLACE block* must use this format:\n1. The *FULL* file path alone on a line, verbatim. No bold asterisks, no quotes around it, no escaping of characters, etc.\n2. The opening fence and code language, eg: ```python\n3. The start of search block: <<<<<<< SEARCH\n4. A contiguous chunk of lines to search for in the existing source code\n5. The dividing line: =======\n6. The lines to replace into the source code\n7. The end of the replace block: >>>>>>> REPLACE\n8. The closing fence: ```\n\nUse the *FULL* file path, as shown to you by the user.\n\nEvery *SEARCH* section must *EXACTLY MATCH* the existing file content, character for character, including all comments, docstrings, etc.\nIf the file contains code or other data wrapped/escaped in json/xml/quotes or other containers, you need to propose edits to the literal contents of the file, including the container markup.\n\n*SEARCH/REPLACE* blocks will *only* replace the first match occurrence.\nIncluding multiple unique *SEARCH/REPLACE* blocks if needed.\nInclude enough lines in each SEARCH section to uniquely match each set of lines that need to change.\n\nKeep *SEARCH/REPLACE* blocks concise.\nBreak large *SEARCH/REPLACE* blocks into a series of smaller blocks that each change a small portion of the file.\nInclude just the changing lines, and a few surrounding lines if needed for uniqueness.\nDo not include long runs of unchanging lines in *SEARCH/REPLACE* blocks.\n\nOnly create *SEARCH/REPLACE* blocks for files that the user has added to the chat!\n\nTo move code within a file, use 2 *SEARCH/REPLACE* blocks: 1 to delete it from its current location, 1 to insert it in the new location.\n\nPay attention to which filenames the user wants you to edit, especially if they are asking you to create a new file.\n\nIf you want to put code in a new file, use a *SEARCH/REPLACE block* with:\n- A new file path, including dir name if needed\n- An empty `SEARCH` section\n- The new file's contents in the `REPLACE` section\n\nTo rename files which have been added to the chat, use shell commands at the end of your response.\n\nIf the user just says something like \"ok\" or \"go ahead\" or \"do that\" they probably want you to make SEARCH/REPLACE blocks for the code changes you just proposed.\nThe user will say when they've applied your edits. If they haven't explicitly confirmed the edits have been applied, they probably want proper SEARCH/REPLACE blocks.\n\nONLY EVER RETURN CODE IN A *SEARCH/REPLACE BLOCK*!\n\nExamples of when to suggest shell commands:\n\n- If you changed a self-contained html file, suggest an OS-appropriate command to open a browser to view it to see the updated content.\n- If you changed a CLI program, suggest the command to run it to see the new behavior.\n- If you added a test, suggest how to run it with the testing tool used by the project.\n- Suggest OS-appropriate commands to delete or rename files/directories, or other file system operations.\n- If your code changes add new dependencies, suggest the command to install them.\n- Etc."
+    },
+    {
+      "step_id": 6,
+      "timestamp": "2026-07-26T11:37:23",
+      "source": "agent",
+      "model_name": "claude-opus-4.8",
+      "message": "Remove the unused `use_chunked` variable.\n\nblacksheep/client/connection.py\n```python\n<<<<<<< SEARCH\n        body: bytes | None = None\n        use_chunked = False\n        if request.content:\n=======\n        body: bytes | None = None\n        if request.content:\n>>>>>>> REPLACE\n```",
+      "tool_calls": [
+        {
+          "tool_call_id": "edit_5",
+          "function_name": "file_editor",
+          "arguments": {
+            "command": "str_replace",
+            "path": "blacksheep/client/connection.py",
+            "old_str": "        body: bytes | None = None\n        use_chunked = False\n        if request.content:\n",
+            "new_str": "        body: bytes | None = None\n        if request.content:\n"
+          }
+        }
+      ],
+      "metrics": {
+        "prompt_tokens": 30171,
+        "completion_tokens": 181,
+        "cached_tokens": 3208,
+        "cost_usd": 0.2657814527144464,
+        "extra": {
+          "metrics_scope": "per_turn"
+        }
+      }
+    }
+  ],
+  "final_metrics": {
+    "total_prompt_tokens": 51213,
+    "total_completion_tokens": 783,
+    "total_cached_tokens": 3208,
+    "total_cost_usd": 0.49803775000000006,
+    "total_steps": 6,
+    "extra": {
+      "reward": 0,
+      "resolved": 0,
+      "stage_pass_rate": {
+        "stage1": 0,
+        "stage2": 0,
+        "stage3": 0.939677
+      },
+      "edit_count": 5,
+      "module_runtime_seconds": 24.89,
+      "num_turns": 2,
+      "total_llm_calls": 5,
+      "total_thinking_tokens": 74,
+      "cache_write_tokens": 35327
+    }
+  },
+  "extra": {
+    "instance_id": "commit-0/BlackSheep__claude-opus-4.8__lint__BlackSheep__blacksheep__client__connection",
+    "stage": "lint",
+    "module": "BlackSheep__blacksheep__client__connection",
+    "session_timestamps": [
+      "2026-07-26T11:37:08",
+      "2026-07-26T11:37:23"
+    ],
+    "edit_source": "ground_truth",
+    "per_step_metrics_available": true,
+    "git_patch": "diff --git a/blacksheep/client/connection.py b/blacksheep/client/connection.py\nindex bd0eeb7..50a0680 100644\n--- a/blacksheep/client/connection.py\n+++ b/blacksheep/client/connection.py\n@@ -62,7 +62,6 @@ DEFAULT_HTTP11_BUFFER_SIZE = 65535  # 64KB\n \n \n class HTTPConnection(ABC):\n-\n     @abstractmethod\n     async def send(self, request: Request) -> Response:\n         \"\"\"Send an HTTP request and return the response.\"\"\"\n@@ -86,7 +85,6 @@ class HTTPConnection(ABC):\n \n \n class HTTPResponseParserProtocol(Protocol):\n-\n     def __init__(self, connection) -> None: ...\n     def feed_data(self, data: bytes) -> None: ...\n     def get_status_code(self) -> int: ...\n@@ -95,7 +93,6 @@ class HTTPResponseParserProtocol(Protocol):\n \n @dataclass(slots=True)\n class StreamState:\n-\n     headers: list\n     content: \"IncomingContent | None\"\n     buffered_data: bytearray\n@@ -130,8 +127,7 @@ class IncomingContent(Content):\n         self._chunk.set()\n \n     def set_complete(self):\n-        \"\"\"\n-        Sets this incoming content as completed, waking up all requests to\n+        \"\"\"Sets this incoming content as completed, waking up all requests to\n         read() and stream().\n         \"\"\"\n         self._complete.set()\n@@ -168,24 +164,22 @@ class IncomingContent(Content):\n         return bytes(self._body)\n \n \n-class ConnectionException(Exception):\n+class ConnectionException(Exception):  # noqa: N818\n     pass\n \n \n class ConnectionClosedError(ConnectionException):\n-\n     def __init__(self, can_retry: bool):\n         super().__init__(\"The connection was closed by the remote server.\")\n         self.can_retry = can_retry\n \n \n class ConnectionLostError(ConnectionException):\n-\n     def __init__(self):\n         super().__init__(\"The connection with the remote server was lost.\")\n \n \n-class InvalidResponseFromServer(Exception):\n+class InvalidResponseFromServer(Exception):  # noqa: N818\n     def __init__(self, inner_exception, message=None):\n         super().__init__(\n             message or \"The remote endpoint returned an invalid HTTP response.\"\n@@ -193,15 +187,13 @@ class InvalidResponseFromServer(Exception):\n         self.inner_exception = inner_exception\n \n \n-class UpgradeResponse(Exception):\n-\n+class UpgradeResponse(Exception):  # noqa: N818\n     def __init__(self, response, transport):\n         self.response = response\n         self.transport = transport\n \n \n class HTTP2Connection(HTTPConnection):\n-\n     __slots__ = (\n         \"pool\",\n         \"host\",\n@@ -234,15 +226,16 @@ class HTTP2Connection(HTTPConnection):\n         ssl_context: ssl.SSLContext | None = None,\n         buffer_size: int = DEFAULT_HTTP2_BUFFER_SIZE,\n     ) -> None:\n-        \"\"\"\n-        Initialize HTTP/2 connection.\n+        \"\"\"Initialize HTTP/2 connection.\n \n         Args:\n+        ----\n             pool: The connection pool this connection belongs to\n             host: Server hostname\n             port: Server port\n             ssl_context: SSL context for the connection\n             buffer_size: Buffer size for reading data (default: 16KB)\n+\n         \"\"\"\n         self.pool = weakref.ref(pool)\n         self.host = host\n@@ -343,14 +336,16 @@ class HTTP2Connection(HTTPConnection):\n         return headers\n \n     async def send(self, request: Request) -> Response:\n-        \"\"\"\n-        Send an HTTP request over HTTP/2 and return the response.\n+        \"\"\"Send an HTTP request over HTTP/2 and return the response.\n \n         Args:\n+        ----\n             request: The BlackSheep Request object to send\n \n         Returns:\n+        -------\n             Response object\n+\n         \"\"\"\n         if not self._connected:\n             await self.connect()\n@@ -453,12 +448,13 @@ class HTTP2Connection(HTTPConnection):\n     async def _wait_for_100_continue_h2(\n         self, stream_id: int, timeout: float = 5.0\n     ) -> bool:\n-        \"\"\"\n-        Wait for 100 Continue response for HTTP/2.\n+        \"\"\"Wait for 100 Continue response for HTTP/2.\n \n-        Returns:\n+        Returns\n+        -------\n             True if should send body (got 100 or timeout)\n             False if got final response (don't send body)\n+\n         \"\"\"\n         stream = self.streams.get(stream_id)\n         if not stream:\n@@ -563,18 +559,20 @@ class HTTP2Connection(HTTPConnection):\n     async def _receive_response(\n         self, stream_id: int, timeout: float = 60.0\n     ) -> Response:\n-        \"\"\"\n-        Receive response for a specific stream with true streaming support.\n+        \"\"\"Receive response for a specific stream with true streaming support.\n \n         Returns the response as soon as headers are received. Body data\n         is streamed progressively via IncomingContent.\n \n         Args:\n+        ----\n             stream_id: Stream ID to receive response for\n             timeout: Timeout in seconds for headers\n \n         Returns:\n+        -------\n             BlackSheep Response object with streaming content\n+\n         \"\"\"\n         headers_event = self._headers_events[stream_id]\n \n@@ -735,7 +733,6 @@ class HTTP2Connection(HTTPConnection):\n \n \n class HTTP11Connection(HTTPConnection):\n-\n     __slots__ = (\n         \"pool\",\n         \"host\",\n@@ -763,15 +760,16 @@ class HTTP11Connection(HTTPConnection):\n         use_ssl: bool = True,\n         buffer_size: int = DEFAULT_HTTP11_BUFFER_SIZE,\n     ) -> None:\n-        \"\"\"\n-        Initialize HTTP/1.1 connection.\n+        \"\"\"Initialize HTTP/1.1 connection.\n \n         Args:\n+        ----\n             pool: The connection pool this connection belongs to\n             host: Server hostname\n             port: Server port\n             ssl_context: SSL context for the connection\n             use_ssl: Whether to use SSL/TLS\n+\n         \"\"\"\n         self.pool = weakref.ref(pool)\n         self.host = host\n@@ -846,10 +844,8 @@ class HTTP11Connection(HTTPConnection):\n             headers.insert(0, (b\"host\", request.url.host))\n \n         body: bytes | None = None\n-        use_chunked = False\n         if request.content:\n             if request.content.length < 0:\n-                use_chunked = True\n                 # Add transfer-encoding header if not present\n                 has_transfer_encoding = any(\n                     h[0].lower() == b\"transfer-encoding\" for h in headers\n@@ -886,14 +882,16 @@ class HTTP11Connection(HTTPConnection):\n         return h11_request, body\n \n     async def send(self, request: Request) -> Response:\n-        \"\"\"\n-        Send an HTTP request over HTTP/1.1 and return the response.\n+        \"\"\"Send an HTTP request over HTTP/1.1 and return the response.\n \n         Args:\n+        ----\n             request: The BlackSheep Request object to send\n \n         Returns:\n+        -------\n             Response object\n+\n         \"\"\"\n         if not self._connected:\n             await self.connect()\n@@ -954,12 +952,13 @@ class HTTP11Connection(HTTPConnection):\n             return await self._receive_response()\n \n     async def _wait_for_100_continue(self, timeout: float = 5.0) -> Response | None:\n-        \"\"\"\n-        Wait for 100 Continue response or a final response.\n+        \"\"\"Wait for 100 Continue response or a final response.\n \n-        Returns:\n+        Returns\n+        -------\n             None if 100 Continue received (proceed with body)\n             Response if got final response like 417 (don't send body)\n+\n         \"\"\"\n         try:\n             async with asyncio_timeout(timeout):\n@@ -1027,8 +1026,7 @@ class HTTP11Connection(HTTPConnection):\n             incoming_content.set_complete()\n \n     async def _receive_response(self, timeout: float = 60.0) -> Response:\n-        \"\"\"\n-        Receive and parse HTTP/1.1 response with true streaming support.\n+        \"\"\"Receive and parse HTTP/1.1 response with true streaming support.\n \n         Returns response immediately after headers are received.\n         Body data is streamed progressively via IncomingContent."
+  }
+}

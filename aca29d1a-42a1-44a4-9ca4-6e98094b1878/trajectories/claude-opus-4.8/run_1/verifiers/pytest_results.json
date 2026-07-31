@@ -1,0 +1,63 @@
+{
+  "solution": {
+    "passed": 2,
+    "failed": 1,
+    "errors": 0,
+    "skipped": 0,
+    "collected": 3,
+    "status": "OK",
+    "detail": "========================= 2 failed, 4 passed in 14.01s =========================",
+    "total": 3,
+    "pass_rate": 0.6666666666666666,
+    "log": ""
+  },
+  "anchors": {
+    "golden": {
+      "passed": 6,
+      "failed": 0,
+      "errors": 0,
+      "skipped": 0,
+      "collected": 6,
+      "status": "OK",
+      "detail": "============================== 6 passed in 48.14s ==============================",
+      "total": 6,
+      "pass_rate": 1.0,
+      "log": ""
+    },
+    "stub": {
+      "passed": 0,
+      "failed": 6,
+      "errors": 0,
+      "skipped": 0,
+      "collected": 6,
+      "status": "OK",
+      "detail": "============================== 6 failed in 7.59s ===============================",
+      "total": 6,
+      "pass_rate": 0.0,
+      "log": ""
+    }
+  },
+  "analysis": {
+    "n_total": 6,
+    "n_sound": 6,
+    "sound_subset": [
+      "test_epoch_reclamation_and_rcu_machinery_present",
+      "test_lib_has_no_remaining_stub_panics",
+      "test_serde_feature_roundtrip_tests_pass",
+      "test_serde_has_no_remaining_stub_panics",
+      "test_suite_compiles_and_produces_test_results",
+      "test_timing_feature_tests_pass"
+    ],
+    "wrong_oracle_dropped": [],
+    "non_discriminating_dropped": [],
+    "inconclusive_on_stub": [],
+    "solution_pass_on_sound": 0.6666666666666666,
+    "gap_vs_golden": 0.3333,
+    "golden_status": "OK",
+    "stub_status": "OK",
+    "solution_status": "OK",
+    "infra_failures": [],
+    "stub_import_broken": false,
+    "stub_note": ""
+  }
+}

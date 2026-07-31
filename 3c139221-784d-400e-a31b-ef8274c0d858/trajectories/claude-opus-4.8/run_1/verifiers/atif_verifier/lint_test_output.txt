@@ -1,0 +1,192 @@
+    Updating crates.io index
+     Locking 145 packages to latest compatible versions
+      Adding async-channel v1.9.0 (available: v2.5.0)
+      Adding async-global-executor v2.4.1 (available: v3.1.0)
+      Adding async-io v1.13.0 (available: v2.6.0)
+      Adding futures-lite v1.13.0 (available: v2.6.1)
+      Adding pretty_assertions v0.6.1 (available: v1.4.1)
+   Compiling parking v2.2.1
+   Compiling pin-project-lite v0.2.17
+   Compiling stable_deref_trait v1.2.1
+   Compiling cfg-if v1.0.4
+   Compiling futures-io v0.3.33
+   Compiling futures-core v0.3.33
+   Compiling litemap v0.8.2
+   Compiling writeable v0.6.3
+   Compiling utf8_iter v1.0.4
+   Compiling fastrand v2.5.0
+   Compiling crossbeam-utils v0.8.22
+   Compiling libc v0.2.188
+   Compiling serde_core v1.0.229
+   Compiling zerofrom v0.1.8
+   Compiling icu_normalizer_data v2.2.0
+   Compiling icu_properties_data v2.2.0
+   Compiling value-bag v1.13.1
+   Compiling percent-encoding v2.3.2
+   Compiling smallvec v1.15.2
+   Compiling bitflags v2.13.1
+   Compiling yoke v0.8.3
+   Compiling slab v0.4.12
+   Compiling memchr v2.8.3
+   Compiling event-listener v2.5.3
+   Compiling linux-raw-sys v0.12.1
+   Compiling zerocopy v0.8.55
+   Compiling futures-lite v2.6.1
+   Compiling async-task v4.7.1
+   Compiling atomic-waker v1.1.2
+   Compiling form_urlencoded v1.2.2
+   Compiling zerovec v0.11.6
+   Compiling zerotrie v0.2.4
+   Compiling log v0.4.33
+   Compiling piper v0.2.5
+   Compiling waker-fn v1.2.0
+   Compiling fastrand v1.9.0
+   Compiling itoa v1.0.18
+   Compiling thiserror v1.0.69
+   Compiling zmij v1.0.23
+   Compiling once_cell v1.21.4
+   Compiling concurrent-queue v2.5.0
+   Compiling linux-raw-sys v0.3.8
+   Compiling ryu v1.0.23
+   Compiling bitflags v1.3.2
+   Compiling futures-lite v1.13.0
+   Compiling anyhow v1.0.104
+   Compiling async-lock v2.8.0
+   Compiling base64 v0.13.1
+   Compiling event-listener v5.4.1
+   Compiling async-channel v1.9.0
+   Compiling infer v0.2.3
+   Compiling pin-project v1.1.13
+   Compiling httparse v1.10.1
+   Compiling kv-log-macro v1.0.7
+   Compiling event-listener-strategy v0.5.4
+   Compiling tinystr v0.8.3
+   Compiling potential_utf v0.1.5
+   Compiling async-lock v3.4.2
+   Compiling async-channel v2.5.0
+   Compiling difference v2.0.0
+   Compiling pin-utils v0.1.0
+   Compiling icu_collections v2.2.0
+   Compiling icu_locale_core v2.2.0
+   Compiling async-executor v1.14.0
+   Compiling ansi_term v0.11.0
+   Compiling blocking v1.6.2
+   Compiling pretty_assertions v0.6.1
+   Compiling async-dup v1.2.4
+   Compiling rustix v1.1.4
+   Compiling getrandom v0.1.16
+   Compiling io-lifetimes v1.0.11
+   Compiling socket2 v0.4.10
+   Compiling polling v2.8.0
+   Compiling rustix v0.37.28
+   Compiling rand_core v0.5.1
+   Compiling icu_provider v2.2.0
+   Compiling icu_normalizer v2.2.0
+   Compiling icu_properties v2.2.0
+   Compiling serde v1.0.229
+   Compiling serde_json v1.0.151
+   Compiling serde_urlencoded v0.7.1
+   Compiling serde_qs v0.8.5
+   Compiling async-io v1.13.0
+   Compiling idna_adapter v1.2.2
+   Compiling idna v1.1.0
+   Compiling url v2.5.8
+   Compiling ppv-lite86 v0.2.21
+   Compiling rand_chacha v0.2.2
+   Compiling rand v0.7.3
+   Compiling http-types v2.12.0
+   Compiling polling v3.11.0
+   Compiling async-io v2.6.0
+   Compiling async-global-executor v2.4.1
+   Compiling async-std v1.13.2
+   Compiling async-h1 v2.3.3 (/tmp/commit0-inplace-iv8ipfj5/tree)
+    Finished `test` profile [unoptimized + debuginfo] target(s) in 6.94s
+     Running unittests src/lib.rs (target/debug/deps/async_h1-c4aa0d56dd53ef25)
+
+running 19 tests
+test chunked::decoder::tests::test_chunked_big ... ok
+test chunked::decoder::tests::test_chunked_mdn ... ok
+test chunked::decoder::tests::test_chunked_wiki ... ok
+test chunked::decoder::tests::test_ff7 ... ok
+test chunked::encoder::test_bytes_to_read::simple_check_of_known_values ... ok
+test date::tests::size_of ... ok
+test date::tests::test2 ... ok
+test date::tests::test3 ... ok
+test date::tests::test_fmt ... ok
+test date::tests::test_rfc_example ... ok
+test server::decode::tests::url_for_anchor ... ok
+test server::decode::tests::url_for_conflicting_connect ... ok
+test server::decode::tests::url_for_connect ... ok
+test server::decode::tests::url_for_double_slash_path ... ok
+test server::decode::tests::url_for_host_plus_absolute_url ... ok
+test server::decode::tests::url_for_host_plus_path ... ok
+test server::decode::tests::url_for_malformed_resource_path ... ok
+test server::decode::tests::url_for_query ... ok
+test server::decode::tests::url_for_triple_slash_path ... ok
+
+test result: ok. 19 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running tests/accept.rs (target/debug/deps/accept-fc8eecfe3ff41dc7)
+
+running 7 tests
+test accept::basic ... ok
+test accept::keep_alive_long_chunked_unread_body ... ok
+test accept::keep_alive_long_fixed_length_unread_body ... ok
+test accept::keep_alive_short_chunked_unread_body ... ok
+test accept::keep_alive_short_fixed_length_unread_body ... ok
+test accept::request_close ... ok
+test accept::response_close ... ok
+
+test result: ok. 7 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running tests/client_decode.rs (target/debug/deps/client_decode-67c073c168df0371)
+
+running 4 tests
+test client_decode::connection_closure ... ok
+test client_decode::multiple_header_values_for_same_header_name ... ok
+test client_decode::response_newlines ... ok
+test client_decode::response_no_date ... ok
+
+test result: ok. 4 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running tests/client_encode.rs (target/debug/deps/client_encode-df074a7b93f4eff1)
+
+running 4 tests
+test client_encode::client_encode_chunked_body ... FAILED
+test client_encode::client_encode_request_add_date ... ok
+test client_encode::client_encode_request_with_connect ... FAILED
+test client_encode::client_encode_request_with_fragment ... ok
+
+failures:
+
+---- client_encode::client_encode_chunked_body stdout ----
+
+thread 'client_encode::client_encode_chunked_body' (11655) panicked at tests/client_encode.rs:91:9:
+assertion failed: `(left == right)`
+
+[1mDiff[0m [31m< left[0m / [32mright >[0m :
+[31m<[0m[31m"GET /path?query HTTP/1.1\r\nhost: example.com\r\ncontent-type: application/octet-stream\r\ntransfer-encoding: chunked\r\n\r\n[0m[31m"[0m
+[32m>[0m[32m"GET /path?query HTTP/1.1\r\nhost: example.com\r\ncontent-type: application/octet-stream\r\ntransfer-encoding: chunked\r\n\r\n[0m[1;48;5;22;32m5\r\nhello\r\n5\r\n worl\r\n1\r\nd\r\n0\r\n\r\n[0m[32m"[0m
+
+
+note: run with `RUST_BACKTRACE=1` environment variable to display a backtrace
+
+---- client_encode::client_encode_request_with_connect stdout ----
+
+thread 'client_encode::client_encode_request_with_connect' (11674) panicked at tests/client_encode.rs:91:9:
+assertion failed: `(left == right)`
+
+[1mDiff[0m [31m< left[0m / [32mright >[0m :
+[31m<[0m[31m"CONNECT example.com:443 HTTP/1.1\r\nhost: example.com\r\ncontent-length: 0\r\n[0m[31m\r\n[0m[31m"[0m
+[32m>[0m[32m"CONNECT example.com:443 HTTP/1.1\r\nhost: example.com\r\ncontent-length: 0\r\n[0m[1;48;5;22;32mproxy-connection: keep-alive[0m[32m\r\n[0m[1;48;5;22;32m\r\n[0m[32m"[0m
+
+
+
+
+failures:
+    client_encode::client_encode_chunked_body
+    client_encode::client_encode_request_with_connect
+
+test result: FAILED. 2 passed; 2 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+error: test failed, to rerun pass `--test client_encode`

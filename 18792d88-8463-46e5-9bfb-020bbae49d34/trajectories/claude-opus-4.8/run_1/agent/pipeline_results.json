@@ -1,0 +1,63 @@
+{
+  "pipeline": "typescript",
+  "model": "claude-opus-4.8",
+  "model_short": "claude-opus-4.8",
+  "model_name": "anthropic/claude-opus-4-8",
+  "branch": "aider-ts-claude-opus-4.8-dataset",
+  "backend": "local_inplace",
+  "repo_split": "graphql-jit",
+  "dataset": "dataset.json",
+  "dataset_short": "dataset",
+  "max_iteration": 1,
+  "cache_prompts": "true",
+  "start_time": "2026-07-21 21:12:00",
+  "sample_index": 1,
+  "num_samples": 1,
+  "stage1": {
+    "name": "Draft (no feedback)",
+    "elapsed_s": 901,
+    "eval_time_s": 14,
+    "cost_usd": 5.1397,
+    "cost_source": "output_json:15",
+    "returncode": 0,
+    "runtime": 0,
+    "num_passed": 0,
+    "num_tests": 396,
+    "pass_rate": 0,
+    "eval_status": "COMPILE_FAILED"
+  },
+  "warnings_by_type": {},
+  "warning_scan_stats": {
+    "files_scanned": 91,
+    "bytes_scanned": 4912811
+  },
+  "stage2": {
+    "name": "Lint refine",
+    "elapsed_s": 451,
+    "eval_time_s": 14,
+    "cost_usd_incremental": 0.921,
+    "cost_usd_cumulative": 6.0607,
+    "cost_source": "output_json:15",
+    "returncode": 0,
+    "runtime": 0,
+    "num_passed": 0,
+    "num_tests": 396,
+    "pass_rate": 0,
+    "eval_status": "COMPILE_FAILED"
+  },
+  "stage3": {
+    "name": "Test refine",
+    "elapsed_s": 1307,
+    "eval_time_s": 4,
+    "cost_usd_incremental": 10.9438,
+    "cost_usd_cumulative": 17.0045,
+    "cost_source": "output_json:19",
+    "returncode": 0,
+    "runtime": 0.938,
+    "num_passed": 389,
+    "num_tests": 396,
+    "pass_rate": 0.982323,
+    "eval_status": "OK"
+  },
+  "end_time": "2026-07-21 21:56:52"
+}

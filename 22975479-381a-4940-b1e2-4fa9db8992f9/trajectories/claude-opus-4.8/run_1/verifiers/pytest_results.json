@@ -1,0 +1,64 @@
+{
+  "solution": {
+    "passed": 7,
+    "failed": 0,
+    "errors": 0,
+    "skipped": 0,
+    "collected": 7,
+    "status": "OK",
+    "detail": "============================== 7 passed in 0.01s ===============================",
+    "total": 7,
+    "pass_rate": 1.0,
+    "log": ""
+  },
+  "anchors": {
+    "golden": {
+      "passed": 7,
+      "failed": 0,
+      "errors": 0,
+      "skipped": 0,
+      "collected": 7,
+      "status": "OK",
+      "detail": "============================== 7 passed in 0.01s ===============================",
+      "total": 7,
+      "pass_rate": 1.0,
+      "log": ""
+    },
+    "stub": {
+      "passed": 0,
+      "failed": 7,
+      "errors": 0,
+      "skipped": 0,
+      "collected": 7,
+      "status": "OK",
+      "detail": "============================== 7 failed in 0.03s ===============================",
+      "total": 7,
+      "pass_rate": 0.0,
+      "log": ""
+    }
+  },
+  "analysis": {
+    "n_total": 7,
+    "n_sound": 7,
+    "sound_subset": [
+      "test_eval_strips_trailing_none",
+      "test_main_dispatches_multiple_runnables",
+      "test_message_size_clamping_present",
+      "test_no_remaining_stub_in_dummy",
+      "test_no_remaining_stub_in_main",
+      "test_send_recv_use_exact_read_semantics",
+      "test_send_uses_big_endian_two_byte_size"
+    ],
+    "wrong_oracle_dropped": [],
+    "non_discriminating_dropped": [],
+    "inconclusive_on_stub": [],
+    "solution_pass_on_sound": 1.0,
+    "gap_vs_golden": 0.0,
+    "golden_status": "OK",
+    "stub_status": "OK",
+    "solution_status": "OK",
+    "infra_failures": [],
+    "stub_import_broken": false,
+    "stub_note": ""
+  }
+}

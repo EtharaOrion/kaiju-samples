@@ -1,0 +1,46 @@
+{
+  "instance_id": "commit-0/datasketch",
+  "id": "e696e87f-dfe5-45b2-94e1-9caafb259ab0",
+  "repo": "Zahgon/datasketch",
+  "base_commit": "b97eb128d016f10e3164857a16179f51720b2308",
+  "reference_commit": "3da96a591c954952c9dd367567db720cfdc151e0",
+  "setup": {
+    "install": "pip install -e \".[test]\"",
+    "packages": "",
+    "pip_packages": [
+      "cassandra-driver>=3.20",
+      "coverage",
+      "mock>=2.0.0",
+      "mockredispy",
+      "nose>=1.3.7",
+      "nose-exclude>=0.5.0",
+      "numpy>=1.11",
+      "pygments>=2.20.0",
+      "pymongo>=3.9.0",
+      "pytest",
+      "pytest-asyncio",
+      "pytest-cov",
+      "pytest-json-report",
+      "pytest-rerunfailures",
+      "redis>=2.10.0",
+      "scipy>=1.0.0",
+      "motor"
+    ],
+    "pre_install": [
+      "apt-get install -y gfortran libopenblas-dev"
+    ],
+    "python": "3.9",
+    "specification": "",
+    "version_source": "pyproject.toml[project.requires-python]",
+    "version_conflicts": [],
+    "system_deps_hint": []
+  },
+  "test": {
+    "test_cmd": "pytest",
+    "test_dir": "test"
+  },
+  "src_dir": "datasketch",
+  "base_compiles": null,
+  "language": "python",
+  "ecr_image_uri": "426628337772.dkr.ecr.ap-south-1.amazonaws.com/kaiju_q2:python_ekzhu_datasketch"
+}

@@ -1,0 +1,62 @@
+{
+  "solution": {
+    "passed": 0,
+    "failed": 0,
+    "errors": 0,
+    "skipped": 0,
+    "collected": 0,
+    "status": "NO_TESTS",
+    "detail": "========================= 1 failed, 4 passed in 9.79s ==========================",
+    "total": 0,
+    "pass_rate": null,
+    "log": ""
+  },
+  "anchors": {
+    "golden": {
+      "passed": 5,
+      "failed": 0,
+      "errors": 0,
+      "skipped": 0,
+      "collected": 5,
+      "status": "OK",
+      "detail": "============================== 5 passed in 14.13s ==============================",
+      "total": 5,
+      "pass_rate": 1.0,
+      "log": ""
+    },
+    "stub": {
+      "passed": 0,
+      "failed": 5,
+      "errors": 0,
+      "skipped": 0,
+      "collected": 5,
+      "status": "OK",
+      "detail": "============================== 5 failed in 9.69s ===============================",
+      "total": 5,
+      "pass_rate": 0.0,
+      "log": ""
+    }
+  },
+  "analysis": {
+    "n_total": 5,
+    "n_sound": 5,
+    "sound_subset": [
+      "test_atomic_uses_raw_box_conversion",
+      "test_crate_builds_under_strict_lints",
+      "test_extra_contract_probe_passes",
+      "test_full_behavioral_test_suite_passes",
+      "test_no_remaining_stub_bodies"
+    ],
+    "wrong_oracle_dropped": [],
+    "non_discriminating_dropped": [],
+    "inconclusive_on_stub": [],
+    "solution_pass_on_sound": 0.8,
+    "gap_vs_golden": 0.2,
+    "golden_status": "OK",
+    "stub_status": "OK",
+    "solution_status": "NO_TESTS",
+    "infra_failures": [],
+    "stub_import_broken": false,
+    "stub_note": ""
+  }
+}

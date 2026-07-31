@@ -1,0 +1,6 @@
+{
+  "repo": "Zahgon/riker",
+  "base_commit": "20fa4d22f50fa5463701413b941416ef81c92628",
+  "reference_commit": "ccd4e5f76f12e5d409c6dcf7e03401391e06b550",
+  "docker_image": "426628337772.dkr.ecr.ap-south-1.amazonaws.com/kaiju_q2:rust_riker_rs_riker"
+}

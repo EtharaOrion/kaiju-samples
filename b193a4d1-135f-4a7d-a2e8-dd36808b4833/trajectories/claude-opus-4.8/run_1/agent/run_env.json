@@ -1,0 +1,6 @@
+{
+  "repo": "zahgon/little-raft",
+  "base_commit": "6e9ecf33d67fd608927146eec062ce72dd374ac5",
+  "reference_commit": "15371d5a3a0ce19572d5a5a647a936eb190cac06",
+  "docker_image": "426628337772.dkr.ecr.ap-south-1.amazonaws.com/kaiju_q2:rust_andreev_io_little_raft"
+}

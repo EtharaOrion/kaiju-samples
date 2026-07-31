@@ -1,0 +1,313 @@
+{
+  "model": "openai/gpt-5.5-2026-04-23",
+  "ok": true,
+  "verdicts": [
+    {
+      "criterion_id": "bb.reasoning_faithfulness",
+      "passed": false,
+      "evidence": "Final diff only shows changes to dce.go, while the trajectory claims edits across many modules such as \u201cmodule hash \u2026 edit: The file hash.go has been edited\u201d and \u201cmodule uuid \u2026 edit: The file uuid.go has been edited.\u201d",
+      "justification": "The stated reasoning and claimed edits are not consistent with the actual cumulative diff shown."
+    },
+    {
+      "criterion_id": "bb.stage_legitimacy",
+      "passed": false,
+      "evidence": "Repeated test-refine entries show \u201creasoning: Reading file: dce.go\u201d for unrelated tests such as TestJSON, TestNullUUIDScan, TestVersion7, and others, with repeated feedback \u201c12 passed, 1 failed\u201d and no corresponding responsive edits.",
+      "justification": "The refinement stages appear non-responsive to test feedback and do not demonstrate real iterative correction."
+    },
+    {
+      "criterion_id": "ts.dce-bigendian",
+      "passed": true,
+      "evidence": "NewDCESecurity: \u201cuuid[9] = byte(domain)\u201d and \u201cbinary.BigEndian.PutUint32(uuid[0:], id)\u201d; Domain: \u201creturn Domain(uuid[9])\u201d; ID: \u201creturn binary.BigEndian.Uint32(uuid[0:4])\u201d.",
+      "justification": "The DCE implementation stores and decodes the domain and ID at the required offsets using big-endian byte order."
+    },
+    {
+      "criterion_id": "ts.unmarshal-binary-length",
+      "passed": true,
+      "evidence": "func (uuid *UUID) UnmarshalBinary(data []byte) error { if len(data) != 16 { return fmt.Errorf(\"invalid UUID (got %d bytes)\", len(data)) } copy(uuid[:], data) return nil }",
+      "justification": "Binary unmarshaling explicitly rejects any length other than exactly 16 bytes before copying."
+    },
+    {
+      "criterion_id": "ts.hash-derives-from-input",
+      "passed": true,
+      "evidence": "NewHash: \u201ch.Reset()\u201d, \u201ch.Write(space[:])\u201d, \u201ch.Write(data)\u201d, \u201cs := h.Sum(nil)\u201d, \u201ccopy(uuid[:], s)\u201d, \u201cuuid[6] = \u2026 version\u201d, and \u201cuuid[8] = \u2026 | 0x80\u201d.",
+      "justification": "Hash UUID generation is derived from the namespace and data through the provided hash and sets the required version and variant bits."
+    }
+  ],
+  "anchors": {
+    "golden": {
+      "model": "openai/gpt-5.5-2026-04-23",
+      "reasoning_effort": "high",
+      "ok": true,
+      "raw_verdicts": 18,
+      "response_chars": 6229,
+      "thinking": "",
+      "raw_response": "[\n  {\n    \"criterion_id\": \"bb.intent_fidelity\",\n    \"verdict\": \"fail\",\n    \"evidence\": \"# ===== json_test.go ===== ... # ===== null_test.go =====\",\n    \"justification\": \"The trajectory includes test files as part of the solution and omits substantial implementation files, so there is insufficient evidence of a genuine full-package implementation rather than test-oriented changes.\"\n  },\n  {\n    \"criterion_id\": \"bb.oracle_strength\",\n    \"verdict\": \"fail\",\n    \"evidence\": \"The following is the solution's implementation code ... # ===== json_test.go ===== ... # ===== null_test.go =====\",\n    \"justification\": \"Because the provided trajectory includes tests and lacks many core implementation files, it is not possible to verify correctness beyond the frozen test oracle.\"\n  },\n  {\n    \"criterion_id\": \"ts.version-variant-bits\",\n    \"verdict\": \"fail\",\n    \"evidence\": \"uuid[6] = (uuid[6] & 0x0f) | 0x20 // Version 2 ... uuid[8] = (uuid[8] & 0x3f) | 0x80\",\n    \"justification\": \"Although DCE and hash paths shown set bits correctly, the version-based generators for V1/V4/V6/V7 are not provided, so the criterion is not fully evidenced.\"\n  },\n  {\n    \"criterion_id\": \"ts.dce-bigendian\",\n    \"verdict\": \"pass\",\n    \"evidence\": \"binary.BigEndian.PutUint32(uuid[0:], id) ... uuid[9] = byte(domain) ... return Domain(uuid[9]) ... return binary.BigEndian.Uint32(uuid[0:4])\",\n    \"justification\": \"DCE writes the ID big-endian to bytes 0-3, stores the domain in byte 9, and decodes from those same offsets.\"\n  },\n  {\n    \"criterion_id\": \"ts.v7-bigendian-timestamp\",\n    \"verdict\": \"fail\",\n    \"evidence\": \"No version7.go implementation is included in the trajectory.\",\n    \"justification\": \"There is no evidence that V7 UUIDs encode the Unix millisecond timestamp big-endian with correct version and variant bits.\"\n  },\n  {\n    \"criterion_id\": \"ts.v7-monotonic\",\n    \"verdict\": \"fail\",\n    \"evidence\": \"No version7.go implementation is included in the trajectory.\",\n    \"justification\": \"There is no evidence of a V7 monotonic sequence or last-timestamp mechanism.\"\n  },\n  {\n    \"criterion_id\": \"ts.unmarshal-binary-length\",\n    \"verdict\": \"pass\",\n    \"evidence\": \"func (uuid *UUID) UnmarshalBinary(data []byte) error {\\n\\tif len(data) != 16 {\\n\\t\\treturn fmt.Errorf(\\\"invalid UUID (got %d bytes)\\\", len(data))\\n\\t}\\n\\tcopy(uuid[:], data)\",\n    \"justification\": \"UUID binary unmarshaling explicitly rejects non-16-byte inputs before copying.\"\n  },\n  {\n    \"criterion_id\": \"ts.parse-errors-propagate\",\n    \"verdict\": \"fail\",\n    \"evidence\": \"func (uuid *UUID) UnmarshalText(data []byte) error { id, err := ParseBytes(data); if err != nil { return err } ... }\",\n    \"justification\": \"Text unmarshaling propagates parse errors, but the SQL Scan implementation for UUID is not provided, so the full criterion is not evidenced.\"\n  },\n  {\n    \"criterion_id\": \"ts.null-null-semantics\",\n    \"verdict\": \"fail\",\n    \"evidence\": \"func (nu *NullUUID) UnmarshalBinary(data []byte) error {\\n\\tif len(data) != 16 {\\n\\t\\treturn fmt.Errorf(\\\"invalid UUID (got %d bytes)\\\", len(data))\\n\\t}\\n... func (nu *NullUUID) UnmarshalText(data []byte) error {\\n\\tid, err := ParseBytes(data)\",\n    \"justification\": \"NullUUID does not accept empty/nil binary as null and does not treat literal text \\\"null\\\" as a successful invalid/null value.\"\n  },\n  {\n    \"criterion_id\": \"ts.concurrency-guards\",\n    \"verdict\": \"fail\",\n    \"evidence\": \"var (\\n\\tnodeMu sync.Mutex\\n... )\",\n    \"justification\": \"Node state is guarded, but time and clock-sequence implementations are absent, so race-free shared global handling is not established.\"\n  },\n  {\n    \"criterion_id\": \"ts.setrand-nil-restore\",\n    \"verdict\": \"fail\",\n    \"evidence\": \"No SetRand implementation is included in the trajectory.\",\n    \"justification\": \"There is no evidence that SetRand(nil) restores crypto/rand.\"\n  },\n  {\n    \"criterion_id\": \"ts.new-vs-newrandom\",\n    \"verdict\": \"fail\",\n    \"evidence\": \"No New or NewRandom implementation is included in the trajectory.\",\n    \"justification\": \"There is no evidence that New panics on random-source failure while NewRandom returns an error.\"\n  },\n  {\n    \"criterion_id\": \"ts.fuzz-safety\",\n    \"verdict\": \"fail\",\n    \"evidence\": \"No Parse, ParseBytes, or FromBytes implementation is included in the trajectory.\",\n    \"justification\": \"Without the parsing implementations, there is no evidence of length guards preventing panics on arbitrary fuzz input.\"\n  },\n  {\n    \"criterion_id\": \"ts.node-fallback\",\n    \"verdict\": \"fail\",\n    \"evidence\": \"if name == \\\"\\\" {\\n\\t\\tifname = \\\"random\\\"\\n\\t\\trandomBits(nodeID[:])\\n\\t\\treturn true\\n\\t}\",\n    \"justification\": \"The fallback generates random bytes but does not ensure a non-zero or multicast-flagged valid node ID.\"\n  },\n  {\n    \"criterion_id\": \"ts.hash-derives-from-input\",\n    \"verdict\": \"pass\",\n    \"evidence\": \"h.Reset()\\n\\th.Write(space[:])\\n\\th.Write(data)\\n\\ts := h.Sum(nil)\\n\\tvar uuid UUID\\n\\tcopy(uuid[:], s)\\n\\tuuid[6] = (uuid[6] & 0x0f) | uint8((version&0xf)<<4)\\n\\tuuid[8] = (uuid[8] & 0x3f) | 0x80\",\n    \"justification\": \"Hash UUIDs are computed from the namespace and data using the supplied hash, then version and variant bits are set correctly.\"\n  },\n  {\n    \"criterion_id\": \"ts.rand-pool-valid\",\n    \"verdict\": \"fail\",\n    \"evidence\": \"No rand-pool implementation is included in the trajectory.\",\n    \"justification\": \"There is no evidence of an internal random pool or safe enable/disable behavior.\"\n  },\n  {\n    \"criterion_id\": \"ts.build-tags-split\",\n    \"verdict\": \"pass\",\n    \"evidence\": \"# ===== node_js.go =====\\n// +build js\\n... func getHardwareInterface(name string) (string, []byte) { return \\\"\\\", nil }\\n\\n# ===== node_net.go =====\\n// +build !js\\n... func getHardwareInterface(name string) (string, []byte)\",\n    \"justification\": \"The JS and non-JS node implementations are mutually exclusive and provide matching getHardwareInterface signatures.\"\n  },\n  {\n    \"criterion_id\": \"ts.genuine-computation\",\n    \"verdict\": \"fail\",\n    \"evidence\": \"# ===== json_test.go ===== ... # ===== null_test.go =====\",\n    \"justification\": \"The trajectory includes test files and lacks many required implementation files, so genuine computation across the whole package cannot be verified.\"\n  }\n]",
+      "verdicts": [
+        {
+          "criterion_id": "bb.intent_fidelity",
+          "passed": false,
+          "evidence": "# ===== json_test.go ===== ... # ===== null_test.go =====",
+          "justification": "The trajectory includes test files as part of the solution and omits substantial implementation files, so there is insufficient evidence of a genuine full-package implementation rather than test-oriented changes."
+        },
+        {
+          "criterion_id": "bb.oracle_strength",
+          "passed": false,
+          "evidence": "The following is the solution's implementation code ... # ===== json_test.go ===== ... # ===== null_test.go =====",
+          "justification": "Because the provided trajectory includes tests and lacks many core implementation files, it is not possible to verify correctness beyond the frozen test oracle."
+        },
+        {
+          "criterion_id": "ts.version-variant-bits",
+          "passed": false,
+          "evidence": "uuid[6] = (uuid[6] & 0x0f) | 0x20 // Version 2 ... uuid[8] = (uuid[8] & 0x3f) | 0x80",
+          "justification": "Although DCE and hash paths shown set bits correctly, the version-based generators for V1/V4/V6/V7 are not provided, so the criterion is not fully evidenced."
+        },
+        {
+          "criterion_id": "ts.dce-bigendian",
+          "passed": true,
+          "evidence": "binary.BigEndian.PutUint32(uuid[0:], id) ... uuid[9] = byte(domain) ... return Domain(uuid[9]) ... return binary.BigEndian.Uint32(uuid[0:4])",
+          "justification": "DCE writes the ID big-endian to bytes 0-3, stores the domain in byte 9, and decodes from those same offsets."
+        },
+        {
+          "criterion_id": "ts.v7-bigendian-timestamp",
+          "passed": false,
+          "evidence": "No version7.go implementation is included in the trajectory.",
+          "justification": "There is no evidence that V7 UUIDs encode the Unix millisecond timestamp big-endian with correct version and variant bits."
+        },
+        {
+          "criterion_id": "ts.v7-monotonic",
+          "passed": false,
+          "evidence": "No version7.go implementation is included in the trajectory.",
+          "justification": "There is no evidence of a V7 monotonic sequence or last-timestamp mechanism."
+        },
+        {
+          "criterion_id": "ts.unmarshal-binary-length",
+          "passed": true,
+          "evidence": "func (uuid *UUID) UnmarshalBinary(data []byte) error {\n\tif len(data) != 16 {\n\t\treturn fmt.Errorf(\"invalid UUID (got %d bytes)\", len(data))\n\t}\n\tcopy(uuid[:], data)",
+          "justification": "UUID binary unmarshaling explicitly rejects non-16-byte inputs before copying."
+        },
+        {
+          "criterion_id": "ts.parse-errors-propagate",
+          "passed": false,
+          "evidence": "func (uuid *UUID) UnmarshalText(data []byte) error { id, err := ParseBytes(data); if err != nil { return err } ... }",
+          "justification": "Text unmarshaling propagates parse errors, but the SQL Scan implementation for UUID is not provided, so the full criterion is not evidenced."
+        },
+        {
+          "criterion_id": "ts.null-null-semantics",
+          "passed": false,
+          "evidence": "func (nu *NullUUID) UnmarshalBinary(data []byte) error {\n\tif len(data) != 16 {\n\t\treturn fmt.Errorf(\"invalid UUID (got %d bytes)\", len(data))\n\t}\n... func (nu *NullUUID) UnmarshalText(data []byte) error {\n\tid, err := ParseBytes(data)",
+          "justification": "NullUUID does not accept empty/nil binary as null and does not treat literal text \"null\" as a successful invalid/null value."
+        },
+        {
+          "criterion_id": "ts.concurrency-guards",
+          "passed": false,
+          "evidence": "var (\n\tnodeMu sync.Mutex\n... )",
+          "justification": "Node state is guarded, but time and clock-sequence implementations are absent, so race-free shared global handling is not established."
+        },
+        {
+          "criterion_id": "ts.setrand-nil-restore",
+          "passed": false,
+          "evidence": "No SetRand implementation is included in the trajectory.",
+          "justification": "There is no evidence that SetRand(nil) restores crypto/rand."
+        },
+        {
+          "criterion_id": "ts.new-vs-newrandom",
+          "passed": false,
+          "evidence": "No New or NewRandom implementation is included in the trajectory.",
+          "justification": "There is no evidence that New panics on random-source failure while NewRandom returns an error."
+        },
+        {
+          "criterion_id": "ts.fuzz-safety",
+          "passed": false,
+          "evidence": "No Parse, ParseBytes, or FromBytes implementation is included in the trajectory.",
+          "justification": "Without the parsing implementations, there is no evidence of length guards preventing panics on arbitrary fuzz input."
+        },
+        {
+          "criterion_id": "ts.node-fallback",
+          "passed": false,
+          "evidence": "if name == \"\" {\n\t\tifname = \"random\"\n\t\trandomBits(nodeID[:])\n\t\treturn true\n\t}",
+          "justification": "The fallback generates random bytes but does not ensure a non-zero or multicast-flagged valid node ID."
+        },
+        {
+          "criterion_id": "ts.hash-derives-from-input",
+          "passed": true,
+          "evidence": "h.Reset()\n\th.Write(space[:])\n\th.Write(data)\n\ts := h.Sum(nil)\n\tvar uuid UUID\n\tcopy(uuid[:], s)\n\tuuid[6] = (uuid[6] & 0x0f) | uint8((version&0xf)<<4)\n\tuuid[8] = (uuid[8] & 0x3f) | 0x80",
+          "justification": "Hash UUIDs are computed from the namespace and data using the supplied hash, then version and variant bits are set correctly."
+        },
+        {
+          "criterion_id": "ts.rand-pool-valid",
+          "passed": false,
+          "evidence": "No rand-pool implementation is included in the trajectory.",
+          "justification": "There is no evidence of an internal random pool or safe enable/disable behavior."
+        },
+        {
+          "criterion_id": "ts.build-tags-split",
+          "passed": true,
+          "evidence": "# ===== node_js.go =====\n// +build js\n... func getHardwareInterface(name string) (string, []byte) { return \"\", nil }\n\n# ===== node_net.go =====\n// +build !js\n... func getHardwareInterface(name string) (string, []byte)",
+          "justification": "The JS and non-JS node implementations are mutually exclusive and provide matching getHardwareInterface signatures."
+        },
+        {
+          "criterion_id": "ts.genuine-computation",
+          "passed": false,
+          "evidence": "# ===== json_test.go ===== ... # ===== null_test.go =====",
+          "justification": "The trajectory includes test files and lacks many required implementation files, so genuine computation across the whole package cannot be verified."
+        }
+      ]
+    },
+    "stub": {
+      "model": "openai/gpt-5.5-2026-04-23",
+      "reasoning_effort": "high",
+      "ok": true,
+      "raw_verdicts": 18,
+      "response_chars": 6115,
+      "thinking": "",
+      "raw_response": "[\n  {\n    \"criterion_id\": \"bb.intent_fidelity\",\n    \"verdict\": \"fail\",\n    \"evidence\": \"func NewDCESecurity(domain Domain, id uint32) (UUID, error) {\\n\\t_ = \\\"STUB: not implemented\\\"\\n\\treturn *new(UUID), nil\\n}\",\n    \"justification\": \"The trajectory leaves exported functionality as stubs returning zero values rather than implementing the UUID library behavior.\"\n  },\n  {\n    \"criterion_id\": \"bb.oracle_strength\",\n    \"verdict\": \"fail\",\n    \"evidence\": \"func NewHash(h hash.Hash, space UUID, data []byte, version int) UUID {\\n\\t_ = \\\"STUB: not implemented\\\"\\n\\treturn *new(UUID)\\n}\",\n    \"justification\": \"The solution is not a general implementation beyond tests because core functionality is unimplemented.\"\n  },\n  {\n    \"criterion_id\": \"ts.version-variant-bits\",\n    \"verdict\": \"fail\",\n    \"evidence\": \"func NewMD5(space UUID, data []byte) UUID { _ = \\\"STUB: not implemented\\\"; return *new(UUID) }\",\n    \"justification\": \"There is no evidence that any generator sets version or RFC variant bits correctly.\"\n  },\n  {\n    \"criterion_id\": \"ts.dce-bigendian\",\n    \"verdict\": \"fail\",\n    \"evidence\": \"func (uuid UUID) ID() uint32 { _ = \\\"STUB: not implemented\\\"; return 0 }\",\n    \"justification\": \"DCE UUID creation and decoding are stubbed and do not write or read big-endian IDs or domain bytes.\"\n  },\n  {\n    \"criterion_id\": \"ts.v7-bigendian-timestamp\",\n    \"verdict\": \"fail\",\n    \"evidence\": \"No version7.go implementation is shown, while many provided functions still contain `_ = \\\"STUB: not implemented\\\"`.\",\n    \"justification\": \"There is insufficient evidence of any V7 implementation placing a big-endian millisecond timestamp.\"\n  },\n  {\n    \"criterion_id\": \"ts.v7-monotonic\",\n    \"verdict\": \"fail\",\n    \"evidence\": \"No version7.go implementation is shown, while many provided functions still contain `_ = \\\"STUB: not implemented\\\"`.\",\n    \"justification\": \"There is no evidence of a V7 last-timestamp or sequence mechanism for monotonicity.\"\n  },\n  {\n    \"criterion_id\": \"ts.unmarshal-binary-length\",\n    \"verdict\": \"fail\",\n    \"evidence\": \"func (uuid *UUID) UnmarshalBinary(data []byte) error { _ = \\\"STUB: not implemented\\\"; return nil }\",\n    \"justification\": \"Binary unmarshaling accepts all inputs by returning nil and performs no exact-length validation.\"\n  },\n  {\n    \"criterion_id\": \"ts.parse-errors-propagate\",\n    \"verdict\": \"fail\",\n    \"evidence\": \"func (uuid *UUID) UnmarshalText(data []byte) error { _ = \\\"STUB: not implemented\\\"; return nil }\\n\\nfunc (uuid *UUID) Scan(src interface{}) error { _ = \\\"STUB: not implemented\\\"; return nil }\",\n    \"justification\": \"Text unmarshaling and SQL scanning return nil unconditionally, so malformed parse errors are swallowed.\"\n  },\n  {\n    \"criterion_id\": \"ts.null-null-semantics\",\n    \"verdict\": \"fail\",\n    \"evidence\": \"func (nu NullUUID) MarshalJSON() ([]byte, error) { _ = \\\"STUB: not implemented\\\"; return nil, nil }\\n\\nfunc (nu *NullUUID) UnmarshalJSON(data []byte) error { _ = \\\"STUB: not implemented\\\"; return nil }\",\n    \"justification\": \"NullUUID serialization and unmarshaling are stubbed and do not implement required null semantics.\"\n  },\n  {\n    \"criterion_id\": \"ts.concurrency-guards\",\n    \"verdict\": \"fail\",\n    \"evidence\": \"var (\\n\\tnodeMu sync.Mutex\\n\\tifname string\\n\\tnodeID [6]byte\\n\\tzeroID [6]byte\\n)\\n\\nfunc NodeInterface() string { _ = \\\"STUB: not implemented\\\"; return \\\"\\\" }\",\n    \"justification\": \"Although a mutex is declared, shared node/time/clock behavior is unimplemented and not demonstrably race-free.\"\n  },\n  {\n    \"criterion_id\": \"ts.setrand-nil-restore\",\n    \"verdict\": \"fail\",\n    \"evidence\": \"No SetRand implementation is shown, while core files remain stubbed.\",\n    \"justification\": \"There is insufficient evidence that SetRand(nil) restores crypto/rand.\"\n  },\n  {\n    \"criterion_id\": \"ts.new-vs-newrandom\",\n    \"verdict\": \"fail\",\n    \"evidence\": \"No New or NewRandom implementation is shown, while core files remain stubbed.\",\n    \"justification\": \"There is no evidence that New panics on randomness failure while NewRandom returns an error.\"\n  },\n  {\n    \"criterion_id\": \"ts.fuzz-safety\",\n    \"verdict\": \"fail\",\n    \"evidence\": \"No Parse, ParseBytes, or FromBytes implementation is shown.\",\n    \"justification\": \"There is insufficient evidence that parsing guards lengths and avoids panics on arbitrary input.\"\n  },\n  {\n    \"criterion_id\": \"ts.node-fallback\",\n    \"verdict\": \"fail\",\n    \"evidence\": \"func NodeID() []byte { _ = \\\"STUB: not implemented\\\"; return nil }\\n\\nfunc getHardwareInterface(name string) (string, []byte) { _ = \\\"STUB: not implemented\\\"; return \\\"\\\", nil }\",\n    \"justification\": \"Node identity and hardware/random fallback are stubbed and return nil or empty values.\"\n  },\n  {\n    \"criterion_id\": \"ts.hash-derives-from-input\",\n    \"verdict\": \"fail\",\n    \"evidence\": \"func NewHash(h hash.Hash, space UUID, data []byte, version int) UUID {\\n\\t_ = \\\"STUB: not implemented\\\"\\n\\treturn *new(UUID)\\n}\",\n    \"justification\": \"Hash UUID generation ignores the hash, namespace, data, and version and returns a zero UUID.\"\n  },\n  {\n    \"criterion_id\": \"ts.rand-pool-valid\",\n    \"verdict\": \"fail\",\n    \"evidence\": \"No rand-pool implementation is shown, while random UUID functions are absent from the provided implementation.\",\n    \"justification\": \"There is no evidence of a safe reversible random byte pool producing valid V4 UUIDs.\"\n  },\n  {\n    \"criterion_id\": \"ts.build-tags-split\",\n    \"verdict\": \"pass\",\n    \"evidence\": \"//go:build js\\n// +build js\\n...\\nfunc getHardwareInterface(name string) (string, []byte)\\n\\n//go:build !js\\n// +build !js\\n...\\nfunc getHardwareInterface(name string) (string, []byte)\",\n    \"justification\": \"The js and non-js node files have mutually exclusive build constraints and provide matching getHardwareInterface signatures.\"\n  },\n  {\n    \"criterion_id\": \"ts.genuine-computation\",\n    \"verdict\": \"fail\",\n    \"evidence\": \"func (uuid UUID) MarshalText() ([]byte, error) { _ = \\\"STUB: not implemented\\\"; return nil, nil }\",\n    \"justification\": \"Stub markers remain and exported methods return canned nil or zero values rather than computing from inputs.\"\n  }\n]",
+      "verdicts": [
+        {
+          "criterion_id": "bb.intent_fidelity",
+          "passed": false,
+          "evidence": "func NewDCESecurity(domain Domain, id uint32) (UUID, error) {\n\t_ = \"STUB: not implemented\"\n\treturn *new(UUID), nil\n}",
+          "justification": "The trajectory leaves exported functionality as stubs returning zero values rather than implementing the UUID library behavior."
+        },
+        {
+          "criterion_id": "bb.oracle_strength",
+          "passed": false,
+          "evidence": "func NewHash(h hash.Hash, space UUID, data []byte, version int) UUID {\n\t_ = \"STUB: not implemented\"\n\treturn *new(UUID)\n}",
+          "justification": "The solution is not a general implementation beyond tests because core functionality is unimplemented."
+        },
+        {
+          "criterion_id": "ts.version-variant-bits",
+          "passed": false,
+          "evidence": "func NewMD5(space UUID, data []byte) UUID { _ = \"STUB: not implemented\"; return *new(UUID) }",
+          "justification": "There is no evidence that any generator sets version or RFC variant bits correctly."
+        },
+        {
+          "criterion_id": "ts.dce-bigendian",
+          "passed": false,
+          "evidence": "func (uuid UUID) ID() uint32 { _ = \"STUB: not implemented\"; return 0 }",
+          "justification": "DCE UUID creation and decoding are stubbed and do not write or read big-endian IDs or domain bytes."
+        },
+        {
+          "criterion_id": "ts.v7-bigendian-timestamp",
+          "passed": false,
+          "evidence": "No version7.go implementation is shown, while many provided functions still contain `_ = \"STUB: not implemented\"`.",
+          "justification": "There is insufficient evidence of any V7 implementation placing a big-endian millisecond timestamp."
+        },
+        {
+          "criterion_id": "ts.v7-monotonic",
+          "passed": false,
+          "evidence": "No version7.go implementation is shown, while many provided functions still contain `_ = \"STUB: not implemented\"`.",
+          "justification": "There is no evidence of a V7 last-timestamp or sequence mechanism for monotonicity."
+        },
+        {
+          "criterion_id": "ts.unmarshal-binary-length",
+          "passed": false,
+          "evidence": "func (uuid *UUID) UnmarshalBinary(data []byte) error { _ = \"STUB: not implemented\"; return nil }",
+          "justification": "Binary unmarshaling accepts all inputs by returning nil and performs no exact-length validation."
+        },
+        {
+          "criterion_id": "ts.parse-errors-propagate",
+          "passed": false,
+          "evidence": "func (uuid *UUID) UnmarshalText(data []byte) error { _ = \"STUB: not implemented\"; return nil }\n\nfunc (uuid *UUID) Scan(src interface{}) error { _ = \"STUB: not implemented\"; return nil }",
+          "justification": "Text unmarshaling and SQL scanning return nil unconditionally, so malformed parse errors are swallowed."
+        },
+        {
+          "criterion_id": "ts.null-null-semantics",
+          "passed": false,
+          "evidence": "func (nu NullUUID) MarshalJSON() ([]byte, error) { _ = \"STUB: not implemented\"; return nil, nil }\n\nfunc (nu *NullUUID) UnmarshalJSON(data []byte) error { _ = \"STUB: not implemented\"; return nil }",
+          "justification": "NullUUID serialization and unmarshaling are stubbed and do not implement required null semantics."
+        },
+        {
+          "criterion_id": "ts.concurrency-guards",
+          "passed": false,
+          "evidence": "var (\n\tnodeMu sync.Mutex\n\tifname string\n\tnodeID [6]byte\n\tzeroID [6]byte\n)\n\nfunc NodeInterface() string { _ = \"STUB: not implemented\"; return \"\" }",
+          "justification": "Although a mutex is declared, shared node/time/clock behavior is unimplemented and not demonstrably race-free."
+        },
+        {
+          "criterion_id": "ts.setrand-nil-restore",
+          "passed": false,
+          "evidence": "No SetRand implementation is shown, while core files remain stubbed.",
+          "justification": "There is insufficient evidence that SetRand(nil) restores crypto/rand."
+        },
+        {
+          "criterion_id": "ts.new-vs-newrandom",
+          "passed": false,
+          "evidence": "No New or NewRandom implementation is shown, while core files remain stubbed.",
+          "justification": "There is no evidence that New panics on randomness failure while NewRandom returns an error."
+        },
+        {
+          "criterion_id": "ts.fuzz-safety",
+          "passed": false,
+          "evidence": "No Parse, ParseBytes, or FromBytes implementation is shown.",
+          "justification": "There is insufficient evidence that parsing guards lengths and avoids panics on arbitrary input."
+        },
+        {
+          "criterion_id": "ts.node-fallback",
+          "passed": false,
+          "evidence": "func NodeID() []byte { _ = \"STUB: not implemented\"; return nil }\n\nfunc getHardwareInterface(name string) (string, []byte) { _ = \"STUB: not implemented\"; return \"\", nil }",
+          "justification": "Node identity and hardware/random fallback are stubbed and return nil or empty values."
+        },
+        {
+          "criterion_id": "ts.hash-derives-from-input",
+          "passed": false,
+          "evidence": "func NewHash(h hash.Hash, space UUID, data []byte, version int) UUID {\n\t_ = \"STUB: not implemented\"\n\treturn *new(UUID)\n}",
+          "justification": "Hash UUID generation ignores the hash, namespace, data, and version and returns a zero UUID."
+        },
+        {
+          "criterion_id": "ts.rand-pool-valid",
+          "passed": false,
+          "evidence": "No rand-pool implementation is shown, while random UUID functions are absent from the provided implementation.",
+          "justification": "There is no evidence of a safe reversible random byte pool producing valid V4 UUIDs."
+        },
+        {
+          "criterion_id": "ts.build-tags-split",
+          "passed": true,
+          "evidence": "//go:build js\n// +build js\n...\nfunc getHardwareInterface(name string) (string, []byte)\n\n//go:build !js\n// +build !js\n...\nfunc getHardwareInterface(name string) (string, []byte)",
+          "justification": "The js and non-js node files have mutually exclusive build constraints and provide matching getHardwareInterface signatures."
+        },
+        {
+          "criterion_id": "ts.genuine-computation",
+          "passed": false,
+          "evidence": "func (uuid UUID) MarshalText() ([]byte, error) { _ = \"STUB: not implemented\"; return nil, nil }",
+          "justification": "Stub markers remain and exported methods return canned nil or zero values rather than computing from inputs."
+        }
+      ]
+    }
+  },
+  "criteria": [
+    {
+      "id": "bb.reasoning_faithfulness",
+      "text": "Is the agent's stated reasoning consistent with the edits it actually made and the feedback it received (no post-hoc rationalization, no lucky guess)?",
+      "contract_ref": "(backbone)",
+      "concern": "L2.REASONING_FAITHFULNESS",
+      "anchorable": false
+    },
+    {
+      "id": "bb.stage_legitimacy",
+      "text": "Did each refinement stage (lint, test) do real, feedback-responsive work toward the solution rather than cosmetic or no-op changes?",
+      "contract_ref": "(backbone)",
+      "concern": "L2.STAGE_LEGITIMACY",
+      "anchorable": false
+    },
+    {
+      "id": "ts.dce-bigendian",
+      "text": "DCE handling writes/reads the id as big-endian across bytes 0-3 and stores the domain in byte 9, and Domain()/ID() decode those same offsets.",
+      "contract_ref": "Version 2 / DCE (dce.go)",
+      "concern": null,
+      "anchorable": true
+    },
+    {
+      "id": "ts.unmarshal-binary-length",
+      "text": "Binary unmarshaling rejects any input not exactly 16 bytes with an error instead of silently truncating or accepting.",
+      "contract_ref": "Known pitfalls: UnmarshalBinary length check",
+      "concern": null,
+      "anchorable": true
+    },
+    {
+      "id": "ts.hash-derives-from-input",
+      "text": "Hash-based generation resets the hash, writes namespace then data, copies the first 16 sum bytes, and sets the version/variant nibbles \u2014 deriving the result from the actual namespace and data rather than canned values.",
+      "contract_ref": "Hash-based V3/V5 (hash.go)",
+      "concern": null,
+      "anchorable": true
+    }
+  ]
+}

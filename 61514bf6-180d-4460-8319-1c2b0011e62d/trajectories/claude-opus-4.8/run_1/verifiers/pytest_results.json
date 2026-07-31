@@ -1,0 +1,60 @@
+{
+  "solution": {
+    "passed": 3,
+    "failed": 0,
+    "errors": 0,
+    "skipped": 0,
+    "collected": 3,
+    "status": "OK",
+    "detail": "============================== 3 passed in 0.10s ===============================",
+    "total": 3,
+    "pass_rate": 1.0,
+    "log": ""
+  },
+  "anchors": {
+    "golden": {
+      "passed": 3,
+      "failed": 0,
+      "errors": 0,
+      "skipped": 0,
+      "collected": 3,
+      "status": "OK",
+      "detail": "============================== 3 passed in 0.10s ===============================",
+      "total": 3,
+      "pass_rate": 1.0,
+      "log": ""
+    },
+    "stub": {
+      "passed": 0,
+      "failed": 3,
+      "errors": 0,
+      "skipped": 0,
+      "collected": 3,
+      "status": "OK",
+      "detail": "============================== 3 failed in 0.12s ===============================",
+      "total": 3,
+      "pass_rate": 0.0,
+      "log": ""
+    }
+  },
+  "analysis": {
+    "n_total": 3,
+    "n_sound": 3,
+    "sound_subset": [
+      "test_diagnostics_computes_fileline_from_position",
+      "test_diagnostics_routes_by_category",
+      "test_format_host_uses_ts_sys"
+    ],
+    "wrong_oracle_dropped": [],
+    "non_discriminating_dropped": [],
+    "inconclusive_on_stub": [],
+    "solution_pass_on_sound": 1.0,
+    "gap_vs_golden": 0.0,
+    "golden_status": "OK",
+    "stub_status": "OK",
+    "solution_status": "OK",
+    "infra_failures": [],
+    "stub_import_broken": false,
+    "stub_note": ""
+  }
+}

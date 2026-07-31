@@ -1,0 +1,153 @@
+    Updating crates.io index
+     Locking 145 packages to latest compatible versions
+      Adding async-channel v1.9.0 (available: v2.5.0)
+      Adding async-global-executor v2.4.1 (available: v3.1.0)
+      Adding async-io v1.13.0 (available: v2.6.0)
+      Adding futures-lite v1.13.0 (available: v2.6.1)
+      Adding pretty_assertions v0.6.1 (available: v1.4.1)
+   Compiling async-h1 v2.3.3 (/tmp/commit0-inplace-u8avk1i0/tree)
+    Finished `test` profile [unoptimized + debuginfo] target(s) in 5.26s
+     Running unittests src/lib.rs (target/debug/deps/async_h1-c4aa0d56dd53ef25)
+
+running 19 tests
+test chunked::decoder::tests::test_chunked_big ... ok
+test chunked::decoder::tests::test_chunked_mdn ... ok
+test chunked::decoder::tests::test_chunked_wiki ... ok
+test chunked::decoder::tests::test_ff7 ... ok
+test chunked::encoder::test_bytes_to_read::simple_check_of_known_values ... ok
+test date::tests::size_of ... ok
+test date::tests::test2 ... ok
+test date::tests::test3 ... ok
+test date::tests::test_fmt ... ok
+test date::tests::test_rfc_example ... ok
+test server::decode::tests::url_for_anchor ... ok
+test server::decode::tests::url_for_conflicting_connect ... ok
+test server::decode::tests::url_for_connect ... ok
+test server::decode::tests::url_for_double_slash_path ... ok
+test server::decode::tests::url_for_host_plus_absolute_url ... ok
+test server::decode::tests::url_for_host_plus_path ... ok
+test server::decode::tests::url_for_malformed_resource_path ... ok
+test server::decode::tests::url_for_query ... ok
+test server::decode::tests::url_for_triple_slash_path ... ok
+
+test result: ok. 19 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running tests/accept.rs (target/debug/deps/accept-fc8eecfe3ff41dc7)
+
+running 7 tests
+test accept::basic ... ok
+test accept::keep_alive_long_chunked_unread_body ... ok
+test accept::keep_alive_long_fixed_length_unread_body ... ok
+test accept::keep_alive_short_chunked_unread_body ... ok
+test accept::keep_alive_short_fixed_length_unread_body ... ok
+test accept::request_close ... ok
+test accept::response_close ... ok
+
+test result: ok. 7 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running tests/client_decode.rs (target/debug/deps/client_decode-67c073c168df0371)
+
+running 4 tests
+test client_decode::connection_closure ... ok
+test client_decode::multiple_header_values_for_same_header_name ... ok
+test client_decode::response_newlines ... ok
+test client_decode::response_no_date ... ok
+
+test result: ok. 4 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running tests/client_encode.rs (target/debug/deps/client_encode-df074a7b93f4eff1)
+
+running 4 tests
+test client_encode::client_encode_chunked_body ... ok
+test client_encode::client_encode_request_add_date ... ok
+test client_encode::client_encode_request_with_connect ... ok
+test client_encode::client_encode_request_with_fragment ... ok
+
+test result: ok. 4 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running tests/continue.rs (target/debug/deps/continue-134afbfedb20b577)
+
+running 2 tests
+test test_with_expect_when_reading_body ... ok
+test test_without_expect_when_not_reading_body ... ok
+
+test result: ok. 2 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.30s
+
+     Running tests/server-chunked-encode-large.rs (target/debug/deps/server_chunked_encode_large-72c9cf295b411331)
+
+running 1 test
+test server_chunked_large ... ok
+
+test result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running tests/server_decode.rs (target/debug/deps/server_decode-0f0bd04d4b348521)
+
+running 4 tests
+test server_decode::chunked ... ok
+test server_decode::invalid_trailer ... ignored, 
+       the test previously did not actually assert the correct thing prevously
+       and the behavior does not yet work as intended
+    
+test server_decode::post_with_body ... ok
+test server_decode::unexpected_eof ... ok
+
+test result: ok. 3 passed; 0 failed; 1 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running tests/server_encode.rs (target/debug/deps/server_encode-a3a03470510401eb)
+
+running 5 tests
+test server_encode::basic ... ok
+test server_encode::basic_404 ... ok
+test server_encode::chunked ... ok
+test server_encode::head_request_chunked_body ... ok
+test server_encode::head_request_fixed_body ... ok
+
+test result: ok. 5 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running tests/test_utils.rs (target/debug/deps/test_utils-e21c3e73ae724ad9)
+
+running 0 tests
+
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+   Doc-tests async_h1
+warning: lint `missing_doc_code_examples` has been renamed to `rustdoc::missing_doc_code_examples`
+ --> src/lib.rs:4:23
+  |
+4 | #![warn(missing_docs, missing_doc_code_examples, unreachable_pub)]
+  |                       ^^^^^^^^^^^^^^^^^^^^^^^^^ help: use the new name: `rustdoc::missing_doc_code_examples`
+  |
+  = note: `#[warn(renamed_and_removed_lints)]` on by default
+
+warning: unknown lint: `rustdoc::missing_doc_code_examples`
+ --> src/lib.rs:4:23
+  |
+4 | #![warn(missing_docs, missing_doc_code_examples, unreachable_pub)]
+  |                       ^^^^^^^^^^^^^^^^^^^^^^^^^
+  |
+  = note: the `rustdoc::missing_doc_code_examples` lint is unstable
+  = note: see issue #101730 <https://github.com/rust-lang/rust/issues/101730> for more information
+  = note: `#[warn(unknown_lints)]` on by default
+
+warning: lint `missing_doc_code_examples` has been renamed to `rustdoc::missing_doc_code_examples`
+   --> src/chunked/decoder.rs:131:13
+    |
+131 |     #[allow(missing_doc_code_examples)]
+    |             ^^^^^^^^^^^^^^^^^^^^^^^^^ help: use the new name: `rustdoc::missing_doc_code_examples`
+
+warning: unknown lint: `rustdoc::missing_doc_code_examples`
+   --> src/chunked/decoder.rs:131:13
+    |
+131 |     #[allow(missing_doc_code_examples)]
+    |             ^^^^^^^^^^^^^^^^^^^^^^^^^
+    |
+    = note: the `rustdoc::missing_doc_code_examples` lint is unstable
+    = note: see issue #101730 <https://github.com/rust-lang/rust/issues/101730> for more information
+
+warning: 4 warnings emitted
+
+
+running 0 tests
+
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+

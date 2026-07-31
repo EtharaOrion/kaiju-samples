@@ -1,0 +1,26 @@
+{
+  "instance_id": "commit-0/futures-signals",
+  "id": "722c1d25-ddd2-46c6-8a79-83eb8b992afd",
+  "repo": "Zahgon/rust-signals",
+  "base_commit": "8734fef3f84a5ef33003d92fa8c902ca8eb77633",
+  "reference_commit": "006adaf5b13870c6cec71a2f00fda0d12f1e3b5d",
+  "base_compiles": true,
+  "setup": {
+    "rust_version": "stable",
+    "edition": "2018",
+    "packages": "pkg-config libssl-dev",
+    "pre_install": [],
+    "install": "cargo fetch",
+    "specification": "https://docs.rs/futures-signals/^0.3.21/futures_signals/tutorial/index.html",
+    "spec_source": "readme",
+    "version_source": "default",
+    "version_conflicts": [],
+    "base_compiles": true
+  },
+  "test": {
+    "test_cmd": "cargo test",
+    "test_dir": "tests"
+  },
+  "src_dir": "src",
+  "language": "rust"
+}

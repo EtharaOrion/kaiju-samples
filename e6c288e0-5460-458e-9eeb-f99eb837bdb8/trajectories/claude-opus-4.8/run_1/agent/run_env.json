@@ -1,0 +1,6 @@
+{
+  "repo": "Zahgon/kui",
+  "base_commit": "e1f5ce5506cfa3b35e37103b9d0895d5e83b1db0",
+  "reference_commit": "83daa32a6621762a7891a9bcc65de05f148ca5d8",
+  "docker_image": "426628337772.dkr.ecr.ap-south-1.amazonaws.com/kaiju_q2:python_abersheeran_kui"
+}

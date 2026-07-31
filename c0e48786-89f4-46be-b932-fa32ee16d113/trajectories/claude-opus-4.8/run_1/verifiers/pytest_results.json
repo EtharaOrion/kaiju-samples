@@ -1,0 +1,65 @@
+{
+  "solution": {
+    "passed": 1,
+    "failed": 7,
+    "errors": 0,
+    "skipped": 0,
+    "collected": 8,
+    "status": "OK",
+    "detail": "========================= 7 failed, 1 passed in 0.70s ==========================",
+    "total": 8,
+    "pass_rate": 0.125,
+    "log": ""
+  },
+  "anchors": {
+    "golden": {
+      "passed": 8,
+      "failed": 0,
+      "errors": 0,
+      "skipped": 0,
+      "collected": 8,
+      "status": "OK",
+      "detail": "============================== 8 passed in 2.73s ===============================",
+      "total": 8,
+      "pass_rate": 1.0,
+      "log": ""
+    },
+    "stub": {
+      "passed": 0,
+      "failed": 8,
+      "errors": 0,
+      "skipped": 0,
+      "collected": 8,
+      "status": "OK",
+      "detail": "============================== 8 failed in 2.35s ===============================",
+      "total": 8,
+      "pass_rate": 0.0,
+      "log": ""
+    }
+  },
+  "analysis": {
+    "n_total": 8,
+    "n_sound": 8,
+    "sound_subset": [
+      "test_aliases_resolution_and_termination",
+      "test_codec_registry_contract",
+      "test_env_binding_with_prefix",
+      "test_merge_semantics",
+      "test_nil_option_guards_are_noops",
+      "test_no_remaining_stub_placeholders",
+      "test_not_found_error_unwrap_direction",
+      "test_precedence_and_case_insensitivity"
+    ],
+    "wrong_oracle_dropped": [],
+    "non_discriminating_dropped": [],
+    "inconclusive_on_stub": [],
+    "solution_pass_on_sound": 0.125,
+    "gap_vs_golden": 0.875,
+    "golden_status": "OK",
+    "stub_status": "OK",
+    "solution_status": "OK",
+    "infra_failures": [],
+    "stub_import_broken": false,
+    "stub_note": ""
+  }
+}

@@ -1,0 +1,274 @@
+{
+  "model": "openai/gpt-5.5-2026-04-23",
+  "ok": true,
+  "verdicts": [
+    {
+      "criterion_id": "bb.reasoning_faithfulness",
+      "passed": false,
+      "evidence": "Draft claims broad implementations such as \u201cI'll implement the stubbed functions in `datasketch/minhash.py`\u201d, \u201cI'll implement them based on the standard HyperLogLog algorithm\u201d, and \u201cLooking at the stubbed functions, I'll implement them based on the MutableMapping semantics and HNSW algorithm,\u201d but the final diff shown contains only changes to `datasketch/storage.py`.",
+      "justification": "The stated reasoning and claimed edits across many core modules are not consistent with the cumulative diff, which only evidences storage-layer changes."
+    },
+    {
+      "criterion_id": "bb.stage_legitimacy",
+      "passed": false,
+      "evidence": "In the test-refine stage, entries repeatedly show only test commands and unrelated reasoning like \u201cReading file: datasketch/hnsw.py\u201d for `test_hyperloglog`, `test_lsh`, `test_minhash`, and others, with no subsequent edits.",
+      "justification": "The test refinement stage did not demonstrate feedback-responsive fixes, and much of the recorded activity appears no-op or unrelated to the invoked tests."
+    }
+  ],
+  "anchors": {
+    "golden": {
+      "model": "openai/gpt-5.5-2026-04-23",
+      "reasoning_effort": "high",
+      "ok": true,
+      "raw_verdicts": 18,
+      "response_chars": 5578,
+      "thinking": "",
+      "raw_response": "[\n  {\n    \"criterion_id\": \"bb.intent_fidelity\",\n    \"verdict\": \"fail\",\n    \"evidence\": \"The submitted code shows only `datasketch/__init__.py`, `datasketch/aio/__init__.py`, and a partial `datasketch/aio/lsh.py` ending mid-statement at `if await h`.\",\n    \"justification\": \"The trajectory does not provide evidence of implementing the core probabilistic data structures required by the task.\"\n  },\n  {\n    \"criterion_id\": \"bb.oracle_strength\",\n    \"verdict\": \"fail\",\n    \"evidence\": \"Core modules such as `minhash.py`, `hyperloglog.py`, `lean_minhash.py`, `lsh.py`, and `hnsw.py` are referenced but not shown implemented.\",\n    \"justification\": \"There is insufficient evidence of a general implementation beyond tests.\"\n  },\n  {\n    \"criterion_id\": \"ts.minhash-scheme-registry\",\n    \"verdict\": \"fail\",\n    \"evidence\": \"`from datasketch.minhash import MinHash` is imported, but no `MinHash` implementation or scheme registry is shown.\",\n    \"justification\": \"There is no evidence of scheme selection, 32-bit/64-bit dtypes, or scheme-specific sentinels.\"\n  },\n  {\n    \"criterion_id\": \"ts.minhash-cross-scheme-raise\",\n    \"verdict\": \"fail\",\n    \"evidence\": \"`from datasketch.minhash import _check_scheme_consistency` is used in async LSH, but MinHash operations such as `merge`, `union`, `jaccard`, and equality are not shown.\",\n    \"justification\": \"Use of a helper in one module is insufficient evidence that all cross-scheme MinHash operations raise.\"\n  },\n  {\n    \"criterion_id\": \"ts.minhash-eq-scheme-seed\",\n    \"verdict\": \"fail\",\n    \"evidence\": \"No `MinHash.__eq__` implementation is present in the submitted code.\",\n    \"justification\": \"There is no evidence equality compares seed, scheme, and registers.\"\n  },\n  {\n    \"criterion_id\": \"ts.minhash-range-validation\",\n    \"verdict\": \"fail\",\n    \"evidence\": \"No `MinHash` constructor, `update`, or hashvalue validation code is shown.\",\n    \"justification\": \"There is no evidence of range validation for hash outputs or supplied hashvalues.\"\n  },\n  {\n    \"criterion_id\": \"ts.minhash-estimators-computed\",\n    \"verdict\": \"fail\",\n    \"evidence\": \"No `jaccard()` or `count()` implementation is shown.\",\n    \"justification\": \"There is no evidence that estimators are computed from register state.\"\n  },\n  {\n    \"criterion_id\": \"ts.gpu-always-raises\",\n    \"verdict\": \"fail\",\n    \"evidence\": \"No GPU acceleration code or mode handling is shown.\",\n    \"justification\": \"There is no evidence forced GPU mode raises when unavailable.\"\n  },\n  {\n    \"criterion_id\": \"ts.gpu-detect-identical\",\n    \"verdict\": \"fail\",\n    \"evidence\": \"No GPU detect path, CPU shim, register comparison logic, or pickling state handling is shown.\",\n    \"justification\": \"There is no evidence detect mode is bit-for-bit identical or portable after pickling.\"\n  },\n  {\n    \"criterion_id\": \"ts.gpu-cache-dtype-reject\",\n    \"verdict\": \"fail\",\n    \"evidence\": \"No cache dtype validation or GPU shim branch is shown.\",\n    \"justification\": \"There is no evidence wrong GPU cache dtype is rejected.\"\n  },\n  {\n    \"criterion_id\": \"ts.hll-plusplus-correction\",\n    \"verdict\": \"fail\",\n    \"evidence\": \"`HyperLogLogPlusPlus` is imported, but no implementation is shown.\",\n    \"justification\": \"There is no evidence of conditional bias or linear-counting correction.\"\n  },\n  {\n    \"criterion_id\": \"ts.hll-init-from-reg\",\n    \"verdict\": \"fail\",\n    \"evidence\": \"`HyperLogLog` is imported, but no constructor or serialization/deserialization implementation is shown.\",\n    \"justification\": \"There is no evidence of init-from-registers or byte-order-independent round-trip.\"\n  },\n  {\n    \"criterion_id\": \"ts.compact-serialize\",\n    \"verdict\": \"fail\",\n    \"evidence\": \"`LeanMinHash` and `bBitMinHash` are imported, but their implementations are not shown.\",\n    \"justification\": \"There is no evidence of compact serialization, bytesize, or byteorder handling.\"\n  },\n  {\n    \"criterion_id\": \"ts.lsh-H-deterministic\",\n    \"verdict\": \"fail\",\n    \"evidence\": \"Async `_H` is `return bytes(hs.byteswap().data)`, but no synchronous `MinHashLSH._H` or buffered query equivalence is shown.\",\n    \"justification\": \"Only part of the requirement is evidenced, and the required sync LSH behavior is not demonstrated.\"\n  },\n  {\n    \"criterion_id\": \"ts.storage-backend-guards\",\n    \"verdict\": \"fail\",\n    \"evidence\": \"`batch_size` setter raises `AttributeError(\\\"AsyncMinHashLSH is not initialized.\\\")`, but storage implementations and sync Redis/in-memory backend support are not shown.\",\n    \"justification\": \"The criterion requires broader storage backend behavior not evidenced by the partial async setter.\"\n  },\n  {\n    \"criterion_id\": \"ts.optional-import-guards\",\n    \"verdict\": \"fail\",\n    \"evidence\": \"`from datasketch.aio.storage import async_ordered_storage, async_unordered_storage` is imported, but the storage module and optional dependency guards are not shown.\",\n    \"justification\": \"There is insufficient evidence that redis, cassandra, motor, mongo, or GPU imports are guarded.\"\n  },\n  {\n    \"criterion_id\": \"ts.hnsw-soft-hard-remove\",\n    \"verdict\": \"fail\",\n    \"evidence\": \"`from datasketch.hnsw import HNSW` is imported, but no HNSW implementation is shown.\",\n    \"justification\": \"There is no evidence of soft/hard removal or graph repair semantics.\"\n  },\n  {\n    \"criterion_id\": \"ts.hnsw-ordered-mapping\",\n    \"verdict\": \"fail\",\n    \"evidence\": \"`HNSW` is only imported in `__init__.py`; no ordered mapping, search, popitem, or reversed-edge code is shown.\",\n    \"justification\": \"There is no evidence HNSW satisfies ordered mapping or reversed-edge behavior.\"\n  }\n]",
+      "verdicts": [
+        {
+          "criterion_id": "bb.intent_fidelity",
+          "passed": false,
+          "evidence": "The submitted code shows only `datasketch/__init__.py`, `datasketch/aio/__init__.py`, and a partial `datasketch/aio/lsh.py` ending mid-statement at `if await h`.",
+          "justification": "The trajectory does not provide evidence of implementing the core probabilistic data structures required by the task."
+        },
+        {
+          "criterion_id": "bb.oracle_strength",
+          "passed": false,
+          "evidence": "Core modules such as `minhash.py`, `hyperloglog.py`, `lean_minhash.py`, `lsh.py`, and `hnsw.py` are referenced but not shown implemented.",
+          "justification": "There is insufficient evidence of a general implementation beyond tests."
+        },
+        {
+          "criterion_id": "ts.minhash-scheme-registry",
+          "passed": false,
+          "evidence": "`from datasketch.minhash import MinHash` is imported, but no `MinHash` implementation or scheme registry is shown.",
+          "justification": "There is no evidence of scheme selection, 32-bit/64-bit dtypes, or scheme-specific sentinels."
+        },
+        {
+          "criterion_id": "ts.minhash-cross-scheme-raise",
+          "passed": false,
+          "evidence": "`from datasketch.minhash import _check_scheme_consistency` is used in async LSH, but MinHash operations such as `merge`, `union`, `jaccard`, and equality are not shown.",
+          "justification": "Use of a helper in one module is insufficient evidence that all cross-scheme MinHash operations raise."
+        },
+        {
+          "criterion_id": "ts.minhash-eq-scheme-seed",
+          "passed": false,
+          "evidence": "No `MinHash.__eq__` implementation is present in the submitted code.",
+          "justification": "There is no evidence equality compares seed, scheme, and registers."
+        },
+        {
+          "criterion_id": "ts.minhash-range-validation",
+          "passed": false,
+          "evidence": "No `MinHash` constructor, `update`, or hashvalue validation code is shown.",
+          "justification": "There is no evidence of range validation for hash outputs or supplied hashvalues."
+        },
+        {
+          "criterion_id": "ts.minhash-estimators-computed",
+          "passed": false,
+          "evidence": "No `jaccard()` or `count()` implementation is shown.",
+          "justification": "There is no evidence that estimators are computed from register state."
+        },
+        {
+          "criterion_id": "ts.gpu-always-raises",
+          "passed": false,
+          "evidence": "No GPU acceleration code or mode handling is shown.",
+          "justification": "There is no evidence forced GPU mode raises when unavailable."
+        },
+        {
+          "criterion_id": "ts.gpu-detect-identical",
+          "passed": false,
+          "evidence": "No GPU detect path, CPU shim, register comparison logic, or pickling state handling is shown.",
+          "justification": "There is no evidence detect mode is bit-for-bit identical or portable after pickling."
+        },
+        {
+          "criterion_id": "ts.gpu-cache-dtype-reject",
+          "passed": false,
+          "evidence": "No cache dtype validation or GPU shim branch is shown.",
+          "justification": "There is no evidence wrong GPU cache dtype is rejected."
+        },
+        {
+          "criterion_id": "ts.hll-plusplus-correction",
+          "passed": false,
+          "evidence": "`HyperLogLogPlusPlus` is imported, but no implementation is shown.",
+          "justification": "There is no evidence of conditional bias or linear-counting correction."
+        },
+        {
+          "criterion_id": "ts.hll-init-from-reg",
+          "passed": false,
+          "evidence": "`HyperLogLog` is imported, but no constructor or serialization/deserialization implementation is shown.",
+          "justification": "There is no evidence of init-from-registers or byte-order-independent round-trip."
+        },
+        {
+          "criterion_id": "ts.compact-serialize",
+          "passed": false,
+          "evidence": "`LeanMinHash` and `bBitMinHash` are imported, but their implementations are not shown.",
+          "justification": "There is no evidence of compact serialization, bytesize, or byteorder handling."
+        },
+        {
+          "criterion_id": "ts.lsh-H-deterministic",
+          "passed": false,
+          "evidence": "Async `_H` is `return bytes(hs.byteswap().data)`, but no synchronous `MinHashLSH._H` or buffered query equivalence is shown.",
+          "justification": "Only part of the requirement is evidenced, and the required sync LSH behavior is not demonstrated."
+        },
+        {
+          "criterion_id": "ts.storage-backend-guards",
+          "passed": false,
+          "evidence": "`batch_size` setter raises `AttributeError(\"AsyncMinHashLSH is not initialized.\")`, but storage implementations and sync Redis/in-memory backend support are not shown.",
+          "justification": "The criterion requires broader storage backend behavior not evidenced by the partial async setter."
+        },
+        {
+          "criterion_id": "ts.optional-import-guards",
+          "passed": false,
+          "evidence": "`from datasketch.aio.storage import async_ordered_storage, async_unordered_storage` is imported, but the storage module and optional dependency guards are not shown.",
+          "justification": "There is insufficient evidence that redis, cassandra, motor, mongo, or GPU imports are guarded."
+        },
+        {
+          "criterion_id": "ts.hnsw-soft-hard-remove",
+          "passed": false,
+          "evidence": "`from datasketch.hnsw import HNSW` is imported, but no HNSW implementation is shown.",
+          "justification": "There is no evidence of soft/hard removal or graph repair semantics."
+        },
+        {
+          "criterion_id": "ts.hnsw-ordered-mapping",
+          "passed": false,
+          "evidence": "`HNSW` is only imported in `__init__.py`; no ordered mapping, search, popitem, or reversed-edge code is shown.",
+          "justification": "There is no evidence HNSW satisfies ordered mapping or reversed-edge behavior."
+        }
+      ]
+    },
+    "stub": {
+      "model": "openai/gpt-5.5-2026-04-23",
+      "reasoning_effort": "high",
+      "ok": true,
+      "raw_verdicts": 18,
+      "response_chars": 4951,
+      "thinking": "",
+      "raw_response": "[\n  {\n    \"criterion_id\": \"bb.intent_fidelity\",\n    \"verdict\": \"fail\",\n    \"evidence\": \"async def __async_init(self):\\n        pass\",\n    \"justification\": \"The trajectory leaves major public methods as stubs, so it does not genuinely implement the required library behavior.\"\n  },\n  {\n    \"criterion_id\": \"bb.oracle_strength\",\n    \"verdict\": \"fail\",\n    \"evidence\": \"async def query(self, minhash):\\n        pass\",\n    \"justification\": \"A solution with unimplemented core operations is not a general implementation beyond the tests.\"\n  },\n  {\n    \"criterion_id\": \"ts.minhash-scheme-registry\",\n    \"verdict\": \"fail\",\n    \"evidence\": \"from datasketch.minhash import MinHash\",\n    \"justification\": \"No MinHash implementation showing a scheme registry, width-specific dtype, or sentinel handling is provided.\"\n  },\n  {\n    \"criterion_id\": \"ts.minhash-cross-scheme-raise\",\n    \"verdict\": \"fail\",\n    \"evidence\": \"from datasketch.minhash import _check_scheme_consistency\",\n    \"justification\": \"The shown code only imports a helper and provides no evidence that MinHash merge, union, jaccard, equality, or invalid scheme construction raise correctly.\"\n  },\n  {\n    \"criterion_id\": \"ts.minhash-eq-scheme-seed\",\n    \"verdict\": \"fail\",\n    \"evidence\": \"from datasketch.minhash import MinHash\",\n    \"justification\": \"There is no shown equality implementation proving seed and scheme are included.\"\n  },\n  {\n    \"criterion_id\": \"ts.minhash-range-validation\",\n    \"verdict\": \"fail\",\n    \"evidence\": \"from datasketch.minhash import MinHash\",\n    \"justification\": \"No hashfunc or hashvalues range-validation implementation is shown.\"\n  },\n  {\n    \"criterion_id\": \"ts.minhash-estimators-computed\",\n    \"verdict\": \"fail\",\n    \"evidence\": \"from datasketch.minhash import MinHash\",\n    \"justification\": \"No jaccard or count implementation from register state is shown.\"\n  },\n  {\n    \"criterion_id\": \"ts.gpu-always-raises\",\n    \"verdict\": \"fail\",\n    \"evidence\": \"from datasketch.minhash import MinHash\",\n    \"justification\": \"No GPU mode implementation or force-on no-device error path is shown.\"\n  },\n  {\n    \"criterion_id\": \"ts.gpu-detect-identical\",\n    \"verdict\": \"fail\",\n    \"evidence\": \"from datasketch.minhash import MinHash\",\n    \"justification\": \"No GPU detect/shim path or portable pickling behavior is evidenced.\"\n  },\n  {\n    \"criterion_id\": \"ts.gpu-cache-dtype-reject\",\n    \"verdict\": \"fail\",\n    \"evidence\": \"from datasketch.minhash import MinHash\",\n    \"justification\": \"No cache dtype validation branch is shown.\"\n  },\n  {\n    \"criterion_id\": \"ts.hll-plusplus-correction\",\n    \"verdict\": \"fail\",\n    \"evidence\": \"from datasketch.hyperloglog import HyperLogLog, HyperLogLogPlusPlus\",\n    \"justification\": \"No HyperLogLog++ estimator or conditional correction implementation is provided.\"\n  },\n  {\n    \"criterion_id\": \"ts.hll-init-from-reg\",\n    \"verdict\": \"fail\",\n    \"evidence\": \"from datasketch.hyperloglog import HyperLogLog, HyperLogLogPlusPlus\",\n    \"justification\": \"No construction-from-registers or byte-order-independent serialization implementation is shown.\"\n  },\n  {\n    \"criterion_id\": \"ts.compact-serialize\",\n    \"verdict\": \"fail\",\n    \"evidence\": \"from datasketch.lean_minhash import LeanMinHash\\nfrom datasketch.b_bit_minhash import bBitMinHash\",\n    \"justification\": \"No compact bytesize, serialize, deserialize, or byteorder-handling implementation is shown.\"\n  },\n  {\n    \"criterion_id\": \"ts.lsh-H-deterministic\",\n    \"verdict\": \"fail\",\n    \"evidence\": \"async def query(self, minhash):\\n        pass\",\n    \"justification\": \"Although an async _H exists, query and buffering behavior are unimplemented and there is no evidence for the synchronous LSH deterministic hashing contract.\"\n  },\n  {\n    \"criterion_id\": \"ts.storage-backend-guards\",\n    \"verdict\": \"fail\",\n    \"evidence\": \"@batch_size.setter\\n    def batch_size(self, value):\\n        pass\",\n    \"justification\": \"The batch_size setter is a stub and therefore does not raise on uninitialized indexes as required.\"\n  },\n  {\n    \"criterion_id\": \"ts.optional-import-guards\",\n    \"verdict\": \"fail\",\n    \"evidence\": \"try:\\n    import motor.motor_asyncio\\n    from pymongo import ReturnDocument\\nexcept ImportError:\\n    motor = None\\n    ReturnDocument = None\",\n    \"justification\": \"Some async optional imports are guarded, but there is insufficient evidence that all required optional dependencies including cassandra, redis sync, mongo, and cupy are guarded across the package.\"\n  },\n  {\n    \"criterion_id\": \"ts.hnsw-soft-hard-remove\",\n    \"verdict\": \"fail\",\n    \"evidence\": \"from datasketch.hnsw import HNSW\",\n    \"justification\": \"No HNSW removal, cleanup, or graph-repair implementation is shown.\"\n  },\n  {\n    \"criterion_id\": \"ts.hnsw-ordered-mapping\",\n    \"verdict\": \"fail\",\n    \"evidence\": \"from datasketch.hnsw import HNSW\",\n    \"justification\": \"No ordered mapping operations, search behavior, popitem ordering, or reversed-edge maintenance implementation is shown.\"\n  }\n]",
+      "verdicts": [
+        {
+          "criterion_id": "bb.intent_fidelity",
+          "passed": false,
+          "evidence": "async def __async_init(self):\n        pass",
+          "justification": "The trajectory leaves major public methods as stubs, so it does not genuinely implement the required library behavior."
+        },
+        {
+          "criterion_id": "bb.oracle_strength",
+          "passed": false,
+          "evidence": "async def query(self, minhash):\n        pass",
+          "justification": "A solution with unimplemented core operations is not a general implementation beyond the tests."
+        },
+        {
+          "criterion_id": "ts.minhash-scheme-registry",
+          "passed": false,
+          "evidence": "from datasketch.minhash import MinHash",
+          "justification": "No MinHash implementation showing a scheme registry, width-specific dtype, or sentinel handling is provided."
+        },
+        {
+          "criterion_id": "ts.minhash-cross-scheme-raise",
+          "passed": false,
+          "evidence": "from datasketch.minhash import _check_scheme_consistency",
+          "justification": "The shown code only imports a helper and provides no evidence that MinHash merge, union, jaccard, equality, or invalid scheme construction raise correctly."
+        },
+        {
+          "criterion_id": "ts.minhash-eq-scheme-seed",
+          "passed": false,
+          "evidence": "from datasketch.minhash import MinHash",
+          "justification": "There is no shown equality implementation proving seed and scheme are included."
+        },
+        {
+          "criterion_id": "ts.minhash-range-validation",
+          "passed": false,
+          "evidence": "from datasketch.minhash import MinHash",
+          "justification": "No hashfunc or hashvalues range-validation implementation is shown."
+        },
+        {
+          "criterion_id": "ts.minhash-estimators-computed",
+          "passed": false,
+          "evidence": "from datasketch.minhash import MinHash",
+          "justification": "No jaccard or count implementation from register state is shown."
+        },
+        {
+          "criterion_id": "ts.gpu-always-raises",
+          "passed": false,
+          "evidence": "from datasketch.minhash import MinHash",
+          "justification": "No GPU mode implementation or force-on no-device error path is shown."
+        },
+        {
+          "criterion_id": "ts.gpu-detect-identical",
+          "passed": false,
+          "evidence": "from datasketch.minhash import MinHash",
+          "justification": "No GPU detect/shim path or portable pickling behavior is evidenced."
+        },
+        {
+          "criterion_id": "ts.gpu-cache-dtype-reject",
+          "passed": false,
+          "evidence": "from datasketch.minhash import MinHash",
+          "justification": "No cache dtype validation branch is shown."
+        },
+        {
+          "criterion_id": "ts.hll-plusplus-correction",
+          "passed": false,
+          "evidence": "from datasketch.hyperloglog import HyperLogLog, HyperLogLogPlusPlus",
+          "justification": "No HyperLogLog++ estimator or conditional correction implementation is provided."
+        },
+        {
+          "criterion_id": "ts.hll-init-from-reg",
+          "passed": false,
+          "evidence": "from datasketch.hyperloglog import HyperLogLog, HyperLogLogPlusPlus",
+          "justification": "No construction-from-registers or byte-order-independent serialization implementation is shown."
+        },
+        {
+          "criterion_id": "ts.compact-serialize",
+          "passed": false,
+          "evidence": "from datasketch.lean_minhash import LeanMinHash\nfrom datasketch.b_bit_minhash import bBitMinHash",
+          "justification": "No compact bytesize, serialize, deserialize, or byteorder-handling implementation is shown."
+        },
+        {
+          "criterion_id": "ts.lsh-H-deterministic",
+          "passed": false,
+          "evidence": "async def query(self, minhash):\n        pass",
+          "justification": "Although an async _H exists, query and buffering behavior are unimplemented and there is no evidence for the synchronous LSH deterministic hashing contract."
+        },
+        {
+          "criterion_id": "ts.storage-backend-guards",
+          "passed": false,
+          "evidence": "@batch_size.setter\n    def batch_size(self, value):\n        pass",
+          "justification": "The batch_size setter is a stub and therefore does not raise on uninitialized indexes as required."
+        },
+        {
+          "criterion_id": "ts.optional-import-guards",
+          "passed": false,
+          "evidence": "try:\n    import motor.motor_asyncio\n    from pymongo import ReturnDocument\nexcept ImportError:\n    motor = None\n    ReturnDocument = None",
+          "justification": "Some async optional imports are guarded, but there is insufficient evidence that all required optional dependencies including cassandra, redis sync, mongo, and cupy are guarded across the package."
+        },
+        {
+          "criterion_id": "ts.hnsw-soft-hard-remove",
+          "passed": false,
+          "evidence": "from datasketch.hnsw import HNSW",
+          "justification": "No HNSW removal, cleanup, or graph-repair implementation is shown."
+        },
+        {
+          "criterion_id": "ts.hnsw-ordered-mapping",
+          "passed": false,
+          "evidence": "from datasketch.hnsw import HNSW",
+          "justification": "No ordered mapping operations, search behavior, popitem ordering, or reversed-edge maintenance implementation is shown."
+        }
+      ]
+    }
+  },
+  "criteria": [
+    {
+      "id": "bb.reasoning_faithfulness",
+      "text": "Is the agent's stated reasoning consistent with the edits it actually made and the feedback it received (no post-hoc rationalization, no lucky guess)?",
+      "contract_ref": "(backbone)",
+      "concern": "L2.REASONING_FAITHFULNESS",
+      "anchorable": false
+    },
+    {
+      "id": "bb.stage_legitimacy",
+      "text": "Did each refinement stage (lint, test) do real, feedback-responsive work toward the solution rather than cosmetic or no-op changes?",
+      "contract_ref": "(backbone)",
+      "concern": "L2.STAGE_LEGITIMACY",
+      "anchorable": false
+    }
+  ]
+}

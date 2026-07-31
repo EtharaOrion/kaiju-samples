@@ -1,0 +1,35 @@
+{
+  "instance_id": "commit-0/kui",
+  "id": "e6c288e0-5460-458e-9eeb-f99eb837bdb8",
+  "repo": "Zahgon/kui",
+  "base_commit": "e1f5ce5506cfa3b35e37103b9d0895d5e83b1db0",
+  "reference_commit": "83daa32a6621762a7891a9bcc65de05f148ca5d8",
+  "setup": {
+    "install": "pip install -e \".[test]\"",
+    "packages": "",
+    "pip_packages": [
+      "baize>=0.22.0",
+      "pydantic>=2",
+      "pytest",
+      "pytest-json-report",
+      "typing-extensions>=4.2.0",
+      "httpx",
+      "httpx_ws",
+      "pytest-asyncio"
+    ],
+    "pre_install": [],
+    "python": "3.9",
+    "specification": "https://kui.aber.sh",
+    "version_source": "pyproject.toml[project.requires-python]",
+    "version_conflicts": [],
+    "system_deps_hint": []
+  },
+  "test": {
+    "test_cmd": "pytest",
+    "test_dir": "tests"
+  },
+  "src_dir": "kui",
+  "base_compiles": null,
+  "language": "python",
+  "ecr_image_uri": "426628337772.dkr.ecr.ap-south-1.amazonaws.com/kaiju_q2:python_abersheeran_kui"
+}

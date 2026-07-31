@@ -1,0 +1,435 @@
+[1m============================= test session starts ==============================[0m
+platform linux -- Python 3.9.25, pytest-8.4.2, pluggy-1.6.0
+rootdir: /tmp/commit0-inplace-owbc_2uj/tree
+configfile: pyproject.toml
+plugins: asyncio-1.2.0, cov-7.1.0, json-report-1.5.0, metadata-3.1.1, rerunfailures-16.0.1
+asyncio: mode=auto, debug=False, asyncio_default_fixture_loop_scope=None, asyncio_default_test_loop_scope=function
+collected 324 items
+
+test/aio/test_lsh.py [33ms[0m[33ms[0m[33ms[0m[33ms[0m[33ms[0m[33ms[0m[33ms[0m[33ms[0m[33ms[0m[33ms[0m[33ms[0m[33ms[0m[33ms[0m[33ms[0m[33ms[0m[33ms[0m[33ms[0m[33ms[0m[33ms[0m[33ms[0m[33ms[0m[33ms[0m[33ms[0m[33ms[0m[33ms[0m[33ms[0m[33ms[0m[33ms[0m[33ms[0m[33ms[0m[33ms[0m[33ms[0m[33ms[0m[33ms[0m[33ms[0m[33ms[0m[33ms[0m[33ms[0m[33ms[0m[33ms[0m[33ms[0m[33ms[0m[33ms[0m[33ms[0m[33ms[0m[33ms[0m[33ms[0m[33ms[0m[33ms[0m[33ms[0m[33ms[0m[32m [ 15%]
+[0m[33ms[0m[33ms[0m[33ms[0m[33ms[0m[33ms[0m[33ms[0m[33ms[0m[33ms[0m[33ms[0m[33ms[0m[33ms[0m[32m                                                              [ 19%][0m
+test/test_hnsw.py [32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[33m           [ 32%][0m
+test/test_hyperloglog.py [32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[31mF[0m[32m.[0m[32m.[0m[31mF[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[31mF[0m[32m.[0m[31m                      [ 40%][0m
+test/test_integration.py [33ms[0m[33ms[0m[33ms[0m[33ms[0m[33ms[0m[33ms[0m[33ms[0m[33ms[0m[33ms[0m[33ms[0m[33ms[0m[33ms[0m[33ms[0m[33ms[0m[33ms[0m[33ms[0m[33ms[0m[33ms[0m[33ms[0m[33ms[0m[33ms[0m[33ms[0m[33ms[0m[33ms[0m[33ms[0m[33ms[0m[33ms[0m[33ms[0m[33ms[0m[33ms[0m[33ms[0m[33ms[0m[31m                [ 50%][0m
+test/test_lean_minhash.py [32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[31m                                 [ 54%][0m
+test/test_lsh.py [32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[31mF[0m[31mF[0m[31mF[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[31m                                [ 62%][0m
+test/test_lshbloom.py [33ms[0m[33ms[0m[33ms[0m[33ms[0m[33ms[0m[33ms[0m[33ms[0m[33ms[0m[33ms[0m[31m                                          [ 65%][0m
+test/test_lshensemble.py [32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[31mF[0m[31m                                          [ 66%][0m
+test/test_lshforest.py [32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[31m                                         [ 69%][0m
+test/test_minhash.py [32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[31mF[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[31m                                   [ 75%][0m
+test/test_minhash_gpu.py [32m.[0m[33ms[0m[32m.[0m[33ms[0m[31mF[0m[31mF[0m[31m                                          [ 76%][0m
+test/test_minhash_schemes.py [32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[31mF[0m[32m.[0m[31mF[0m[31mF[0m[31mF[0m[31mF[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[31m [ 90%]
+[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[31mF[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[31m                                                   [ 96%][0m
+test/test_weighted_minhash.py [32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[31m                                 [100%][0m
+
+=================================== FAILURES ===================================
+[31m[1m__________________________ TestHyperLogLog.test_union __________________________[0m
+
+self = <test.test_hyperloglog.TestHyperLogLog testMethod=test_union>
+
+    [0m[94mdef[39;49;00m[90m [39;49;00m[92mtest_union[39;49;00m([96mself[39;49;00m):[90m[39;49;00m
+        h1 = [96mself[39;49;00m._class([94m4[39;49;00m, hashfunc=fake_hash_func)[90m[39;49;00m
+        h2 = [96mself[39;49;00m._class([94m4[39;49;00m, hashfunc=fake_hash_func)[90m[39;49;00m
+        h3 = [96mself[39;49;00m._class([94m4[39;49;00m, hashfunc=fake_hash_func)[90m[39;49;00m
+        h1.update([94m0b00011111[39;49;00m)[90m[39;49;00m
+        h2.update([94m0xFFFFFFF1[39;49;00m)[90m[39;49;00m
+        h3.update([94m0x000000F5[39;49;00m)[90m[39;49;00m
+        h = [96mself[39;49;00m._class.union(h1, h2, h3)[90m[39;49;00m
+        [96mself[39;49;00m.assertEqual(h.reg[[94m0b1111[39;49;00m], [96mself[39;49;00m._class._hash_range_bit - [94m4[39;49;00m)[90m[39;49;00m
+        [96mself[39;49;00m.assertEqual(h.reg[[94m1[39;49;00m], [94m1[39;49;00m)[90m[39;49;00m
+        [96mself[39;49;00m.assertEqual(h.reg[[94m5[39;49;00m], [96mself[39;49;00m._class._hash_range_bit - [94m4[39;49;00m - [94m3[39;49;00m)[90m[39;49;00m
+>       [96mself[39;49;00m.assertIs(h.hashfunc, fake_hash_func)[90m[39;49;00m
+[1m[31mE       AssertionError: <function sha1_hash32 at 0xffff9fcaa940> is not <function fake_hash_func at 0xffff9daa78b0>[0m
+
+[1m[31mtest/test_hyperloglog.py[0m:101: AssertionError
+[31m[1m___________ TestHyperLogLogSpecific.test_hyperloglog_small_card_est ____________[0m
+
+self = <test.test_hyperloglog.TestHyperLogLogSpecific testMethod=test_hyperloglog_small_card_est>
+
+    [0m[94mdef[39;49;00m[90m [39;49;00m[92mtest_hyperloglog_small_card_est[39;49;00m([96mself[39;49;00m):[90m[39;49;00m
+        reg = np.array([[94m1[39;49;00m [94mfor[39;49;00m i [95min[39;49;00m [96mrange[39;49;00m([94m1[39;49;00m << [94m4[39;49;00m)], dtype=np.int8)[90m[39;49;00m
+        [94mwith[39;49;00m patch.object(HyperLogLog, [33m"[39;49;00m[33m_linearcounting[39;49;00m[33m"[39;49;00m) [94mas[39;49;00m mock_method:[90m[39;49;00m
+            mock_method.return_value = [94m0[39;49;00m[90m[39;49;00m
+            h = HyperLogLog(reg=reg)[90m[39;49;00m
+            h.count()[90m[39;49;00m
+>       [96mself[39;49;00m.assertTrue(mock_method.called)[90m[39;49;00m
+[1m[31mE       AssertionError: False is not true[0m
+
+[1m[31mtest/test_hyperloglog.py[0m:140: AssertionError
+[31m[1m______________________ TestHyperLogLogPlusPlus.test_union ______________________[0m
+
+self = <test.test_hyperloglog.TestHyperLogLogPlusPlus testMethod=test_union>
+
+    [0m[94mdef[39;49;00m[90m [39;49;00m[92mtest_union[39;49;00m([96mself[39;49;00m):[90m[39;49;00m
+        h1 = [96mself[39;49;00m._class([94m4[39;49;00m, hashfunc=fake_hash_func)[90m[39;49;00m
+        h2 = [96mself[39;49;00m._class([94m4[39;49;00m, hashfunc=fake_hash_func)[90m[39;49;00m
+        h3 = [96mself[39;49;00m._class([94m4[39;49;00m, hashfunc=fake_hash_func)[90m[39;49;00m
+        h1.update([94m0b00011111[39;49;00m)[90m[39;49;00m
+        h2.update([94m0xFFFFFFFFFFFFFFF1[39;49;00m)[90m[39;49;00m
+        h3.update([94m0x000000F5[39;49;00m)[90m[39;49;00m
+        h = [96mself[39;49;00m._class.union(h1, h2, h3)[90m[39;49;00m
+        [96mself[39;49;00m.assertEqual(h.reg[[94m0b1111[39;49;00m], [96mself[39;49;00m._class._hash_range_bit - [94m4[39;49;00m)[90m[39;49;00m
+        [96mself[39;49;00m.assertEqual(h.reg[[94m1[39;49;00m], [94m1[39;49;00m)[90m[39;49;00m
+        [96mself[39;49;00m.assertEqual(h.reg[[94m5[39;49;00m], [96mself[39;49;00m._class._hash_range_bit - [94m4[39;49;00m - [94m3[39;49;00m)[90m[39;49;00m
+>       [96mself[39;49;00m.assertIs(h.hashfunc, fake_hash_func)[90m[39;49;00m
+[1m[31mE       AssertionError: <function sha1_hash64 at 0xffff9fcaac10> is not <function fake_hash_func at 0xffff9daa78b0>[0m
+
+[1m[31mtest/test_hyperloglog.py[0m:175: AssertionError
+[31m[1m_______________________ TestMinHashLSH.test_query_buffer _______________________[0m
+
+self = <test.test_lsh.TestMinHashLSH testMethod=test_query_buffer>
+
+    [0m[94mdef[39;49;00m[90m [39;49;00m[92mtest_query_buffer[39;49;00m([96mself[39;49;00m):[90m[39;49;00m
+        lsh = MinHashLSH(threshold=[94m0.5[39;49;00m, num_perm=[94m16[39;49;00m)[90m[39;49;00m
+        m1 = MinHash([94m16[39;49;00m)[90m[39;49;00m
+        m1.update([33mb[39;49;00m[33m"[39;49;00m[33ma[39;49;00m[33m"[39;49;00m)[90m[39;49;00m
+        m2 = MinHash([94m16[39;49;00m)[90m[39;49;00m
+        m2.update([33mb[39;49;00m[33m"[39;49;00m[33mb[39;49;00m[33m"[39;49;00m)[90m[39;49;00m
+        lsh.insert([33m"[39;49;00m[33ma[39;49;00m[33m"[39;49;00m, m1)[90m[39;49;00m
+        lsh.insert([33m"[39;49;00m[33mb[39;49;00m[33m"[39;49;00m, m2)[90m[39;49;00m
+        lsh.add_to_query_buffer(m1)[90m[39;49;00m
+>       result = lsh.collect_query_buffer()[90m[39;49;00m
+
+[1m[31mtest/test_lsh.py[0m:101: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+[1m[31mdatasketch/lsh.py[0m:270: in collect_query_buffer
+    [0mcollected_result_sets = [[90m[39;49;00m
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+.0 = <list_iterator object at 0xffffa5467490>
+
+    [0mcollected_result_sets = [[90m[39;49;00m
+        [96mset[39;49;00m(collected_result_lists)[90m[39;49;00m
+        [94mfor[39;49;00m hashtable [95min[39;49;00m [96mself[39;49;00m.hashtables[90m[39;49;00m
+>       [94mfor[39;49;00m collected_result_lists [95min[39;49;00m hashtable.collect_select_buffer()[90m[39;49;00m
+    ][90m[39;49;00m
+[1m[31mE   TypeError: 'NoneType' object is not iterable[0m
+
+[1m[31mdatasketch/lsh.py[0m:273: TypeError
+[31m[1m__________ TestMinHashLSH.test_query_buffer_matches_query_candidates ___________[0m
+
+self = <test.test_lsh.TestMinHashLSH testMethod=test_query_buffer_matches_query_candidates>
+
+    [0m[94mdef[39;49;00m[90m [39;49;00m[92mtest_query_buffer_matches_query_candidates[39;49;00m([96mself[39;49;00m):[90m[39;49;00m
+        lsh = MinHashLSH(threshold=[94m0.5[39;49;00m, num_perm=[94m32[39;49;00m)[90m[39;49;00m
+        docs = [][90m[39;49;00m
+        [94mfor[39;49;00m tokens [95min[39;49;00m ([[33mb[39;49;00m[33m"[39;49;00m[33ma[39;49;00m[33m"[39;49;00m, [33mb[39;49;00m[33m"[39;49;00m[33mb[39;49;00m[33m"[39;49;00m, [33mb[39;49;00m[33m"[39;49;00m[33mc[39;49;00m[33m"[39;49;00m], [[33mb[39;49;00m[33m"[39;49;00m[33ma[39;49;00m[33m"[39;49;00m, [33mb[39;49;00m[33m"[39;49;00m[33mb[39;49;00m[33m"[39;49;00m, [33mb[39;49;00m[33m"[39;49;00m[33md[39;49;00m[33m"[39;49;00m], [[33mb[39;49;00m[33m"[39;49;00m[33mx[39;49;00m[33m"[39;49;00m, [33mb[39;49;00m[33m"[39;49;00m[33my[39;49;00m[33m"[39;49;00m, [33mb[39;49;00m[33m"[39;49;00m[33mz[39;49;00m[33m"[39;49;00m]):[90m[39;49;00m
+            minhash = MinHash(num_perm=[94m32[39;49;00m)[90m[39;49;00m
+            [94mfor[39;49;00m token [95min[39;49;00m tokens:[90m[39;49;00m
+                minhash.update(token)[90m[39;49;00m
+            docs.append(minhash)[90m[39;49;00m
+        [94mfor[39;49;00m key, minhash [95min[39;49;00m [96menumerate[39;49;00m(docs):[90m[39;49;00m
+            lsh.insert(key, minhash)[90m[39;49;00m
+    [90m[39;49;00m
+        lsh.add_to_query_buffer(docs[[94m0[39;49;00m])[90m[39;49;00m
+>       buffered_result = [96mset[39;49;00m(lsh.collect_query_buffer())[90m[39;49;00m
+
+[1m[31mtest/test_lsh.py[0m:121: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+[1m[31mdatasketch/lsh.py[0m:270: in collect_query_buffer
+    [0mcollected_result_sets = [[90m[39;49;00m
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+.0 = <list_iterator object at 0xffffa803f670>
+
+    [0mcollected_result_sets = [[90m[39;49;00m
+        [96mset[39;49;00m(collected_result_lists)[90m[39;49;00m
+        [94mfor[39;49;00m hashtable [95min[39;49;00m [96mself[39;49;00m.hashtables[90m[39;49;00m
+>       [94mfor[39;49;00m collected_result_lists [95min[39;49;00m hashtable.collect_select_buffer()[90m[39;49;00m
+    ][90m[39;49;00m
+[1m[31mE   TypeError: 'NoneType' object is not iterable[0m
+
+[1m[31mdatasketch/lsh.py[0m:273: TypeError
+[31m[1m____________________ TestMinHashLSH.test_query_buffer_redis ____________________[0m
+
+self = <test.test_lsh.TestMinHashLSH testMethod=test_query_buffer_redis>
+
+    [0m[94mdef[39;49;00m[90m [39;49;00m[92mtest_query_buffer_redis[39;49;00m([96mself[39;49;00m):[90m[39;49;00m
+        [94mwith[39;49;00m patch([33m"[39;49;00m[33mredis.Redis[39;49;00m[33m"[39;49;00m, fake_redis):[90m[39;49;00m
+            lsh = MinHashLSH([90m[39;49;00m
+                threshold=[94m0.5[39;49;00m,[90m[39;49;00m
+                num_perm=[94m16[39;49;00m,[90m[39;49;00m
+                storage_config={[33m"[39;49;00m[33mtype[39;49;00m[33m"[39;49;00m: [33m"[39;49;00m[33mredis[39;49;00m[33m"[39;49;00m, [33m"[39;49;00m[33mredis[39;49;00m[33m"[39;49;00m: {[33m"[39;49;00m[33mhost[39;49;00m[33m"[39;49;00m: [33m"[39;49;00m[33mlocalhost[39;49;00m[33m"[39;49;00m, [33m"[39;49;00m[33mport[39;49;00m[33m"[39;49;00m: [94m6379[39;49;00m}},[90m[39;49;00m
+            )[90m[39;49;00m
+            m1 = MinHash([94m16[39;49;00m)[90m[39;49;00m
+            m1.update([33mb[39;49;00m[33m"[39;49;00m[33ma[39;49;00m[33m"[39;49;00m)[90m[39;49;00m
+            m2 = MinHash([94m16[39;49;00m)[90m[39;49;00m
+            m2.update([33mb[39;49;00m[33m"[39;49;00m[33mb[39;49;00m[33m"[39;49;00m)[90m[39;49;00m
+            lsh.insert([33m"[39;49;00m[33ma[39;49;00m[33m"[39;49;00m, m1)[90m[39;49;00m
+            lsh.insert([33m"[39;49;00m[33mb[39;49;00m[33m"[39;49;00m, m2)[90m[39;49;00m
+            lsh.query(m1)[90m[39;49;00m
+            lsh.add_to_query_buffer(m1)[90m[39;49;00m
+>           result = lsh.collect_query_buffer()[90m[39;49;00m
+
+[1m[31mtest/test_lsh.py[0m:223: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+[1m[31mdatasketch/lsh.py[0m:270: in collect_query_buffer
+    [0mcollected_result_sets = [[90m[39;49;00m
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+.0 = <list_iterator object at 0xffff9d91ca00>
+
+    [0mcollected_result_sets = [[90m[39;49;00m
+        [96mset[39;49;00m(collected_result_lists)[90m[39;49;00m
+        [94mfor[39;49;00m hashtable [95min[39;49;00m [96mself[39;49;00m.hashtables[90m[39;49;00m
+>       [94mfor[39;49;00m collected_result_lists [95min[39;49;00m hashtable.collect_select_buffer()[90m[39;49;00m
+    ][90m[39;49;00m
+[1m[31mE   TypeError: 'NoneType' object is not iterable[0m
+
+[1m[31mdatasketch/lsh.py[0m:273: TypeError
+[31m[1m___________________ TestMinHashLSHEnsemble.test_query_redis ____________________[0m
+
+self = <test.test_lshensemble.TestMinHashLSHEnsemble testMethod=test_query_redis>
+
+    [0m[94mdef[39;49;00m[90m [39;49;00m[92mtest_query_redis[39;49;00m([96mself[39;49;00m):[90m[39;49;00m
+        storage_config = {[90m[39;49;00m
+            [33m"[39;49;00m[33mtype[39;49;00m[33m"[39;49;00m: [33m"[39;49;00m[33mredis[39;49;00m[33m"[39;49;00m,[90m[39;49;00m
+            [33m"[39;49;00m[33mredis[39;49;00m[33m"[39;49;00m: {[90m[39;49;00m
+                [33m"[39;49;00m[33mhost[39;49;00m[33m"[39;49;00m: [33m"[39;49;00m[33mlocalhost[39;49;00m[33m"[39;49;00m,[90m[39;49;00m
+                [33m"[39;49;00m[33mport[39;49;00m[33m"[39;49;00m: [94m6379[39;49;00m,[90m[39;49;00m
+            },[90m[39;49;00m
+        }[90m[39;49;00m
+        [94mwith[39;49;00m patch([33m"[39;49;00m[33mredis.Redis[39;49;00m[33m"[39;49;00m, fake_redis):[90m[39;49;00m
+            lsh = MinHashLSHEnsemble(threshold=[94m0.9[39;49;00m, storage_config=storage_config)[90m[39;49;00m
+            data = [96mlist[39;49;00m([96mself[39;49;00m._data([94m64[39;49;00m))[90m[39;49;00m
+            lsh.index(data)[90m[39;49;00m
+            [94mfor[39;49;00m key, minhash, size [95min[39;49;00m data:[90m[39;49;00m
+                keys = lsh.query(minhash, size)[90m[39;49;00m
+>               [96mself[39;49;00m.assertTrue(key [95min[39;49;00m keys)[90m[39;49;00m
+[1m[31mE               AssertionError: False is not true[0m
+
+[1m[31mtest/test_lshensemble.py[0m:85: AssertionError
+[31m[1m____________________________ TestMinHash.test_union ____________________________[0m
+
+self = <test.test_minhash.TestMinHash testMethod=test_union>
+
+    [0m[94mdef[39;49;00m[90m [39;49;00m[92mtest_union[39;49;00m([96mself[39;49;00m):[90m[39;49;00m
+        m1 = minhash.MinHash([94m4[39;49;00m, [94m1[39;49;00m, gpu_mode=[33m"[39;49;00m[33mdetect[39;49;00m[33m"[39;49;00m, hashfunc=fake_hash_func)[90m[39;49;00m
+        m2 = minhash.MinHash([94m4[39;49;00m, [94m1[39;49;00m, gpu_mode=[33m"[39;49;00m[33mdetect[39;49;00m[33m"[39;49;00m, hashfunc=fake_hash_func)[90m[39;49;00m
+        m2.update([94m12[39;49;00m)[90m[39;49;00m
+        u = minhash.MinHash.union(m1, m2)[90m[39;49;00m
+        [96mself[39;49;00m.assertTrue(u.jaccard(m2) == [94m1.0[39;49;00m)[90m[39;49;00m
+>       [96mself[39;49;00m.assertIs(u.hashfunc, fake_hash_func)[90m[39;49;00m
+[1m[31mE       AssertionError: <function sha1_hash32 at 0xffff9fcaa940> is not <function fake_hash_func at 0xffff9daa78b0>[0m
+
+[1m[31mtest/test_minhash.py[0m:65: AssertionError
+[31m[1m___________ TestGPUPathOnCPU.test_gpu_branch_matches_cpu_all_schemes ___________[0m
+
+self = <test.test_minhash_gpu.TestGPUPathOnCPU testMethod=test_gpu_branch_matches_cpu_all_schemes>
+
+    [0m[94mdef[39;49;00m[90m [39;49;00m[92mtest_gpu_branch_matches_cpu_all_schemes[39;49;00m([96mself[39;49;00m):[90m[39;49;00m
+>       gpu = [96mself[39;49;00m._run_with_shim([96mself[39;49;00m._shim(), [94mTrue[39;49;00m)[90m[39;49;00m
+
+[1m[31mtest/test_minhash_gpu.py[0m:132: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+[1m[31mtest/test_minhash_gpu.py[0m:125: in _run_with_shim
+    [0mm.update_batch(data)[90m[39;49;00m
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = <datasketch.minhash.MinHash object at 0xffff9a9f3b50>
+b = [b'token-0', b'token-1', b'token-2', b'token-3', b'token-4', b'token-5', ...]
+
+    [0m[94mdef[39;49;00m[90m [39;49;00m[92mupdate_batch[39;49;00m([96mself[39;49;00m, b: Iterable) -> [94mNone[39;49;00m:[90m[39;49;00m
+    [90m    [39;49;00m[33m"""Update this MinHash with a batch of hashable values.[39;49;00m
+    [33m[39;49;00m
+    [33m    Args:[39;49;00m
+    [33m        b (Iterable): An iterable of values to be hashed using the[39;49;00m
+    [33m            specified hash function.[39;49;00m
+    [33m    """[39;49;00m[90m[39;49;00m
+        b = [96mlist[39;49;00m(b)[90m[39;49;00m
+        [94mif[39;49;00m [96mlen[39;49;00m(b) == [94m0[39;49;00m:[90m[39;49;00m
+            [94mreturn[39;49;00m[90m[39;49;00m
+        hashes = [[96mself[39;49;00m.hashfunc(_b) [94mfor[39;49;00m _b [95min[39;49;00m b][90m[39;49;00m
+        a, bperm = [96mself[39;49;00m.permutations[90m[39;49;00m
+        [94mif[39;49;00m [96mself[39;49;00m.scheme == _SCHEME_LEGACY:[90m[39;49;00m
+            hv = np.array(hashes, dtype=np.uint64)[90m[39;49;00m
+            phv = np.bitwise_and([90m[39;49;00m
+                (hv[:, np.newaxis] * a + bperm) % _mersenne_prime, _max_hash[90m[39;49;00m
+            )[90m[39;49;00m
+            [96mself[39;49;00m.hashvalues = np.vstack([phv, [96mself[39;49;00m.hashvalues]).min(axis=[94m0[39;49;00m)[90m[39;49;00m
+            [94mreturn[39;49;00m[90m[39;49;00m
+        width = _SCHEME_WIDTHS[[96mself[39;49;00m.scheme][90m[39;49;00m
+        dtype = _SCHEME_DTYPES[[96mself[39;49;00m.scheme][90m[39;49;00m
+        hv = _fmix([96mself[39;49;00m._hash_input_array(hashes), width)[90m[39;49;00m
+        [94mif[39;49;00m [96mself[39;49;00m._resolve_gpu():[90m[39;49;00m
+            [96mself[39;49;00m._ensure_gpu_caches()[90m[39;49;00m
+            hv_gpu = cp.asarray(hv)[90m[39;49;00m
+>           phv = [96mself[39;49;00m._a_gpu * hv_gpu[:, cp.newaxis] + [96mself[39;49;00m._b_gpu[90m[39;49;00m
+[1m[31mE           AttributeError: 'types.SimpleNamespace' object has no attribute 'newaxis'[0m
+
+[1m[31mdatasketch/minhash.py[0m:345: AttributeError
+[31m[1m_____________ TestGPUPathOnCPU.test_shim_catches_wrong_cache_dtype _____________[0m
+
+self = <test.test_minhash_gpu.TestGPUPathOnCPU testMethod=test_shim_catches_wrong_cache_dtype>
+
+    [0m[94mdef[39;49;00m[90m [39;49;00m[92mtest_shim_catches_wrong_cache_dtype[39;49;00m([96mself[39;49;00m):[90m[39;49;00m
+        [90m# Mutation guard: forcing uint64 caches for affine32 changes the[39;49;00m[90m[39;49;00m
+        [90m# pre-truncation minimum ordering, so the result must differ from CPU.[39;49;00m[90m[39;49;00m
+        bad = [96mself[39;49;00m._shim()[90m[39;49;00m
+        bad.uint32 = np.uint64  [90m# affine32 caches wrongly built as uint64[39;49;00m[90m[39;49;00m
+>       gpu = [96mself[39;49;00m._run_with_shim(bad, [94mTrue[39;49;00m)[90m[39;49;00m
+
+[1m[31mtest/test_minhash_gpu.py[0m:145: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+[1m[31mtest/test_minhash_gpu.py[0m:125: in _run_with_shim
+    [0mm.update_batch(data)[90m[39;49;00m
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = <datasketch.minhash.MinHash object at 0xffff9a9f0820>
+b = [b'token-0', b'token-1', b'token-2', b'token-3', b'token-4', b'token-5', ...]
+
+    [0m[94mdef[39;49;00m[90m [39;49;00m[92mupdate_batch[39;49;00m([96mself[39;49;00m, b: Iterable) -> [94mNone[39;49;00m:[90m[39;49;00m
+    [90m    [39;49;00m[33m"""Update this MinHash with a batch of hashable values.[39;49;00m
+    [33m[39;49;00m
+    [33m    Args:[39;49;00m
+    [33m        b (Iterable): An iterable of values to be hashed using the[39;49;00m
+    [33m            specified hash function.[39;49;00m
+    [33m    """[39;49;00m[90m[39;49;00m
+        b = [96mlist[39;49;00m(b)[90m[39;49;00m
+        [94mif[39;49;00m [96mlen[39;49;00m(b) == [94m0[39;49;00m:[90m[39;49;00m
+            [94mreturn[39;49;00m[90m[39;49;00m
+        hashes = [[96mself[39;49;00m.hashfunc(_b) [94mfor[39;49;00m _b [95min[39;49;00m b][90m[39;49;00m
+        a, bperm = [96mself[39;49;00m.permutations[90m[39;49;00m
+        [94mif[39;49;00m [96mself[39;49;00m.scheme == _SCHEME_LEGACY:[90m[39;49;00m
+            hv = np.array(hashes, dtype=np.uint64)[90m[39;49;00m
+            phv = np.bitwise_and([90m[39;49;00m
+                (hv[:, np.newaxis] * a + bperm) % _mersenne_prime, _max_hash[90m[39;49;00m
+            )[90m[39;49;00m
+            [96mself[39;49;00m.hashvalues = np.vstack([phv, [96mself[39;49;00m.hashvalues]).min(axis=[94m0[39;49;00m)[90m[39;49;00m
+            [94mreturn[39;49;00m[90m[39;49;00m
+        width = _SCHEME_WIDTHS[[96mself[39;49;00m.scheme][90m[39;49;00m
+        dtype = _SCHEME_DTYPES[[96mself[39;49;00m.scheme][90m[39;49;00m
+        hv = _fmix([96mself[39;49;00m._hash_input_array(hashes), width)[90m[39;49;00m
+        [94mif[39;49;00m [96mself[39;49;00m._resolve_gpu():[90m[39;49;00m
+            [96mself[39;49;00m._ensure_gpu_caches()[90m[39;49;00m
+            hv_gpu = cp.asarray(hv)[90m[39;49;00m
+>           phv = [96mself[39;49;00m._a_gpu * hv_gpu[:, cp.newaxis] + [96mself[39;49;00m._b_gpu[90m[39;49;00m
+[1m[31mE           AttributeError: 'types.SimpleNamespace' object has no attribute 'newaxis'[0m
+
+[1m[31mdatasketch/minhash.py[0m:345: AttributeError
+[31m[1m_______ TestLSHSchemeGuards.test_lsh_insert_and_query_mixed_scheme_raise _______[0m
+
+self = <test.test_minhash_schemes.TestLSHSchemeGuards testMethod=test_lsh_insert_and_query_mixed_scheme_raise>
+
+    [0m[94mdef[39;49;00m[90m [39;49;00m[92mtest_lsh_insert_and_query_mixed_scheme_raise[39;49;00m([96mself[39;49;00m):[90m[39;49;00m
+        lsh = MinHashLSH(threshold=[94m0.5[39;49;00m, num_perm=[94m128[39;49;00m)[90m[39;49;00m
+        lsh.insert([33m"[39;49;00m[33mk32[39;49;00m[33m"[39;49;00m, [96mself[39;49;00m._mh([33m"[39;49;00m[33maffine32[39;49;00m[33m"[39;49;00m))[90m[39;49;00m
+        [94mwith[39;49;00m [96mself[39;49;00m.assertRaises([96mValueError[39;49;00m):[90m[39;49;00m
+            lsh.insert([33m"[39;49;00m[33mkleg[39;49;00m[33m"[39;49;00m, [96mself[39;49;00m._mh([33m"[39;49;00m[33mlegacy[39;49;00m[33m"[39;49;00m))[90m[39;49;00m
+        [94mwith[39;49;00m [96mself[39;49;00m.assertRaises([96mValueError[39;49;00m):[90m[39;49;00m
+>           lsh.query([96mself[39;49;00m._mh([33m"[39;49;00m[33maffine64[39;49;00m[33m"[39;49;00m))[90m[39;49;00m
+[1m[31mE           AssertionError: ValueError not raised[0m
+
+[1m[31mtest/test_minhash_schemes.py[0m:323: AssertionError
+[31m[1m____________ TestLSHSchemeGuards.test_lsh_merge_mixed_scheme_raises ____________[0m
+
+self = <test.test_minhash_schemes.TestLSHSchemeGuards testMethod=test_lsh_merge_mixed_scheme_raises>
+
+    [0m[94mdef[39;49;00m[90m [39;49;00m[92mtest_lsh_merge_mixed_scheme_raises[39;49;00m([96mself[39;49;00m):[90m[39;49;00m
+        a = MinHashLSH(threshold=[94m0.5[39;49;00m, num_perm=[94m128[39;49;00m)[90m[39;49;00m
+        a.insert([33m"[39;49;00m[33mx[39;49;00m[33m"[39;49;00m, [96mself[39;49;00m._mh([33m"[39;49;00m[33maffine32[39;49;00m[33m"[39;49;00m))[90m[39;49;00m
+        b = MinHashLSH(threshold=[94m0.5[39;49;00m, num_perm=[94m128[39;49;00m)[90m[39;49;00m
+        b.insert([33m"[39;49;00m[33my[39;49;00m[33m"[39;49;00m, [96mself[39;49;00m._mh([33m"[39;49;00m[33mlegacy[39;49;00m[33m"[39;49;00m))[90m[39;49;00m
+        [94mwith[39;49;00m [96mself[39;49;00m.assertRaises([96mValueError[39;49;00m):[90m[39;49;00m
+>           a.merge(b)[90m[39;49;00m
+[1m[31mE           AssertionError: ValueError not raised[0m
+
+[1m[31mtest/test_minhash_schemes.py[0m:341: AssertionError
+[31m[1m_________ TestLSHSchemeGuards.test_lsh_pickle_preserves_learned_scheme _________[0m
+
+self = <test.test_minhash_schemes.TestLSHSchemeGuards testMethod=test_lsh_pickle_preserves_learned_scheme>
+
+    [0m[94mdef[39;49;00m[90m [39;49;00m[92mtest_lsh_pickle_preserves_learned_scheme[39;49;00m([96mself[39;49;00m):[90m[39;49;00m
+        lsh = MinHashLSH(threshold=[94m0.5[39;49;00m, num_perm=[94m128[39;49;00m)[90m[39;49;00m
+        lsh.insert([33m"[39;49;00m[33mk[39;49;00m[33m"[39;49;00m, [96mself[39;49;00m._mh([33m"[39;49;00m[33maffine32[39;49;00m[33m"[39;49;00m))[90m[39;49;00m
+        restored = pickle.loads(pickle.dumps(lsh))[90m[39;49;00m
+        [94mwith[39;49;00m [96mself[39;49;00m.assertRaises([96mValueError[39;49;00m):[90m[39;49;00m
+>           restored.query([96mself[39;49;00m._mh([33m"[39;49;00m[33mlegacy[39;49;00m[33m"[39;49;00m))[90m[39;49;00m
+[1m[31mE           AssertionError: ValueError not raised[0m
+
+[1m[31mtest/test_minhash_schemes.py[0m:353: AssertionError
+[31m[1m___________ TestLSHSchemeGuards.test_lshensemble_mixed_scheme_raises ___________[0m
+
+self = <test.test_minhash_schemes.TestLSHSchemeGuards testMethod=test_lshensemble_mixed_scheme_raises>
+
+    [0m[94mdef[39;49;00m[90m [39;49;00m[92mtest_lshensemble_mixed_scheme_raises[39;49;00m([96mself[39;49;00m):[90m[39;49;00m
+        ensemble = MinHashLSHEnsemble(threshold=[94m0.8[39;49;00m, num_perm=[94m128[39;49;00m, num_part=[94m2[39;49;00m)[90m[39;49;00m
+        ensemble.index([([33m"[39;49;00m[33mk[39;49;00m[33m"[39;49;00m, [96mself[39;49;00m._mh([33m"[39;49;00m[33maffine32[39;49;00m[33m"[39;49;00m), [94m3[39;49;00m)])[90m[39;49;00m
+        [96mself[39;49;00m.assertIn([33m"[39;49;00m[33mk[39;49;00m[33m"[39;49;00m, [96mlist[39;49;00m(ensemble.query([96mself[39;49;00m._mh([33m"[39;49;00m[33maffine32[39;49;00m[33m"[39;49;00m), [94m3[39;49;00m)))[90m[39;49;00m
+        [94mwith[39;49;00m [96mself[39;49;00m.assertRaises([96mValueError[39;49;00m):[90m[39;49;00m
+>           [96mlist[39;49;00m(ensemble.query([96mself[39;49;00m._mh([33m"[39;49;00m[33mlegacy[39;49;00m[33m"[39;49;00m), [94m3[39;49;00m))[90m[39;49;00m
+[1m[31mE           AssertionError: ValueError not raised[0m
+
+[1m[31mtest/test_minhash_schemes.py[0m:371: AssertionError
+[31m[1m____________ TestLSHSchemeGuards.test_lshforest_mixed_scheme_raises ____________[0m
+
+self = <test.test_minhash_schemes.TestLSHSchemeGuards testMethod=test_lshforest_mixed_scheme_raises>
+
+    [0m[94mdef[39;49;00m[90m [39;49;00m[92mtest_lshforest_mixed_scheme_raises[39;49;00m([96mself[39;49;00m):[90m[39;49;00m
+        forest = MinHashLSHForest(num_perm=[94m128[39;49;00m)[90m[39;49;00m
+        forest.add([33m"[39;49;00m[33mk[39;49;00m[33m"[39;49;00m, [96mself[39;49;00m._mh([33m"[39;49;00m[33maffine32[39;49;00m[33m"[39;49;00m))[90m[39;49;00m
+        [94mwith[39;49;00m [96mself[39;49;00m.assertRaises([96mValueError[39;49;00m):[90m[39;49;00m
+            forest.add([33m"[39;49;00m[33mk2[39;49;00m[33m"[39;49;00m, [96mself[39;49;00m._mh([33m"[39;49;00m[33mlegacy[39;49;00m[33m"[39;49;00m))[90m[39;49;00m
+        forest.index()[90m[39;49;00m
+        [94mwith[39;49;00m [96mself[39;49;00m.assertRaises([96mValueError[39;49;00m):[90m[39;49;00m
+>           forest.query([96mself[39;49;00m._mh([33m"[39;49;00m[33mlegacy[39;49;00m[33m"[39;49;00m), [94m1[39;49;00m)[90m[39;49;00m
+[1m[31mE           AssertionError: ValueError not raised[0m
+
+[1m[31mtest/test_minhash_schemes.py[0m:363: AssertionError
+[31m[1m_____________ TestBBitSchemes.test_estimation_accuracy_per_scheme ______________[0m
+
+self = <test.test_minhash_schemes.TestBBitSchemes testMethod=test_estimation_accuracy_per_scheme>
+
+    [0m[94mdef[39;49;00m[90m [39;49;00m[92mtest_estimation_accuracy_per_scheme[39;49;00m([96mself[39;49;00m):[90m[39;49;00m
+        [90m# b-bit keeps the *low* bits of each min hash value, which are the[39;49;00m[90m[39;49;00m
+        [90m# softest bits of a multiply-shift (affine) output, so verify the[39;49;00m[90m[39;49;00m
+        [90m# estimate stays accurate under every scheme. Two sets of size 1000[39;49;00m[90m[39;49;00m
+        [90m# sharing 500 elements have true Jaccard 500 / 1500 = 1/3.[39;49;00m[90m[39;49;00m
+        true_j = [94m1.0[39;49;00m / [94m3.0[39;49;00m[90m[39;49;00m
+        a = [[33mb[39;49;00m[33m"[39;49;00m[33mw[39;49;00m[33m%d[39;49;00m[33m"[39;49;00m % i [94mfor[39;49;00m i [95min[39;49;00m [96mrange[39;49;00m([94m0[39;49;00m, [94m1000[39;49;00m)][90m[39;49;00m
+        b_set = [[33mb[39;49;00m[33m"[39;49;00m[33mw[39;49;00m[33m%d[39;49;00m[33m"[39;49;00m % i [94mfor[39;49;00m i [95min[39;49;00m [96mrange[39;49;00m([94m500[39;49;00m, [94m1500[39;49;00m)][90m[39;49;00m
+        [94mfor[39;49;00m scheme [95min[39;49;00m ALL_SCHEMES:[90m[39;49;00m
+            ma = MinHash(num_perm=[94m512[39;49;00m, seed=[94m7[39;49;00m, scheme=scheme)[90m[39;49;00m
+            mb = MinHash(num_perm=[94m512[39;49;00m, seed=[94m7[39;49;00m, scheme=scheme)[90m[39;49;00m
+            ma.update_batch(a)[90m[39;49;00m
+            mb.update_batch(b_set)[90m[39;49;00m
+            [94mfor[39;49;00m nbits [95min[39;49;00m ([94m1[39;49;00m, [94m4[39;49;00m, [94m8[39;49;00m, [94m16[39;49;00m, [94m32[39;49;00m):[90m[39;49;00m
+                est = bBitMinHash(ma, nbits).jaccard(bBitMinHash(mb, nbits))[90m[39;49;00m
+>               [96mself[39;49;00m.assertLess([96mabs[39;49;00m(est - true_j), [94m0.1[39;49;00m, (scheme, nbits))[90m[39;49;00m
+[1m[31mE               AssertionError: 0.3678385416666667 not less than 0.1 : ('affine32', 1)[0m
+
+[1m[31mtest/test_minhash_schemes.py[0m:671: AssertionError
+[33m=============================== warnings summary ===============================[0m
+test/test_hnsw.py::TestHNSW::test_soft_remove_and_pop_and_clean
+  /usr/local/lib/python3.9/unittest/case.py:550: UserWarning: Issue encountered at i=97 during soft remove unit test: expected 2 results, got 1 results. Potential graph connectivity issue.
+    method()
+
+test/test_hnsw.py::TestHNSWJaccard::test_soft_remove_and_pop_and_clean
+  /usr/local/lib/python3.9/unittest/case.py:550: UserWarning: Issue encountered at i=94 during soft remove unit test: expected 5 results, got 4 results. Potential graph connectivity issue.
+    method()
+
+test/test_hnsw.py::TestHNSWMinHashJaccard::test_soft_remove_and_pop_and_clean
+  /usr/local/lib/python3.9/unittest/case.py:550: UserWarning: Issue encountered at i=94 during soft remove unit test: expected 5 results, got 3 results. Potential graph connectivity issue.
+    method()
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+--------------------------------- JSON report ----------------------------------
+report saved to: report.json
+[36m[1m=========================== short test summary info ============================[0m
+[31mFAILED[0m test/test_hyperloglog.py::[1mTestHyperLogLog::test_union[0m - AssertionError: <function sha1_hash32 at 0xffff9fcaa940> is not <function f...
+[31mFAILED[0m test/test_hyperloglog.py::[1mTestHyperLogLogSpecific::test_hyperloglog_small_card_est[0m - AssertionError: False is not true
+[31mFAILED[0m test/test_hyperloglog.py::[1mTestHyperLogLogPlusPlus::test_union[0m - AssertionError: <function sha1_hash64 at 0xffff9fcaac10> is not <function f...
+[31mFAILED[0m test/test_lsh.py::[1mTestMinHashLSH::test_query_buffer[0m - TypeError: 'NoneType' object is not iterable
+[31mFAILED[0m test/test_lsh.py::[1mTestMinHashLSH::test_query_buffer_matches_query_candidates[0m - TypeError: 'NoneType' object is not iterable
+[31mFAILED[0m test/test_lsh.py::[1mTestMinHashLSH::test_query_buffer_redis[0m - TypeError: 'NoneType' object is not iterable
+[31mFAILED[0m test/test_lshensemble.py::[1mTestMinHashLSHEnsemble::test_query_redis[0m - AssertionError: False is not true
+[31mFAILED[0m test/test_minhash.py::[1mTestMinHash::test_union[0m - AssertionError: <function sha1_hash32 at 0xffff9fcaa940> is not <function f...
+[31mFAILED[0m test/test_minhash_gpu.py::[1mTestGPUPathOnCPU::test_gpu_branch_matches_cpu_all_schemes[0m - AttributeError: 'types.SimpleNamespace' object has no attribute 'newaxis'
+[31mFAILED[0m test/test_minhash_gpu.py::[1mTestGPUPathOnCPU::test_shim_catches_wrong_cache_dtype[0m - AttributeError: 'types.SimpleNamespace' object has no attribute 'newaxis'
+[31mFAILED[0m test/test_minhash_schemes.py::[1mTestLSHSchemeGuards::test_lsh_insert_and_query_mixed_scheme_raise[0m - AssertionError: ValueError not raised
+[31mFAILED[0m test/test_minhash_schemes.py::[1mTestLSHSchemeGuards::test_lsh_merge_mixed_scheme_raises[0m - AssertionError: ValueError not raised
+[31mFAILED[0m test/test_minhash_schemes.py::[1mTestLSHSchemeGuards::test_lsh_pickle_preserves_learned_scheme[0m - AssertionError: ValueError not raised
+[31mFAILED[0m test/test_minhash_schemes.py::[1mTestLSHSchemeGuards::test_lshensemble_mixed_scheme_raises[0m - AssertionError: ValueError not raised
+[31mFAILED[0m test/test_minhash_schemes.py::[1mTestLSHSchemeGuards::test_lshforest_mixed_scheme_raises[0m - AssertionError: ValueError not raised
+[31mFAILED[0m test/test_minhash_schemes.py::[1mTestBBitSchemes::test_estimation_accuracy_per_scheme[0m - AssertionError: 0.3678385416666667 not less than 0.1 : ('affine32', 1)
+[31m=========== [31m[1m16 failed[0m, [32m203 passed[0m, [33m105 skipped[0m, [33m3 warnings[0m[31m in 29.94s[0m[31m ===========[0m

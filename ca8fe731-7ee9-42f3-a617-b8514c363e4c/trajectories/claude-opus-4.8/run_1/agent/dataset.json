@@ -1,0 +1,26 @@
+{
+  "instance_id": "commit-0/goleak",
+  "id": "ca8fe731-7ee9-42f3-a617-b8514c363e4c",
+  "repo": "Shivansh9411/goleak",
+  "base_commit": "c9075a466fdfdef715e02e92d958967cf1a40edd",
+  "reference_commit": "5f791e3ef83b35d32b262466250507c2f20fea3c",
+  "setup": {
+    "install": "go mod download && go build ./...",
+    "packages": "",
+    "pip_packages": "",
+    "pre_install": [],
+    "go_version": "1.20",
+    "specification": "https://pkg.go.dev/go.uber.org/goleak",
+    "version_source": "go.mod[go]",
+    "version_conflicts": [
+      ".github/workflows/*.yml[matrix.go-version](1.23)"
+    ]
+  },
+  "test": {
+    "test_cmd": "go test -json -count=1 ./...",
+    "test_dir": "."
+  },
+  "src_dir": ".",
+  "language": "go",
+  "base_compiles": true
+}

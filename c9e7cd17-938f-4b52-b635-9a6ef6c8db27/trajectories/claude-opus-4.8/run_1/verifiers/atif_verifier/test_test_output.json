@@ -1,0 +1,499 @@
+{"Time":"2026-07-28T14:24:10.883654378Z","Action":"start","Package":"github.com/allegro/bigcache/v3"}
+{"Time":"2026-07-28T14:24:10.88380933Z","Action":"start","Package":"github.com/allegro/bigcache/v3/queue"}
+{"Time":"2026-07-28T14:24:10.88390973Z","Action":"start","Package":"github.com/allegro/bigcache/v3/server"}
+{"Time":"2026-07-28T14:24:10.884934754Z","Action":"run","Package":"github.com/allegro/bigcache/v3/queue","Test":"TestPushAndPop"}
+{"Time":"2026-07-28T14:24:10.884965925Z","Action":"output","Package":"github.com/allegro/bigcache/v3/queue","Test":"TestPushAndPop","Output":"=== RUN   TestPushAndPop\n"}
+{"Time":"2026-07-28T14:24:10.88498081Z","Action":"output","Package":"github.com/allegro/bigcache/v3/queue","Test":"TestPushAndPop","Output":"=== PAUSE TestPushAndPop\n"}
+{"Time":"2026-07-28T14:24:10.884984142Z","Action":"pause","Package":"github.com/allegro/bigcache/v3/queue","Test":"TestPushAndPop"}
+{"Time":"2026-07-28T14:24:10.884987295Z","Action":"run","Package":"github.com/allegro/bigcache/v3/queue","Test":"TestLen"}
+{"Time":"2026-07-28T14:24:10.884989621Z","Action":"output","Package":"github.com/allegro/bigcache/v3/queue","Test":"TestLen","Output":"=== RUN   TestLen\n"}
+{"Time":"2026-07-28T14:24:10.884992917Z","Action":"output","Package":"github.com/allegro/bigcache/v3/queue","Test":"TestLen","Output":"=== PAUSE TestLen\n"}
+{"Time":"2026-07-28T14:24:10.884995205Z","Action":"pause","Package":"github.com/allegro/bigcache/v3/queue","Test":"TestLen"}
+{"Time":"2026-07-28T14:24:10.88499776Z","Action":"run","Package":"github.com/allegro/bigcache/v3/queue","Test":"TestPeek"}
+{"Time":"2026-07-28T14:24:10.884999783Z","Action":"output","Package":"github.com/allegro/bigcache/v3/queue","Test":"TestPeek","Output":"=== RUN   TestPeek\n"}
+{"Time":"2026-07-28T14:24:10.885002195Z","Action":"output","Package":"github.com/allegro/bigcache/v3/queue","Test":"TestPeek","Output":"=== PAUSE TestPeek\n"}
+{"Time":"2026-07-28T14:24:10.885004084Z","Action":"pause","Package":"github.com/allegro/bigcache/v3/queue","Test":"TestPeek"}
+{"Time":"2026-07-28T14:24:10.885006842Z","Action":"run","Package":"github.com/allegro/bigcache/v3/queue","Test":"TestResetFullQueue"}
+{"Time":"2026-07-28T14:24:10.885008892Z","Action":"output","Package":"github.com/allegro/bigcache/v3/queue","Test":"TestResetFullQueue","Output":"=== RUN   TestResetFullQueue\n"}
+{"Time":"2026-07-28T14:24:10.885011582Z","Action":"output","Package":"github.com/allegro/bigcache/v3/queue","Test":"TestResetFullQueue","Output":"=== PAUSE TestResetFullQueue\n"}
+{"Time":"2026-07-28T14:24:10.885013482Z","Action":"pause","Package":"github.com/allegro/bigcache/v3/queue","Test":"TestResetFullQueue"}
+{"Time":"2026-07-28T14:24:10.885015777Z","Action":"run","Package":"github.com/allegro/bigcache/v3/queue","Test":"TestReset"}
+{"Time":"2026-07-28T14:24:10.885017782Z","Action":"output","Package":"github.com/allegro/bigcache/v3/queue","Test":"TestReset","Output":"=== RUN   TestReset\n"}
+{"Time":"2026-07-28T14:24:10.885022924Z","Action":"output","Package":"github.com/allegro/bigcache/v3/queue","Test":"TestReset","Output":"=== PAUSE TestReset\n"}
+{"Time":"2026-07-28T14:24:10.885024829Z","Action":"pause","Package":"github.com/allegro/bigcache/v3/queue","Test":"TestReset"}
+{"Time":"2026-07-28T14:24:10.885029155Z","Action":"run","Package":"github.com/allegro/bigcache/v3/queue","Test":"TestReuseAvailableSpace"}
+{"Time":"2026-07-28T14:24:10.885031189Z","Action":"output","Package":"github.com/allegro/bigcache/v3/queue","Test":"TestReuseAvailableSpace","Output":"=== RUN   TestReuseAvailableSpace\n"}
+{"Time":"2026-07-28T14:24:10.885033686Z","Action":"output","Package":"github.com/allegro/bigcache/v3/queue","Test":"TestReuseAvailableSpace","Output":"=== PAUSE TestReuseAvailableSpace\n"}
+{"Time":"2026-07-28T14:24:10.88503672Z","Action":"pause","Package":"github.com/allegro/bigcache/v3/queue","Test":"TestReuseAvailableSpace"}
+{"Time":"2026-07-28T14:24:10.88503979Z","Action":"run","Package":"github.com/allegro/bigcache/v3/queue","Test":"TestAllocateAdditionalSpace"}
+{"Time":"2026-07-28T14:24:10.885041852Z","Action":"output","Package":"github.com/allegro/bigcache/v3/queue","Test":"TestAllocateAdditionalSpace","Output":"=== RUN   TestAllocateAdditionalSpace\n"}
+{"Time":"2026-07-28T14:24:10.885051107Z","Action":"output","Package":"github.com/allegro/bigcache/v3/queue","Test":"TestAllocateAdditionalSpace","Output":"=== PAUSE TestAllocateAdditionalSpace\n"}
+{"Time":"2026-07-28T14:24:10.885052942Z","Action":"pause","Package":"github.com/allegro/bigcache/v3/queue","Test":"TestAllocateAdditionalSpace"}
+{"Time":"2026-07-28T14:24:10.885055813Z","Action":"run","Package":"github.com/allegro/bigcache/v3/queue","Test":"TestAllocateAdditionalSpaceForInsufficientFreeFragmentedSpaceWhereHeadIsBeforeTail"}
+{"Time":"2026-07-28T14:24:10.885057872Z","Action":"output","Package":"github.com/allegro/bigcache/v3/queue","Test":"TestAllocateAdditionalSpaceForInsufficientFreeFragmentedSpaceWhereHeadIsBeforeTail","Output":"=== RUN   TestAllocateAdditionalSpaceForInsufficientFreeFragmentedSpaceWhereHeadIsBeforeTail\n"}
+{"Time":"2026-07-28T14:24:10.885061313Z","Action":"output","Package":"github.com/allegro/bigcache/v3/queue","Test":"TestAllocateAdditionalSpaceForInsufficientFreeFragmentedSpaceWhereHeadIsBeforeTail","Output":"=== PAUSE TestAllocateAdditionalSpaceForInsufficientFreeFragmentedSpaceWhereHeadIsBeforeTail\n"}
+{"Time":"2026-07-28T14:24:10.885063226Z","Action":"pause","Package":"github.com/allegro/bigcache/v3/queue","Test":"TestAllocateAdditionalSpaceForInsufficientFreeFragmentedSpaceWhereHeadIsBeforeTail"}
+{"Time":"2026-07-28T14:24:10.885066179Z","Action":"run","Package":"github.com/allegro/bigcache/v3/queue","Test":"TestUnchangedEntriesIndexesAfterAdditionalMemoryAllocationWhereHeadIsBeforeTail"}
+{"Time":"2026-07-28T14:24:10.88506806Z","Action":"output","Package":"github.com/allegro/bigcache/v3/queue","Test":"TestUnchangedEntriesIndexesAfterAdditionalMemoryAllocationWhereHeadIsBeforeTail","Output":"=== RUN   TestUnchangedEntriesIndexesAfterAdditionalMemoryAllocationWhereHeadIsBeforeTail\n"}
+{"Time":"2026-07-28T14:24:10.885070224Z","Action":"output","Package":"github.com/allegro/bigcache/v3/queue","Test":"TestUnchangedEntriesIndexesAfterAdditionalMemoryAllocationWhereHeadIsBeforeTail","Output":"=== PAUSE TestUnchangedEntriesIndexesAfterAdditionalMemoryAllocationWhereHeadIsBeforeTail\n"}
+{"Time":"2026-07-28T14:24:10.885072049Z","Action":"pause","Package":"github.com/allegro/bigcache/v3/queue","Test":"TestUnchangedEntriesIndexesAfterAdditionalMemoryAllocationWhereHeadIsBeforeTail"}
+{"Time":"2026-07-28T14:24:10.885075756Z","Action":"run","Package":"github.com/allegro/bigcache/v3/queue","Test":"TestAllocateAdditionalSpaceForInsufficientFreeFragmentedSpaceWhereTailIsBeforeHead"}
+{"Time":"2026-07-28T14:24:10.885077635Z","Action":"output","Package":"github.com/allegro/bigcache/v3/queue","Test":"TestAllocateAdditionalSpaceForInsufficientFreeFragmentedSpaceWhereTailIsBeforeHead","Output":"=== RUN   TestAllocateAdditionalSpaceForInsufficientFreeFragmentedSpaceWhereTailIsBeforeHead\n"}
+{"Time":"2026-07-28T14:24:10.885079778Z","Action":"output","Package":"github.com/allegro/bigcache/v3/queue","Test":"TestAllocateAdditionalSpaceForInsufficientFreeFragmentedSpaceWhereTailIsBeforeHead","Output":"=== PAUSE TestAllocateAdditionalSpaceForInsufficientFreeFragmentedSpaceWhereTailIsBeforeHead\n"}
+{"Time":"2026-07-28T14:24:10.885081544Z","Action":"pause","Package":"github.com/allegro/bigcache/v3/queue","Test":"TestAllocateAdditionalSpaceForInsufficientFreeFragmentedSpaceWhereTailIsBeforeHead"}
+{"Time":"2026-07-28T14:24:10.885084876Z","Action":"run","Package":"github.com/allegro/bigcache/v3/queue","Test":"TestAllocateAdditionalSpaceForInsufficientFreeFragmentedSpaceWhereTailIsBeforeHead128"}
+{"Time":"2026-07-28T14:24:10.885086738Z","Action":"output","Package":"github.com/allegro/bigcache/v3/queue","Test":"TestAllocateAdditionalSpaceForInsufficientFreeFragmentedSpaceWhereTailIsBeforeHead128","Output":"=== RUN   TestAllocateAdditionalSpaceForInsufficientFreeFragmentedSpaceWhereTailIsBeforeHead128\n"}
+{"Time":"2026-07-28T14:24:10.885089167Z","Action":"output","Package":"github.com/allegro/bigcache/v3/queue","Test":"TestAllocateAdditionalSpaceForInsufficientFreeFragmentedSpaceWhereTailIsBeforeHead128","Output":"=== PAUSE TestAllocateAdditionalSpaceForInsufficientFreeFragmentedSpaceWhereTailIsBeforeHead128\n"}
+{"Time":"2026-07-28T14:24:10.885092752Z","Action":"pause","Package":"github.com/allegro/bigcache/v3/queue","Test":"TestAllocateAdditionalSpaceForInsufficientFreeFragmentedSpaceWhereTailIsBeforeHead128"}
+{"Time":"2026-07-28T14:24:10.885094922Z","Action":"run","Package":"github.com/allegro/bigcache/v3/queue","Test":"TestUnchangedEntriesIndexesAfterAdditionalMemoryAllocationWhereTailIsBeforeHead"}
+{"Time":"2026-07-28T14:24:10.885096595Z","Action":"output","Package":"github.com/allegro/bigcache/v3/queue","Test":"TestUnchangedEntriesIndexesAfterAdditionalMemoryAllocationWhereTailIsBeforeHead","Output":"=== RUN   TestUnchangedEntriesIndexesAfterAdditionalMemoryAllocationWhereTailIsBeforeHead\n"}
+{"Time":"2026-07-28T14:24:10.885098987Z","Action":"output","Package":"github.com/allegro/bigcache/v3/queue","Test":"TestUnchangedEntriesIndexesAfterAdditionalMemoryAllocationWhereTailIsBeforeHead","Output":"=== PAUSE TestUnchangedEntriesIndexesAfterAdditionalMemoryAllocationWhereTailIsBeforeHead\n"}
+{"Time":"2026-07-28T14:24:10.885100725Z","Action":"pause","Package":"github.com/allegro/bigcache/v3/queue","Test":"TestUnchangedEntriesIndexesAfterAdditionalMemoryAllocationWhereTailIsBeforeHead"}
+{"Time":"2026-07-28T14:24:10.885102929Z","Action":"run","Package":"github.com/allegro/bigcache/v3/queue","Test":"TestAllocateAdditionalSpaceForValueBiggerThanInitQueue"}
+{"Time":"2026-07-28T14:24:10.885105024Z","Action":"output","Package":"github.com/allegro/bigcache/v3/queue","Test":"TestAllocateAdditionalSpaceForValueBiggerThanInitQueue","Output":"=== RUN   TestAllocateAdditionalSpaceForValueBiggerThanInitQueue\n"}
+{"Time":"2026-07-28T14:24:10.885108147Z","Action":"output","Package":"github.com/allegro/bigcache/v3/queue","Test":"TestAllocateAdditionalSpaceForValueBiggerThanInitQueue","Output":"=== PAUSE TestAllocateAdditionalSpaceForValueBiggerThanInitQueue\n"}
+{"Time":"2026-07-28T14:24:10.885109934Z","Action":"pause","Package":"github.com/allegro/bigcache/v3/queue","Test":"TestAllocateAdditionalSpaceForValueBiggerThanInitQueue"}
+{"Time":"2026-07-28T14:24:10.885114584Z","Action":"run","Package":"github.com/allegro/bigcache/v3/queue","Test":"TestAllocateAdditionalSpaceForValueBiggerThanQueue"}
+{"Time":"2026-07-28T14:24:10.885116617Z","Action":"output","Package":"github.com/allegro/bigcache/v3/queue","Test":"TestAllocateAdditionalSpaceForValueBiggerThanQueue","Output":"=== RUN   TestAllocateAdditionalSpaceForValueBiggerThanQueue\n"}
+{"Time":"2026-07-28T14:24:10.885118963Z","Action":"output","Package":"github.com/allegro/bigcache/v3/queue","Test":"TestAllocateAdditionalSpaceForValueBiggerThanQueue","Output":"=== PAUSE TestAllocateAdditionalSpaceForValueBiggerThanQueue\n"}
+{"Time":"2026-07-28T14:24:10.885120899Z","Action":"pause","Package":"github.com/allegro/bigcache/v3/queue","Test":"TestAllocateAdditionalSpaceForValueBiggerThanQueue"}
+{"Time":"2026-07-28T14:24:10.88512281Z","Action":"run","Package":"github.com/allegro/bigcache/v3/queue","Test":"TestPopWholeQueue"}
+{"Time":"2026-07-28T14:24:10.88512446Z","Action":"output","Package":"github.com/allegro/bigcache/v3/queue","Test":"TestPopWholeQueue","Output":"=== RUN   TestPopWholeQueue\n"}
+{"Time":"2026-07-28T14:24:10.88512711Z","Action":"output","Package":"github.com/allegro/bigcache/v3/queue","Test":"TestPopWholeQueue","Output":"=== PAUSE TestPopWholeQueue\n"}
+{"Time":"2026-07-28T14:24:10.885128924Z","Action":"pause","Package":"github.com/allegro/bigcache/v3/queue","Test":"TestPopWholeQueue"}
+{"Time":"2026-07-28T14:24:10.885131661Z","Action":"run","Package":"github.com/allegro/bigcache/v3/queue","Test":"TestGetEntryFromIndex"}
+{"Time":"2026-07-28T14:24:10.885133499Z","Action":"output","Package":"github.com/allegro/bigcache/v3/queue","Test":"TestGetEntryFromIndex","Output":"=== RUN   TestGetEntryFromIndex\n"}
+{"Time":"2026-07-28T14:24:10.885135605Z","Action":"output","Package":"github.com/allegro/bigcache/v3/queue","Test":"TestGetEntryFromIndex","Output":"=== PAUSE TestGetEntryFromIndex\n"}
+{"Time":"2026-07-28T14:24:10.885139082Z","Action":"pause","Package":"github.com/allegro/bigcache/v3/queue","Test":"TestGetEntryFromIndex"}
+{"Time":"2026-07-28T14:24:10.885143402Z","Action":"run","Package":"github.com/allegro/bigcache/v3/queue","Test":"TestGetEntryFromInvalidIndex"}
+{"Time":"2026-07-28T14:24:10.885145403Z","Action":"output","Package":"github.com/allegro/bigcache/v3/queue","Test":"TestGetEntryFromInvalidIndex","Output":"=== RUN   TestGetEntryFromInvalidIndex\n"}
+{"Time":"2026-07-28T14:24:10.885147778Z","Action":"output","Package":"github.com/allegro/bigcache/v3/queue","Test":"TestGetEntryFromInvalidIndex","Output":"=== PAUSE TestGetEntryFromInvalidIndex\n"}
+{"Time":"2026-07-28T14:24:10.885149522Z","Action":"pause","Package":"github.com/allegro/bigcache/v3/queue","Test":"TestGetEntryFromInvalidIndex"}
+{"Time":"2026-07-28T14:24:10.885151455Z","Action":"run","Package":"github.com/allegro/bigcache/v3/queue","Test":"TestGetEntryFromIndexOutOfRange"}
+{"Time":"2026-07-28T14:24:10.885153182Z","Action":"output","Package":"github.com/allegro/bigcache/v3/queue","Test":"TestGetEntryFromIndexOutOfRange","Output":"=== RUN   TestGetEntryFromIndexOutOfRange\n"}
+{"Time":"2026-07-28T14:24:10.88515542Z","Action":"output","Package":"github.com/allegro/bigcache/v3/queue","Test":"TestGetEntryFromIndexOutOfRange","Output":"=== PAUSE TestGetEntryFromIndexOutOfRange\n"}
+{"Time":"2026-07-28T14:24:10.885157091Z","Action":"pause","Package":"github.com/allegro/bigcache/v3/queue","Test":"TestGetEntryFromIndexOutOfRange"}
+{"Time":"2026-07-28T14:24:10.885159035Z","Action":"run","Package":"github.com/allegro/bigcache/v3/queue","Test":"TestGetEntryFromEmptyQueue"}
+{"Time":"2026-07-28T14:24:10.885161382Z","Action":"output","Package":"github.com/allegro/bigcache/v3/queue","Test":"TestGetEntryFromEmptyQueue","Output":"=== RUN   TestGetEntryFromEmptyQueue\n"}
+{"Time":"2026-07-28T14:24:10.885163725Z","Action":"output","Package":"github.com/allegro/bigcache/v3/queue","Test":"TestGetEntryFromEmptyQueue","Output":"=== PAUSE TestGetEntryFromEmptyQueue\n"}
+{"Time":"2026-07-28T14:24:10.885165503Z","Action":"pause","Package":"github.com/allegro/bigcache/v3/queue","Test":"TestGetEntryFromEmptyQueue"}
+{"Time":"2026-07-28T14:24:10.885168226Z","Action":"run","Package":"github.com/allegro/bigcache/v3/queue","Test":"TestMaxSizeLimit"}
+{"Time":"2026-07-28T14:24:10.885170141Z","Action":"output","Package":"github.com/allegro/bigcache/v3/queue","Test":"TestMaxSizeLimit","Output":"=== RUN   TestMaxSizeLimit\n"}
+{"Time":"2026-07-28T14:24:10.885172197Z","Action":"output","Package":"github.com/allegro/bigcache/v3/queue","Test":"TestMaxSizeLimit","Output":"=== PAUSE TestMaxSizeLimit\n"}
+{"Time":"2026-07-28T14:24:10.88517411Z","Action":"pause","Package":"github.com/allegro/bigcache/v3/queue","Test":"TestMaxSizeLimit"}
+{"Time":"2026-07-28T14:24:10.885175917Z","Action":"run","Package":"github.com/allegro/bigcache/v3/queue","Test":"TestPushEntryAfterAllocateAdditionMemory"}
+{"Time":"2026-07-28T14:24:10.885177591Z","Action":"output","Package":"github.com/allegro/bigcache/v3/queue","Test":"TestPushEntryAfterAllocateAdditionMemory","Output":"=== RUN   TestPushEntryAfterAllocateAdditionMemory\n"}
+{"Time":"2026-07-28T14:24:10.885181039Z","Action":"output","Package":"github.com/allegro/bigcache/v3/queue","Test":"TestPushEntryAfterAllocateAdditionMemory","Output":"=== PAUSE TestPushEntryAfterAllocateAdditionMemory\n"}
+{"Time":"2026-07-28T14:24:10.885182929Z","Action":"pause","Package":"github.com/allegro/bigcache/v3/queue","Test":"TestPushEntryAfterAllocateAdditionMemory"}
+{"Time":"2026-07-28T14:24:10.88518506Z","Action":"run","Package":"github.com/allegro/bigcache/v3/queue","Test":"TestPushEntryAfterAllocateAdditionMemoryInFull"}
+{"Time":"2026-07-28T14:24:10.885187699Z","Action":"output","Package":"github.com/allegro/bigcache/v3/queue","Test":"TestPushEntryAfterAllocateAdditionMemoryInFull","Output":"=== RUN   TestPushEntryAfterAllocateAdditionMemoryInFull\n"}
+{"Time":"2026-07-28T14:24:10.885191662Z","Action":"output","Package":"github.com/allegro/bigcache/v3/queue","Test":"TestPushEntryAfterAllocateAdditionMemoryInFull","Output":"=== PAUSE TestPushEntryAfterAllocateAdditionMemoryInFull\n"}
+{"Time":"2026-07-28T14:24:10.885193558Z","Action":"pause","Package":"github.com/allegro/bigcache/v3/queue","Test":"TestPushEntryAfterAllocateAdditionMemoryInFull"}
+{"Time":"2026-07-28T14:24:10.885196258Z","Action":"cont","Package":"github.com/allegro/bigcache/v3/queue","Test":"TestPushAndPop"}
+{"Time":"2026-07-28T14:24:10.885198123Z","Action":"output","Package":"github.com/allegro/bigcache/v3/queue","Test":"TestPushAndPop","Output":"=== CONT  TestPushAndPop\n"}
+{"Time":"2026-07-28T14:24:10.885202842Z","Action":"output","Package":"github.com/allegro/bigcache/v3/queue","Test":"TestPushAndPop","Output":"--- PASS: TestPushAndPop (0.00s)\n"}
+{"Time":"2026-07-28T14:24:10.885205048Z","Action":"pass","Package":"github.com/allegro/bigcache/v3/queue","Test":"TestPushAndPop","Elapsed":0}
+{"Time":"2026-07-28T14:24:10.885207659Z","Action":"cont","Package":"github.com/allegro/bigcache/v3/queue","Test":"TestAllocateAdditionalSpace"}
+{"Time":"2026-07-28T14:24:10.885209339Z","Action":"output","Package":"github.com/allegro/bigcache/v3/queue","Test":"TestAllocateAdditionalSpace","Output":"=== CONT  TestAllocateAdditionalSpace\n"}
+{"Time":"2026-07-28T14:24:10.885212369Z","Action":"output","Package":"github.com/allegro/bigcache/v3/queue","Test":"TestAllocateAdditionalSpace","Output":"--- PASS: TestAllocateAdditionalSpace (0.00s)\n"}
+{"Time":"2026-07-28T14:24:10.88521566Z","Action":"pass","Package":"github.com/allegro/bigcache/v3/queue","Test":"TestAllocateAdditionalSpace","Elapsed":0}
+{"Time":"2026-07-28T14:24:10.8852174Z","Action":"cont","Package":"github.com/allegro/bigcache/v3/queue","Test":"TestReuseAvailableSpace"}
+{"Time":"2026-07-28T14:24:10.885219199Z","Action":"output","Package":"github.com/allegro/bigcache/v3/queue","Test":"TestReuseAvailableSpace","Output":"=== CONT  TestReuseAvailableSpace\n"}
+{"Time":"2026-07-28T14:24:10.885229628Z","Action":"run","Package":"github.com/allegro/bigcache/v3","Test":"TestWriteAndGetOnCache"}
+{"Time":"2026-07-28T14:24:10.885238843Z","Action":"output","Package":"github.com/allegro/bigcache/v3","Test":"TestWriteAndGetOnCache","Output":"=== RUN   TestWriteAndGetOnCache\n"}
+{"Time":"2026-07-28T14:24:10.885241222Z","Action":"output","Package":"github.com/allegro/bigcache/v3","Test":"TestWriteAndGetOnCache","Output":"=== PAUSE TestWriteAndGetOnCache\n"}
+{"Time":"2026-07-28T14:24:10.885243031Z","Action":"pause","Package":"github.com/allegro/bigcache/v3","Test":"TestWriteAndGetOnCache"}
+{"Time":"2026-07-28T14:24:10.885245319Z","Action":"run","Package":"github.com/allegro/bigcache/v3","Test":"TestAppendAndGetOnCache"}
+{"Time":"2026-07-28T14:24:10.885247678Z","Action":"output","Package":"github.com/allegro/bigcache/v3","Test":"TestAppendAndGetOnCache","Output":"=== RUN   TestAppendAndGetOnCache\n"}
+{"Time":"2026-07-28T14:24:10.885249997Z","Action":"output","Package":"github.com/allegro/bigcache/v3","Test":"TestAppendAndGetOnCache","Output":"=== PAUSE TestAppendAndGetOnCache\n"}
+{"Time":"2026-07-28T14:24:10.885251786Z","Action":"pause","Package":"github.com/allegro/bigcache/v3","Test":"TestAppendAndGetOnCache"}
+{"Time":"2026-07-28T14:24:10.885253715Z","Action":"run","Package":"github.com/allegro/bigcache/v3","Test":"TestAppendRandomly"}
+{"Time":"2026-07-28T14:24:10.885255472Z","Action":"output","Package":"github.com/allegro/bigcache/v3","Test":"TestAppendRandomly","Output":"=== RUN   TestAppendRandomly\n"}
+{"Time":"2026-07-28T14:24:10.885257635Z","Action":"output","Package":"github.com/allegro/bigcache/v3","Test":"TestAppendRandomly","Output":"=== PAUSE TestAppendRandomly\n"}
+{"Time":"2026-07-28T14:24:10.885259439Z","Action":"pause","Package":"github.com/allegro/bigcache/v3","Test":"TestAppendRandomly"}
+{"Time":"2026-07-28T14:24:10.885261365Z","Action":"run","Package":"github.com/allegro/bigcache/v3","Test":"TestAppendCollision"}
+{"Time":"2026-07-28T14:24:10.885263311Z","Action":"output","Package":"github.com/allegro/bigcache/v3","Test":"TestAppendCollision","Output":"=== RUN   TestAppendCollision\n"}
+{"Time":"2026-07-28T14:24:10.885267013Z","Action":"output","Package":"github.com/allegro/bigcache/v3","Test":"TestAppendCollision","Output":"=== PAUSE TestAppendCollision\n"}
+{"Time":"2026-07-28T14:24:10.885268782Z","Action":"pause","Package":"github.com/allegro/bigcache/v3","Test":"TestAppendCollision"}
+{"Time":"2026-07-28T14:24:10.88527079Z","Action":"run","Package":"github.com/allegro/bigcache/v3","Test":"TestConstructCacheWithDefaultHasher"}
+{"Time":"2026-07-28T14:24:10.885273429Z","Action":"output","Package":"github.com/allegro/bigcache/v3","Test":"TestConstructCacheWithDefaultHasher","Output":"=== RUN   TestConstructCacheWithDefaultHasher\n"}
+{"Time":"2026-07-28T14:24:10.88527552Z","Action":"output","Package":"github.com/allegro/bigcache/v3","Test":"TestConstructCacheWithDefaultHasher","Output":"=== PAUSE TestConstructCacheWithDefaultHasher\n"}
+{"Time":"2026-07-28T14:24:10.885277266Z","Action":"pause","Package":"github.com/allegro/bigcache/v3","Test":"TestConstructCacheWithDefaultHasher"}
+{"Time":"2026-07-28T14:24:10.885279918Z","Action":"run","Package":"github.com/allegro/bigcache/v3","Test":"TestNewBigcacheValidation"}
+{"Time":"2026-07-28T14:24:10.88528229Z","Action":"output","Package":"github.com/allegro/bigcache/v3","Test":"TestNewBigcacheValidation","Output":"=== RUN   TestNewBigcacheValidation\n"}
+{"Time":"2026-07-28T14:24:10.885284343Z","Action":"output","Package":"github.com/allegro/bigcache/v3","Test":"TestNewBigcacheValidation","Output":"=== PAUSE TestNewBigcacheValidation\n"}
+{"Time":"2026-07-28T14:24:10.885286105Z","Action":"pause","Package":"github.com/allegro/bigcache/v3","Test":"TestNewBigcacheValidation"}
+{"Time":"2026-07-28T14:24:10.8852882Z","Action":"run","Package":"github.com/allegro/bigcache/v3","Test":"TestEntryNotFound"}
+{"Time":"2026-07-28T14:24:10.885290074Z","Action":"output","Package":"github.com/allegro/bigcache/v3","Test":"TestEntryNotFound","Output":"=== RUN   TestEntryNotFound\n"}
+{"Time":"2026-07-28T14:24:10.885292098Z","Action":"output","Package":"github.com/allegro/bigcache/v3","Test":"TestEntryNotFound","Output":"=== PAUSE TestEntryNotFound\n"}
+{"Time":"2026-07-28T14:24:10.885293846Z","Action":"pause","Package":"github.com/allegro/bigcache/v3","Test":"TestEntryNotFound"}
+{"Time":"2026-07-28T14:24:10.885295965Z","Action":"run","Package":"github.com/allegro/bigcache/v3","Test":"TestTimingEviction"}
+{"Time":"2026-07-28T14:24:10.885297636Z","Action":"output","Package":"github.com/allegro/bigcache/v3","Test":"TestTimingEviction","Output":"=== RUN   TestTimingEviction\n"}
+{"Time":"2026-07-28T14:24:10.885299667Z","Action":"output","Package":"github.com/allegro/bigcache/v3","Test":"TestTimingEviction","Output":"=== PAUSE TestTimingEviction\n"}
+{"Time":"2026-07-28T14:24:10.88530137Z","Action":"pause","Package":"github.com/allegro/bigcache/v3","Test":"TestTimingEviction"}
+{"Time":"2026-07-28T14:24:10.885303357Z","Action":"run","Package":"github.com/allegro/bigcache/v3","Test":"TestTimingEvictionShouldEvictOnlyFromUpdatedShard"}
+{"Time":"2026-07-28T14:24:10.885305111Z","Action":"output","Package":"github.com/allegro/bigcache/v3","Test":"TestTimingEvictionShouldEvictOnlyFromUpdatedShard","Output":"=== RUN   TestTimingEvictionShouldEvictOnlyFromUpdatedShard\n"}
+{"Time":"2026-07-28T14:24:10.885307279Z","Action":"output","Package":"github.com/allegro/bigcache/v3","Test":"TestTimingEvictionShouldEvictOnlyFromUpdatedShard","Output":"=== PAUSE TestTimingEvictionShouldEvictOnlyFromUpdatedShard\n"}
+{"Time":"2026-07-28T14:24:10.885308995Z","Action":"pause","Package":"github.com/allegro/bigcache/v3","Test":"TestTimingEvictionShouldEvictOnlyFromUpdatedShard"}
+{"Time":"2026-07-28T14:24:10.885310968Z","Action":"run","Package":"github.com/allegro/bigcache/v3","Test":"TestCleanShouldEvictAll"}
+{"Time":"2026-07-28T14:24:10.885312618Z","Action":"output","Package":"github.com/allegro/bigcache/v3","Test":"TestCleanShouldEvictAll","Output":"=== RUN   TestCleanShouldEvictAll\n"}
+{"Time":"2026-07-28T14:24:10.885315995Z","Action":"output","Package":"github.com/allegro/bigcache/v3","Test":"TestCleanShouldEvictAll","Output":"=== PAUSE TestCleanShouldEvictAll\n"}
+{"Time":"2026-07-28T14:24:10.885317769Z","Action":"pause","Package":"github.com/allegro/bigcache/v3","Test":"TestCleanShouldEvictAll"}
+{"Time":"2026-07-28T14:24:10.885319616Z","Action":"run","Package":"github.com/allegro/bigcache/v3","Test":"TestOnRemoveCallback"}
+{"Time":"2026-07-28T14:24:10.885321257Z","Action":"output","Package":"github.com/allegro/bigcache/v3","Test":"TestOnRemoveCallback","Output":"=== RUN   TestOnRemoveCallback\n"}
+{"Time":"2026-07-28T14:24:10.885323749Z","Action":"output","Package":"github.com/allegro/bigcache/v3","Test":"TestOnRemoveCallback","Output":"=== PAUSE TestOnRemoveCallback\n"}
+{"Time":"2026-07-28T14:24:10.885325441Z","Action":"pause","Package":"github.com/allegro/bigcache/v3","Test":"TestOnRemoveCallback"}
+{"Time":"2026-07-28T14:24:10.885327309Z","Action":"run","Package":"github.com/allegro/bigcache/v3","Test":"TestOnRemoveWithReasonCallback"}
+{"Time":"2026-07-28T14:24:10.885329521Z","Action":"output","Package":"github.com/allegro/bigcache/v3","Test":"TestOnRemoveWithReasonCallback","Output":"=== RUN   TestOnRemoveWithReasonCallback\n"}
+{"Time":"2026-07-28T14:24:10.885331719Z","Action":"output","Package":"github.com/allegro/bigcache/v3","Test":"TestOnRemoveWithReasonCallback","Output":"=== PAUSE TestOnRemoveWithReasonCallback\n"}
+{"Time":"2026-07-28T14:24:10.885333392Z","Action":"pause","Package":"github.com/allegro/bigcache/v3","Test":"TestOnRemoveWithReasonCallback"}
+{"Time":"2026-07-28T14:24:10.885335355Z","Action":"run","Package":"github.com/allegro/bigcache/v3","Test":"TestOnRemoveFilter"}
+{"Time":"2026-07-28T14:24:10.885336946Z","Action":"output","Package":"github.com/allegro/bigcache/v3","Test":"TestOnRemoveFilter","Output":"=== RUN   TestOnRemoveFilter\n"}
+{"Time":"2026-07-28T14:24:10.885338931Z","Action":"output","Package":"github.com/allegro/bigcache/v3","Test":"TestOnRemoveFilter","Output":"=== PAUSE TestOnRemoveFilter\n"}
+{"Time":"2026-07-28T14:24:10.885340655Z","Action":"pause","Package":"github.com/allegro/bigcache/v3","Test":"TestOnRemoveFilter"}
+{"Time":"2026-07-28T14:24:10.885342503Z","Action":"run","Package":"github.com/allegro/bigcache/v3","Test":"TestOnRemoveFilterExpired"}
+{"Time":"2026-07-28T14:24:10.885344135Z","Action":"output","Package":"github.com/allegro/bigcache/v3","Test":"TestOnRemoveFilterExpired","Output":"=== RUN   TestOnRemoveFilterExpired\n"}
+{"Time":"2026-07-28T14:24:10.885346517Z","Action":"output","Package":"github.com/allegro/bigcache/v3","Test":"TestOnRemoveFilterExpired","Output":"--- PASS: TestOnRemoveFilterExpired (0.00s)\n"}
+{"Time":"2026-07-28T14:24:10.885348371Z","Action":"pass","Package":"github.com/allegro/bigcache/v3","Test":"TestOnRemoveFilterExpired","Elapsed":0}
+{"Time":"2026-07-28T14:24:10.885350303Z","Action":"run","Package":"github.com/allegro/bigcache/v3","Test":"TestOnRemoveGetEntryStats"}
+{"Time":"2026-07-28T14:24:10.885351958Z","Action":"output","Package":"github.com/allegro/bigcache/v3","Test":"TestOnRemoveGetEntryStats","Output":"=== RUN   TestOnRemoveGetEntryStats\n"}
+{"Time":"2026-07-28T14:24:10.885354086Z","Action":"output","Package":"github.com/allegro/bigcache/v3","Test":"TestOnRemoveGetEntryStats","Output":"=== PAUSE TestOnRemoveGetEntryStats\n"}
+{"Time":"2026-07-28T14:24:10.88535597Z","Action":"pause","Package":"github.com/allegro/bigcache/v3","Test":"TestOnRemoveGetEntryStats"}
+{"Time":"2026-07-28T14:24:10.885357923Z","Action":"run","Package":"github.com/allegro/bigcache/v3","Test":"TestCacheLen"}
+{"Time":"2026-07-28T14:24:10.885359607Z","Action":"output","Package":"github.com/allegro/bigcache/v3","Test":"TestCacheLen","Output":"=== RUN   TestCacheLen\n"}
+{"Time":"2026-07-28T14:24:10.88536166Z","Action":"output","Package":"github.com/allegro/bigcache/v3","Test":"TestCacheLen","Output":"=== PAUSE TestCacheLen\n"}
+{"Time":"2026-07-28T14:24:10.885363402Z","Action":"pause","Package":"github.com/allegro/bigcache/v3","Test":"TestCacheLen"}
+{"Time":"2026-07-28T14:24:10.885365295Z","Action":"run","Package":"github.com/allegro/bigcache/v3","Test":"TestCacheCapacity"}
+{"Time":"2026-07-28T14:24:10.885369789Z","Action":"output","Package":"github.com/allegro/bigcache/v3","Test":"TestCacheCapacity","Output":"=== RUN   TestCacheCapacity\n"}
+{"Time":"2026-07-28T14:24:10.885371923Z","Action":"output","Package":"github.com/allegro/bigcache/v3","Test":"TestCacheCapacity","Output":"=== PAUSE TestCacheCapacity\n"}
+{"Time":"2026-07-28T14:24:10.885373655Z","Action":"pause","Package":"github.com/allegro/bigcache/v3","Test":"TestCacheCapacity"}
+{"Time":"2026-07-28T14:24:10.885375669Z","Action":"run","Package":"github.com/allegro/bigcache/v3","Test":"TestCacheInitialCapacity"}
+{"Time":"2026-07-28T14:24:10.88537726Z","Action":"output","Package":"github.com/allegro/bigcache/v3","Test":"TestCacheInitialCapacity","Output":"=== RUN   TestCacheInitialCapacity\n"}
+{"Time":"2026-07-28T14:24:10.885379351Z","Action":"output","Package":"github.com/allegro/bigcache/v3","Test":"TestCacheInitialCapacity","Output":"=== PAUSE TestCacheInitialCapacity\n"}
+{"Time":"2026-07-28T14:24:10.885381079Z","Action":"pause","Package":"github.com/allegro/bigcache/v3","Test":"TestCacheInitialCapacity"}
+{"Time":"2026-07-28T14:24:10.885382961Z","Action":"run","Package":"github.com/allegro/bigcache/v3","Test":"TestRemoveEntriesWhenShardIsFull"}
+{"Time":"2026-07-28T14:24:10.885384577Z","Action":"output","Package":"github.com/allegro/bigcache/v3","Test":"TestRemoveEntriesWhenShardIsFull","Output":"=== RUN   TestRemoveEntriesWhenShardIsFull\n"}
+{"Time":"2026-07-28T14:24:10.88538652Z","Action":"output","Package":"github.com/allegro/bigcache/v3","Test":"TestRemoveEntriesWhenShardIsFull","Output":"=== PAUSE TestRemoveEntriesWhenShardIsFull\n"}
+{"Time":"2026-07-28T14:24:10.885388201Z","Action":"pause","Package":"github.com/allegro/bigcache/v3","Test":"TestRemoveEntriesWhenShardIsFull"}
+{"Time":"2026-07-28T14:24:10.885390111Z","Action":"run","Package":"github.com/allegro/bigcache/v3","Test":"TestCacheStats"}
+{"Time":"2026-07-28T14:24:10.885391754Z","Action":"output","Package":"github.com/allegro/bigcache/v3","Test":"TestCacheStats","Output":"=== RUN   TestCacheStats\n"}
+{"Time":"2026-07-28T14:24:10.885393723Z","Action":"output","Package":"github.com/allegro/bigcache/v3","Test":"TestCacheStats","Output":"=== PAUSE TestCacheStats\n"}
+{"Time":"2026-07-28T14:24:10.885395353Z","Action":"pause","Package":"github.com/allegro/bigcache/v3","Test":"TestCacheStats"}
+{"Time":"2026-07-28T14:24:10.885397201Z","Action":"run","Package":"github.com/allegro/bigcache/v3","Test":"TestCacheEntryStats"}
+{"Time":"2026-07-28T14:24:10.885399085Z","Action":"output","Package":"github.com/allegro/bigcache/v3","Test":"TestCacheEntryStats","Output":"=== RUN   TestCacheEntryStats\n"}
+{"Time":"2026-07-28T14:24:10.885401999Z","Action":"output","Package":"github.com/allegro/bigcache/v3","Test":"TestCacheEntryStats","Output":"=== PAUSE TestCacheEntryStats\n"}
+{"Time":"2026-07-28T14:24:10.885403708Z","Action":"pause","Package":"github.com/allegro/bigcache/v3","Test":"TestCacheEntryStats"}
+{"Time":"2026-07-28T14:24:10.885405617Z","Action":"run","Package":"github.com/allegro/bigcache/v3","Test":"TestCacheRestStats"}
+{"Time":"2026-07-28T14:24:10.885407219Z","Action":"output","Package":"github.com/allegro/bigcache/v3","Test":"TestCacheRestStats","Output":"=== RUN   TestCacheRestStats\n"}
+{"Time":"2026-07-28T14:24:10.885410615Z","Action":"output","Package":"github.com/allegro/bigcache/v3","Test":"TestCacheRestStats","Output":"=== PAUSE TestCacheRestStats\n"}
+{"Time":"2026-07-28T14:24:10.885412285Z","Action":"pause","Package":"github.com/allegro/bigcache/v3","Test":"TestCacheRestStats"}
+{"Time":"2026-07-28T14:24:10.885414162Z","Action":"run","Package":"github.com/allegro/bigcache/v3","Test":"TestCacheDel"}
+{"Time":"2026-07-28T14:24:10.885415822Z","Action":"output","Package":"github.com/allegro/bigcache/v3","Test":"TestCacheDel","Output":"=== RUN   TestCacheDel\n"}
+{"Time":"2026-07-28T14:24:10.885417883Z","Action":"output","Package":"github.com/allegro/bigcache/v3","Test":"TestCacheDel","Output":"=== PAUSE TestCacheDel\n"}
+{"Time":"2026-07-28T14:24:10.885420957Z","Action":"pause","Package":"github.com/allegro/bigcache/v3","Test":"TestCacheDel"}
+{"Time":"2026-07-28T14:24:10.885422861Z","Action":"run","Package":"github.com/allegro/bigcache/v3","Test":"TestCacheDelRandomly"}
+{"Time":"2026-07-28T14:24:10.885424503Z","Action":"output","Package":"github.com/allegro/bigcache/v3","Test":"TestCacheDelRandomly","Output":"=== RUN   TestCacheDelRandomly\n"}
+{"Time":"2026-07-28T14:24:10.885426444Z","Action":"output","Package":"github.com/allegro/bigcache/v3","Test":"TestCacheDelRandomly","Output":"=== PAUSE TestCacheDelRandomly\n"}
+{"Time":"2026-07-28T14:24:10.885428187Z","Action":"pause","Package":"github.com/allegro/bigcache/v3","Test":"TestCacheDelRandomly"}
+{"Time":"2026-07-28T14:24:10.885430029Z","Action":"run","Package":"github.com/allegro/bigcache/v3","Test":"TestWriteAndReadParallelSameKeyWithStats"}
+{"Time":"2026-07-28T14:24:10.885431687Z","Action":"output","Package":"github.com/allegro/bigcache/v3","Test":"TestWriteAndReadParallelSameKeyWithStats","Output":"=== RUN   TestWriteAndReadParallelSameKeyWithStats\n"}
+{"Time":"2026-07-28T14:24:10.885433769Z","Action":"output","Package":"github.com/allegro/bigcache/v3","Test":"TestWriteAndReadParallelSameKeyWithStats","Output":"=== PAUSE TestWriteAndReadParallelSameKeyWithStats\n"}
+{"Time":"2026-07-28T14:24:10.885435576Z","Action":"pause","Package":"github.com/allegro/bigcache/v3","Test":"TestWriteAndReadParallelSameKeyWithStats"}
+{"Time":"2026-07-28T14:24:10.885437399Z","Action":"run","Package":"github.com/allegro/bigcache/v3","Test":"TestCacheReset"}
+{"Time":"2026-07-28T14:24:10.885441604Z","Action":"output","Package":"github.com/allegro/bigcache/v3","Test":"TestCacheReset","Output":"=== RUN   TestCacheReset\n"}
+{"Time":"2026-07-28T14:24:10.885443663Z","Action":"output","Package":"github.com/allegro/bigcache/v3","Test":"TestCacheReset","Output":"=== PAUSE TestCacheReset\n"}
+{"Time":"2026-07-28T14:24:10.885445285Z","Action":"pause","Package":"github.com/allegro/bigcache/v3","Test":"TestCacheReset"}
+{"Time":"2026-07-28T14:24:10.885447148Z","Action":"run","Package":"github.com/allegro/bigcache/v3","Test":"TestIterateOnResetCache"}
+{"Time":"2026-07-28T14:24:10.885448755Z","Action":"output","Package":"github.com/allegro/bigcache/v3","Test":"TestIterateOnResetCache","Output":"=== RUN   TestIterateOnResetCache\n"}
+{"Time":"2026-07-28T14:24:10.885450769Z","Action":"output","Package":"github.com/allegro/bigcache/v3","Test":"TestIterateOnResetCache","Output":"=== PAUSE TestIterateOnResetCache\n"}
+{"Time":"2026-07-28T14:24:10.885452569Z","Action":"pause","Package":"github.com/allegro/bigcache/v3","Test":"TestIterateOnResetCache"}
+{"Time":"2026-07-28T14:24:10.885454497Z","Action":"run","Package":"github.com/allegro/bigcache/v3","Test":"TestGetOnResetCache"}
+{"Time":"2026-07-28T14:24:10.885456287Z","Action":"output","Package":"github.com/allegro/bigcache/v3","Test":"TestGetOnResetCache","Output":"=== RUN   TestGetOnResetCache\n"}
+{"Time":"2026-07-28T14:24:10.885458207Z","Action":"output","Package":"github.com/allegro/bigcache/v3","Test":"TestGetOnResetCache","Output":"=== PAUSE TestGetOnResetCache\n"}
+{"Time":"2026-07-28T14:24:10.885459853Z","Action":"pause","Package":"github.com/allegro/bigcache/v3","Test":"TestGetOnResetCache"}
+{"Time":"2026-07-28T14:24:10.885461702Z","Action":"run","Package":"github.com/allegro/bigcache/v3","Test":"TestEntryUpdate"}
+{"Time":"2026-07-28T14:24:10.885463327Z","Action":"output","Package":"github.com/allegro/bigcache/v3","Test":"TestEntryUpdate","Output":"=== RUN   TestEntryUpdate\n"}
+{"Time":"2026-07-28T14:24:10.885465252Z","Action":"output","Package":"github.com/allegro/bigcache/v3","Test":"TestEntryUpdate","Output":"=== PAUSE TestEntryUpdate\n"}
+{"Time":"2026-07-28T14:24:10.885466896Z","Action":"pause","Package":"github.com/allegro/bigcache/v3","Test":"TestEntryUpdate"}
+{"Time":"2026-07-28T14:24:10.885468778Z","Action":"run","Package":"github.com/allegro/bigcache/v3","Test":"TestOldestEntryDeletionWhenMaxCacheSizeIsReached"}
+{"Time":"2026-07-28T14:24:10.885471526Z","Action":"output","Package":"github.com/allegro/bigcache/v3","Test":"TestOldestEntryDeletionWhenMaxCacheSizeIsReached","Output":"=== RUN   TestOldestEntryDeletionWhenMaxCacheSizeIsReached\n"}
+{"Time":"2026-07-28T14:24:10.885473584Z","Action":"output","Package":"github.com/allegro/bigcache/v3","Test":"TestOldestEntryDeletionWhenMaxCacheSizeIsReached","Output":"=== PAUSE TestOldestEntryDeletionWhenMaxCacheSizeIsReached\n"}
+{"Time":"2026-07-28T14:24:10.885475324Z","Action":"pause","Package":"github.com/allegro/bigcache/v3","Test":"TestOldestEntryDeletionWhenMaxCacheSizeIsReached"}
+{"Time":"2026-07-28T14:24:10.88547733Z","Action":"run","Package":"github.com/allegro/bigcache/v3","Test":"TestRetrievingEntryShouldCopy"}
+{"Time":"2026-07-28T14:24:10.885478953Z","Action":"output","Package":"github.com/allegro/bigcache/v3","Test":"TestRetrievingEntryShouldCopy","Output":"=== RUN   TestRetrievingEntryShouldCopy\n"}
+{"Time":"2026-07-28T14:24:10.885481003Z","Action":"output","Package":"github.com/allegro/bigcache/v3","Test":"TestRetrievingEntryShouldCopy","Output":"=== PAUSE TestRetrievingEntryShouldCopy\n"}
+{"Time":"2026-07-28T14:24:10.885482701Z","Action":"pause","Package":"github.com/allegro/bigcache/v3","Test":"TestRetrievingEntryShouldCopy"}
+{"Time":"2026-07-28T14:24:10.885484562Z","Action":"run","Package":"github.com/allegro/bigcache/v3","Test":"TestEntryBiggerThanMaxShardSizeError"}
+{"Time":"2026-07-28T14:24:10.88548637Z","Action":"output","Package":"github.com/allegro/bigcache/v3","Test":"TestEntryBiggerThanMaxShardSizeError","Output":"=== RUN   TestEntryBiggerThanMaxShardSizeError\n"}
+{"Time":"2026-07-28T14:24:10.885488362Z","Action":"output","Package":"github.com/allegro/bigcache/v3","Test":"TestEntryBiggerThanMaxShardSizeError","Output":"=== PAUSE TestEntryBiggerThanMaxShardSizeError\n"}
+{"Time":"2026-07-28T14:24:10.885490826Z","Action":"pause","Package":"github.com/allegro/bigcache/v3","Test":"TestEntryBiggerThanMaxShardSizeError"}
+{"Time":"2026-07-28T14:24:10.885492838Z","Action":"run","Package":"github.com/allegro/bigcache/v3","Test":"TestHashCollision"}
+{"Time":"2026-07-28T14:24:10.88549443Z","Action":"output","Package":"github.com/allegro/bigcache/v3","Test":"TestHashCollision","Output":"=== RUN   TestHashCollision\n"}
+{"Time":"2026-07-28T14:24:10.885496487Z","Action":"output","Package":"github.com/allegro/bigcache/v3","Test":"TestHashCollision","Output":"=== PAUSE TestHashCollision\n"}
+{"Time":"2026-07-28T14:24:10.885498273Z","Action":"pause","Package":"github.com/allegro/bigcache/v3","Test":"TestHashCollision"}
+{"Time":"2026-07-28T14:24:10.885500289Z","Action":"run","Package":"github.com/allegro/bigcache/v3","Test":"TestNilValueCaching"}
+{"Time":"2026-07-28T14:24:10.885504045Z","Action":"output","Package":"github.com/allegro/bigcache/v3","Test":"TestNilValueCaching","Output":"=== RUN   TestNilValueCaching\n"}
+{"Time":"2026-07-28T14:24:10.88550614Z","Action":"output","Package":"github.com/allegro/bigcache/v3","Test":"TestNilValueCaching","Output":"=== PAUSE TestNilValueCaching\n"}
+{"Time":"2026-07-28T14:24:10.885507832Z","Action":"pause","Package":"github.com/allegro/bigcache/v3","Test":"TestNilValueCaching"}
+{"Time":"2026-07-28T14:24:10.885509699Z","Action":"run","Package":"github.com/allegro/bigcache/v3","Test":"TestClosing"}
+{"Time":"2026-07-28T14:24:10.885511327Z","Action":"output","Package":"github.com/allegro/bigcache/v3","Test":"TestClosing","Output":"=== RUN   TestClosing\n"}
+{"Time":"2026-07-28T14:24:10.885516992Z","Action":"cont","Package":"github.com/allegro/bigcache/v3/queue","Test":"TestAllocateAdditionalSpaceForValueBiggerThanQueue"}
+{"Time":"2026-07-28T14:24:10.885518953Z","Action":"output","Package":"github.com/allegro/bigcache/v3/queue","Test":"TestAllocateAdditionalSpaceForValueBiggerThanQueue","Output":"=== CONT  TestAllocateAdditionalSpaceForValueBiggerThanQueue\n"}
+{"Time":"2026-07-28T14:24:10.885520901Z","Action":"cont","Package":"github.com/allegro/bigcache/v3/queue","Test":"TestMaxSizeLimit"}
+{"Time":"2026-07-28T14:24:10.885522536Z","Action":"output","Package":"github.com/allegro/bigcache/v3/queue","Test":"TestMaxSizeLimit","Output":"=== CONT  TestMaxSizeLimit\n"}
+{"Time":"2026-07-28T14:24:10.885526066Z","Action":"cont","Package":"github.com/allegro/bigcache/v3/queue","Test":"TestGetEntryFromInvalidIndex"}
+{"Time":"2026-07-28T14:24:10.885529743Z","Action":"output","Package":"github.com/allegro/bigcache/v3/queue","Test":"TestGetEntryFromInvalidIndex","Output":"=== CONT  TestGetEntryFromInvalidIndex\n"}
+{"Time":"2026-07-28T14:24:10.885531681Z","Action":"cont","Package":"github.com/allegro/bigcache/v3/queue","Test":"TestGetEntryFromIndexOutOfRange"}
+{"Time":"2026-07-28T14:24:10.885533517Z","Action":"output","Package":"github.com/allegro/bigcache/v3/queue","Test":"TestGetEntryFromIndexOutOfRange","Output":"=== CONT  TestGetEntryFromIndexOutOfRange\n"}
+{"Time":"2026-07-28T14:24:10.885535367Z","Action":"cont","Package":"github.com/allegro/bigcache/v3/queue","Test":"TestGetEntryFromIndex"}
+{"Time":"2026-07-28T14:24:10.885536998Z","Action":"output","Package":"github.com/allegro/bigcache/v3/queue","Test":"TestGetEntryFromIndex","Output":"=== CONT  TestGetEntryFromIndex\n"}
+{"Time":"2026-07-28T14:24:10.885538979Z","Action":"cont","Package":"github.com/allegro/bigcache/v3/queue","Test":"TestPopWholeQueue"}
+{"Time":"2026-07-28T14:24:10.885540639Z","Action":"output","Package":"github.com/allegro/bigcache/v3/queue","Test":"TestPopWholeQueue","Output":"=== CONT  TestPopWholeQueue\n"}
+{"Time":"2026-07-28T14:24:10.885546466Z","Action":"output","Package":"github.com/allegro/bigcache/v3/queue","Test":"TestReuseAvailableSpace","Output":"--- PASS: TestReuseAvailableSpace (0.00s)\n"}
+{"Time":"2026-07-28T14:24:10.885548609Z","Action":"pass","Package":"github.com/allegro/bigcache/v3/queue","Test":"TestReuseAvailableSpace","Elapsed":0}
+{"Time":"2026-07-28T14:24:10.885550474Z","Action":"output","Package":"github.com/allegro/bigcache/v3/queue","Test":"TestMaxSizeLimit","Output":"--- PASS: TestMaxSizeLimit (0.00s)\n"}
+{"Time":"2026-07-28T14:24:10.885552713Z","Action":"pass","Package":"github.com/allegro/bigcache/v3/queue","Test":"TestMaxSizeLimit","Elapsed":0}
+{"Time":"2026-07-28T14:24:10.885554494Z","Action":"output","Package":"github.com/allegro/bigcache/v3/queue","Test":"TestGetEntryFromInvalidIndex","Output":"--- PASS: TestGetEntryFromInvalidIndex (0.00s)\n"}
+{"Time":"2026-07-28T14:24:10.885556563Z","Action":"pass","Package":"github.com/allegro/bigcache/v3/queue","Test":"TestGetEntryFromInvalidIndex","Elapsed":0}
+{"Time":"2026-07-28T14:24:10.8855583Z","Action":"output","Package":"github.com/allegro/bigcache/v3/queue","Test":"TestGetEntryFromIndexOutOfRange","Output":"--- PASS: TestGetEntryFromIndexOutOfRange (0.00s)\n"}
+{"Time":"2026-07-28T14:24:10.885560437Z","Action":"pass","Package":"github.com/allegro/bigcache/v3/queue","Test":"TestGetEntryFromIndexOutOfRange","Elapsed":0}
+{"Time":"2026-07-28T14:24:10.885562317Z","Action":"output","Package":"github.com/allegro/bigcache/v3/queue","Test":"TestGetEntryFromIndex","Output":"--- PASS: TestGetEntryFromIndex (0.00s)\n"}
+{"Time":"2026-07-28T14:24:10.885565027Z","Action":"pass","Package":"github.com/allegro/bigcache/v3/queue","Test":"TestGetEntryFromIndex","Elapsed":0}
+{"Time":"2026-07-28T14:24:10.88556689Z","Action":"output","Package":"github.com/allegro/bigcache/v3/queue","Test":"TestAllocateAdditionalSpaceForValueBiggerThanQueue","Output":"--- PASS: TestAllocateAdditionalSpaceForValueBiggerThanQueue (0.00s)\n"}
+{"Time":"2026-07-28T14:24:10.885568916Z","Action":"pass","Package":"github.com/allegro/bigcache/v3/queue","Test":"TestAllocateAdditionalSpaceForValueBiggerThanQueue","Elapsed":0}
+{"Time":"2026-07-28T14:24:10.885570573Z","Action":"cont","Package":"github.com/allegro/bigcache/v3/queue","Test":"TestAllocateAdditionalSpaceForInsufficientFreeFragmentedSpaceWhereHeadIsBeforeTail"}
+{"Time":"2026-07-28T14:24:10.885572351Z","Action":"output","Package":"github.com/allegro/bigcache/v3/queue","Test":"TestAllocateAdditionalSpaceForInsufficientFreeFragmentedSpaceWhereHeadIsBeforeTail","Output":"=== CONT  TestAllocateAdditionalSpaceForInsufficientFreeFragmentedSpaceWhereHeadIsBeforeTail\n"}
+{"Time":"2026-07-28T14:24:10.885576362Z","Action":"output","Package":"github.com/allegro/bigcache/v3/queue","Test":"TestPopWholeQueue","Output":"--- PASS: TestPopWholeQueue (0.00s)\n"}
+{"Time":"2026-07-28T14:24:10.885578637Z","Action":"pass","Package":"github.com/allegro/bigcache/v3/queue","Test":"TestPopWholeQueue","Elapsed":0}
+{"Time":"2026-07-28T14:24:10.885580504Z","Action":"output","Package":"github.com/allegro/bigcache/v3/queue","Test":"TestAllocateAdditionalSpaceForInsufficientFreeFragmentedSpaceWhereHeadIsBeforeTail","Output":"--- PASS: TestAllocateAdditionalSpaceForInsufficientFreeFragmentedSpaceWhereHeadIsBeforeTail (0.00s)\n"}
+{"Time":"2026-07-28T14:24:10.885582649Z","Action":"pass","Package":"github.com/allegro/bigcache/v3/queue","Test":"TestAllocateAdditionalSpaceForInsufficientFreeFragmentedSpaceWhereHeadIsBeforeTail","Elapsed":0}
+{"Time":"2026-07-28T14:24:10.885584367Z","Action":"cont","Package":"github.com/allegro/bigcache/v3/queue","Test":"TestResetFullQueue"}
+{"Time":"2026-07-28T14:24:10.885586033Z","Action":"output","Package":"github.com/allegro/bigcache/v3/queue","Test":"TestResetFullQueue","Output":"=== CONT  TestResetFullQueue\n"}
+{"Time":"2026-07-28T14:24:10.885588054Z","Action":"output","Package":"github.com/allegro/bigcache/v3/queue","Test":"TestResetFullQueue","Output":"--- PASS: TestResetFullQueue (0.00s)\n"}
+{"Time":"2026-07-28T14:24:10.885590072Z","Action":"pass","Package":"github.com/allegro/bigcache/v3/queue","Test":"TestResetFullQueue","Elapsed":0}
+{"Time":"2026-07-28T14:24:10.885591688Z","Action":"cont","Package":"github.com/allegro/bigcache/v3/queue","Test":"TestPeek"}
+{"Time":"2026-07-28T14:24:10.885593335Z","Action":"output","Package":"github.com/allegro/bigcache/v3/queue","Test":"TestPeek","Output":"=== CONT  TestPeek\n"}
+{"Time":"2026-07-28T14:24:10.885595498Z","Action":"output","Package":"github.com/allegro/bigcache/v3/queue","Test":"TestPeek","Output":"--- PASS: TestPeek (0.00s)\n"}
+{"Time":"2026-07-28T14:24:10.885597409Z","Action":"pass","Package":"github.com/allegro/bigcache/v3/queue","Test":"TestPeek","Elapsed":0}
+{"Time":"2026-07-28T14:24:10.885599033Z","Action":"cont","Package":"github.com/allegro/bigcache/v3/queue","Test":"TestLen"}
+{"Time":"2026-07-28T14:24:10.885600734Z","Action":"output","Package":"github.com/allegro/bigcache/v3/queue","Test":"TestLen","Output":"=== CONT  TestLen\n"}
+{"Time":"2026-07-28T14:24:10.885602798Z","Action":"output","Package":"github.com/allegro/bigcache/v3/queue","Test":"TestLen","Output":"--- PASS: TestLen (0.00s)\n"}
+{"Time":"2026-07-28T14:24:10.885604938Z","Action":"pass","Package":"github.com/allegro/bigcache/v3/queue","Test":"TestLen","Elapsed":0}
+{"Time":"2026-07-28T14:24:10.885606535Z","Action":"cont","Package":"github.com/allegro/bigcache/v3/queue","Test":"TestAllocateAdditionalSpaceForInsufficientFreeFragmentedSpaceWhereTailIsBeforeHead128"}
+{"Time":"2026-07-28T14:24:10.885608275Z","Action":"output","Package":"github.com/allegro/bigcache/v3/queue","Test":"TestAllocateAdditionalSpaceForInsufficientFreeFragmentedSpaceWhereTailIsBeforeHead128","Output":"=== CONT  TestAllocateAdditionalSpaceForInsufficientFreeFragmentedSpaceWhereTailIsBeforeHead128\n"}
+{"Time":"2026-07-28T14:24:10.885610633Z","Action":"output","Package":"github.com/allegro/bigcache/v3/queue","Test":"TestAllocateAdditionalSpaceForInsufficientFreeFragmentedSpaceWhereTailIsBeforeHead128","Output":"--- PASS: TestAllocateAdditionalSpaceForInsufficientFreeFragmentedSpaceWhereTailIsBeforeHead128 (0.00s)\n"}
+{"Time":"2026-07-28T14:24:10.885613369Z","Action":"pass","Package":"github.com/allegro/bigcache/v3/queue","Test":"TestAllocateAdditionalSpaceForInsufficientFreeFragmentedSpaceWhereTailIsBeforeHead128","Elapsed":0}
+{"Time":"2026-07-28T14:24:10.885615128Z","Action":"cont","Package":"github.com/allegro/bigcache/v3/queue","Test":"TestAllocateAdditionalSpaceForValueBiggerThanInitQueue"}
+{"Time":"2026-07-28T14:24:10.885616881Z","Action":"output","Package":"github.com/allegro/bigcache/v3/queue","Test":"TestAllocateAdditionalSpaceForValueBiggerThanInitQueue","Output":"=== CONT  TestAllocateAdditionalSpaceForValueBiggerThanInitQueue\n"}
+{"Time":"2026-07-28T14:24:10.885620576Z","Action":"output","Package":"github.com/allegro/bigcache/v3/queue","Test":"TestAllocateAdditionalSpaceForValueBiggerThanInitQueue","Output":"--- PASS: TestAllocateAdditionalSpaceForValueBiggerThanInitQueue (0.00s)\n"}
+{"Time":"2026-07-28T14:24:10.885622624Z","Action":"pass","Package":"github.com/allegro/bigcache/v3/queue","Test":"TestAllocateAdditionalSpaceForValueBiggerThanInitQueue","Elapsed":0}
+{"Time":"2026-07-28T14:24:10.885624221Z","Action":"cont","Package":"github.com/allegro/bigcache/v3/queue","Test":"TestUnchangedEntriesIndexesAfterAdditionalMemoryAllocationWhereTailIsBeforeHead"}
+{"Time":"2026-07-28T14:24:10.885625959Z","Action":"output","Package":"github.com/allegro/bigcache/v3/queue","Test":"TestUnchangedEntriesIndexesAfterAdditionalMemoryAllocationWhereTailIsBeforeHead","Output":"=== CONT  TestUnchangedEntriesIndexesAfterAdditionalMemoryAllocationWhereTailIsBeforeHead\n"}
+{"Time":"2026-07-28T14:24:10.885628242Z","Action":"output","Package":"github.com/allegro/bigcache/v3/queue","Test":"TestUnchangedEntriesIndexesAfterAdditionalMemoryAllocationWhereTailIsBeforeHead","Output":"--- PASS: TestUnchangedEntriesIndexesAfterAdditionalMemoryAllocationWhereTailIsBeforeHead (0.00s)\n"}
+{"Time":"2026-07-28T14:24:10.885630264Z","Action":"pass","Package":"github.com/allegro/bigcache/v3/queue","Test":"TestUnchangedEntriesIndexesAfterAdditionalMemoryAllocationWhereTailIsBeforeHead","Elapsed":0}
+{"Time":"2026-07-28T14:24:10.885631932Z","Action":"cont","Package":"github.com/allegro/bigcache/v3/queue","Test":"TestAllocateAdditionalSpaceForInsufficientFreeFragmentedSpaceWhereTailIsBeforeHead"}
+{"Time":"2026-07-28T14:24:10.885636674Z","Action":"output","Package":"github.com/allegro/bigcache/v3/queue","Test":"TestAllocateAdditionalSpaceForInsufficientFreeFragmentedSpaceWhereTailIsBeforeHead","Output":"=== CONT  TestAllocateAdditionalSpaceForInsufficientFreeFragmentedSpaceWhereTailIsBeforeHead\n"}
+{"Time":"2026-07-28T14:24:10.885639663Z","Action":"output","Package":"github.com/allegro/bigcache/v3/queue","Test":"TestAllocateAdditionalSpaceForInsufficientFreeFragmentedSpaceWhereTailIsBeforeHead","Output":"--- PASS: TestAllocateAdditionalSpaceForInsufficientFreeFragmentedSpaceWhereTailIsBeforeHead (0.00s)\n"}
+{"Time":"2026-07-28T14:24:10.885641727Z","Action":"pass","Package":"github.com/allegro/bigcache/v3/queue","Test":"TestAllocateAdditionalSpaceForInsufficientFreeFragmentedSpaceWhereTailIsBeforeHead","Elapsed":0}
+{"Time":"2026-07-28T14:24:10.885643428Z","Action":"cont","Package":"github.com/allegro/bigcache/v3/queue","Test":"TestUnchangedEntriesIndexesAfterAdditionalMemoryAllocationWhereHeadIsBeforeTail"}
+{"Time":"2026-07-28T14:24:10.88564533Z","Action":"output","Package":"github.com/allegro/bigcache/v3/queue","Test":"TestUnchangedEntriesIndexesAfterAdditionalMemoryAllocationWhereHeadIsBeforeTail","Output":"=== CONT  TestUnchangedEntriesIndexesAfterAdditionalMemoryAllocationWhereHeadIsBeforeTail\n"}
+{"Time":"2026-07-28T14:24:10.885649544Z","Action":"output","Package":"github.com/allegro/bigcache/v3/queue","Test":"TestUnchangedEntriesIndexesAfterAdditionalMemoryAllocationWhereHeadIsBeforeTail","Output":"--- PASS: TestUnchangedEntriesIndexesAfterAdditionalMemoryAllocationWhereHeadIsBeforeTail (0.00s)\n"}
+{"Time":"2026-07-28T14:24:10.885651597Z","Action":"pass","Package":"github.com/allegro/bigcache/v3/queue","Test":"TestUnchangedEntriesIndexesAfterAdditionalMemoryAllocationWhereHeadIsBeforeTail","Elapsed":0}
+{"Time":"2026-07-28T14:24:10.885653304Z","Action":"cont","Package":"github.com/allegro/bigcache/v3/queue","Test":"TestGetEntryFromEmptyQueue"}
+{"Time":"2026-07-28T14:24:10.885655168Z","Action":"output","Package":"github.com/allegro/bigcache/v3/queue","Test":"TestGetEntryFromEmptyQueue","Output":"=== CONT  TestGetEntryFromEmptyQueue\n"}
+{"Time":"2026-07-28T14:24:10.885657265Z","Action":"output","Package":"github.com/allegro/bigcache/v3/queue","Test":"TestGetEntryFromEmptyQueue","Output":"--- PASS: TestGetEntryFromEmptyQueue (0.00s)\n"}
+{"Time":"2026-07-28T14:24:10.885662185Z","Action":"pass","Package":"github.com/allegro/bigcache/v3/queue","Test":"TestGetEntryFromEmptyQueue","Elapsed":0}
+{"Time":"2026-07-28T14:24:10.885663819Z","Action":"cont","Package":"github.com/allegro/bigcache/v3/queue","Test":"TestPushEntryAfterAllocateAdditionMemoryInFull"}
+{"Time":"2026-07-28T14:24:10.88566549Z","Action":"output","Package":"github.com/allegro/bigcache/v3/queue","Test":"TestPushEntryAfterAllocateAdditionMemoryInFull","Output":"=== CONT  TestPushEntryAfterAllocateAdditionMemoryInFull\n"}
+{"Time":"2026-07-28T14:24:10.885667357Z","Action":"output","Package":"github.com/allegro/bigcache/v3/queue","Test":"TestPushEntryAfterAllocateAdditionMemoryInFull","Output":"2026/07/28 14:24:10 Allocated new queue in 120ns; Capacity: 18 \n"}
+{"Time":"2026-07-28T14:24:10.885669637Z","Action":"output","Package":"github.com/allegro/bigcache/v3/queue","Test":"TestPushEntryAfterAllocateAdditionMemoryInFull","Output":"--- PASS: TestPushEntryAfterAllocateAdditionMemoryInFull (0.00s)\n"}
+{"Time":"2026-07-28T14:24:10.885671548Z","Action":"pass","Package":"github.com/allegro/bigcache/v3/queue","Test":"TestPushEntryAfterAllocateAdditionMemoryInFull","Elapsed":0}
+{"Time":"2026-07-28T14:24:10.885673184Z","Action":"cont","Package":"github.com/allegro/bigcache/v3/queue","Test":"TestPushEntryAfterAllocateAdditionMemory"}
+{"Time":"2026-07-28T14:24:10.885674855Z","Action":"output","Package":"github.com/allegro/bigcache/v3/queue","Test":"TestPushEntryAfterAllocateAdditionMemory","Output":"=== CONT  TestPushEntryAfterAllocateAdditionMemory\n"}
+{"Time":"2026-07-28T14:24:10.885676695Z","Action":"output","Package":"github.com/allegro/bigcache/v3/queue","Test":"TestPushEntryAfterAllocateAdditionMemory","Output":"2026/07/28 14:24:10 Allocated new queue in 92ns; Capacity: 18 \n"}
+{"Time":"2026-07-28T14:24:10.885678772Z","Action":"output","Package":"github.com/allegro/bigcache/v3/queue","Test":"TestPushEntryAfterAllocateAdditionMemory","Output":"--- PASS: TestPushEntryAfterAllocateAdditionMemory (0.00s)\n"}
+{"Time":"2026-07-28T14:24:10.885680729Z","Action":"pass","Package":"github.com/allegro/bigcache/v3/queue","Test":"TestPushEntryAfterAllocateAdditionMemory","Elapsed":0}
+{"Time":"2026-07-28T14:24:10.885682474Z","Action":"cont","Package":"github.com/allegro/bigcache/v3/queue","Test":"TestReset"}
+{"Time":"2026-07-28T14:24:10.885684089Z","Action":"output","Package":"github.com/allegro/bigcache/v3/queue","Test":"TestReset","Output":"=== CONT  TestReset\n"}
+{"Time":"2026-07-28T14:24:10.885687097Z","Action":"output","Package":"github.com/allegro/bigcache/v3/queue","Test":"TestReset","Output":"--- PASS: TestReset (0.00s)\n"}
+{"Time":"2026-07-28T14:24:10.885689096Z","Action":"pass","Package":"github.com/allegro/bigcache/v3/queue","Test":"TestReset","Elapsed":0}
+{"Time":"2026-07-28T14:24:10.885690937Z","Action":"output","Package":"github.com/allegro/bigcache/v3/queue","Output":"PASS\n"}
+{"Time":"2026-07-28T14:24:10.885740561Z","Action":"output","Package":"github.com/allegro/bigcache/v3/queue","Output":"ok  \tgithub.com/allegro/bigcache/v3/queue\t0.002s\n"}
+{"Time":"2026-07-28T14:24:10.885753086Z","Action":"pass","Package":"github.com/allegro/bigcache/v3/queue","Elapsed":0.002}
+{"Time":"2026-07-28T14:24:10.900637766Z","Action":"run","Package":"github.com/allegro/bigcache/v3/server","Test":"TestServiceLoader"}
+{"Time":"2026-07-28T14:24:10.900678659Z","Action":"output","Package":"github.com/allegro/bigcache/v3/server","Test":"TestServiceLoader","Output":"=== RUN   TestServiceLoader\n"}
+{"Time":"2026-07-28T14:24:10.900688646Z","Action":"output","Package":"github.com/allegro/bigcache/v3/server","Test":"TestServiceLoader","Output":"--- PASS: TestServiceLoader (0.00s)\n"}
+{"Time":"2026-07-28T14:24:10.900692242Z","Action":"pass","Package":"github.com/allegro/bigcache/v3/server","Test":"TestServiceLoader","Elapsed":0}
+{"Time":"2026-07-28T14:24:10.90069625Z","Action":"run","Package":"github.com/allegro/bigcache/v3/server","Test":"TestRequestMetrics"}
+{"Time":"2026-07-28T14:24:10.900699005Z","Action":"output","Package":"github.com/allegro/bigcache/v3/server","Test":"TestRequestMetrics","Output":"=== RUN   TestRequestMetrics\n"}
+{"Time":"2026-07-28T14:24:10.900732595Z","Action":"output","Package":"github.com/allegro/bigcache/v3/server","Test":"TestRequestMetrics","Output":"    middleware_test.go:46: 2026/07/28 14:24:10 GET request to /api/v1/cache/empty took 1.276µs to process\n"}
+{"Time":"2026-07-28T14:24:10.900737465Z","Action":"output","Package":"github.com/allegro/bigcache/v3/server","Test":"TestRequestMetrics","Output":"        \n"}
+{"Time":"2026-07-28T14:24:10.900740635Z","Action":"output","Package":"github.com/allegro/bigcache/v3/server","Test":"TestRequestMetrics","Output":"--- PASS: TestRequestMetrics (0.00s)\n"}
+{"Time":"2026-07-28T14:24:10.90074393Z","Action":"pass","Package":"github.com/allegro/bigcache/v3/server","Test":"TestRequestMetrics","Elapsed":0}
+{"Time":"2026-07-28T14:24:10.900746367Z","Action":"run","Package":"github.com/allegro/bigcache/v3/server","Test":"TestGetWithNoKey"}
+{"Time":"2026-07-28T14:24:10.900748353Z","Action":"output","Package":"github.com/allegro/bigcache/v3/server","Test":"TestGetWithNoKey","Output":"=== RUN   TestGetWithNoKey\n"}
+{"Time":"2026-07-28T14:24:10.900752949Z","Action":"output","Package":"github.com/allegro/bigcache/v3/server","Test":"TestGetWithNoKey","Output":"=== PAUSE TestGetWithNoKey\n"}
+{"Time":"2026-07-28T14:24:10.900754792Z","Action":"pause","Package":"github.com/allegro/bigcache/v3/server","Test":"TestGetWithNoKey"}
+{"Time":"2026-07-28T14:24:10.900758185Z","Action":"run","Package":"github.com/allegro/bigcache/v3/server","Test":"TestGetWithMissingKey"}
+{"Time":"2026-07-28T14:24:10.900760137Z","Action":"output","Package":"github.com/allegro/bigcache/v3/server","Test":"TestGetWithMissingKey","Output":"=== RUN   TestGetWithMissingKey\n"}
+{"Time":"2026-07-28T14:24:10.900763259Z","Action":"output","Package":"github.com/allegro/bigcache/v3/server","Test":"TestGetWithMissingKey","Output":"=== PAUSE TestGetWithMissingKey\n"}
+{"Time":"2026-07-28T14:24:10.900765093Z","Action":"pause","Package":"github.com/allegro/bigcache/v3/server","Test":"TestGetWithMissingKey"}
+{"Time":"2026-07-28T14:24:10.900767876Z","Action":"run","Package":"github.com/allegro/bigcache/v3/server","Test":"TestGetKey"}
+{"Time":"2026-07-28T14:24:10.900769767Z","Action":"output","Package":"github.com/allegro/bigcache/v3/server","Test":"TestGetKey","Output":"=== RUN   TestGetKey\n"}
+{"Time":"2026-07-28T14:24:10.900772676Z","Action":"output","Package":"github.com/allegro/bigcache/v3/server","Test":"TestGetKey","Output":"=== PAUSE TestGetKey\n"}
+{"Time":"2026-07-28T14:24:10.900774489Z","Action":"pause","Package":"github.com/allegro/bigcache/v3/server","Test":"TestGetKey"}
+{"Time":"2026-07-28T14:24:10.900777454Z","Action":"run","Package":"github.com/allegro/bigcache/v3/server","Test":"TestPutKey"}
+{"Time":"2026-07-28T14:24:10.90077914Z","Action":"output","Package":"github.com/allegro/bigcache/v3/server","Test":"TestPutKey","Output":"=== RUN   TestPutKey\n"}
+{"Time":"2026-07-28T14:24:10.900781915Z","Action":"output","Package":"github.com/allegro/bigcache/v3/server","Test":"TestPutKey","Output":"=== PAUSE TestPutKey\n"}
+{"Time":"2026-07-28T14:24:10.900783719Z","Action":"pause","Package":"github.com/allegro/bigcache/v3/server","Test":"TestPutKey"}
+{"Time":"2026-07-28T14:24:10.900786443Z","Action":"run","Package":"github.com/allegro/bigcache/v3/server","Test":"TestPutEmptyKey"}
+{"Time":"2026-07-28T14:24:10.900788271Z","Action":"output","Package":"github.com/allegro/bigcache/v3/server","Test":"TestPutEmptyKey","Output":"=== RUN   TestPutEmptyKey\n"}
+{"Time":"2026-07-28T14:24:10.900792353Z","Action":"output","Package":"github.com/allegro/bigcache/v3/server","Test":"TestPutEmptyKey","Output":"=== PAUSE TestPutEmptyKey\n"}
+{"Time":"2026-07-28T14:24:10.900794186Z","Action":"pause","Package":"github.com/allegro/bigcache/v3/server","Test":"TestPutEmptyKey"}
+{"Time":"2026-07-28T14:24:10.900800412Z","Action":"run","Package":"github.com/allegro/bigcache/v3/server","Test":"TestDeleteEmptyKey"}
+{"Time":"2026-07-28T14:24:10.900802151Z","Action":"output","Package":"github.com/allegro/bigcache/v3/server","Test":"TestDeleteEmptyKey","Output":"=== RUN   TestDeleteEmptyKey\n"}
+{"Time":"2026-07-28T14:24:10.900807062Z","Action":"output","Package":"github.com/allegro/bigcache/v3/server","Test":"TestDeleteEmptyKey","Output":"=== PAUSE TestDeleteEmptyKey\n"}
+{"Time":"2026-07-28T14:24:10.900809017Z","Action":"pause","Package":"github.com/allegro/bigcache/v3/server","Test":"TestDeleteEmptyKey"}
+{"Time":"2026-07-28T14:24:10.900811548Z","Action":"run","Package":"github.com/allegro/bigcache/v3/server","Test":"TestDeleteInvalidKey"}
+{"Time":"2026-07-28T14:24:10.9008133Z","Action":"output","Package":"github.com/allegro/bigcache/v3/server","Test":"TestDeleteInvalidKey","Output":"=== RUN   TestDeleteInvalidKey\n"}
+{"Time":"2026-07-28T14:24:10.900815954Z","Action":"output","Package":"github.com/allegro/bigcache/v3/server","Test":"TestDeleteInvalidKey","Output":"=== PAUSE TestDeleteInvalidKey\n"}
+{"Time":"2026-07-28T14:24:10.900817822Z","Action":"pause","Package":"github.com/allegro/bigcache/v3/server","Test":"TestDeleteInvalidKey"}
+{"Time":"2026-07-28T14:24:10.900820334Z","Action":"run","Package":"github.com/allegro/bigcache/v3/server","Test":"TestDeleteKey"}
+{"Time":"2026-07-28T14:24:10.900822006Z","Action":"output","Package":"github.com/allegro/bigcache/v3/server","Test":"TestDeleteKey","Output":"=== RUN   TestDeleteKey\n"}
+{"Time":"2026-07-28T14:24:10.900827576Z","Action":"output","Package":"github.com/allegro/bigcache/v3/server","Test":"TestDeleteKey","Output":"=== PAUSE TestDeleteKey\n"}
+{"Time":"2026-07-28T14:24:10.900829455Z","Action":"pause","Package":"github.com/allegro/bigcache/v3/server","Test":"TestDeleteKey"}
+{"Time":"2026-07-28T14:24:10.90083218Z","Action":"run","Package":"github.com/allegro/bigcache/v3/server","Test":"TestClearCache"}
+{"Time":"2026-07-28T14:24:10.900833974Z","Action":"output","Package":"github.com/allegro/bigcache/v3/server","Test":"TestClearCache","Output":"=== RUN   TestClearCache\n"}
+{"Time":"2026-07-28T14:24:10.900849648Z","Action":"output","Package":"github.com/allegro/bigcache/v3/server","Test":"TestClearCache","Output":"=== PAUSE TestClearCache\n"}
+{"Time":"2026-07-28T14:24:10.900851668Z","Action":"pause","Package":"github.com/allegro/bigcache/v3/server","Test":"TestClearCache"}
+{"Time":"2026-07-28T14:24:10.900854212Z","Action":"run","Package":"github.com/allegro/bigcache/v3/server","Test":"TestGetStats"}
+{"Time":"2026-07-28T14:24:10.900857556Z","Action":"output","Package":"github.com/allegro/bigcache/v3/server","Test":"TestGetStats","Output":"=== RUN   TestGetStats\n"}
+{"Time":"2026-07-28T14:24:10.900861172Z","Action":"output","Package":"github.com/allegro/bigcache/v3/server","Test":"TestGetStats","Output":"=== PAUSE TestGetStats\n"}
+{"Time":"2026-07-28T14:24:10.900863088Z","Action":"pause","Package":"github.com/allegro/bigcache/v3/server","Test":"TestGetStats"}
+{"Time":"2026-07-28T14:24:10.900866322Z","Action":"run","Package":"github.com/allegro/bigcache/v3/server","Test":"TestGetStatsIndex"}
+{"Time":"2026-07-28T14:24:10.900868148Z","Action":"output","Package":"github.com/allegro/bigcache/v3/server","Test":"TestGetStatsIndex","Output":"=== RUN   TestGetStatsIndex\n"}
+{"Time":"2026-07-28T14:24:10.900873191Z","Action":"output","Package":"github.com/allegro/bigcache/v3/server","Test":"TestGetStatsIndex","Output":"=== PAUSE TestGetStatsIndex\n"}
+{"Time":"2026-07-28T14:24:10.900875052Z","Action":"pause","Package":"github.com/allegro/bigcache/v3/server","Test":"TestGetStatsIndex"}
+{"Time":"2026-07-28T14:24:10.900878389Z","Action":"run","Package":"github.com/allegro/bigcache/v3/server","Test":"TestCacheIndexHandler"}
+{"Time":"2026-07-28T14:24:10.900880113Z","Action":"output","Package":"github.com/allegro/bigcache/v3/server","Test":"TestCacheIndexHandler","Output":"=== RUN   TestCacheIndexHandler\n"}
+{"Time":"2026-07-28T14:24:10.900920355Z","Action":"output","Package":"github.com/allegro/bigcache/v3/server","Test":"TestCacheIndexHandler","Output":"--- PASS: TestCacheIndexHandler (0.00s)\n"}
+{"Time":"2026-07-28T14:24:10.900923703Z","Action":"pass","Package":"github.com/allegro/bigcache/v3/server","Test":"TestCacheIndexHandler","Elapsed":0}
+{"Time":"2026-07-28T14:24:10.900930755Z","Action":"run","Package":"github.com/allegro/bigcache/v3/server","Test":"TestInvalidPutWhenExceedShardCap"}
+{"Time":"2026-07-28T14:24:10.900933157Z","Action":"output","Package":"github.com/allegro/bigcache/v3/server","Test":"TestInvalidPutWhenExceedShardCap","Output":"=== RUN   TestInvalidPutWhenExceedShardCap\n"}
+{"Time":"2026-07-28T14:24:10.900935505Z","Action":"output","Package":"github.com/allegro/bigcache/v3/server","Test":"TestInvalidPutWhenExceedShardCap","Output":"=== PAUSE TestInvalidPutWhenExceedShardCap\n"}
+{"Time":"2026-07-28T14:24:10.900937497Z","Action":"pause","Package":"github.com/allegro/bigcache/v3/server","Test":"TestInvalidPutWhenExceedShardCap"}
+{"Time":"2026-07-28T14:24:10.90094341Z","Action":"run","Package":"github.com/allegro/bigcache/v3/server","Test":"TestInvalidPutWhenReading"}
+{"Time":"2026-07-28T14:24:10.900945276Z","Action":"output","Package":"github.com/allegro/bigcache/v3/server","Test":"TestInvalidPutWhenReading","Output":"=== RUN   TestInvalidPutWhenReading\n"}
+{"Time":"2026-07-28T14:24:10.900948252Z","Action":"output","Package":"github.com/allegro/bigcache/v3/server","Test":"TestInvalidPutWhenReading","Output":"=== PAUSE TestInvalidPutWhenReading\n"}
+{"Time":"2026-07-28T14:24:10.900950082Z","Action":"pause","Package":"github.com/allegro/bigcache/v3/server","Test":"TestInvalidPutWhenReading"}
+{"Time":"2026-07-28T14:24:10.900960063Z","Action":"cont","Package":"github.com/allegro/bigcache/v3/server","Test":"TestInvalidPutWhenReading"}
+{"Time":"2026-07-28T14:24:10.900962155Z","Action":"output","Package":"github.com/allegro/bigcache/v3/server","Test":"TestInvalidPutWhenReading","Output":"=== CONT  TestInvalidPutWhenReading\n"}
+{"Time":"2026-07-28T14:24:10.901004444Z","Action":"output","Package":"github.com/allegro/bigcache/v3/server","Test":"TestInvalidPutWhenReading","Output":"2026/07/28 14:24:10 test read error\n"}
+{"Time":"2026-07-28T14:24:10.90100786Z","Action":"output","Package":"github.com/allegro/bigcache/v3/server","Test":"TestInvalidPutWhenReading","Output":"--- PASS: TestInvalidPutWhenReading (0.00s)\n"}
+{"Time":"2026-07-28T14:24:10.901010821Z","Action":"pass","Package":"github.com/allegro/bigcache/v3/server","Test":"TestInvalidPutWhenReading","Elapsed":0}
+{"Time":"2026-07-28T14:24:10.901012736Z","Action":"cont","Package":"github.com/allegro/bigcache/v3/server","Test":"TestGetWithNoKey"}
+{"Time":"2026-07-28T14:24:10.901014461Z","Action":"output","Package":"github.com/allegro/bigcache/v3/server","Test":"TestGetWithNoKey","Output":"=== CONT  TestGetWithNoKey\n"}
+{"Time":"2026-07-28T14:24:10.901016882Z","Action":"output","Package":"github.com/allegro/bigcache/v3/server","Test":"TestGetWithNoKey","Output":"2026/07/28 14:24:10 empty request.\n"}
+{"Time":"2026-07-28T14:24:10.90101984Z","Action":"output","Package":"github.com/allegro/bigcache/v3/server","Test":"TestGetWithNoKey","Output":"--- PASS: TestGetWithNoKey (0.00s)\n"}
+{"Time":"2026-07-28T14:24:10.901022449Z","Action":"pass","Package":"github.com/allegro/bigcache/v3/server","Test":"TestGetWithNoKey","Elapsed":0}
+{"Time":"2026-07-28T14:24:10.901024218Z","Action":"cont","Package":"github.com/allegro/bigcache/v3/server","Test":"TestDeleteEmptyKey"}
+{"Time":"2026-07-28T14:24:10.901025856Z","Action":"output","Package":"github.com/allegro/bigcache/v3/server","Test":"TestDeleteEmptyKey","Output":"=== CONT  TestDeleteEmptyKey\n"}
+{"Time":"2026-07-28T14:24:10.901028303Z","Action":"output","Package":"github.com/allegro/bigcache/v3/server","Test":"TestDeleteEmptyKey","Output":"2026/07/28 14:24:10 empty request.\n"}
+{"Time":"2026-07-28T14:24:10.901048064Z","Action":"output","Package":"github.com/allegro/bigcache/v3/server","Test":"TestDeleteEmptyKey","Output":"    server_test.go:125: want: 404; got: 400.\n"}
+{"Time":"2026-07-28T14:24:10.901050117Z","Action":"output","Package":"github.com/allegro/bigcache/v3/server","Test":"TestDeleteEmptyKey","Output":"        \tapparently we're trying to delete empty keys.\n"}
+{"Time":"2026-07-28T14:24:10.901054486Z","Action":"output","Package":"github.com/allegro/bigcache/v3/server","Test":"TestDeleteEmptyKey","Output":"--- FAIL: TestDeleteEmptyKey (0.00s)\n"}
+{"Time":"2026-07-28T14:24:10.90105663Z","Action":"fail","Package":"github.com/allegro/bigcache/v3/server","Test":"TestDeleteEmptyKey","Elapsed":0}
+{"Time":"2026-07-28T14:24:10.901058317Z","Action":"cont","Package":"github.com/allegro/bigcache/v3/server","Test":"TestPutEmptyKey"}
+{"Time":"2026-07-28T14:24:10.901059955Z","Action":"output","Package":"github.com/allegro/bigcache/v3/server","Test":"TestPutEmptyKey","Output":"=== CONT  TestPutEmptyKey\n"}
+{"Time":"2026-07-28T14:24:10.901062433Z","Action":"output","Package":"github.com/allegro/bigcache/v3/server","Test":"TestPutEmptyKey","Output":"2026/07/28 14:24:10 empty request.\n"}
+{"Time":"2026-07-28T14:24:10.901064697Z","Action":"output","Package":"github.com/allegro/bigcache/v3/server","Test":"TestPutEmptyKey","Output":"--- PASS: TestPutEmptyKey (0.00s)\n"}
+{"Time":"2026-07-28T14:24:10.901066796Z","Action":"pass","Package":"github.com/allegro/bigcache/v3/server","Test":"TestPutEmptyKey","Elapsed":0}
+{"Time":"2026-07-28T14:24:10.901068586Z","Action":"cont","Package":"github.com/allegro/bigcache/v3/server","Test":"TestPutKey"}
+{"Time":"2026-07-28T14:24:10.901070265Z","Action":"output","Package":"github.com/allegro/bigcache/v3/server","Test":"TestPutKey","Output":"=== CONT  TestPutKey\n"}
+{"Time":"2026-07-28T14:24:10.901073051Z","Action":"output","Package":"github.com/allegro/bigcache/v3/server","Test":"TestPutKey","Output":"--- PASS: TestPutKey (0.00s)\n"}
+{"Time":"2026-07-28T14:24:10.901075165Z","Action":"pass","Package":"github.com/allegro/bigcache/v3/server","Test":"TestPutKey","Elapsed":0}
+{"Time":"2026-07-28T14:24:10.901076916Z","Action":"cont","Package":"github.com/allegro/bigcache/v3/server","Test":"TestGetKey"}
+{"Time":"2026-07-28T14:24:10.901078678Z","Action":"output","Package":"github.com/allegro/bigcache/v3/server","Test":"TestGetKey","Output":"=== CONT  TestGetKey\n"}
+{"Time":"2026-07-28T14:24:10.901084158Z","Action":"output","Package":"github.com/allegro/bigcache/v3/server","Test":"TestGetKey","Output":"--- PASS: TestGetKey (0.00s)\n"}
+{"Time":"2026-07-28T14:24:10.901086237Z","Action":"pass","Package":"github.com/allegro/bigcache/v3/server","Test":"TestGetKey","Elapsed":0}
+{"Time":"2026-07-28T14:24:10.901088438Z","Action":"cont","Package":"github.com/allegro/bigcache/v3/server","Test":"TestGetWithMissingKey"}
+{"Time":"2026-07-28T14:24:10.901090252Z","Action":"output","Package":"github.com/allegro/bigcache/v3/server","Test":"TestGetWithMissingKey","Output":"=== CONT  TestGetWithMissingKey\n"}
+{"Time":"2026-07-28T14:24:10.901093237Z","Action":"output","Package":"github.com/allegro/bigcache/v3/server","Test":"TestGetWithMissingKey","Output":"--- PASS: TestGetWithMissingKey (0.00s)\n"}
+{"Time":"2026-07-28T14:24:10.901095198Z","Action":"pass","Package":"github.com/allegro/bigcache/v3/server","Test":"TestGetWithMissingKey","Elapsed":0}
+{"Time":"2026-07-28T14:24:10.901097507Z","Action":"cont","Package":"github.com/allegro/bigcache/v3/server","Test":"TestGetStats"}
+{"Time":"2026-07-28T14:24:10.901099385Z","Action":"output","Package":"github.com/allegro/bigcache/v3/server","Test":"TestGetStats","Output":"=== CONT  TestGetStats\n"}
+{"Time":"2026-07-28T14:24:10.901177055Z","Action":"output","Package":"github.com/allegro/bigcache/v3/server","Test":"TestGetStats","Output":"--- PASS: TestGetStats (0.00s)\n"}
+{"Time":"2026-07-28T14:24:10.901179818Z","Action":"pass","Package":"github.com/allegro/bigcache/v3/server","Test":"TestGetStats","Elapsed":0}
+{"Time":"2026-07-28T14:24:10.901181792Z","Action":"cont","Package":"github.com/allegro/bigcache/v3/server","Test":"TestInvalidPutWhenExceedShardCap"}
+{"Time":"2026-07-28T14:24:10.901183437Z","Action":"output","Package":"github.com/allegro/bigcache/v3/server","Test":"TestInvalidPutWhenExceedShardCap","Output":"=== CONT  TestInvalidPutWhenExceedShardCap\n"}
+{"Time":"2026-07-28T14:24:10.901266969Z","Action":"cont","Package":"github.com/allegro/bigcache/v3/server","Test":"TestGetStatsIndex"}
+{"Time":"2026-07-28T14:24:10.90127104Z","Action":"output","Package":"github.com/allegro/bigcache/v3/server","Test":"TestGetStatsIndex","Output":"=== CONT  TestGetStatsIndex\n"}
+{"Time":"2026-07-28T14:24:10.901340856Z","Action":"cont","Package":"github.com/allegro/bigcache/v3/server","Test":"TestClearCache"}
+{"Time":"2026-07-28T14:24:10.901342787Z","Action":"output","Package":"github.com/allegro/bigcache/v3/server","Test":"TestClearCache","Output":"=== CONT  TestClearCache\n"}
+{"Time":"2026-07-28T14:24:10.90140765Z","Action":"cont","Package":"github.com/allegro/bigcache/v3/server","Test":"TestDeleteInvalidKey"}
+{"Time":"2026-07-28T14:24:10.901409587Z","Action":"output","Package":"github.com/allegro/bigcache/v3/server","Test":"TestDeleteInvalidKey","Output":"=== CONT  TestDeleteInvalidKey\n"}
+{"Time":"2026-07-28T14:24:10.901427937Z","Action":"cont","Package":"github.com/allegro/bigcache/v3/server","Test":"TestDeleteKey"}
+{"Time":"2026-07-28T14:24:10.901429891Z","Action":"output","Package":"github.com/allegro/bigcache/v3/server","Test":"TestDeleteKey","Output":"=== CONT  TestDeleteKey\n"}
+{"Time":"2026-07-28T14:24:10.901432889Z","Action":"output","Package":"github.com/allegro/bigcache/v3/server","Test":"TestGetStatsIndex","Output":"--- PASS: TestGetStatsIndex (0.00s)\n"}
+{"Time":"2026-07-28T14:24:10.901435576Z","Action":"pass","Package":"github.com/allegro/bigcache/v3/server","Test":"TestGetStatsIndex","Elapsed":0}
+{"Time":"2026-07-28T14:24:10.901437839Z","Action":"output","Package":"github.com/allegro/bigcache/v3/server","Test":"TestDeleteInvalidKey","Output":"--- PASS: TestDeleteInvalidKey (0.00s)\n"}
+{"Time":"2026-07-28T14:24:10.901440607Z","Action":"pass","Package":"github.com/allegro/bigcache/v3/server","Test":"TestDeleteInvalidKey","Elapsed":0}
+{"Time":"2026-07-28T14:24:10.901442398Z","Action":"output","Package":"github.com/allegro/bigcache/v3/server","Test":"TestDeleteKey","Output":"--- PASS: TestDeleteKey (0.00s)\n"}
+{"Time":"2026-07-28T14:24:10.907088341Z","Action":"pass","Package":"github.com/allegro/bigcache/v3/server","Test":"TestDeleteKey","Elapsed":0}
+{"Time":"2026-07-28T14:24:10.907093464Z","Action":"output","Package":"github.com/allegro/bigcache/v3/server","Test":"TestClearCache","Output":"--- PASS: TestClearCache (0.01s)\n"}
+{"Time":"2026-07-28T14:24:10.916803122Z","Action":"output","Package":"github.com/allegro/bigcache/v3/server","Test":"TestClearCache","Output":"2026/07/28 14:24:10 entry is bigger than max shard size\n"}
+{"Time":"2026-07-28T14:24:10.916808221Z","Action":"pass","Package":"github.com/allegro/bigcache/v3/server","Test":"TestClearCache","Elapsed":0.01}
+{"Time":"2026-07-28T14:24:10.916811214Z","Action":"output","Package":"github.com/allegro/bigcache/v3/server","Test":"TestInvalidPutWhenExceedShardCap","Output":"--- PASS: TestInvalidPutWhenExceedShardCap (0.02s)\n"}
+{"Time":"2026-07-28T14:24:10.916820098Z","Action":"pass","Package":"github.com/allegro/bigcache/v3/server","Test":"TestInvalidPutWhenExceedShardCap","Elapsed":0.02}
+{"Time":"2026-07-28T14:24:10.916822666Z","Action":"output","Package":"github.com/allegro/bigcache/v3/server","Output":"FAIL\n"}
+{"Time":"2026-07-28T14:24:10.927153083Z","Action":"output","Package":"github.com/allegro/bigcache/v3/server","Output":"FAIL\tgithub.com/allegro/bigcache/v3/server\t0.043s\n"}
+{"Time":"2026-07-28T14:24:10.927176585Z","Action":"fail","Package":"github.com/allegro/bigcache/v3/server","Elapsed":0.043}
+{"Time":"2026-07-28T14:24:11.086049281Z","Action":"output","Package":"github.com/allegro/bigcache/v3","Test":"TestClosing","Output":"--- PASS: TestClosing (0.20s)\n"}
+{"Time":"2026-07-28T14:24:11.086068003Z","Action":"pass","Package":"github.com/allegro/bigcache/v3","Test":"TestClosing","Elapsed":0.2}
+{"Time":"2026-07-28T14:24:11.086071983Z","Action":"run","Package":"github.com/allegro/bigcache/v3","Test":"TestEntryNotPresent"}
+{"Time":"2026-07-28T14:24:11.086075108Z","Action":"output","Package":"github.com/allegro/bigcache/v3","Test":"TestEntryNotPresent","Output":"=== RUN   TestEntryNotPresent\n"}
+{"Time":"2026-07-28T14:24:11.086092859Z","Action":"output","Package":"github.com/allegro/bigcache/v3","Test":"TestEntryNotPresent","Output":"=== PAUSE TestEntryNotPresent\n"}
+{"Time":"2026-07-28T14:24:11.086095335Z","Action":"pause","Package":"github.com/allegro/bigcache/v3","Test":"TestEntryNotPresent"}
+{"Time":"2026-07-28T14:24:11.086102337Z","Action":"run","Package":"github.com/allegro/bigcache/v3","Test":"TestBigCache_GetWithInfo"}
+{"Time":"2026-07-28T14:24:11.086104572Z","Action":"output","Package":"github.com/allegro/bigcache/v3","Test":"TestBigCache_GetWithInfo","Output":"=== RUN   TestBigCache_GetWithInfo\n"}
+{"Time":"2026-07-28T14:24:11.086107872Z","Action":"output","Package":"github.com/allegro/bigcache/v3","Test":"TestBigCache_GetWithInfo","Output":"=== PAUSE TestBigCache_GetWithInfo\n"}
+{"Time":"2026-07-28T14:24:11.086109871Z","Action":"pause","Package":"github.com/allegro/bigcache/v3","Test":"TestBigCache_GetWithInfo"}
+{"Time":"2026-07-28T14:24:11.08611307Z","Action":"run","Package":"github.com/allegro/bigcache/v3","Test":"TestBigCache_GetWithInfoCollision"}
+{"Time":"2026-07-28T14:24:11.086115016Z","Action":"output","Package":"github.com/allegro/bigcache/v3","Test":"TestBigCache_GetWithInfoCollision","Output":"=== RUN   TestBigCache_GetWithInfoCollision\n"}
+{"Time":"2026-07-28T14:24:11.086118307Z","Action":"output","Package":"github.com/allegro/bigcache/v3","Test":"TestBigCache_GetWithInfoCollision","Output":"=== PAUSE TestBigCache_GetWithInfoCollision\n"}
+{"Time":"2026-07-28T14:24:11.086120252Z","Action":"pause","Package":"github.com/allegro/bigcache/v3","Test":"TestBigCache_GetWithInfoCollision"}
+{"Time":"2026-07-28T14:24:11.086122656Z","Action":"run","Package":"github.com/allegro/bigcache/v3","Test":"TestCache_SetWithoutCleanWindow"}
+{"Time":"2026-07-28T14:24:11.08612474Z","Action":"output","Package":"github.com/allegro/bigcache/v3","Test":"TestCache_SetWithoutCleanWindow","Output":"=== RUN   TestCache_SetWithoutCleanWindow\n"}
+{"Time":"2026-07-28T14:24:11.097622946Z","Action":"output","Package":"github.com/allegro/bigcache/v3","Test":"TestCache_SetWithoutCleanWindow","Output":"--- PASS: TestCache_SetWithoutCleanWindow (0.01s)\n"}
+{"Time":"2026-07-28T14:24:11.097642084Z","Action":"pass","Package":"github.com/allegro/bigcache/v3","Test":"TestCache_SetWithoutCleanWindow","Elapsed":0.01}
+{"Time":"2026-07-28T14:24:11.097648002Z","Action":"run","Package":"github.com/allegro/bigcache/v3","Test":"TestCache_RepeatedSetWithBiggerEntry"}
+{"Time":"2026-07-28T14:24:11.097650319Z","Action":"output","Package":"github.com/allegro/bigcache/v3","Test":"TestCache_RepeatedSetWithBiggerEntry","Output":"=== RUN   TestCache_RepeatedSetWithBiggerEntry\n"}
+{"Time":"2026-07-28T14:24:11.098881127Z","Action":"output","Package":"github.com/allegro/bigcache/v3","Test":"TestCache_RepeatedSetWithBiggerEntry","Output":"2026/07/28 14:24:11 Allocated new queue in 528ns; Capacity: 468 \n"}
+{"Time":"2026-07-28T14:24:11.098889045Z","Action":"output","Package":"github.com/allegro/bigcache/v3","Test":"TestCache_RepeatedSetWithBiggerEntry","Output":"    bigcache_test.go:1299: entry is bigger than max shard size\n"}
+{"Time":"2026-07-28T14:24:11.098899441Z","Action":"output","Package":"github.com/allegro/bigcache/v3","Test":"TestCache_RepeatedSetWithBiggerEntry","Output":"--- FAIL: TestCache_RepeatedSetWithBiggerEntry (0.00s)\n"}
+{"Time":"2026-07-28T14:24:11.10101926Z","Action":"output","Package":"github.com/allegro/bigcache/v3","Test":"TestCache_RepeatedSetWithBiggerEntry","Output":"panic: runtime error: slice bounds out of range [226:225] [recovered, repanicked]\n"}
+{"Time":"2026-07-28T14:24:11.101022756Z","Action":"output","Package":"github.com/allegro/bigcache/v3","Test":"TestCache_RepeatedSetWithBiggerEntry","Output":"\n"}
+{"Time":"2026-07-28T14:24:11.101025488Z","Action":"output","Package":"github.com/allegro/bigcache/v3","Test":"TestCache_RepeatedSetWithBiggerEntry","Output":"goroutine 153 [running]:\n"}
+{"Time":"2026-07-28T14:24:11.101028841Z","Action":"output","Package":"github.com/allegro/bigcache/v3","Test":"TestCache_RepeatedSetWithBiggerEntry","Output":"testing.tRunner.func1.2({0x187ae0, 0x4002a88168})\n"}
+{"Time":"2026-07-28T14:24:11.101033968Z","Action":"output","Package":"github.com/allegro/bigcache/v3","Test":"TestCache_RepeatedSetWithBiggerEntry","Output":"\t/usr/local/go/src/testing/testing.go:1872 +0x190\n"}
+{"Time":"2026-07-28T14:24:11.101036394Z","Action":"output","Package":"github.com/allegro/bigcache/v3","Test":"TestCache_RepeatedSetWithBiggerEntry","Output":"testing.tRunner.func1()\n"}
+{"Time":"2026-07-28T14:24:11.101038549Z","Action":"output","Package":"github.com/allegro/bigcache/v3","Test":"TestCache_RepeatedSetWithBiggerEntry","Output":"\t/usr/local/go/src/testing/testing.go:1875 +0x31c\n"}
+{"Time":"2026-07-28T14:24:11.101041385Z","Action":"output","Package":"github.com/allegro/bigcache/v3","Test":"TestCache_RepeatedSetWithBiggerEntry","Output":"panic({0x187ae0?, 0x4002a88168?})\n"}
+{"Time":"2026-07-28T14:24:11.101043593Z","Action":"output","Package":"github.com/allegro/bigcache/v3","Test":"TestCache_RepeatedSetWithBiggerEntry","Output":"\t/usr/local/go/src/runtime/panic.go:783 +0x120\n"}
+{"Time":"2026-07-28T14:24:11.101045621Z","Action":"output","Package":"github.com/allegro/bigcache/v3","Test":"TestCache_RepeatedSetWithBiggerEntry","Output":"github.com/allegro/bigcache/v3/queue.(*BytesQueue).peek(0x16fc80?, 0x4002625650?)\n"}
+{"Time":"2026-07-28T14:24:11.101047774Z","Action":"output","Package":"github.com/allegro/bigcache/v3","Test":"TestCache_RepeatedSetWithBiggerEntry","Output":"\t/tmp/commit0-inplace-jd2i251i/tree/queue/bytes_queue.go:246 +0x214\n"}
+{"Time":"2026-07-28T14:24:11.101050789Z","Action":"output","Package":"github.com/allegro/bigcache/v3","Test":"TestCache_RepeatedSetWithBiggerEntry","Output":"github.com/allegro/bigcache/v3/queue.(*BytesQueue).Get(...)\n"}
+{"Time":"2026-07-28T14:24:11.101052975Z","Action":"output","Package":"github.com/allegro/bigcache/v3","Test":"TestCache_RepeatedSetWithBiggerEntry","Output":"\t/tmp/commit0-inplace-jd2i251i/tree/queue/bytes_queue.go:189\n"}
+{"Time":"2026-07-28T14:24:11.101058683Z","Action":"output","Package":"github.com/allegro/bigcache/v3","Test":"TestCache_RepeatedSetWithBiggerEntry","Output":"github.com/allegro/bigcache/v3.(*cacheShard).set(0x40027cb200, {0x198765, 0x4}, 0xc1136e3dbe7e9800, {0x4002a9996e, 0xc8, 0x4002a998b8?})\n"}
+{"Time":"2026-07-28T14:24:11.101061463Z","Action":"output","Package":"github.com/allegro/bigcache/v3","Test":"TestCache_RepeatedSetWithBiggerEntry","Output":"\t/tmp/commit0-inplace-jd2i251i/tree/shard.go:125 +0x7c\n"}
+{"Time":"2026-07-28T14:24:11.101064382Z","Action":"output","Package":"github.com/allegro/bigcache/v3","Test":"TestCache_RepeatedSetWithBiggerEntry","Output":"github.com/allegro/bigcache/v3.(*BigCache).Set(0x40002a61a0, {0x198765, 0x4}, {0x4002a9996e, 0xc8, 0xc8})\n"}
+{"Time":"2026-07-28T14:24:11.101066732Z","Action":"output","Package":"github.com/allegro/bigcache/v3","Test":"TestCache_RepeatedSetWithBiggerEntry","Output":"\t/tmp/commit0-inplace-jd2i251i/tree/bigcache.go:137 +0x7c\n"}
+{"Time":"2026-07-28T14:24:11.101069693Z","Action":"output","Package":"github.com/allegro/bigcache/v3","Test":"TestCache_RepeatedSetWithBiggerEntry","Output":"github.com/allegro/bigcache/v3.TestCache_RepeatedSetWithBiggerEntry(0x4000003dc0)\n"}
+{"Time":"2026-07-28T14:24:11.101071868Z","Action":"output","Package":"github.com/allegro/bigcache/v3","Test":"TestCache_RepeatedSetWithBiggerEntry","Output":"\t/tmp/commit0-inplace-jd2i251i/tree/bigcache_test.go:1308 +0x328\n"}
+{"Time":"2026-07-28T14:24:11.101073923Z","Action":"output","Package":"github.com/allegro/bigcache/v3","Test":"TestCache_RepeatedSetWithBiggerEntry","Output":"testing.tRunner(0x4000003dc0, 0x1a77c0)\n"}
+{"Time":"2026-07-28T14:24:11.101079965Z","Action":"output","Package":"github.com/allegro/bigcache/v3","Test":"TestCache_RepeatedSetWithBiggerEntry","Output":"\t/usr/local/go/src/testing/testing.go:1934 +0xc8\n"}
+{"Time":"2026-07-28T14:24:11.101082172Z","Action":"output","Package":"github.com/allegro/bigcache/v3","Test":"TestCache_RepeatedSetWithBiggerEntry","Output":"created by testing.(*T).Run in goroutine 1\n"}
+{"Time":"2026-07-28T14:24:11.101085684Z","Action":"output","Package":"github.com/allegro/bigcache/v3","Test":"TestCache_RepeatedSetWithBiggerEntry","Output":"\t/usr/local/go/src/testing/testing.go:1997 +0x364\n"}
+{"Time":"2026-07-28T14:24:11.104940888Z","Action":"fail","Package":"github.com/allegro/bigcache/v3","Test":"TestCache_RepeatedSetWithBiggerEntry","Elapsed":0}
+{"Time":"2026-07-28T14:24:11.10496203Z","Action":"output","Package":"github.com/allegro/bigcache/v3","Output":"FAIL\tgithub.com/allegro/bigcache/v3\t0.221s\n"}
+{"Time":"2026-07-28T14:24:11.104975374Z","Action":"fail","Package":"github.com/allegro/bigcache/v3","Elapsed":0.221}

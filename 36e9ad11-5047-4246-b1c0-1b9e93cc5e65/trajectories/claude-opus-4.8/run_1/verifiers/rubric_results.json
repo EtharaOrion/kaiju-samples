@@ -1,0 +1,391 @@
+{
+  "model": "openai/gpt-5.5-2026-04-23",
+  "ok": true,
+  "verdicts": [
+    {
+      "criterion_id": "bb.reasoning_faithfulness",
+      "passed": false,
+      "evidence": "Looking at the provided file `transitions/experimental/utils.py`, all functions are already fully implemented... The specification text you included describes a separate `django_transitions` package",
+      "justification": "The reasoning includes an irrelevant and inconsistent claim about a different package/specification, so the trajectory is not reliably faithful to the stated task."
+    },
+    {
+      "criterion_id": "bb.stage_legitimacy",
+      "passed": false,
+      "evidence": "tests__test_mermaid ... FAILURES ... TestDiagrams.test_binary_stream ... tests__test_pygraphviz ... FAILURES ... tests__test_states ... FAILURES",
+      "justification": "The test-refine stage records real failures but shows no corresponding feedback-responsive fixes afterward."
+    },
+    {
+      "criterion_id": "ts.internal-transition-dest-none",
+      "passed": true,
+      "evidence": "if self.dest is not None:\n            self._change_state(event_data)",
+      "justification": "Transition execution explicitly skips state-change logic when the destination is None."
+    },
+    {
+      "criterion_id": "ts.condition-target-polarity",
+      "passed": true,
+      "evidence": "return predicate(event_data) == self.target ... return predicate(*event_data.args, **event_data.kwargs) == self.target",
+      "justification": "Condition results are compared against the configured target, supporting negative/unless conditions."
+    },
+    {
+      "criterion_id": "ts.send-event-branch-present",
+      "passed": true,
+      "evidence": "if event_data.machine.send_event:\n            return predicate(event_data) == self.target\n        return predicate(*event_data.args, **event_data.kwargs) == self.target",
+      "justification": "Condition invocation branches on send_event and uses the correct EventData versus unpacked argument calling convention."
+    },
+    {
+      "criterion_id": "ts.state-change-ordering",
+      "passed": true,
+      "evidence": "event_data.machine.get_state(self.source).exit(event_data)\n        event_data.machine.set_state(self.dest, event_data.model)\n        event_data.update(...)\n        dest = event_data.machine.get_state(self.dest)\n        dest.enter(event_data)",
+      "justification": "The state change exits the source, sets the destination state, refreshes event data, and then enters the destination."
+    },
+    {
+      "criterion_id": "ts.eventdata-refresh-before-enter",
+      "passed": true,
+      "evidence": "event_data.machine.set_state(self.dest, event_data.model)\n        event_data.update(getattr(event_data.model, event_data.machine.model_attribute))\n        dest = event_data.machine.get_state(self.dest)\n        dest.enter(event_data)",
+      "justification": "EventData is refreshed after setting the model state and before entering the destination state."
+    },
+    {
+      "criterion_id": "ts.final-state-callback",
+      "passed": true,
+      "evidence": "if dest.final:\n            event_data.machine.callbacks(event_data.machine.on_final, event_data)",
+      "justification": "Final destination states trigger the machine's on_final callbacks during state change completion."
+    },
+    {
+      "criterion_id": "ts.execute-condition-shortcircuit",
+      "passed": true,
+      "evidence": "if not self._eval_conditions(event_data):\n            return False\n...\n        if self.dest is not None:\n            self._change_state(event_data)",
+      "justification": "Transition execution returns False before performing a state change when any condition fails."
+    },
+    {
+      "criterion_id": "ts.execute-callback-phases",
+      "passed": true,
+      "evidence": "callbacks(self.prepare, event_data) ... if not self._eval_conditions(event_data): ... callbacks(itertools.chain(event_data.machine.before_state_change, self.before), event_data) ... self._change_state(event_data) ... callbacks(itertools.chain(self.after, event_data.machine.after_state_change), event_data)",
+      "justification": "The implementation orders prepare, condition evaluation, before callbacks, state change, and after callbacks as required."
+    },
+    {
+      "criterion_id": "ts.enum-name-value",
+      "passed": true,
+      "evidence": "if isinstance(self._name, Enum):\n            return self._name.name\n        return self._name ... return self._name",
+      "justification": "State.name returns an Enum member's name while State.value returns the underlying stored object."
+    }
+  ],
+  "anchors": {
+    "golden": {
+      "model": "openai/gpt-5.5-2026-04-23",
+      "reasoning_effort": "high",
+      "ok": true,
+      "raw_verdicts": 18,
+      "response_chars": 6152,
+      "thinking": "",
+      "raw_response": "[\n  {\n    \"criterion_id\": \"bb.intent_fidelity\",\n    \"verdict\": \"fail\",\n    \"evidence\": \"Only `transitions/__init__.py` and a truncated `transitions/core.py` are shown; no implementation evidence is provided for `transitions/extensions/`.\",\n    \"justification\": \"The task requires restoring core and extension modules, but the trajectory provides insufficient evidence of a complete implementation.\"\n  },\n  {\n    \"criterion_id\": \"bb.oracle_strength\",\n    \"verdict\": \"fail\",\n    \"evidence\": \"Only partial core implementation is visible, ending mid-`EventData.__repr__`.\",\n    \"justification\": \"There is insufficient evidence that the solution implements the full general library behavior beyond a subset of core methods.\"\n  },\n  {\n    \"criterion_id\": \"ts.internal-transition-dest-none\",\n    \"verdict\": \"pass\",\n    \"evidence\": \"`if self.dest is not None:  # if self.dest is None this is an internal transition with no actual state change\\n            self._change_state(event_data)`\",\n    \"justification\": \"Transition execution explicitly skips `_change_state` when `dest` is `None`.\"\n  },\n  {\n    \"criterion_id\": \"ts.condition-target-polarity\",\n    \"verdict\": \"pass\",\n    \"evidence\": \"`return predicate(event_data) == self.target` and `return predicate(*event_data.args, **event_data.kwargs) == self.target`\",\n    \"justification\": \"Condition checking compares the predicate result against the configured target polarity.\"\n  },\n  {\n    \"criterion_id\": \"ts.send-event-branch-present\",\n    \"verdict\": \"pass\",\n    \"evidence\": \"`if event_data.machine.send_event:\\n            return predicate(event_data) == self.target\\n        return predicate(*event_data.args, **event_data.kwargs) == self.target`\",\n    \"justification\": \"Condition invocation branches on `send_event` and uses the appropriate calling convention.\"\n  },\n  {\n    \"criterion_id\": \"ts.state-change-ordering\",\n    \"verdict\": \"pass\",\n    \"evidence\": \"`event_data.machine.get_state(self.source).exit(event_data)\\n        event_data.machine.set_state(self.dest, event_data.model)\\n        ...\\n        dest.enter(event_data)`\",\n    \"justification\": \"The state change exits the source, sets the new state, then enters the destination.\"\n  },\n  {\n    \"criterion_id\": \"ts.eventdata-refresh-before-enter\",\n    \"verdict\": \"pass\",\n    \"evidence\": \"`event_data.machine.set_state(self.dest, event_data.model)\\n        event_data.update(getattr(event_data.model, event_data.machine.model_attribute))\\n        dest = event_data.machine.get_state(self.dest)\\n        dest.enter(event_data)`\",\n    \"justification\": \"EventData is refreshed after setting the model state and before entering the destination.\"\n  },\n  {\n    \"criterion_id\": \"ts.final-state-callback\",\n    \"verdict\": \"pass\",\n    \"evidence\": \"`if dest.final:\\n            event_data.machine.callbacks(event_data.machine.on_final, event_data)`\",\n    \"justification\": \"The transition fires machine `on_final` callbacks when the destination state is final.\"\n  },\n  {\n    \"criterion_id\": \"ts.execute-condition-shortcircuit\",\n    \"verdict\": \"pass\",\n    \"evidence\": \"`if not self._eval_conditions(event_data):\\n            return False`\",\n    \"justification\": \"Execution returns `False` before callbacks/state change when any condition fails.\"\n  },\n  {\n    \"criterion_id\": \"ts.execute-callback-phases\",\n    \"verdict\": \"pass\",\n    \"evidence\": \"`callbacks(self.prepare, event_data)` ... `callbacks(itertools.chain(event_data.machine.before_state_change, self.before), event_data)` ... `_change_state(event_data)` ... `callbacks(itertools.chain(self.after, event_data.machine.after_state_change), event_data)`\",\n    \"justification\": \"The visible execution order matches prepare, before, state change, then after phases.\"\n  },\n  {\n    \"criterion_id\": \"ts.finalize-in-finally\",\n    \"verdict\": \"fail\",\n    \"evidence\": \"No complete `Event.trigger` or `Event._trigger` implementation is shown.\",\n    \"justification\": \"There is insufficient evidence that finalize callbacks are placed in a `finally` block and handled correctly.\"\n  },\n  {\n    \"criterion_id\": \"ts.exception-routing\",\n    \"verdict\": \"fail\",\n    \"evidence\": \"No complete event trigger exception-handling implementation is shown.\",\n    \"justification\": \"There is insufficient evidence that exceptions are routed to `on_exception` only when configured and otherwise re-raised.\"\n  },\n  {\n    \"criterion_id\": \"ts.process-stops-first-success\",\n    \"verdict\": \"fail\",\n    \"evidence\": \"No complete `Event._process` implementation is shown.\",\n    \"justification\": \"There is insufficient evidence that event processing stops after the first successful transition.\"\n  },\n  {\n    \"criterion_id\": \"ts.model-gc-no-leak\",\n    \"verdict\": \"fail\",\n    \"evidence\": \"No `Machine.add_model`/`remove_model` implementation or weak-reference handling is shown.\",\n    \"justification\": \"There is insufficient evidence that removed models are garbage-collectable.\"\n  },\n  {\n    \"criterion_id\": \"ts.enum-name-value\",\n    \"verdict\": \"pass\",\n    \"evidence\": \"`if isinstance(self._name, Enum):\\n            return self._name.name\\n        return self._name` and `return self._name`\",\n    \"justification\": \"State `name` distinguishes enum members from strings, while `value` returns the stored object.\"\n  },\n  {\n    \"criterion_id\": \"ts.async-awaits-coroutines\",\n    \"verdict\": \"fail\",\n    \"evidence\": \"No `transitions/extensions/asyncio.py` implementation is shown.\",\n    \"justification\": \"There is no evidence that async callbacks or conditions are awaited or that async parity is implemented.\"\n  },\n  {\n    \"criterion_id\": \"ts.general-not-hardcoded\",\n    \"verdict\": \"fail\",\n    \"evidence\": \"Only a partial implementation is provided, with no complete `Machine`, `Event`, or extension code visible.\",\n    \"justification\": \"The evidence is insufficient to confirm the solution is a general implementation rather than an incomplete subset.\"\n  },\n  {\n    \"criterion_id\": \"ts.factory-mixin-composition\",\n    \"verdict\": \"fail\",\n    \"evidence\": \"No `transitions/extensions/factory.py` implementation is shown.\",\n    \"justification\": \"There is no evidence that concrete product classes are composed from the required feature mixins.\"\n  }\n]",
+      "verdicts": [
+        {
+          "criterion_id": "bb.intent_fidelity",
+          "passed": false,
+          "evidence": "Only `transitions/__init__.py` and a truncated `transitions/core.py` are shown; no implementation evidence is provided for `transitions/extensions/`.",
+          "justification": "The task requires restoring core and extension modules, but the trajectory provides insufficient evidence of a complete implementation."
+        },
+        {
+          "criterion_id": "bb.oracle_strength",
+          "passed": false,
+          "evidence": "Only partial core implementation is visible, ending mid-`EventData.__repr__`.",
+          "justification": "There is insufficient evidence that the solution implements the full general library behavior beyond a subset of core methods."
+        },
+        {
+          "criterion_id": "ts.internal-transition-dest-none",
+          "passed": true,
+          "evidence": "`if self.dest is not None:  # if self.dest is None this is an internal transition with no actual state change\n            self._change_state(event_data)`",
+          "justification": "Transition execution explicitly skips `_change_state` when `dest` is `None`."
+        },
+        {
+          "criterion_id": "ts.condition-target-polarity",
+          "passed": true,
+          "evidence": "`return predicate(event_data) == self.target` and `return predicate(*event_data.args, **event_data.kwargs) == self.target`",
+          "justification": "Condition checking compares the predicate result against the configured target polarity."
+        },
+        {
+          "criterion_id": "ts.send-event-branch-present",
+          "passed": true,
+          "evidence": "`if event_data.machine.send_event:\n            return predicate(event_data) == self.target\n        return predicate(*event_data.args, **event_data.kwargs) == self.target`",
+          "justification": "Condition invocation branches on `send_event` and uses the appropriate calling convention."
+        },
+        {
+          "criterion_id": "ts.state-change-ordering",
+          "passed": true,
+          "evidence": "`event_data.machine.get_state(self.source).exit(event_data)\n        event_data.machine.set_state(self.dest, event_data.model)\n        ...\n        dest.enter(event_data)`",
+          "justification": "The state change exits the source, sets the new state, then enters the destination."
+        },
+        {
+          "criterion_id": "ts.eventdata-refresh-before-enter",
+          "passed": true,
+          "evidence": "`event_data.machine.set_state(self.dest, event_data.model)\n        event_data.update(getattr(event_data.model, event_data.machine.model_attribute))\n        dest = event_data.machine.get_state(self.dest)\n        dest.enter(event_data)`",
+          "justification": "EventData is refreshed after setting the model state and before entering the destination."
+        },
+        {
+          "criterion_id": "ts.final-state-callback",
+          "passed": true,
+          "evidence": "`if dest.final:\n            event_data.machine.callbacks(event_data.machine.on_final, event_data)`",
+          "justification": "The transition fires machine `on_final` callbacks when the destination state is final."
+        },
+        {
+          "criterion_id": "ts.execute-condition-shortcircuit",
+          "passed": true,
+          "evidence": "`if not self._eval_conditions(event_data):\n            return False`",
+          "justification": "Execution returns `False` before callbacks/state change when any condition fails."
+        },
+        {
+          "criterion_id": "ts.execute-callback-phases",
+          "passed": true,
+          "evidence": "`callbacks(self.prepare, event_data)` ... `callbacks(itertools.chain(event_data.machine.before_state_change, self.before), event_data)` ... `_change_state(event_data)` ... `callbacks(itertools.chain(self.after, event_data.machine.after_state_change), event_data)`",
+          "justification": "The visible execution order matches prepare, before, state change, then after phases."
+        },
+        {
+          "criterion_id": "ts.finalize-in-finally",
+          "passed": false,
+          "evidence": "No complete `Event.trigger` or `Event._trigger` implementation is shown.",
+          "justification": "There is insufficient evidence that finalize callbacks are placed in a `finally` block and handled correctly."
+        },
+        {
+          "criterion_id": "ts.exception-routing",
+          "passed": false,
+          "evidence": "No complete event trigger exception-handling implementation is shown.",
+          "justification": "There is insufficient evidence that exceptions are routed to `on_exception` only when configured and otherwise re-raised."
+        },
+        {
+          "criterion_id": "ts.process-stops-first-success",
+          "passed": false,
+          "evidence": "No complete `Event._process` implementation is shown.",
+          "justification": "There is insufficient evidence that event processing stops after the first successful transition."
+        },
+        {
+          "criterion_id": "ts.model-gc-no-leak",
+          "passed": false,
+          "evidence": "No `Machine.add_model`/`remove_model` implementation or weak-reference handling is shown.",
+          "justification": "There is insufficient evidence that removed models are garbage-collectable."
+        },
+        {
+          "criterion_id": "ts.enum-name-value",
+          "passed": true,
+          "evidence": "`if isinstance(self._name, Enum):\n            return self._name.name\n        return self._name` and `return self._name`",
+          "justification": "State `name` distinguishes enum members from strings, while `value` returns the stored object."
+        },
+        {
+          "criterion_id": "ts.async-awaits-coroutines",
+          "passed": false,
+          "evidence": "No `transitions/extensions/asyncio.py` implementation is shown.",
+          "justification": "There is no evidence that async callbacks or conditions are awaited or that async parity is implemented."
+        },
+        {
+          "criterion_id": "ts.general-not-hardcoded",
+          "passed": false,
+          "evidence": "Only a partial implementation is provided, with no complete `Machine`, `Event`, or extension code visible.",
+          "justification": "The evidence is insufficient to confirm the solution is a general implementation rather than an incomplete subset."
+        },
+        {
+          "criterion_id": "ts.factory-mixin-composition",
+          "passed": false,
+          "evidence": "No `transitions/extensions/factory.py` implementation is shown.",
+          "justification": "There is no evidence that concrete product classes are composed from the required feature mixins."
+        }
+      ]
+    },
+    "stub": {
+      "model": "openai/gpt-5.5-2026-04-23",
+      "reasoning_effort": "high",
+      "ok": true,
+      "raw_verdicts": 18,
+      "response_chars": 5315,
+      "thinking": "",
+      "raw_response": "[\n  {\n    \"criterion_id\": \"bb.intent_fidelity\",\n    \"verdict\": \"fail\",\n    \"evidence\": \"State.name/value, enter/exit, Condition.check, Transition._eval_conditions/execute/_change_state, Event.trigger/_trigger/_process/_is_valid_source all contain `pass`; Machine.__init__ ends with `self.prepare_event = prepare_ev`\",\n    \"justification\": \"The trajectory leaves core behavior stubbed and even introduces an undefined variable, so it does not genuinely implement the state-machine contract.\"\n  },\n  {\n    \"criterion_id\": \"bb.oracle_strength\",\n    \"verdict\": \"fail\",\n    \"evidence\": \"Multiple core methods are still `pass` and no extension implementation is shown.\",\n    \"justification\": \"A mostly stubbed implementation cannot be correct beyond frozen tests or provide general state-machine semantics.\"\n  },\n  {\n    \"criterion_id\": \"ts.internal-transition-dest-none\",\n    \"verdict\": \"fail\",\n    \"evidence\": \"def execute(self, event_data):\\n        pass\",\n    \"justification\": \"There is no transition execution logic demonstrating that `dest is None` skips state changes.\"\n  },\n  {\n    \"criterion_id\": \"ts.condition-target-polarity\",\n    \"verdict\": \"fail\",\n    \"evidence\": \"def check(self, event_data):\\n        pass\",\n    \"justification\": \"Condition checking is not implemented, so there is no comparison of predicate result to `self.target`.\"\n  },\n  {\n    \"criterion_id\": \"ts.send-event-branch-present\",\n    \"verdict\": \"fail\",\n    \"evidence\": \"def check(self, event_data):\\n        pass\",\n    \"justification\": \"No callback or condition invocation code is present to branch on `send_event`.\"\n  },\n  {\n    \"criterion_id\": \"ts.state-change-ordering\",\n    \"verdict\": \"fail\",\n    \"evidence\": \"def _change_state(self, event_data):\\n        pass\",\n    \"justification\": \"The state-change method is empty, so exit-before-set-before-enter ordering is not satisfied.\"\n  },\n  {\n    \"criterion_id\": \"ts.eventdata-refresh-before-enter\",\n    \"verdict\": \"fail\",\n    \"evidence\": \"def _change_state(self, event_data):\\n        pass\",\n    \"justification\": \"There is no implemented refresh of `EventData.state` before entering the destination state.\"\n  },\n  {\n    \"criterion_id\": \"ts.final-state-callback\",\n    \"verdict\": \"fail\",\n    \"evidence\": \"def _change_state(self, event_data):\\n        pass\",\n    \"justification\": \"There is no logic to detect final states or invoke machine `on_final` callbacks.\"\n  },\n  {\n    \"criterion_id\": \"ts.execute-condition-shortcircuit\",\n    \"verdict\": \"fail\",\n    \"evidence\": \"def _eval_conditions(self, event_data):\\n        pass\\n\\n    def execute(self, event_data):\\n        pass\",\n    \"justification\": \"Condition evaluation and transition execution are unimplemented, so failed conditions cannot short-circuit state changes.\"\n  },\n  {\n    \"criterion_id\": \"ts.execute-callback-phases\",\n    \"verdict\": \"fail\",\n    \"evidence\": \"def execute(self, event_data):\\n        pass\",\n    \"justification\": \"No prepare/before/state-change/after callback sequencing is implemented.\"\n  },\n  {\n    \"criterion_id\": \"ts.finalize-in-finally\",\n    \"verdict\": \"fail\",\n    \"evidence\": \"def _trigger(self, event_data):\\n        pass\",\n    \"justification\": \"The trigger flow is empty and contains no `finally` block for finalize callbacks.\"\n  },\n  {\n    \"criterion_id\": \"ts.exception-routing\",\n    \"verdict\": \"fail\",\n    \"evidence\": \"def _trigger(self, event_data):\\n        pass\",\n    \"justification\": \"There is no exception handling logic to route to `on_exception` or re-raise.\"\n  },\n  {\n    \"criterion_id\": \"ts.process-stops-first-success\",\n    \"verdict\": \"fail\",\n    \"evidence\": \"def _process(self, event_data):\\n        pass\",\n    \"justification\": \"Event processing is not implemented, so there is no evidence it stops after the first successful transition.\"\n  },\n  {\n    \"criterion_id\": \"ts.model-gc-no-leak\",\n    \"verdict\": \"fail\",\n    \"evidence\": \"Machine.__init__ is incomplete and no add_model/remove_model implementation is shown.\",\n    \"justification\": \"There is insufficient evidence of weak-reference or cleanup behavior preventing model reference leaks.\"\n  },\n  {\n    \"criterion_id\": \"ts.enum-name-value\",\n    \"verdict\": \"fail\",\n    \"evidence\": \"@property\\n    def name(self):\\n        pass\\n\\n    @property\\n    def value(self):\\n        pass\",\n    \"justification\": \"State name/value handling is left unimplemented, including enum-specific behavior.\"\n  },\n  {\n    \"criterion_id\": \"ts.async-awaits-coroutines\",\n    \"verdict\": \"fail\",\n    \"evidence\": \"No asyncio extension implementation is shown; core async-related behavior is absent.\",\n    \"justification\": \"There is no evidence that coroutine callbacks or conditions are awaited or that async parity exists.\"\n  },\n  {\n    \"criterion_id\": \"ts.general-not-hardcoded\",\n    \"verdict\": \"fail\",\n    \"evidence\": \"Core methods return no behavior via `pass`, and Machine.__init__ references undefined `prepare_ev`.\",\n    \"justification\": \"The implementation is not general state-machine logic; it is nonfunctional stubbing.\"\n  },\n  {\n    \"criterion_id\": \"ts.factory-mixin-composition\",\n    \"verdict\": \"fail\",\n    \"evidence\": \"No `transitions/extensions/factory.py` implementation or class lookup/mixin composition is shown.\",\n    \"justification\": \"There is insufficient evidence that factory products are wired from locked, nested, async, and graph mixins.\"\n  }\n]",
+      "verdicts": [
+        {
+          "criterion_id": "bb.intent_fidelity",
+          "passed": false,
+          "evidence": "State.name/value, enter/exit, Condition.check, Transition._eval_conditions/execute/_change_state, Event.trigger/_trigger/_process/_is_valid_source all contain `pass`; Machine.__init__ ends with `self.prepare_event = prepare_ev`",
+          "justification": "The trajectory leaves core behavior stubbed and even introduces an undefined variable, so it does not genuinely implement the state-machine contract."
+        },
+        {
+          "criterion_id": "bb.oracle_strength",
+          "passed": false,
+          "evidence": "Multiple core methods are still `pass` and no extension implementation is shown.",
+          "justification": "A mostly stubbed implementation cannot be correct beyond frozen tests or provide general state-machine semantics."
+        },
+        {
+          "criterion_id": "ts.internal-transition-dest-none",
+          "passed": false,
+          "evidence": "def execute(self, event_data):\n        pass",
+          "justification": "There is no transition execution logic demonstrating that `dest is None` skips state changes."
+        },
+        {
+          "criterion_id": "ts.condition-target-polarity",
+          "passed": false,
+          "evidence": "def check(self, event_data):\n        pass",
+          "justification": "Condition checking is not implemented, so there is no comparison of predicate result to `self.target`."
+        },
+        {
+          "criterion_id": "ts.send-event-branch-present",
+          "passed": false,
+          "evidence": "def check(self, event_data):\n        pass",
+          "justification": "No callback or condition invocation code is present to branch on `send_event`."
+        },
+        {
+          "criterion_id": "ts.state-change-ordering",
+          "passed": false,
+          "evidence": "def _change_state(self, event_data):\n        pass",
+          "justification": "The state-change method is empty, so exit-before-set-before-enter ordering is not satisfied."
+        },
+        {
+          "criterion_id": "ts.eventdata-refresh-before-enter",
+          "passed": false,
+          "evidence": "def _change_state(self, event_data):\n        pass",
+          "justification": "There is no implemented refresh of `EventData.state` before entering the destination state."
+        },
+        {
+          "criterion_id": "ts.final-state-callback",
+          "passed": false,
+          "evidence": "def _change_state(self, event_data):\n        pass",
+          "justification": "There is no logic to detect final states or invoke machine `on_final` callbacks."
+        },
+        {
+          "criterion_id": "ts.execute-condition-shortcircuit",
+          "passed": false,
+          "evidence": "def _eval_conditions(self, event_data):\n        pass\n\n    def execute(self, event_data):\n        pass",
+          "justification": "Condition evaluation and transition execution are unimplemented, so failed conditions cannot short-circuit state changes."
+        },
+        {
+          "criterion_id": "ts.execute-callback-phases",
+          "passed": false,
+          "evidence": "def execute(self, event_data):\n        pass",
+          "justification": "No prepare/before/state-change/after callback sequencing is implemented."
+        },
+        {
+          "criterion_id": "ts.finalize-in-finally",
+          "passed": false,
+          "evidence": "def _trigger(self, event_data):\n        pass",
+          "justification": "The trigger flow is empty and contains no `finally` block for finalize callbacks."
+        },
+        {
+          "criterion_id": "ts.exception-routing",
+          "passed": false,
+          "evidence": "def _trigger(self, event_data):\n        pass",
+          "justification": "There is no exception handling logic to route to `on_exception` or re-raise."
+        },
+        {
+          "criterion_id": "ts.process-stops-first-success",
+          "passed": false,
+          "evidence": "def _process(self, event_data):\n        pass",
+          "justification": "Event processing is not implemented, so there is no evidence it stops after the first successful transition."
+        },
+        {
+          "criterion_id": "ts.model-gc-no-leak",
+          "passed": false,
+          "evidence": "Machine.__init__ is incomplete and no add_model/remove_model implementation is shown.",
+          "justification": "There is insufficient evidence of weak-reference or cleanup behavior preventing model reference leaks."
+        },
+        {
+          "criterion_id": "ts.enum-name-value",
+          "passed": false,
+          "evidence": "@property\n    def name(self):\n        pass\n\n    @property\n    def value(self):\n        pass",
+          "justification": "State name/value handling is left unimplemented, including enum-specific behavior."
+        },
+        {
+          "criterion_id": "ts.async-awaits-coroutines",
+          "passed": false,
+          "evidence": "No asyncio extension implementation is shown; core async-related behavior is absent.",
+          "justification": "There is no evidence that coroutine callbacks or conditions are awaited or that async parity exists."
+        },
+        {
+          "criterion_id": "ts.general-not-hardcoded",
+          "passed": false,
+          "evidence": "Core methods return no behavior via `pass`, and Machine.__init__ references undefined `prepare_ev`.",
+          "justification": "The implementation is not general state-machine logic; it is nonfunctional stubbing."
+        },
+        {
+          "criterion_id": "ts.factory-mixin-composition",
+          "passed": false,
+          "evidence": "No `transitions/extensions/factory.py` implementation or class lookup/mixin composition is shown.",
+          "justification": "There is insufficient evidence that factory products are wired from locked, nested, async, and graph mixins."
+        }
+      ]
+    }
+  },
+  "criteria": [
+    {
+      "id": "bb.reasoning_faithfulness",
+      "text": "Is the agent's stated reasoning consistent with the edits it actually made and the feedback it received (no post-hoc rationalization, no lucky guess)?",
+      "contract_ref": "(backbone)",
+      "concern": "L2.REASONING_FAITHFULNESS",
+      "anchorable": false
+    },
+    {
+      "id": "bb.stage_legitimacy",
+      "text": "Did each refinement stage (lint, test) do real, feedback-responsive work toward the solution rather than cosmetic or no-op changes?",
+      "contract_ref": "(backbone)",
+      "concern": "L2.STAGE_LEGITIMACY",
+      "anchorable": false
+    },
+    {
+      "id": "ts.internal-transition-dest-none",
+      "text": "The transition state-change logic skips the actual state change when the destination is None (internal transition), rather than always changing state or calling state lookup with None.",
+      "contract_ref": "Transition.execute / Known pitfalls: Internal transitions (dest is None)",
+      "concern": null,
+      "anchorable": true
+    },
+    {
+      "id": "ts.condition-target-polarity",
+      "text": "Condition checking compares the predicate's boolean result against the condition's target value (so negative/'unless' conditions with target=False work), not merely returning the raw truthiness of the predicate.",
+      "contract_ref": "Condition.check / Known pitfalls: Condition target polarity",
+      "concern": null,
+      "anchorable": true
+    },
+    {
+      "id": "ts.send-event-branch-present",
+      "text": "Callback/condition invocation branches on the send_event setting: passing the single EventData object when send_event is enabled and unpacking args/kwargs when it is disabled, rather than using one calling convention unconditionally.",
+      "contract_ref": "Condition.check / Machine.callbacks / Known pitfalls: send_event branching",
+      "concern": null,
+      "anchorable": true
+    },
+    {
+      "id": "ts.state-change-ordering",
+      "text": "The state change performs exit of the source state, then sets the model's new state, then enters the destination state (exit-before-enter ordering), rather than entering before exiting or omitting either step.",
+      "contract_ref": "Transition._change_state / Solution decomposition: State change ordering",
+      "concern": null,
+      "anchorable": true
+    },
+    {
+      "id": "ts.eventdata-refresh-before-enter",
+      "text": "After setting the model's new state and before entering the destination, the EventData's state reference is refreshed to the new state so enter/final logic reads the current (not stale) state.",
+      "contract_ref": "Known pitfalls: EventData refresh after state change",
+      "concern": null,
+      "anchorable": true
+    },
+    {
+      "id": "ts.final-state-callback",
+      "text": "When the destination state is a final state, the machine's on_final callbacks are fired as part of completing the state change.",
+      "contract_ref": "Transition._change_state",
+      "concern": null,
+      "anchorable": true
+    },
+    {
+      "id": "ts.execute-condition-shortcircuit",
+      "text": "Transition.execute evaluates the transition's conditions and returns False without performing the state change when any condition fails, only proceeding to the state change when all conditions pass.",
+      "contract_ref": "Transition.execute / Transition._eval_conditions",
+      "concern": null,
+      "anchorable": true
+    },
+    {
+      "id": "ts.execute-callback-phases",
+      "text": "Transition.execute runs the callback phases in order: prepare, then before (machine before_state_change plus transition before), then the state change, then after (transition after plus machine after_state_change).",
+      "contract_ref": "Transition.execute",
+      "concern": null,
+      "anchorable": true
+    },
+    {
+      "id": "ts.enum-name-value",
+      "text": "State name/value handling distinguishes enum members from strings: the name property yields the enum member's .name for enum states and the raw string for string states, while value returns the underlying stored object.",
+      "contract_ref": "State (name/value) / Known pitfalls: Enum states",
+      "concern": null,
+      "anchorable": true
+    }
+  ]
+}

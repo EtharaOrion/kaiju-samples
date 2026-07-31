@@ -1,0 +1,29 @@
+{
+  "instance_id": "commit-0/tryalgo",
+  "id": "03e25be8-ee83-475e-a2f7-34ca21d45147",
+  "repo": "Zahgon/tryalgo",
+  "base_commit": "ee032b235e7af28b6cc56b95c0aa093551353d9d",
+  "reference_commit": "79adeb9983ae784b73ef9dea10aa0c852fc39718",
+  "setup": {
+    "install": "pip install -e \".\"",
+    "packages": "",
+    "pip_packages": [
+      "pytest",
+      "pytest-json-report"
+    ],
+    "pre_install": [],
+    "python": "3.8",
+    "specification": "",
+    "version_source": ".github/workflows/*.yml[matrix.python-version]",
+    "version_conflicts": [],
+    "system_deps_hint": []
+  },
+  "test": {
+    "test_cmd": "pytest",
+    "test_dir": "tests"
+  },
+  "src_dir": "tryalgo",
+  "base_compiles": null,
+  "language": "python",
+  "ecr_image_uri": "426628337772.dkr.ecr.ap-south-1.amazonaws.com/kaiju_q2:python_jilljenn_tryalgo"
+}

@@ -1,0 +1,16 @@
+{
+  "instance_id": "commit-0/etl-parser",
+  "repo": "Zahgon/etl-parser",
+  "base_commit": "365736dd243606bd07764bbf6bbf9465ef019a75",
+  "reference_commit": "e9ad559f8ba2cd192a1c6be2011f514dad46c3a2",
+  "src_dir": "etl",
+  "language": "python",
+  "setup": {
+    "python": "3.9"
+  },
+  "test": {
+    "test_cmd": "",
+    "test_dir": ""
+  },
+  "docker_image": "426628337772.dkr.ecr.ap-south-1.amazonaws.com/kaiju_q2:etl-parser"
+}

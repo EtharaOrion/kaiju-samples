@@ -1,0 +1,9 @@
+{
+  "kind": "commit0-golden-ref",
+  "repo": "Zahgon/etherparse",
+  "base_commit": "893b0fe3f77474ef7ee005b1ec6c84e2acbc9e85",
+  "reference_commit": "6b05a1f4cb412d3cfb1d512f5c308588fd83ebe7",
+  "src_dir": "etherparse/src",
+  "language": "rust",
+  "note": "Golden solution = the repo at reference_commit; solve.sh fetches+resets to it."
+}

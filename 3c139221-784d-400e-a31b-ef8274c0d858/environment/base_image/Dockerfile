@@ -1,0 +1,66 @@
+FROM rust:1.96-bookworm
+
+ARG TARGETARCH
+ARG DEBIAN_FRONTEND=noninteractive
+ARG http_proxy=""
+ARG https_proxy=""
+ARG HTTP_PROXY=""
+ARG HTTPS_PROXY=""
+ARG no_proxy="localhost,127.0.0.1,::1"
+ARG NO_PROXY="localhost,127.0.0.1,::1"
+ARG CA_CERT_PATH="/etc/ssl/certs/ca-certificates.crt"
+
+ENV TZ=Etc/UTC \
+    LANG=C.UTF-8 \
+    SSL_CERT_FILE=${CA_CERT_PATH} \
+    REQUESTS_CA_BUNDLE=${CA_CERT_PATH} \
+    CURL_CA_BUNDLE=${CA_CERT_PATH} \
+    NODE_EXTRA_CA_CERTS=${CA_CERT_PATH} \
+    RUSTUP_HOME=/usr/local/rustup \
+    CARGO_HOME=/usr/local/cargo
+
+ENV PATH=${CARGO_HOME}/bin:${PATH}
+
+RUN apt-get update && apt-get install -y --no-install-recommends \
+    git \
+    build-essential \
+    ca-certificates \
+    curl \
+    wget \
+    jq \
+    locales \
+    locales-all \
+    tzdata \
+    pkg-config \
+    libssl-dev \
+    cmake \
+    clang \
+    libclang-dev \
+    && rm -rf /var/lib/apt/lists/*
+
+RUN rustup component add rustfmt clippy && \
+    case "${TARGETARCH}" in \
+      arm64) NEXTEST_PLATFORM=linux-arm ;; \
+      *)     NEXTEST_PLATFORM=linux ;; \
+    esac && \
+    curl -LsSf "https://get.nexte.st/0.9.96/${NEXTEST_PLATFORM}" | tar zxf - -C ${CARGO_HOME}/bin && \
+    cargo --version && \
+    cargo nextest --version && \
+    { cargo nextest --version | grep -q "0.9.96" \
+        || { echo "FATAL: cargo-nextest version mismatch (expected 0.9.96)" >&2; exit 1; }; }
+
+RUN mkdir -p /etc/pki/tls/certs /etc/pki/tls /etc/pki/ca-trust/extracted/pem /etc/ssl/certs && \
+    ln -sf /etc/ssl/certs/ca-certificates.crt /etc/pki/tls/certs/ca-bundle.crt 2>/dev/null; \
+    ln -sf /etc/ssl/certs/ca-certificates.crt /etc/ssl/cert.pem 2>/dev/null; \
+    ln -sf /etc/ssl/certs/ca-certificates.crt /etc/pki/tls/cert.pem 2>/dev/null; \
+    ln -sf /etc/ssl/certs/ca-certificates.crt /etc/pki/ca-trust/extracted/pem/tls-ca-bundle.pem 2>/dev/null; \
+    true
+
+RUN --mount=type=secret,id=mitm_ca,required=false \
+    if [ -f /run/secrets/mitm_ca ]; then \
+        cp /run/secrets/mitm_ca /usr/local/share/ca-certificates/mitm-ca.crt && \
+        update-ca-certificates && \
+        echo "MITM CA certificate installed successfully"; \
+    else \
+        echo "No MITM CA certificate found, skipping"; \
+    fi

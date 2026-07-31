@@ -1,0 +1,34 @@
+schema_version = "1.3"
+source = "commit0"
+
+[task]
+name = "commit-0/tryalgo"
+description = "commit0 from-scratch implementation task for jilljenn/tryalgo."
+keywords = ["commit0", "code-generation", "python", "swe"]
+
+[metadata]
+category = "code-generation"
+difficulty = "hard"
+original_repo = "Zahgon/tryalgo"
+instance_id = "commit-0/tryalgo"
+base_commit = "ee032b235e7af28b6cc56b95c0aa093551353d9d"
+reference_commit = "79adeb9983ae784b73ef9dea10aa0c852fc39718"
+src_dir = "tryalgo"
+python_version = "3.8"
+test_mode = "official_test_ids"
+n_test_ids = 123
+
+[agent]
+timeout_sec = 1800.0
+
+[verifier]
+timeout_sec = 1800.0
+
+[environment]
+docker_image = "426628337772.dkr.ecr.ap-south-1.amazonaws.com/kaiju_q2:python_jilljenn_tryalgo"
+build_timeout_sec = 1800.0
+os = "linux"
+cpus = 2
+memory_mb = 4096
+network_mode = "public"
+workdir = "/testbed"

@@ -1,0 +1,139 @@
+{
+  "schema_version": "ATIF-v1.7",
+  "session_id": "commit-0/tryalgo__claude-opus-4.8",
+  "trajectory_id": "commit-0/tryalgo__claude-opus-4.8__lint__tryalgo__tryalgo__horn_sat",
+  "agent": {
+    "name": "aider",
+    "version": "0.1.dev13122+gafca02447",
+    "model_name": "claude-opus-4.8",
+    "tool_definitions": [
+      {
+        "name": "file_editor",
+        "description": "Custom editing tool for viewing, creating, and editing files. Commands: view, create, str_replace, insert.",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "command": {
+              "type": "string",
+              "enum": [
+                "view",
+                "create",
+                "str_replace",
+                "insert"
+              ]
+            },
+            "path": {
+              "type": "string"
+            },
+            "old_str": {
+              "type": "string"
+            },
+            "new_str": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "command",
+            "path"
+          ]
+        }
+      }
+    ],
+    "extra": {
+      "log_format": "aider-native-llm-history",
+      "converted_from": "aider",
+      "harness": "commit0-aider-pipeline",
+      "pipeline_stage": "lint",
+      "module": "tryalgo__tryalgo__horn_sat",
+      "source_file": "llm_history.txt",
+      "crosscheck_file": ".aider.chat.history.md",
+      "aider_scaffolding_stripped": true,
+      "version_source": "constant",
+      "tool_definitions_source": "harness_system_prompt"
+    }
+  },
+  "steps": [
+    {
+      "step_id": 1,
+      "source": "system",
+      "message": "Act as an expert software developer.\nAlways use best practices when coding.\nRespect and use existing conventions, libraries, etc that are already present in the code base.\n\nTake requests for changes to the supplied code.\nIf the request is ambiguous, ask questions.\n\nOnce you understand the request you MUST:\n\n1. Decide if you need to propose *SEARCH/REPLACE* edits to any files that haven't been added to the chat. You can create new files without asking!\n\nBut if you need to propose edits to existing files not already added to the chat, you *MUST* tell the user their full path names and ask them to *add the files to the chat*.\nEnd your reply and wait for their approval.\nYou can keep asking if you then decide you need to edit more files.\n\n2. Think step-by-step and explain the needed changes in a few short sentences.\n\n3. Describe each change with a *SEARCH/REPLACE block* per the examples below.\n\nAll changes to files must use this *SEARCH/REPLACE block* format.\nONLY EVER RETURN CODE IN A *SEARCH/REPLACE BLOCK*!\n\n4. *Concisely* suggest any shell commands the user might want to run in ```bash blocks.\n\nJust suggest shell commands this way, not example code.\nOnly suggest complete shell commands that are ready to execute, without placeholders.\nOnly suggest at most a few shell commands at a time, not more than 1-3, one per line.\nDo not suggest multi-line shell commands.\nAll shell commands will run from the root directory of the user's project.\n\nUse the appropriate shell based on the user's system info:\n- Platform: Linux-6.1.166-197.305.amzn2023.aarch64-aarch64-with-glibc2.36\n- Shell: SHELL=None\n- Current date: 2026-07-23\n- The user is operating inside a git repository\n- The user's pre-commit runs these lint commands, don't suggest running them:\n  - python: /opt/kaiju/.venv/bin/python -m commit0 lint tryalgo --commit0-config-file /opt/kaiju/outputs/03e25be8-ee83-475e-a2f7-34ca21d45147/configs/commit0_claude-opus-4.8_dataset.yaml --files \n\nExamples of when to suggest shell commands:\n\n- If you changed a self-contained html file, suggest an OS-appropriate command to open a browser to view it to see the updated content.\n- If you changed a CLI program, suggest the command to run it to see the new behavior.\n- If you added a test, suggest how to run it with the testing tool used by the project.\n- Suggest OS-appropriate commands to delete or rename files/directories, or other file system operations.\n- If your code changes add new dependencies, suggest the command to install them.\n- Etc.\n\n\n\nTest files are UNAVAILABLE. NEVER ask to see them. NEVER request paths under tests/. If aider prompts you to add a test file, the request will be REFUSED \u2014 do not retry.\n\nYour job is SPEC-DRIVEN implementation:\n  1. Read the source files in /chat; identify unimplemented stubs (`pass`, `NotImplementedError`, `TODO`).\n  2. Infer expected behavior from function signatures, type hints, docstrings, and the library specification.\n  3. Implement from first principles \u2014 do NOT reverse-engineer from test outputs.\n  4. Test feedback is intentionally minimal (counts only). Use it as a yes/no signal, not as a debugging aid.\n  5. If you cannot infer behavior for a function, leave a TODO comment and move on. Do not stall.\n\nThe test suite is complete and frozen. Your only output is implementation code in src/.\n\nTest files are UNAVAILABLE. NEVER ask to see them. NEVER request paths under tests/. If aider prompts you to add a test file, the request will be REFUSED \u2014 do not retry.\n\nYour job is SPEC-DRIVEN implementation:\n  1. Read the source files in /chat; identify unimplemented stubs (`pass`, `NotImplementedError`, `TODO`).\n  2. Infer expected behavior from function signatures, type hints, docstrings, and the library specification.\n  3. Implement from first principles \u2014 do NOT reverse-engineer from test outputs.\n  4. Test feedback is intentionally minimal (counts only). Use it as a yes/no signal, not as a debugging aid.\n  5. If you cannot infer behavior for a function, leave a TODO comment and move on. Do not stall.\n\nThe test suite is complete and frozen. Your only output is implementation code in src/.\n\nTest files are UNAVAILABLE. NEVER ask to see them. NEVER request paths under tests/. If aider prompts you to add a test file, the request will be REFUSED \u2014 do not retry.\n\nYour job is SPEC-DRIVEN implementation:\n  1. Read the source files in /chat; identify unimplemented stubs (`pass`, `NotImplementedError`, `TODO`).\n  2. Infer expected behavior from function signatures, type hints, docstrings, and the library specification.\n  3. Implement from first principles \u2014 do NOT reverse-engineer from test outputs.\n  4. Test feedback is intentionally minimal (counts only). Use it as a yes/no signal, not as a debugging aid.\n  5. If you cannot infer behavior for a function, leave a TODO comment and move on. Do not stall.\n\nThe test suite is complete and frozen. Your only output is implementation code in src/.\n\nTest files are UNAVAILABLE. NEVER ask to see them. NEVER request paths under tests/. If aider prompts you to add a test file, the request will be REFUSED \u2014 do not retry.\n\nYour job is SPEC-DRIVEN implementation:\n  1. Read the source files in /chat; identify unimplemented stubs (`pass`, `NotImplementedError`, `TODO`).\n  2. Infer expected behavior from function signatures, type hints, docstrings, and the library specification.\n  3. Implement from first principles \u2014 do NOT reverse-engineer from test outputs.\n  4. Test feedback is intentionally minimal (counts only). Use it as a yes/no signal, not as a debugging aid.\n  5. If you cannot infer behavior for a function, leave a TODO comment and move on. Do not stall.\n\nThe test suite is complete and frozen. Your only output is implementation code in src/.\n\nTest files are UNAVAILABLE. NEVER ask to see them. NEVER request paths under tests/. If aider prompts you to add a test file, the request will be REFUSED \u2014 do not retry.\n\nYour job is SPEC-DRIVEN implementation:\n  1. Read the source files in /chat; identify unimplemented stubs (`pass`, `NotImplementedError`, `TODO`).\n  2. Infer expected behavior from function signatures, type hints, docstrings, and the library specification.\n  3. Implement from first principles \u2014 do NOT reverse-engineer from test outputs.\n  4. Test feedback is intentionally minimal (counts only). Use it as a yes/no signal, not as a debugging aid.\n  5. If you cannot infer behavior for a function, leave a TODO comment and move on. Do not stall.\n\nThe test suite is complete and frozen. Your only output is implementation code in src/.\n\nTest files are UNAVAILABLE. NEVER ask to see them. NEVER request paths under tests/. If aider prompts you to add a test file, the request will be REFUSED \u2014 do not retry.\n\nYour job is SPEC-DRIVEN implementation:\n  1. Read the source files in /chat; identify unimplemented stubs (`pass`, `NotImplementedError`, `TODO`).\n  2. Infer expected behavior from function signatures, type hints, docstrings, and the library specification.\n  3. Implement from first principles \u2014 do NOT reverse-engineer from test outputs.\n  4. Test feedback is intentionally minimal (counts only). Use it as a yes/no signal, not as a debugging aid.\n  5. If you cannot infer behavior for a function, leave a TODO comment and move on. Do not stall.\n\nThe test suite is complete and frozen. Your only output is implementation code in src/.\n\nTest files are UNAVAILABLE. NEVER ask to see them. NEVER request paths under tests/. If aider prompts you to add a test file, the request will be REFUSED \u2014 do not retry.\n\nYour job is SPEC-DRIVEN implementation:\n  1. Read the source files in /chat; identify unimplemented stubs (`pass`, `NotImplementedError`, `TODO`).\n  2. Infer expected behavior from function signatures, type hints, docstrings, and the library specification.\n  3. Implement from first principles \u2014 do NOT reverse-engineer from test outputs.\n  4. Test feedback is intentionally minimal (counts only). Use it as a yes/no signal, not as a debugging aid.\n  5. If you cannot infer behavior for a function, leave a TODO comment and move on. Do not stall.\n\nThe test suite is complete and frozen. Your only output is implementation code in src/.\n\nTest files are UNAVAILABLE. NEVER ask to see them. NEVER request paths under tests/. If aider prompts you to add a test file, the request will be REFUSED \u2014 do not retry.\n\nYour job is SPEC-DRIVEN implementation:\n  1. Read the source files in /chat; identify unimplemented stubs (`pass`, `NotImplementedError`, `TODO`).\n  2. Infer expected behavior from function signatures, type hints, docstrings, and the library specification.\n  3. Implement from first principles \u2014 do NOT reverse-engineer from test outputs.\n  4. Test feedback is intentionally minimal (counts only). Use it as a yes/no signal, not as a debugging aid.\n  5. If you cannot infer behavior for a function, leave a TODO comment and move on. Do not stall.\n\nThe test suite is complete and frozen. Your only output is implementation code in src/.\n\nTest files are UNAVAILABLE. NEVER ask to see them. NEVER request paths under tests/. If aider prompts you to add a test file, the request will be REFUSED \u2014 do not retry.\n\nYour job is SPEC-DRIVEN implementation:\n  1. Read the source files in /chat; identify unimplemented stubs (`pass`, `NotImplementedError`, `TODO`).\n  2. Infer expected behavior from function signatures, type hints, docstrings, and the library specification.\n  3. Implement from first principles \u2014 do NOT reverse-engineer from test outputs.\n  4. Test feedback is intentionally minimal (counts only). Use it as a yes/no signal, not as a debugging aid.\n  5. If you cannot infer behavior for a function, leave a TODO comment and move on. Do not stall.\n\nThe test suite is complete and frozen. Your only output is implementation code in src/.\n\nTest files are UNAVAILABLE. NEVER ask to see them. NEVER request paths under tests/. If aider prompts you to add a test file, the request will be REFUSED \u2014 do not retry.\n\nYour job is SPEC-DRIVEN implementation:\n  1. Read the source files in /chat; identify unimplemented stubs (`pass`, `NotImplementedError`, `TODO`).\n  2. Infer expected behavior from function signatures, type hints, docstrings, and the library specification.\n  3. Implement from first principles \u2014 do NOT reverse-engineer from test outputs.\n  4. Test feedback is intentionally minimal (counts only). Use it as a yes/no signal, not as a debugging aid.\n  5. If you cannot infer behavior for a function, leave a TODO comment and move on. Do not stall.\n\nThe test suite is complete and frozen. Your only output is implementation code in src/.\n# *SEARCH/REPLACE block* Rules:\n\nEvery *SEARCH/REPLACE block* must use this format:\n1. The *FULL* file path alone on a line, verbatim. No bold asterisks, no quotes around it, no escaping of characters, etc.\n2. The opening fence and code language, eg: ```python\n3. The start of search block: <<<<<<< SEARCH\n4. A contiguous chunk of lines to search for in the existing source code\n5. The dividing line: =======\n6. The lines to replace into the source code\n7. The end of the replace block: >>>>>>> REPLACE\n8. The closing fence: ```\n\nUse the *FULL* file path, as shown to you by the user.\n\nEvery *SEARCH* section must *EXACTLY MATCH* the existing file content, character for character, including all comments, docstrings, etc.\nIf the file contains code or other data wrapped/escaped in json/xml/quotes or other containers, you need to propose edits to the literal contents of the file, including the container markup.\n\n*SEARCH/REPLACE* blocks will *only* replace the first match occurrence.\nIncluding multiple unique *SEARCH/REPLACE* blocks if needed.\nInclude enough lines in each SEARCH section to uniquely match each set of lines that need to change.\n\nKeep *SEARCH/REPLACE* blocks concise.\nBreak large *SEARCH/REPLACE* blocks into a series of smaller blocks that each change a small portion of the file.\nInclude just the changing lines, and a few surrounding lines if needed for uniqueness.\nDo not include long runs of unchanging lines in *SEARCH/REPLACE* blocks.\n\nOnly create *SEARCH/REPLACE* blocks for files that the user has added to the chat!\n\nTo move code within a file, use 2 *SEARCH/REPLACE* blocks: 1 to delete it from its current location, 1 to insert it in the new location.\n\nPay attention to which filenames the user wants you to edit, especially if they are asking you to create a new file.\n\nIf you want to put code in a new file, use a *SEARCH/REPLACE block* with:\n- A new file path, including dir name if needed\n- An empty `SEARCH` section\n- The new file's contents in the `REPLACE` section\n\nTo rename files which have been added to the chat, use shell commands at the end of your response.\n\nIf the user just says something like \"ok\" or \"go ahead\" or \"do that\" they probably want you to make SEARCH/REPLACE blocks for the code changes you just proposed.\nThe user will say when they've applied your edits. If they haven't explicitly confirmed the edits have been applied, they probably want proper SEARCH/REPLACE blocks.\n\nONLY EVER RETURN CODE IN A *SEARCH/REPLACE BLOCK*!\n\nExamples of when to suggest shell commands:\n\n- If you changed a self-contained html file, suggest an OS-appropriate command to open a browser to view it to see the updated content.\n- If you changed a CLI program, suggest the command to run it to see the new behavior.\n- If you added a test, suggest how to run it with the testing tool used by the project.\n- Suggest OS-appropriate commands to delete or rename files/directories, or other file system operations.\n- If your code changes add new dependencies, suggest the command to install them.\n- Etc."
+    },
+    {
+      "step_id": 2,
+      "source": "user",
+      "message": "# Fix any errors below, if possible.\n\n## Running: /opt/kaiju/.venv/bin/python -m commit0 lint tryalgo --commit0-config-file /opt/kaiju/outputs/03e25be8-ee83-475e-a2f7-34ca21d45147/configs/commit0_claude-opus-4.8_dataset.yaml --files  tryalgo/horn_sat.py\n\n2026-07-23 17:57:51,501 - commit0.harness.utils - INFO - Loaded 1 entries from local dataset: dataset.json\n2026-07-23 17:57:51,515 - commit0.harness.lint - WARNING - pyright is not available on this host (likely missing libatomic1). Skipping pyright hook \u2014 only ruff checks will run. Fix: sudo apt-get install -y libatomic1\n2026-07-23 17:57:51,517 - commit0.harness.lint - INFO - Using pre-commit binary: pre-commit\n2026-07-23 17:57:51,707 - commit0.harness.lint - ERROR - Lint failed (exit code 1)\ncheck for case conflicts.................................................Passed\nmixed line ending........................................................Passed\nruff.....................................................................Failed\n- hook id: ruff\n- files were modified by this hook\n\nFound 2 errors (2 fixed, 0 remaining).\n\nruff-format..............................................................Failed\n- hook id: ruff-format\n- files were modified by this hook\n\n1 file reformatted\n\n\n## See relevant line below marked with \u2588.\n\ntryalgo/horn_sat.py:\n\n\n# *SEARCH/REPLACE block* Rules:\n\nEvery *SEARCH/REPLACE block* must use this format:\n1. The *FULL* file path alone on a line, verbatim. No bold asterisks, no quotes around it, no escaping of characters, etc.\n2. The opening fence and code language, eg: ```python\n3. The start of search block: <<<<<<< SEARCH\n4. A contiguous chunk of lines to search for in the existing source code\n5. The dividing line: =======\n6. The lines to replace into the source code\n7. The end of the replace block: >>>>>>> REPLACE\n8. The closing fence: ```\n\nUse the *FULL* file path, as shown to you by the user.\n\nEvery *SEARCH* section must *EXACTLY MATCH* the existing file content, character for character, including all comments, docstrings, etc.\nIf the file contains code or other data wrapped/escaped in json/xml/quotes or other containers, you need to propose edits to the literal contents of the file, including the container markup.\n\n*SEARCH/REPLACE* blocks will *only* replace the first match occurrence.\nIncluding multiple unique *SEARCH/REPLACE* blocks if needed.\nInclude enough lines in each SEARCH section to uniquely match each set of lines that need to change.\n\nKeep *SEARCH/REPLACE* blocks concise.\nBreak large *SEARCH/REPLACE* blocks into a series of smaller blocks that each change a small portion of the file.\nInclude just the changing lines, and a few surrounding lines if needed for uniqueness.\nDo not include long runs of unchanging lines in *SEARCH/REPLACE* blocks.\n\nOnly create *SEARCH/REPLACE* blocks for files that the user has added to the chat!\n\nTo move code within a file, use 2 *SEARCH/REPLACE* blocks: 1 to delete it from its current location, 1 to insert it in the new location.\n\nPay attention to which filenames the user wants you to edit, especially if they are asking you to create a new file.\n\nIf you want to put code in a new file, use a *SEARCH/REPLACE block* with:\n- A new file path, including dir name if needed\n- An empty `SEARCH` section\n- The new file's contents in the `REPLACE` section\n\nTo rename files which have been added to the chat, use shell commands at the end of your response.\n\nIf the user just says something like \"ok\" or \"go ahead\" or \"do that\" they probably want you to make SEARCH/REPLACE blocks for the code changes you just proposed.\nThe user will say when they've applied your edits. If they haven't explicitly confirmed the edits have been applied, they probably want proper SEARCH/REPLACE blocks.\n\nONLY EVER RETURN CODE IN A *SEARCH/REPLACE BLOCK*!\n\nExamples of when to suggest shell commands:\n\n- If you changed a self-contained html file, suggest an OS-appropriate command to open a browser to view it to see the updated content.\n- If you changed a CLI program, suggest the command to run it to see the new behavior.\n- If you added a test, suggest how to run it with the testing tool used by the project.\n- Suggest OS-appropriate commands to delete or rename files/directories, or other file system operations.\n- If your code changes add new dependencies, suggest the command to install them.\n- Etc."
+    },
+    {
+      "step_id": 3,
+      "timestamp": "2026-07-23T17:58:03",
+      "source": "agent",
+      "model_name": "claude-opus-4.8",
+      "message": "<thinking-content-7bbeb8e1441453ad999a0bbba8a46d4b>\n\nI'm tracking down the lint errors that ruff flagged\u2014looks like there are unused variables in the loop iterations, particularly where I'm iterating over ranges and clause collections without actually using those loop variables.\n\n</thinking>\n\nThe ruff errors are unused loop variables (`c` and `s` in comprehensions). Let me fix them:\n\ntryalgo/horn_sat.py\n```python\n<<<<<<< SEARCH\n    score = [0 for c in CLAUSES]  # number of neg vars not yet in solution\n=======\n    score = [0 for _ in CLAUSES]  # number of neg vars not yet in solution\n>>>>>>> REPLACE\n```\n\ntryalgo/horn_sat.py\n```python\n<<<<<<< SEARCH\n    pool = [set() for s in range(max(score) + 1)]  # create the pool\n=======\n    pool = [set() for _ in range(max(score) + 1)]  # create the pool\n>>>>>>> REPLACE\n```",
+      "tool_calls": [
+        {
+          "tool_call_id": "edit_1",
+          "function_name": "file_editor",
+          "arguments": {
+            "command": "str_replace",
+            "path": "tryalgo/horn_sat.py",
+            "old_str": "    score = [0 for c in CLAUSES]  # number of neg vars not yet in solution\n",
+            "new_str": "    score = [0 for _ in CLAUSES]  # number of neg vars not yet in solution\n"
+          }
+        },
+        {
+          "tool_call_id": "edit_2",
+          "function_name": "file_editor",
+          "arguments": {
+            "command": "str_replace",
+            "path": "tryalgo/horn_sat.py",
+            "old_str": "    pool = [set() for s in range(max(score) + 1)]  # create the pool\n",
+            "new_str": "    pool = [set() for _ in range(max(score) + 1)]  # create the pool\n"
+          }
+        }
+      ],
+      "metrics": {
+        "prompt_tokens": 12563,
+        "completion_tokens": 586,
+        "cached_tokens": 0,
+        "cost_usd": 0.12797750000000002,
+        "extra": {
+          "metrics_scope": "per_turn"
+        }
+      }
+    }
+  ],
+  "final_metrics": {
+    "total_prompt_tokens": 12563,
+    "total_completion_tokens": 586,
+    "total_cached_tokens": 0,
+    "total_cost_usd": 0.12797750000000002,
+    "total_steps": 3,
+    "extra": {
+      "reward": 0.910569,
+      "resolved": 0,
+      "stage_pass_rate": {
+        "stage1": 0.910569,
+        "stage2": 0.910569,
+        "stage3": 0.934959
+      },
+      "edit_count": 2,
+      "module_runtime_seconds": 15.97,
+      "num_turns": 1,
+      "total_llm_calls": 3,
+      "total_thinking_tokens": 40,
+      "cache_write_tokens": 8082
+    }
+  },
+  "extra": {
+    "instance_id": "commit-0/tryalgo__claude-opus-4.8__lint__tryalgo__tryalgo__horn_sat",
+    "stage": "lint",
+    "module": "tryalgo__tryalgo__horn_sat",
+    "session_timestamps": [
+      "2026-07-23T17:57:53",
+      "2026-07-23T17:58:03"
+    ],
+    "edit_source": "ground_truth",
+    "per_step_metrics_available": true,
+    "git_patch": "diff --git a/tryalgo/horn_sat.py b/tryalgo/horn_sat.py\nindex 2fed258..8236396 100644\n--- a/tryalgo/horn_sat.py\n+++ b/tryalgo/horn_sat.py\n@@ -6,7 +6,7 @@ import sys\n \n \n def read(filename):\n-    \"\"\"reads a Horn SAT formula from a text file\n+    \"\"\"Reads a Horn SAT formula from a text file\n \n     :file format: one clause per line\n         lines that are empty or start with '#' are ignored\n@@ -17,12 +17,12 @@ def read(filename):\n     :returns: a list of couples (posvar, negvars) as expected by horn_sat\n     \"\"\"\n     formula = []\n-    for line in open(filename, 'r'):\n+    for line in open(filename, \"r\"):\n         line = line.strip()\n-        if not line or line[0] == '#':\n+        if not line or line[0] == \"#\":\n             continue\n-        if ':-' in line:\n-            lhs, rhs = line.split(':-', 1)\n+        if \":-\" in line:\n+            lhs, rhs = line.split(\":-\", 1)\n         else:\n             lhs, rhs = line, \"\"\n         posvars = lhs.split()\n@@ -33,7 +33,7 @@ def read(filename):\n \n \n def horn_sat(formula):\n-    \"\"\" Solving a HORN Sat formula\n+    \"\"\"Solving a HORN Sat formula\n \n     :param formula: list of couple(posvar, negvars).\n                     negvars is a list of the negative variables (can be empty)\n@@ -44,7 +44,7 @@ def horn_sat(formula):\n     :complexity: linear\n     \"\"\"\n     CLAUSES = range(len(formula))\n-    score = [0 for c in CLAUSES]  # number of neg vars not yet in solution\n+    score = [0 for _ in CLAUSES]  # number of neg vars not yet in solution\n     posvar_in_clause = [None for c in CLAUSES]\n     clauses_with_negvar = defaultdict(set)\n     for c in CLAUSES:\n@@ -53,23 +53,23 @@ def horn_sat(formula):\n         posvar_in_clause[c] = posvar\n         for v in negvars:\n             clauses_with_negvar[v].add(c)\n-    pool = [set() for s in range(max(score) + 1)]   # create the pool\n+    pool = [set() for _ in range(max(score) + 1)]  # create the pool\n     for c in CLAUSES:\n-        pool[score[c]].add(c)           # pool[s] = set of clauses with score s\n+        pool[score[c]].add(c)  # pool[s] = set of clauses with score s\n \n-    solution = set()                    # contains all variables set to True\n+    solution = set()  # contains all variables set to True\n     while pool[0]:\n-        curr = pool[0].pop()               # arbitrary zero score clause\n+        curr = pool[0].pop()  # arbitrary zero score clause\n         v = posvar_in_clause[curr]\n-        if v is None:                      # formula is not satisfiable\n+        if v is None:  # formula is not satisfiable\n             return None\n         if v in solution or curr in clauses_with_negvar[v]:\n-            continue                       # clause is already satisfied\n+            continue  # clause is already satisfied\n         solution.add(v)\n-        for c in clauses_with_negvar[v]:   # update score\n+        for c in clauses_with_negvar[v]:  # update score\n             pool[score[c]].remove(c)\n             score[c] -= 1\n-            pool[score[c]].add(c)          # change c to lower score in pool\n+            pool[score[c]].add(c)  # change c to lower score in pool\n     return solution\n \n "
+  }
+}

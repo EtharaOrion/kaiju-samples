@@ -1,0 +1,881 @@
+    Updating crates.io index
+     Locking 29 packages to latest compatible versions
+      Adding rand v0.8.7 (available: v0.10.2)
+   Compiling libc v0.2.186
+   Compiling parking_lot_core v0.9.12
+   Compiling scopeguard v1.2.0
+   Compiling smallvec v1.15.2
+   Compiling cfg-if v1.0.4
+   Compiling stack-map v1.0.5
+   Compiling lock_api v0.4.14
+   Compiling parking_lot v0.12.5
+   Compiling shared-local-state v0.1.4
+   Compiling ebr v0.2.13
+   Compiling concurrent-map v5.0.37 (/tmp/commit0-inplace-h2dj3w5y/tree)
+warning: unused import: `std::mem::size_of`
+  --> src/lib.rs:93:5
+   |
+93 | use std::mem::size_of;
+   |     ^^^^^^^^^^^^^^^^^
+   |
+   = note: `#[warn(unused_imports)]` (part of `#[warn(unused)]`) on by default
+
+warning: unused import: `Bound`
+  --> src/lib.rs:98:16
+   |
+98 | use std::ops::{Bound, Deref};
+   |                ^^^^^
+
+warning: unused import: `Ordering`
+   --> src/lib.rs:101:38
+    |
+101 |     atomic::{AtomicPtr, AtomicUsize, Ordering},
+    |                                      ^^^^^^^^
+
+warning: unused variable: `other`
+   --> src/lib.rs:153:18
+    |
+153 |     fn eq(&self, other: &Self) -> bool { panic!("STUB: not implemented") }
+    |                  ^^^^^ help: if this is intentional, prefix it with an underscore: `_other`
+    |
+    = note: `#[warn(unused_variables)]` (part of `#[warn(unused)]`) on by default
+
+warning: unused variable: `node`
+   --> src/lib.rs:189:12
+    |
+189 |     fn new(node: Box<Node<K, V, FANOUT>>) -> BoxedAtomicPtr<K, V, FANOUT> { panic!("STUB: not implemented") }
+    |            ^^^^ help: if this is intentional, prefix it with an underscore: `_node`
+
+warning: unused variable: `replacement`
+   --> src/lib.rs:223:9
+    |
+223 |         replacement: Box<Node<K, V, FANOUT>>,
+    |         ^^^^^^^^^^^ help: if this is intentional, prefix it with an underscore: `_replacement`
+
+warning: unused variable: `guard`
+   --> src/lib.rs:224:9
+    |
+224 |         guard: &mut Guard<'_, Deferred<K, V, FANOUT>, LOCAL_GC_BUFFER_SIZE>,
+    |         ^^^^^ help: if this is intentional, prefix it with an underscore: `_guard`
+
+warning: unused variable: `other`
+   --> src/lib.rs:361:18
+    |
+361 |     fn eq(&self, other: &Self) -> bool { panic!("STUB: not implemented") }
+    |                  ^^^^^ help: if this is intentional, prefix it with an underscore: `_other`
+
+warning: unused variable: `f`
+   --> src/lib.rs:370:19
+    |
+370 |     fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result { panic!("STUB: not implemented") }
+    |                   ^ help: if this is intentional, prefix it with an underscore: `_f`
+
+warning: unused variable: `key`
+   --> src/lib.rs:412:26
+    |
+412 |     pub fn get<Q>(&self, key: &Q) -> Option<V>
+    |                          ^^^ help: if this is intentional, prefix it with an underscore: `_key`
+
+warning: unused variable: `key`
+   --> src/lib.rs:418:35
+    |
+418 |     pub fn contains_key<Q>(&self, key: &Q) -> bool
+    |                                   ^^^ help: if this is intentional, prefix it with an underscore: `_key`
+
+warning: unused variable: `key`
+   --> src/lib.rs:424:29
+    |
+424 |     pub fn get_lt<Q>(&self, key: &Q) -> Option<(K, V)>
+    |                             ^^^ help: if this is intentional, prefix it with an underscore: `_key`
+
+warning: unused variable: `key`
+   --> src/lib.rs:430:30
+    |
+430 |     pub fn get_lte<Q>(&self, key: &Q) -> Option<(K, V)>
+    |                              ^^^ help: if this is intentional, prefix it with an underscore: `_key`
+
+warning: unused variable: `key`
+   --> src/lib.rs:436:29
+    |
+436 |     pub fn get_gt<Q>(&self, key: &Q) -> Option<(K, V)>
+    |                             ^^^ help: if this is intentional, prefix it with an underscore: `_key`
+
+warning: unused variable: `key`
+   --> src/lib.rs:442:30
+    |
+442 |     pub fn get_gte<Q>(&self, key: &Q) -> Option<(K, V)>
+    |                              ^^^ help: if this is intentional, prefix it with an underscore: `_key`
+
+warning: unused variable: `range`
+   --> src/lib.rs:455:44
+    |
+455 |     pub fn pop_first_in_range<Q, R>(&self, range: R) -> Option<(K, V)>
+    |                                            ^^^^^ help: if this is intentional, prefix it with an underscore: `_range`
+
+warning: unused variable: `range`
+   --> src/lib.rs:470:43
+    |
+470 |     pub fn pop_last_in_range<Q, R>(&self, range: R) -> Option<(K, V)>
+    |                                           ^^^^^ help: if this is intentional, prefix it with an underscore: `_range`
+
+warning: unused variable: `key`
+   --> src/lib.rs:478:26
+    |
+478 |     pub fn insert(&self, key: K, value: V) -> Option<V> { panic!("STUB: not implemented") }
+    |                          ^^^ help: if this is intentional, prefix it with an underscore: `_key`
+
+warning: unused variable: `value`
+   --> src/lib.rs:478:34
+    |
+478 |     pub fn insert(&self, key: K, value: V) -> Option<V> { panic!("STUB: not implemented") }
+    |                                  ^^^^^ help: if this is intentional, prefix it with an underscore: `_value`
+
+warning: unused variable: `key`
+   --> src/lib.rs:480:29
+    |
+480 |     pub fn remove<Q>(&self, key: &Q) -> Option<V>
+    |                             ^^^ help: if this is intentional, prefix it with an underscore: `_key`
+
+warning: unused variable: `key`
+   --> src/lib.rs:488:9
+    |
+488 |         key: K,
+    |         ^^^ help: if this is intentional, prefix it with an underscore: `_key`
+
+warning: unused variable: `old`
+   --> src/lib.rs:489:9
+    |
+489 |         old: Option<&VRef>,
+    |         ^^^ help: if this is intentional, prefix it with an underscore: `_old`
+
+warning: unused variable: `new`
+   --> src/lib.rs:490:9
+    |
+490 |         new: Option<V>,
+    |         ^^^ help: if this is intentional, prefix it with an underscore: `_new`
+
+warning: unused variable: `range`
+   --> src/lib.rs:503:31
+    |
+503 |     pub fn range<Q, R>(&self, range: R) -> Iter<'_, K, V, FANOUT, LOCAL_GC_BUFFER_SIZE, R, Q>
+    |                               ^^^^^ help: if this is intentional, prefix it with an underscore: `_range`
+
+warning: variable does not need to be mutable
+   --> src/lib.rs:510:47
+    |
+510 |     pub fn update_and_fetch<F>(&self, key: K, mut f: F) -> Option<V>
+    |                                               ----^
+    |                                               |
+    |                                               help: remove this `mut`
+    |
+    = note: `#[warn(unused_mut)]` (part of `#[warn(unused)]`) on by default
+
+warning: unused variable: `key`
+   --> src/lib.rs:510:39
+    |
+510 |     pub fn update_and_fetch<F>(&self, key: K, mut f: F) -> Option<V>
+    |                                       ^^^ help: if this is intentional, prefix it with an underscore: `_key`
+
+warning: unused variable: `f`
+   --> src/lib.rs:510:47
+    |
+510 |     pub fn update_and_fetch<F>(&self, key: K, mut f: F) -> Option<V>
+    |                                               ^^^^^ help: if this is intentional, prefix it with an underscore: `_f`
+
+warning: variable does not need to be mutable
+   --> src/lib.rs:516:47
+    |
+516 |     pub fn fetch_and_update<F>(&self, key: K, mut f: F) -> Option<V>
+    |                                               ----^
+    |                                               |
+    |                                               help: remove this `mut`
+
+warning: unused variable: `key`
+   --> src/lib.rs:516:39
+    |
+516 |     pub fn fetch_and_update<F>(&self, key: K, mut f: F) -> Option<V>
+    |                                       ^^^ help: if this is intentional, prefix it with an underscore: `_key`
+
+warning: unused variable: `f`
+   --> src/lib.rs:516:47
+    |
+516 |     pub fn fetch_and_update<F>(&self, key: K, mut f: F) -> Option<V>
+    |                                               ^^^^^ help: if this is intentional, prefix it with an underscore: `_f`
+
+warning: unused variable: `key`
+   --> src/lib.rs:530:29
+    |
+530 |     pub fn fetch_min(&self, key: K, value: V) -> Option<V> { panic!("STUB: not implemented") }
+    |                             ^^^ help: if this is intentional, prefix it with an underscore: `_key`
+
+warning: unused variable: `value`
+   --> src/lib.rs:530:37
+    |
+530 |     pub fn fetch_min(&self, key: K, value: V) -> Option<V> { panic!("STUB: not implemented") }
+    |                                     ^^^^^ help: if this is intentional, prefix it with an underscore: `_value`
+
+warning: unused variable: `key`
+   --> src/lib.rs:532:29
+    |
+532 |     pub fn fetch_max(&self, key: K, value: V) -> Option<V> { panic!("STUB: not implemented") }
+    |                             ^^^ help: if this is intentional, prefix it with an underscore: `_key`
+
+warning: unused variable: `value`
+   --> src/lib.rs:532:37
+    |
+532 |     pub fn fetch_max(&self, key: K, value: V) -> Option<V> { panic!("STUB: not implemented") }
+    |                                     ^^^^^ help: if this is intentional, prefix it with an underscore: `_value`
+
+warning: unused variable: `parent`
+   --> src/lib.rs:607:9
+    |
+607 |         parent: &NodeView<K, V, FANOUT>,
+    |         ^^^^^^ help: if this is intentional, prefix it with an underscore: `_parent`
+
+warning: unused variable: `child`
+   --> src/lib.rs:608:9
+    |
+608 |         child: &NodeView<K, V, FANOUT>,
+    |         ^^^^^ help: if this is intentional, prefix it with an underscore: `_child`
+
+warning: unused variable: `guard`
+   --> src/lib.rs:609:9
+    |
+609 |         guard: &mut Guard<'a, Deferred<K, V, FANOUT>, LOCAL_GC_BUFFER_SIZE>,
+    |         ^^^^^ help: if this is intentional, prefix it with an underscore: `_guard`
+
+warning: unused variable: `parent`
+   --> src/lib.rs:614:9
+    |
+614 |         parent: &mut NodeView<K, V, FANOUT>,
+    |         ^^^^^^ help: if this is intentional, prefix it with an underscore: `_parent`
+
+warning: unused variable: `child`
+   --> src/lib.rs:615:9
+    |
+615 |         child: &mut NodeView<K, V, FANOUT>,
+    |         ^^^^^ help: if this is intentional, prefix it with an underscore: `_child`
+
+warning: unused variable: `guard`
+   --> src/lib.rs:616:9
+    |
+616 |         guard: &mut Guard<'a, Deferred<K, V, FANOUT>, LOCAL_GC_BUFFER_SIZE>,
+    |         ^^^^^ help: if this is intentional, prefix it with an underscore: `_guard`
+
+warning: unused variable: `search`
+   --> src/lib.rs:627:9
+    |
+627 |         search: LeafSearch<&Q>,
+    |         ^^^^^^ help: if this is intentional, prefix it with an underscore: `_search`
+
+warning: unused variable: `guard`
+   --> src/lib.rs:628:9
+    |
+628 |         guard: &mut Guard<'a, Deferred<K, V, FANOUT>, LOCAL_GC_BUFFER_SIZE>,
+    |         ^^^^^ help: if this is intentional, prefix it with an underscore: `_guard`
+
+warning: unused variable: `lo`
+   --> src/lib.rs:713:17
+    |
+713 |     fn new_leaf(lo: K) -> Box<Node<K, V, FANOUT>> { panic!("STUB: not implemented") }
+    |                 ^^ help: if this is intentional, prefix it with an underscore: `_lo`
+
+warning: unused variable: `key`
+   --> src/lib.rs:715:22
+    |
+715 |     fn get<Q>(&self, key: &Q) -> Option<V>
+    |                      ^^^ help: if this is intentional, prefix it with an underscore: `_key`
+
+warning: unused variable: `key`
+   --> src/lib.rs:721:29
+    |
+721 |     fn remove<Q>(&mut self, key: &Q) -> Option<V>
+    |                             ^^^ help: if this is intentional, prefix it with an underscore: `_key`
+
+warning: unused variable: `key`
+   --> src/lib.rs:727:26
+    |
+727 |     fn insert(&mut self, key: K, value: V) -> Option<V> { panic!("STUB: not implemented") }
+    |                          ^^^ help: if this is intentional, prefix it with an underscore: `_key`
+
+warning: unused variable: `value`
+   --> src/lib.rs:727:34
+    |
+727 |     fn insert(&mut self, key: K, value: V) -> Option<V> { panic!("STUB: not implemented") }
+    |                                  ^^^^^ help: if this is intentional, prefix it with an underscore: `_value`
+
+warning: unused variable: `key`
+   --> src/lib.rs:731:9
+    |
+731 |         key: K,
+    |         ^^^ help: if this is intentional, prefix it with an underscore: `_key`
+
+warning: unused variable: `old`
+   --> src/lib.rs:732:9
+    |
+732 |         old: Option<&V2>,
+    |         ^^^ help: if this is intentional, prefix it with an underscore: `_old`
+
+warning: unused variable: `new`
+   --> src/lib.rs:733:9
+    |
+733 |         new: Option<V>,
+    |         ^^^ help: if this is intentional, prefix it with an underscore: `_new`
+
+warning: unused variable: `rhs`
+   --> src/lib.rs:760:25
+    |
+760 |     fn merge(&mut self, rhs: &NodeView<K, V, FANOUT>) { panic!("STUB: not implemented") }
+    |                         ^^^ help: if this is intentional, prefix it with an underscore: `_rhs`
+
+warning: unused variable: `possible_child`
+   --> src/lib.rs:762:36
+    |
+762 |     fn is_viable_parent_for(&self, possible_child: &NodeView<K, V, FANOUT>) -> bool { panic!("STUB: not implemented") }
+    |                                    ^^^^^^^^^^^^^^ help: if this is intentional, prefix it with an underscore: `_possible_child`
+
+warning: unused variable: `iter`
+   --> src/lib.rs:771:50
+    |
+771 |     fn from_iter<I: IntoIterator<Item = (K, V)>>(iter: I) -> Self { panic!("STUB: not implemented") }
+    |                                                  ^^^^ help: if this is intentional, prefix it with an underscore: `_iter`
+
+warning: function `debug_delay` is never used
+  --> src/lib.rs:82:10
+   |
+82 | const fn debug_delay() -> bool {
+   |          ^^^^^^^^^^^
+   |
+   = note: `#[warn(dead_code)]` (part of `#[warn(unused)]`) on by default
+
+warning: constant `MERGE_SIZE` is never used
+   --> src/lib.rs:110:7
+    |
+110 | const MERGE_SIZE: usize = 1;
+    |       ^^^^^^^^^^
+
+warning: variant `BoxedAtomicPtr` is never constructed
+   --> src/lib.rs:120:5
+    |
+113 | enum Deferred<
+    |      -------- variant in this enum
+...
+120 |     BoxedAtomicPtr(BoxedAtomicPtr<K, V, FANOUT>),
+    |     ^^^^^^^^^^^^^^
+    |
+    = note: `Deferred` has a derived impl for the trait `Debug`, but this is intentionally ignored during dead code analysis
+
+warning: field `0` is never read
+   --> src/lib.rs:137:3
+    |
+133 | struct BoxedAtomicPtr<
+    |        -------------- field in this struct
+...
+137 | >(*const AtomicPtr<Node<K, V, FANOUT>>);
+    |   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    |
+    = help: consider removing this field
+    = note: `BoxedAtomicPtr` has derived impls for the traits `Clone` and `Debug`, but these are intentionally ignored during dead code analysis
+
+warning: associated items `new` and `node_view` are never used
+   --> src/lib.rs:189:8
+    |
+183 | / impl<
+184 | |         K: 'static + Clone + Minimum + Send + Sync + Ord,
+185 | |         V: 'static + Clone + Send + Sync,
+186 | |         const FANOUT: usize,
+187 | |     > BoxedAtomicPtr<K, V, FANOUT>
+    | |__________________________________- associated items in this implementation
+188 |   {
+189 |       fn new(node: Box<Node<K, V, FANOUT>>) -> BoxedAtomicPtr<K, V, FANOUT> { panic!("STUB: not implemented") }
+    |          ^^^
+190 |
+191 |       fn node_view<const LOCAL_GC_BUFFER_SIZE: usize>(
+    |          ^^^^^^^^^
+
+warning: fields `ptr` and `id` are never read
+   --> src/lib.rs:211:5
+    |
+206 | struct NodeView<K, V, const FANOUT: usize>
+    |        -------- fields in this struct
+...
+211 |     ptr: NonNull<Node<K, V, FANOUT>>,
+    |     ^^^
+212 |     id: BoxedAtomicPtr<K, V, FANOUT>,
+    |     ^^
+    |
+    = note: `NodeView` has a derived impl for the trait `Debug`, but this is intentionally ignored during dead code analysis
+
+warning: methods `cas` and `get_mut` are never used
+   --> src/lib.rs:221:8
+    |
+215 | / impl<K, V, const FANOUT: usize> NodeView<K, V, FANOUT>
+216 | | where
+217 | |     K: 'static + Clone + Minimum + Ord + Send + Sync,
+218 | |     V: 'static + Clone + Send + Sync,
+    | |_____________________________________- methods in this implementation
+...
+221 |       fn cas<const LOCAL_GC_BUFFER_SIZE: usize>(
+    |          ^^^
+...
+227 |       unsafe fn get_mut(&mut self) -> &mut Node<K, V, FANOUT> { panic!("STUB: not implemented") }
+    |                 ^^^^^^^
+
+warning: fields `ebr`, `inner`, and `len` are never read
+   --> src/lib.rs:348:5
+    |
+342 | pub struct ConcurrentMap<K, V, const FANOUT: usize = 64, const LOCAL_GC_BUFFER_SIZE: usize = 128>
+    |            ------------- fields in this struct
+...
+348 |     ebr: Ebr<Deferred<K, V, FANOUT>, LOCAL_GC_BUFFER_SIZE>,
+    |     ^^^
+349 |     
+350 |     inner: Arc<Inner<K, V, FANOUT, LOCAL_GC_BUFFER_SIZE>>,
+    |     ^^^^^
+351 |     
+352 |     len: Arc<AtomicUsize>,
+    |     ^^^
+    |
+    = note: `ConcurrentMap` has a derived impl for the trait `Clone`, but this is intentionally ignored during dead code analysis
+
+warning: field `root` is never read
+   --> src/lib.rs:387:5
+    |
+382 | struct Inner<K, V, const FANOUT: usize, const LOCAL_GC_BUFFER_SIZE: usize>
+    |        ----- field in this struct
+...
+387 |     root: BoxedAtomicPtr<K, V, FANOUT>,
+    |     ^^^^
+
+warning: multiple fields are never read
+   --> src/lib.rs:550:5
+    |
+535 | pub struct Iter<
+    |            ---- fields in this struct
+...
+550 |     inner: &'a Inner<K, V, FANOUT, LOCAL_GC_BUFFER_SIZE>,
+    |     ^^^^^
+551 |     guard: Guard<'a, Deferred<K, V, FANOUT>, LOCAL_GC_BUFFER_SIZE>,
+    |     ^^^^^
+552 |     range: R,
+    |     ^^^^^
+553 |     current: NodeView<K, V, FANOUT>,
+    |     ^^^^^^^
+554 |     next_index: usize,
+    |     ^^^^^^^^^^
+555 |     current_back: NodeView<K, V, FANOUT>,
+    |     ^^^^^^^^^^^^
+556 |     next_index_from_back: usize,
+    |     ^^^^^^^^^^^^^^^^^^^^
+
+warning: enum `LeafSearch` is never used
+   --> src/lib.rs:586:6
+    |
+586 | enum LeafSearch<K> {
+    |      ^^^^^^^^^^
+
+warning: methods `root`, `install_parent_merge`, `merge_child`, and `leaf_for_key` are never used
+   --> src/lib.rs:600:8
+    |
+594 | / impl<K, V, const FANOUT: usize, const LOCAL_GC_BUFFER_SIZE: usize>
+595 | |     Inner<K, V, FANOUT, LOCAL_GC_BUFFER_SIZE>
+596 | | where
+597 | |     K: 'static + Clone + Minimum + Ord + Send + Sync,
+598 | |     V: 'static + Clone + Send + Sync,
+    | |_____________________________________- methods in this implementation
+599 |   {
+600 |       fn root(
+    |          ^^^^
+...
+605 |       fn install_parent_merge<'a>(
+    |          ^^^^^^^^^^^^^^^^^^^^
+...
+612 |       fn merge_child<'a>(
+    |          ^^^^^^^^^^^
+...
+625 |       fn leaf_for_key<'a, Q>(
+    |          ^^^^^^^^^^^^
+
+warning: variants `Leaf` and `Index` are never constructed
+   --> src/lib.rs:643:5
+    |
+638 | enum Data<K, V, const FANOUT: usize>
+    |      ---- variants in this enum
+...
+643 |     Leaf(StackMap<K, V, FANOUT>),
+    |     ^^^^
+644 |     Index(StackMap<K, BoxedAtomicPtr<K, V, FANOUT>, FANOUT>),
+    |     ^^^^^
+    |
+    = note: `Data` has derived impls for the traits `Clone` and `Debug`, but these are intentionally ignored during dead code analysis
+
+warning: method `len` is never used
+   --> src/lib.rs:652:14
+    |
+647 | / impl<K, V, const FANOUT: usize> Data<K, V, FANOUT>
+648 | | where
+649 | |     K: 'static + Clone + Minimum + Ord + Send + Sync,
+650 | |     V: 'static + Clone + Send + Sync,
+    | |_____________________________________- method in this implementation
+651 |   {
+652 |       const fn len(&self) -> usize {
+    |                ^^^
+
+warning: fields `next`, `merging_child`, `data`, `lo`, `hi`, and `is_merging` are never read
+   --> src/lib.rs:666:5
+    |
+661 | struct Node<K, V, const FANOUT: usize>
+    |        ---- fields in this struct
+...
+666 |     next: Option<BoxedAtomicPtr<K, V, FANOUT>>,
+    |     ^^^^
+667 |     merging_child: Option<BoxedAtomicPtr<K, V, FANOUT>>,
+    |     ^^^^^^^^^^^^^
+668 |     data: Data<K, V, FANOUT>,
+    |     ^^^^
+669 |     lo: K,
+    |     ^^
+670 |     hi: Option<K>,
+    |     ^^
+671 |     is_merging: bool,
+    |     ^^^^^^^^^^
+    |
+    = note: `Node` has a derived impl for the trait `Debug`, but this is intentionally ignored during dead code analysis
+
+warning: multiple associated items are never used
+   --> src/lib.rs:687:14
+    |
+682 | / impl<K, V, const FANOUT: usize> Node<K, V, FANOUT>
+683 | | where
+684 | |     K: 'static + Clone + Minimum + Ord + Send + Sync,
+685 | |     V: 'static + Clone + Send + Sync,
+    | |_____________________________________- associated items in this implementation
+686 |   {
+687 |       const fn index(&self) -> &StackMap<K, BoxedAtomicPtr<K, V, FANOUT>, FANOUT> {
+    |                ^^^^^
+...
+695 |       fn index_mut(&mut self) -> &mut StackMap<K, BoxedAtomicPtr<K, V, FANOUT>, FANOUT> { panic!("STUB: not implemented") }
+    |          ^^^^^^^^^
+696 |
+697 |       const fn leaf(&self) -> &StackMap<K, V, FANOUT> {
+    |                ^^^^
+...
+705 |       fn leaf_mut(&mut self) -> &mut StackMap<K, V, FANOUT> { panic!("STUB: not implemented") }
+    |          ^^^^^^^^
+706 |
+707 |       const fn is_leaf(&self) -> bool {
+    |                ^^^^^^^
+...
+711 |       fn new_root() -> Box<Node<K, V, FANOUT>> { panic!("STUB: not implemented") }
+    |          ^^^^^^^^
+712 |
+713 |       fn new_leaf(lo: K) -> Box<Node<K, V, FANOUT>> { panic!("STUB: not implemented") }
+    |          ^^^^^^^^
+714 |
+715 |       fn get<Q>(&self, key: &Q) -> Option<V>
+    |          ^^^
+...
+721 |       fn remove<Q>(&mut self, key: &Q) -> Option<V>
+    |          ^^^^^^
+...
+727 |       fn insert(&mut self, key: K, value: V) -> Option<V> { panic!("STUB: not implemented") }
+    |          ^^^^^^
+728 |
+729 |       fn cas<V2>(
+    |          ^^^
+...
+740 |       const fn should_merge(&self) -> bool {
+    |                ^^^^^^^^^^^^
+...
+747 |       const fn should_split(&self) -> bool {
+    |                ^^^^^^^^^^^^
+...
+754 |       const fn len(&self) -> usize {
+    |                ^^^
+...
+758 |       fn split(&mut self) -> BoxedAtomicPtr<K, V, FANOUT> { panic!("STUB: not implemented") }
+    |          ^^^^^
+759 |
+760 |       fn merge(&mut self, rhs: &NodeView<K, V, FANOUT>) { panic!("STUB: not implemented") }
+    |          ^^^^^
+761 |
+762 |       fn is_viable_parent_for(&self, possible_child: &NodeView<K, V, FANOUT>) -> bool { panic!("STUB: not implemented") }
+    |          ^^^^^^^^^^^^^^^^^^^^
+
+warning: `concurrent-map` (lib) generated 69 warnings (run `cargo fix --lib -p concurrent-map` to apply 53 suggestions)
+error: missing documentation for the crate
+   --> src/lib.rs:1:1
+    |
+  1 | / #![cfg_attr(
+  2 | |     test,
+  3 | |     deny(
+  4 | |         missing_docs,
+...   |
+897 | |     );
+898 | | }
+    | |_^
+    |
+note: the lint level is defined here
+   --> src/lib.rs:4:9
+    |
+  4 |         missing_docs,
+    |         ^^^^^^^^^^^^
+
+error: missing documentation for a struct
+   --> src/lib.rs:198:1
+    |
+198 | pub struct CasFailure<V> {
+    | ^^^^^^^^^^^^^^^^^^^^^^^^
+
+error: missing documentation for a struct field
+   --> src/lib.rs:200:5
+    |
+200 |     pub actual: Option<V>,
+    |     ^^^^^^^^^^^^^^^^^^^^^
+
+error: missing documentation for a struct field
+   --> src/lib.rs:202:5
+    |
+202 |     pub returned_new_value: Option<V>,
+    |     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+error: missing documentation for a trait
+   --> src/lib.rs:240:1
+    |
+240 | pub trait Minimum: Ord {
+    | ^^^^^^^^^^^^^^^^^^^^^^
+
+error: missing documentation for an associated constant
+   --> src/lib.rs:242:5
+    |
+242 |     const MIN: Self;
+    |     ^^^^^^^^^^^^^^^
+
+error: missing documentation for a trait
+   --> src/lib.rs:245:1
+    |
+245 | pub trait Maximum: Ord {
+    | ^^^^^^^^^^^^^^^^^^^^^^
+
+error: missing documentation for an associated constant
+   --> src/lib.rs:247:5
+    |
+247 |     const MAX: Self;
+    |     ^^^^^^^^^^^^^^^
+
+error: missing documentation for a struct
+   --> src/lib.rs:342:1
+    |
+342 | pub struct ConcurrentMap<K, V, const FANOUT: usize = 64, const LOCAL_GC_BUFFER_SIZE: usize = 128>
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+error: missing documentation for an associated function
+   --> src/lib.rs:410:5
+    |
+410 |     pub fn new() -> Self { panic!("STUB: not implemented") }
+    |     ^^^^^^^^^^^^^^^^^^^^
+
+error: missing documentation for a method
+   --> src/lib.rs:412:5
+    |
+412 | /     pub fn get<Q>(&self, key: &Q) -> Option<V>
+413 | |     where
+414 | |         K: Borrow<Q>,
+415 | |         Q: Ord + ?Sized,
+    | |________________________^
+
+error: missing documentation for a method
+   --> src/lib.rs:418:5
+    |
+418 | /     pub fn contains_key<Q>(&self, key: &Q) -> bool
+419 | |     where
+420 | |         K: Borrow<Q>,
+421 | |         Q: Ord + ?Sized,
+    | |________________________^
+
+error: missing documentation for a method
+   --> src/lib.rs:424:5
+    |
+424 | /     pub fn get_lt<Q>(&self, key: &Q) -> Option<(K, V)>
+425 | |     where
+426 | |         K: Borrow<Q>,
+427 | |         Q: ?Sized + Ord + PartialEq,
+    | |____________________________________^
+
+error: missing documentation for a method
+   --> src/lib.rs:430:5
+    |
+430 | /     pub fn get_lte<Q>(&self, key: &Q) -> Option<(K, V)>
+431 | |     where
+432 | |         K: Borrow<Q>,
+433 | |         Q: ?Sized + Ord + PartialEq,
+    | |____________________________________^
+
+error: missing documentation for a method
+   --> src/lib.rs:436:5
+    |
+436 | /     pub fn get_gt<Q>(&self, key: &Q) -> Option<(K, V)>
+437 | |     where
+438 | |         K: Borrow<Q>,
+439 | |         Q: ?Sized + Ord + PartialEq,
+    | |____________________________________^
+
+error: missing documentation for a method
+   --> src/lib.rs:442:5
+    |
+442 | /     pub fn get_gte<Q>(&self, key: &Q) -> Option<(K, V)>
+443 | |     where
+444 | |         K: Borrow<Q>,
+445 | |         Q: ?Sized + Ord + PartialEq,
+    | |____________________________________^
+
+error: missing documentation for a method
+   --> src/lib.rs:448:5
+    |
+448 |     pub fn first(&self) -> Option<(K, V)> { panic!("STUB: not implemented") }
+    |     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+error: missing documentation for a method
+   --> src/lib.rs:450:5
+    |
+450 | /     pub fn pop_first(&self) -> Option<(K, V)>
+451 | |     where
+452 | |         V: PartialEq,
+    | |_____________________^
+
+error: missing documentation for a method
+   --> src/lib.rs:455:5
+    |
+455 | /     pub fn pop_first_in_range<Q, R>(&self, range: R) -> Option<(K, V)>
+456 | |     where
+457 | |         R: std::ops::RangeBounds<Q> + Clone,
+458 | |         K: Borrow<Q>,
+459 | |         V: PartialEq,
+460 | |         Q: ?Sized + Ord + PartialEq,
+    | |____________________________________^
+
+error: missing documentation for a method
+   --> src/lib.rs:463:5
+    |
+463 |     pub fn last(&self) -> Option<(K, V)> { panic!("STUB: not implemented") }
+    |     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+error: missing documentation for a method
+   --> src/lib.rs:465:5
+    |
+465 | /     pub fn pop_last(&self) -> Option<(K, V)>
+466 | |     where
+467 | |         V: PartialEq,
+    | |_____________________^
+
+error: missing documentation for a method
+   --> src/lib.rs:470:5
+    |
+470 | /     pub fn pop_last_in_range<Q, R>(&self, range: R) -> Option<(K, V)>
+471 | |     where
+472 | |         R: std::ops::RangeBounds<Q> + Clone,
+473 | |         K: Borrow<Q>,
+474 | |         V: PartialEq,
+475 | |         Q: ?Sized + Ord + PartialEq,
+    | |____________________________________^
+
+error: missing documentation for a method
+   --> src/lib.rs:478:5
+    |
+478 |     pub fn insert(&self, key: K, value: V) -> Option<V> { panic!("STUB: not implemented") }
+    |     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+error: missing documentation for a method
+   --> src/lib.rs:480:5
+    |
+480 | /     pub fn remove<Q>(&self, key: &Q) -> Option<V>
+481 | |     where
+482 | |         K: Borrow<Q>,
+483 | |         Q: Ord + ?Sized,
+    | |________________________^
+
+error: missing documentation for a method
+   --> src/lib.rs:486:5
+    |
+486 | /     pub fn cas<VRef>(
+487 | |         &self,
+488 | |         key: K,
+489 | |         old: Option<&VRef>,
+...   |
+493 | |         V: Borrow<VRef>,
+494 | |         VRef: PartialEq + ?Sized,
+    | |_________________________________^
+
+error: missing documentation for a method
+   --> src/lib.rs:497:5
+    |
+497 |     pub fn len(&self) -> usize { panic!("STUB: not implemented") }
+    |     ^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+error: missing documentation for a method
+   --> src/lib.rs:499:5
+    |
+499 |     pub fn is_empty(&self) -> bool { panic!("STUB: not implemented") }
+    |     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+error: missing documentation for a method
+   --> src/lib.rs:501:5
+    |
+501 |     pub fn iter(&self) -> Iter<'_, K, V, FANOUT, LOCAL_GC_BUFFER_SIZE> { panic!("STUB: not implemented") }
+    |     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+error: missing documentation for a method
+   --> src/lib.rs:503:5
+    |
+503 | /     pub fn range<Q, R>(&self, range: R) -> Iter<'_, K, V, FANOUT, LOCAL_GC_BUFFER_SIZE, R, Q>
+504 | |     where
+505 | |         R: std::ops::RangeBounds<Q>,
+506 | |         K: Borrow<Q>,
+507 | |         Q: ?Sized + Ord + PartialEq,
+    | |____________________________________^
+
+error: missing documentation for a method
+   --> src/lib.rs:510:5
+    |
+510 | /     pub fn update_and_fetch<F>(&self, key: K, mut f: F) -> Option<V>
+511 | |     where
+512 | |         F: FnMut(Option<&V>) -> Option<V>,
+513 | |         V: PartialEq,
+    | |_____________________^
+
+error: missing documentation for a method
+   --> src/lib.rs:516:5
+    |
+516 | /     pub fn fetch_and_update<F>(&self, key: K, mut f: F) -> Option<V>
+517 | |     where
+518 | |         F: FnMut(Option<&V>) -> Option<V>,
+519 | |         V: PartialEq,
+    | |_____________________^
+
+error: missing documentation for a method
+   --> src/lib.rs:530:5
+    |
+530 |     pub fn fetch_min(&self, key: K, value: V) -> Option<V> { panic!("STUB: not implemented") }
+    |     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+error: missing documentation for a method
+   --> src/lib.rs:532:5
+    |
+532 |     pub fn fetch_max(&self, key: K, value: V) -> Option<V> { panic!("STUB: not implemented") }
+    |     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+error: missing documentation for a struct
+   --> src/lib.rs:535:1
+    |
+535 | / pub struct Iter<
+536 | |     'a,
+537 | |     K,
+538 | |     V,
+...   |
+542 | |     Q = K,
+543 | | > where
+    | |_^
+
+warning: `concurrent-map` (lib test) generated 69 warnings (69 duplicates)
+error: could not compile `concurrent-map` (lib test) due to 34 previous errors; 69 warnings emitted
+warning: build failed, waiting for other jobs to finish...

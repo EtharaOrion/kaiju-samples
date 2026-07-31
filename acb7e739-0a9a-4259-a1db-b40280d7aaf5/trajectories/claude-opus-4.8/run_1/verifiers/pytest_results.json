@@ -1,0 +1,62 @@
+{
+  "solution": {
+    "passed": 0,
+    "failed": 5,
+    "errors": 0,
+    "skipped": 0,
+    "collected": 5,
+    "status": "OK",
+    "detail": "============================== 5 failed in 0.04s ===============================",
+    "total": 5,
+    "pass_rate": 0.0,
+    "log": ""
+  },
+  "anchors": {
+    "golden": {
+      "passed": 5,
+      "failed": 0,
+      "errors": 0,
+      "skipped": 0,
+      "collected": 5,
+      "status": "OK",
+      "detail": "============================== 5 passed in 0.02s ===============================",
+      "total": 5,
+      "pass_rate": 1.0,
+      "log": ""
+    },
+    "stub": {
+      "passed": 0,
+      "failed": 5,
+      "errors": 0,
+      "skipped": 0,
+      "collected": 5,
+      "status": "OK",
+      "detail": "============================== 5 failed in 0.04s ===============================",
+      "total": 5,
+      "pass_rate": 0.0,
+      "log": ""
+    }
+  },
+  "analysis": {
+    "n_total": 5,
+    "n_sound": 5,
+    "sound_subset": [
+      "test_core_modules_have_substantive_bodies",
+      "test_generic_stub_marker_absent_everywhere",
+      "test_no_reachable_stub_panics",
+      "test_no_unreachable_loop_placeholders",
+      "test_scoped_thread_local_has_panic_safe_restore"
+    ],
+    "wrong_oracle_dropped": [],
+    "non_discriminating_dropped": [],
+    "inconclusive_on_stub": [],
+    "solution_pass_on_sound": 0.0,
+    "gap_vs_golden": 1.0,
+    "golden_status": "OK",
+    "stub_status": "OK",
+    "solution_status": "OK",
+    "infra_failures": [],
+    "stub_import_broken": false,
+    "stub_note": ""
+  }
+}

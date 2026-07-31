@@ -1,0 +1,189 @@
+{"Time":"2026-07-28T10:36:15.134542339Z","Action":"start","Package":"go.uber.org/goleak"}
+{"Time":"2026-07-28T10:36:15.136408126Z","Action":"run","Package":"go.uber.org/goleak","Test":"TestFind"}
+{"Time":"2026-07-28T10:36:15.136439417Z","Action":"output","Package":"go.uber.org/goleak","Test":"TestFind","Output":"=== RUN   TestFind\n"}
+{"Time":"2026-07-28T10:36:15.136448482Z","Action":"run","Package":"go.uber.org/goleak","Test":"TestFind/Should_find_no_leaks_by_default"}
+{"Time":"2026-07-28T10:36:15.136451919Z","Action":"output","Package":"go.uber.org/goleak","Test":"TestFind/Should_find_no_leaks_by_default","Output":"=== RUN   TestFind/Should_find_no_leaks_by_default\n"}
+{"Time":"2026-07-28T10:36:15.167579974Z","Action":"start","Package":"go.uber.org/goleak/internal/stack"}
+{"Time":"2026-07-28T10:36:15.169373927Z","Action":"run","Package":"go.uber.org/goleak/internal/stack","Test":"TestScanner"}
+{"Time":"2026-07-28T10:36:15.169406231Z","Action":"output","Package":"go.uber.org/goleak/internal/stack","Test":"TestScanner","Output":"=== RUN   TestScanner\n"}
+{"Time":"2026-07-28T10:36:15.169416907Z","Action":"output","Package":"go.uber.org/goleak/internal/stack","Test":"TestScanner","Output":"--- PASS: TestScanner (0.00s)\n"}
+{"Time":"2026-07-28T10:36:15.169420514Z","Action":"pass","Package":"go.uber.org/goleak/internal/stack","Test":"TestScanner","Elapsed":0}
+{"Time":"2026-07-28T10:36:15.169425157Z","Action":"run","Package":"go.uber.org/goleak/internal/stack","Test":"TestAll"}
+{"Time":"2026-07-28T10:36:15.169427505Z","Action":"output","Package":"go.uber.org/goleak/internal/stack","Test":"TestAll","Output":"=== RUN   TestAll\n"}
+{"Time":"2026-07-28T10:36:15.169595269Z","Action":"output","Package":"go.uber.org/goleak/internal/stack","Test":"TestAll","Output":"--- PASS: TestAll (0.00s)\n"}
+{"Time":"2026-07-28T10:36:15.16959891Z","Action":"pass","Package":"go.uber.org/goleak/internal/stack","Test":"TestAll","Elapsed":0}
+{"Time":"2026-07-28T10:36:15.169602746Z","Action":"run","Package":"go.uber.org/goleak/internal/stack","Test":"TestCurrent"}
+{"Time":"2026-07-28T10:36:15.169605064Z","Action":"output","Package":"go.uber.org/goleak/internal/stack","Test":"TestCurrent","Output":"=== RUN   TestCurrent\n"}
+{"Time":"2026-07-28T10:36:15.169646349Z","Action":"output","Package":"go.uber.org/goleak/internal/stack","Test":"TestCurrent","Output":"--- PASS: TestCurrent (0.00s)\n"}
+{"Time":"2026-07-28T10:36:15.169649391Z","Action":"pass","Package":"go.uber.org/goleak/internal/stack","Test":"TestCurrent","Elapsed":0}
+{"Time":"2026-07-28T10:36:15.169652512Z","Action":"run","Package":"go.uber.org/goleak/internal/stack","Test":"TestCurrentCreatedBy"}
+{"Time":"2026-07-28T10:36:15.169654739Z","Action":"output","Package":"go.uber.org/goleak/internal/stack","Test":"TestCurrentCreatedBy","Output":"=== RUN   TestCurrentCreatedBy\n"}
+{"Time":"2026-07-28T10:36:15.169680915Z","Action":"output","Package":"go.uber.org/goleak/internal/stack","Test":"TestCurrentCreatedBy","Output":"--- PASS: TestCurrentCreatedBy (0.00s)\n"}
+{"Time":"2026-07-28T10:36:15.169684592Z","Action":"pass","Package":"go.uber.org/goleak/internal/stack","Test":"TestCurrentCreatedBy","Elapsed":0}
+{"Time":"2026-07-28T10:36:15.169687069Z","Action":"run","Package":"go.uber.org/goleak/internal/stack","Test":"TestAllLargeStack"}
+{"Time":"2026-07-28T10:36:15.169688986Z","Action":"output","Package":"go.uber.org/goleak/internal/stack","Test":"TestAllLargeStack","Output":"=== RUN   TestAllLargeStack\n"}
+{"Time":"2026-07-28T10:36:15.204890165Z","Action":"output","Package":"go.uber.org/goleak/internal/stack","Test":"TestAllLargeStack","Output":"--- PASS: TestAllLargeStack (0.04s)\n"}
+{"Time":"2026-07-28T10:36:15.205010326Z","Action":"pass","Package":"go.uber.org/goleak/internal/stack","Test":"TestAllLargeStack","Elapsed":0.04}
+{"Time":"2026-07-28T10:36:15.205019443Z","Action":"run","Package":"go.uber.org/goleak/internal/stack","Test":"TestParseFuncName"}
+{"Time":"2026-07-28T10:36:15.205022239Z","Action":"output","Package":"go.uber.org/goleak/internal/stack","Test":"TestParseFuncName","Output":"=== RUN   TestParseFuncName\n"}
+{"Time":"2026-07-28T10:36:15.205034627Z","Action":"run","Package":"go.uber.org/goleak/internal/stack","Test":"TestParseFuncName/function"}
+{"Time":"2026-07-28T10:36:15.205037189Z","Action":"output","Package":"go.uber.org/goleak/internal/stack","Test":"TestParseFuncName/function","Output":"=== RUN   TestParseFuncName/function\n"}
+{"Time":"2026-07-28T10:36:15.205040314Z","Action":"output","Package":"go.uber.org/goleak/internal/stack","Test":"TestParseFuncName/function","Output":"--- PASS: TestParseFuncName/function (0.00s)\n"}
+{"Time":"2026-07-28T10:36:15.20504356Z","Action":"pass","Package":"go.uber.org/goleak/internal/stack","Test":"TestParseFuncName/function","Elapsed":0}
+{"Time":"2026-07-28T10:36:15.205045888Z","Action":"run","Package":"go.uber.org/goleak/internal/stack","Test":"TestParseFuncName/method"}
+{"Time":"2026-07-28T10:36:15.205047808Z","Action":"output","Package":"go.uber.org/goleak/internal/stack","Test":"TestParseFuncName/method","Output":"=== RUN   TestParseFuncName/method\n"}
+{"Time":"2026-07-28T10:36:15.205050291Z","Action":"output","Package":"go.uber.org/goleak/internal/stack","Test":"TestParseFuncName/method","Output":"--- PASS: TestParseFuncName/method (0.00s)\n"}
+{"Time":"2026-07-28T10:36:15.20505262Z","Action":"pass","Package":"go.uber.org/goleak/internal/stack","Test":"TestParseFuncName/method","Elapsed":0}
+{"Time":"2026-07-28T10:36:15.205054728Z","Action":"run","Package":"go.uber.org/goleak/internal/stack","Test":"TestParseFuncName/created_by"}
+{"Time":"2026-07-28T10:36:15.205056686Z","Action":"output","Package":"go.uber.org/goleak/internal/stack","Test":"TestParseFuncName/created_by","Output":"=== RUN   TestParseFuncName/created_by\n"}
+{"Time":"2026-07-28T10:36:15.205059157Z","Action":"output","Package":"go.uber.org/goleak/internal/stack","Test":"TestParseFuncName/created_by","Output":"--- PASS: TestParseFuncName/created_by (0.00s)\n"}
+{"Time":"2026-07-28T10:36:15.205061492Z","Action":"pass","Package":"go.uber.org/goleak/internal/stack","Test":"TestParseFuncName/created_by","Elapsed":0}
+{"Time":"2026-07-28T10:36:15.20506362Z","Action":"run","Package":"go.uber.org/goleak/internal/stack","Test":"TestParseFuncName/created_by/in_goroutine"}
+{"Time":"2026-07-28T10:36:15.205065526Z","Action":"output","Package":"go.uber.org/goleak/internal/stack","Test":"TestParseFuncName/created_by/in_goroutine","Output":"=== RUN   TestParseFuncName/created_by/in_goroutine\n"}
+{"Time":"2026-07-28T10:36:15.205068926Z","Action":"output","Package":"go.uber.org/goleak/internal/stack","Test":"TestParseFuncName/created_by/in_goroutine","Output":"--- PASS: TestParseFuncName/created_by/in_goroutine (0.00s)\n"}
+{"Time":"2026-07-28T10:36:15.205071451Z","Action":"pass","Package":"go.uber.org/goleak/internal/stack","Test":"TestParseFuncName/created_by/in_goroutine","Elapsed":0}
+{"Time":"2026-07-28T10:36:15.205073793Z","Action":"output","Package":"go.uber.org/goleak/internal/stack","Test":"TestParseFuncName","Output":"--- PASS: TestParseFuncName (0.00s)\n"}
+{"Time":"2026-07-28T10:36:15.205076127Z","Action":"pass","Package":"go.uber.org/goleak/internal/stack","Test":"TestParseFuncName","Elapsed":0}
+{"Time":"2026-07-28T10:36:15.205078358Z","Action":"run","Package":"go.uber.org/goleak/internal/stack","Test":"TestParseStack"}
+{"Time":"2026-07-28T10:36:15.205081133Z","Action":"output","Package":"go.uber.org/goleak/internal/stack","Test":"TestParseStack","Output":"=== RUN   TestParseStack\n"}
+{"Time":"2026-07-28T10:36:15.205084447Z","Action":"run","Package":"go.uber.org/goleak/internal/stack","Test":"TestParseStack/running"}
+{"Time":"2026-07-28T10:36:15.205086261Z","Action":"output","Package":"go.uber.org/goleak/internal/stack","Test":"TestParseStack/running","Output":"=== RUN   TestParseStack/running\n"}
+{"Time":"2026-07-28T10:36:15.205088629Z","Action":"output","Package":"go.uber.org/goleak/internal/stack","Test":"TestParseStack/running","Output":"--- PASS: TestParseStack/running (0.00s)\n"}
+{"Time":"2026-07-28T10:36:15.205090914Z","Action":"pass","Package":"go.uber.org/goleak/internal/stack","Test":"TestParseStack/running","Elapsed":0}
+{"Time":"2026-07-28T10:36:15.205095134Z","Action":"run","Package":"go.uber.org/goleak/internal/stack","Test":"TestParseStack/without_position"}
+{"Time":"2026-07-28T10:36:15.205097148Z","Action":"output","Package":"go.uber.org/goleak/internal/stack","Test":"TestParseStack/without_position","Output":"=== RUN   TestParseStack/without_position\n"}
+{"Time":"2026-07-28T10:36:15.205099553Z","Action":"output","Package":"go.uber.org/goleak/internal/stack","Test":"TestParseStack/without_position","Output":"--- PASS: TestParseStack/without_position (0.00s)\n"}
+{"Time":"2026-07-28T10:36:15.205101739Z","Action":"pass","Package":"go.uber.org/goleak/internal/stack","Test":"TestParseStack/without_position","Elapsed":0}
+{"Time":"2026-07-28T10:36:15.20510375Z","Action":"run","Package":"go.uber.org/goleak/internal/stack","Test":"TestParseStack/created_by"}
+{"Time":"2026-07-28T10:36:15.205105571Z","Action":"output","Package":"go.uber.org/goleak/internal/stack","Test":"TestParseStack/created_by","Output":"=== RUN   TestParseStack/created_by\n"}
+{"Time":"2026-07-28T10:36:15.2051082Z","Action":"output","Package":"go.uber.org/goleak/internal/stack","Test":"TestParseStack/created_by","Output":"--- PASS: TestParseStack/created_by (0.00s)\n"}
+{"Time":"2026-07-28T10:36:15.205110379Z","Action":"pass","Package":"go.uber.org/goleak/internal/stack","Test":"TestParseStack/created_by","Elapsed":0}
+{"Time":"2026-07-28T10:36:15.205112515Z","Action":"run","Package":"go.uber.org/goleak/internal/stack","Test":"TestParseStack/elided_frames"}
+{"Time":"2026-07-28T10:36:15.20511459Z","Action":"output","Package":"go.uber.org/goleak/internal/stack","Test":"TestParseStack/elided_frames","Output":"=== RUN   TestParseStack/elided_frames\n"}
+{"Time":"2026-07-28T10:36:15.205118437Z","Action":"output","Package":"go.uber.org/goleak/internal/stack","Test":"TestParseStack/elided_frames","Output":"--- PASS: TestParseStack/elided_frames (0.00s)\n"}
+{"Time":"2026-07-28T10:36:15.205120488Z","Action":"pass","Package":"go.uber.org/goleak/internal/stack","Test":"TestParseStack/elided_frames","Elapsed":0}
+{"Time":"2026-07-28T10:36:15.205122616Z","Action":"output","Package":"go.uber.org/goleak/internal/stack","Test":"TestParseStack","Output":"--- PASS: TestParseStack (0.00s)\n"}
+{"Time":"2026-07-28T10:36:15.205124545Z","Action":"pass","Package":"go.uber.org/goleak/internal/stack","Test":"TestParseStack","Elapsed":0}
+{"Time":"2026-07-28T10:36:15.205126623Z","Action":"run","Package":"go.uber.org/goleak/internal/stack","Test":"TestParseStackErrors"}
+{"Time":"2026-07-28T10:36:15.205128471Z","Action":"output","Package":"go.uber.org/goleak/internal/stack","Test":"TestParseStackErrors","Output":"=== RUN   TestParseStackErrors\n"}
+{"Time":"2026-07-28T10:36:15.205130568Z","Action":"run","Package":"go.uber.org/goleak/internal/stack","Test":"TestParseStackErrors/bad_goroutine_ID"}
+{"Time":"2026-07-28T10:36:15.205132386Z","Action":"output","Package":"go.uber.org/goleak/internal/stack","Test":"TestParseStackErrors/bad_goroutine_ID","Output":"=== RUN   TestParseStackErrors/bad_goroutine_ID\n"}
+{"Time":"2026-07-28T10:36:15.205134798Z","Action":"output","Package":"go.uber.org/goleak/internal/stack","Test":"TestParseStackErrors/bad_goroutine_ID","Output":"--- PASS: TestParseStackErrors/bad_goroutine_ID (0.00s)\n"}
+{"Time":"2026-07-28T10:36:15.205136957Z","Action":"pass","Package":"go.uber.org/goleak/internal/stack","Test":"TestParseStackErrors/bad_goroutine_ID","Elapsed":0}
+{"Time":"2026-07-28T10:36:15.205138836Z","Action":"run","Package":"go.uber.org/goleak/internal/stack","Test":"TestParseStackErrors/not_enough_parts"}
+{"Time":"2026-07-28T10:36:15.205141147Z","Action":"output","Package":"go.uber.org/goleak/internal/stack","Test":"TestParseStackErrors/not_enough_parts","Output":"=== RUN   TestParseStackErrors/not_enough_parts\n"}
+{"Time":"2026-07-28T10:36:15.2051435Z","Action":"output","Package":"go.uber.org/goleak/internal/stack","Test":"TestParseStackErrors/not_enough_parts","Output":"--- PASS: TestParseStackErrors/not_enough_parts (0.00s)\n"}
+{"Time":"2026-07-28T10:36:15.205145653Z","Action":"pass","Package":"go.uber.org/goleak/internal/stack","Test":"TestParseStackErrors/not_enough_parts","Elapsed":0}
+{"Time":"2026-07-28T10:36:15.205149704Z","Action":"run","Package":"go.uber.org/goleak/internal/stack","Test":"TestParseStackErrors/bad_function_name"}
+{"Time":"2026-07-28T10:36:15.205151795Z","Action":"output","Package":"go.uber.org/goleak/internal/stack","Test":"TestParseStackErrors/bad_function_name","Output":"=== RUN   TestParseStackErrors/bad_function_name\n"}
+{"Time":"2026-07-28T10:36:15.205154324Z","Action":"output","Package":"go.uber.org/goleak/internal/stack","Test":"TestParseStackErrors/bad_function_name","Output":"--- PASS: TestParseStackErrors/bad_function_name (0.00s)\n"}
+{"Time":"2026-07-28T10:36:15.205156458Z","Action":"pass","Package":"go.uber.org/goleak/internal/stack","Test":"TestParseStackErrors/bad_function_name","Elapsed":0}
+{"Time":"2026-07-28T10:36:15.205159011Z","Action":"output","Package":"go.uber.org/goleak/internal/stack","Test":"TestParseStackErrors","Output":"--- PASS: TestParseStackErrors (0.00s)\n"}
+{"Time":"2026-07-28T10:36:15.205161138Z","Action":"pass","Package":"go.uber.org/goleak/internal/stack","Test":"TestParseStackErrors","Elapsed":0}
+{"Time":"2026-07-28T10:36:15.205163131Z","Action":"run","Package":"go.uber.org/goleak/internal/stack","Test":"TestParseStackFixtures"}
+{"Time":"2026-07-28T10:36:15.205165021Z","Action":"output","Package":"go.uber.org/goleak/internal/stack","Test":"TestParseStackFixtures","Output":"=== RUN   TestParseStackFixtures\n"}
+{"Time":"2026-07-28T10:36:15.205167099Z","Action":"run","Package":"go.uber.org/goleak/internal/stack","Test":"TestParseStackFixtures/http.txt"}
+{"Time":"2026-07-28T10:36:15.205169082Z","Action":"output","Package":"go.uber.org/goleak/internal/stack","Test":"TestParseStackFixtures/http.txt","Output":"=== RUN   TestParseStackFixtures/http.txt\n"}
+{"Time":"2026-07-28T10:36:15.205172985Z","Action":"output","Package":"go.uber.org/goleak/internal/stack","Test":"TestParseStackFixtures/http.txt","Output":"--- PASS: TestParseStackFixtures/http.txt (0.00s)\n"}
+{"Time":"2026-07-28T10:36:15.205175183Z","Action":"pass","Package":"go.uber.org/goleak/internal/stack","Test":"TestParseStackFixtures/http.txt","Elapsed":0}
+{"Time":"2026-07-28T10:36:15.205177916Z","Action":"run","Package":"go.uber.org/goleak/internal/stack","Test":"TestParseStackFixtures/http.go1.20.txt"}
+{"Time":"2026-07-28T10:36:15.205179859Z","Action":"output","Package":"go.uber.org/goleak/internal/stack","Test":"TestParseStackFixtures/http.go1.20.txt","Output":"=== RUN   TestParseStackFixtures/http.go1.20.txt\n"}
+{"Time":"2026-07-28T10:36:15.205229392Z","Action":"output","Package":"go.uber.org/goleak/internal/stack","Test":"TestParseStackFixtures/http.go1.20.txt","Output":"--- PASS: TestParseStackFixtures/http.go1.20.txt (0.00s)\n"}
+{"Time":"2026-07-28T10:36:15.205231501Z","Action":"pass","Package":"go.uber.org/goleak/internal/stack","Test":"TestParseStackFixtures/http.go1.20.txt","Elapsed":0}
+{"Time":"2026-07-28T10:36:15.205234232Z","Action":"run","Package":"go.uber.org/goleak/internal/stack","Test":"TestParseStackFixtures/http.tracebackancestors.txt"}
+{"Time":"2026-07-28T10:36:15.205236117Z","Action":"output","Package":"go.uber.org/goleak/internal/stack","Test":"TestParseStackFixtures/http.tracebackancestors.txt","Output":"=== RUN   TestParseStackFixtures/http.tracebackancestors.txt\n"}
+{"Time":"2026-07-28T10:36:15.205300858Z","Action":"output","Package":"go.uber.org/goleak/internal/stack","Test":"TestParseStackFixtures/http.tracebackancestors.txt","Output":"--- PASS: TestParseStackFixtures/http.tracebackancestors.txt (0.00s)\n"}
+{"Time":"2026-07-28T10:36:15.205304214Z","Action":"pass","Package":"go.uber.org/goleak/internal/stack","Test":"TestParseStackFixtures/http.tracebackancestors.txt","Elapsed":0}
+{"Time":"2026-07-28T10:36:15.205306599Z","Action":"output","Package":"go.uber.org/goleak/internal/stack","Test":"TestParseStackFixtures","Output":"--- PASS: TestParseStackFixtures (0.00s)\n"}
+{"Time":"2026-07-28T10:36:15.205309275Z","Action":"pass","Package":"go.uber.org/goleak/internal/stack","Test":"TestParseStackFixtures","Elapsed":0}
+{"Time":"2026-07-28T10:36:15.205313257Z","Action":"output","Package":"go.uber.org/goleak/internal/stack","Output":"PASS\n"}
+{"Time":"2026-07-28T10:36:15.206577437Z","Action":"output","Package":"go.uber.org/goleak/internal/stack","Output":"ok  \tgo.uber.org/goleak/internal/stack\t0.039s\n"}
+{"Time":"2026-07-28T10:36:15.206593228Z","Action":"pass","Package":"go.uber.org/goleak/internal/stack","Elapsed":0.039}
+{"Time":"2026-07-28T10:36:16.091332842Z","Action":"output","Package":"go.uber.org/goleak","Test":"TestFind/Should_find_no_leaks_by_default","Output":"    leaks_test.go:44: \n"}
+{"Time":"2026-07-28T10:36:16.091395092Z","Action":"output","Package":"go.uber.org/goleak","Test":"TestFind/Should_find_no_leaks_by_default","Output":"        \tError Trace:\t/tmp/commit0-inplace-hurh0ih2/tree/leaks_test.go:44\n"}
+{"Time":"2026-07-28T10:36:16.091399315Z","Action":"output","Package":"go.uber.org/goleak","Test":"TestFind/Should_find_no_leaks_by_default","Output":"        \tError:      \tReceived unexpected error:\n"}
+{"Time":"2026-07-28T10:36:16.091402807Z","Action":"output","Package":"go.uber.org/goleak","Test":"TestFind/Should_find_no_leaks_by_default","Output":"        \t            \tfound unexpected goroutines:\n"}
+{"Time":"2026-07-28T10:36:16.091405565Z","Action":"output","Package":"go.uber.org/goleak","Test":"TestFind/Should_find_no_leaks_by_default","Output":"        \t            \t[Goroutine 1 in state chan receive, with testing.(*T).Run on top of the stack:\n"}
+{"Time":"2026-07-28T10:36:16.091409365Z","Action":"output","Package":"go.uber.org/goleak","Test":"TestFind/Should_find_no_leaks_by_default","Output":"        \t            \ttesting.(*T).Run(0x4000102e00, {0x23cda5?, 0x4000185b38?}, 0x253170)\n"}
+{"Time":"2026-07-28T10:36:16.091413448Z","Action":"output","Package":"go.uber.org/goleak","Test":"TestFind/Should_find_no_leaks_by_default","Output":"        \t            \t\t/usr/local/go/src/testing/testing.go:2005 +0x378\n"}
+{"Time":"2026-07-28T10:36:16.09141582Z","Action":"output","Package":"go.uber.org/goleak","Test":"TestFind/Should_find_no_leaks_by_default","Output":"        \t            \ttesting.runTests.func1(0x4000102e00)\n"}
+{"Time":"2026-07-28T10:36:16.09141826Z","Action":"output","Package":"go.uber.org/goleak","Test":"TestFind/Should_find_no_leaks_by_default","Output":"        \t            \t\t/usr/local/go/src/testing/testing.go:2477 +0x38\n"}
+{"Time":"2026-07-28T10:36:16.091420226Z","Action":"output","Package":"go.uber.org/goleak","Test":"TestFind/Should_find_no_leaks_by_default","Output":"        \t            \ttesting.tRunner(0x4000102e00, 0x4000185c68)\n"}
+{"Time":"2026-07-28T10:36:16.091422485Z","Action":"output","Package":"go.uber.org/goleak","Test":"TestFind/Should_find_no_leaks_by_default","Output":"        \t            \t\t/usr/local/go/src/testing/testing.go:1934 +0xc8\n"}
+{"Time":"2026-07-28T10:36:16.091424791Z","Action":"output","Package":"go.uber.org/goleak","Test":"TestFind/Should_find_no_leaks_by_default","Output":"        \t            \ttesting.runTests(0x4000120360, {0x4308e0, 0xb, 0xb}, {0x4000126580?, 0x7?, 0x4380a0?})\n"}
+{"Time":"2026-07-28T10:36:16.091428003Z","Action":"output","Package":"go.uber.org/goleak","Test":"TestFind/Should_find_no_leaks_by_default","Output":"        \t            \t\t/usr/local/go/src/testing/testing.go:2475 +0x3b8\n"}
+{"Time":"2026-07-28T10:36:16.091430116Z","Action":"output","Package":"go.uber.org/goleak","Test":"TestFind/Should_find_no_leaks_by_default","Output":"        \t            \ttesting.(*M).Run(0x400011f0e0)\n"}
+{"Time":"2026-07-28T10:36:16.091435289Z","Action":"output","Package":"go.uber.org/goleak","Test":"TestFind/Should_find_no_leaks_by_default","Output":"        \t            \t\t/usr/local/go/src/testing/testing.go:2337 +0x530\n"}
+{"Time":"2026-07-28T10:36:16.091437353Z","Action":"output","Package":"go.uber.org/goleak","Test":"TestFind/Should_find_no_leaks_by_default","Output":"        \t            \tmain.main()\n"}
+{"Time":"2026-07-28T10:36:16.091439794Z","Action":"output","Package":"go.uber.org/goleak","Test":"TestFind/Should_find_no_leaks_by_default","Output":"        \t            \t\t_testmain.go:67 +0x80\n"}
+{"Time":"2026-07-28T10:36:16.091447502Z","Action":"output","Package":"go.uber.org/goleak","Test":"TestFind/Should_find_no_leaks_by_default","Output":"        \t            \t Goroutine 20 in state chan receive, with testing.(*T).Run on top of the stack:\n"}
+{"Time":"2026-07-28T10:36:16.091449674Z","Action":"output","Package":"go.uber.org/goleak","Test":"TestFind/Should_find_no_leaks_by_default","Output":"        \t            \ttesting.(*T).Run(0x4000102fc0, {0x245062?, 0x4000074f58?}, 0x2532a8)\n"}
+{"Time":"2026-07-28T10:36:16.091451725Z","Action":"output","Package":"go.uber.org/goleak","Test":"TestFind/Should_find_no_leaks_by_default","Output":"        \t            \t\t/usr/local/go/src/testing/testing.go:2005 +0x378\n"}
+{"Time":"2026-07-28T10:36:16.091453747Z","Action":"output","Package":"go.uber.org/goleak","Test":"TestFind/Should_find_no_leaks_by_default","Output":"        \t            \tgo.uber.org/goleak.TestFind(0x4000102fc0)\n"}
+{"Time":"2026-07-28T10:36:16.091455785Z","Action":"output","Package":"go.uber.org/goleak","Test":"TestFind/Should_find_no_leaks_by_default","Output":"        \t            \t\t/tmp/commit0-inplace-hurh0ih2/tree/leaks_test.go:43 +0x34\n"}
+{"Time":"2026-07-28T10:36:16.091457978Z","Action":"output","Package":"go.uber.org/goleak","Test":"TestFind/Should_find_no_leaks_by_default","Output":"        \t            \ttesting.tRunner(0x4000102fc0, 0x253170)\n"}
+{"Time":"2026-07-28T10:36:16.09146002Z","Action":"output","Package":"go.uber.org/goleak","Test":"TestFind/Should_find_no_leaks_by_default","Output":"        \t            \t\t/usr/local/go/src/testing/testing.go:1934 +0xc8\n"}
+{"Time":"2026-07-28T10:36:16.09146209Z","Action":"output","Package":"go.uber.org/goleak","Test":"TestFind/Should_find_no_leaks_by_default","Output":"        \t            \tcreated by testing.(*T).Run in goroutine 1\n"}
+{"Time":"2026-07-28T10:36:16.091464091Z","Action":"output","Package":"go.uber.org/goleak","Test":"TestFind/Should_find_no_leaks_by_default","Output":"        \t            \t\t/usr/local/go/src/testing/testing.go:1997 +0x364\n"}
+{"Time":"2026-07-28T10:36:16.091466043Z","Action":"output","Package":"go.uber.org/goleak","Test":"TestFind/Should_find_no_leaks_by_default","Output":"        \t            \t]\n"}
+{"Time":"2026-07-28T10:36:16.091468009Z","Action":"output","Package":"go.uber.org/goleak","Test":"TestFind/Should_find_no_leaks_by_default","Output":"        \tTest:       \tTestFind/Should_find_no_leaks_by_default\n"}
+{"Time":"2026-07-28T10:36:16.091474266Z","Action":"output","Package":"go.uber.org/goleak","Test":"TestFind/Should_find_no_leaks_by_default","Output":"--- FAIL: TestFind/Should_find_no_leaks_by_default (0.95s)\n"}
+{"Time":"2026-07-28T10:36:16.091478558Z","Action":"fail","Package":"go.uber.org/goleak","Test":"TestFind/Should_find_no_leaks_by_default","Elapsed":0.95}
+{"Time":"2026-07-28T10:36:16.09148296Z","Action":"run","Package":"go.uber.org/goleak","Test":"TestFind/Find_leaks_with_leaked_goroutine"}
+{"Time":"2026-07-28T10:36:16.091485394Z","Action":"output","Package":"go.uber.org/goleak","Test":"TestFind/Find_leaks_with_leaked_goroutine","Output":"=== RUN   TestFind/Find_leaks_with_leaked_goroutine\n"}
+{"Time":"2026-07-28T10:36:17.068420523Z","Action":"output","Package":"go.uber.org/goleak","Test":"TestFind/Find_leaks_with_leaked_goroutine","Output":"    leaks_test.go:56: \n"}
+{"Time":"2026-07-28T10:36:17.068457761Z","Action":"output","Package":"go.uber.org/goleak","Test":"TestFind/Find_leaks_with_leaked_goroutine","Output":"        \tError Trace:\t/tmp/commit0-inplace-hurh0ih2/tree/leaks_test.go:56\n"}
+{"Time":"2026-07-28T10:36:17.068465387Z","Action":"output","Package":"go.uber.org/goleak","Test":"TestFind/Find_leaks_with_leaked_goroutine","Output":"        \tError:      \tReceived unexpected error:\n"}
+{"Time":"2026-07-28T10:36:17.06846919Z","Action":"output","Package":"go.uber.org/goleak","Test":"TestFind/Find_leaks_with_leaked_goroutine","Output":"        \t            \tfound unexpected goroutines:\n"}
+{"Time":"2026-07-28T10:36:17.068479162Z","Action":"output","Package":"go.uber.org/goleak","Test":"TestFind/Find_leaks_with_leaked_goroutine","Output":"        \t            \t[Goroutine 1 in state chan receive, with testing.(*T).Run on top of the stack:\n"}
+{"Time":"2026-07-28T10:36:17.06848311Z","Action":"output","Package":"go.uber.org/goleak","Test":"TestFind/Find_leaks_with_leaked_goroutine","Output":"        \t            \ttesting.(*T).Run(0x4000102e00, {0x23cda5?, 0x4000185b38?}, 0x253170)\n"}
+{"Time":"2026-07-28T10:36:17.068485693Z","Action":"output","Package":"go.uber.org/goleak","Test":"TestFind/Find_leaks_with_leaked_goroutine","Output":"        \t            \t\t/usr/local/go/src/testing/testing.go:2005 +0x378\n"}
+{"Time":"2026-07-28T10:36:17.068487982Z","Action":"output","Package":"go.uber.org/goleak","Test":"TestFind/Find_leaks_with_leaked_goroutine","Output":"        \t            \ttesting.runTests.func1(0x4000102e00)\n"}
+{"Time":"2026-07-28T10:36:17.068491047Z","Action":"output","Package":"go.uber.org/goleak","Test":"TestFind/Find_leaks_with_leaked_goroutine","Output":"        \t            \t\t/usr/local/go/src/testing/testing.go:2477 +0x38\n"}
+{"Time":"2026-07-28T10:36:17.068493275Z","Action":"output","Package":"go.uber.org/goleak","Test":"TestFind/Find_leaks_with_leaked_goroutine","Output":"        \t            \ttesting.tRunner(0x4000102e00, 0x4000185c68)\n"}
+{"Time":"2026-07-28T10:36:17.068495565Z","Action":"output","Package":"go.uber.org/goleak","Test":"TestFind/Find_leaks_with_leaked_goroutine","Output":"        \t            \t\t/usr/local/go/src/testing/testing.go:1934 +0xc8\n"}
+{"Time":"2026-07-28T10:36:17.068497736Z","Action":"output","Package":"go.uber.org/goleak","Test":"TestFind/Find_leaks_with_leaked_goroutine","Output":"        \t            \ttesting.runTests(0x4000120360, {0x4308e0, 0xb, 0xb}, {0x4000126580?, 0x7?, 0x4380a0?})\n"}
+{"Time":"2026-07-28T10:36:17.068500083Z","Action":"output","Package":"go.uber.org/goleak","Test":"TestFind/Find_leaks_with_leaked_goroutine","Output":"        \t            \t\t/usr/local/go/src/testing/testing.go:2475 +0x3b8\n"}
+{"Time":"2026-07-28T10:36:17.068502067Z","Action":"output","Package":"go.uber.org/goleak","Test":"TestFind/Find_leaks_with_leaked_goroutine","Output":"        \t            \ttesting.(*M).Run(0x400011f0e0)\n"}
+{"Time":"2026-07-28T10:36:17.068504216Z","Action":"output","Package":"go.uber.org/goleak","Test":"TestFind/Find_leaks_with_leaked_goroutine","Output":"        \t            \t\t/usr/local/go/src/testing/testing.go:2337 +0x530\n"}
+{"Time":"2026-07-28T10:36:17.06850622Z","Action":"output","Package":"go.uber.org/goleak","Test":"TestFind/Find_leaks_with_leaked_goroutine","Output":"        \t            \tmain.main()\n"}
+{"Time":"2026-07-28T10:36:17.068508816Z","Action":"output","Package":"go.uber.org/goleak","Test":"TestFind/Find_leaks_with_leaked_goroutine","Output":"        \t            \t\t_testmain.go:67 +0x80\n"}
+{"Time":"2026-07-28T10:36:17.068511031Z","Action":"output","Package":"go.uber.org/goleak","Test":"TestFind/Find_leaks_with_leaked_goroutine","Output":"        \t            \t Goroutine 20 in state chan receive, with testing.(*T).Run on top of the stack:\n"}
+{"Time":"2026-07-28T10:36:17.068513175Z","Action":"output","Package":"go.uber.org/goleak","Test":"TestFind/Find_leaks_with_leaked_goroutine","Output":"        \t            \ttesting.(*T).Run(0x4000102fc0, {0x2455b8?, 0x4000074f58?}, 0x2532b0)\n"}
+{"Time":"2026-07-28T10:36:17.068515275Z","Action":"output","Package":"go.uber.org/goleak","Test":"TestFind/Find_leaks_with_leaked_goroutine","Output":"        \t            \t\t/usr/local/go/src/testing/testing.go:2005 +0x378\n"}
+{"Time":"2026-07-28T10:36:17.068517425Z","Action":"output","Package":"go.uber.org/goleak","Test":"TestFind/Find_leaks_with_leaked_goroutine","Output":"        \t            \tgo.uber.org/goleak.TestFind(0x4000102fc0)\n"}
+{"Time":"2026-07-28T10:36:17.068519411Z","Action":"output","Package":"go.uber.org/goleak","Test":"TestFind/Find_leaks_with_leaked_goroutine","Output":"        \t            \t\t/tmp/commit0-inplace-hurh0ih2/tree/leaks_test.go:47 +0x50\n"}
+{"Time":"2026-07-28T10:36:17.06852546Z","Action":"output","Package":"go.uber.org/goleak","Test":"TestFind/Find_leaks_with_leaked_goroutine","Output":"        \t            \ttesting.tRunner(0x4000102fc0, 0x253170)\n"}
+{"Time":"2026-07-28T10:36:17.068527592Z","Action":"output","Package":"go.uber.org/goleak","Test":"TestFind/Find_leaks_with_leaked_goroutine","Output":"        \t            \t\t/usr/local/go/src/testing/testing.go:1934 +0xc8\n"}
+{"Time":"2026-07-28T10:36:17.068529718Z","Action":"output","Package":"go.uber.org/goleak","Test":"TestFind/Find_leaks_with_leaked_goroutine","Output":"        \t            \tcreated by testing.(*T).Run in goroutine 1\n"}
+{"Time":"2026-07-28T10:36:17.068531698Z","Action":"output","Package":"go.uber.org/goleak","Test":"TestFind/Find_leaks_with_leaked_goroutine","Output":"        \t            \t\t/usr/local/go/src/testing/testing.go:1997 +0x364\n"}
+{"Time":"2026-07-28T10:36:17.068533734Z","Action":"output","Package":"go.uber.org/goleak","Test":"TestFind/Find_leaks_with_leaked_goroutine","Output":"        \t            \t]\n"}
+{"Time":"2026-07-28T10:36:17.068535931Z","Action":"output","Package":"go.uber.org/goleak","Test":"TestFind/Find_leaks_with_leaked_goroutine","Output":"        \tTest:       \tTestFind/Find_leaks_with_leaked_goroutine\n"}
+{"Time":"2026-07-28T10:36:17.068538063Z","Action":"output","Package":"go.uber.org/goleak","Test":"TestFind/Find_leaks_with_leaked_goroutine","Output":"        \tMessages:   \tShould find no leaks by default\n"}
+{"Time":"2026-07-28T10:36:17.068547006Z","Action":"output","Package":"go.uber.org/goleak","Test":"TestFind/Find_leaks_with_leaked_goroutine","Output":"--- FAIL: TestFind/Find_leaks_with_leaked_goroutine (0.98s)\n"}
+{"Time":"2026-07-28T10:36:17.068549766Z","Action":"fail","Package":"go.uber.org/goleak","Test":"TestFind/Find_leaks_with_leaked_goroutine","Elapsed":0.98}
+{"Time":"2026-07-28T10:36:17.068555959Z","Action":"run","Package":"go.uber.org/goleak","Test":"TestFind/Find_can't_take_in_Cleanup_option"}
+{"Time":"2026-07-28T10:36:17.068558569Z","Action":"output","Package":"go.uber.org/goleak","Test":"TestFind/Find_can't_take_in_Cleanup_option","Output":"=== RUN   TestFind/Find_can't_take_in_Cleanup_option\n"}
+{"Time":"2026-07-28T10:36:17.068562299Z","Action":"output","Package":"go.uber.org/goleak","Test":"TestFind/Find_can't_take_in_Cleanup_option","Output":"--- FAIL: TestFind/Find_can't_take_in_Cleanup_option (0.00s)\n"}
+{"Time":"2026-07-28T10:36:17.068565Z","Action":"fail","Package":"go.uber.org/goleak","Test":"TestFind/Find_can't_take_in_Cleanup_option","Elapsed":0}
+{"Time":"2026-07-28T10:36:17.068567236Z","Action":"output","Package":"go.uber.org/goleak","Test":"TestFind","Output":"--- FAIL: TestFind (1.93s)\n"}
+{"Time":"2026-07-28T10:36:17.071643439Z","Action":"output","Package":"go.uber.org/goleak","Test":"TestFind","Output":"panic: Cleanup can only be passed to VerifyNone or VerifyTestMain [recovered, repanicked]\n"}
+{"Time":"2026-07-28T10:36:17.071646075Z","Action":"output","Package":"go.uber.org/goleak","Test":"TestFind","Output":"\n"}
+{"Time":"2026-07-28T10:36:17.071648755Z","Action":"output","Package":"go.uber.org/goleak","Test":"TestFind","Output":"goroutine 38 [running]:\n"}
+{"Time":"2026-07-28T10:36:17.071651717Z","Action":"output","Package":"go.uber.org/goleak","Test":"TestFind","Output":"testing.tRunner.func1.2({0x1eaea0, 0x295360})\n"}
+{"Time":"2026-07-28T10:36:17.071654095Z","Action":"output","Package":"go.uber.org/goleak","Test":"TestFind","Output":"\t/usr/local/go/src/testing/testing.go:1872 +0x190\n"}
+{"Time":"2026-07-28T10:36:17.071656178Z","Action":"output","Package":"go.uber.org/goleak","Test":"TestFind","Output":"testing.tRunner.func1()\n"}
+{"Time":"2026-07-28T10:36:17.071658222Z","Action":"output","Package":"go.uber.org/goleak","Test":"TestFind","Output":"\t/usr/local/go/src/testing/testing.go:1875 +0x31c\n"}
+{"Time":"2026-07-28T10:36:17.071661092Z","Action":"output","Package":"go.uber.org/goleak","Test":"TestFind","Output":"panic({0x1eaea0?, 0x295360?})\n"}
+{"Time":"2026-07-28T10:36:17.071665404Z","Action":"output","Package":"go.uber.org/goleak","Test":"TestFind","Output":"\t/usr/local/go/src/runtime/panic.go:783 +0x120\n"}
+{"Time":"2026-07-28T10:36:17.071668296Z","Action":"output","Package":"go.uber.org/goleak","Test":"TestFind","Output":"go.uber.org/goleak.Find({0x4000079f40?, 0xfeeac?, 0x4000079f38?})\n"}
+{"Time":"2026-07-28T10:36:17.071670202Z","Action":"output","Package":"go.uber.org/goleak","Test":"TestFind","Output":"\t/tmp/commit0-inplace-hurh0ih2/tree/leaks.go:54 +0x4c\n"}
+{"Time":"2026-07-28T10:36:17.071672702Z","Action":"output","Package":"go.uber.org/goleak","Test":"TestFind","Output":"go.uber.org/goleak.TestFind.func3(0x4000482a80)\n"}
+{"Time":"2026-07-28T10:36:17.071674517Z","Action":"output","Package":"go.uber.org/goleak","Test":"TestFind","Output":"\t/tmp/commit0-inplace-hurh0ih2/tree/leaks_test.go:60 +0xb4\n"}
+{"Time":"2026-07-28T10:36:17.07167697Z","Action":"output","Package":"go.uber.org/goleak","Test":"TestFind","Output":"testing.tRunner(0x4000482a80, 0x2532b8)\n"}
+{"Time":"2026-07-28T10:36:17.071679599Z","Action":"output","Package":"go.uber.org/goleak","Test":"TestFind","Output":"\t/usr/local/go/src/testing/testing.go:1934 +0xc8\n"}
+{"Time":"2026-07-28T10:36:17.071681422Z","Action":"output","Package":"go.uber.org/goleak","Test":"TestFind","Output":"created by testing.(*T).Run in goroutine 20\n"}
+{"Time":"2026-07-28T10:36:17.071683388Z","Action":"output","Package":"go.uber.org/goleak","Test":"TestFind","Output":"\t/usr/local/go/src/testing/testing.go:1997 +0x364\n"}
+{"Time":"2026-07-28T10:36:17.072595783Z","Action":"fail","Package":"go.uber.org/goleak","Test":"TestFind","Elapsed":1.93}
+{"Time":"2026-07-28T10:36:17.072615164Z","Action":"output","Package":"go.uber.org/goleak","Output":"FAIL\tgo.uber.org/goleak\t1.938s\n"}
+{"Time":"2026-07-28T10:36:17.072622143Z","Action":"fail","Package":"go.uber.org/goleak","Elapsed":1.938}

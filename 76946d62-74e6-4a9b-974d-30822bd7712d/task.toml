@@ -1,0 +1,34 @@
+schema_version = "1.3"
+source = "commit0"
+
+[task]
+name = "commit-0/css-select"
+description = "commit0 from-scratch implementation task for fb55/css-select."
+keywords = ["commit0", "code-generation", "typescript", "swe"]
+
+[metadata]
+category = "code-generation"
+difficulty = "hard"
+original_repo = "Zahgon/css-select"
+instance_id = "commit-0/css-select"
+base_commit = "c5b5062737a4ef564f752ae1e74313065f230e30"
+reference_commit = "b20cf8def741d8a6064cecbad7b1dcf3099a72f6"
+src_dir = "src"
+node_version = "22"
+test_mode = "official_test_ids"
+n_test_ids = 204
+
+[agent]
+timeout_sec = 1800.0
+
+[verifier]
+timeout_sec = 1800.0
+
+[environment]
+docker_image = "426628337772.dkr.ecr.ap-south-1.amazonaws.com/kaiju_q2:typescript_fb55_css_select_c5b5062"
+build_timeout_sec = 1800.0
+os = "linux"
+cpus = 2
+memory_mb = 4096
+network_mode = "public"
+workdir = "/testbed"

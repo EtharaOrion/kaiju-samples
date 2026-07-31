@@ -1,0 +1,430 @@
+{
+  "model": "openai/gpt-5.5-2026-04-23",
+  "ok": true,
+  "verdicts": [
+    {
+      "criterion_id": "bb.reasoning_faithfulness",
+      "passed": false,
+      "evidence": "\u201cTo reduce risk and since the REPL tests are #[ignore]d, I'll keep stream unused\u201d vs final code \u201cstream.send_msg(&Message::new(Inst::Execute, ...))\u201d",
+      "justification": "The stated plan to avoid using the REPL stream is inconsistent with the final implementation that builds and uses the stream protocol."
+    },
+    {
+      "criterion_id": "bb.stage_legitimacy",
+      "passed": false,
+      "evidence": "Large lint-refine stage repeatedly reads unrelated files such as \u201ccrates/els/call_hierarchy.rs\u201d, \u201ccrates/erg_common/cache.rs\u201d, and many compiler/parser files.",
+      "justification": "The refinement stage appears dominated by unrelated lint churn rather than focused feedback-responsive work on the stubbed functionality."
+    },
+    {
+      "criterion_id": "ts.inst-decode-table",
+      "passed": true,
+      "evidence": "match v { 0x01 => Inst::Print, 0x02 => Inst::Load, 0x03 => Inst::Exception, 0x04 => Inst::Initialize, 0x05 => Inst::Exit, 0x06 => Inst::Execute, _ => Inst::Unknown }",
+      "justification": "The conversion table exactly matches the required instruction byte mapping."
+    },
+    {
+      "criterion_id": "ts.message-size-clamp",
+      "passed": true,
+      "evidence": "if d.len() > usize::from(u16::MAX) { eprintln!(\"Warning: length truncated to 65535\"); u16::MAX } else { d.len() as u16 }",
+      "justification": "Message construction explicitly clamps oversized payload lengths to u16::MAX with a warning and len returns size as usize."
+    },
+    {
+      "criterion_id": "ts.send-wire-format",
+      "passed": true,
+      "evidence": "write_buf.extend((msg.inst as u8).to_be_bytes()); write_buf.extend((msg.size).to_be_bytes()); write_buf.extend_from_slice(&msg.data.clone().unwrap_or_default());",
+      "justification": "The serializer writes instruction, two-byte big-endian size, then payload bytes in the required order."
+    },
+    {
+      "criterion_id": "ts.recv-read-exact",
+      "passed": true,
+      "evidence": "self.stream.read_exact(&mut inst_buf)?; ... self.stream.read_exact(&mut size_buf)?; ... if data_size == 0 { return Ok(Message::new(inst, None)); } ... self.stream.read_exact(&mut data_buf)?;",
+      "justification": "The receiver uses exact reads for each field, handles zero-size payloads, decodes the instruction, and propagates I/O errors."
+    },
+    {
+      "criterion_id": "ts.free-port",
+      "passed": true,
+      "evidence": "TcpListener::bind(socket).and_then(|listener| listener.local_addr()).map(|sock_addr| sock_addr.port())",
+      "justification": "The helper binds localhost port 0 and returns the assigned local port."
+    },
+    {
+      "criterion_id": "ts.vm-new-repl",
+      "passed": false,
+      "evidence": ".replace(\"__MODULE__\", &cfg.dump_filename().replace('/', \".\"))",
+      "justification": "The REPL construction is mostly present, but the module-name substitution only converts forward slashes and does not clearly handle all path separators as required."
+    },
+    {
+      "criterion_id": "ts.runnable-accessors",
+      "passed": true,
+      "evidence": "fn cfg(&self) -> &ErgConfig { &self.compiler.cfg } ... fn initialize(&mut self) { self.compiler.initialize(); } ... fn clear(&mut self) { self.compiler.clear(); }",
+      "justification": "The accessors expose the compiler config and lifecycle methods delegate to the compiler."
+    },
+    {
+      "criterion_id": "ts.exec-exit-status",
+      "passed": true,
+      "evidence": "let src = self.cfg_mut().input.read(); let art = self.compiler.compile(src, \"exec\") ... art.warns.write_all_to(&mut self.cfg_mut().output); let stat = art.object.exec(self.cfg()).expect(\"failed to execute\"); let stat = ExitStatus::new(stat.code().unwrap_or(0), art.warns.len(), 0);",
+      "justification": "Batch execution reads input, compiles in exec mode, writes warnings, executes the object, and propagates the child exit code with warning count."
+    },
+    {
+      "criterion_id": "ts.eval-dispatch",
+      "passed": true,
+      "evidence": "send_msg(&Message::new(Inst::Execute, Some(code.into_script(...).into_bytes()))) ... match msg.inst { Inst::Exception => ... system_exit(), Inst::Initialize => { self.compiler.initialize_generator(); ... }, Inst::Print => ..., Inst::Exit => err_handle!(...), Inst::Load | Inst::Execute | Inst::Unknown => err_handle!(...) }",
+      "justification": "Eval compiles, sends generated script bytes to the server, receives one response, and dispatches each instruction with distinct semantics."
+    },
+    {
+      "criterion_id": "ts.eval-none-trim-type",
+      "passed": true,
+      "evidence": "res.push_str(&data); ... if res.ends_with(\"None\") { res.truncate(res.len() - 5); } ... if self.cfg().show_type { res.push_str(\": \"); ... if let Some(Expr::Def(def)) = last { res.push_str(&format!(\" ({})\", def.sig.ident())); } }",
+      "justification": "Eval appends result text to warnings, strips trailing None, and adds type/definition information when requested."
+    },
+    {
+      "criterion_id": "ts.expect-block",
+      "passed": true,
+      "evidence": "filter(|e| e.core().kind == ErrorKind::ExpectNextLine) ... return BlockKind::from(kind.as_str()); ... any(|err| err.core.main_message.contains(\"\\\"\\\"\\\"\")) { return BlockKind::MultiLineStr; } ... if src.contains(\"Class\") { return BlockKind::ClassDef; }",
+      "justification": "Block classification parses input and handles ExpectNextLine, unterminated triple quotes, other errors, and class definitions as required."
+    },
+    {
+      "criterion_id": "ts.package-manager-run",
+      "passed": true,
+      "evidence": "if Command::new(\"poise\").arg(\"--version\").output().is_err() { eprintln!(\"Error: poise is not installed...\"); return ExitStatus::ERR1; } ... stdin(Stdio::inherit()).stdout(Stdio::inherit()).stderr(Stdio::inherit()).args(cfg.runtime_args.as_ref()).output()",
+      "justification": "The package manager runner checks for poise, reports a nonzero error if missing, and otherwise invokes it with inherited stdio and runtime arguments."
+    }
+  ],
+  "anchors": {
+    "golden": {
+      "model": "openai/gpt-5.5-2026-04-23",
+      "reasoning_effort": "high",
+      "ok": true,
+      "raw_verdicts": 18,
+      "response_chars": 8781,
+      "thinking": "",
+      "raw_response": "[\n  {\n    \"criterion_id\": \"bb.intent_fidelity\",\n    \"verdict\": \"fail\",\n    \"evidence\": \"fn run() { let cfg = ErgConfig::parse(); let stat = match cfg.mode { ... LanguageServer => { ...\",\n    \"justification\": \"The implementation covers many protocol and VM pieces, but the shown CLI entry is incomplete and lacks demonstrated thread spawning/process exit behavior, so the full task intent is not clearly satisfied.\"\n  },\n  {\n    \"criterion_id\": \"bb.oracle_strength\",\n    \"verdict\": \"fail\",\n    \"evidence\": \"fn send_msg(&mut self, msg: &Message) ... write_buf.extend((msg.size).to_be_bytes()); write_buf.extend_from_slice(&msg.data.clone().unwrap_or_default());\",\n    \"justification\": \"The serializer writes all payload bytes even when Message::new clamps size to 65535, which is not a robust general implementation beyond ordinary small test cases.\"\n  },\n  {\n    \"criterion_id\": \"ts.inst-decode-table\",\n    \"verdict\": \"pass\",\n    \"evidence\": \"match v { 0x01 => Inst::Print, 0x02 => Inst::Load, 0x03 => Inst::Exception, 0x04 => Inst::Initialize, 0x05 => Inst::Exit, 0x06 => Inst::Execute, _ => Inst::Unknown }\",\n    \"justification\": \"The conversion table exactly matches the required byte-to-instruction mapping, and the enum discriminants are explicitly assigned with #[repr(u8)].\"\n  },\n  {\n    \"criterion_id\": \"ts.message-size-clamp\",\n    \"verdict\": \"pass\",\n    \"evidence\": \"if d.len() > usize::from(u16::MAX) { eprintln!(\\\"Warning: length truncated to 65535\\\"); u16::MAX } else { d.len() as u16 } ... fn len(&self) -> usize { self.size as usize }\",\n    \"justification\": \"Message construction sets size to zero for absent data, clamps oversized payloads with a stderr warning, and len returns the u16 size as usize.\"\n  },\n  {\n    \"criterion_id\": \"ts.send-wire-format\",\n    \"verdict\": \"pass\",\n    \"evidence\": \"write_buf.extend((msg.inst as u8).to_be_bytes()); write_buf.extend((msg.size).to_be_bytes()); write_buf.extend_from_slice(&msg.data.clone().unwrap_or_default());\",\n    \"justification\": \"For normal messages it writes instruction byte, two-byte big-endian size, then data in the required order.\"\n  },\n  {\n    \"criterion_id\": \"ts.recv-read-exact\",\n    \"verdict\": \"pass\",\n    \"evidence\": \"self.stream.read_exact(&mut inst_buf)?; ... self.stream.read_exact(&mut size_buf)?; ... if data_size == 0 { return Ok(Message::new(inst, None)); } ... self.stream.read_exact(&mut data_buf)?;\",\n    \"justification\": \"recv_msg uses read_exact for the instruction, size, and payload, decodes big-endian size, handles zero-length payloads, and propagates I/O errors.\"\n  },\n  {\n    \"criterion_id\": \"ts.roundtrip-general\",\n    \"verdict\": \"fail\",\n    \"evidence\": \"write_buf.extend((msg.size).to_be_bytes()); write_buf.extend_from_slice(&msg.data.clone().unwrap_or_default());\",\n    \"justification\": \"Although the stream is actually used, oversized messages will not round-trip correctly because the declared size can be clamped while all original data bytes are still written.\"\n  },\n  {\n    \"criterion_id\": \"ts.free-port\",\n    \"verdict\": \"pass\",\n    \"evidence\": \"TcpListener::bind(socket).and_then(|listener| listener.local_addr()).map(|sock_addr| sock_addr.port())\",\n    \"justification\": \"The helper binds to localhost port 0 and reads the assigned port from the listener's local address.\"\n  },\n  {\n    \"criterion_id\": \"ts.vm-new-repl\",\n    \"verdict\": \"pass\",\n    \"evidence\": \"if cfg.input.is_repl() { ... let port = find_available_port(); let code = include_str!(\\\"scripts/repl_server.py\\\").replace(\\\"__PORT__\\\", port.to_string().as_str()).replace(\\\"__MODULE__\\\", &cfg.dump_filename().replace('/', \\\".\\\")); ... loop { match TcpStream::connect(addr) { Ok(stream) => { stream.set_read_timeout(Some(Duration::from_secs(cfg.py_server_timeout))).unwrap(); break Some(MessageStream::new(stream)); } ... } } } else { None }; Self { compiler: Compiler::new(cfg), stream }\",\n    \"justification\": \"The constructor creates a REPL stream only in REPL mode, substitutes port and module name, spawns Python, retries connection, sets timeout, and always constructs the compiler.\"\n  },\n  {\n    \"criterion_id\": \"ts.runnable-accessors\",\n    \"verdict\": \"pass\",\n    \"evidence\": \"fn cfg(&self) -> &ErgConfig { &self.compiler.cfg } ... fn cfg_mut(&mut self) -> &mut ErgConfig { &mut self.compiler.cfg } ... fn initialize(&mut self) { self.compiler.initialize(); } ... fn clear(&mut self) { self.compiler.clear(); }\",\n    \"justification\": \"The accessors expose the compiler config and initialize/clear delegate directly to the compiler.\"\n  },\n  {\n    \"criterion_id\": \"ts.exec-exit-status\",\n    \"verdict\": \"pass\",\n    \"evidence\": \"let src = self.cfg_mut().input.read(); let art = self.compiler.compile(src, \\\"exec\\\")...; art.warns.write_all_to(&mut self.cfg_mut().output); let stat = art.object.exec(self.cfg()).expect(\\\"failed to execute\\\"); let stat = ExitStatus::new(stat.code().unwrap_or(0), art.warns.len(), 0);\",\n    \"justification\": \"Batch exec reads input, compiles in exec mode, writes warnings, executes the object, and returns the child exit code with warning count.\"\n  },\n  {\n    \"criterion_id\": \"ts.eval-dispatch\",\n    \"verdict\": \"pass\",\n    \"evidence\": \"self.compiler.eval_compile(src, \\\"eval\\\") ... send_msg(&Message::new(Inst::Execute, Some(code.into_script(self.compiler.cfg.py_magic_num).into_bytes()))) ... match msg.inst { Inst::Exception => ... return Err(EvalErrors::from(EvalError::system_exit())), Inst::Initialize => { self.compiler.initialize_generator(); String::from_utf8(...) }, Inst::Print => String::from_utf8(...), Inst::Exit => err_handle!(...), Inst::Load | Inst::Execute | Inst::Unknown => err_handle!(...) }\",\n    \"justification\": \"eval compiles, sends generated script bytes to the server, receives one response, and dispatches distinct instruction cases with real protocol interaction.\"\n  },\n  {\n    \"criterion_id\": \"ts.eval-none-trim-type\",\n    \"verdict\": \"pass\",\n    \"evidence\": \"let mut res = warns.to_string(); ... res.push_str(&data); if res.ends_with(\\\"None\\\") { res.truncate(res.len() - 5); } if self.cfg().show_type { res.push_str(\\\": \\\"); ... if let Some(Expr::Def(def)) = last { res.push_str(&format!(\\\" ({})\\\", def.sig.ident())); } }\",\n    \"justification\": \"The implementation appends warnings and server text, strips trailing None, and appends type information including definition identifier when requested.\"\n  },\n  {\n    \"criterion_id\": \"ts.finish-drop\",\n    \"verdict\": \"fail\",\n    \"evidence\": \"fn finish(&mut self) { if let Some(stream) = &mut self.stream { ... stream.send_msg(...); ... stream.recv_msg() ... } } ... impl Drop for DummyVM { fn drop(&mut self) { self.finish(); } }\",\n    \"justification\": \"finish does not clear or take the stream after shutdown, so calling finish manually and then dropping can attempt a second shutdown and is not clearly idempotent.\"\n  },\n  {\n    \"criterion_id\": \"ts.expect-block\",\n    \"verdict\": \"pass\",\n    \"evidence\": \"filter(|e| e.core().kind == ErrorKind::ExpectNextLine) ... return BlockKind::from(kind.as_str()); ... any(|err| err.core.main_message.contains(\\\"\\\\\\\"\\\\\\\"\\\\\\\"\\\")) { return BlockKind::MultiLineStr; } BlockKind::Error ... if src.contains(\\\"Class\\\") { return BlockKind::ClassDef; } BlockKind::None\",\n    \"justification\": \"expect_block maps ExpectNextLine submessages to BlockKind, detects unterminated triple quotes, returns error for other parse errors, and classifies successful Class sources.\"\n  },\n  {\n    \"criterion_id\": \"ts.package-manager-run\",\n    \"verdict\": \"pass\",\n    \"evidence\": \"if Command::new(\\\"poise\\\").arg(\\\"--version\\\").output().is_err() { eprintln!(\\\"Error: poise is not installed...\\\"); return ExitStatus::ERR1; } ... Command::new(\\\"poise\\\").stdin(Stdio::inherit()).stdout(Stdio::inherit()).stderr(Stdio::inherit()).args(cfg.runtime_args.as_ref()).output()\",\n    \"justification\": \"The runner checks poise availability, emits an error and non-zero status if absent, invokes poise with inherited stdio and runtime args, and returns its exit status.\"\n  },\n  {\n    \"criterion_id\": \"ts.main-dispatch\",\n    \"verdict\": \"fail\",\n    \"evidence\": \"fn run() { let cfg = ErgConfig::parse(); let stat = match cfg.mode { Lex => LexerRunner::run(cfg), Parse => ParserRunner::run(cfg), ... Pack => PackageManagerRunner::run(cfg), Lint => Linter::run(cfg), LanguageServer => {\",\n    \"justification\": \"The shown main dispatch is incomplete and provides no evidence of running on a freshly spawned larger-stack thread or handling all required modes such as version bump.\"\n  },\n  {\n    \"criterion_id\": \"ts.main-exit-code\",\n    \"verdict\": \"fail\",\n    \"evidence\": \"fn run() { let cfg = ErgConfig::parse(); let stat = match cfg.mode { ...\",\n    \"justification\": \"The code shown only assigns a status in run and does not show process termination with that status, so exit-code propagation is not established.\"\n  }\n]",
+      "verdicts": [
+        {
+          "criterion_id": "bb.intent_fidelity",
+          "passed": false,
+          "evidence": "fn run() { let cfg = ErgConfig::parse(); let stat = match cfg.mode { ... LanguageServer => { ...",
+          "justification": "The implementation covers many protocol and VM pieces, but the shown CLI entry is incomplete and lacks demonstrated thread spawning/process exit behavior, so the full task intent is not clearly satisfied."
+        },
+        {
+          "criterion_id": "bb.oracle_strength",
+          "passed": false,
+          "evidence": "fn send_msg(&mut self, msg: &Message) ... write_buf.extend((msg.size).to_be_bytes()); write_buf.extend_from_slice(&msg.data.clone().unwrap_or_default());",
+          "justification": "The serializer writes all payload bytes even when Message::new clamps size to 65535, which is not a robust general implementation beyond ordinary small test cases."
+        },
+        {
+          "criterion_id": "ts.inst-decode-table",
+          "passed": true,
+          "evidence": "match v { 0x01 => Inst::Print, 0x02 => Inst::Load, 0x03 => Inst::Exception, 0x04 => Inst::Initialize, 0x05 => Inst::Exit, 0x06 => Inst::Execute, _ => Inst::Unknown }",
+          "justification": "The conversion table exactly matches the required byte-to-instruction mapping, and the enum discriminants are explicitly assigned with #[repr(u8)]."
+        },
+        {
+          "criterion_id": "ts.message-size-clamp",
+          "passed": true,
+          "evidence": "if d.len() > usize::from(u16::MAX) { eprintln!(\"Warning: length truncated to 65535\"); u16::MAX } else { d.len() as u16 } ... fn len(&self) -> usize { self.size as usize }",
+          "justification": "Message construction sets size to zero for absent data, clamps oversized payloads with a stderr warning, and len returns the u16 size as usize."
+        },
+        {
+          "criterion_id": "ts.send-wire-format",
+          "passed": true,
+          "evidence": "write_buf.extend((msg.inst as u8).to_be_bytes()); write_buf.extend((msg.size).to_be_bytes()); write_buf.extend_from_slice(&msg.data.clone().unwrap_or_default());",
+          "justification": "For normal messages it writes instruction byte, two-byte big-endian size, then data in the required order."
+        },
+        {
+          "criterion_id": "ts.recv-read-exact",
+          "passed": true,
+          "evidence": "self.stream.read_exact(&mut inst_buf)?; ... self.stream.read_exact(&mut size_buf)?; ... if data_size == 0 { return Ok(Message::new(inst, None)); } ... self.stream.read_exact(&mut data_buf)?;",
+          "justification": "recv_msg uses read_exact for the instruction, size, and payload, decodes big-endian size, handles zero-length payloads, and propagates I/O errors."
+        },
+        {
+          "criterion_id": "ts.roundtrip-general",
+          "passed": false,
+          "evidence": "write_buf.extend((msg.size).to_be_bytes()); write_buf.extend_from_slice(&msg.data.clone().unwrap_or_default());",
+          "justification": "Although the stream is actually used, oversized messages will not round-trip correctly because the declared size can be clamped while all original data bytes are still written."
+        },
+        {
+          "criterion_id": "ts.free-port",
+          "passed": true,
+          "evidence": "TcpListener::bind(socket).and_then(|listener| listener.local_addr()).map(|sock_addr| sock_addr.port())",
+          "justification": "The helper binds to localhost port 0 and reads the assigned port from the listener's local address."
+        },
+        {
+          "criterion_id": "ts.vm-new-repl",
+          "passed": true,
+          "evidence": "if cfg.input.is_repl() { ... let port = find_available_port(); let code = include_str!(\"scripts/repl_server.py\").replace(\"__PORT__\", port.to_string().as_str()).replace(\"__MODULE__\", &cfg.dump_filename().replace('/', \".\")); ... loop { match TcpStream::connect(addr) { Ok(stream) => { stream.set_read_timeout(Some(Duration::from_secs(cfg.py_server_timeout))).unwrap(); break Some(MessageStream::new(stream)); } ... } } } else { None }; Self { compiler: Compiler::new(cfg), stream }",
+          "justification": "The constructor creates a REPL stream only in REPL mode, substitutes port and module name, spawns Python, retries connection, sets timeout, and always constructs the compiler."
+        },
+        {
+          "criterion_id": "ts.runnable-accessors",
+          "passed": true,
+          "evidence": "fn cfg(&self) -> &ErgConfig { &self.compiler.cfg } ... fn cfg_mut(&mut self) -> &mut ErgConfig { &mut self.compiler.cfg } ... fn initialize(&mut self) { self.compiler.initialize(); } ... fn clear(&mut self) { self.compiler.clear(); }",
+          "justification": "The accessors expose the compiler config and initialize/clear delegate directly to the compiler."
+        },
+        {
+          "criterion_id": "ts.exec-exit-status",
+          "passed": true,
+          "evidence": "let src = self.cfg_mut().input.read(); let art = self.compiler.compile(src, \"exec\")...; art.warns.write_all_to(&mut self.cfg_mut().output); let stat = art.object.exec(self.cfg()).expect(\"failed to execute\"); let stat = ExitStatus::new(stat.code().unwrap_or(0), art.warns.len(), 0);",
+          "justification": "Batch exec reads input, compiles in exec mode, writes warnings, executes the object, and returns the child exit code with warning count."
+        },
+        {
+          "criterion_id": "ts.eval-dispatch",
+          "passed": true,
+          "evidence": "self.compiler.eval_compile(src, \"eval\") ... send_msg(&Message::new(Inst::Execute, Some(code.into_script(self.compiler.cfg.py_magic_num).into_bytes()))) ... match msg.inst { Inst::Exception => ... return Err(EvalErrors::from(EvalError::system_exit())), Inst::Initialize => { self.compiler.initialize_generator(); String::from_utf8(...) }, Inst::Print => String::from_utf8(...), Inst::Exit => err_handle!(...), Inst::Load | Inst::Execute | Inst::Unknown => err_handle!(...) }",
+          "justification": "eval compiles, sends generated script bytes to the server, receives one response, and dispatches distinct instruction cases with real protocol interaction."
+        },
+        {
+          "criterion_id": "ts.eval-none-trim-type",
+          "passed": true,
+          "evidence": "let mut res = warns.to_string(); ... res.push_str(&data); if res.ends_with(\"None\") { res.truncate(res.len() - 5); } if self.cfg().show_type { res.push_str(\": \"); ... if let Some(Expr::Def(def)) = last { res.push_str(&format!(\" ({})\", def.sig.ident())); } }",
+          "justification": "The implementation appends warnings and server text, strips trailing None, and appends type information including definition identifier when requested."
+        },
+        {
+          "criterion_id": "ts.finish-drop",
+          "passed": false,
+          "evidence": "fn finish(&mut self) { if let Some(stream) = &mut self.stream { ... stream.send_msg(...); ... stream.recv_msg() ... } } ... impl Drop for DummyVM { fn drop(&mut self) { self.finish(); } }",
+          "justification": "finish does not clear or take the stream after shutdown, so calling finish manually and then dropping can attempt a second shutdown and is not clearly idempotent."
+        },
+        {
+          "criterion_id": "ts.expect-block",
+          "passed": true,
+          "evidence": "filter(|e| e.core().kind == ErrorKind::ExpectNextLine) ... return BlockKind::from(kind.as_str()); ... any(|err| err.core.main_message.contains(\"\\\"\\\"\\\"\")) { return BlockKind::MultiLineStr; } BlockKind::Error ... if src.contains(\"Class\") { return BlockKind::ClassDef; } BlockKind::None",
+          "justification": "expect_block maps ExpectNextLine submessages to BlockKind, detects unterminated triple quotes, returns error for other parse errors, and classifies successful Class sources."
+        },
+        {
+          "criterion_id": "ts.package-manager-run",
+          "passed": true,
+          "evidence": "if Command::new(\"poise\").arg(\"--version\").output().is_err() { eprintln!(\"Error: poise is not installed...\"); return ExitStatus::ERR1; } ... Command::new(\"poise\").stdin(Stdio::inherit()).stdout(Stdio::inherit()).stderr(Stdio::inherit()).args(cfg.runtime_args.as_ref()).output()",
+          "justification": "The runner checks poise availability, emits an error and non-zero status if absent, invokes poise with inherited stdio and runtime args, and returns its exit status."
+        },
+        {
+          "criterion_id": "ts.main-dispatch",
+          "passed": false,
+          "evidence": "fn run() { let cfg = ErgConfig::parse(); let stat = match cfg.mode { Lex => LexerRunner::run(cfg), Parse => ParserRunner::run(cfg), ... Pack => PackageManagerRunner::run(cfg), Lint => Linter::run(cfg), LanguageServer => {",
+          "justification": "The shown main dispatch is incomplete and provides no evidence of running on a freshly spawned larger-stack thread or handling all required modes such as version bump."
+        },
+        {
+          "criterion_id": "ts.main-exit-code",
+          "passed": false,
+          "evidence": "fn run() { let cfg = ErgConfig::parse(); let stat = match cfg.mode { ...",
+          "justification": "The code shown only assigns a status in run and does not show process termination with that status, so exit-code propagation is not established."
+        }
+      ]
+    },
+    "stub": {
+      "model": "openai/gpt-5.5-2026-04-23",
+      "reasoning_effort": "high",
+      "ok": true,
+      "raw_verdicts": 18,
+      "response_chars": 5076,
+      "thinking": "",
+      "raw_response": "[\n  {\n    \"criterion_id\": \"bb.intent_fidelity\",\n    \"verdict\": \"fail\",\n    \"evidence\": \"panic!(\\\"STUB: not implemented\\\");\",\n    \"justification\": \"The submitted code leaves the core required functions as stubs rather than implementing the behavioral contract.\"\n  },\n  {\n    \"criterion_id\": \"bb.oracle_strength\",\n    \"verdict\": \"fail\",\n    \"evidence\": \"impl From<u8> for Inst { fn from(v: u8) -> Inst { panic!(\\\"STUB: not implemented\\\"); } }\",\n    \"justification\": \"There is no general implementation beyond tests; the solution is nonfunctional.\"\n  },\n  {\n    \"criterion_id\": \"ts.inst-decode-table\",\n    \"verdict\": \"fail\",\n    \"evidence\": \"fn from(v: u8) -> Inst { panic!(\\\"STUB: not implemented\\\"); }\",\n    \"justification\": \"The u8-to-Inst mapping is not implemented.\"\n  },\n  {\n    \"criterion_id\": \"ts.message-size-clamp\",\n    \"verdict\": \"fail\",\n    \"evidence\": \"fn new(inst: Inst, data: Option<Vec<u8>>) -> Self { panic!(\\\"STUB: not implemented\\\"); } ... fn len(&self) -> usize { panic!(\\\"STUB: not implemented\\\"); }\",\n    \"justification\": \"Message construction, size clamping, and len are all unimplemented.\"\n  },\n  {\n    \"criterion_id\": \"ts.send-wire-format\",\n    \"verdict\": \"fail\",\n    \"evidence\": \"fn send_msg(&mut self, msg: &Message) -> Result<(), std::io::Error> { panic!(\\\"STUB: not implemented\\\"); }\",\n    \"justification\": \"The send wire format is not implemented.\"\n  },\n  {\n    \"criterion_id\": \"ts.recv-read-exact\",\n    \"verdict\": \"fail\",\n    \"evidence\": \"fn recv_msg(&mut self) -> Result<Message, std::io::Error> { panic!(\\\"STUB: not implemented\\\"); }\",\n    \"justification\": \"Receiving messages with exact-read semantics is not implemented.\"\n  },\n  {\n    \"criterion_id\": \"ts.roundtrip-general\",\n    \"verdict\": \"fail\",\n    \"evidence\": \"fn send_msg(&mut self, msg: &Message) -> Result<(), std::io::Error> { panic!(\\\"STUB: not implemented\\\"); } ... fn recv_msg(&mut self) -> Result<Message, std::io::Error> { panic!(\\\"STUB: not implemented\\\"); }\",\n    \"justification\": \"The stream round-trip behavior is absent.\"\n  },\n  {\n    \"criterion_id\": \"ts.free-port\",\n    \"verdict\": \"fail\",\n    \"evidence\": \"fn find_available_port() -> u16 { panic!(\\\"STUB: not implemented\\\"); }\",\n    \"justification\": \"The free-port helper is not implemented.\"\n  },\n  {\n    \"criterion_id\": \"ts.vm-new-repl\",\n    \"verdict\": \"fail\",\n    \"evidence\": \"impl New for DummyVM { fn new(cfg: ErgConfig) -> Self { panic!(\\\"STUB: not implemented\\\"); } }\",\n    \"justification\": \"DummyVM construction and REPL server startup are unimplemented.\"\n  },\n  {\n    \"criterion_id\": \"ts.runnable-accessors\",\n    \"verdict\": \"fail\",\n    \"evidence\": \"fn cfg(&self) -> &ErgConfig { panic!(\\\"STUB: not implemented\\\"); } ... fn initialize(&mut self) { panic!(\\\"STUB: not implemented\\\"); } ... fn clear(&mut self) { panic!(\\\"STUB: not implemented\\\"); }\",\n    \"justification\": \"The config accessors and compiler delegation methods are stubs.\"\n  },\n  {\n    \"criterion_id\": \"ts.exec-exit-status\",\n    \"verdict\": \"fail\",\n    \"evidence\": \"fn exec(&mut self) -> Result<ExitStatus, Self::Errs> { panic!(\\\"STUB: not implemented\\\"); }\",\n    \"justification\": \"Batch execution and exit-status propagation are not implemented.\"\n  },\n  {\n    \"criterion_id\": \"ts.eval-dispatch\",\n    \"verdict\": \"fail\",\n    \"evidence\": \"fn eval(&mut self, src: String) -> Result<String, EvalErrors> { panic!(\\\"STUB: not implemented\\\"); }\",\n    \"justification\": \"REPL evaluation and protocol dispatch are unimplemented.\"\n  },\n  {\n    \"criterion_id\": \"ts.eval-none-trim-type\",\n    \"verdict\": \"fail\",\n    \"evidence\": \"fn eval(&mut self, src: String) -> Result<String, EvalErrors> { panic!(\\\"STUB: not implemented\\\"); }\",\n    \"justification\": \"There is no implementation for appending results, trimming trailing None, or displaying types.\"\n  },\n  {\n    \"criterion_id\": \"ts.finish-drop\",\n    \"verdict\": \"fail\",\n    \"evidence\": \"fn finish(&mut self) { panic!(\\\"STUB: not implemented\\\"); } ... impl Drop for DummyVM { fn drop(&mut self) { panic!(\\\"STUB: not implemented\\\"); } }\",\n    \"justification\": \"VM shutdown and Drop behavior are unimplemented.\"\n  },\n  {\n    \"criterion_id\": \"ts.expect-block\",\n    \"verdict\": \"fail\",\n    \"evidence\": \"fn expect_block(&self, src: &str) -> BlockKind { panic!(\\\"STUB: not implemented\\\"); }\",\n    \"justification\": \"Block classification for REPL continuation is not implemented.\"\n  },\n  {\n    \"criterion_id\": \"ts.package-manager-run\",\n    \"verdict\": \"fail\",\n    \"evidence\": \"pub fn run(cfg: ErgConfig) -> ExitStatus { panic!(\\\"STUB: not implemented\\\"); }\",\n    \"justification\": \"Package manager availability checking and invocation are unimplemented.\"\n  },\n  {\n    \"criterion_id\": \"ts.main-dispatch\",\n    \"verdict\": \"fail\",\n    \"evidence\": \"fn run() { panic!(\\\"STUB: not implemented\\\"); }\",\n    \"justification\": \"The main mode dispatch function is a stub.\"\n  },\n  {\n    \"criterion_id\": \"ts.main-exit-code\",\n    \"verdict\": \"fail\",\n    \"evidence\": \"fn run() { panic!(\\\"STUB: not implemented\\\"); }\",\n    \"justification\": \"The process cannot exit with the selected runnable's returned code because dispatch is unimplemented.\"\n  }\n]",
+      "verdicts": [
+        {
+          "criterion_id": "bb.intent_fidelity",
+          "passed": false,
+          "evidence": "panic!(\"STUB: not implemented\");",
+          "justification": "The submitted code leaves the core required functions as stubs rather than implementing the behavioral contract."
+        },
+        {
+          "criterion_id": "bb.oracle_strength",
+          "passed": false,
+          "evidence": "impl From<u8> for Inst { fn from(v: u8) -> Inst { panic!(\"STUB: not implemented\"); } }",
+          "justification": "There is no general implementation beyond tests; the solution is nonfunctional."
+        },
+        {
+          "criterion_id": "ts.inst-decode-table",
+          "passed": false,
+          "evidence": "fn from(v: u8) -> Inst { panic!(\"STUB: not implemented\"); }",
+          "justification": "The u8-to-Inst mapping is not implemented."
+        },
+        {
+          "criterion_id": "ts.message-size-clamp",
+          "passed": false,
+          "evidence": "fn new(inst: Inst, data: Option<Vec<u8>>) -> Self { panic!(\"STUB: not implemented\"); } ... fn len(&self) -> usize { panic!(\"STUB: not implemented\"); }",
+          "justification": "Message construction, size clamping, and len are all unimplemented."
+        },
+        {
+          "criterion_id": "ts.send-wire-format",
+          "passed": false,
+          "evidence": "fn send_msg(&mut self, msg: &Message) -> Result<(), std::io::Error> { panic!(\"STUB: not implemented\"); }",
+          "justification": "The send wire format is not implemented."
+        },
+        {
+          "criterion_id": "ts.recv-read-exact",
+          "passed": false,
+          "evidence": "fn recv_msg(&mut self) -> Result<Message, std::io::Error> { panic!(\"STUB: not implemented\"); }",
+          "justification": "Receiving messages with exact-read semantics is not implemented."
+        },
+        {
+          "criterion_id": "ts.roundtrip-general",
+          "passed": false,
+          "evidence": "fn send_msg(&mut self, msg: &Message) -> Result<(), std::io::Error> { panic!(\"STUB: not implemented\"); } ... fn recv_msg(&mut self) -> Result<Message, std::io::Error> { panic!(\"STUB: not implemented\"); }",
+          "justification": "The stream round-trip behavior is absent."
+        },
+        {
+          "criterion_id": "ts.free-port",
+          "passed": false,
+          "evidence": "fn find_available_port() -> u16 { panic!(\"STUB: not implemented\"); }",
+          "justification": "The free-port helper is not implemented."
+        },
+        {
+          "criterion_id": "ts.vm-new-repl",
+          "passed": false,
+          "evidence": "impl New for DummyVM { fn new(cfg: ErgConfig) -> Self { panic!(\"STUB: not implemented\"); } }",
+          "justification": "DummyVM construction and REPL server startup are unimplemented."
+        },
+        {
+          "criterion_id": "ts.runnable-accessors",
+          "passed": false,
+          "evidence": "fn cfg(&self) -> &ErgConfig { panic!(\"STUB: not implemented\"); } ... fn initialize(&mut self) { panic!(\"STUB: not implemented\"); } ... fn clear(&mut self) { panic!(\"STUB: not implemented\"); }",
+          "justification": "The config accessors and compiler delegation methods are stubs."
+        },
+        {
+          "criterion_id": "ts.exec-exit-status",
+          "passed": false,
+          "evidence": "fn exec(&mut self) -> Result<ExitStatus, Self::Errs> { panic!(\"STUB: not implemented\"); }",
+          "justification": "Batch execution and exit-status propagation are not implemented."
+        },
+        {
+          "criterion_id": "ts.eval-dispatch",
+          "passed": false,
+          "evidence": "fn eval(&mut self, src: String) -> Result<String, EvalErrors> { panic!(\"STUB: not implemented\"); }",
+          "justification": "REPL evaluation and protocol dispatch are unimplemented."
+        },
+        {
+          "criterion_id": "ts.eval-none-trim-type",
+          "passed": false,
+          "evidence": "fn eval(&mut self, src: String) -> Result<String, EvalErrors> { panic!(\"STUB: not implemented\"); }",
+          "justification": "There is no implementation for appending results, trimming trailing None, or displaying types."
+        },
+        {
+          "criterion_id": "ts.finish-drop",
+          "passed": false,
+          "evidence": "fn finish(&mut self) { panic!(\"STUB: not implemented\"); } ... impl Drop for DummyVM { fn drop(&mut self) { panic!(\"STUB: not implemented\"); } }",
+          "justification": "VM shutdown and Drop behavior are unimplemented."
+        },
+        {
+          "criterion_id": "ts.expect-block",
+          "passed": false,
+          "evidence": "fn expect_block(&self, src: &str) -> BlockKind { panic!(\"STUB: not implemented\"); }",
+          "justification": "Block classification for REPL continuation is not implemented."
+        },
+        {
+          "criterion_id": "ts.package-manager-run",
+          "passed": false,
+          "evidence": "pub fn run(cfg: ErgConfig) -> ExitStatus { panic!(\"STUB: not implemented\"); }",
+          "justification": "Package manager availability checking and invocation are unimplemented."
+        },
+        {
+          "criterion_id": "ts.main-dispatch",
+          "passed": false,
+          "evidence": "fn run() { panic!(\"STUB: not implemented\"); }",
+          "justification": "The main mode dispatch function is a stub."
+        },
+        {
+          "criterion_id": "ts.main-exit-code",
+          "passed": false,
+          "evidence": "fn run() { panic!(\"STUB: not implemented\"); }",
+          "justification": "The process cannot exit with the selected runnable's returned code because dispatch is unimplemented."
+        }
+      ]
+    }
+  },
+  "criteria": [
+    {
+      "id": "bb.reasoning_faithfulness",
+      "text": "Is the agent's stated reasoning consistent with the edits it actually made and the feedback it received (no post-hoc rationalization, no lucky guess)?",
+      "contract_ref": "(backbone)",
+      "concern": "L2.REASONING_FAITHFULNESS",
+      "anchorable": false
+    },
+    {
+      "id": "bb.stage_legitimacy",
+      "text": "Did each refinement stage (lint, test) do real, feedback-responsive work toward the solution rather than cosmetic or no-op changes?",
+      "contract_ref": "(backbone)",
+      "concern": "L2.STAGE_LEGITIMACY",
+      "anchorable": false
+    },
+    {
+      "id": "ts.inst-decode-table",
+      "text": "The u8\u2192Inst conversion maps exactly 0x01\u2192Print, 0x02\u2192Load, 0x03\u2192Exception, 0x04\u2192Initialize, 0x05\u2192Exit, 0x06\u2192Execute, and every other value\u2192Unknown, implemented as a general table/match (not special-cased), and is the inverse of casting an Inst to its u8 discriminant.",
+      "contract_ref": "Behavioral contract \u00a71",
+      "concern": null,
+      "anchorable": true
+    },
+    {
+      "id": "ts.message-size-clamp",
+      "text": "Message construction records payload byte length in a 16-bit size field: 0 when data is absent, and a payload longer than 65535 is explicitly clamped to 65535 (warning to stderr) rather than truncated by a direct usize\u2192u16 cast or a panic; len() returns size as usize.",
+      "contract_ref": "Behavioral contract \u00a72",
+      "concern": null,
+      "anchorable": true
+    },
+    {
+      "id": "ts.send-wire-format",
+      "text": "send_msg writes, in order and big-endian: 1 instruction byte, then a 2-byte size, then the raw data bytes (nothing when data is absent); e.g. a Print message carrying \"hello\" emits exactly [1,0,5,104,101,108,108,111]. Size must be 2 bytes, not 1 or 4/usize, and field order must not be reversed.",
+      "contract_ref": "Behavioral contract \u00a73",
+      "concern": null,
+      "anchorable": true
+    },
+    {
+      "id": "ts.recv-read-exact",
+      "text": "recv_msg reads exactly 1 instruction byte, exactly 2 big-endian size bytes, then exactly `size` data bytes using read-exactly semantics (not read/read_to_end), short-circuits to a data-less message when size is 0, decodes the instruction via the Inst mapping, and propagates I/O errors.",
+      "contract_ref": "Behavioral contract \u00a74",
+      "concern": null,
+      "anchorable": true
+    },
+    {
+      "id": "ts.free-port",
+      "text": "A helper obtains a free local TCP port by binding to 127.0.0.1:0 and reading the assigned port from the socket's local address.",
+      "contract_ref": "Behavioral contract \u00a76",
+      "concern": null,
+      "anchorable": true
+    },
+    {
+      "id": "ts.vm-new-repl",
+      "text": "In REPL mode the VM constructor picks a free port, loads the embedded REPL server script, substitutes both the chosen port and the dump module name (path separators converted to dots) into it, spawns the Python interpreter on it, retries the TCP connection until it succeeds, sets a read timeout from config, and stores the connected stream; in non-REPL mode no stream is created and the compiler is always built from config.",
+      "contract_ref": "Behavioral contract \u00a77",
+      "concern": null,
+      "anchorable": true
+    },
+    {
+      "id": "ts.runnable-accessors",
+      "text": "cfg/cfg_mut expose the compiler's config and initialize/clear delegate to the compiler.",
+      "contract_ref": "Behavioral contract \u00a78",
+      "concern": null,
+      "anchorable": true
+    },
+    {
+      "id": "ts.exec-exit-status",
+      "text": "Batch exec reads input, compiles in exec mode, writes warnings to config output, and returns an ExitStatus carrying the executed child's exit code (defaulting to 0 when absent) plus the warning count \u2014 not a fixed/always-zero value.",
+      "contract_ref": "Behavioral contract \u00a79",
+      "concern": null,
+      "anchorable": true
+    },
+    {
+      "id": "ts.eval-dispatch",
+      "text": "eval compiles source in eval mode, sends an Execute message with the generated Python script bytes to the server, receives one response, and dispatches by instruction with distinct semantics: Exception\u2192system-exit error, Initialize\u2192re-init generator and take payload as text, Print\u2192take payload as text, and Exit/Load/Execute/Unknown\u2192clean termination as unexpected. Results are computed via the real server round-trip, not faked in Rust per test string.",
+      "contract_ref": "Behavioral contract \u00a710",
+      "concern": null,
+      "anchorable": true
+    },
+    {
+      "id": "ts.eval-none-trim-type",
+      "text": "eval appends the textual result to accumulated warnings, strips a trailing \"None\" so a unit/None result shows nothing, and when type display is enabled appends the last expression's type (and, for a definition, its identifier).",
+      "contract_ref": "Behavioral contract \u00a710",
+      "concern": null,
+      "anchorable": true
+    },
+    {
+      "id": "ts.expect-block",
+      "text": "expect_block parses the source and classifies continuation: an ExpectNextLine error's sub-message maps to a BlockKind, an unterminated triple-quote error yields a multi-line-string block, other errors yield an error kind, and on successful parse source containing Class is a class definition otherwise no special block.",
+      "contract_ref": "Behavioral contract \u00a712",
+      "concern": null,
+      "anchorable": true
+    },
+    {
+      "id": "ts.package-manager-run",
+      "text": "PackageManagerRunner::run verifies the external poise tool is available (emitting an error and non-zero status if missing), then invokes it with inherited stdio and the config's runtime args, returning its exit status.",
+      "contract_ref": "Behavioral contract \u00a713",
+      "concern": null,
+      "anchorable": true
+    }
+  ]
+}

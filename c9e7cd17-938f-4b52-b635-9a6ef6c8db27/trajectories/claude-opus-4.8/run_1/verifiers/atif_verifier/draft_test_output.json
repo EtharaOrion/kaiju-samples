@@ -1,0 +1,194 @@
+{"ImportPath":"github.com/allegro/bigcache/v3","Action":"build-output","Output":"# github.com/allegro/bigcache/v3\n"}
+{"ImportPath":"github.com/allegro/bigcache/v3","Action":"build-output","Output":"./iterator.go:96:58: cannot use int(it.elements[it.currentIndex]) (value of type int) as uint64 value in argument to it.cache.shards[it.currentShard].getEntry\n"}
+{"ImportPath":"github.com/allegro/bigcache/v3","Action":"build-output","Output":"./shard.go:126:4: undefined: resetKeyFromEntry\n"}
+{"ImportPath":"github.com/allegro/bigcache/v3","Action":"build-output","Output":"./shard.go:176:4: undefined: resetKeyFromEntry\n"}
+{"ImportPath":"github.com/allegro/bigcache/v3","Action":"build-output","Output":"./shard.go:265:3: undefined: resetKeyFromEntry\n"}
+{"ImportPath":"github.com/allegro/bigcache/v3","Action":"build-fail"}
+{"Time":"2026-07-28T13:46:02.096153788Z","Action":"start","Package":"github.com/allegro/bigcache/v3"}
+{"Time":"2026-07-28T13:46:02.096221433Z","Action":"output","Package":"github.com/allegro/bigcache/v3","Output":"FAIL\tgithub.com/allegro/bigcache/v3 [build failed]\n"}
+{"Time":"2026-07-28T13:46:02.096228051Z","Action":"fail","Package":"github.com/allegro/bigcache/v3","Elapsed":0,"FailedBuild":"github.com/allegro/bigcache/v3"}
+{"Time":"2026-07-28T13:46:02.113822711Z","Action":"start","Package":"github.com/allegro/bigcache/v3/queue"}
+{"Time":"2026-07-28T13:46:02.115208949Z","Action":"run","Package":"github.com/allegro/bigcache/v3/queue","Test":"TestPushAndPop"}
+{"Time":"2026-07-28T13:46:02.115245376Z","Action":"output","Package":"github.com/allegro/bigcache/v3/queue","Test":"TestPushAndPop","Output":"=== RUN   TestPushAndPop\n"}
+{"Time":"2026-07-28T13:46:02.115253411Z","Action":"output","Package":"github.com/allegro/bigcache/v3/queue","Test":"TestPushAndPop","Output":"=== PAUSE TestPushAndPop\n"}
+{"Time":"2026-07-28T13:46:02.115255889Z","Action":"pause","Package":"github.com/allegro/bigcache/v3/queue","Test":"TestPushAndPop"}
+{"Time":"2026-07-28T13:46:02.115259817Z","Action":"run","Package":"github.com/allegro/bigcache/v3/queue","Test":"TestLen"}
+{"Time":"2026-07-28T13:46:02.115263386Z","Action":"output","Package":"github.com/allegro/bigcache/v3/queue","Test":"TestLen","Output":"=== RUN   TestLen\n"}
+{"Time":"2026-07-28T13:46:02.115267423Z","Action":"output","Package":"github.com/allegro/bigcache/v3/queue","Test":"TestLen","Output":"=== PAUSE TestLen\n"}
+{"Time":"2026-07-28T13:46:02.115269505Z","Action":"pause","Package":"github.com/allegro/bigcache/v3/queue","Test":"TestLen"}
+{"Time":"2026-07-28T13:46:02.115271877Z","Action":"run","Package":"github.com/allegro/bigcache/v3/queue","Test":"TestPeek"}
+{"Time":"2026-07-28T13:46:02.115273842Z","Action":"output","Package":"github.com/allegro/bigcache/v3/queue","Test":"TestPeek","Output":"=== RUN   TestPeek\n"}
+{"Time":"2026-07-28T13:46:02.115276294Z","Action":"output","Package":"github.com/allegro/bigcache/v3/queue","Test":"TestPeek","Output":"=== PAUSE TestPeek\n"}
+{"Time":"2026-07-28T13:46:02.115278111Z","Action":"pause","Package":"github.com/allegro/bigcache/v3/queue","Test":"TestPeek"}
+{"Time":"2026-07-28T13:46:02.115280858Z","Action":"run","Package":"github.com/allegro/bigcache/v3/queue","Test":"TestResetFullQueue"}
+{"Time":"2026-07-28T13:46:02.115282982Z","Action":"output","Package":"github.com/allegro/bigcache/v3/queue","Test":"TestResetFullQueue","Output":"=== RUN   TestResetFullQueue\n"}
+{"Time":"2026-07-28T13:46:02.115287885Z","Action":"output","Package":"github.com/allegro/bigcache/v3/queue","Test":"TestResetFullQueue","Output":"=== PAUSE TestResetFullQueue\n"}
+{"Time":"2026-07-28T13:46:02.115289776Z","Action":"pause","Package":"github.com/allegro/bigcache/v3/queue","Test":"TestResetFullQueue"}
+{"Time":"2026-07-28T13:46:02.11529199Z","Action":"run","Package":"github.com/allegro/bigcache/v3/queue","Test":"TestReset"}
+{"Time":"2026-07-28T13:46:02.115293843Z","Action":"output","Package":"github.com/allegro/bigcache/v3/queue","Test":"TestReset","Output":"=== RUN   TestReset\n"}
+{"Time":"2026-07-28T13:46:02.115296649Z","Action":"output","Package":"github.com/allegro/bigcache/v3/queue","Test":"TestReset","Output":"=== PAUSE TestReset\n"}
+{"Time":"2026-07-28T13:46:02.115304351Z","Action":"pause","Package":"github.com/allegro/bigcache/v3/queue","Test":"TestReset"}
+{"Time":"2026-07-28T13:46:02.115306872Z","Action":"run","Package":"github.com/allegro/bigcache/v3/queue","Test":"TestReuseAvailableSpace"}
+{"Time":"2026-07-28T13:46:02.115308865Z","Action":"output","Package":"github.com/allegro/bigcache/v3/queue","Test":"TestReuseAvailableSpace","Output":"=== RUN   TestReuseAvailableSpace\n"}
+{"Time":"2026-07-28T13:46:02.11531143Z","Action":"output","Package":"github.com/allegro/bigcache/v3/queue","Test":"TestReuseAvailableSpace","Output":"=== PAUSE TestReuseAvailableSpace\n"}
+{"Time":"2026-07-28T13:46:02.115313297Z","Action":"pause","Package":"github.com/allegro/bigcache/v3/queue","Test":"TestReuseAvailableSpace"}
+{"Time":"2026-07-28T13:46:02.115316324Z","Action":"run","Package":"github.com/allegro/bigcache/v3/queue","Test":"TestAllocateAdditionalSpace"}
+{"Time":"2026-07-28T13:46:02.115318331Z","Action":"output","Package":"github.com/allegro/bigcache/v3/queue","Test":"TestAllocateAdditionalSpace","Output":"=== RUN   TestAllocateAdditionalSpace\n"}
+{"Time":"2026-07-28T13:46:02.115322877Z","Action":"output","Package":"github.com/allegro/bigcache/v3/queue","Test":"TestAllocateAdditionalSpace","Output":"=== PAUSE TestAllocateAdditionalSpace\n"}
+{"Time":"2026-07-28T13:46:02.115324915Z","Action":"pause","Package":"github.com/allegro/bigcache/v3/queue","Test":"TestAllocateAdditionalSpace"}
+{"Time":"2026-07-28T13:46:02.115328683Z","Action":"run","Package":"github.com/allegro/bigcache/v3/queue","Test":"TestAllocateAdditionalSpaceForInsufficientFreeFragmentedSpaceWhereHeadIsBeforeTail"}
+{"Time":"2026-07-28T13:46:02.115330728Z","Action":"output","Package":"github.com/allegro/bigcache/v3/queue","Test":"TestAllocateAdditionalSpaceForInsufficientFreeFragmentedSpaceWhereHeadIsBeforeTail","Output":"=== RUN   TestAllocateAdditionalSpaceForInsufficientFreeFragmentedSpaceWhereHeadIsBeforeTail\n"}
+{"Time":"2026-07-28T13:46:02.115333168Z","Action":"output","Package":"github.com/allegro/bigcache/v3/queue","Test":"TestAllocateAdditionalSpaceForInsufficientFreeFragmentedSpaceWhereHeadIsBeforeTail","Output":"=== PAUSE TestAllocateAdditionalSpaceForInsufficientFreeFragmentedSpaceWhereHeadIsBeforeTail\n"}
+{"Time":"2026-07-28T13:46:02.115335135Z","Action":"pause","Package":"github.com/allegro/bigcache/v3/queue","Test":"TestAllocateAdditionalSpaceForInsufficientFreeFragmentedSpaceWhereHeadIsBeforeTail"}
+{"Time":"2026-07-28T13:46:02.115337618Z","Action":"run","Package":"github.com/allegro/bigcache/v3/queue","Test":"TestUnchangedEntriesIndexesAfterAdditionalMemoryAllocationWhereHeadIsBeforeTail"}
+{"Time":"2026-07-28T13:46:02.115339526Z","Action":"output","Package":"github.com/allegro/bigcache/v3/queue","Test":"TestUnchangedEntriesIndexesAfterAdditionalMemoryAllocationWhereHeadIsBeforeTail","Output":"=== RUN   TestUnchangedEntriesIndexesAfterAdditionalMemoryAllocationWhereHeadIsBeforeTail\n"}
+{"Time":"2026-07-28T13:46:02.11534192Z","Action":"output","Package":"github.com/allegro/bigcache/v3/queue","Test":"TestUnchangedEntriesIndexesAfterAdditionalMemoryAllocationWhereHeadIsBeforeTail","Output":"=== PAUSE TestUnchangedEntriesIndexesAfterAdditionalMemoryAllocationWhereHeadIsBeforeTail\n"}
+{"Time":"2026-07-28T13:46:02.115343752Z","Action":"pause","Package":"github.com/allegro/bigcache/v3/queue","Test":"TestUnchangedEntriesIndexesAfterAdditionalMemoryAllocationWhereHeadIsBeforeTail"}
+{"Time":"2026-07-28T13:46:02.115348765Z","Action":"run","Package":"github.com/allegro/bigcache/v3/queue","Test":"TestAllocateAdditionalSpaceForInsufficientFreeFragmentedSpaceWhereTailIsBeforeHead"}
+{"Time":"2026-07-28T13:46:02.115350733Z","Action":"output","Package":"github.com/allegro/bigcache/v3/queue","Test":"TestAllocateAdditionalSpaceForInsufficientFreeFragmentedSpaceWhereTailIsBeforeHead","Output":"=== RUN   TestAllocateAdditionalSpaceForInsufficientFreeFragmentedSpaceWhereTailIsBeforeHead\n"}
+{"Time":"2026-07-28T13:46:02.115352956Z","Action":"output","Package":"github.com/allegro/bigcache/v3/queue","Test":"TestAllocateAdditionalSpaceForInsufficientFreeFragmentedSpaceWhereTailIsBeforeHead","Output":"=== PAUSE TestAllocateAdditionalSpaceForInsufficientFreeFragmentedSpaceWhereTailIsBeforeHead\n"}
+{"Time":"2026-07-28T13:46:02.115356898Z","Action":"pause","Package":"github.com/allegro/bigcache/v3/queue","Test":"TestAllocateAdditionalSpaceForInsufficientFreeFragmentedSpaceWhereTailIsBeforeHead"}
+{"Time":"2026-07-28T13:46:02.115359343Z","Action":"run","Package":"github.com/allegro/bigcache/v3/queue","Test":"TestAllocateAdditionalSpaceForInsufficientFreeFragmentedSpaceWhereTailIsBeforeHead128"}
+{"Time":"2026-07-28T13:46:02.115361244Z","Action":"output","Package":"github.com/allegro/bigcache/v3/queue","Test":"TestAllocateAdditionalSpaceForInsufficientFreeFragmentedSpaceWhereTailIsBeforeHead128","Output":"=== RUN   TestAllocateAdditionalSpaceForInsufficientFreeFragmentedSpaceWhereTailIsBeforeHead128\n"}
+{"Time":"2026-07-28T13:46:02.115365899Z","Action":"output","Package":"github.com/allegro/bigcache/v3/queue","Test":"TestAllocateAdditionalSpaceForInsufficientFreeFragmentedSpaceWhereTailIsBeforeHead128","Output":"=== PAUSE TestAllocateAdditionalSpaceForInsufficientFreeFragmentedSpaceWhereTailIsBeforeHead128\n"}
+{"Time":"2026-07-28T13:46:02.11536782Z","Action":"pause","Package":"github.com/allegro/bigcache/v3/queue","Test":"TestAllocateAdditionalSpaceForInsufficientFreeFragmentedSpaceWhereTailIsBeforeHead128"}
+{"Time":"2026-07-28T13:46:02.11537002Z","Action":"run","Package":"github.com/allegro/bigcache/v3/queue","Test":"TestUnchangedEntriesIndexesAfterAdditionalMemoryAllocationWhereTailIsBeforeHead"}
+{"Time":"2026-07-28T13:46:02.115371859Z","Action":"output","Package":"github.com/allegro/bigcache/v3/queue","Test":"TestUnchangedEntriesIndexesAfterAdditionalMemoryAllocationWhereTailIsBeforeHead","Output":"=== RUN   TestUnchangedEntriesIndexesAfterAdditionalMemoryAllocationWhereTailIsBeforeHead\n"}
+{"Time":"2026-07-28T13:46:02.115376277Z","Action":"output","Package":"github.com/allegro/bigcache/v3/queue","Test":"TestUnchangedEntriesIndexesAfterAdditionalMemoryAllocationWhereTailIsBeforeHead","Output":"=== PAUSE TestUnchangedEntriesIndexesAfterAdditionalMemoryAllocationWhereTailIsBeforeHead\n"}
+{"Time":"2026-07-28T13:46:02.115378293Z","Action":"pause","Package":"github.com/allegro/bigcache/v3/queue","Test":"TestUnchangedEntriesIndexesAfterAdditionalMemoryAllocationWhereTailIsBeforeHead"}
+{"Time":"2026-07-28T13:46:02.115381244Z","Action":"run","Package":"github.com/allegro/bigcache/v3/queue","Test":"TestAllocateAdditionalSpaceForValueBiggerThanInitQueue"}
+{"Time":"2026-07-28T13:46:02.115383198Z","Action":"output","Package":"github.com/allegro/bigcache/v3/queue","Test":"TestAllocateAdditionalSpaceForValueBiggerThanInitQueue","Output":"=== RUN   TestAllocateAdditionalSpaceForValueBiggerThanInitQueue\n"}
+{"Time":"2026-07-28T13:46:02.115387035Z","Action":"output","Package":"github.com/allegro/bigcache/v3/queue","Test":"TestAllocateAdditionalSpaceForValueBiggerThanInitQueue","Output":"=== PAUSE TestAllocateAdditionalSpaceForValueBiggerThanInitQueue\n"}
+{"Time":"2026-07-28T13:46:02.115388948Z","Action":"pause","Package":"github.com/allegro/bigcache/v3/queue","Test":"TestAllocateAdditionalSpaceForValueBiggerThanInitQueue"}
+{"Time":"2026-07-28T13:46:02.115401554Z","Action":"run","Package":"github.com/allegro/bigcache/v3/queue","Test":"TestAllocateAdditionalSpaceForValueBiggerThanQueue"}
+{"Time":"2026-07-28T13:46:02.115414338Z","Action":"output","Package":"github.com/allegro/bigcache/v3/queue","Test":"TestAllocateAdditionalSpaceForValueBiggerThanQueue","Output":"=== RUN   TestAllocateAdditionalSpaceForValueBiggerThanQueue\n"}
+{"Time":"2026-07-28T13:46:02.115420846Z","Action":"output","Package":"github.com/allegro/bigcache/v3/queue","Test":"TestAllocateAdditionalSpaceForValueBiggerThanQueue","Output":"=== PAUSE TestAllocateAdditionalSpaceForValueBiggerThanQueue\n"}
+{"Time":"2026-07-28T13:46:02.115423824Z","Action":"pause","Package":"github.com/allegro/bigcache/v3/queue","Test":"TestAllocateAdditionalSpaceForValueBiggerThanQueue"}
+{"Time":"2026-07-28T13:46:02.115431065Z","Action":"run","Package":"github.com/allegro/bigcache/v3/queue","Test":"TestPopWholeQueue"}
+{"Time":"2026-07-28T13:46:02.115433617Z","Action":"output","Package":"github.com/allegro/bigcache/v3/queue","Test":"TestPopWholeQueue","Output":"=== RUN   TestPopWholeQueue\n"}
+{"Time":"2026-07-28T13:46:02.115437957Z","Action":"output","Package":"github.com/allegro/bigcache/v3/queue","Test":"TestPopWholeQueue","Output":"=== PAUSE TestPopWholeQueue\n"}
+{"Time":"2026-07-28T13:46:02.115440098Z","Action":"pause","Package":"github.com/allegro/bigcache/v3/queue","Test":"TestPopWholeQueue"}
+{"Time":"2026-07-28T13:46:02.115442534Z","Action":"run","Package":"github.com/allegro/bigcache/v3/queue","Test":"TestGetEntryFromIndex"}
+{"Time":"2026-07-28T13:46:02.115444371Z","Action":"output","Package":"github.com/allegro/bigcache/v3/queue","Test":"TestGetEntryFromIndex","Output":"=== RUN   TestGetEntryFromIndex\n"}
+{"Time":"2026-07-28T13:46:02.115448948Z","Action":"output","Package":"github.com/allegro/bigcache/v3/queue","Test":"TestGetEntryFromIndex","Output":"=== PAUSE TestGetEntryFromIndex\n"}
+{"Time":"2026-07-28T13:46:02.115450844Z","Action":"pause","Package":"github.com/allegro/bigcache/v3/queue","Test":"TestGetEntryFromIndex"}
+{"Time":"2026-07-28T13:46:02.115454126Z","Action":"run","Package":"github.com/allegro/bigcache/v3/queue","Test":"TestGetEntryFromInvalidIndex"}
+{"Time":"2026-07-28T13:46:02.115456586Z","Action":"output","Package":"github.com/allegro/bigcache/v3/queue","Test":"TestGetEntryFromInvalidIndex","Output":"=== RUN   TestGetEntryFromInvalidIndex\n"}
+{"Time":"2026-07-28T13:46:02.115459133Z","Action":"output","Package":"github.com/allegro/bigcache/v3/queue","Test":"TestGetEntryFromInvalidIndex","Output":"=== PAUSE TestGetEntryFromInvalidIndex\n"}
+{"Time":"2026-07-28T13:46:02.115460852Z","Action":"pause","Package":"github.com/allegro/bigcache/v3/queue","Test":"TestGetEntryFromInvalidIndex"}
+{"Time":"2026-07-28T13:46:02.115463028Z","Action":"run","Package":"github.com/allegro/bigcache/v3/queue","Test":"TestGetEntryFromIndexOutOfRange"}
+{"Time":"2026-07-28T13:46:02.115464747Z","Action":"output","Package":"github.com/allegro/bigcache/v3/queue","Test":"TestGetEntryFromIndexOutOfRange","Output":"=== RUN   TestGetEntryFromIndexOutOfRange\n"}
+{"Time":"2026-07-28T13:46:02.115467698Z","Action":"output","Package":"github.com/allegro/bigcache/v3/queue","Test":"TestGetEntryFromIndexOutOfRange","Output":"=== PAUSE TestGetEntryFromIndexOutOfRange\n"}
+{"Time":"2026-07-28T13:46:02.115469555Z","Action":"pause","Package":"github.com/allegro/bigcache/v3/queue","Test":"TestGetEntryFromIndexOutOfRange"}
+{"Time":"2026-07-28T13:46:02.115471666Z","Action":"run","Package":"github.com/allegro/bigcache/v3/queue","Test":"TestGetEntryFromEmptyQueue"}
+{"Time":"2026-07-28T13:46:02.11547338Z","Action":"output","Package":"github.com/allegro/bigcache/v3/queue","Test":"TestGetEntryFromEmptyQueue","Output":"=== RUN   TestGetEntryFromEmptyQueue\n"}
+{"Time":"2026-07-28T13:46:02.115475648Z","Action":"output","Package":"github.com/allegro/bigcache/v3/queue","Test":"TestGetEntryFromEmptyQueue","Output":"=== PAUSE TestGetEntryFromEmptyQueue\n"}
+{"Time":"2026-07-28T13:46:02.115477384Z","Action":"pause","Package":"github.com/allegro/bigcache/v3/queue","Test":"TestGetEntryFromEmptyQueue"}
+{"Time":"2026-07-28T13:46:02.115481336Z","Action":"run","Package":"github.com/allegro/bigcache/v3/queue","Test":"TestMaxSizeLimit"}
+{"Time":"2026-07-28T13:46:02.115483327Z","Action":"output","Package":"github.com/allegro/bigcache/v3/queue","Test":"TestMaxSizeLimit","Output":"=== RUN   TestMaxSizeLimit\n"}
+{"Time":"2026-07-28T13:46:02.115485487Z","Action":"output","Package":"github.com/allegro/bigcache/v3/queue","Test":"TestMaxSizeLimit","Output":"=== PAUSE TestMaxSizeLimit\n"}
+{"Time":"2026-07-28T13:46:02.115487256Z","Action":"pause","Package":"github.com/allegro/bigcache/v3/queue","Test":"TestMaxSizeLimit"}
+{"Time":"2026-07-28T13:46:02.115490353Z","Action":"run","Package":"github.com/allegro/bigcache/v3/queue","Test":"TestPushEntryAfterAllocateAdditionMemory"}
+{"Time":"2026-07-28T13:46:02.115493943Z","Action":"output","Package":"github.com/allegro/bigcache/v3/queue","Test":"TestPushEntryAfterAllocateAdditionMemory","Output":"=== RUN   TestPushEntryAfterAllocateAdditionMemory\n"}
+{"Time":"2026-07-28T13:46:02.115497113Z","Action":"output","Package":"github.com/allegro/bigcache/v3/queue","Test":"TestPushEntryAfterAllocateAdditionMemory","Output":"=== PAUSE TestPushEntryAfterAllocateAdditionMemory\n"}
+{"Time":"2026-07-28T13:46:02.115498987Z","Action":"pause","Package":"github.com/allegro/bigcache/v3/queue","Test":"TestPushEntryAfterAllocateAdditionMemory"}
+{"Time":"2026-07-28T13:46:02.11550185Z","Action":"run","Package":"github.com/allegro/bigcache/v3/queue","Test":"TestPushEntryAfterAllocateAdditionMemoryInFull"}
+{"Time":"2026-07-28T13:46:02.115504161Z","Action":"output","Package":"github.com/allegro/bigcache/v3/queue","Test":"TestPushEntryAfterAllocateAdditionMemoryInFull","Output":"=== RUN   TestPushEntryAfterAllocateAdditionMemoryInFull\n"}
+{"Time":"2026-07-28T13:46:02.115506944Z","Action":"output","Package":"github.com/allegro/bigcache/v3/queue","Test":"TestPushEntryAfterAllocateAdditionMemoryInFull","Output":"=== PAUSE TestPushEntryAfterAllocateAdditionMemoryInFull\n"}
+{"Time":"2026-07-28T13:46:02.115508995Z","Action":"pause","Package":"github.com/allegro/bigcache/v3/queue","Test":"TestPushEntryAfterAllocateAdditionMemoryInFull"}
+{"Time":"2026-07-28T13:46:02.115511663Z","Action":"cont","Package":"github.com/allegro/bigcache/v3/queue","Test":"TestPushAndPop"}
+{"Time":"2026-07-28T13:46:02.11551355Z","Action":"output","Package":"github.com/allegro/bigcache/v3/queue","Test":"TestPushAndPop","Output":"=== CONT  TestPushAndPop\n"}
+{"Time":"2026-07-28T13:46:02.115521614Z","Action":"output","Package":"github.com/allegro/bigcache/v3/queue","Test":"TestPushAndPop","Output":"--- PASS: TestPushAndPop (0.00s)\n"}
+{"Time":"2026-07-28T13:46:02.115524604Z","Action":"pass","Package":"github.com/allegro/bigcache/v3/queue","Test":"TestPushAndPop","Elapsed":0}
+{"Time":"2026-07-28T13:46:02.115527414Z","Action":"cont","Package":"github.com/allegro/bigcache/v3/queue","Test":"TestAllocateAdditionalSpaceForValueBiggerThanQueue"}
+{"Time":"2026-07-28T13:46:02.11552928Z","Action":"output","Package":"github.com/allegro/bigcache/v3/queue","Test":"TestAllocateAdditionalSpaceForValueBiggerThanQueue","Output":"=== CONT  TestAllocateAdditionalSpaceForValueBiggerThanQueue\n"}
+{"Time":"2026-07-28T13:46:02.115533426Z","Action":"output","Package":"github.com/allegro/bigcache/v3/queue","Test":"TestAllocateAdditionalSpaceForValueBiggerThanQueue","Output":"--- PASS: TestAllocateAdditionalSpaceForValueBiggerThanQueue (0.00s)\n"}
+{"Time":"2026-07-28T13:46:02.115535906Z","Action":"pass","Package":"github.com/allegro/bigcache/v3/queue","Test":"TestAllocateAdditionalSpaceForValueBiggerThanQueue","Elapsed":0}
+{"Time":"2026-07-28T13:46:02.11553798Z","Action":"cont","Package":"github.com/allegro/bigcache/v3/queue","Test":"TestAllocateAdditionalSpaceForValueBiggerThanInitQueue"}
+{"Time":"2026-07-28T13:46:02.115539974Z","Action":"output","Package":"github.com/allegro/bigcache/v3/queue","Test":"TestAllocateAdditionalSpaceForValueBiggerThanInitQueue","Output":"=== CONT  TestAllocateAdditionalSpaceForValueBiggerThanInitQueue\n"}
+{"Time":"2026-07-28T13:46:02.115543191Z","Action":"output","Package":"github.com/allegro/bigcache/v3/queue","Test":"TestAllocateAdditionalSpaceForValueBiggerThanInitQueue","Output":"--- PASS: TestAllocateAdditionalSpaceForValueBiggerThanInitQueue (0.00s)\n"}
+{"Time":"2026-07-28T13:46:02.115545853Z","Action":"pass","Package":"github.com/allegro/bigcache/v3/queue","Test":"TestAllocateAdditionalSpaceForValueBiggerThanInitQueue","Elapsed":0}
+{"Time":"2026-07-28T13:46:02.115547687Z","Action":"cont","Package":"github.com/allegro/bigcache/v3/queue","Test":"TestUnchangedEntriesIndexesAfterAdditionalMemoryAllocationWhereTailIsBeforeHead"}
+{"Time":"2026-07-28T13:46:02.115549957Z","Action":"output","Package":"github.com/allegro/bigcache/v3/queue","Test":"TestUnchangedEntriesIndexesAfterAdditionalMemoryAllocationWhereTailIsBeforeHead","Output":"=== CONT  TestUnchangedEntriesIndexesAfterAdditionalMemoryAllocationWhereTailIsBeforeHead\n"}
+{"Time":"2026-07-28T13:46:02.115555059Z","Action":"cont","Package":"github.com/allegro/bigcache/v3/queue","Test":"TestPopWholeQueue"}
+{"Time":"2026-07-28T13:46:02.115557362Z","Action":"output","Package":"github.com/allegro/bigcache/v3/queue","Test":"TestPopWholeQueue","Output":"=== CONT  TestPopWholeQueue\n"}
+{"Time":"2026-07-28T13:46:02.115559609Z","Action":"cont","Package":"github.com/allegro/bigcache/v3/queue","Test":"TestPeek"}
+{"Time":"2026-07-28T13:46:02.11556154Z","Action":"output","Package":"github.com/allegro/bigcache/v3/queue","Test":"TestPeek","Output":"=== CONT  TestPeek\n"}
+{"Time":"2026-07-28T13:46:02.115574162Z","Action":"cont","Package":"github.com/allegro/bigcache/v3/queue","Test":"TestGetEntryFromEmptyQueue"}
+{"Time":"2026-07-28T13:46:02.115576218Z","Action":"output","Package":"github.com/allegro/bigcache/v3/queue","Test":"TestGetEntryFromEmptyQueue","Output":"=== CONT  TestGetEntryFromEmptyQueue\n"}
+{"Time":"2026-07-28T13:46:02.115591099Z","Action":"cont","Package":"github.com/allegro/bigcache/v3/queue","Test":"TestGetEntryFromInvalidIndex"}
+{"Time":"2026-07-28T13:46:02.115595086Z","Action":"output","Package":"github.com/allegro/bigcache/v3/queue","Test":"TestGetEntryFromInvalidIndex","Output":"=== CONT  TestGetEntryFromInvalidIndex\n"}
+{"Time":"2026-07-28T13:46:02.115597979Z","Action":"cont","Package":"github.com/allegro/bigcache/v3/queue","Test":"TestAllocateAdditionalSpaceForInsufficientFreeFragmentedSpaceWhereTailIsBeforeHead128"}
+{"Time":"2026-07-28T13:46:02.115600013Z","Action":"output","Package":"github.com/allegro/bigcache/v3/queue","Test":"TestAllocateAdditionalSpaceForInsufficientFreeFragmentedSpaceWhereTailIsBeforeHead128","Output":"=== CONT  TestAllocateAdditionalSpaceForInsufficientFreeFragmentedSpaceWhereTailIsBeforeHead128\n"}
+{"Time":"2026-07-28T13:46:02.115620175Z","Action":"cont","Package":"github.com/allegro/bigcache/v3/queue","Test":"TestLen"}
+{"Time":"2026-07-28T13:46:02.115622177Z","Action":"output","Package":"github.com/allegro/bigcache/v3/queue","Test":"TestLen","Output":"=== CONT  TestLen\n"}
+{"Time":"2026-07-28T13:46:02.115641256Z","Action":"cont","Package":"github.com/allegro/bigcache/v3/queue","Test":"TestAllocateAdditionalSpaceForInsufficientFreeFragmentedSpaceWhereTailIsBeforeHead"}
+{"Time":"2026-07-28T13:46:02.115643297Z","Action":"output","Package":"github.com/allegro/bigcache/v3/queue","Test":"TestAllocateAdditionalSpaceForInsufficientFreeFragmentedSpaceWhereTailIsBeforeHead","Output":"=== CONT  TestAllocateAdditionalSpaceForInsufficientFreeFragmentedSpaceWhereTailIsBeforeHead\n"}
+{"Time":"2026-07-28T13:46:02.115652976Z","Action":"cont","Package":"github.com/allegro/bigcache/v3/queue","Test":"TestUnchangedEntriesIndexesAfterAdditionalMemoryAllocationWhereHeadIsBeforeTail"}
+{"Time":"2026-07-28T13:46:02.115655099Z","Action":"output","Package":"github.com/allegro/bigcache/v3/queue","Test":"TestUnchangedEntriesIndexesAfterAdditionalMemoryAllocationWhereHeadIsBeforeTail","Output":"=== CONT  TestUnchangedEntriesIndexesAfterAdditionalMemoryAllocationWhereHeadIsBeforeTail\n"}
+{"Time":"2026-07-28T13:46:02.115657878Z","Action":"cont","Package":"github.com/allegro/bigcache/v3/queue","Test":"TestAllocateAdditionalSpaceForInsufficientFreeFragmentedSpaceWhereHeadIsBeforeTail"}
+{"Time":"2026-07-28T13:46:02.115659791Z","Action":"output","Package":"github.com/allegro/bigcache/v3/queue","Test":"TestAllocateAdditionalSpaceForInsufficientFreeFragmentedSpaceWhereHeadIsBeforeTail","Output":"=== CONT  TestAllocateAdditionalSpaceForInsufficientFreeFragmentedSpaceWhereHeadIsBeforeTail\n"}
+{"Time":"2026-07-28T13:46:02.115662873Z","Action":"cont","Package":"github.com/allegro/bigcache/v3/queue","Test":"TestAllocateAdditionalSpace"}
+{"Time":"2026-07-28T13:46:02.115664649Z","Action":"output","Package":"github.com/allegro/bigcache/v3/queue","Test":"TestAllocateAdditionalSpace","Output":"=== CONT  TestAllocateAdditionalSpace\n"}
+{"Time":"2026-07-28T13:46:02.115669425Z","Action":"cont","Package":"github.com/allegro/bigcache/v3/queue","Test":"TestReuseAvailableSpace"}
+{"Time":"2026-07-28T13:46:02.115671251Z","Action":"output","Package":"github.com/allegro/bigcache/v3/queue","Test":"TestReuseAvailableSpace","Output":"=== CONT  TestReuseAvailableSpace\n"}
+{"Time":"2026-07-28T13:46:02.11567335Z","Action":"cont","Package":"github.com/allegro/bigcache/v3/queue","Test":"TestReset"}
+{"Time":"2026-07-28T13:46:02.115674965Z","Action":"output","Package":"github.com/allegro/bigcache/v3/queue","Test":"TestReset","Output":"=== CONT  TestReset\n"}
+{"Time":"2026-07-28T13:46:02.115677672Z","Action":"cont","Package":"github.com/allegro/bigcache/v3/queue","Test":"TestResetFullQueue"}
+{"Time":"2026-07-28T13:46:02.115679396Z","Action":"output","Package":"github.com/allegro/bigcache/v3/queue","Test":"TestResetFullQueue","Output":"=== CONT  TestResetFullQueue\n"}
+{"Time":"2026-07-28T13:46:02.115681492Z","Action":"cont","Package":"github.com/allegro/bigcache/v3/queue","Test":"TestGetEntryFromIndexOutOfRange"}
+{"Time":"2026-07-28T13:46:02.115683303Z","Action":"output","Package":"github.com/allegro/bigcache/v3/queue","Test":"TestGetEntryFromIndexOutOfRange","Output":"=== CONT  TestGetEntryFromIndexOutOfRange\n"}
+{"Time":"2026-07-28T13:46:02.115685901Z","Action":"cont","Package":"github.com/allegro/bigcache/v3/queue","Test":"TestGetEntryFromIndex"}
+{"Time":"2026-07-28T13:46:02.115687752Z","Action":"output","Package":"github.com/allegro/bigcache/v3/queue","Test":"TestGetEntryFromIndex","Output":"=== CONT  TestGetEntryFromIndex\n"}
+{"Time":"2026-07-28T13:46:02.115689771Z","Action":"cont","Package":"github.com/allegro/bigcache/v3/queue","Test":"TestPushEntryAfterAllocateAdditionMemory"}
+{"Time":"2026-07-28T13:46:02.115691603Z","Action":"output","Package":"github.com/allegro/bigcache/v3/queue","Test":"TestPushEntryAfterAllocateAdditionMemory","Output":"=== CONT  TestPushEntryAfterAllocateAdditionMemory\n"}
+{"Time":"2026-07-28T13:46:02.115746344Z","Action":"cont","Package":"github.com/allegro/bigcache/v3/queue","Test":"TestPushEntryAfterAllocateAdditionMemoryInFull"}
+{"Time":"2026-07-28T13:46:02.115748572Z","Action":"output","Package":"github.com/allegro/bigcache/v3/queue","Test":"TestPushEntryAfterAllocateAdditionMemoryInFull","Output":"=== CONT  TestPushEntryAfterAllocateAdditionMemoryInFull\n"}
+{"Time":"2026-07-28T13:46:02.115798152Z","Action":"output","Package":"github.com/allegro/bigcache/v3/queue","Test":"TestPushEntryAfterAllocateAdditionMemoryInFull","Output":"2026/07/28 13:46:02 Allocated new queue in 124ns; Capacity: 18 \n"}
+{"Time":"2026-07-28T13:46:02.115801412Z","Action":"output","Package":"github.com/allegro/bigcache/v3/queue","Test":"TestPushEntryAfterAllocateAdditionMemoryInFull","Output":"2026/07/28 13:46:02 Allocated new queue in 95ns; Capacity: 18 \n"}
+{"Time":"2026-07-28T13:46:02.115815327Z","Action":"cont","Package":"github.com/allegro/bigcache/v3/queue","Test":"TestMaxSizeLimit"}
+{"Time":"2026-07-28T13:46:02.115817319Z","Action":"output","Package":"github.com/allegro/bigcache/v3/queue","Test":"TestMaxSizeLimit","Output":"=== CONT  TestMaxSizeLimit\n"}
+{"Time":"2026-07-28T13:46:02.115835812Z","Action":"output","Package":"github.com/allegro/bigcache/v3/queue","Test":"TestUnchangedEntriesIndexesAfterAdditionalMemoryAllocationWhereTailIsBeforeHead","Output":"--- PASS: TestUnchangedEntriesIndexesAfterAdditionalMemoryAllocationWhereTailIsBeforeHead (0.00s)\n"}
+{"Time":"2026-07-28T13:46:02.115839023Z","Action":"pass","Package":"github.com/allegro/bigcache/v3/queue","Test":"TestUnchangedEntriesIndexesAfterAdditionalMemoryAllocationWhereTailIsBeforeHead","Elapsed":0}
+{"Time":"2026-07-28T13:46:02.115841192Z","Action":"output","Package":"github.com/allegro/bigcache/v3/queue","Test":"TestPeek","Output":"--- PASS: TestPeek (0.00s)\n"}
+{"Time":"2026-07-28T13:46:02.115843988Z","Action":"pass","Package":"github.com/allegro/bigcache/v3/queue","Test":"TestPeek","Elapsed":0}
+{"Time":"2026-07-28T13:46:02.115845994Z","Action":"output","Package":"github.com/allegro/bigcache/v3/queue","Test":"TestPopWholeQueue","Output":"--- PASS: TestPopWholeQueue (0.00s)\n"}
+{"Time":"2026-07-28T13:46:02.115850135Z","Action":"pass","Package":"github.com/allegro/bigcache/v3/queue","Test":"TestPopWholeQueue","Elapsed":0}
+{"Time":"2026-07-28T13:46:02.115851962Z","Action":"output","Package":"github.com/allegro/bigcache/v3/queue","Test":"TestGetEntryFromEmptyQueue","Output":"--- PASS: TestGetEntryFromEmptyQueue (0.00s)\n"}
+{"Time":"2026-07-28T13:46:02.115856324Z","Action":"pass","Package":"github.com/allegro/bigcache/v3/queue","Test":"TestGetEntryFromEmptyQueue","Elapsed":0}
+{"Time":"2026-07-28T13:46:02.115858107Z","Action":"output","Package":"github.com/allegro/bigcache/v3/queue","Test":"TestGetEntryFromInvalidIndex","Output":"--- PASS: TestGetEntryFromInvalidIndex (0.00s)\n"}
+{"Time":"2026-07-28T13:46:02.115860339Z","Action":"pass","Package":"github.com/allegro/bigcache/v3/queue","Test":"TestGetEntryFromInvalidIndex","Elapsed":0}
+{"Time":"2026-07-28T13:46:02.115862308Z","Action":"output","Package":"github.com/allegro/bigcache/v3/queue","Test":"TestAllocateAdditionalSpaceForInsufficientFreeFragmentedSpaceWhereTailIsBeforeHead128","Output":"--- PASS: TestAllocateAdditionalSpaceForInsufficientFreeFragmentedSpaceWhereTailIsBeforeHead128 (0.00s)\n"}
+{"Time":"2026-07-28T13:46:02.115865401Z","Action":"pass","Package":"github.com/allegro/bigcache/v3/queue","Test":"TestAllocateAdditionalSpaceForInsufficientFreeFragmentedSpaceWhereTailIsBeforeHead128","Elapsed":0}
+{"Time":"2026-07-28T13:46:02.115867346Z","Action":"output","Package":"github.com/allegro/bigcache/v3/queue","Test":"TestLen","Output":"--- PASS: TestLen (0.00s)\n"}
+{"Time":"2026-07-28T13:46:02.115869471Z","Action":"pass","Package":"github.com/allegro/bigcache/v3/queue","Test":"TestLen","Elapsed":0}
+{"Time":"2026-07-28T13:46:02.115871333Z","Action":"output","Package":"github.com/allegro/bigcache/v3/queue","Test":"TestAllocateAdditionalSpaceForInsufficientFreeFragmentedSpaceWhereTailIsBeforeHead","Output":"--- PASS: TestAllocateAdditionalSpaceForInsufficientFreeFragmentedSpaceWhereTailIsBeforeHead (0.00s)\n"}
+{"Time":"2026-07-28T13:46:02.115873641Z","Action":"pass","Package":"github.com/allegro/bigcache/v3/queue","Test":"TestAllocateAdditionalSpaceForInsufficientFreeFragmentedSpaceWhereTailIsBeforeHead","Elapsed":0}
+{"Time":"2026-07-28T13:46:02.115875526Z","Action":"output","Package":"github.com/allegro/bigcache/v3/queue","Test":"TestUnchangedEntriesIndexesAfterAdditionalMemoryAllocationWhereHeadIsBeforeTail","Output":"--- PASS: TestUnchangedEntriesIndexesAfterAdditionalMemoryAllocationWhereHeadIsBeforeTail (0.00s)\n"}
+{"Time":"2026-07-28T13:46:02.11587775Z","Action":"pass","Package":"github.com/allegro/bigcache/v3/queue","Test":"TestUnchangedEntriesIndexesAfterAdditionalMemoryAllocationWhereHeadIsBeforeTail","Elapsed":0}
+{"Time":"2026-07-28T13:46:02.115880226Z","Action":"output","Package":"github.com/allegro/bigcache/v3/queue","Test":"TestAllocateAdditionalSpaceForInsufficientFreeFragmentedSpaceWhereHeadIsBeforeTail","Output":"--- PASS: TestAllocateAdditionalSpaceForInsufficientFreeFragmentedSpaceWhereHeadIsBeforeTail (0.00s)\n"}
+{"Time":"2026-07-28T13:46:02.11588332Z","Action":"pass","Package":"github.com/allegro/bigcache/v3/queue","Test":"TestAllocateAdditionalSpaceForInsufficientFreeFragmentedSpaceWhereHeadIsBeforeTail","Elapsed":0}
+{"Time":"2026-07-28T13:46:02.115885251Z","Action":"output","Package":"github.com/allegro/bigcache/v3/queue","Test":"TestAllocateAdditionalSpace","Output":"--- PASS: TestAllocateAdditionalSpace (0.00s)\n"}
+{"Time":"2026-07-28T13:46:02.115887519Z","Action":"pass","Package":"github.com/allegro/bigcache/v3/queue","Test":"TestAllocateAdditionalSpace","Elapsed":0}
+{"Time":"2026-07-28T13:46:02.115889814Z","Action":"output","Package":"github.com/allegro/bigcache/v3/queue","Test":"TestReuseAvailableSpace","Output":"--- PASS: TestReuseAvailableSpace (0.00s)\n"}
+{"Time":"2026-07-28T13:46:02.11589191Z","Action":"pass","Package":"github.com/allegro/bigcache/v3/queue","Test":"TestReuseAvailableSpace","Elapsed":0}
+{"Time":"2026-07-28T13:46:02.11589375Z","Action":"output","Package":"github.com/allegro/bigcache/v3/queue","Test":"TestReset","Output":"--- PASS: TestReset (0.00s)\n"}
+{"Time":"2026-07-28T13:46:02.1158976Z","Action":"pass","Package":"github.com/allegro/bigcache/v3/queue","Test":"TestReset","Elapsed":0}
+{"Time":"2026-07-28T13:46:02.115899486Z","Action":"output","Package":"github.com/allegro/bigcache/v3/queue","Test":"TestResetFullQueue","Output":"--- PASS: TestResetFullQueue (0.00s)\n"}
+{"Time":"2026-07-28T13:46:02.115901696Z","Action":"pass","Package":"github.com/allegro/bigcache/v3/queue","Test":"TestResetFullQueue","Elapsed":0}
+{"Time":"2026-07-28T13:46:02.115903544Z","Action":"output","Package":"github.com/allegro/bigcache/v3/queue","Test":"TestGetEntryFromIndexOutOfRange","Output":"--- PASS: TestGetEntryFromIndexOutOfRange (0.00s)\n"}
+{"Time":"2026-07-28T13:46:02.115905681Z","Action":"pass","Package":"github.com/allegro/bigcache/v3/queue","Test":"TestGetEntryFromIndexOutOfRange","Elapsed":0}
+{"Time":"2026-07-28T13:46:02.115907433Z","Action":"output","Package":"github.com/allegro/bigcache/v3/queue","Test":"TestGetEntryFromIndex","Output":"--- PASS: TestGetEntryFromIndex (0.00s)\n"}
+{"Time":"2026-07-28T13:46:02.115910428Z","Action":"pass","Package":"github.com/allegro/bigcache/v3/queue","Test":"TestGetEntryFromIndex","Elapsed":0}
+{"Time":"2026-07-28T13:46:02.115912186Z","Action":"output","Package":"github.com/allegro/bigcache/v3/queue","Test":"TestPushEntryAfterAllocateAdditionMemoryInFull","Output":"--- PASS: TestPushEntryAfterAllocateAdditionMemoryInFull (0.00s)\n"}
+{"Time":"2026-07-28T13:46:02.115914256Z","Action":"pass","Package":"github.com/allegro/bigcache/v3/queue","Test":"TestPushEntryAfterAllocateAdditionMemoryInFull","Elapsed":0}
+{"Time":"2026-07-28T13:46:02.115916146Z","Action":"output","Package":"github.com/allegro/bigcache/v3/queue","Test":"TestPushEntryAfterAllocateAdditionMemory","Output":"--- PASS: TestPushEntryAfterAllocateAdditionMemory (0.00s)\n"}
+{"Time":"2026-07-28T13:46:02.115918217Z","Action":"pass","Package":"github.com/allegro/bigcache/v3/queue","Test":"TestPushEntryAfterAllocateAdditionMemory","Elapsed":0}
+{"Time":"2026-07-28T13:46:02.115920063Z","Action":"output","Package":"github.com/allegro/bigcache/v3/queue","Test":"TestMaxSizeLimit","Output":"--- PASS: TestMaxSizeLimit (0.00s)\n"}
+{"Time":"2026-07-28T13:46:02.115921873Z","Action":"pass","Package":"github.com/allegro/bigcache/v3/queue","Test":"TestMaxSizeLimit","Elapsed":0}
+{"Time":"2026-07-28T13:46:02.115923701Z","Action":"output","Package":"github.com/allegro/bigcache/v3/queue","Output":"PASS\n"}
+{"Time":"2026-07-28T13:46:02.116197324Z","Action":"output","Package":"github.com/allegro/bigcache/v3/queue","Output":"ok  \tgithub.com/allegro/bigcache/v3/queue\t0.002s\n"}
+{"Time":"2026-07-28T13:46:02.116210551Z","Action":"pass","Package":"github.com/allegro/bigcache/v3/queue","Elapsed":0.002}
+{"Time":"2026-07-28T13:46:02.434339907Z","Action":"start","Package":"github.com/allegro/bigcache/v3/server"}
+{"Time":"2026-07-28T13:46:02.434386514Z","Action":"output","Package":"github.com/allegro/bigcache/v3/server","Output":"FAIL\tgithub.com/allegro/bigcache/v3/server [build failed]\n"}
+{"Time":"2026-07-28T13:46:02.434393701Z","Action":"fail","Package":"github.com/allegro/bigcache/v3/server","Elapsed":0,"FailedBuild":"github.com/allegro/bigcache/v3"}

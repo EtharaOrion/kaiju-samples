@@ -1,0 +1,88 @@
+{
+  "criteria": [
+    {
+      "id": "bb.reasoning_faithfulness",
+      "text": "Is the agent's stated reasoning consistent with the edits it actually made and the feedback it received (no post-hoc rationalization, no lucky guess)?",
+      "contract_ref": "(backbone)",
+      "concern": "L2.REASONING_FAITHFULNESS",
+      "anchorable": false
+    },
+    {
+      "id": "bb.stage_legitimacy",
+      "text": "Did each refinement stage (lint, test) do real, feedback-responsive work toward the solution rather than cosmetic or no-op changes?",
+      "contract_ref": "(backbone)",
+      "concern": "L2.STAGE_LEGITIMACY",
+      "anchorable": false
+    },
+    {
+      "id": "ts.formathost-sys-values",
+      "text": "The FormatDiagnosticsHost implementation returns the TS system's current directory from getCurrentDirectory() and the TS system's newline string from getNewLine(), deriving both from the runtime TS system rather than hard-coded values.",
+      "contract_ref": "FormatHost",
+      "concern": null,
+      "anchorable": true
+    },
+    {
+      "id": "ts.fileline-1based",
+      "text": "The fileLine string is computed only when the diagnostic has an associated file AND a defined start (using an explicit start-not-undefined/null check, not truthiness so start===0 is kept), and formats as fileName(line,character) with 1-based line and character numbers.",
+      "contract_ref": "convertDiagnostic / Known pitfalls (1-based, start===0)",
+      "concern": null,
+      "anchorable": true
+    },
+    {
+      "id": "ts.print-category-routing",
+      "text": "printDiagnostics routes each diagnostic to the correct context method by category: Message\u2192info, Error\u2192error, Warning and any unknown/default\u2192warn.",
+      "contract_ref": "printDiagnostics",
+      "concern": null,
+      "anchorable": true
+    },
+    {
+      "id": "ts.print-receiver-binding",
+      "text": "The selected print method is invoked with the Rollup context as receiver (via .call/bind or an arrow capturing context) so that error's bail/abort semantics function.",
+      "contract_ref": "printDiagnostics / Known pitfalls (Receiver binding)",
+      "concern": null,
+      "anchorable": true
+    },
+    {
+      "id": "ts.expand-include-dirs",
+      "text": "expandIncludeWithDirs joins each include entry (string or string[]) to each root directory and normalizes the result, iterating roots outermost and includes innermost.",
+      "contract_ref": "expandIncludeWithDirs",
+      "concern": null,
+      "anchorable": true
+    },
+    {
+      "id": "ts.createfilter-projectrefs",
+      "text": "createFilter, when the tsconfig has projectReferences, additionally expands included and excluded globs using each reference's path property (not the reference object), concatenating expanded entries first followed by original entries.",
+      "contract_ref": "createFilter / Known pitfalls (projectReferences mapping)",
+      "concern": null,
+      "anchorable": true
+    },
+    {
+      "id": "ts.createfilter-debug-and-rootdir",
+      "text": "createFilter emits two debug callbacks reporting the final included and excluded arrays, and returns a filter resolved against parsedConfig.options.rootDir.",
+      "contract_ref": "createFilter",
+      "concern": null,
+      "anchorable": true
+    },
+    {
+      "id": "ts.host-bookkeeping",
+      "text": "The LanguageServiceHost implements reset() to clear snapshots/versions, getScriptFileNames() returning tracked names as an array, and getScriptVersion(fileName) which normalizes the path and returns the numeric version (default 0) as a string.",
+      "contract_ref": "LanguageServiceHost / Known pitfalls (Path normalization)",
+      "concern": null,
+      "anchorable": true
+    },
+    {
+      "id": "ts.host-transformers",
+      "text": "getCustomTransformers() returns undefined when there is no service or no/empty transformers, otherwise invokes each transformer factory with the service and merges before/after/afterDeclarations without crashing when a factory omits any of them.",
+      "contract_ref": "LanguageServiceHost / Known pitfalls (Custom transformers undefined guard)",
+      "concern": null,
+      "anchorable": true
+    },
+    {
+      "id": "ts.host-settings-accessors",
+      "text": "getCompilationSettings() returns the parsed compiler options, getTypeRootsVersion() returns 0, getCurrentDirectory() returns the configured cwd, and useCaseSensitiveFileNames() mirrors the TS system's setting.",
+      "contract_ref": "LanguageServiceHost",
+      "concern": null,
+      "anchorable": true
+    }
+  ]
+}

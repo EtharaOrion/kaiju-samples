@@ -1,0 +1,9 @@
+{
+  "kind": "commit0-golden-ref",
+  "repo": "Zahgon/async-h1",
+  "base_commit": "5054a44f41a6341c3962e692f9a8cca934a7e4a0",
+  "reference_commit": "4de64c18de36d63e3f422e0c88187534a7e11e2e",
+  "src_dir": "src",
+  "language": "rust",
+  "note": "Golden solution = the repo at reference_commit; solve.sh fetches+resets to it."
+}

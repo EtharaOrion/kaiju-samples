@@ -1,0 +1,57 @@
+{
+  "instance_id": "commit-0/BlackSheep",
+  "id": "6e2b7758-4c4c-4955-b181-a81286f708bc",
+  "repo": "Zahgon/BlackSheep",
+  "base_commit": "5cb9476fe374b49f2835c86cece5f07b61af074b",
+  "reference_commit": "b5d548b345fe800269cbbbf21126ba1f3a2426a0",
+  "setup": {
+    "install": "BLACKSHEEP_NO_EXTENSIONS=1 pip install -e \".\"",
+    "packages": "",
+    "pip_packages": [
+      "async-timeout>=4.0.0; python_version < '3.11'",
+      "certifi>=2025.4.26",
+      "cryptography>=45.0.2,<47.0.0",
+      "Cython==3.1.4",
+      "defusedxml>=0.7.1",
+      "essentials>=1.1.8,<2.0",
+      "essentials-openapi>=1.2.0,<2.0",
+      "Flask[async]==3.1.1",
+      "guardpost>=1.0.4",
+      "h11>=0.14.0,<1.0.0",
+      "h2>=4.0.0,<5.0.0",
+      "httptools>=0.7.1; platform_python_implementation != 'PyPy'",
+      "Hypercorn==0.17.3",
+      "itsdangerous~=2.2.0",
+      "Jinja2~=3.1.6",
+      "pydantic==2.12.3",
+      "pydantic_core==2.41.4",
+      "PyJWT==2.12.0",
+      "pytest==8.3.5",
+      "pytest-asyncio==1.2.0",
+      "pytest-cov==6.1.1",
+      "pytest-json-report",
+      "requests==2.32.4",
+      "rodi~=2.0.8",
+      "setuptools==80.7.1",
+      "starlette>=0.37.0",
+      "uvicorn==0.34.2",
+      "websockets~=15.0.1"
+    ],
+    "pre_install": [
+      "apt-get install -y libffi-dev libssl-dev"
+    ],
+    "python": "3.10",
+    "specification": "https://www.neoteroi.dev/blacksheep/",
+    "version_source": "pyproject.toml[project.requires-python]",
+    "version_conflicts": [],
+    "system_deps_hint": []
+  },
+  "test": {
+    "test_cmd": "pytest",
+    "test_dir": "tests"
+  },
+  "src_dir": "blacksheep",
+  "base_compiles": null,
+  "language": "python",
+  "ecr_image_uri": "426628337772.dkr.ecr.ap-south-1.amazonaws.com/kaiju_q2:python_neoteroi_blacksheep"
+}

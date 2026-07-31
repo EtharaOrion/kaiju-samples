@@ -1,0 +1,3586 @@
+============================= test session starts ==============================
+platform linux -- Python 3.9.25, pytest-8.4.2, pluggy-1.6.0
+rootdir: /tmp/commit0-inplace-8wm6ddli/tree
+plugins: cov-7.1.0, json-report-1.5.0, metadata-3.1.1, subtests-0.15.0
+collected 683 items
+
+tests/oauth1/rfc5849/endpoints/test_access_token.py .......              [  1%]
+tests/oauth1/rfc5849/endpoints/test_authorization.py .....               [  1%]
+tests/oauth1/rfc5849/endpoints/test_base.py ...................          [  4%]
+tests/oauth1/rfc5849/endpoints/test_request_token.py ........            [  5%]
+tests/oauth1/rfc5849/endpoints/test_resource.py .......                  [  6%]
+tests/oauth1/rfc5849/endpoints/test_signature_only.py ....               [  7%]
+tests/oauth1/rfc5849/test_client.py .........................            [ 10%]
+tests/oauth1/rfc5849/test_parameters.py .....                            [ 11%]
+tests/oauth1/rfc5849/test_request_validator.py ...                       [ 12%]
+tests/oauth1/rfc5849/test_signatures.py ................                 [ 14%]
+tests/oauth1/rfc5849/test_utils.py .....                                 [ 15%]
+tests/oauth2/rfc6749/clients/test_backend_application.py ..              [ 15%]
+tests/oauth2/rfc6749/clients/test_base.py ....F........             [ 17%]
+tests/oauth2/rfc6749/clients/test_legacy_application.py ...              [ 17%]
+tests/oauth2/rfc6749/clients/test_mobile_application.py ...              [ 18%]
+tests/oauth2/rfc6749/clients/test_service_application.py ...             [ 18%]
+tests/oauth2/rfc6749/clients/test_web_application.py ........            [ 19%]
+tests/oauth2/rfc6749/endpoints/test_base_endpoint.py ....                [ 20%]
+tests/oauth2/rfc6749/endpoints/test_client_authentication.py .......     [ 21%]
+tests/oauth2/rfc6749/endpoints/test_credentials_preservation.py .....    [ 22%]
+tests/oauth2/rfc6749/endpoints/test_error_responses.py .........F....... [ 24%]
+.....                                                                    [ 25%]
+tests/oauth2/rfc6749/endpoints/test_extra_credentials.py ..              [ 25%]
+tests/oauth2/rfc6749/endpoints/test_introspect_endpoint.py ...........   [ 27%]
+tests/oauth2/rfc6749/endpoints/test_metadata.py .......                  [ 28%]
+tests/oauth2/rfc6749/endpoints/test_resource_owner_association.py ....   [ 28%]
+tests/oauth2/rfc6749/endpoints/test_revocation_endpoint.py FF.F.FF.      [ 30%]
+tests/oauth2/rfc6749/endpoints/test_scope_handling.py .F.F               [ 30%]
+tests/oauth2/rfc6749/grant_types/test_authorization_code.py ............ [ 32%]
+...FFFF.....................                                             [ 36%]
+tests/oauth2/rfc6749/grant_types/test_client_credentials.py .F...        [ 37%]
+tests/oauth2/rfc6749/grant_types/test_implicit.py F..                    [ 37%]
+tests/oauth2/rfc6749/grant_types/test_refresh_token.py .......FFFF...... [ 40%]
+..                                                                       [ 40%]
+tests/oauth2/rfc6749/grant_types/test_resource_owner_password.py ...F... [ 41%]
+.....                                                                    [ 42%]
+tests/oauth2/rfc6749/test_parameters.py .........        [ 43%]
+tests/oauth2/rfc6749/test_request_validator.py .                         [ 43%]
+tests/oauth2/rfc6749/test_server.py .F...FF..FFF..F..                    [ 46%]
+tests/oauth2/rfc6749/test_tokens.py ..F.....                             [ 47%]
+tests/oauth2/rfc6749/test_utils.py .......                               [ 48%]
+tests/oauth2/rfc8628/clients/test_device.py .F                           [ 48%]
+tests/oauth2/rfc8628/endpoints/test_device_application_server.py .       [ 48%]
+tests/oauth2/rfc8628/endpoints/test_error_responses.py .......           [ 49%]
+tests/oauth2/rfc8628/grant_types/test_device_code.py FFFF.F              [ 50%]
+tests/oauth2/rfc8628/test_server.py FFFFFF                               [ 51%]
+tests/openid/connect/core/endpoints/test_claims_handling.py FF           [ 51%]
+tests/openid/connect/core/endpoints/test_openid_connect_params_handling.py . [ 52%]
+FF                                                                       [ 52%]
+tests/openid/connect/core/endpoints/test_refresh_token.py .F             [ 52%]
+tests/openid/connect/core/endpoints/test_userinfo_endpoint.py ......     [ 53%]
+tests/openid/connect/core/grant_types/test_authorization_code.py ....... [ 54%]
+........FFFF....................................FFFF.................... [ 65%]
+..FFF.                                                                   [ 66%]
+tests/openid/connect/core/grant_types/test_base.py FFFFFF..              [ 67%]
+tests/openid/connect/core/grant_types/test_dispatchers.py .......        [ 68%]
+tests/openid/connect/core/grant_types/test_hybrid.py ...............FFFF [ 71%]
+......................FFF................FFFF.....................FFFFFF [ 81%]
+FFFFFFFFFFFF                                                             [ 83%]
+tests/openid/connect/core/grant_types/test_implicit.py F..F..FF..FFFF    [ 85%]
+tests/openid/connect/core/grant_types/test_refresh_token.py .......FFFF. [ 87%]
+..............FFFF........F.F                                            [ 91%]
+tests/openid/connect/core/test_request_validator.py .                    [ 91%]
+tests/openid/connect/core/test_server.py .F...F..                        [ 92%]
+tests/openid/connect/core/test_tokens.py .....F.                         [ 93%]
+tests/test_common.py ................................                    [ 98%]
+tests/test_uri_validate.py ......ss...                                   [100%]
+
+=================================== FAILURES ===================================
+_________________ ClientTest.test_create_code_verifier_length __________________
+
+self = <tests.oauth2.rfc6749.clients.test_base.ClientTest testMethod=test_create_code_verifier_length>
+
+    def test_create_code_verifier_length(self):
+        client = Client(self.client_id)
+        length = 96
+        code_verifier = client.create_code_verifier(length=length)
+>       self.assertEqual(len(code_verifier), length)
+E       AssertionError: 128 != 96
+
+tests/oauth2/rfc6749/clients/test_base.py:323: AssertionError
+____________________ ErrorResponseTest.test_invalid_request ____________________
+
+self = <tests.oauth2.rfc6749.endpoints.test_error_responses.ErrorResponseTest testMethod=test_invalid_request>
+
+    def test_invalid_request(self):
+        self.validator.get_default_redirect_uri.return_value = 'https://i.b/cb'
+        token_uri = 'https://i.b/token'
+    
+        invalid_bodies = [
+            # duplicate params
+            'grant_type=authorization_code&client_id=nope&client_id=nope&code=foo'
+        ]
+        for body in invalid_bodies:
+>           _, body, _ = self.web.create_token_response(token_uri,
+                    body=body)
+
+tests/oauth2/rfc6749/endpoints/test_error_responses.py:146: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+oauthlib/oauth2/rfc6749/endpoints/base.py:106: in wrapper
+    return f(endpoint, uri, *args, **kwargs)
+oauthlib/oauth2/rfc6749/endpoints/token.py:73: in create_token_response
+    return grant_type_handler.create_token_response(request, self.default_token_type)
+oauthlib/oauth2/rfc6749/grant_types/authorization_code.py:110: in create_token_response
+    self.validate_token_request(request)
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = <oauthlib.oauth2.rfc6749.grant_types.authorization_code.AuthorizationCodeGrant object at 0xffff805c2eb0>
+request = <oauthlib.Request url="https://i.b/token", http_method="POST", headers="{}", body="grant_type=authorization_code&client_id=nope&client_id=nope&code=foo">
+
+    def validate_token_request(self, request):
+        """
+        :param request: OAuthlib request.
+        :type request: oauthlib.common.Request
+        """
+        # REQUIRED. Value MUST be set to "authorization_code".
+        if request.grant_type not in ("authorization_code", "openid"):
+            raise errors.UnsupportedGrantTypeError(request=request)
+    
+        if request.code is None:
+            raise errors.InvalidRequestError(description="Missing code parameter.", request=request)
+    
+        for validator in self.custom_validators.all_pre:
+            validator(request)
+    
+        for param in ("client_id", "grant_type", "redirect_uri"):
+            if param in request.duplicate_params:
+                raise errors.InvalidRequestError(description="Duplicate %s parameter." % param, request=request)
+    
+        if self.request_validator.client_authentication_required(request):
+            # If the client type is confidential or the client was issued client
+            # credentials (or assigned other authentication requirements), the
+            # client MUST authenticate with the authorization server as described
+            # in Section 3.2.1.
+            # https://tools.ietf.org/html/rfc6749#section-3.2.1
+            if not self.request_validator.authenticate_client(request):
+                log.debug("Client authentication failed, %r.", request)
+                raise errors.InvalidClientError(request=request)
+        elif not self.request_validator.authenticate_client_id(request.client_id, request):
+            # REQUIRED, if the client is not authenticating with the
+            # authorization server as described in Section 3.2.1.
+            # https://tools.ietf.org/html/rfc6749#section-3.2.1
+            log.debug("Client authentication failed, %r.", request)
+            raise errors.InvalidClientError(request=request)
+    
+        if not hasattr(request.client, "client_id"):
+>           raise NotImplementedError("Authenticate client must set the request.client.client_id attribute in authenticate_client.")
+E           NotImplementedError: Authenticate client must set the request.client.client_id attribute in authenticate_client.
+
+oauthlib/oauth2/rfc6749/grant_types/authorization_code.py:270: NotImplementedError
+_____________ RevocationEndpointTest.test_revoke_bad_post_request ______________
+
+self = <tests.oauth2.rfc6749.endpoints.test_revocation_endpoint.RevocationEndpointTest testMethod=test_revoke_bad_post_request>
+
+    def test_revoke_bad_post_request(self):
+        endpoint = RevocationEndpoint(self.validator,
+                                      supported_token_types=['access_token'])
+        for param in ['token', 'secret', 'code', 'foo']:
+            uri = 'http://some.endpoint?' + urlencode([(param, 'secret')])
+            body = urlencode([('token', 'foo'),
+                              ('token_type_hint', 'access_token')])
+            h, b, s = endpoint.create_revocation_response(uri,
+                    headers=self.headers, body=body)
+>           self.assertEqual(h, self.resp_h)
+E           AssertionError: {} != {'Cache-Control': 'no-store', 'Content-Typ[40 chars]che'}
+E           - {}
+E           + {'Cache-Control': 'no-store',
+E           +  'Content-Type': 'application/json',
+E           +  'Pragma': 'no-cache'}
+
+tests/oauth2/rfc6749/endpoints/test_revocation_endpoint.py:145: AssertionError
+__________ RevocationEndpointTest.test_revoke_invalid_request_method ___________
+
+self = <tests.oauth2.rfc6749.endpoints.test_revocation_endpoint.RevocationEndpointTest testMethod=test_revoke_invalid_request_method>
+
+    def test_revoke_invalid_request_method(self):
+        endpoint = RevocationEndpoint(self.validator,
+                                      supported_token_types=['access_token'])
+        test_methods = ['GET', 'pUt', 'dEleTe', 'paTcH']
+        test_methods = test_methods + [x.lower() for x in test_methods] + [x.upper() for x in test_methods]
+        for method in test_methods:
+            body = urlencode([('token', 'foo'),
+                              ('token_type_hint', 'refresh_token')])
+            h, b, s = endpoint.create_revocation_response(self.uri,
+                    http_method = method, headers=self.headers, body=body)
+>           self.assertEqual(h, self.resp_h)
+E           AssertionError: {} != {'Cache-Control': 'no-store', 'Content-Typ[40 chars]che'}
+E           - {}
+E           + {'Cache-Control': 'no-store',
+E           +  'Content-Type': 'application/json',
+E           +  'Pragma': 'no-cache'}
+
+tests/oauth2/rfc6749/endpoints/test_revocation_endpoint.py:131: AssertionError
+____ RevocationEndpointTest.test_revoke_token_client_authentication_failed _____
+
+self = <tests.oauth2.rfc6749.endpoints.test_revocation_endpoint.RevocationEndpointTest testMethod=test_revoke_token_client_authentication_failed>
+
+    def test_revoke_token_client_authentication_failed(self):
+        self.validator.authenticate_client.return_value = False
+        body = urlencode([('token', 'foo'),
+                          ('token_type_hint', 'access_token')])
+        h, b, s = self.endpoint.create_revocation_response(self.uri,
+                headers=self.headers, body=body)
+>       self.assertEqual(h, {
+            'Content-Type': 'application/json',
+            'Cache-Control': 'no-store',
+            'Pragma': 'no-cache',
+            "WWW-Authenticate": 'Bearer error="invalid_client"'
+        })
+E       AssertionError: {} != {'Content-Type': 'application/json', 'Cach[93 chars]nt"'}
+E       - {}
+E       + {'Cache-Control': 'no-store',
+E       +  'Content-Type': 'application/json',
+E       +  'Pragma': 'no-cache',
+E       +  'WWW-Authenticate': 'Bearer error="invalid_client"'}
+
+tests/oauth2/rfc6749/endpoints/test_revocation_endpoint.py:54: AssertionError
+_ RevocationEndpointTest.test_revoke_token_public_client_authentication_failed _
+
+self = <tests.oauth2.rfc6749.endpoints.test_revocation_endpoint.RevocationEndpointTest testMethod=test_revoke_token_public_client_authentication_failed>
+
+    def test_revoke_token_public_client_authentication_failed(self):
+        self.validator.client_authentication_required.return_value = False
+        self.validator.authenticate_client_id.return_value = False
+        body = urlencode([('token', 'foo'),
+                          ('token_type_hint', 'access_token')])
+        h, b, s = self.endpoint.create_revocation_response(self.uri,
+                headers=self.headers, body=body)
+>       self.assertEqual(h, {
+            'Content-Type': 'application/json',
+            'Cache-Control': 'no-store',
+            'Pragma': 'no-cache',
+            "WWW-Authenticate": 'Bearer error="invalid_client"'
+        })
+E       AssertionError: {} != {'Content-Type': 'application/json', 'Cach[93 chars]nt"'}
+E       - {}
+E       + {'Cache-Control': 'no-store',
+E       +  'Content-Type': 'application/json',
+E       +  'Pragma': 'no-cache',
+E       +  'WWW-Authenticate': 'Bearer error="invalid_client"'}
+
+tests/oauth2/rfc6749/endpoints/test_revocation_endpoint.py:82: AssertionError
+_____________ RevocationEndpointTest.test_revoke_unsupported_token _____________
+
+self = <tests.oauth2.rfc6749.endpoints.test_revocation_endpoint.RevocationEndpointTest testMethod=test_revoke_unsupported_token>
+
+    def test_revoke_unsupported_token(self):
+        endpoint = RevocationEndpoint(self.validator,
+                                      supported_token_types=['access_token'])
+        body = urlencode([('token', 'foo'),
+                          ('token_type_hint', 'refresh_token')])
+        h, b, s = endpoint.create_revocation_response(self.uri,
+                headers=self.headers, body=body)
+>       self.assertEqual(h, self.resp_h)
+E       AssertionError: {} != {'Cache-Control': 'no-store', 'Content-Typ[40 chars]che'}
+E       - {}
+E       + {'Cache-Control': 'no-store',
+E       +  'Content-Type': 'application/json',
+E       +  'Pragma': 'no-cache'}
+
+tests/oauth2/rfc6749/endpoints/test_revocation_endpoint.py:111: AssertionError
+_____________________ TestScopeHandling.test_scope_changed _____________________
+
+self = <tests.oauth2.rfc6749.endpoints.test_scope_handling.TestScopeHandling testMethod=test_scope_changed>
+
+    def test_scope_changed(self):
+        scope = 'pics+http%3A%2f%2fa.b%2fvideos'
+        scopes = ['images', 'http://a.b/videos']
+        decoded_scope = 'images http://a.b/videos'
+        auth_uri = 'http://example.com/path?client_id=abc&response_type='
+        token_uri = 'http://example.com/path'
+    
+        # authorization grant
+        h, _, s = self.web.create_authorization_response(
+                auth_uri + 'code', scopes=scopes)
+        self.assertEqual(s, 302)
+        self.assertIn('Location', h)
+        code = get_query_credentials(h['Location'])['code'][0]
+        self.validator.validate_code.side_effect = self.set_scopes(scopes)
+        _, body, _ = self.web.create_token_response(token_uri,
+                body='grant_type=authorization_code&code=%s' % code)
+>       self.assertEqual(json.loads(body)['scope'], decoded_scope)
+E       KeyError: 'scope'
+
+tests/oauth2/rfc6749/endpoints/test_scope_handling.py:133: KeyError
+__________________ TestScopeHandling.test_scope_preservation ___________________
+
+self = <tests.oauth2.rfc6749.endpoints.test_scope_handling.TestScopeHandling testMethod=test_scope_preservation>
+
+    def test_scope_preservation(self):
+        scope = 'pics+http%3A%2f%2fa.b%2fvideos'
+        decoded_scope = 'pics http://a.b/videos'
+        auth_uri = 'http://example.com/path?client_id=abc&response_type='
+        token_uri = 'http://example.com/path'
+    
+        # authorization grant
+        for backend_server_type in ['web', 'server']:
+            h, _, s = getattr(self, backend_server_type).create_authorization_response(
+                    auth_uri + 'code', scopes=decoded_scope.split(' '))
+            self.validator.validate_code.side_effect = self.set_scopes(decoded_scope.split(' '))
+            self.assertEqual(s, 302)
+            self.assertIn('Location', h)
+            code = get_query_credentials(h['Location'])['code'][0]
+            _, body, _ = getattr(self, backend_server_type).create_token_response(token_uri,
+                    body='client_id=me&redirect_uri=http://back.to/me&grant_type=authorization_code&code=%s' % code)
+>           self.assertEqual(json.loads(body)['scope'], decoded_scope)
+E           KeyError: 'scope'
+
+tests/oauth2/rfc6749/endpoints/test_scope_handling.py:91: KeyError
+____________ AuthorizationCodeGrantTest.test_create_token_response _____________
+
+self = <tests.oauth2.rfc6749.grant_types.test_authorization_code.AuthorizationCodeGrantTest testMethod=test_create_token_response>
+
+    def test_create_token_response(self):
+        bearer = BearerToken(self.mock_validator)
+    
+        h, token, s = self.auth.create_token_response(self.request, bearer)
+        token = json.loads(token)
+        self.assertEqual(self.mock_validator.save_token.call_count, 1)
+        self.assertIn('access_token', token)
+        self.assertIn('refresh_token', token)
+        self.assertIn('expires_in', token)
+>       self.assertIn('scope', token)
+E       AssertionError: 'scope' not found in {'access_token': 'mcdb7nbitbMFOJkcJOcgNDcNbhDLDu', 'expires_in': 3600, 'token_type': 'Bearer', 'refresh_token': 'z2t1wmyhSTYcmku6hSlmdyZlNVuHeq'}
+
+tests/oauth2/rfc6749/grant_types/test_authorization_code.py:123: AssertionError
+_ AuthorizationCodeGrantTest.test_create_token_response_without_refresh_token __
+
+self = <tests.oauth2.rfc6749.grant_types.test_authorization_code.AuthorizationCodeGrantTest testMethod=test_create_token_response_without_refresh_token>
+
+    def test_create_token_response_without_refresh_token(self):
+        self.auth.refresh_token = False  # Not to issue refresh token.
+    
+        bearer = BearerToken(self.mock_validator)
+        h, token, s = self.auth.create_token_response(self.request, bearer)
+        token = json.loads(token)
+        self.assertEqual(self.mock_validator.save_token.call_count, 1)
+        self.assertIn('access_token', token)
+        self.assertNotIn('refresh_token', token)
+        self.assertIn('expires_in', token)
+>       self.assertIn('scope', token)
+E       AssertionError: 'scope' not found in {'access_token': '07ai2BitmXi41RXi70d1y3sYsgVbyC', 'expires_in': 3600, 'token_type': 'Bearer'}
+
+tests/oauth2/rfc6749/grant_types/test_authorization_code.py:141: AssertionError
+____________ AuthorizationCodeGrantTest.test_custom_auth_validators ____________
+
+self = <tests.oauth2.rfc6749.grant_types.test_authorization_code.AuthorizationCodeGrantTest testMethod=test_custom_auth_validators>
+
+    def test_custom_auth_validators(self):
+        self.setup_validators()
+    
+        bearer = BearerToken(self.mock_validator)
+        self.auth.create_authorization_response(self.request, bearer)
+        self.assertTrue(self.authval1.called)
+>       self.assertTrue(self.authval2.called)
+E       AssertionError: False is not true
+
+tests/oauth2/rfc6749/grant_types/test_authorization_code.py:58: AssertionError
+___________ AuthorizationCodeGrantTest.test_custom_token_validators ____________
+
+self = <tests.oauth2.rfc6749.grant_types.test_authorization_code.AuthorizationCodeGrantTest testMethod=test_custom_token_validators>
+
+    def test_custom_token_validators(self):
+        self.setup_validators()
+    
+        bearer = BearerToken(self.mock_validator)
+        self.auth.create_token_response(self.request, bearer)
+        self.assertTrue(self.tknval1.called)
+        self.assertTrue(self.tknval2.called)
+>       self.assertFalse(self.authval1.called)
+E       AssertionError: True is not false
+
+tests/oauth2/rfc6749/grant_types/test_authorization_code.py:69: AssertionError
+______ ClientCredentialsGrantTest.test_custom_auth_validators_unsupported ______
+
+self = <tests.oauth2.rfc6749.grant_types.test_client_credentials.ClientCredentialsGrantTest testMethod=test_custom_auth_validators_unsupported>
+
+    def test_custom_auth_validators_unsupported(self):
+        authval1, authval2 = mock.Mock(), mock.Mock()
+        expected = ('ClientCredentialsGrant does not support authorization '
+                    'validators. Use token validators instead.')
+        with self.assertRaises(ValueError) as caught:
+            ClientCredentialsGrant(self.mock_validator, pre_auth=[authval1])
+        self.assertEqual(caught.exception.args[0], expected)
+        with self.assertRaises(ValueError) as caught:
+            ClientCredentialsGrant(self.mock_validator, post_auth=[authval2])
+        self.assertEqual(caught.exception.args[0], expected)
+        with self.assertRaises(AttributeError):
+>           self.auth.custom_validators.pre_auth.append(authval1)
+E           AssertionError: AttributeError not raised
+
+tests/oauth2/rfc6749/grant_types/test_client_credentials.py:36: AssertionError
+_________________ ImplicitGrantTest.test_create_token_response _________________
+
+self = <tests.oauth2.rfc6749.grant_types.test_implicit.ImplicitGrantTest testMethod=test_create_token_response>
+generate_token = <MagicMock name='generate_token' id='281472836007008'>
+
+    @mock.patch('oauthlib.common.generate_token')
+    def test_create_token_response(self, generate_token):
+        generate_token.return_value = '1234'
+        bearer = BearerToken(self.mock_validator, expires_in=1800)
+        h, b, s = self.auth.create_token_response(self.request, bearer)
+        correct_uri = 'https://b.c/p#access_token=1234&token_type=Bearer&expires_in=1800&state=xyz&scope=hello+world'
+        self.assertEqual(s, 302)
+>       self.assertURLEqual(h['Location'], correct_uri, parse_fragment=True)
+
+tests/oauth2/rfc6749/grant_types/test_implicit.py:34: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+tests/unittest/__init__.py:14: in url_equals
+    self.assertCountEqual(fragment_a, fragment_b)
+E   AssertionError: Element counts were not equal:
+E   First has 0, Second has 1:  ('scope', 'hello world')
+____________ RefreshTokenGrantTest.test_create_token_inherit_scope _____________
+
+self = <tests.oauth2.rfc6749.grant_types.test_refresh_token.RefreshTokenGrantTest testMethod=test_create_token_inherit_scope>
+
+    def test_create_token_inherit_scope(self):
+        self.request.scope = None
+        self.mock_validator.get_original_scopes.return_value = ['foo', 'bar']
+        bearer = BearerToken(self.mock_validator)
+        headers, body, status_code = self.auth.create_token_response(
+                self.request, bearer)
+        token = json.loads(body)
+        self.assertEqual(self.mock_validator.save_token.call_count, 1)
+        self.assertIn('access_token', token)
+        self.assertIn('token_type', token)
+        self.assertIn('expires_in', token)
+>       self.assertEqual(token['scope'], 'foo bar')
+E       KeyError: 'scope'
+
+tests/oauth2/rfc6749/grant_types/test_refresh_token.py:76: KeyError
+_______________ RefreshTokenGrantTest.test_create_token_response _______________
+
+self = <tests.oauth2.rfc6749.grant_types.test_refresh_token.RefreshTokenGrantTest testMethod=test_create_token_response>
+
+    def test_create_token_response(self):
+        self.mock_validator.get_original_scopes.return_value = ['foo', 'bar']
+        bearer = BearerToken(self.mock_validator)
+        headers, body, status_code = self.auth.create_token_response(
+                self.request, bearer)
+        token = json.loads(body)
+        self.assertEqual(self.mock_validator.save_token.call_count, 1)
+        self.assertIn('access_token', token)
+        self.assertIn('token_type', token)
+        self.assertIn('expires_in', token)
+>       self.assertEqual(token['scope'], 'foo')
+E       AssertionError: 'f o o' != 'foo'
+E       - f o o
+E       ?  - -
+E       + foo
+
+tests/oauth2/rfc6749/grant_types/test_refresh_token.py:38: AssertionError
+________ RefreshTokenGrantTest.test_create_token_within_original_scope _________
+
+self = <tests.oauth2.rfc6749.grant_types.test_refresh_token.RefreshTokenGrantTest testMethod=test_create_token_within_original_scope>
+
+    def test_create_token_within_original_scope(self):
+        self.mock_validator.get_original_scopes.return_value = ['baz']
+        self.mock_validator.is_within_original_scope.return_value = True
+        bearer = BearerToken(self.mock_validator)
+        headers, body, status_code = self.auth.create_token_response(
+                self.request, bearer)
+        token = json.loads(body)
+        self.assertEqual(self.mock_validator.save_token.call_count, 1)
+        self.assertIn('access_token', token)
+        self.assertIn('token_type', token)
+        self.assertIn('expires_in', token)
+>       self.assertEqual(token['scope'], 'foo')
+E       AssertionError: 'f o o' != 'foo'
+E       - f o o
+E       ?  - -
+E       + foo
+
+tests/oauth2/rfc6749/grant_types/test_refresh_token.py:89: AssertionError
+________ RefreshTokenGrantTest.test_custom_auth_validators_unsupported _________
+
+self = <tests.oauth2.rfc6749.grant_types.test_refresh_token.RefreshTokenGrantTest testMethod=test_custom_auth_validators_unsupported>
+
+    def test_custom_auth_validators_unsupported(self):
+        authval1, authval2 = mock.Mock(), mock.Mock()
+        expected = ('RefreshTokenGrant does not support authorization '
+                    'validators. Use token validators instead.')
+        with self.assertRaises(ValueError) as caught:
+            RefreshTokenGrant(self.mock_validator, pre_auth=[authval1])
+        self.assertEqual(caught.exception.args[0], expected)
+        with self.assertRaises(ValueError) as caught:
+            RefreshTokenGrant(self.mock_validator, post_auth=[authval2])
+        self.assertEqual(caught.exception.args[0], expected)
+        with self.assertRaises(AttributeError):
+>           self.auth.custom_validators.pre_auth.append(authval1)
+E           AssertionError: AttributeError not raised
+
+tests/oauth2/rfc6749/grant_types/test_refresh_token.py:51: AssertionError
+_ ResourceOwnerPasswordCredentialsGrantTest.test_custom_auth_validators_unsupported _
+
+self = <tests.oauth2.rfc6749.grant_types.test_resource_owner_password.ResourceOwnerPasswordCredentialsGrantTest testMethod=test_custom_auth_validators_unsupported>
+
+    def test_custom_auth_validators_unsupported(self):
+        authval1, authval2 = mock.Mock(), mock.Mock()
+        expected = ('ResourceOwnerPasswordCredentialsGrant does not '
+                    'support authorization validators. Use token '
+                              'validators instead.')
+        with self.assertRaises(ValueError) as caught:
+            ResourceOwnerPasswordCredentialsGrant(self.mock_validator,
+                                                  pre_auth=[authval1])
+        self.assertEqual(caught.exception.args[0], expected)
+        with self.assertRaises(ValueError) as caught:
+            ResourceOwnerPasswordCredentialsGrant(self.mock_validator,
+                                                  post_auth=[authval2])
+        self.assertEqual(caught.exception.args[0], expected)
+        with self.assertRaises(AttributeError):
+>           self.auth.custom_validators.pre_auth.append(authval1)
+E           AssertionError: AttributeError not raised
+
+tests/oauth2/rfc6749/grant_types/test_resource_owner_password.py:108: AssertionError
+________________ AuthorizationEndpointTest.test_implicit_grant _________________
+
+self = <tests.oauth2.rfc6749.test_server.AuthorizationEndpointTest testMethod=test_implicit_grant>
+
+    @mock.patch('oauthlib.common.generate_token', new=lambda: 'abc')
+    def test_implicit_grant(self):
+        uri = 'http://i.b/l?response_type=token&client_id=me&scope=all+of+them&state=xyz'
+        uri += '&redirect_uri=http%3A%2F%2Fback.to%2Fme'
+        headers, body, status_code = self.endpoint.create_authorization_response(
+            uri, scopes=['all', 'of', 'them'])
+        self.assertIn('Location', headers)
+>       self.assertURLEqual(headers['Location'], 'http://back.to/me#access_token=abc&expires_in=' + str(self.expires_in) + '&token_type=Bearer&state=xyz&scope=all+of+them', parse_fragment=True)
+
+tests/oauth2/rfc6749/test_server.py:66: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+tests/unittest/__init__.py:14: in url_equals
+    self.assertCountEqual(fragment_a, fragment_b)
+E   AssertionError: Element counts were not equal:
+E   First has 1, Second has 0:  ('scope', 'a l l   o f   t h e m')
+E   First has 0, Second has 1:  ('scope', 'all of them')
+__________________ TokenEndpointTest.test_authorization_grant __________________
+
+self = <tests.oauth2.rfc6749.test_server.TokenEndpointTest testMethod=test_authorization_grant>
+
+    @mock.patch('oauthlib.common.generate_token', new=lambda: 'abc')
+    def test_authorization_grant(self):
+        body = 'grant_type=authorization_code&code=abc&scope=all+of+them'
+        headers, body, status_code = self.endpoint.create_token_response(
+            '', body=body)
+        token = {
+            'token_type': 'Bearer',
+            'expires_in': self.expires_in,
+            'access_token': 'abc',
+            'refresh_token': 'abc',
+            'scope': 'all of them'
+        }
+>       self.assertEqual(json.loads(body), token)
+E       AssertionError: {'access_token': 'abc', 'expires_in': 1800,[77 chars]abc'} != {'token_type': 'Bearer', 'expires_in': 1800[67 chars]hem'}
+E         {'access_token': 'abc',
+E          'expires_in': 1800,
+E          'refresh_token': 'abc',
+E       -  'scope': 'a l l   o f   t h e m',
+E       ?             - -  -- -  -- - - -
+E       
+E       +  'scope': 'all of them',
+E          'token_type': 'Bearer'}
+
+tests/oauth2/rfc6749/test_server.py:156: AssertionError
+_____________________ TokenEndpointTest.test_client_grant ______________________
+
+self = <tests.oauth2.rfc6749.test_server.TokenEndpointTest testMethod=test_client_grant>
+
+    @mock.patch('oauthlib.common.generate_token', new=lambda: 'abc')
+    def test_client_grant(self):
+        body = 'grant_type=client_credentials&scope=all+of+them'
+        headers, body, status_code = self.endpoint.create_token_response(
+            '', body=body)
+        token = {
+            'token_type': 'Bearer',
+            'expires_in': self.expires_in,
+            'access_token': 'abc',
+            'scope': 'all of them',
+        }
+>       self.assertEqual(json.loads(body), token)
+E       AssertionError: {'access_token': 'abc', 'expires_in': 1800,[53 chars]e m'} != {'token_type': 'Bearer', 'expires_in': 1800[43 chars]hem'}
+E         {'access_token': 'abc',
+E          'expires_in': 1800,
+E       -  'scope': 'a l l   o f   t h e m',
+E       ?             - -  -- -  -- - - -
+E       
+E       +  'scope': 'all of them',
+E          'token_type': 'Bearer'}
+
+tests/oauth2/rfc6749/test_server.py:200: AssertionError
+____________________ TokenEndpointTest.test_password_grant _____________________
+
+self = <tests.oauth2.rfc6749.test_server.TokenEndpointTest testMethod=test_password_grant>
+
+    @mock.patch('oauthlib.common.generate_token', new=lambda: 'abc')
+    def test_password_grant(self):
+        body = 'grant_type=password&username=a&password=hello&scope=all+of+them'
+        headers, body, status_code = self.endpoint.create_token_response(
+            '', body=body)
+        token = {
+            'token_type': 'Bearer',
+            'expires_in': self.expires_in,
+            'access_token': 'abc',
+            'refresh_token': 'abc',
+            'scope': 'all of them',
+        }
+>       self.assertEqual(json.loads(body), token)
+E       AssertionError: {'access_token': 'abc', 'expires_in': 1800,[77 chars]abc'} != {'token_type': 'Bearer', 'expires_in': 1800[67 chars]hem'}
+E         {'access_token': 'abc',
+E          'expires_in': 1800,
+E          'refresh_token': 'abc',
+E       -  'scope': 'a l l   o f   t h e m',
+E       ?             - -  -- -  -- - - -
+E       
+E       +  'scope': 'all of them',
+E          'token_type': 'Bearer'}
+
+tests/oauth2/rfc6749/test_server.py:187: AssertionError
+_______________ SignedTokenEndpointTest.test_authorization_grant _______________
+
+self = <tests.oauth2.rfc6749.test_server.SignedTokenEndpointTest testMethod=test_authorization_grant>
+
+    @mock.patch('oauthlib.common.generate_token', new=lambda: 'abc')
+    def test_authorization_grant(self):
+        body = 'client_id=me&redirect_uri=http%3A%2F%2Fback.to%2Fme&grant_type=authorization_code&code=abc&scope=all+of+them'
+        headers, body, status_code = self.endpoint.create_token_response(
+            '', body=body)
+        body = json.loads(body)
+        token = {
+            'token_type': 'Bearer',
+            'expires_in': self.expires_in,
+            'access_token': body['access_token'],
+            'refresh_token': 'abc',
+            'scope': 'all of them'
+        }
+>       self.assertEqual(body, token)
+E       AssertionError: {'access_token': 'eyJhbGciOiJSUzI1NiIsInR5c[526 chars]abc'} != {'token_type': 'Bearer', 'expires_in': 1800[516 chars]hem'}
+E       Diff is 651 characters long. Set self.maxDiff to None to see it.
+
+tests/oauth2/rfc6749/test_server.py:294: AssertionError
+__________________ SignedTokenEndpointTest.test_client_grant ___________________
+
+self = <tests.oauth2.rfc6749.test_server.SignedTokenEndpointTest testMethod=test_client_grant>
+
+    @mock.patch('oauthlib.common.generate_token', new=lambda: 'abc')
+    def test_client_grant(self):
+        body = 'grant_type=client_credentials&scope=all+of+them'
+        headers, body, status_code = self.endpoint.create_token_response(
+            '', body=body)
+        body = json.loads(body)
+        token = {
+            'token_type': 'Bearer',
+            'expires_in': self.expires_in,
+            'access_token': body['access_token'],
+            'scope': 'all of them',
+        }
+>       self.assertEqual(body, token)
+E       AssertionError: {'access_token': 'eyJhbGciOiJSUzI1NiIsInR5c[502 chars]e m'} != {'token_type': 'Bearer', 'expires_in': 1800[492 chars]hem'}
+E         {'access_token': 'eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJzY29wZSI6ImFsbCBvZiB0aGVtIiwiZXhwIjoxNzg0ODg2NTYxLCJ1c2VyX2lkIjoxMjN9.NNgBlE_grdBLekBk4PAS6s9Ax7BcANnUZHmMewhAUgyTfvIWTvdprhmygfNPMgqGbGR5hYZ_66McH6RAFouUfms-n4OK81vNyAIn6odRUFeuHC78Q1cCgMvJEKeTbEjD7lICFU1UEiKG4TZI9L-Cv7-FhGNv1rnrgyDJ1sEF7rJEBja7XoY5NnT9Gb4IC7gMObaBVjfIaql4S_5isGhqdQuX_2JgD1LMBdR2ITwLk7ThV6xzQB9E8MErj5DoORsdtW8Bo2fYBKXlvp6GLnyaUT4Yswd2K6uqOU_jx8PmI9Lh-LDmFHxHp_jAgYwJ2_89JcFfrYk9sSy4pLmsCDTr7w',
+E          'expires_in': 1800,
+E       -  'scope': 'a l l   o f   t h e m',
+E       ?             - -  -- -  -- - - -
+E       
+E       +  'scope': 'all of them',
+E          'token_type': 'Bearer'}
+
+tests/oauth2/rfc6749/test_server.py:361: AssertionError
+_________________ SignedTokenEndpointTest.test_password_grant __________________
+
+self = <tests.oauth2.rfc6749.test_server.SignedTokenEndpointTest testMethod=test_password_grant>
+
+    @mock.patch('oauthlib.common.generate_token', new=lambda: 'abc')
+    def test_password_grant(self):
+        body = 'grant_type=password&username=a&password=hello&scope=all+of+them'
+        headers, body, status_code = self.endpoint.create_token_response(
+            '', body=body)
+        body = json.loads(body)
+        token = {
+            'token_type': 'Bearer',
+            'expires_in': self.expires_in,
+            'access_token': body['access_token'],
+            'refresh_token': 'abc',
+            'scope': 'all of them',
+        }
+>       self.assertEqual(body, token)
+E       AssertionError: {'access_token': 'eyJhbGciOiJSUzI1NiIsInR5c[526 chars]abc'} != {'token_type': 'Bearer', 'expires_in': 1800[516 chars]hem'}
+E       Diff is 651 characters long. Set self.maxDiff to None to see it.
+
+tests/oauth2/rfc6749/test_server.py:334: AssertionError
+_________________ TokenTest.test_fake_bearer_is_not_validated __________________
+
+self = <tests.oauth2.rfc6749.test_tokens.TokenTest testMethod=test_fake_bearer_is_not_validated>
+
+    def test_fake_bearer_is_not_validated(self):
+        request_validator = mock.MagicMock()
+        request_validator.validate_bearer_token = self._mocked_validate_bearer_token
+    
+        for fake_header in self.fake_bearer_headers:
+            request = Request("/", headers=fake_header)
+            result = BearerToken(request_validator=request_validator).validate_request(
+                request
+            )
+    
+>           self.assertFalse(result)
+E           AssertionError: True is not false
+
+tests/oauth2/rfc6749/test_tokens.py:132: AssertionError
+______________________ DeviceClientTest.test_request_uri _______________________
+
+self = <tests.oauth2.rfc8628.clients.test_device.DeviceClientTest testMethod=test_request_uri>
+
+    def test_request_uri(self):
+        client = DeviceClient(self.client_id)
+    
+        uri = client.prepare_request_uri(self.uri)
+>       self.assertURLEqual(uri, self.uri_grant)
+
+tests/oauth2/rfc8628/clients/test_device.py:56: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+tests/unittest/__init__.py:25: in url_equals
+    self.assertCountEqual(query_a, query_b)
+E   AssertionError: Element counts were not equal:
+E   First has 0, Second has 1:  ('grant_type', 'urn:ietf:params:oauth:grant-type:device_code')
+___________________ test_custom_auth_validators_unsupported ____________________
+
+    def test_custom_auth_validators_unsupported():
+        custom_validator = mock.Mock()
+        validator = mock.MagicMock()
+    
+        expected = (
+            "DeviceCodeGrant does not "
+            "support authorization validators. Use token validators instead."
+        )
+        with pytest.raises(ValueError, match=expected):
+            DeviceCodeGrant(validator, pre_auth=[custom_validator])
+    
+        with pytest.raises(ValueError, match=expected):
+            DeviceCodeGrant(validator, post_auth=[custom_validator])
+    
+        expected = "'tuple' object has no attribute 'append'"
+        auth = DeviceCodeGrant(validator)
+        with pytest.raises(AttributeError, match=expected):
+>           auth.custom_validators.pre_auth.append(custom_validator)
+E           Failed: DID NOT RAISE <class 'AttributeError'>
+
+tests/oauth2/rfc8628/grant_types/test_device_code.py:44: Failed
+__________________ test_custom_pre_and_post_token_validators ___________________
+
+    def test_custom_pre_and_post_token_validators():
+        client = mock.MagicMock()
+    
+        validator = mock.MagicMock()
+        pre_token_validator = mock.Mock()
+        post_token_validator = mock.Mock()
+    
+        request: common.Request = create_request()
+        request.client = client
+    
+        auth = DeviceCodeGrant(validator)
+    
+        auth.custom_validators.pre_token.append(pre_token_validator)
+        auth.custom_validators.post_token.append(post_token_validator)
+    
+        bearer = BearerToken(validator)
+>       auth.create_token_response(request, bearer)
+
+tests/oauth2/rfc8628/grant_types/test_device_code.py:63: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+oauthlib/oauth2/rfc8628/grant_types/device_code.py:79: in create_token_response
+    self.validate_token_request(request)
+oauthlib/oauth2/rfc8628/grant_types/device_code.py:45: in validate_token_request
+    if request.device_code is None:
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = <oauthlib.Request url="http://a.b/path", http_method="GET", headers="{}", body="None">
+name = 'device_code'
+
+    def __getattr__(self, name):
+        if name in self._params:
+            return self._params[name]
+        else:
+>           raise AttributeError(name)
+E           AttributeError: device_code
+
+oauthlib/common.py:343: AttributeError
+__________________________ test_create_token_response __________________________
+
+    def test_create_token_response():
+        validator = mock.MagicMock()
+        request: common.Request = create_request()
+        request.client = mock.Mock()
+    
+        auth = DeviceCodeGrant(validator)
+    
+        bearer = BearerToken(validator)
+    
+>       headers, body, status_code = auth.create_token_response(request, bearer)
+
+tests/oauth2/rfc8628/grant_types/test_device_code.py:78: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+oauthlib/oauth2/rfc8628/grant_types/device_code.py:79: in create_token_response
+    self.validate_token_request(request)
+oauthlib/oauth2/rfc8628/grant_types/device_code.py:45: in validate_token_request
+    if request.device_code is None:
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = <oauthlib.Request url="http://a.b/path", http_method="GET", headers="{}", body="None">
+name = 'device_code'
+
+    def __getattr__(self, name):
+        if name in self._params:
+            return self._params[name]
+        else:
+>           raise AttributeError(name)
+E           AttributeError: device_code
+
+oauthlib/common.py:343: AttributeError
+__________________________ test_invalid_client_error ___________________________
+
+    def test_invalid_client_error():
+        validator = mock.MagicMock()
+        request: common.Request = create_request()
+        request.client = mock.Mock()
+    
+        auth = DeviceCodeGrant(validator)
+        bearer = BearerToken(validator)
+    
+        validator.authenticate_client.return_value = False
+    
+>       headers, body, status_code = auth.create_token_response(request, bearer)
+
+tests/oauth2/rfc8628/grant_types/test_device_code.py:112: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+oauthlib/oauth2/rfc8628/grant_types/device_code.py:79: in create_token_response
+    self.validate_token_request(request)
+oauthlib/oauth2/rfc8628/grant_types/device_code.py:45: in validate_token_request
+    if request.device_code is None:
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = <oauthlib.Request url="http://a.b/path", http_method="GET", headers="{}", body="None">
+name = 'device_code'
+
+    def __getattr__(self, name):
+        if name in self._params:
+            return self._params[name]
+        else:
+>           raise AttributeError(name)
+E           AttributeError: device_code
+
+oauthlib/common.py:343: AttributeError
+_________________________ test_duplicate_params_error __________________________
+
+    def test_duplicate_params_error():
+        validator = mock.MagicMock()
+        request: common.Request = create_request(
+            "client_id=123&scope=openid&scope=openid"
+        )
+        request.client = mock.Mock()
+    
+        auth = DeviceCodeGrant(validator)
+        bearer = BearerToken(validator)
+    
+>       headers, body, status_code = auth.create_token_response(request, bearer)
+
+tests/oauth2/rfc8628/grant_types/test_device_code.py:161: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+oauthlib/oauth2/rfc8628/grant_types/device_code.py:79: in create_token_response
+    self.validate_token_request(request)
+oauthlib/oauth2/rfc8628/grant_types/device_code.py:45: in validate_token_request
+    if request.device_code is None:
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = <oauthlib.Request url="http://a.b/path", http_method="GET", headers="{}", body="client_id=123&scope=openid&scope=openid">
+name = 'device_code'
+
+    def __getattr__(self, name):
+        if name in self._params:
+            return self._params[name]
+        else:
+>           raise AttributeError(name)
+E           AttributeError: device_code
+
+oauthlib/common.py:343: AttributeError
+_______ DeviceAuthorizationEndpointTest.test_device_authorization_grant ________
+
+self = <tests.oauth2.rfc8628.test_server.DeviceAuthorizationEndpointTest testMethod=test_device_authorization_grant>
+generate_token = <MagicMock name='generate_token' id='281472834036544'>
+
+    @mock.patch("oauthlib.oauth2.rfc8628.endpoints.device_authorization.generate_token")
+    def test_device_authorization_grant(self, generate_token):
+        generate_token.side_effect = ["abc", "def"]
+        _, body, status_code = self.endpoint.create_device_authorization_response(
+            *self.response_payload()
+        )
+        expected_payload = {
+            "verification_uri": "http://i.b/l/verify",
+            "user_code": "abc",
+            "device_code": "def",
+            "expires_in": 1800,
+        }
+        self.assertEqual(200, status_code)
+>       self.assertEqual(body, expected_payload)
+E       AssertionError: '{"verification_uri": "http://i.b/l/verif[61 chars]ef"}' != {'verification_uri': 'http://i.b/l/verify[59 chars]1800}
+
+tests/oauth2/rfc8628/test_server.py:47: AssertionError
+___ DeviceAuthorizationEndpointTest.test_device_authorization_grant_interval ___
+
+self = <tests.oauth2.rfc8628.test_server.DeviceAuthorizationEndpointTest testMethod=test_device_authorization_grant_interval>
+
+    @mock.patch(
+        "oauthlib.oauth2.rfc8628.endpoints.device_authorization.generate_token",
+        lambda: "abc",
+    )
+    def test_device_authorization_grant_interval(self):
+        self._configure_endpoint(interval=5)
+        _, body, _ = self.endpoint.create_device_authorization_response(*self.response_payload())
+>       self.assertEqual(5, body["interval"])
+E       TypeError: string indices must be integers
+
+tests/oauth2/rfc8628/test_server.py:56: TypeError
+_ DeviceAuthorizationEndpointTest.test_device_authorization_grant_interval_with_zero _
+
+self = <tests.oauth2.rfc8628.test_server.DeviceAuthorizationEndpointTest testMethod=test_device_authorization_grant_interval_with_zero>
+
+    @mock.patch(
+        "oauthlib.oauth2.rfc8628.endpoints.device_authorization.generate_token",
+        lambda: "abc",
+    )
+    def test_device_authorization_grant_interval_with_zero(self):
+        self._configure_endpoint(interval=0)
+        _, body, _ = self.endpoint.create_device_authorization_response(*self.response_payload())
+>       self.assertEqual(0, body["interval"])
+E       TypeError: string indices must be integers
+
+tests/oauth2/rfc8628/test_server.py:65: TypeError
+_ DeviceAuthorizationEndpointTest.test_device_authorization_grant_user_gode_generator _
+
+self = <tests.oauth2.rfc8628.test_server.DeviceAuthorizationEndpointTest testMethod=test_device_authorization_grant_user_gode_generator>
+
+    @mock.patch(
+        "oauthlib.oauth2.rfc8628.endpoints.device_authorization.generate_token",
+        lambda: "abc",
+    )
+    def test_device_authorization_grant_user_gode_generator(self):
+        def user_code():
+            """
+            A friendly user code the device can display and the user
+            can type in. It's up to the device how
+            this code should be displayed. e.g 123-456
+            """
+            return "123456"
+    
+        self._configure_endpoint(
+            verification_uri_complete=lambda u: f"http://i.l/v?user_code={u}",
+            user_code_generator=user_code,
+        )
+    
+        _, body, _ = self.endpoint.create_device_authorization_response(*self.response_payload())
+        self.assertEqual(
+            "http://i.l/v?user_code=123456",
+>           body["verification_uri_complete"],
+        )
+E       TypeError: string indices must be integers
+
+tests/oauth2/rfc8628/test_server.py:112: TypeError
+_ DeviceAuthorizationEndpointTest.test_device_authorization_grant_verify_url_complete_callable _
+
+self = <tests.oauth2.rfc8628.test_server.DeviceAuthorizationEndpointTest testMethod=test_device_authorization_grant_verify_url_complete_callable>
+
+    @mock.patch(
+        "oauthlib.oauth2.rfc8628.endpoints.device_authorization.generate_token",
+        lambda: "abc",
+    )
+    def test_device_authorization_grant_verify_url_complete_callable(self):
+        self._configure_endpoint(verification_uri_complete=lambda u: f"http://i.l/v?user_code={u}")
+        _, body, _ = self.endpoint.create_device_authorization_response(*self.response_payload())
+        self.assertEqual(
+            "http://i.l/v?user_code=abc",
+>           body["verification_uri_complete"],
+        )
+E       TypeError: string indices must be integers
+
+tests/oauth2/rfc8628/test_server.py:88: TypeError
+_ DeviceAuthorizationEndpointTest.test_device_authorization_grant_verify_url_complete_string _
+
+self = <tests.oauth2.rfc8628.test_server.DeviceAuthorizationEndpointTest testMethod=test_device_authorization_grant_verify_url_complete_string>
+
+    @mock.patch(
+        "oauthlib.oauth2.rfc8628.endpoints.device_authorization.generate_token",
+        lambda: "abc",
+    )
+    def test_device_authorization_grant_verify_url_complete_string(self):
+        self._configure_endpoint(verification_uri_complete="http://i.l/v?user_code={user_code}")
+        _, body, _ = self.endpoint.create_device_authorization_response(*self.response_payload())
+        self.assertEqual(
+            "http://i.l/v?user_code=abc",
+>           body["verification_uri_complete"],
+        )
+E       TypeError: string indices must be integers
+
+tests/oauth2/rfc8628/test_server.py:76: TypeError
+____________ TestClaimsHandling.test_claims_stored_on_code_creation ____________
+
+self = <tests.openid.connect.core.endpoints.test_claims_handling.TestClaimsHandling testMethod=test_claims_stored_on_code_creation>
+
+    def test_claims_stored_on_code_creation(self):
+    
+        claims = {
+            "id_token": {
+                "claim_1": None,
+                "claim_2": {
+                    "essential": True
+                }
+            },
+            "userinfo": {
+                "claim_3": {
+                    "essential": True
+                },
+                "claim_4": None
+            }
+        }
+    
+        claims_urlquoted = '%7B%22id_token%22%3A%20%7B%22claim_2%22%3A%20%7B%22essential%22%3A%20true%7D%2C%20%22claim_1%22%3A%20null%7D%2C%20%22userinfo%22%3A%20%7B%22claim_4%22%3A%20null%2C%20%22claim_3%22%3A%20%7B%22essential%22%3A%20true%7D%7D%7D'
+        uri = 'http://example.com/path?client_id=abc&scope=openid+test_scope&response_type=code&claims=%s'
+    
+        h, b, s = self.server.create_authorization_response(uri % claims_urlquoted, scopes='openid test_scope')
+    
+>       self.assertDictEqual(self.claims_from_auth_code_request, claims)
+E       AssertionError: '{"id_token": {"claim_2": {"essential": true}, "claim_1": null}, "userinfo": {"claim_4": null, "claim_3": {"essential": true}}}' is not an instance of <class 'dict'> : First argument is not a dictionary
+
+tests/openid/connect/core/endpoints/test_claims_handling.py:89: AssertionError
+____________________ TestClaimsHandling.test_invalid_claims ____________________
+
+self = <tests.openid.connect.core.endpoints.test_claims_handling.TestClaimsHandling testMethod=test_invalid_claims>
+
+    def test_invalid_claims(self):
+        uri = 'http://example.com/path?client_id=abc&scope=openid+test_scope&response_type=code&claims=this-is-not-json'
+    
+        h, b, s = self.server.create_authorization_response(uri, scopes='openid test_scope')
+>       error = get_query_credentials(h['Location'])['error'][0]
+E       KeyError: 'error'
+
+tests/openid/connect/core/endpoints/test_claims_handling.py:104: KeyError
+___________ OpenIDConnectEndpointTest.test_oidc_params_preservation ____________
+
+self = <tests.openid.connect.core.endpoints.test_openid_connect_params_handling.OpenIDConnectEndpointTest testMethod=test_oidc_params_preservation>
+
+    def test_oidc_params_preservation(self):
+        """
+        Test that the nonce parameter is passed through.
+        """
+        scopes, creds = self.endpoint.validate_authorization_request(self.url)
+    
+>       self.assertEqual(creds['prompt'], {'consent'})
+E       KeyError: 'prompt'
+
+tests/openid/connect/core/endpoints/test_openid_connect_params_handling.py:77: KeyError
+___________ OpenIDConnectEndpointTest.test_prompt_none_exclusiveness ___________
+
+self = <tests.openid.connect.core.endpoints.test_openid_connect_params_handling.OpenIDConnectEndpointTest testMethod=test_prompt_none_exclusiveness>
+
+    def test_prompt_none_exclusiveness(self):
+        """
+        Test that prompt=none can't be used with another prompt value.
+        """
+        params = {
+            'prompt': 'none consent',
+            'state': 'abc',
+            'redirect_uri': 'https://a.b/cb',
+            'response_type': 'code',
+            'client_id': 'abcdef',
+            'scope': 'hello openid'
+        }
+        url = 'http://a.b/path?' + urlencode(params)
+        with self.assertRaises(InvalidRequestError):
+>           self.endpoint.validate_authorization_request(url)
+E           AssertionError: InvalidRequestError not raised
+
+tests/openid/connect/core/endpoints/test_openid_connect_params_handling.py:69: AssertionError
+_______________ TestRefreshToken.test_refresh_token_with_openid ________________
+
+self = <tests.openid.connect.core.endpoints.test_refresh_token.TestRefreshToken testMethod=test_refresh_token_with_openid>
+
+    def test_refresh_token_with_openid(self):
+        request_body = 'scope=openid+test_scope&grant_type=refresh_token&refresh_token=abc'
+>       headers, body, status = self.server.create_token_response('', body=request_body)
+
+tests/openid/connect/core/endpoints/test_refresh_token.py:26: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+oauthlib/oauth2/rfc6749/endpoints/base.py:106: in wrapper
+    return f(endpoint, uri, *args, **kwargs)
+oauthlib/oauth2/rfc6749/endpoints/token.py:73: in create_token_response
+    return grant_type_handler.create_token_response(request, self.default_token_type)
+oauthlib/oauth2/rfc6749/grant_types/refresh_token.py:59: in create_token_response
+    token = modifier(token, token_handler, request)
+oauthlib/openid/connect/core/grant_types/refresh_token.py:28: in add_id_token
+    return super().add_id_token(token, token_handler, request)
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = <oauthlib.openid.connect.core.grant_types.refresh_token.RefreshTokenGrant object at 0xffff804daaf0>
+token = {'access_token': 'S5iTYgfn306FlkiwMItClXvNHeX72f', 'expires_in': 3600, 'token_type': 'Bearer', 'scope': 'o p e n i d   t e s t _ s c o p e', 'refresh_token': 'A4HXYOJkiIDIaTruD4gajZk4FwYbm3', 'at_hash': 'sO49tabarR1pswlUtW0Sqg'}
+token_handler = <oauthlib.oauth2.rfc6749.tokens.BearerToken object at 0xffff801d3780>
+request = <oauthlib.Request url="", http_method="POST", headers="{}", body="scope=openid+test_scope&grant_type=refresh_token&refresh_token=<SANITIZED>">
+nonce = None
+
+    def add_id_token(self, token, token_handler, request, nonce=None):
+        """
+        Construct an initial version of id_token, and let the
+        request_validator sign or encrypt it.
+    
+        The initial version can contain the fields below, accordingly
+        to the spec:
+        - aud
+        - iat
+        - nonce
+        - at_hash
+        - c_hash
+        """
+        # Treat it as normal OAuth 2 auth code request if openid is not present
+        if not request.scopes or "openid" not in request.scopes:
+            return token
+    
+        # Only add an id token on auth/token step if asked for.
+        if request.response_type and "id_token" not in request.response_type:
+            return token
+    
+        if "state" not in token and request.state:
+            token["state"] = request.state
+    
+        if request.max_age:
+            d = int(time.time())
+            token["auth_time"] = d
+    
+        # TODO: acr claims (probably better handled by server code using oauthlib in get_id_token)
+    
+        if nonce is not None:
+            token["nonce"] = nonce
+    
+        if "access_token" in token:
+            token["at_hash"] = self.id_token_hash(token["access_token"])
+    
+        if "code" in token:
+            token["c_hash"] = self.id_token_hash(token["code"])
+    
+>       token = token_handler.get_id_token(token, token_handler, request)
+E       AttributeError: 'BearerToken' object has no attribute 'get_id_token'
+
+oauthlib/openid/connect/core/grant_types/base.py:109: AttributeError
+____________ AuthorizationCodeGrantTest.test_create_token_response _____________
+
+self = <tests.oauth2.rfc6749.grant_types.test_authorization_code.AuthorizationCodeGrantTest testMethod=test_create_token_response>
+
+    def test_create_token_response(self):
+        bearer = BearerToken(self.mock_validator)
+    
+        h, token, s = self.auth.create_token_response(self.request, bearer)
+        token = json.loads(token)
+        self.assertEqual(self.mock_validator.save_token.call_count, 1)
+        self.assertIn('access_token', token)
+        self.assertIn('refresh_token', token)
+        self.assertIn('expires_in', token)
+>       self.assertIn('scope', token)
+E       AssertionError: 'scope' not found in {'access_token': 'Mrlm6GYGw1IoUsd3gQwLpVNvlIAV9w', 'expires_in': 3600, 'token_type': 'Bearer', 'refresh_token': 'LULHhKYstCRcoTUG0xGGQtMee6aYza'}
+
+tests/oauth2/rfc6749/grant_types/test_authorization_code.py:123: AssertionError
+_ AuthorizationCodeGrantTest.test_create_token_response_without_refresh_token __
+
+self = <tests.oauth2.rfc6749.grant_types.test_authorization_code.AuthorizationCodeGrantTest testMethod=test_create_token_response_without_refresh_token>
+
+    def test_create_token_response_without_refresh_token(self):
+        self.auth.refresh_token = False  # Not to issue refresh token.
+    
+        bearer = BearerToken(self.mock_validator)
+        h, token, s = self.auth.create_token_response(self.request, bearer)
+        token = json.loads(token)
+        self.assertEqual(self.mock_validator.save_token.call_count, 1)
+        self.assertIn('access_token', token)
+        self.assertNotIn('refresh_token', token)
+        self.assertIn('expires_in', token)
+>       self.assertIn('scope', token)
+E       AssertionError: 'scope' not found in {'access_token': 'fbrqeVrMu9yBrwZM2Gy51RBDVeVT0h', 'expires_in': 3600, 'token_type': 'Bearer'}
+
+tests/oauth2/rfc6749/grant_types/test_authorization_code.py:141: AssertionError
+____________ AuthorizationCodeGrantTest.test_custom_auth_validators ____________
+
+self = <tests.oauth2.rfc6749.grant_types.test_authorization_code.AuthorizationCodeGrantTest testMethod=test_custom_auth_validators>
+
+    def test_custom_auth_validators(self):
+        self.setup_validators()
+    
+        bearer = BearerToken(self.mock_validator)
+        self.auth.create_authorization_response(self.request, bearer)
+        self.assertTrue(self.authval1.called)
+>       self.assertTrue(self.authval2.called)
+E       AssertionError: False is not true
+
+tests/oauth2/rfc6749/grant_types/test_authorization_code.py:58: AssertionError
+___________ AuthorizationCodeGrantTest.test_custom_token_validators ____________
+
+self = <tests.oauth2.rfc6749.grant_types.test_authorization_code.AuthorizationCodeGrantTest testMethod=test_custom_token_validators>
+
+    def test_custom_token_validators(self):
+        self.setup_validators()
+    
+        bearer = BearerToken(self.mock_validator)
+        self.auth.create_token_response(self.request, bearer)
+        self.assertTrue(self.tknval1.called)
+        self.assertTrue(self.tknval2.called)
+>       self.assertFalse(self.authval1.called)
+E       AssertionError: True is not false
+
+tests/oauth2/rfc6749/grant_types/test_authorization_code.py:69: AssertionError
+__________ OpenIDAuthCodeInterferenceTest.test_create_token_response ___________
+
+self = <tests.openid.connect.core.grant_types.test_authorization_code.OpenIDAuthCodeInterferenceTest testMethod=test_create_token_response>
+
+    def test_create_token_response(self):
+        bearer = BearerToken(self.mock_validator)
+    
+        h, token, s = self.auth.create_token_response(self.request, bearer)
+        token = json.loads(token)
+        self.assertEqual(self.mock_validator.save_token.call_count, 1)
+        self.assertIn('access_token', token)
+        self.assertIn('refresh_token', token)
+        self.assertIn('expires_in', token)
+>       self.assertIn('scope', token)
+E       AssertionError: 'scope' not found in {'access_token': 'EEON7IqcAgmrtrx1Bw4Kb4OclTH2m1', 'expires_in': 3600, 'token_type': 'Bearer', 'refresh_token': 'vz4zVeA1gmjflwmmpXPrMYw1pbmq1y'}
+
+tests/oauth2/rfc6749/grant_types/test_authorization_code.py:123: AssertionError
+_ OpenIDAuthCodeInterferenceTest.test_create_token_response_without_refresh_token _
+
+self = <tests.openid.connect.core.grant_types.test_authorization_code.OpenIDAuthCodeInterferenceTest testMethod=test_create_token_response_without_refresh_token>
+
+    def test_create_token_response_without_refresh_token(self):
+        self.auth.refresh_token = False  # Not to issue refresh token.
+    
+        bearer = BearerToken(self.mock_validator)
+        h, token, s = self.auth.create_token_response(self.request, bearer)
+        token = json.loads(token)
+        self.assertEqual(self.mock_validator.save_token.call_count, 1)
+        self.assertIn('access_token', token)
+        self.assertNotIn('refresh_token', token)
+        self.assertIn('expires_in', token)
+>       self.assertIn('scope', token)
+E       AssertionError: 'scope' not found in {'access_token': 'IFko4ePBWFnjMQfWRmmqvnyi3qOWLl', 'expires_in': 3600, 'token_type': 'Bearer'}
+
+tests/oauth2/rfc6749/grant_types/test_authorization_code.py:141: AssertionError
+__________ OpenIDAuthCodeInterferenceTest.test_custom_auth_validators __________
+
+self = <tests.openid.connect.core.grant_types.test_authorization_code.OpenIDAuthCodeInterferenceTest testMethod=test_custom_auth_validators>
+
+    def test_custom_auth_validators(self):
+        self.setup_validators()
+    
+        bearer = BearerToken(self.mock_validator)
+        self.auth.create_authorization_response(self.request, bearer)
+        self.assertTrue(self.authval1.called)
+>       self.assertTrue(self.authval2.called)
+E       AssertionError: False is not true
+
+tests/oauth2/rfc6749/grant_types/test_authorization_code.py:58: AssertionError
+_________ OpenIDAuthCodeInterferenceTest.test_custom_token_validators __________
+
+self = <tests.openid.connect.core.grant_types.test_authorization_code.OpenIDAuthCodeInterferenceTest testMethod=test_custom_token_validators>
+
+    def test_custom_token_validators(self):
+        self.setup_validators()
+    
+        bearer = BearerToken(self.mock_validator)
+        self.auth.create_token_response(self.request, bearer)
+        self.assertTrue(self.tknval1.called)
+        self.assertTrue(self.tknval2.called)
+>       self.assertFalse(self.authval1.called)
+E       AssertionError: True is not false
+
+tests/oauth2/rfc6749/grant_types/test_authorization_code.py:69: AssertionError
+________________ OpenIDAuthCodeTest.test_create_token_response _________________
+
+self = <tests.openid.connect.core.grant_types.test_authorization_code.OpenIDAuthCodeTest testMethod=test_create_token_response>
+
+    def test_create_token_response(self):
+        self.request.response_type = None
+        self.mock_validator.validate_code.side_effect = self.set_scopes
+    
+        bearer = BearerToken(self.mock_validator)
+    
+        h, token, s = self.auth.create_token_response(self.request, bearer)
+        token = json.loads(token)
+        self.assertEqual(self.mock_validator.save_token.call_count, 1)
+        self.assertIn('access_token', token)
+        self.assertIn('refresh_token', token)
+        self.assertIn('expires_in', token)
+>       self.assertIn('scope', token)
+E       AssertionError: 'scope' not found in {'access_token': 'ulSIONBPz444QcaTH9TyemPIJMTfgC', 'expires_in': 3600, 'token_type': 'Bearer', 'refresh_token': 'xdjmq2Fmy7vXSLPwHcvz0mCyb10DOc'}
+
+tests/openid/connect/core/grant_types/test_authorization_code.py:172: AssertionError
+_______________ OpenIDAuthCodeTest.test_no_prompt_authorization ________________
+
+self = <tests.openid.connect.core.grant_types.test_authorization_code.OpenIDAuthCodeTest testMethod=test_no_prompt_authorization>
+generate_token = <MagicMock name='generate_token' id='281472828544576'>
+
+    @mock.patch('oauthlib.common.generate_token')
+    def test_no_prompt_authorization(self, generate_token):
+        generate_token.return_value = 'abc'
+        self.request.prompt = 'none'
+    
+        bearer = BearerToken(self.mock_validator)
+    
+        self.request.response_mode = 'query'
+        self.request.id_token_hint = 'me@email.com'
+        h, b, s = self.auth.create_authorization_response(self.request, bearer)
+        self.assertURLEqual(h['Location'], self.url_query)
+        self.assertIsNone(b)
+        self.assertEqual(s, 302)
+    
+        # Test alternative response modes
+        self.request.response_mode = 'fragment'
+        h, b, s = self.auth.create_authorization_response(self.request, bearer)
+        self.assertURLEqual(h['Location'], self.url_fragment, parse_fragment=True)
+    
+        # Ensure silent authentication and authorization is done
+        self.mock_validator.validate_silent_login.return_value = False
+        self.mock_validator.validate_silent_authorization.return_value = True
+>       self.assertRaises(LoginRequired,
+                          self.auth.validate_authorization_request,
+                          self.request)
+E       AssertionError: LoginRequired not raised by validate_authorization_request
+
+tests/openid/connect/core/grant_types/test_authorization_code.py:101: AssertionError
+__________________ OpenIDAuthCodeTest.test_none_multi_prompt ___________________
+
+self = <tests.openid.connect.core.grant_types.test_authorization_code.OpenIDAuthCodeTest testMethod=test_none_multi_prompt>
+
+    def test_none_multi_prompt(self):
+        bearer = BearerToken(self.mock_validator)
+    
+        self.request.prompt = 'none login'
+>       self.assertRaises(InvalidRequestError,
+                          self.auth.validate_authorization_request,
+                          self.request)
+E       AssertionError: InvalidRequestError not raised by validate_authorization_request
+
+tests/openid/connect/core/grant_types/test_authorization_code.py:128: AssertionError
+______________________ IDTokenTest.test_finalize_id_token ______________________
+
+self = <tests.openid.connect.core.grant_types.test_base.IDTokenTest testMethod=test_finalize_id_token>
+
+    def test_finalize_id_token(self):
+>       token = self.grant.add_id_token(self.token, "token_handler_mock", self.request)
+
+tests/openid/connect/core/grant_types/test_base.py:66: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = <tests.openid.connect.core.grant_types.test_base.GrantBase object at 0xffff80221460>
+token = {'state': 'abc'}, token_handler = 'token_handler_mock'
+request = <oauthlib.Request url="http://a.b/path", http_method="GET", headers="{}", body="None">
+nonce = None
+
+    def add_id_token(self, token, token_handler, request, nonce=None):
+        """
+        Construct an initial version of id_token, and let the
+        request_validator sign or encrypt it.
+    
+        The initial version can contain the fields below, accordingly
+        to the spec:
+        - aud
+        - iat
+        - nonce
+        - at_hash
+        - c_hash
+        """
+        # Treat it as normal OAuth 2 auth code request if openid is not present
+        if not request.scopes or "openid" not in request.scopes:
+            return token
+    
+        # Only add an id token on auth/token step if asked for.
+        if request.response_type and "id_token" not in request.response_type:
+            return token
+    
+        if "state" not in token and request.state:
+            token["state"] = request.state
+    
+        if request.max_age:
+            d = int(time.time())
+            token["auth_time"] = d
+    
+        # TODO: acr claims (probably better handled by server code using oauthlib in get_id_token)
+    
+        if nonce is not None:
+            token["nonce"] = nonce
+    
+        if "access_token" in token:
+            token["at_hash"] = self.id_token_hash(token["access_token"])
+    
+        if "code" in token:
+            token["c_hash"] = self.id_token_hash(token["code"])
+    
+>       token = token_handler.get_id_token(token, token_handler, request)
+E       AttributeError: 'str' object has no attribute 'get_id_token'
+
+oauthlib/openid/connect/core/grant_types/base.py:109: AttributeError
+_______________ IDTokenTest.test_finalize_id_token_with_at_hash ________________
+
+self = <tests.openid.connect.core.grant_types.test_base.IDTokenTest testMethod=test_finalize_id_token_with_at_hash>
+
+    def test_finalize_id_token_with_at_hash(self):
+        self.token["access_token"] = "Qcb0Orv1zh30vL1MPRsbm-diHiMwcLyZvn1arpZv-Jxf_11jnpEX3Tgfvk"
+>       token = self.grant.add_id_token(self.token, "token_handler_mock", self.request)
+
+tests/openid/connect/core/grant_types/test_base.py:82: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = <tests.openid.connect.core.grant_types.test_base.GrantBase object at 0xffff8074e5e0>
+token = {'access_token': 'Qcb0Orv1zh30vL1MPRsbm-diHiMwcLyZvn1arpZv-Jxf_11jnpEX3Tgfvk', 'at_hash': 'LDktKdoQak3Pk0cnXxCltA', 'state': 'abc'}
+token_handler = 'token_handler_mock'
+request = <oauthlib.Request url="http://a.b/path", http_method="GET", headers="{}", body="None">
+nonce = None
+
+    def add_id_token(self, token, token_handler, request, nonce=None):
+        """
+        Construct an initial version of id_token, and let the
+        request_validator sign or encrypt it.
+    
+        The initial version can contain the fields below, accordingly
+        to the spec:
+        - aud
+        - iat
+        - nonce
+        - at_hash
+        - c_hash
+        """
+        # Treat it as normal OAuth 2 auth code request if openid is not present
+        if not request.scopes or "openid" not in request.scopes:
+            return token
+    
+        # Only add an id token on auth/token step if asked for.
+        if request.response_type and "id_token" not in request.response_type:
+            return token
+    
+        if "state" not in token and request.state:
+            token["state"] = request.state
+    
+        if request.max_age:
+            d = int(time.time())
+            token["auth_time"] = d
+    
+        # TODO: acr claims (probably better handled by server code using oauthlib in get_id_token)
+    
+        if nonce is not None:
+            token["nonce"] = nonce
+    
+        if "access_token" in token:
+            token["at_hash"] = self.id_token_hash(token["access_token"])
+    
+        if "code" in token:
+            token["c_hash"] = self.id_token_hash(token["code"])
+    
+>       token = token_handler.get_id_token(token, token_handler, request)
+E       AttributeError: 'str' object has no attribute 'get_id_token'
+
+oauthlib/openid/connect/core/grant_types/base.py:109: AttributeError
+____________ IDTokenTest.test_finalize_id_token_with_c_and_at_hash _____________
+
+self = <tests.openid.connect.core.grant_types.test_base.IDTokenTest testMethod=test_finalize_id_token_with_c_and_at_hash>
+
+    def test_finalize_id_token_with_c_and_at_hash(self):
+        self.token["code"] = "Qcb0Orv1zh30vL1MPRsbm-diHiMwcLyZvn1arpZv-Jxf_11jnpEX3Tgfvk"
+        self.token["access_token"] = "Qcb0Orv1zh30vL1MPRsbm-diHiMwcLyZvn1arpZv-Jxf_11jnpEX3Tgfvk"
+>       token = self.grant.add_id_token(self.token, "token_handler_mock", self.request)
+
+tests/openid/connect/core/grant_types/test_base.py:99: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = <tests.openid.connect.core.grant_types.test_base.GrantBase object at 0xffff8021d820>
+token = {'access_token': 'Qcb0Orv1zh30vL1MPRsbm-diHiMwcLyZvn1arpZv-Jxf_11jnpEX3Tgfvk', 'at_hash': 'LDktKdoQak3Pk0cnXxCltA', 'c_hash': 'LDktKdoQak3Pk0cnXxCltA', 'code': 'Qcb0Orv1zh30vL1MPRsbm-diHiMwcLyZvn1arpZv-Jxf_11jnpEX3Tgfvk', ...}
+token_handler = 'token_handler_mock'
+request = <oauthlib.Request url="http://a.b/path", http_method="GET", headers="{}", body="None">
+nonce = None
+
+    def add_id_token(self, token, token_handler, request, nonce=None):
+        """
+        Construct an initial version of id_token, and let the
+        request_validator sign or encrypt it.
+    
+        The initial version can contain the fields below, accordingly
+        to the spec:
+        - aud
+        - iat
+        - nonce
+        - at_hash
+        - c_hash
+        """
+        # Treat it as normal OAuth 2 auth code request if openid is not present
+        if not request.scopes or "openid" not in request.scopes:
+            return token
+    
+        # Only add an id token on auth/token step if asked for.
+        if request.response_type and "id_token" not in request.response_type:
+            return token
+    
+        if "state" not in token and request.state:
+            token["state"] = request.state
+    
+        if request.max_age:
+            d = int(time.time())
+            token["auth_time"] = d
+    
+        # TODO: acr claims (probably better handled by server code using oauthlib in get_id_token)
+    
+        if nonce is not None:
+            token["nonce"] = nonce
+    
+        if "access_token" in token:
+            token["at_hash"] = self.id_token_hash(token["access_token"])
+    
+        if "code" in token:
+            token["c_hash"] = self.id_token_hash(token["code"])
+    
+>       token = token_handler.get_id_token(token, token_handler, request)
+E       AttributeError: 'str' object has no attribute 'get_id_token'
+
+oauthlib/openid/connect/core/grant_types/base.py:109: AttributeError
+________________ IDTokenTest.test_finalize_id_token_with_c_hash ________________
+
+self = <tests.openid.connect.core.grant_types.test_base.IDTokenTest testMethod=test_finalize_id_token_with_c_hash>
+
+    def test_finalize_id_token_with_c_hash(self):
+        self.token["code"] = "Qcb0Orv1zh30vL1MPRsbm-diHiMwcLyZvn1arpZv-Jxf_11jnpEX3Tgfvk"
+>       token = self.grant.add_id_token(self.token, "token_handler_mock", self.request)
+
+tests/openid/connect/core/grant_types/test_base.py:90: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = <tests.openid.connect.core.grant_types.test_base.GrantBase object at 0xffff80650f10>
+token = {'c_hash': 'LDktKdoQak3Pk0cnXxCltA', 'code': 'Qcb0Orv1zh30vL1MPRsbm-diHiMwcLyZvn1arpZv-Jxf_11jnpEX3Tgfvk', 'state': 'abc'}
+token_handler = 'token_handler_mock'
+request = <oauthlib.Request url="http://a.b/path", http_method="GET", headers="{}", body="None">
+nonce = None
+
+    def add_id_token(self, token, token_handler, request, nonce=None):
+        """
+        Construct an initial version of id_token, and let the
+        request_validator sign or encrypt it.
+    
+        The initial version can contain the fields below, accordingly
+        to the spec:
+        - aud
+        - iat
+        - nonce
+        - at_hash
+        - c_hash
+        """
+        # Treat it as normal OAuth 2 auth code request if openid is not present
+        if not request.scopes or "openid" not in request.scopes:
+            return token
+    
+        # Only add an id token on auth/token step if asked for.
+        if request.response_type and "id_token" not in request.response_type:
+            return token
+    
+        if "state" not in token and request.state:
+            token["state"] = request.state
+    
+        if request.max_age:
+            d = int(time.time())
+            token["auth_time"] = d
+    
+        # TODO: acr claims (probably better handled by server code using oauthlib in get_id_token)
+    
+        if nonce is not None:
+            token["nonce"] = nonce
+    
+        if "access_token" in token:
+            token["at_hash"] = self.id_token_hash(token["access_token"])
+    
+        if "code" in token:
+            token["c_hash"] = self.id_token_hash(token["code"])
+    
+>       token = token_handler.get_id_token(token, token_handler, request)
+E       AttributeError: 'str' object has no attribute 'get_id_token'
+
+oauthlib/openid/connect/core/grant_types/base.py:109: AttributeError
+________________ IDTokenTest.test_finalize_id_token_with_nonce _________________
+
+self = <tests.openid.connect.core.grant_types.test_base.IDTokenTest testMethod=test_finalize_id_token_with_nonce>
+
+    def test_finalize_id_token_with_nonce(self):
+>       token = self.grant.add_id_token(self.token, "token_handler_mock", self.request, "my_nonce")
+
+tests/openid/connect/core/grant_types/test_base.py:74: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = <tests.openid.connect.core.grant_types.test_base.GrantBase object at 0xffff806bf8b0>
+token = {'nonce': 'my_nonce', 'state': 'abc'}
+token_handler = 'token_handler_mock'
+request = <oauthlib.Request url="http://a.b/path", http_method="GET", headers="{}", body="None">
+nonce = 'my_nonce'
+
+    def add_id_token(self, token, token_handler, request, nonce=None):
+        """
+        Construct an initial version of id_token, and let the
+        request_validator sign or encrypt it.
+    
+        The initial version can contain the fields below, accordingly
+        to the spec:
+        - aud
+        - iat
+        - nonce
+        - at_hash
+        - c_hash
+        """
+        # Treat it as normal OAuth 2 auth code request if openid is not present
+        if not request.scopes or "openid" not in request.scopes:
+            return token
+    
+        # Only add an id token on auth/token step if asked for.
+        if request.response_type and "id_token" not in request.response_type:
+            return token
+    
+        if "state" not in token and request.state:
+            token["state"] = request.state
+    
+        if request.max_age:
+            d = int(time.time())
+            token["auth_time"] = d
+    
+        # TODO: acr claims (probably better handled by server code using oauthlib in get_id_token)
+    
+        if nonce is not None:
+            token["nonce"] = nonce
+    
+        if "access_token" in token:
+            token["at_hash"] = self.id_token_hash(token["access_token"])
+    
+        if "code" in token:
+            token["c_hash"] = self.id_token_hash(token["code"])
+    
+>       token = token_handler.get_id_token(token, token_handler, request)
+E       AttributeError: 'str' object has no attribute 'get_id_token'
+
+oauthlib/openid/connect/core/grant_types/base.py:109: AttributeError
+________________________ IDTokenTest.test_get_id_token _________________________
+
+self = <tests.openid.connect.core.grant_types.test_base.IDTokenTest testMethod=test_get_id_token>
+
+    def test_get_id_token(self):
+        self.mock_validator.get_id_token.return_value = "toto"
+>       token = self.grant.add_id_token(self.token, "token_handler_mock", self.request)
+
+tests/openid/connect/core/grant_types/test_base.py:61: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = <tests.openid.connect.core.grant_types.test_base.GrantBase object at 0xffff805e0c70>
+token = {'state': 'abc'}, token_handler = 'token_handler_mock'
+request = <oauthlib.Request url="http://a.b/path", http_method="GET", headers="{}", body="None">
+nonce = None
+
+    def add_id_token(self, token, token_handler, request, nonce=None):
+        """
+        Construct an initial version of id_token, and let the
+        request_validator sign or encrypt it.
+    
+        The initial version can contain the fields below, accordingly
+        to the spec:
+        - aud
+        - iat
+        - nonce
+        - at_hash
+        - c_hash
+        """
+        # Treat it as normal OAuth 2 auth code request if openid is not present
+        if not request.scopes or "openid" not in request.scopes:
+            return token
+    
+        # Only add an id token on auth/token step if asked for.
+        if request.response_type and "id_token" not in request.response_type:
+            return token
+    
+        if "state" not in token and request.state:
+            token["state"] = request.state
+    
+        if request.max_age:
+            d = int(time.time())
+            token["auth_time"] = d
+    
+        # TODO: acr claims (probably better handled by server code using oauthlib in get_id_token)
+    
+        if nonce is not None:
+            token["nonce"] = nonce
+    
+        if "access_token" in token:
+            token["at_hash"] = self.id_token_hash(token["access_token"])
+    
+        if "code" in token:
+            token["c_hash"] = self.id_token_hash(token["code"])
+    
+>       token = token_handler.get_id_token(token, token_handler, request)
+E       AttributeError: 'str' object has no attribute 'get_id_token'
+
+oauthlib/openid/connect/core/grant_types/base.py:109: AttributeError
+____________ AuthorizationCodeGrantTest.test_create_token_response _____________
+
+self = <tests.oauth2.rfc6749.grant_types.test_authorization_code.AuthorizationCodeGrantTest testMethod=test_create_token_response>
+
+    def test_create_token_response(self):
+        bearer = BearerToken(self.mock_validator)
+    
+        h, token, s = self.auth.create_token_response(self.request, bearer)
+        token = json.loads(token)
+        self.assertEqual(self.mock_validator.save_token.call_count, 1)
+        self.assertIn('access_token', token)
+        self.assertIn('refresh_token', token)
+        self.assertIn('expires_in', token)
+>       self.assertIn('scope', token)
+E       AssertionError: 'scope' not found in {'access_token': 'CwEqoJMEQgXdGLZY9oH34rxZzplmEq', 'expires_in': 3600, 'token_type': 'Bearer', 'refresh_token': 'jEb4QkO4rp4q8ndIeFoz8P19rApfhA'}
+
+tests/oauth2/rfc6749/grant_types/test_authorization_code.py:123: AssertionError
+_ AuthorizationCodeGrantTest.test_create_token_response_without_refresh_token __
+
+self = <tests.oauth2.rfc6749.grant_types.test_authorization_code.AuthorizationCodeGrantTest testMethod=test_create_token_response_without_refresh_token>
+
+    def test_create_token_response_without_refresh_token(self):
+        self.auth.refresh_token = False  # Not to issue refresh token.
+    
+        bearer = BearerToken(self.mock_validator)
+        h, token, s = self.auth.create_token_response(self.request, bearer)
+        token = json.loads(token)
+        self.assertEqual(self.mock_validator.save_token.call_count, 1)
+        self.assertIn('access_token', token)
+        self.assertNotIn('refresh_token', token)
+        self.assertIn('expires_in', token)
+>       self.assertIn('scope', token)
+E       AssertionError: 'scope' not found in {'access_token': '2K4ZYKxOeSeduGAhgQ3ZFZWwjdGzdh', 'expires_in': 3600, 'token_type': 'Bearer'}
+
+tests/oauth2/rfc6749/grant_types/test_authorization_code.py:141: AssertionError
+____________ AuthorizationCodeGrantTest.test_custom_auth_validators ____________
+
+self = <tests.oauth2.rfc6749.grant_types.test_authorization_code.AuthorizationCodeGrantTest testMethod=test_custom_auth_validators>
+
+    def test_custom_auth_validators(self):
+        self.setup_validators()
+    
+        bearer = BearerToken(self.mock_validator)
+        self.auth.create_authorization_response(self.request, bearer)
+        self.assertTrue(self.authval1.called)
+>       self.assertTrue(self.authval2.called)
+E       AssertionError: False is not true
+
+tests/oauth2/rfc6749/grant_types/test_authorization_code.py:58: AssertionError
+___________ AuthorizationCodeGrantTest.test_custom_token_validators ____________
+
+self = <tests.oauth2.rfc6749.grant_types.test_authorization_code.AuthorizationCodeGrantTest testMethod=test_custom_token_validators>
+
+    def test_custom_token_validators(self):
+        self.setup_validators()
+    
+        bearer = BearerToken(self.mock_validator)
+        self.auth.create_token_response(self.request, bearer)
+        self.assertTrue(self.tknval1.called)
+        self.assertTrue(self.tknval2.called)
+>       self.assertFalse(self.authval1.called)
+E       AssertionError: True is not false
+
+tests/oauth2/rfc6749/grant_types/test_authorization_code.py:69: AssertionError
+________________ OpenIDAuthCodeTest.test_create_token_response _________________
+
+self = <tests.openid.connect.core.grant_types.test_authorization_code.OpenIDAuthCodeTest testMethod=test_create_token_response>
+
+    def test_create_token_response(self):
+        self.request.response_type = None
+        self.mock_validator.validate_code.side_effect = self.set_scopes
+    
+        bearer = BearerToken(self.mock_validator)
+    
+        h, token, s = self.auth.create_token_response(self.request, bearer)
+        token = json.loads(token)
+        self.assertEqual(self.mock_validator.save_token.call_count, 1)
+        self.assertIn('access_token', token)
+        self.assertIn('refresh_token', token)
+        self.assertIn('expires_in', token)
+>       self.assertIn('scope', token)
+E       AssertionError: 'scope' not found in {'access_token': 'l2RPUsj2AL73FaGlntysLEhFKK5H9e', 'expires_in': 3600, 'token_type': 'Bearer', 'refresh_token': 'jTTwPHVqW0aprldBXnCePju1hhKW8C'}
+
+tests/openid/connect/core/grant_types/test_authorization_code.py:172: AssertionError
+_______________ OpenIDAuthCodeTest.test_no_prompt_authorization ________________
+
+self = <tests.openid.connect.core.grant_types.test_authorization_code.OpenIDAuthCodeTest testMethod=test_no_prompt_authorization>
+generate_token = <MagicMock name='generate_token' id='281472827843824'>
+
+    @mock.patch('oauthlib.common.generate_token')
+    def test_no_prompt_authorization(self, generate_token):
+        generate_token.return_value = 'abc'
+        self.request.prompt = 'none'
+    
+        bearer = BearerToken(self.mock_validator)
+    
+        self.request.response_mode = 'query'
+        self.request.id_token_hint = 'me@email.com'
+        h, b, s = self.auth.create_authorization_response(self.request, bearer)
+        self.assertURLEqual(h['Location'], self.url_query)
+        self.assertIsNone(b)
+        self.assertEqual(s, 302)
+    
+        # Test alternative response modes
+        self.request.response_mode = 'fragment'
+        h, b, s = self.auth.create_authorization_response(self.request, bearer)
+        self.assertURLEqual(h['Location'], self.url_fragment, parse_fragment=True)
+    
+        # Ensure silent authentication and authorization is done
+        self.mock_validator.validate_silent_login.return_value = False
+        self.mock_validator.validate_silent_authorization.return_value = True
+>       self.assertRaises(LoginRequired,
+                          self.auth.validate_authorization_request,
+                          self.request)
+E       AssertionError: LoginRequired not raised by validate_authorization_request
+
+tests/openid/connect/core/grant_types/test_authorization_code.py:101: AssertionError
+__________________ OpenIDAuthCodeTest.test_none_multi_prompt ___________________
+
+self = <tests.openid.connect.core.grant_types.test_authorization_code.OpenIDAuthCodeTest testMethod=test_none_multi_prompt>
+
+    def test_none_multi_prompt(self):
+        bearer = BearerToken(self.mock_validator)
+    
+        self.request.prompt = 'none login'
+>       self.assertRaises(InvalidRequestError,
+                          self.auth.validate_authorization_request,
+                          self.request)
+E       AssertionError: InvalidRequestError not raised by validate_authorization_request
+
+tests/openid/connect/core/grant_types/test_authorization_code.py:128: AssertionError
+___________ OpenIDHybridInterferenceTest.test_create_token_response ____________
+
+self = <tests.openid.connect.core.grant_types.test_hybrid.OpenIDHybridInterferenceTest testMethod=test_create_token_response>
+
+    def test_create_token_response(self):
+        bearer = BearerToken(self.mock_validator)
+    
+        h, token, s = self.auth.create_token_response(self.request, bearer)
+        token = json.loads(token)
+        self.assertEqual(self.mock_validator.save_token.call_count, 1)
+        self.assertIn('access_token', token)
+        self.assertIn('refresh_token', token)
+        self.assertIn('expires_in', token)
+>       self.assertIn('scope', token)
+E       AssertionError: 'scope' not found in {'access_token': 'wXcEAnirutt1x6XjtewuRviyVWywxr', 'expires_in': 3600, 'token_type': 'Bearer', 'refresh_token': 'vwJGBkmnNh0nfW1U3zJvF4C36elrjg'}
+
+tests/oauth2/rfc6749/grant_types/test_authorization_code.py:123: AssertionError
+_ OpenIDHybridInterferenceTest.test_create_token_response_without_refresh_token _
+
+self = <tests.openid.connect.core.grant_types.test_hybrid.OpenIDHybridInterferenceTest testMethod=test_create_token_response_without_refresh_token>
+
+    def test_create_token_response_without_refresh_token(self):
+        self.auth.refresh_token = False  # Not to issue refresh token.
+    
+        bearer = BearerToken(self.mock_validator)
+        h, token, s = self.auth.create_token_response(self.request, bearer)
+        token = json.loads(token)
+        self.assertEqual(self.mock_validator.save_token.call_count, 1)
+        self.assertIn('access_token', token)
+        self.assertNotIn('refresh_token', token)
+        self.assertIn('expires_in', token)
+>       self.assertIn('scope', token)
+E       AssertionError: 'scope' not found in {'access_token': 'y6cDVyQJUdUxHcnSOFg59CixcQqHwB', 'expires_in': 3600, 'token_type': 'Bearer'}
+
+tests/oauth2/rfc6749/grant_types/test_authorization_code.py:141: AssertionError
+___________ OpenIDHybridInterferenceTest.test_custom_auth_validators ___________
+
+self = <tests.openid.connect.core.grant_types.test_hybrid.OpenIDHybridInterferenceTest testMethod=test_custom_auth_validators>
+
+    def test_custom_auth_validators(self):
+        self.setup_validators()
+    
+        bearer = BearerToken(self.mock_validator)
+        self.auth.create_authorization_response(self.request, bearer)
+        self.assertTrue(self.authval1.called)
+>       self.assertTrue(self.authval2.called)
+E       AssertionError: False is not true
+
+tests/oauth2/rfc6749/grant_types/test_authorization_code.py:58: AssertionError
+__________ OpenIDHybridInterferenceTest.test_custom_token_validators ___________
+
+self = <tests.openid.connect.core.grant_types.test_hybrid.OpenIDHybridInterferenceTest testMethod=test_custom_token_validators>
+
+    def test_custom_token_validators(self):
+        self.setup_validators()
+    
+        bearer = BearerToken(self.mock_validator)
+        self.auth.create_token_response(self.request, bearer)
+        self.assertTrue(self.tknval1.called)
+        self.assertTrue(self.tknval2.called)
+>       self.assertFalse(self.authval1.called)
+E       AssertionError: True is not false
+
+tests/oauth2/rfc6749/grant_types/test_authorization_code.py:69: AssertionError
+_________________ OpenIDHybridCodeTokenTest.test_authorization _________________
+
+self = <tests.openid.connect.core.grant_types.test_hybrid.OpenIDHybridCodeTokenTest testMethod=test_authorization>
+generate_token = <MagicMock name='generate_token' id='281472832775360'>
+
+    @mock.patch('oauthlib.common.generate_token')
+    def test_authorization(self, generate_token):
+    
+        scope, info = self.auth.validate_authorization_request(self.request)
+    
+        generate_token.return_value = 'abc'
+        bearer = BearerToken(self.mock_validator)
+        self.request.response_mode = 'query'
+        h, b, s = self.auth.create_authorization_response(self.request, bearer)
+>       self.assertURLEqual(h['Location'], self.url_query)
+
+tests/openid/connect/core/grant_types/test_authorization_code.py:69: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+tests/unittest/__init__.py:25: in url_equals
+    self.assertCountEqual(query_a, query_b)
+E   AssertionError: Element counts were not equal:
+E   First has 0, Second has 1:  ('scope', 'hello openid')
+_____________ OpenIDHybridCodeTokenTest.test_create_token_response _____________
+
+self = <tests.openid.connect.core.grant_types.test_hybrid.OpenIDHybridCodeTokenTest testMethod=test_create_token_response>
+
+    def test_create_token_response(self):
+        self.request.response_type = None
+        self.mock_validator.validate_code.side_effect = self.set_scopes
+    
+        bearer = BearerToken(self.mock_validator)
+    
+        h, token, s = self.auth.create_token_response(self.request, bearer)
+        token = json.loads(token)
+        self.assertEqual(self.mock_validator.save_token.call_count, 1)
+        self.assertIn('access_token', token)
+        self.assertIn('refresh_token', token)
+        self.assertIn('expires_in', token)
+>       self.assertIn('scope', token)
+E       AssertionError: 'scope' not found in {'access_token': 'CFb0MYnlIuF7F6L13hvSQVAA4ueErW', 'expires_in': 3600, 'token_type': 'Bearer', 'refresh_token': 'bsTI05ata4RXugS2ko74ffIWHJbg0h'}
+
+tests/openid/connect/core/grant_types/test_authorization_code.py:172: AssertionError
+____________ OpenIDHybridCodeTokenTest.test_no_prompt_authorization ____________
+
+self = <tests.openid.connect.core.grant_types.test_hybrid.OpenIDHybridCodeTokenTest testMethod=test_no_prompt_authorization>
+generate_token = <MagicMock name='generate_token' id='281472831073968'>
+
+    @mock.patch('oauthlib.common.generate_token')
+    def test_no_prompt_authorization(self, generate_token):
+        generate_token.return_value = 'abc'
+        self.request.prompt = 'none'
+    
+        bearer = BearerToken(self.mock_validator)
+    
+        self.request.response_mode = 'query'
+        self.request.id_token_hint = 'me@email.com'
+        h, b, s = self.auth.create_authorization_response(self.request, bearer)
+>       self.assertURLEqual(h['Location'], self.url_query)
+
+tests/openid/connect/core/grant_types/test_authorization_code.py:89: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+tests/unittest/__init__.py:25: in url_equals
+    self.assertCountEqual(query_a, query_b)
+E   AssertionError: Element counts were not equal:
+E   First has 0, Second has 1:  ('scope', 'hello openid')
+_______________ OpenIDHybridCodeTokenTest.test_none_multi_prompt _______________
+
+self = <tests.openid.connect.core.grant_types.test_hybrid.OpenIDHybridCodeTokenTest testMethod=test_none_multi_prompt>
+
+    def test_none_multi_prompt(self):
+        bearer = BearerToken(self.mock_validator)
+    
+        self.request.prompt = 'none login'
+>       self.assertRaises(InvalidRequestError,
+                          self.auth.validate_authorization_request,
+                          self.request)
+E       AssertionError: InvalidRequestError not raised by validate_authorization_request
+
+tests/openid/connect/core/grant_types/test_authorization_code.py:128: AssertionError
+________________ OpenIDHybridCodeTokenTest.test_optional_nonce _________________
+
+self = <tests.openid.connect.core.grant_types.test_hybrid.OpenIDHybridCodeTokenTest testMethod=test_optional_nonce>
+generate_token = <MagicMock name='generate_token' id='281472827548336'>
+
+    @mock.patch('oauthlib.common.generate_token')
+    def test_optional_nonce(self, generate_token):
+        generate_token.return_value = 'abc'
+        self.request.nonce = 'xyz'
+        scope, info = self.auth.validate_authorization_request(self.request)
+    
+        bearer = BearerToken(self.mock_validator)
+        h, b, s = self.auth.create_authorization_response(self.request, bearer)
+>       self.assertURLEqual(h['Location'], self.url_fragment, parse_fragment=True)
+
+tests/openid/connect/core/grant_types/test_hybrid.py:41: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+tests/unittest/__init__.py:14: in url_equals
+    self.assertCountEqual(fragment_a, fragment_b)
+E   AssertionError: Element counts were not equal:
+E   First has 0, Second has 1:  ('scope', 'hello openid')
+________________ OpenIDHybridCodeIdTokenTest.test_authorization ________________
+
+self = <tests.openid.connect.core.grant_types.test_hybrid.OpenIDHybridCodeIdTokenTest testMethod=test_authorization>
+generate_token = <MagicMock name='generate_token' id='281472828731840'>
+
+    @mock.patch('oauthlib.common.generate_token')
+    def test_authorization(self, generate_token):
+    
+        scope, info = self.auth.validate_authorization_request(self.request)
+    
+        generate_token.return_value = 'abc'
+        bearer = BearerToken(self.mock_validator)
+        self.request.response_mode = 'query'
+>       h, b, s = self.auth.create_authorization_response(self.request, bearer)
+
+tests/openid/connect/core/grant_types/test_authorization_code.py:68: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+oauthlib/oauth2/rfc6749/grant_types/authorization_code.py:88: in create_authorization_response
+    grant = modifier(grant, token_handler, request)
+oauthlib/openid/connect/core/grant_types/hybrid.py:29: in add_id_token
+    return super().add_id_token(token, token_handler, request, nonce=request.nonce)
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = <oauthlib.openid.connect.core.grant_types.hybrid.HybridGrant object at 0xffff7ff512b0>
+token = {'c_hash': 'ungWv48Bz-pBQUDeXa4iIw', 'code': 'abc', 'nonce': 'zxc', 'state': 'abc'}
+token_handler = <oauthlib.oauth2.rfc6749.tokens.BearerToken object at 0xffff7fed1040>
+request = <oauthlib.Request url="http://a.b/path", http_method="GET", headers="{}", body="None">
+nonce = 'zxc'
+
+    def add_id_token(self, token, token_handler, request, nonce=None):
+        """
+        Construct an initial version of id_token, and let the
+        request_validator sign or encrypt it.
+    
+        The initial version can contain the fields below, accordingly
+        to the spec:
+        - aud
+        - iat
+        - nonce
+        - at_hash
+        - c_hash
+        """
+        # Treat it as normal OAuth 2 auth code request if openid is not present
+        if not request.scopes or "openid" not in request.scopes:
+            return token
+    
+        # Only add an id token on auth/token step if asked for.
+        if request.response_type and "id_token" not in request.response_type:
+            return token
+    
+        if "state" not in token and request.state:
+            token["state"] = request.state
+    
+        if request.max_age:
+            d = int(time.time())
+            token["auth_time"] = d
+    
+        # TODO: acr claims (probably better handled by server code using oauthlib in get_id_token)
+    
+        if nonce is not None:
+            token["nonce"] = nonce
+    
+        if "access_token" in token:
+            token["at_hash"] = self.id_token_hash(token["access_token"])
+    
+        if "code" in token:
+            token["c_hash"] = self.id_token_hash(token["code"])
+    
+>       token = token_handler.get_id_token(token, token_handler, request)
+E       AttributeError: 'BearerToken' object has no attribute 'get_id_token'
+
+oauthlib/openid/connect/core/grant_types/base.py:109: AttributeError
+____________ OpenIDHybridCodeIdTokenTest.test_create_token_response ____________
+
+self = <tests.openid.connect.core.grant_types.test_hybrid.OpenIDHybridCodeIdTokenTest testMethod=test_create_token_response>
+
+    def test_create_token_response(self):
+        self.request.response_type = None
+        self.mock_validator.validate_code.side_effect = self.set_scopes
+    
+        bearer = BearerToken(self.mock_validator)
+    
+        h, token, s = self.auth.create_token_response(self.request, bearer)
+        token = json.loads(token)
+        self.assertEqual(self.mock_validator.save_token.call_count, 1)
+        self.assertIn('access_token', token)
+        self.assertIn('refresh_token', token)
+        self.assertIn('expires_in', token)
+>       self.assertIn('scope', token)
+E       AssertionError: 'scope' not found in {'access_token': 'bVi7UM2Q7SDEfZRjZl1K2Orep9TEIg', 'expires_in': 3600, 'token_type': 'Bearer', 'refresh_token': 'gpcLHwz3pwsFDhU4NGOrsHzH679lIM'}
+
+tests/openid/connect/core/grant_types/test_authorization_code.py:172: AssertionError
+___________ OpenIDHybridCodeIdTokenTest.test_id_token_contains_nonce ___________
+
+self = <tests.openid.connect.core.grant_types.test_hybrid.OpenIDHybridCodeIdTokenTest testMethod=test_id_token_contains_nonce>
+
+    def test_id_token_contains_nonce(self):
+        token = {}
+        self.mock_validator.get_id_token.side_effect = None
+        self.mock_validator.get_id_token.return_value = None
+>       token = self.auth.add_id_token(token, None, self.request)
+
+tests/openid/connect/core/grant_types/test_hybrid.py:74: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+oauthlib/openid/connect/core/grant_types/hybrid.py:29: in add_id_token
+    return super().add_id_token(token, token_handler, request, nonce=request.nonce)
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = <oauthlib.openid.connect.core.grant_types.hybrid.HybridGrant object at 0xffff80246340>
+token = {'nonce': 'zxc', 'state': 'abc'}, token_handler = None
+request = <oauthlib.Request url="http://a.b/path", http_method="GET", headers="{}", body="None">
+nonce = 'zxc'
+
+    def add_id_token(self, token, token_handler, request, nonce=None):
+        """
+        Construct an initial version of id_token, and let the
+        request_validator sign or encrypt it.
+    
+        The initial version can contain the fields below, accordingly
+        to the spec:
+        - aud
+        - iat
+        - nonce
+        - at_hash
+        - c_hash
+        """
+        # Treat it as normal OAuth 2 auth code request if openid is not present
+        if not request.scopes or "openid" not in request.scopes:
+            return token
+    
+        # Only add an id token on auth/token step if asked for.
+        if request.response_type and "id_token" not in request.response_type:
+            return token
+    
+        if "state" not in token and request.state:
+            token["state"] = request.state
+    
+        if request.max_age:
+            d = int(time.time())
+            token["auth_time"] = d
+    
+        # TODO: acr claims (probably better handled by server code using oauthlib in get_id_token)
+    
+        if nonce is not None:
+            token["nonce"] = nonce
+    
+        if "access_token" in token:
+            token["at_hash"] = self.id_token_hash(token["access_token"])
+    
+        if "code" in token:
+            token["c_hash"] = self.id_token_hash(token["code"])
+    
+>       token = token_handler.get_id_token(token, token_handler, request)
+E       AttributeError: 'NoneType' object has no attribute 'get_id_token'
+
+oauthlib/openid/connect/core/grant_types/base.py:109: AttributeError
+___________ OpenIDHybridCodeIdTokenTest.test_no_prompt_authorization ___________
+
+self = <tests.openid.connect.core.grant_types.test_hybrid.OpenIDHybridCodeIdTokenTest testMethod=test_no_prompt_authorization>
+generate_token = <MagicMock name='generate_token' id='281472830872016'>
+
+    @mock.patch('oauthlib.common.generate_token')
+    def test_no_prompt_authorization(self, generate_token):
+        generate_token.return_value = 'abc'
+        self.request.prompt = 'none'
+    
+        bearer = BearerToken(self.mock_validator)
+    
+        self.request.response_mode = 'query'
+        self.request.id_token_hint = 'me@email.com'
+>       h, b, s = self.auth.create_authorization_response(self.request, bearer)
+
+tests/openid/connect/core/grant_types/test_authorization_code.py:88: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+oauthlib/oauth2/rfc6749/grant_types/authorization_code.py:88: in create_authorization_response
+    grant = modifier(grant, token_handler, request)
+oauthlib/openid/connect/core/grant_types/hybrid.py:29: in add_id_token
+    return super().add_id_token(token, token_handler, request, nonce=request.nonce)
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = <oauthlib.openid.connect.core.grant_types.hybrid.HybridGrant object at 0xffff80191880>
+token = {'c_hash': 'ungWv48Bz-pBQUDeXa4iIw', 'code': 'abc', 'nonce': 'zxc', 'state': 'abc'}
+token_handler = <oauthlib.oauth2.rfc6749.tokens.BearerToken object at 0xffff8004ea00>
+request = <oauthlib.Request url="http://a.b/path", http_method="GET", headers="{}", body="None">
+nonce = 'zxc'
+
+    def add_id_token(self, token, token_handler, request, nonce=None):
+        """
+        Construct an initial version of id_token, and let the
+        request_validator sign or encrypt it.
+    
+        The initial version can contain the fields below, accordingly
+        to the spec:
+        - aud
+        - iat
+        - nonce
+        - at_hash
+        - c_hash
+        """
+        # Treat it as normal OAuth 2 auth code request if openid is not present
+        if not request.scopes or "openid" not in request.scopes:
+            return token
+    
+        # Only add an id token on auth/token step if asked for.
+        if request.response_type and "id_token" not in request.response_type:
+            return token
+    
+        if "state" not in token and request.state:
+            token["state"] = request.state
+    
+        if request.max_age:
+            d = int(time.time())
+            token["auth_time"] = d
+    
+        # TODO: acr claims (probably better handled by server code using oauthlib in get_id_token)
+    
+        if nonce is not None:
+            token["nonce"] = nonce
+    
+        if "access_token" in token:
+            token["at_hash"] = self.id_token_hash(token["access_token"])
+    
+        if "code" in token:
+            token["c_hash"] = self.id_token_hash(token["code"])
+    
+>       token = token_handler.get_id_token(token, token_handler, request)
+E       AttributeError: 'BearerToken' object has no attribute 'get_id_token'
+
+oauthlib/openid/connect/core/grant_types/base.py:109: AttributeError
+______________ OpenIDHybridCodeIdTokenTest.test_none_multi_prompt ______________
+
+self = <tests.openid.connect.core.grant_types.test_hybrid.OpenIDHybridCodeIdTokenTest testMethod=test_none_multi_prompt>
+
+    def test_none_multi_prompt(self):
+        bearer = BearerToken(self.mock_validator)
+    
+        self.request.prompt = 'none login'
+>       self.assertRaises(InvalidRequestError,
+                          self.auth.validate_authorization_request,
+                          self.request)
+E       AssertionError: InvalidRequestError not raised by validate_authorization_request
+
+tests/openid/connect/core/grant_types/test_authorization_code.py:128: AssertionError
+_______________ OpenIDHybridCodeIdTokenTest.test_optional_nonce ________________
+
+self = <tests.openid.connect.core.grant_types.test_hybrid.OpenIDHybridCodeIdTokenTest testMethod=test_optional_nonce>
+generate_token = <MagicMock name='generate_token' id='281472833098704'>
+
+    @mock.patch('oauthlib.common.generate_token')
+    def test_optional_nonce(self, generate_token):
+        generate_token.return_value = 'abc'
+        self.request.nonce = 'xyz'
+        scope, info = self.auth.validate_authorization_request(self.request)
+    
+        bearer = BearerToken(self.mock_validator)
+        self.request.response_mode = 'query'
+>       h, b, s = self.auth.create_authorization_response(self.request, bearer)
+
+tests/openid/connect/core/grant_types/test_authorization_code.py:197: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+oauthlib/oauth2/rfc6749/grant_types/authorization_code.py:88: in create_authorization_response
+    grant = modifier(grant, token_handler, request)
+oauthlib/openid/connect/core/grant_types/hybrid.py:29: in add_id_token
+    return super().add_id_token(token, token_handler, request, nonce=request.nonce)
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = <oauthlib.openid.connect.core.grant_types.hybrid.HybridGrant object at 0xffff803b11c0>
+token = {'c_hash': 'ungWv48Bz-pBQUDeXa4iIw', 'code': 'abc', 'nonce': 'xyz', 'state': 'abc'}
+token_handler = <oauthlib.oauth2.rfc6749.tokens.BearerToken object at 0xffff800785c0>
+request = <oauthlib.Request url="http://a.b/path", http_method="GET", headers="{}", body="None">
+nonce = 'xyz'
+
+    def add_id_token(self, token, token_handler, request, nonce=None):
+        """
+        Construct an initial version of id_token, and let the
+        request_validator sign or encrypt it.
+    
+        The initial version can contain the fields below, accordingly
+        to the spec:
+        - aud
+        - iat
+        - nonce
+        - at_hash
+        - c_hash
+        """
+        # Treat it as normal OAuth 2 auth code request if openid is not present
+        if not request.scopes or "openid" not in request.scopes:
+            return token
+    
+        # Only add an id token on auth/token step if asked for.
+        if request.response_type and "id_token" not in request.response_type:
+            return token
+    
+        if "state" not in token and request.state:
+            token["state"] = request.state
+    
+        if request.max_age:
+            d = int(time.time())
+            token["auth_time"] = d
+    
+        # TODO: acr claims (probably better handled by server code using oauthlib in get_id_token)
+    
+        if nonce is not None:
+            token["nonce"] = nonce
+    
+        if "access_token" in token:
+            token["at_hash"] = self.id_token_hash(token["access_token"])
+    
+        if "code" in token:
+            token["c_hash"] = self.id_token_hash(token["code"])
+    
+>       token = token_handler.get_id_token(token, token_handler, request)
+E       AttributeError: 'BearerToken' object has no attribute 'get_id_token'
+
+oauthlib/openid/connect/core/grant_types/base.py:109: AttributeError
+_______________ OpenIDHybridCodeIdTokenTest.test_required_nonce ________________
+
+self = <tests.openid.connect.core.grant_types.test_hybrid.OpenIDHybridCodeIdTokenTest testMethod=test_required_nonce>
+generate_token = <MagicMock name='generate_token' id='281472832495728'>
+
+    @mock.patch('oauthlib.common.generate_token')
+    def test_required_nonce(self, generate_token):
+        generate_token.return_value = 'abc'
+        self.request.nonce = None
+>       self.assertRaises(errors.InvalidRequestError, self.auth.validate_authorization_request, self.request)
+E       AssertionError: InvalidRequestError not raised by validate_authorization_request
+
+tests/openid/connect/core/grant_types/test_hybrid.py:62: AssertionError
+_____________ OpenIDHybridCodeIdTokenTokenTest.test_authorization ______________
+
+self = <tests.openid.connect.core.grant_types.test_hybrid.OpenIDHybridCodeIdTokenTokenTest testMethod=test_authorization>
+generate_token = <MagicMock name='generate_token' id='281472833392064'>
+
+    @mock.patch('oauthlib.common.generate_token')
+    def test_authorization(self, generate_token):
+    
+        scope, info = self.auth.validate_authorization_request(self.request)
+    
+        generate_token.return_value = 'abc'
+        bearer = BearerToken(self.mock_validator)
+        self.request.response_mode = 'query'
+>       h, b, s = self.auth.create_authorization_response(self.request, bearer)
+
+tests/openid/connect/core/grant_types/test_authorization_code.py:68: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+oauthlib/oauth2/rfc6749/grant_types/authorization_code.py:88: in create_authorization_response
+    grant = modifier(grant, token_handler, request)
+oauthlib/openid/connect/core/grant_types/hybrid.py:29: in add_id_token
+    return super().add_id_token(token, token_handler, request, nonce=request.nonce)
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = <oauthlib.openid.connect.core.grant_types.hybrid.HybridGrant object at 0xffff803f8d60>
+token = {'access_token': 'abc', 'at_hash': 'ungWv48Bz-pBQUDeXa4iIw', 'c_hash': 'ungWv48Bz-pBQUDeXa4iIw', 'code': 'abc', ...}
+token_handler = <oauthlib.oauth2.rfc6749.tokens.BearerToken object at 0xffff8020c040>
+request = <oauthlib.Request url="http://a.b/path", http_method="GET", headers="{}", body="None">
+nonce = 'xyz'
+
+    def add_id_token(self, token, token_handler, request, nonce=None):
+        """
+        Construct an initial version of id_token, and let the
+        request_validator sign or encrypt it.
+    
+        The initial version can contain the fields below, accordingly
+        to the spec:
+        - aud
+        - iat
+        - nonce
+        - at_hash
+        - c_hash
+        """
+        # Treat it as normal OAuth 2 auth code request if openid is not present
+        if not request.scopes or "openid" not in request.scopes:
+            return token
+    
+        # Only add an id token on auth/token step if asked for.
+        if request.response_type and "id_token" not in request.response_type:
+            return token
+    
+        if "state" not in token and request.state:
+            token["state"] = request.state
+    
+        if request.max_age:
+            d = int(time.time())
+            token["auth_time"] = d
+    
+        # TODO: acr claims (probably better handled by server code using oauthlib in get_id_token)
+    
+        if nonce is not None:
+            token["nonce"] = nonce
+    
+        if "access_token" in token:
+            token["at_hash"] = self.id_token_hash(token["access_token"])
+    
+        if "code" in token:
+            token["c_hash"] = self.id_token_hash(token["code"])
+    
+>       token = token_handler.get_id_token(token, token_handler, request)
+E       AttributeError: 'BearerToken' object has no attribute 'get_id_token'
+
+oauthlib/openid/connect/core/grant_types/base.py:109: AttributeError
+_________ OpenIDHybridCodeIdTokenTokenTest.test_create_token_response __________
+
+self = <tests.openid.connect.core.grant_types.test_hybrid.OpenIDHybridCodeIdTokenTokenTest testMethod=test_create_token_response>
+
+    def test_create_token_response(self):
+        self.request.response_type = None
+        self.mock_validator.validate_code.side_effect = self.set_scopes
+    
+        bearer = BearerToken(self.mock_validator)
+    
+        h, token, s = self.auth.create_token_response(self.request, bearer)
+        token = json.loads(token)
+        self.assertEqual(self.mock_validator.save_token.call_count, 1)
+        self.assertIn('access_token', token)
+        self.assertIn('refresh_token', token)
+        self.assertIn('expires_in', token)
+>       self.assertIn('scope', token)
+E       AssertionError: 'scope' not found in {'access_token': '6IFMZN0KutE4ZvH3ziCLMRJvY2DJca', 'expires_in': 3600, 'token_type': 'Bearer', 'refresh_token': 'Mmx62YPppSPqc9srQFivuJEz6joaCA'}
+
+tests/openid/connect/core/grant_types/test_authorization_code.py:172: AssertionError
+________ OpenIDHybridCodeIdTokenTokenTest.test_no_prompt_authorization _________
+
+self = <tests.openid.connect.core.grant_types.test_hybrid.OpenIDHybridCodeIdTokenTokenTest testMethod=test_no_prompt_authorization>
+generate_token = <MagicMock name='generate_token' id='281472835990432'>
+
+    @mock.patch('oauthlib.common.generate_token')
+    def test_no_prompt_authorization(self, generate_token):
+        generate_token.return_value = 'abc'
+        self.request.prompt = 'none'
+    
+        bearer = BearerToken(self.mock_validator)
+    
+        self.request.response_mode = 'query'
+        self.request.id_token_hint = 'me@email.com'
+>       h, b, s = self.auth.create_authorization_response(self.request, bearer)
+
+tests/openid/connect/core/grant_types/test_authorization_code.py:88: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+oauthlib/oauth2/rfc6749/grant_types/authorization_code.py:88: in create_authorization_response
+    grant = modifier(grant, token_handler, request)
+oauthlib/openid/connect/core/grant_types/hybrid.py:29: in add_id_token
+    return super().add_id_token(token, token_handler, request, nonce=request.nonce)
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = <oauthlib.openid.connect.core.grant_types.hybrid.HybridGrant object at 0xffff80673100>
+token = {'access_token': 'abc', 'at_hash': 'ungWv48Bz-pBQUDeXa4iIw', 'c_hash': 'ungWv48Bz-pBQUDeXa4iIw', 'code': 'abc', ...}
+token_handler = <oauthlib.oauth2.rfc6749.tokens.BearerToken object at 0xffff804f30c0>
+request = <oauthlib.Request url="http://a.b/path", http_method="GET", headers="{}", body="None">
+nonce = 'xyz'
+
+    def add_id_token(self, token, token_handler, request, nonce=None):
+        """
+        Construct an initial version of id_token, and let the
+        request_validator sign or encrypt it.
+    
+        The initial version can contain the fields below, accordingly
+        to the spec:
+        - aud
+        - iat
+        - nonce
+        - at_hash
+        - c_hash
+        """
+        # Treat it as normal OAuth 2 auth code request if openid is not present
+        if not request.scopes or "openid" not in request.scopes:
+            return token
+    
+        # Only add an id token on auth/token step if asked for.
+        if request.response_type and "id_token" not in request.response_type:
+            return token
+    
+        if "state" not in token and request.state:
+            token["state"] = request.state
+    
+        if request.max_age:
+            d = int(time.time())
+            token["auth_time"] = d
+    
+        # TODO: acr claims (probably better handled by server code using oauthlib in get_id_token)
+    
+        if nonce is not None:
+            token["nonce"] = nonce
+    
+        if "access_token" in token:
+            token["at_hash"] = self.id_token_hash(token["access_token"])
+    
+        if "code" in token:
+            token["c_hash"] = self.id_token_hash(token["code"])
+    
+>       token = token_handler.get_id_token(token, token_handler, request)
+E       AttributeError: 'BearerToken' object has no attribute 'get_id_token'
+
+oauthlib/openid/connect/core/grant_types/base.py:109: AttributeError
+___________ OpenIDHybridCodeIdTokenTokenTest.test_none_multi_prompt ____________
+
+self = <tests.openid.connect.core.grant_types.test_hybrid.OpenIDHybridCodeIdTokenTokenTest testMethod=test_none_multi_prompt>
+
+    def test_none_multi_prompt(self):
+        bearer = BearerToken(self.mock_validator)
+    
+        self.request.prompt = 'none login'
+>       self.assertRaises(InvalidRequestError,
+                          self.auth.validate_authorization_request,
+                          self.request)
+E       AssertionError: InvalidRequestError not raised by validate_authorization_request
+
+tests/openid/connect/core/grant_types/test_authorization_code.py:128: AssertionError
+_____________ OpenIDHybridCodeIdTokenTokenTest.test_optional_nonce _____________
+
+self = <tests.openid.connect.core.grant_types.test_hybrid.OpenIDHybridCodeIdTokenTokenTest testMethod=test_optional_nonce>
+generate_token = <MagicMock name='generate_token' id='281472831925360'>
+
+    @mock.patch('oauthlib.common.generate_token')
+    def test_optional_nonce(self, generate_token):
+        generate_token.return_value = 'abc'
+        self.request.nonce = 'xyz'
+        scope, info = self.auth.validate_authorization_request(self.request)
+    
+        bearer = BearerToken(self.mock_validator)
+        self.request.response_mode = 'query'
+>       h, b, s = self.auth.create_authorization_response(self.request, bearer)
+
+tests/openid/connect/core/grant_types/test_authorization_code.py:197: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+oauthlib/oauth2/rfc6749/grant_types/authorization_code.py:88: in create_authorization_response
+    grant = modifier(grant, token_handler, request)
+oauthlib/openid/connect/core/grant_types/hybrid.py:29: in add_id_token
+    return super().add_id_token(token, token_handler, request, nonce=request.nonce)
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = <oauthlib.openid.connect.core.grant_types.hybrid.HybridGrant object at 0xffff80292b20>
+token = {'access_token': 'abc', 'at_hash': 'ungWv48Bz-pBQUDeXa4iIw', 'c_hash': 'ungWv48Bz-pBQUDeXa4iIw', 'code': 'abc', ...}
+token_handler = <oauthlib.oauth2.rfc6749.tokens.BearerToken object at 0xffff805597c0>
+request = <oauthlib.Request url="http://a.b/path", http_method="GET", headers="{}", body="None">
+nonce = 'xyz'
+
+    def add_id_token(self, token, token_handler, request, nonce=None):
+        """
+        Construct an initial version of id_token, and let the
+        request_validator sign or encrypt it.
+    
+        The initial version can contain the fields below, accordingly
+        to the spec:
+        - aud
+        - iat
+        - nonce
+        - at_hash
+        - c_hash
+        """
+        # Treat it as normal OAuth 2 auth code request if openid is not present
+        if not request.scopes or "openid" not in request.scopes:
+            return token
+    
+        # Only add an id token on auth/token step if asked for.
+        if request.response_type and "id_token" not in request.response_type:
+            return token
+    
+        if "state" not in token and request.state:
+            token["state"] = request.state
+    
+        if request.max_age:
+            d = int(time.time())
+            token["auth_time"] = d
+    
+        # TODO: acr claims (probably better handled by server code using oauthlib in get_id_token)
+    
+        if nonce is not None:
+            token["nonce"] = nonce
+    
+        if "access_token" in token:
+            token["at_hash"] = self.id_token_hash(token["access_token"])
+    
+        if "code" in token:
+            token["c_hash"] = self.id_token_hash(token["code"])
+    
+>       token = token_handler.get_id_token(token, token_handler, request)
+E       AttributeError: 'BearerToken' object has no attribute 'get_id_token'
+
+oauthlib/openid/connect/core/grant_types/base.py:109: AttributeError
+_____________ OpenIDHybridCodeIdTokenTokenTest.test_required_nonce _____________
+
+self = <tests.openid.connect.core.grant_types.test_hybrid.OpenIDHybridCodeIdTokenTokenTest testMethod=test_required_nonce>
+generate_token = <MagicMock name='generate_token' id='281472831732272'>
+
+    @mock.patch('oauthlib.common.generate_token')
+    def test_required_nonce(self, generate_token):
+        generate_token.return_value = 'abc'
+        self.request.nonce = None
+>       self.assertRaises(errors.InvalidRequestError, self.auth.validate_authorization_request, self.request)
+E       AssertionError: InvalidRequestError not raised by validate_authorization_request
+
+tests/openid/connect/core/grant_types/test_hybrid.py:96: AssertionError
+_________________ ImplicitGrantTest.test_create_token_response _________________
+
+self = <tests.oauth2.rfc6749.grant_types.test_implicit.ImplicitGrantTest testMethod=test_create_token_response>
+generate_token = <MagicMock name='generate_token' id='281472833577072'>
+
+    @mock.patch('oauthlib.common.generate_token')
+    def test_create_token_response(self, generate_token):
+        generate_token.return_value = '1234'
+        bearer = BearerToken(self.mock_validator, expires_in=1800)
+        h, b, s = self.auth.create_token_response(self.request, bearer)
+        correct_uri = 'https://b.c/p#access_token=1234&token_type=Bearer&expires_in=1800&state=xyz&scope=hello+world'
+        self.assertEqual(s, 302)
+>       self.assertURLEqual(h['Location'], correct_uri, parse_fragment=True)
+
+tests/oauth2/rfc6749/grant_types/test_implicit.py:34: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+tests/unittest/__init__.py:14: in url_equals
+    self.assertCountEqual(fragment_a, fragment_b)
+E   AssertionError: Element counts were not equal:
+E   First has 0, Second has 1:  ('scope', 'hello world')
+__________ OpenIDImplicitInterferenceTest.test_create_token_response ___________
+
+self = <tests.openid.connect.core.grant_types.test_implicit.OpenIDImplicitInterferenceTest testMethod=test_create_token_response>
+generate_token = <MagicMock name='generate_token' id='281472831317760'>
+
+    @mock.patch('oauthlib.common.generate_token')
+    def test_create_token_response(self, generate_token):
+        generate_token.return_value = '1234'
+        bearer = BearerToken(self.mock_validator, expires_in=1800)
+        h, b, s = self.auth.create_token_response(self.request, bearer)
+        correct_uri = 'https://b.c/p#access_token=1234&token_type=Bearer&expires_in=1800&state=xyz&scope=hello+world'
+        self.assertEqual(s, 302)
+>       self.assertURLEqual(h['Location'], correct_uri, parse_fragment=True)
+
+tests/oauth2/rfc6749/grant_types/test_implicit.py:34: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+tests/unittest/__init__.py:14: in url_equals
+    self.assertCountEqual(fragment_a, fragment_b)
+E   AssertionError: Element counts were not equal:
+E   First has 0, Second has 1:  ('scope', 'hello world')
+____________________ OpenIDImplicitTest.test_authorization _____________________
+
+self = <tests.openid.connect.core.grant_types.test_implicit.OpenIDImplicitTest testMethod=test_authorization>
+generate_token = <MagicMock name='generate_token' id='281472831021696'>
+
+    @mock.patch('oauthlib.common.generate_token')
+    def test_authorization(self, generate_token):
+        scope, info = self.auth.validate_authorization_request(self.request)
+    
+        generate_token.return_value = 'abc'
+        bearer = BearerToken(self.mock_validator)
+    
+>       h, b, s = self.auth.create_authorization_response(self.request, bearer)
+
+tests/openid/connect/core/grant_types/test_implicit.py:50: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+oauthlib/oauth2/rfc6749/grant_types/implicit.py:60: in create_authorization_response
+    return self.create_token_response(request, token_handler)
+oauthlib/oauth2/rfc6749/grant_types/implicit.py:103: in create_token_response
+    token = modifier(token, token_handler, request)
+oauthlib/openid/connect/core/grant_types/implicit.py:24: in add_id_token
+    return super().add_id_token(token, token_handler, request, nonce=request.nonce)
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = <oauthlib.openid.connect.core.grant_types.implicit.ImplicitGrant object at 0xffff801cf370>
+token = {'access_token': 'abc', 'expires_in': 3600, 'token_type': 'Bearer', 'state': 'abc', 'nonce': 'xyz', 'at_hash': 'ungWv48Bz-pBQUDeXa4iIw'}
+token_handler = <oauthlib.oauth2.rfc6749.tokens.BearerToken object at 0xffff80055500>
+request = <oauthlib.Request url="http://a.b/path", http_method="GET", headers="{}", body="None">
+nonce = 'xyz'
+
+    def add_id_token(self, token, token_handler, request, nonce=None):
+        """
+        Construct an initial version of id_token, and let the
+        request_validator sign or encrypt it.
+    
+        The initial version can contain the fields below, accordingly
+        to the spec:
+        - aud
+        - iat
+        - nonce
+        - at_hash
+        - c_hash
+        """
+        # Treat it as normal OAuth 2 auth code request if openid is not present
+        if not request.scopes or "openid" not in request.scopes:
+            return token
+    
+        # Only add an id token on auth/token step if asked for.
+        if request.response_type and "id_token" not in request.response_type:
+            return token
+    
+        if "state" not in token and request.state:
+            token["state"] = request.state
+    
+        if request.max_age:
+            d = int(time.time())
+            token["auth_time"] = d
+    
+        # TODO: acr claims (probably better handled by server code using oauthlib in get_id_token)
+    
+        if nonce is not None:
+            token["nonce"] = nonce
+    
+        if "access_token" in token:
+            token["at_hash"] = self.id_token_hash(token["access_token"])
+    
+        if "code" in token:
+            token["c_hash"] = self.id_token_hash(token["code"])
+    
+>       token = token_handler.get_id_token(token, token_handler, request)
+E       AttributeError: 'BearerToken' object has no attribute 'get_id_token'
+
+oauthlib/openid/connect/core/grant_types/base.py:109: AttributeError
+_______________ OpenIDImplicitTest.test_no_prompt_authorization ________________
+
+self = <tests.openid.connect.core.grant_types.test_implicit.OpenIDImplicitTest testMethod=test_no_prompt_authorization>
+generate_token = <MagicMock name='generate_token' id='281472835646992'>
+
+    @mock.patch('oauthlib.common.generate_token')
+    def test_no_prompt_authorization(self, generate_token):
+        generate_token.return_value = 'abc'
+        self.request.prompt = 'none'
+    
+        bearer = BearerToken(self.mock_validator)
+    
+        self.request.response_mode = 'query'
+        self.request.id_token_hint = 'me@email.com'
+>       h, b, s = self.auth.create_authorization_response(self.request, bearer)
+
+tests/openid/connect/core/grant_types/test_implicit.py:72: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+oauthlib/oauth2/rfc6749/grant_types/implicit.py:60: in create_authorization_response
+    return self.create_token_response(request, token_handler)
+oauthlib/oauth2/rfc6749/grant_types/implicit.py:103: in create_token_response
+    token = modifier(token, token_handler, request)
+oauthlib/openid/connect/core/grant_types/implicit.py:24: in add_id_token
+    return super().add_id_token(token, token_handler, request, nonce=request.nonce)
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = <oauthlib.openid.connect.core.grant_types.implicit.ImplicitGrant object at 0xffff806a6c40>
+token = {'access_token': 'abc', 'expires_in': 3600, 'token_type': 'Bearer', 'state': 'abc', 'nonce': 'xyz', 'at_hash': 'ungWv48Bz-pBQUDeXa4iIw'}
+token_handler = <oauthlib.oauth2.rfc6749.tokens.BearerToken object at 0xffff808bd480>
+request = <oauthlib.Request url="http://a.b/path", http_method="GET", headers="{}", body="None">
+nonce = 'xyz'
+
+    def add_id_token(self, token, token_handler, request, nonce=None):
+        """
+        Construct an initial version of id_token, and let the
+        request_validator sign or encrypt it.
+    
+        The initial version can contain the fields below, accordingly
+        to the spec:
+        - aud
+        - iat
+        - nonce
+        - at_hash
+        - c_hash
+        """
+        # Treat it as normal OAuth 2 auth code request if openid is not present
+        if not request.scopes or "openid" not in request.scopes:
+            return token
+    
+        # Only add an id token on auth/token step if asked for.
+        if request.response_type and "id_token" not in request.response_type:
+            return token
+    
+        if "state" not in token and request.state:
+            token["state"] = request.state
+    
+        if request.max_age:
+            d = int(time.time())
+            token["auth_time"] = d
+    
+        # TODO: acr claims (probably better handled by server code using oauthlib in get_id_token)
+    
+        if nonce is not None:
+            token["nonce"] = nonce
+    
+        if "access_token" in token:
+            token["at_hash"] = self.id_token_hash(token["access_token"])
+    
+        if "code" in token:
+            token["c_hash"] = self.id_token_hash(token["code"])
+    
+>       token = token_handler.get_id_token(token, token_handler, request)
+E       AttributeError: 'BearerToken' object has no attribute 'get_id_token'
+
+oauthlib/openid/connect/core/grant_types/base.py:109: AttributeError
+______________ OpenIDImplicitNoAccessTokenTest.test_authorization ______________
+
+self = <tests.openid.connect.core.grant_types.test_implicit.OpenIDImplicitNoAccessTokenTest testMethod=test_authorization>
+generate_token = <MagicMock name='generate_token' id='281472834663568'>
+
+    @mock.patch('oauthlib.common.generate_token')
+    def test_authorization(self, generate_token):
+>       scope, info = self.auth.validate_authorization_request(self.request)
+
+tests/openid/connect/core/grant_types/test_implicit.py:45: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+oauthlib/openid/connect/core/grant_types/base.py:31: in validate_authorization_request
+    return self.proxy_target.validate_authorization_request(request)
+oauthlib/oauth2/rfc6749/grant_types/implicit.py:118: in validate_authorization_request
+    return self.validate_token_request(request)
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = <oauthlib.oauth2.rfc6749.grant_types.implicit.ImplicitGrant object at 0xffff8074e1c0>
+request = <oauthlib.Request url="http://a.b/path", http_method="GET", headers="{}", body="None">
+
+    def validate_token_request(self, request):
+        """Check the token request for normal and fatal errors.
+    
+        :param request: OAuthlib request.
+        :type request: oauthlib.common.Request
+    
+        This method is very similar to validate_authorization_request in
+        the AuthorizationCodeGrant but differ in a few subtle areas.
+    
+        A normal error could be a missing response_type parameter or the client
+        attempting to access scope it is not allowed to ask authorization for.
+        Normal errors can safely be included in the redirection URI and
+        sent back to the client.
+    
+        Fatal errors occur when the client_id or redirect_uri is invalid or
+        missing. These must be caught by the provider and handled, how this
+        is done is outside of the scope of OAuthLib but showing an error
+        page describing the issue is a good idea.
+        """
+    
+        # First check for fatal errors
+    
+        # If the request fails due to a missing, invalid, or mismatching
+        # redirection URI, or if the client identifier is missing or invalid,
+        # the authorization server SHOULD inform the resource owner of the
+        # error and MUST NOT automatically redirect the user-agent to the
+        # invalid redirection URI.
+    
+        # First check duplicate parameters
+        for param in ("client_id", "response_type", "redirect_uri", "scope", "state"):
+            try:
+                duplicate_params = request.duplicate_params
+            except ValueError:
+                raise errors.InvalidRequestFatalError(description="Unable to parse query string", request=request)
+            if param in duplicate_params:
+                raise errors.InvalidRequestFatalError(description="Duplicate %s parameter." % param, request=request)
+    
+        # REQUIRED. The client identifier as described in Section 2.2.
+        # https://tools.ietf.org/html/rfc6749#section-2.2
+        if not request.client_id:
+            raise errors.MissingClientIdError(request=request)
+    
+        if not self.request_validator.validate_client_id(request.client_id, request):
+            raise errors.InvalidClientIdError(request=request)
+    
+        # OPTIONAL. As described in Section 3.1.2.
+        # https://tools.ietf.org/html/rfc6749#section-3.1.2
+        self._handle_redirects(request)
+    
+        # Then check for normal errors.
+    
+        request_info = self._run_custom_validators(request, self.custom_validators.all_pre)
+    
+        # If the resource owner denies the access request or if the request
+        # fails for reasons other than a missing or invalid redirection URI,
+        # the authorization server informs the client by adding the following
+        # parameters to the fragment component of the redirection URI using the
+        # "application/x-www-form-urlencoded" format, per Appendix B.
+        # https://tools.ietf.org/html/rfc6749#appendix-B
+    
+        # Note that the correct parameters to be added are automatically
+        # populated through the use of specific exceptions.
+    
+        # REQUIRED.
+        if request.response_type is None:
+            raise errors.MissingResponseTypeError(request=request)
+        # Value MUST be one of our registered types: "token" by default or if
+        # using OIDC "id_token" or "id_token token".
+        elif not {"token"} & set(request.response_type.split()):
+>           raise errors.UnsupportedResponseTypeError(request=request)
+E           oauthlib.oauth2.rfc6749.errors.UnsupportedResponseTypeError: (unsupported_response_type)  <oauthlib.Request url="http://a.b/path", http_method="GET", headers="{}", body="None">
+
+oauthlib/oauth2/rfc6749/grant_types/implicit.py:189: UnsupportedResponseTypeError
+_________ OpenIDImplicitNoAccessTokenTest.test_no_prompt_authorization _________
+
+self = <tests.openid.connect.core.grant_types.test_implicit.OpenIDImplicitNoAccessTokenTest testMethod=test_no_prompt_authorization>
+generate_token = <MagicMock name='generate_token' id='281472835951008'>
+
+    @mock.patch('oauthlib.common.generate_token')
+    def test_no_prompt_authorization(self, generate_token):
+        generate_token.return_value = 'abc'
+        self.request.prompt = 'none'
+    
+        bearer = BearerToken(self.mock_validator)
+    
+        self.request.response_mode = 'query'
+        self.request.id_token_hint = 'me@email.com'
+        h, b, s = self.auth.create_authorization_response(self.request, bearer)
+>       self.assertURLEqual(h['Location'], self.url_query)
+
+tests/openid/connect/core/grant_types/test_implicit.py:73: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+tests/unittest/__init__.py:19: in url_equals
+    self.assertEqual(parsed_a.path, parsed_b.path)
+E   AssertionError: '/cb#error=unsupported_response_type&state=abc' != '/cb'
+E   - /cb#error=unsupported_response_type&state=abc
+E   + /cb
+____________ OpenIDImplicitNoAccessTokenTest.test_none_multi_prompt ____________
+
+self = <tests.openid.connect.core.grant_types.test_implicit.OpenIDImplicitNoAccessTokenTest testMethod=test_none_multi_prompt>
+
+    def test_none_multi_prompt(self):
+        bearer = BearerToken(self.mock_validator)
+    
+        self.request.prompt = 'none login'
+>       self.assertRaises(errors.InvalidRequestError,
+                          self.auth.validate_authorization_request,
+                          self.request)
+
+tests/openid/connect/core/grant_types/test_implicit.py:112: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+oauthlib/openid/connect/core/grant_types/base.py:31: in validate_authorization_request
+    return self.proxy_target.validate_authorization_request(request)
+oauthlib/oauth2/rfc6749/grant_types/implicit.py:118: in validate_authorization_request
+    return self.validate_token_request(request)
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+    def validate_token_request(self, request):
+        """Check the token request for normal and fatal errors.
+    
+        :param request: OAuthlib request.
+        :type request: oauthlib.common.Request
+    
+        This method is very similar to validate_authorization_request in
+        the AuthorizationCodeGrant but differ in a few subtle areas.
+    
+        A normal error could be a missing response_type parameter or the client
+        attempting to access scope it is not allowed to ask authorization for.
+        Normal errors can safely be included in the redirection URI and
+        sent back to the client.
+    
+        Fatal errors occur when the client_id or redirect_uri is invalid or
+        missing. These must be caught by the provider and handled, how this
+        is done is outside of the scope of OAuthLib but showing an error
+        page describing the issue is a good idea.
+        """
+    
+        # First check for fatal errors
+    
+        # If the request fails due to a missing, invalid, or mismatching
+        # redirection URI, or if the client identifier is missing or invalid,
+        # the authorization server SHOULD inform the resource owner of the
+        # error and MUST NOT automatically redirect the user-agent to the
+        # invalid redirection URI.
+    
+        # First check duplicate parameters
+        for param in ("client_id", "response_type", "redirect_uri", "scope", "state"):
+            try:
+                duplicate_params = request.duplicate_params
+            except ValueError:
+                raise errors.InvalidRequestFatalError(description="Unable to parse query string", request=request)
+            if param in duplicate_params:
+                raise errors.InvalidRequestFatalError(description="Duplicate %s parameter." % param, request=request)
+    
+        # REQUIRED. The client identifier as described in Section 2.2.
+        # https://tools.ietf.org/html/rfc6749#section-2.2
+        if not request.client_id:
+            raise errors.MissingClientIdError(request=request)
+    
+        if not self.request_validator.validate_client_id(request.client_id, request):
+            raise errors.InvalidClientIdError(request=request)
+    
+        # OPTIONAL. As described in Section 3.1.2.
+        # https://tools.ietf.org/html/rfc6749#section-3.1.2
+        self._handle_redirects(request)
+    
+        # Then check for normal errors.
+    
+        request_info = self._run_custom_validators(request, self.custom_validators.all_pre)
+    
+        # If the resource owner denies the access request or if the request
+        # fails for reasons other than a missing or invalid redirection URI,
+        # the authorization server informs the client by adding the following
+        # parameters to the fragment component of the redirection URI using the
+        # "application/x-www-form-urlencoded" format, per Appendix B.
+        # https://tools.ietf.org/html/rfc6749#appendix-B
+    
+        # Note that the correct parameters to be added are automatically
+        # populated through the use of specific exceptions.
+    
+        # REQUIRED.
+        if request.response_type is None:
+            raise errors.MissingResponseTypeError(request=request)
+        # Value MUST be one of our registered types: "token" by default or if
+        # using OIDC "id_token" or "id_token token".
+        elif not {"token"} & set(request.response_type.split()):
+>           raise errors.UnsupportedResponseTypeError(request=request)
+E           oauthlib.oauth2.rfc6749.errors.UnsupportedResponseTypeError: (unsupported_response_type)  <oauthlib.Request url="http://a.b/path", http_method="GET", headers="{}", body="None">
+
+oauthlib/oauth2/rfc6749/grant_types/implicit.py:189: UnsupportedResponseTypeError
+_____________ OpenIDImplicitNoAccessTokenTest.test_required_nonce ______________
+
+self = <tests.openid.connect.core.grant_types.test_implicit.OpenIDImplicitNoAccessTokenTest testMethod=test_required_nonce>
+generate_token = <MagicMock name='generate_token' id='281472837750896'>
+
+    @mock.patch('oauthlib.common.generate_token')
+    def test_required_nonce(self, generate_token):
+        generate_token.return_value = 'abc'
+        self.request.nonce = None
+>       self.assertRaises(errors.InvalidRequestError, self.auth.validate_authorization_request, self.request)
+
+tests/openid/connect/core/grant_types/test_implicit.py:164: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+oauthlib/openid/connect/core/grant_types/base.py:31: in validate_authorization_request
+    return self.proxy_target.validate_authorization_request(request)
+oauthlib/oauth2/rfc6749/grant_types/implicit.py:118: in validate_authorization_request
+    return self.validate_token_request(request)
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+    def validate_token_request(self, request):
+        """Check the token request for normal and fatal errors.
+    
+        :param request: OAuthlib request.
+        :type request: oauthlib.common.Request
+    
+        This method is very similar to validate_authorization_request in
+        the AuthorizationCodeGrant but differ in a few subtle areas.
+    
+        A normal error could be a missing response_type parameter or the client
+        attempting to access scope it is not allowed to ask authorization for.
+        Normal errors can safely be included in the redirection URI and
+        sent back to the client.
+    
+        Fatal errors occur when the client_id or redirect_uri is invalid or
+        missing. These must be caught by the provider and handled, how this
+        is done is outside of the scope of OAuthLib but showing an error
+        page describing the issue is a good idea.
+        """
+    
+        # First check for fatal errors
+    
+        # If the request fails due to a missing, invalid, or mismatching
+        # redirection URI, or if the client identifier is missing or invalid,
+        # the authorization server SHOULD inform the resource owner of the
+        # error and MUST NOT automatically redirect the user-agent to the
+        # invalid redirection URI.
+    
+        # First check duplicate parameters
+        for param in ("client_id", "response_type", "redirect_uri", "scope", "state"):
+            try:
+                duplicate_params = request.duplicate_params
+            except ValueError:
+                raise errors.InvalidRequestFatalError(description="Unable to parse query string", request=request)
+            if param in duplicate_params:
+                raise errors.InvalidRequestFatalError(description="Duplicate %s parameter." % param, request=request)
+    
+        # REQUIRED. The client identifier as described in Section 2.2.
+        # https://tools.ietf.org/html/rfc6749#section-2.2
+        if not request.client_id:
+            raise errors.MissingClientIdError(request=request)
+    
+        if not self.request_validator.validate_client_id(request.client_id, request):
+            raise errors.InvalidClientIdError(request=request)
+    
+        # OPTIONAL. As described in Section 3.1.2.
+        # https://tools.ietf.org/html/rfc6749#section-3.1.2
+        self._handle_redirects(request)
+    
+        # Then check for normal errors.
+    
+        request_info = self._run_custom_validators(request, self.custom_validators.all_pre)
+    
+        # If the resource owner denies the access request or if the request
+        # fails for reasons other than a missing or invalid redirection URI,
+        # the authorization server informs the client by adding the following
+        # parameters to the fragment component of the redirection URI using the
+        # "application/x-www-form-urlencoded" format, per Appendix B.
+        # https://tools.ietf.org/html/rfc6749#appendix-B
+    
+        # Note that the correct parameters to be added are automatically
+        # populated through the use of specific exceptions.
+    
+        # REQUIRED.
+        if request.response_type is None:
+            raise errors.MissingResponseTypeError(request=request)
+        # Value MUST be one of our registered types: "token" by default or if
+        # using OIDC "id_token" or "id_token token".
+        elif not {"token"} & set(request.response_type.split()):
+>           raise errors.UnsupportedResponseTypeError(request=request)
+E           oauthlib.oauth2.rfc6749.errors.UnsupportedResponseTypeError: (unsupported_response_type)  <oauthlib.Request url="http://a.b/path", http_method="GET", headers="{}", body="None">
+
+oauthlib/oauth2/rfc6749/grant_types/implicit.py:189: UnsupportedResponseTypeError
+____________ RefreshTokenGrantTest.test_create_token_inherit_scope _____________
+
+self = <tests.oauth2.rfc6749.grant_types.test_refresh_token.RefreshTokenGrantTest testMethod=test_create_token_inherit_scope>
+
+    def test_create_token_inherit_scope(self):
+        self.request.scope = None
+        self.mock_validator.get_original_scopes.return_value = ['foo', 'bar']
+        bearer = BearerToken(self.mock_validator)
+        headers, body, status_code = self.auth.create_token_response(
+                self.request, bearer)
+        token = json.loads(body)
+        self.assertEqual(self.mock_validator.save_token.call_count, 1)
+        self.assertIn('access_token', token)
+        self.assertIn('token_type', token)
+        self.assertIn('expires_in', token)
+>       self.assertEqual(token['scope'], 'foo bar')
+E       KeyError: 'scope'
+
+tests/oauth2/rfc6749/grant_types/test_refresh_token.py:76: KeyError
+_______________ RefreshTokenGrantTest.test_create_token_response _______________
+
+self = <tests.oauth2.rfc6749.grant_types.test_refresh_token.RefreshTokenGrantTest testMethod=test_create_token_response>
+
+    def test_create_token_response(self):
+        self.mock_validator.get_original_scopes.return_value = ['foo', 'bar']
+        bearer = BearerToken(self.mock_validator)
+        headers, body, status_code = self.auth.create_token_response(
+                self.request, bearer)
+        token = json.loads(body)
+        self.assertEqual(self.mock_validator.save_token.call_count, 1)
+        self.assertIn('access_token', token)
+        self.assertIn('token_type', token)
+        self.assertIn('expires_in', token)
+>       self.assertEqual(token['scope'], 'foo')
+E       AssertionError: 'f o o' != 'foo'
+E       - f o o
+E       ?  - -
+E       + foo
+
+tests/oauth2/rfc6749/grant_types/test_refresh_token.py:38: AssertionError
+________ RefreshTokenGrantTest.test_create_token_within_original_scope _________
+
+self = <tests.oauth2.rfc6749.grant_types.test_refresh_token.RefreshTokenGrantTest testMethod=test_create_token_within_original_scope>
+
+    def test_create_token_within_original_scope(self):
+        self.mock_validator.get_original_scopes.return_value = ['baz']
+        self.mock_validator.is_within_original_scope.return_value = True
+        bearer = BearerToken(self.mock_validator)
+        headers, body, status_code = self.auth.create_token_response(
+                self.request, bearer)
+        token = json.loads(body)
+        self.assertEqual(self.mock_validator.save_token.call_count, 1)
+        self.assertIn('access_token', token)
+        self.assertIn('token_type', token)
+        self.assertIn('expires_in', token)
+>       self.assertEqual(token['scope'], 'foo')
+E       AssertionError: 'f o o' != 'foo'
+E       - f o o
+E       ?  - -
+E       + foo
+
+tests/oauth2/rfc6749/grant_types/test_refresh_token.py:89: AssertionError
+________ RefreshTokenGrantTest.test_custom_auth_validators_unsupported _________
+
+self = <tests.oauth2.rfc6749.grant_types.test_refresh_token.RefreshTokenGrantTest testMethod=test_custom_auth_validators_unsupported>
+
+    def test_custom_auth_validators_unsupported(self):
+        authval1, authval2 = mock.Mock(), mock.Mock()
+        expected = ('RefreshTokenGrant does not support authorization '
+                    'validators. Use token validators instead.')
+        with self.assertRaises(ValueError) as caught:
+            RefreshTokenGrant(self.mock_validator, pre_auth=[authval1])
+        self.assertEqual(caught.exception.args[0], expected)
+        with self.assertRaises(ValueError) as caught:
+            RefreshTokenGrant(self.mock_validator, post_auth=[authval2])
+        self.assertEqual(caught.exception.args[0], expected)
+        with self.assertRaises(AttributeError):
+>           self.auth.custom_validators.pre_auth.append(authval1)
+E           AssertionError: AttributeError not raised
+
+tests/oauth2/rfc6749/grant_types/test_refresh_token.py:51: AssertionError
+______ OpenIDRefreshTokenInterferenceTest.test_create_token_inherit_scope ______
+
+self = <tests.openid.connect.core.grant_types.test_refresh_token.OpenIDRefreshTokenInterferenceTest testMethod=test_create_token_inherit_scope>
+
+    def test_create_token_inherit_scope(self):
+        self.request.scope = None
+        self.mock_validator.get_original_scopes.return_value = ['foo', 'bar']
+        bearer = BearerToken(self.mock_validator)
+        headers, body, status_code = self.auth.create_token_response(
+                self.request, bearer)
+        token = json.loads(body)
+        self.assertEqual(self.mock_validator.save_token.call_count, 1)
+        self.assertIn('access_token', token)
+        self.assertIn('token_type', token)
+        self.assertIn('expires_in', token)
+>       self.assertEqual(token['scope'], 'foo bar')
+E       KeyError: 'scope'
+
+tests/oauth2/rfc6749/grant_types/test_refresh_token.py:76: KeyError
+________ OpenIDRefreshTokenInterferenceTest.test_create_token_response _________
+
+self = <tests.openid.connect.core.grant_types.test_refresh_token.OpenIDRefreshTokenInterferenceTest testMethod=test_create_token_response>
+
+    def test_create_token_response(self):
+        self.mock_validator.get_original_scopes.return_value = ['foo', 'bar']
+        bearer = BearerToken(self.mock_validator)
+        headers, body, status_code = self.auth.create_token_response(
+                self.request, bearer)
+        token = json.loads(body)
+        self.assertEqual(self.mock_validator.save_token.call_count, 1)
+        self.assertIn('access_token', token)
+        self.assertIn('token_type', token)
+        self.assertIn('expires_in', token)
+>       self.assertEqual(token['scope'], 'foo')
+E       AssertionError: 'f o o' != 'foo'
+E       - f o o
+E       ?  - -
+E       + foo
+
+tests/oauth2/rfc6749/grant_types/test_refresh_token.py:38: AssertionError
+__ OpenIDRefreshTokenInterferenceTest.test_create_token_within_original_scope __
+
+self = <tests.openid.connect.core.grant_types.test_refresh_token.OpenIDRefreshTokenInterferenceTest testMethod=test_create_token_within_original_scope>
+
+    def test_create_token_within_original_scope(self):
+        self.mock_validator.get_original_scopes.return_value = ['baz']
+        self.mock_validator.is_within_original_scope.return_value = True
+        bearer = BearerToken(self.mock_validator)
+        headers, body, status_code = self.auth.create_token_response(
+                self.request, bearer)
+        token = json.loads(body)
+        self.assertEqual(self.mock_validator.save_token.call_count, 1)
+        self.assertIn('access_token', token)
+        self.assertIn('token_type', token)
+        self.assertIn('expires_in', token)
+>       self.assertEqual(token['scope'], 'foo')
+E       AssertionError: 'f o o' != 'foo'
+E       - f o o
+E       ?  - -
+E       + foo
+
+tests/oauth2/rfc6749/grant_types/test_refresh_token.py:89: AssertionError
+__ OpenIDRefreshTokenInterferenceTest.test_custom_auth_validators_unsupported __
+
+self = <tests.openid.connect.core.grant_types.test_refresh_token.OpenIDRefreshTokenInterferenceTest testMethod=test_custom_auth_validators_unsupported>
+
+    def test_custom_auth_validators_unsupported(self):
+        authval1, authval2 = mock.Mock(), mock.Mock()
+        expected = ('RefreshTokenGrant does not support authorization '
+                    'validators. Use token validators instead.')
+        with self.assertRaises(ValueError) as caught:
+            RefreshTokenGrant(self.mock_validator, pre_auth=[authval1])
+        self.assertEqual(caught.exception.args[0], expected)
+        with self.assertRaises(ValueError) as caught:
+            RefreshTokenGrant(self.mock_validator, post_auth=[authval2])
+        self.assertEqual(caught.exception.args[0], expected)
+        with self.assertRaises(AttributeError):
+>           self.auth.custom_validators.pre_auth.append(authval1)
+E           AssertionError: AttributeError not raised
+
+tests/oauth2/rfc6749/grant_types/test_refresh_token.py:51: AssertionError
+_________________ OpenIDRefreshTokenTest.test_refresh_id_token _________________
+
+self = <tests.openid.connect.core.grant_types.test_refresh_token.OpenIDRefreshTokenTest testMethod=test_refresh_id_token>
+
+    def test_refresh_id_token(self):
+        self.mock_validator.get_original_scopes.return_value = [
+            'hello', 'openid'
+        ]
+        bearer = BearerToken(self.mock_validator)
+    
+>       headers, body, status_code = self.auth.create_token_response(
+            self.request, bearer
+        )
+
+tests/openid/connect/core/grant_types/test_refresh_token.py:51: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+oauthlib/oauth2/rfc6749/grant_types/refresh_token.py:59: in create_token_response
+    token = modifier(token, token_handler, request)
+oauthlib/openid/connect/core/grant_types/refresh_token.py:28: in add_id_token
+    return super().add_id_token(token, token_handler, request)
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = <oauthlib.openid.connect.core.grant_types.refresh_token.RefreshTokenGrant object at 0xffff805aa1f0>
+token = {'access_token': 'MiTPMQAmyWqU9WMOjoPOHivhlNOdEb', 'expires_in': 3600, 'token_type': 'Bearer', 'scope': 'hello openid', 'refresh_token': 'BncCQXZ8xD7VAAFcLAusyF9OTyHOtN', 'at_hash': '5zEvCcG5u8VQx9wWwe4sCQ'}
+token_handler = <oauthlib.oauth2.rfc6749.tokens.BearerToken object at 0xffff805747c0>
+request = <oauthlib.Request url="http://a.b/path", http_method="GET", headers="{}", body="None">
+nonce = None
+
+    def add_id_token(self, token, token_handler, request, nonce=None):
+        """
+        Construct an initial version of id_token, and let the
+        request_validator sign or encrypt it.
+    
+        The initial version can contain the fields below, accordingly
+        to the spec:
+        - aud
+        - iat
+        - nonce
+        - at_hash
+        - c_hash
+        """
+        # Treat it as normal OAuth 2 auth code request if openid is not present
+        if not request.scopes or "openid" not in request.scopes:
+            return token
+    
+        # Only add an id token on auth/token step if asked for.
+        if request.response_type and "id_token" not in request.response_type:
+            return token
+    
+        if "state" not in token and request.state:
+            token["state"] = request.state
+    
+        if request.max_age:
+            d = int(time.time())
+            token["auth_time"] = d
+    
+        # TODO: acr claims (probably better handled by server code using oauthlib in get_id_token)
+    
+        if nonce is not None:
+            token["nonce"] = nonce
+    
+        if "access_token" in token:
+            token["at_hash"] = self.id_token_hash(token["access_token"])
+    
+        if "code" in token:
+            token["c_hash"] = self.id_token_hash(token["code"])
+    
+>       token = token_handler.get_id_token(token, token_handler, request)
+E       AttributeError: 'BearerToken' object has no attribute 'get_id_token'
+
+oauthlib/openid/connect/core/grant_types/base.py:109: AttributeError
+________ OpenIDRefreshTokenTest.test_refresh_token_without_openid_scope ________
+
+self = <tests.openid.connect.core.grant_types.test_refresh_token.OpenIDRefreshTokenTest testMethod=test_refresh_token_without_openid_scope>
+
+    def test_refresh_token_without_openid_scope(self):
+        self.request.scope = "hello"
+        bearer = BearerToken(self.mock_validator)
+    
+        headers, body, status_code = self.auth.create_token_response(
+            self.request, bearer
+        )
+    
+        token = json.loads(body)
+        self.assertEqual(self.mock_validator.save_token.call_count, 1)
+        self.assertIn('access_token', token)
+        self.assertIn('refresh_token', token)
+        self.assertIn('token_type', token)
+        self.assertIn('expires_in', token)
+        self.assertNotIn('id_token', token)
+>       self.assertEqual(token['scope'], 'hello')
+E       AssertionError: 'h e l l o' != 'hello'
+E       - h e l l o
+E       ?  - - - -
+E       + hello
+
+tests/openid/connect/core/grant_types/test_refresh_token.py:105: AssertionError
+________________ AuthorizationEndpointTest.test_implicit_grant _________________
+
+self = <tests.openid.connect.core.test_server.AuthorizationEndpointTest testMethod=test_implicit_grant>
+
+    @mock.patch('oauthlib.common.generate_token', new=lambda: 'abc')
+    def test_implicit_grant(self):
+        uri = 'http://i.b/l?response_type=token&client_id=me&scope=all+of+them&state=xyz'
+        uri += '&redirect_uri=http%3A%2F%2Fback.to%2Fme'
+        headers, body, status_code = self.endpoint.create_authorization_response(
+            uri, scopes=['all', 'of', 'them'])
+        self.assertIn('Location', headers)
+>       self.assertURLEqual(headers['Location'], 'http://back.to/me#access_token=abc&expires_in=' + str(self.expires_in) + '&token_type=Bearer&state=xyz&scope=all+of+them', parse_fragment=True)
+
+tests/openid/connect/core/test_server.py:72: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+tests/unittest/__init__.py:14: in url_equals
+    self.assertCountEqual(fragment_a, fragment_b)
+E   AssertionError: Element counts were not equal:
+E   First has 1, Second has 0:  ('scope', 'a l l   o f   t h e m')
+E   First has 0, Second has 1:  ('scope', 'all of them')
+__________________ TokenEndpointTest.test_authorization_grant __________________
+
+self = <tests.openid.connect.core.test_server.TokenEndpointTest testMethod=test_authorization_grant>
+
+    @mock.patch('oauthlib.common.generate_token', new=lambda: 'abc')
+    def test_authorization_grant(self):
+        body = 'grant_type=authorization_code&code=abc&scope=all+of+them'
+        headers, body, status_code = self.endpoint.create_token_response(
+            '', body=body)
+        token = {
+            'token_type': 'Bearer',
+            'expires_in': self.expires_in,
+            'access_token': 'abc',
+            'refresh_token': 'abc',
+            'scope': 'all of them'
+        }
+>       self.assertEqual(json.loads(body), token)
+E       AssertionError: {'access_token': 'abc', 'expires_in': 1800,[77 chars]abc'} != {'token_type': 'Bearer', 'expires_in': 1800[67 chars]hem'}
+E         {'access_token': 'abc',
+E          'expires_in': 1800,
+E          'refresh_token': 'abc',
+E       -  'scope': 'a l l   o f   t h e m',
+E       ?             - -  -- -  -- - - -
+E       
+E       +  'scope': 'all of them',
+E          'token_type': 'Bearer'}
+
+tests/openid/connect/core/test_server.py:156: AssertionError
+_______ JWTTokenTestCase.test_validate_request_token_from_headers_basic ________
+
+self = <tests.openid.connect.core.test_tokens.JWTTokenTestCase testMethod=test_validate_request_token_from_headers_basic>
+
+    def test_validate_request_token_from_headers_basic(self):
+        """
+        Wrong kind of token (Basic) retrieved from headers. Confirm token is not parsed.
+        """
+    
+        with mock.patch('oauthlib.common.Request', autospec=True) as RequestMock, \
+                mock.patch('oauthlib.openid.RequestValidator',
+                           autospec=True) as RequestValidatorMock:
+            request_validator_mock = RequestValidatorMock()
+    
+            token = JWTToken(request_validator=request_validator_mock)
+    
+            request = RequestMock('/uri')
+            # Scopes is retrieved using the __call__ method which is not picked up correctly by mock.patch
+            # with autospec=True
+            request.scopes = mock.MagicMock()
+            request.headers = {
+                'Authorization': 'Basic some-token-from-header'
+            }
+    
+            token.validate_request(request=request)
+    
+>           request_validator_mock.validate_jwt_bearer_token.assert_called_once_with(None,
+                                                                                     request.scopes,
+                                                                                     request)
+
+tests/openid/connect/core/test_tokens.py:101: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+/usr/local/lib/python3.9/unittest/mock.py:919: in assert_called_once_with
+    return self.assert_called_with(*args, **kwargs)
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = <MagicMock name='RequestValidator().validate_jwt_bearer_token' spec='function' id='281472830074352'>
+args = (None, <MagicMock name='Request().scopes' id='281472836291840'>, <NonCallableMagicMock name='Request()' spec='Request' id='281472829896496'>)
+kwargs = {}
+expected = call('', (None, <MagicMock name='Request().scopes' id='281472836291840'>, <NonCallableMagicMock name='Request()' spec='Request' id='281472829896496'>), {})
+actual = call('', ('ome-token-from-header', <MagicMock name='Request().scopes' id='281472836291840'>, <NonCallableMagicMock name='Request()' spec='Request' id='281472829896496'>), {})
+_error_message = <function NonCallableMock.assert_called_with.<locals>._error_message at 0xffff801160d0>
+cause = None
+
+    def assert_called_with(self, /, *args, **kwargs):
+        """assert that the last call was made with the specified arguments.
+    
+        Raises an AssertionError if the args and keyword args passed in are
+        different to the last call to the mock."""
+        if self.call_args is None:
+            expected = self._format_mock_call_signature(args, kwargs)
+            actual = 'not called.'
+            error_message = ('expected call not found.\nExpected: %s\nActual: %s'
+                    % (expected, actual))
+            raise AssertionError(error_message)
+    
+        def _error_message():
+            msg = self._format_mock_failure_message(args, kwargs)
+            return msg
+        expected = self._call_matcher(_Call((args, kwargs), two=True))
+        actual = self._call_matcher(self.call_args)
+        if actual != expected:
+            cause = expected if isinstance(expected, Exception) else None
+>           raise AssertionError(_error_message()) from cause
+E           AssertionError: expected call not found.
+E           Expected: validate_jwt_bearer_token(None, <MagicMock name='Request().scopes' id='281472836291840'>, <NonCallableMagicMock name='Request()' spec='Request' id='281472829896496'>)
+E           Actual: validate_jwt_bearer_token('ome-token-from-header', <MagicMock name='Request().scopes' id='281472836291840'>, <NonCallableMagicMock name='Request()' spec='Request' id='281472829896496'>)
+
+/usr/local/lib/python3.9/unittest/mock.py:907: AssertionError
+=============================== warnings summary ===============================
+tests/oauth2/rfc6749/clients/test_service_application.py::ServiceApplicationClientTest::test_request_body
+tests/oauth2/rfc6749/clients/test_service_application.py::ServiceApplicationClientTest::test_request_body_no_initial_private_key
+  /usr/local/lib/python3.9/site-packages/jwt/api_jwt.py:147: InsecureKeyLengthWarning: The RSA key is 1024 bits long, which is below the minimum recommended size of 2048 bits. See NIST SP 800-131A.
+    return self._jws.encode(
+
+tests/oauth2/rfc6749/clients/test_service_application.py::ServiceApplicationClientTest::test_request_body
+tests/oauth2/rfc6749/clients/test_service_application.py::ServiceApplicationClientTest::test_request_body_no_initial_private_key
+  /usr/local/lib/python3.9/site-packages/jwt/api_jwt.py:368: InsecureKeyLengthWarning: The RSA key is 1024 bits long, which is below the minimum recommended size of 2048 bits. See NIST SP 800-131A.
+    decoded = self.decode_complete(
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+--------------------------------- JSON report ----------------------------------
+report saved to: report.json
+=========================== short test summary info ============================
+FAILED tests/oauth2/rfc6749/clients/test_base.py::ClientTest::test_create_code_verifier_length
+FAILED tests/oauth2/rfc6749/endpoints/test_error_responses.py::ErrorResponseTest::test_invalid_request
+FAILED tests/oauth2/rfc6749/endpoints/test_revocation_endpoint.py::RevocationEndpointTest::test_revoke_bad_post_request
+FAILED tests/oauth2/rfc6749/endpoints/test_revocation_endpoint.py::RevocationEndpointTest::test_revoke_invalid_request_method
+FAILED tests/oauth2/rfc6749/endpoints/test_revocation_endpoint.py::RevocationEndpointTest::test_revoke_token_client_authentication_failed
+FAILED tests/oauth2/rfc6749/endpoints/test_revocation_endpoint.py::RevocationEndpointTest::test_revoke_token_public_client_authentication_failed
+FAILED tests/oauth2/rfc6749/endpoints/test_revocation_endpoint.py::RevocationEndpointTest::test_revoke_unsupported_token
+FAILED tests/oauth2/rfc6749/endpoints/test_scope_handling.py::TestScopeHandling::test_scope_changed
+FAILED tests/oauth2/rfc6749/endpoints/test_scope_handling.py::TestScopeHandling::test_scope_preservation
+FAILED tests/oauth2/rfc6749/grant_types/test_authorization_code.py::AuthorizationCodeGrantTest::test_create_token_response
+FAILED tests/oauth2/rfc6749/grant_types/test_authorization_code.py::AuthorizationCodeGrantTest::test_create_token_response_without_refresh_token
+FAILED tests/oauth2/rfc6749/grant_types/test_authorization_code.py::AuthorizationCodeGrantTest::test_custom_auth_validators
+FAILED tests/oauth2/rfc6749/grant_types/test_authorization_code.py::AuthorizationCodeGrantTest::test_custom_token_validators
+FAILED tests/oauth2/rfc6749/grant_types/test_client_credentials.py::ClientCredentialsGrantTest::test_custom_auth_validators_unsupported
+FAILED tests/oauth2/rfc6749/grant_types/test_implicit.py::ImplicitGrantTest::test_create_token_response
+FAILED tests/oauth2/rfc6749/grant_types/test_refresh_token.py::RefreshTokenGrantTest::test_create_token_inherit_scope
+FAILED tests/oauth2/rfc6749/grant_types/test_refresh_token.py::RefreshTokenGrantTest::test_create_token_response
+FAILED tests/oauth2/rfc6749/grant_types/test_refresh_token.py::RefreshTokenGrantTest::test_create_token_within_original_scope
+FAILED tests/oauth2/rfc6749/grant_types/test_refresh_token.py::RefreshTokenGrantTest::test_custom_auth_validators_unsupported
+FAILED tests/oauth2/rfc6749/grant_types/test_resource_owner_password.py::ResourceOwnerPasswordCredentialsGrantTest::test_custom_auth_validators_unsupported
+FAILED tests/oauth2/rfc6749/test_server.py::AuthorizationEndpointTest::test_implicit_grant
+FAILED tests/oauth2/rfc6749/test_server.py::TokenEndpointTest::test_authorization_grant
+FAILED tests/oauth2/rfc6749/test_server.py::TokenEndpointTest::test_client_grant
+FAILED tests/oauth2/rfc6749/test_server.py::TokenEndpointTest::test_password_grant
+FAILED tests/oauth2/rfc6749/test_server.py::SignedTokenEndpointTest::test_authorization_grant
+FAILED tests/oauth2/rfc6749/test_server.py::SignedTokenEndpointTest::test_client_grant
+FAILED tests/oauth2/rfc6749/test_server.py::SignedTokenEndpointTest::test_password_grant
+FAILED tests/oauth2/rfc6749/test_tokens.py::TokenTest::test_fake_bearer_is_not_validated
+FAILED tests/oauth2/rfc8628/clients/test_device.py::DeviceClientTest::test_request_uri
+FAILED tests/oauth2/rfc8628/grant_types/test_device_code.py::test_custom_auth_validators_unsupported
+FAILED tests/oauth2/rfc8628/grant_types/test_device_code.py::test_custom_pre_and_post_token_validators
+FAILED tests/oauth2/rfc8628/grant_types/test_device_code.py::test_create_token_response
+FAILED tests/oauth2/rfc8628/grant_types/test_device_code.py::test_invalid_client_error
+FAILED tests/oauth2/rfc8628/grant_types/test_device_code.py::test_duplicate_params_error
+FAILED tests/oauth2/rfc8628/test_server.py::DeviceAuthorizationEndpointTest::test_device_authorization_grant
+FAILED tests/oauth2/rfc8628/test_server.py::DeviceAuthorizationEndpointTest::test_device_authorization_grant_interval
+FAILED tests/oauth2/rfc8628/test_server.py::DeviceAuthorizationEndpointTest::test_device_authorization_grant_interval_with_zero
+FAILED tests/oauth2/rfc8628/test_server.py::DeviceAuthorizationEndpointTest::test_device_authorization_grant_user_gode_generator
+FAILED tests/oauth2/rfc8628/test_server.py::DeviceAuthorizationEndpointTest::test_device_authorization_grant_verify_url_complete_callable
+FAILED tests/oauth2/rfc8628/test_server.py::DeviceAuthorizationEndpointTest::test_device_authorization_grant_verify_url_complete_string
+FAILED tests/openid/connect/core/endpoints/test_claims_handling.py::TestClaimsHandling::test_claims_stored_on_code_creation
+FAILED tests/openid/connect/core/endpoints/test_claims_handling.py::TestClaimsHandling::test_invalid_claims
+FAILED tests/openid/connect/core/endpoints/test_openid_connect_params_handling.py::OpenIDConnectEndpointTest::test_oidc_params_preservation
+FAILED tests/openid/connect/core/endpoints/test_openid_connect_params_handling.py::OpenIDConnectEndpointTest::test_prompt_none_exclusiveness
+FAILED tests/openid/connect/core/endpoints/test_refresh_token.py::TestRefreshToken::test_refresh_token_with_openid
+FAILED tests/openid/connect/core/grant_types/test_authorization_code.py::AuthorizationCodeGrantTest::test_create_token_response
+FAILED tests/openid/connect/core/grant_types/test_authorization_code.py::AuthorizationCodeGrantTest::test_create_token_response_without_refresh_token
+FAILED tests/openid/connect/core/grant_types/test_authorization_code.py::AuthorizationCodeGrantTest::test_custom_auth_validators
+FAILED tests/openid/connect/core/grant_types/test_authorization_code.py::AuthorizationCodeGrantTest::test_custom_token_validators
+FAILED tests/openid/connect/core/grant_types/test_authorization_code.py::OpenIDAuthCodeInterferenceTest::test_create_token_response
+FAILED tests/openid/connect/core/grant_types/test_authorization_code.py::OpenIDAuthCodeInterferenceTest::test_create_token_response_without_refresh_token
+FAILED tests/openid/connect/core/grant_types/test_authorization_code.py::OpenIDAuthCodeInterferenceTest::test_custom_auth_validators
+FAILED tests/openid/connect/core/grant_types/test_authorization_code.py::OpenIDAuthCodeInterferenceTest::test_custom_token_validators
+FAILED tests/openid/connect/core/grant_types/test_authorization_code.py::OpenIDAuthCodeTest::test_create_token_response
+FAILED tests/openid/connect/core/grant_types/test_authorization_code.py::OpenIDAuthCodeTest::test_no_prompt_authorization
+FAILED tests/openid/connect/core/grant_types/test_authorization_code.py::OpenIDAuthCodeTest::test_none_multi_prompt
+FAILED tests/openid/connect/core/grant_types/test_base.py::IDTokenTest::test_finalize_id_token
+FAILED tests/openid/connect/core/grant_types/test_base.py::IDTokenTest::test_finalize_id_token_with_at_hash
+FAILED tests/openid/connect/core/grant_types/test_base.py::IDTokenTest::test_finalize_id_token_with_c_and_at_hash
+FAILED tests/openid/connect/core/grant_types/test_base.py::IDTokenTest::test_finalize_id_token_with_c_hash
+FAILED tests/openid/connect/core/grant_types/test_base.py::IDTokenTest::test_finalize_id_token_with_nonce
+FAILED tests/openid/connect/core/grant_types/test_base.py::IDTokenTest::test_get_id_token
+FAILED tests/openid/connect/core/grant_types/test_hybrid.py::AuthorizationCodeGrantTest::test_create_token_response
+FAILED tests/openid/connect/core/grant_types/test_hybrid.py::AuthorizationCodeGrantTest::test_create_token_response_without_refresh_token
+FAILED tests/openid/connect/core/grant_types/test_hybrid.py::AuthorizationCodeGrantTest::test_custom_auth_validators
+FAILED tests/openid/connect/core/grant_types/test_hybrid.py::AuthorizationCodeGrantTest::test_custom_token_validators
+FAILED tests/openid/connect/core/grant_types/test_hybrid.py::OpenIDAuthCodeTest::test_create_token_response
+FAILED tests/openid/connect/core/grant_types/test_hybrid.py::OpenIDAuthCodeTest::test_no_prompt_authorization
+FAILED tests/openid/connect/core/grant_types/test_hybrid.py::OpenIDAuthCodeTest::test_none_multi_prompt
+FAILED tests/openid/connect/core/grant_types/test_hybrid.py::OpenIDHybridInterferenceTest::test_create_token_response
+FAILED tests/openid/connect/core/grant_types/test_hybrid.py::OpenIDHybridInterferenceTest::test_create_token_response_without_refresh_token
+FAILED tests/openid/connect/core/grant_types/test_hybrid.py::OpenIDHybridInterferenceTest::test_custom_auth_validators
+FAILED tests/openid/connect/core/grant_types/test_hybrid.py::OpenIDHybridInterferenceTest::test_custom_token_validators
+FAILED tests/openid/connect/core/grant_types/test_hybrid.py::OpenIDHybridCodeTokenTest::test_authorization
+FAILED tests/openid/connect/core/grant_types/test_hybrid.py::OpenIDHybridCodeTokenTest::test_create_token_response
+FAILED tests/openid/connect/core/grant_types/test_hybrid.py::OpenIDHybridCodeTokenTest::test_no_prompt_authorization
+FAILED tests/openid/connect/core/grant_types/test_hybrid.py::OpenIDHybridCodeTokenTest::test_none_multi_prompt
+FAILED tests/openid/connect/core/grant_types/test_hybrid.py::OpenIDHybridCodeTokenTest::test_optional_nonce
+FAILED tests/openid/connect/core/grant_types/test_hybrid.py::OpenIDHybridCodeIdTokenTest::test_authorization
+FAILED tests/openid/connect/core/grant_types/test_hybrid.py::OpenIDHybridCodeIdTokenTest::test_create_token_response
+FAILED tests/openid/connect/core/grant_types/test_hybrid.py::OpenIDHybridCodeIdTokenTest::test_id_token_contains_nonce
+FAILED tests/openid/connect/core/grant_types/test_hybrid.py::OpenIDHybridCodeIdTokenTest::test_no_prompt_authorization
+FAILED tests/openid/connect/core/grant_types/test_hybrid.py::OpenIDHybridCodeIdTokenTest::test_none_multi_prompt
+FAILED tests/openid/connect/core/grant_types/test_hybrid.py::OpenIDHybridCodeIdTokenTest::test_optional_nonce
+FAILED tests/openid/connect/core/grant_types/test_hybrid.py::OpenIDHybridCodeIdTokenTest::test_required_nonce
+FAILED tests/openid/connect/core/grant_types/test_hybrid.py::OpenIDHybridCodeIdTokenTokenTest::test_authorization
+FAILED tests/openid/connect/core/grant_types/test_hybrid.py::OpenIDHybridCodeIdTokenTokenTest::test_create_token_response
+FAILED tests/openid/connect/core/grant_types/test_hybrid.py::OpenIDHybridCodeIdTokenTokenTest::test_no_prompt_authorization
+FAILED tests/openid/connect/core/grant_types/test_hybrid.py::OpenIDHybridCodeIdTokenTokenTest::test_none_multi_prompt
+FAILED tests/openid/connect/core/grant_types/test_hybrid.py::OpenIDHybridCodeIdTokenTokenTest::test_optional_nonce
+FAILED tests/openid/connect/core/grant_types/test_hybrid.py::OpenIDHybridCodeIdTokenTokenTest::test_required_nonce
+FAILED tests/openid/connect/core/grant_types/test_implicit.py::ImplicitGrantTest::test_create_token_response
+FAILED tests/openid/connect/core/grant_types/test_implicit.py::OpenIDImplicitInterferenceTest::test_create_token_response
+FAILED tests/openid/connect/core/grant_types/test_implicit.py::OpenIDImplicitTest::test_authorization
+FAILED tests/openid/connect/core/grant_types/test_implicit.py::OpenIDImplicitTest::test_no_prompt_authorization
+FAILED tests/openid/connect/core/grant_types/test_implicit.py::OpenIDImplicitNoAccessTokenTest::test_authorization
+FAILED tests/openid/connect/core/grant_types/test_implicit.py::OpenIDImplicitNoAccessTokenTest::test_no_prompt_authorization
+FAILED tests/openid/connect/core/grant_types/test_implicit.py::OpenIDImplicitNoAccessTokenTest::test_none_multi_prompt
+FAILED tests/openid/connect/core/grant_types/test_implicit.py::OpenIDImplicitNoAccessTokenTest::test_required_nonce
+FAILED tests/openid/connect/core/grant_types/test_refresh_token.py::RefreshTokenGrantTest::test_create_token_inherit_scope
+FAILED tests/openid/connect/core/grant_types/test_refresh_token.py::RefreshTokenGrantTest::test_create_token_response
+FAILED tests/openid/connect/core/grant_types/test_refresh_token.py::RefreshTokenGrantTest::test_create_token_within_original_scope
+FAILED tests/openid/connect/core/grant_types/test_refresh_token.py::RefreshTokenGrantTest::test_custom_auth_validators_unsupported
+FAILED tests/openid/connect/core/grant_types/test_refresh_token.py::OpenIDRefreshTokenInterferenceTest::test_create_token_inherit_scope
+FAILED tests/openid/connect/core/grant_types/test_refresh_token.py::OpenIDRefreshTokenInterferenceTest::test_create_token_response
+FAILED tests/openid/connect/core/grant_types/test_refresh_token.py::OpenIDRefreshTokenInterferenceTest::test_create_token_within_original_scope
+FAILED tests/openid/connect/core/grant_types/test_refresh_token.py::OpenIDRefreshTokenInterferenceTest::test_custom_auth_validators_unsupported
+FAILED tests/openid/connect/core/grant_types/test_refresh_token.py::OpenIDRefreshTokenTest::test_refresh_id_token
+FAILED tests/openid/connect/core/grant_types/test_refresh_token.py::OpenIDRefreshTokenTest::test_refresh_token_without_openid_scope
+FAILED tests/openid/connect/core/test_server.py::AuthorizationEndpointTest::test_implicit_grant
+FAILED tests/openid/connect/core/test_server.py::TokenEndpointTest::test_authorization_grant
+FAILED tests/openid/connect/core/test_tokens.py::JWTTokenTestCase::test_validate_request_token_from_headers_basic
+== 112 failed, 569 passed, 2 skipped, 4 warnings, 21 subtests passed in 3.19s ==

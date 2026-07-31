@@ -1,0 +1,38 @@
+{
+  "instance_id": "commit-0/transitions",
+  "id": "36e9ad11-5047-4246-b1c0-1b9e93cc5e65",
+  "repo": "Zahgon/transitions",
+  "base_commit": "2760aec4a20f42b0e3b80f28524b6da0a8f516fd",
+  "reference_commit": "bd42b38f3627e6bca7274fb4d9af2e105f75da7c",
+  "setup": {
+    "install": "pip install -e \".\"",
+    "packages": "",
+    "pip_packages": [
+      "dill",
+      "graphviz",
+      "mock",
+      "pycodestyle",
+      "pygraphviz",
+      "pytest",
+      "pytest-cov",
+      "pytest-json-report",
+      "pytest-runner",
+      "pytest-xdist",
+      "six",
+      "tox"
+    ],
+    "pre_install": [],
+    "python": "3.10",
+    "specification": "https://django-transitions.readthedocs.io/en/latest/",
+    "version_source": "noxfile.py[@session.python]",
+    "version_conflicts": [],
+    "system_deps_hint": []
+  },
+  "test": {
+    "test_cmd": "pytest",
+    "test_dir": "tests"
+  },
+  "src_dir": "transitions",
+  "base_compiles": true,
+  "language": "python"
+}

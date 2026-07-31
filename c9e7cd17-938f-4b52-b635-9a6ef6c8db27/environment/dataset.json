@@ -1,0 +1,24 @@
+{
+  "instance_id": "commit-0/bigcache",
+  "id": "c9e7cd17-938f-4b52-b635-9a6ef6c8db27",
+  "repo": "Shivansh9411/bigcache",
+  "base_commit": "e035633471d066a1d005b5f474f74f20a490c7a6",
+  "reference_commit": "532eb6410aefb749509084c74f56b8313e200f4a",
+  "setup": {
+    "install": "go mod download && go build ./...",
+    "packages": "",
+    "pip_packages": "",
+    "pre_install": [],
+    "go_version": "1.16",
+    "specification": "https://pkg.go.dev/github.com/allegro/bigcache/v3",
+    "version_source": "go.mod[go]",
+    "version_conflicts": []
+  },
+  "test": {
+    "test_cmd": "go test -json -count=1 ./...",
+    "test_dir": "."
+  },
+  "src_dir": ".",
+  "language": "go",
+  "base_compiles": true
+}

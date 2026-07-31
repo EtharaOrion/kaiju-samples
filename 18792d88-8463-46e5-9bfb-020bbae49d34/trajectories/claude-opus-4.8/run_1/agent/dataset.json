@@ -1,0 +1,29 @@
+{
+  "instance_id": "commit-0/graphql-jit",
+  "id": "18792d88-8463-46e5-9bfb-020bbae49d34",
+  "repo": "Zahgon/graphql-jit",
+  "base_commit": "4289f484cd98e0cb569db43c1b9a4372108a0a3d",
+  "reference_commit": "61e5a006156f6c95e9a3246715a135da93216342",
+  "src_dir": "src",
+  "language": "typescript",
+  "test_framework": "jest",
+  "functions_stubbed": 127,
+  "base_compiles": true,
+  "setup": {
+    "node_version": "22",
+    "install": "yarn install",
+    "packages": [
+      "@types/jest",
+      "jest"
+    ],
+    "pre_install": [],
+    "specification": "http://spec.graphql.org/draft/#sec-Language.Operations",
+    "version_source": ".github/workflows/*.yml[matrix.node-version]",
+    "version_conflicts": []
+  },
+  "test": {
+    "test_cmd": "yarn jest",
+    "test_dir": "src/__tests__",
+    "test_dir_detected_by": "recursive-scan"
+  }
+}

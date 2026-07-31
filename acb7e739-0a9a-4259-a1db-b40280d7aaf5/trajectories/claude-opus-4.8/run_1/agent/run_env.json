@@ -1,0 +1,6 @@
+{
+  "repo": "Zahgon/nexosim",
+  "base_commit": "e1c25de58d8e09fc9b6a93b4ab200abd61790264",
+  "reference_commit": "42eb361c9c553e50b763524cf9087bb64f31af6c",
+  "docker_image": "426628337772.dkr.ecr.ap-south-1.amazonaws.com/kaiju_q2:rust_asynchronics_nexosim_e1c25de"
+}

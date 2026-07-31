@@ -1,0 +1,326 @@
+============================= test session starts ==============================
+platform linux -- Python 3.8.20, pytest-8.3.5, pluggy-1.5.0
+rootdir: /tmp/commit0-inplace-l5ylllkh/tree
+plugins: cov-5.0.0, json-report-1.5.0, metadata-3.1.1
+collected 123 items
+
+tests/test_PC_tree.py FFFFFFF                                            [  5%]
+tests/test_arithm.py ....                                                [  8%]
+tests/test_freivalds.py ....                                             [ 12%]
+tests/test_interval_cover.py ..                                          [ 13%]
+tests/test_next_permutation.py ..                                        [ 15%]
+tests/test_our_std.py ....                                               [ 18%]
+tests/test_tryalgo.py .....F...............................F............ [ 59%]
+.F...................F............................                       [100%]
+
+=================================== FAILURES ===================================
+_____________________________ Test_PC_tree.test_80 _____________________________
+
+self = <tests.test_PC_tree.Test_PC_tree testMethod=test_80>
+
+    def test_80(self):
+        # this generates a spider graph with 4 legs
+        tmp = PC_tree(80)
+        for d in range(0, 80, 20):
+            for i in range(0, 20, 2):
+                tmp.restrict(range(d + i, d + 20 - i))
+        tmp.restrict({6, 7, 8})
+>       tmp.restrict({4,6,7})
+
+tests/test_PC_tree.py:210: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+tryalgo/PC_tree.py:284: in restrict
+    path = self._terminal_path(partial)
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = <tryalgo.PC_tree.PC_tree object at 0xffffaeb708e0>
+partial_nodes = {281473611777792: <tryalgo.PC_tree.C_node object at 0xffffaea4c700>, 281473611778752: <tryalgo.PC_tree.P_node object at 0xffffaea4cac0>}
+
+    def _terminal_path(self, partial_nodes: Dict[int, Node]):
+        nodes = list(partial_nodes.values())
+        if not nodes:
+            return []
+        adj = {}
+        for n in nodes:
+            adj[id(n)] = [x for x in self._iter(n)
+                          if not isinstance(x, Leaf) and x.is_partial()]
+        if len(nodes) == 1:
+            nodes[0].is_terminal = True
+            return nodes
+        ends = [n for n in nodes if len(adj[id(n)]) <= 1]
+        if len(ends) != 2:
+            raise Infeasible("terminal path is not a simple path")
+        prev = None
+        cur = ends[0]
+        path = [cur]
+        while True:
+            nxts = [x for x in adj[id(cur)] if x is not prev]
+            if not nxts:
+                break
+            if len(nxts) > 1:
+                raise Infeasible("terminal path branches")
+            prev, cur = cur, nxts[0]
+            path.append(cur)
+        if len(path) != len(nodes):
+>           raise Infeasible("terminal path is disconnected")
+E           tryalgo.PC_tree.Infeasible: Impossible restriction because : terminal path is disconnected
+
+tryalgo/PC_tree.py:335: Infeasible
+________________________ Test_PC_tree.test_Degree3Node _________________________
+
+self = <tests.test_PC_tree.Test_PC_tree testMethod=test_Degree3Node>
+
+    def test_Degree3Node(self):
+        # PARTIAL
+    
+        tmp = PC_tree(20)
+>       self.assertTrue(tmp.restrict({9, 17}))
+E       AssertionError: None is not true
+
+tests/test_PC_tree.py:99: AssertionError
+____________ Test_PC_tree.test_Fink_Pfretzschner_Rutter_Appendix_B1 ____________
+
+self = <tests.test_PC_tree.Test_PC_tree testMethod=test_Fink_Pfretzschner_Rutter_Appendix_B1>
+
+    def test_Fink_Pfretzschner_Rutter_Appendix_B1(self):
+        tmp = PC_tree(6)
+        tmp.restrict({1, 2})
+        tmp.restrict({2, 3})
+        tmp.restrict({4, 5})
+        tmp.restrict({5, 0})
+>       self.assertEqual(tmp.represent(False), [['C', 6, [0, 5, 4, 7]], ['C', 7, [1, 2, 3, 6]]])
+E       AssertionError: (0, 5, 4, (1, 2, 3)) != [['C', 6, [0, 5, 4, 7]], ['C', 7, [1, 2, 3, 6]]]
+
+tests/test_PC_tree.py:227: AssertionError
+_____________________________ Test_PC_tree.test_OK _____________________________
+
+self = <tests.test_PC_tree.Test_PC_tree testMethod=test_OK>
+
+    def test_OK(self):
+        # we don't allow less than 3 leafs, by the invariant that every inner node has degree at least 3
+    
+        # Minus one
+        tmp = T_prime = PC_tree(10)
+        self.init_assertTrue()
+>       self.my_assertTrue(tmp, {1, 2, 3, 4, 5, 6, 7, 8})
+
+tests/test_PC_tree.py:45: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+tests/test_PC_tree.py:28: in my_assertTrue
+    self.assertTrue(tmp.restrict(R))
+E   AssertionError: None is not true
+_________________ Test_PC_tree.test_TerminalPathNotSplittable __________________
+
+self = <tests.test_PC_tree.Test_PC_tree testMethod=test_TerminalPathNotSplittable>
+
+    def test_TerminalPathNotSplittable(self):
+        tmp = PC_tree(9)
+        self.init_assertTrue()
+>       self.my_assertTrue(tmp, {3, 7})
+
+tests/test_PC_tree.py:62: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+tests/test_PC_tree.py:28: in my_assertTrue
+    self.assertTrue(tmp.restrict(R))
+E   AssertionError: None is not true
+________________________ Test_PC_tree.test_UniqueCNode _________________________
+
+self = <tests.test_PC_tree.Test_PC_tree testMethod=test_UniqueCNode>
+
+    def test_UniqueCNode(self):
+        tmp = PC_tree(9)
+>       self.assertTrue(tmp.restrict({0,1}))
+E       AssertionError: None is not true
+
+tests/test_PC_tree.py:177: AssertionError
+_________________________ Test_PC_tree.test_represent __________________________
+
+self = <tests.test_PC_tree.Test_PC_tree testMethod=test_represent>
+
+    def test_represent(self):
+        tmp = PC_tree(4)
+>       self.assertEqual(tmp.represent(True), [['P', 4, [0,1,2,3], None]])
+E       AssertionError: frozenset({0, 1, 2, 3}) != [['P', 4, [0, 1, 2, 3], None]]
+
+tests/test_PC_tree.py:57: AssertionError
+__________________________ TestTryalgo.test_SortedSet __________________________
+
+self = <tests.test_tryalgo.TestTryalgo testMethod=test_SortedSet>
+
+    def test_SortedSet(self):
+        s1 = set()
+        s2 = SortedSet()
+        for _ in range(50):
+            i = random.randint(0, 20)
+            try:
+                nK = next(k for k in sorted(s1) if k >= i)
+            except StopIteration:
+                nK = None
+>           self.assertEqual(s2.nextKey(i), nK)
+
+tests/test_tryalgo.py:2001: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = {}, key = 6
+
+    def nextKey(self, key):
+        """Returns the smallest key strictly greater than key, or None."""
+        update = self._updateList(key)[0]
+>       node = update[0].next[0]
+E       IndexError: list index out of range
+
+tryalgo/skip_list.py:75: IndexError
+____________________________ TestTryalgo.test_graph ____________________________
+
+self = <tests.test_tryalgo.TestTryalgo testMethod=test_graph>
+
+    def test_graph(self):
+        G = GraphNamedVertices()
+        G.add_node("A")
+        G.add_node("B")
+        G.add_node("C")
+        G.add_edge("A", "B", 4)
+        G.add_arc("A", "C", 1)
+        G.add_arc("C", "B", -2)
+        G.add_arc("B", "C", 0)
+        self.assertEqual(G.node2name, ['A', 'B', 'C'])
+        self.assertEqual(G.name2node, {'A': 0, 'B': 1, 'C': 2})
+        self.assertEqual(G.neighbors, [[1, 2], [0, 2], [1]])
+        self.assertEqual(G.weight, [{1: 4, 2: 1}, {0: 4, 2: 0}, {1: -2}])
+        self.assertEqual(len(G), 3)
+        self.assertEqual(G[0], [1, 2])
+        G = GraphNamedVertices()
+>       G.add_arc("a", "b", 2)
+
+tests/test_tryalgo.py:901: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = <tryalgo.graph.GraphNamedVertices object at 0xffffaea67f70>, name_u = 'a'
+name_v = 'b', weight_uv = 2
+
+    def add_arc(self, name_u, name_v, weight_uv=None):
+>       u = self.name2node[name_u]
+E       KeyError: 'a'
+
+tryalgo/graph.py:337: KeyError
+________________________ TestTryalgo.test_kuhn_munkres _________________________
+
+self = <tests.test_tryalgo.TestTryalgo testMethod=test_kuhn_munkres>
+
+    def test_kuhn_munkres(self):
+        for kuhn_munkres in [kuhn_munkres_n3, kuhn_munkres_n4]:
+            self.assertEqual(kuhn_munkres([[1]])[0], [0])
+            self.assertEqual(kuhn_munkres([[1, 1], [1, 1]])[0], [1, 0])
+            self.assertEqual(kuhn_munkres([[1, 2], [1, 1]])[0], [1, 0])
+            self.assertEqual(kuhn_munkres([[1, 1], [2, 1]])[0], [1, 0])
+            self.assertEqual(kuhn_munkres([[2, 1], [1, 1]])[0], [0, 1])
+            self.assertEqual(kuhn_munkres([[1, 1], [1, 2]])[0], [0, 1])
+            self.assertEqual(kuhn_munkres([[-1, -2, -3], [-6, -5, -4],
+                                           [-1, -1, -1]])[0], [0, 2, 1])
+            self.assertEqual(kuhn_munkres(
+                [[1, 2, 3], [6, 5, 4], [1, 1, 1]])[0], [2, 0, 1])
+            self.assertEqual(kuhn_munkres([[7, 53, 183, 439, 863],
+                                           [497, 383, 563, 79, 973],
+                                           [287, 63, 343, 169, 583],
+                                           [627, 343, 773, 959, 943],
+                                           [767, 473, 103, 699, 303]])[1], 3315)
+            self.assertEqual(kuhn_munkres([[7, 53, 183, 439, 863, 497, 383, 563,
+                                            79, 973, 287, 63, 343, 169, 583],
+                                           [627, 343, 773, 959, 943, 767, 473, 103,
+                                            699, 303, 957, 703, 583, 639, 913],
+                                           [447, 283, 463, 29, 23, 487, 463, 993,
+                                            119, 883, 327, 493, 423, 159, 743],
+                                           [217, 623, 3, 399, 853, 407, 103, 983,
+                                            89, 463, 290, 516, 212, 462, 350],
+                                           [960, 376, 682, 962, 300, 780, 486, 502,
+                                            912, 800, 250, 346, 172, 812, 350],
+                                           [870, 456, 192, 162, 593, 473, 915, 45,
+                                            989, 873, 823, 965, 425, 329, 803],
+                                           [973, 965, 905, 919, 133, 673, 665, 235,
+                                            509, 613, 673, 815, 165, 992, 326],
+                                           [322, 148, 972, 962, 286, 255, 941, 541,
+                                            265, 323, 925, 281, 601, 95, 973],
+                                           [445, 721, 11, 525, 473, 65, 511, 164,
+                                            138, 672, 18, 428, 154, 448, 848],
+                                           [414, 456, 310, 312, 798, 104, 566, 520,
+                                            302, 248, 694, 976, 430, 392, 198],
+                                           [184, 829, 373, 181, 631, 101, 969, 613,
+                                            840, 740, 778, 458, 284, 760, 390],
+                                           [821, 461, 843, 513, 17, 901, 711, 993,
+                                            293, 157, 274, 94, 192, 156, 574],
+                                           [34, 124, 4, 878, 450, 476, 712, 914,
+                                            838, 669, 875, 299, 823, 329, 699],
+                                           [815, 559, 813, 459, 522, 788, 168, 586,
+                                            966, 232, 308, 833, 251, 631, 107],
+                                           [813, 883, 451, 509, 615, 77, 281, 613,
+                                            459, 205, 380, 274, 302, 35, 805]])[1], 13938)
+        # https://www.youtube.com/watch?v=aPVtIhnwHPE
+>       self.assertEqual(kuhn_munkres_n3([[62, 78, 50, 101, 82],
+                                          [71, 84, 61, 73, 59],
+                                          [87, 92, 111, 71, 81],
+                                          [48, 64, 87, 77, 80]]),
+                         ([3, 1, 2, 4], 376))
+
+tests/test_tryalgo.py:1121: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+G = [[62, 78, 50, 101, 82], [71, 84, 61, 73, 59], [87, 92, 111, 71, 81], [48, 64, 87, 77, 80]]
+TOLERANCE = 1e-06
+
+    def kuhn_munkres(G, TOLERANCE=1e-6):
+        """Maximum profit perfect matching by Kuhn-Munkres
+    
+        :param G: squared weight matrix of a complete bipartite graph
+        :param TOLERANCE: values with absolute difference below tolerance
+                  are considered equal. Use 0 for integer/fractional weights.
+        :requires: len(G) == len(G[0])
+        :returns: (mu, value) where mu is the matching from U to V and
+                  value is the total weight of the matching
+        :complexity: :math:`O(n^3)`
+        """
+>       assert len(G) == len(G[0])
+E       AssertionError
+
+tryalgo/kuhn_munkres.py:16: AssertionError
+____________________ TestTryalgo.test_partition_refinement _____________________
+
+self = <tests.test_tryalgo.TestTryalgo testMethod=test_partition_refinement>
+
+    def test_partition_refinement(self):
+        P = PartitionRefinement(10)
+        self.assertEqual(P.tolist(), [[0, 1, 2, 3, 4, 5, 6, 7, 8, 9]])
+        P.refine([3, 4, 5])
+        P.refine([2, 3])
+        P.refine([-1, 2, 3, 10])
+>       self.assertEqual(P.tolist(), [[3], [4, 5], [2], [0, 1, 6, 7, 8, 9]])
+E       AssertionError: Lists differ: [[0, 1, 6, 7, 8, 9], [3], [4, 5], [2]] != [[3], [4, 5], [2], [0, 1, 6, 7, 8, 9]]
+E       
+E       First differing element 0:
+E       [0, 1, 6, 7, 8, 9]
+E       [3]
+E       
+E       - [[0, 1, 6, 7, 8, 9], [3], [4, 5], [2]]
+E       + [[3], [4, 5], [2], [0, 1, 6, 7, 8, 9]]
+
+tests/test_tryalgo.py:1356: AssertionError
+=============================== warnings summary ===============================
+tryalgo/karatsuba.py:40
+  /tmp/commit0-inplace-l5ylllkh/tree/tryalgo/karatsuba.py:40: DeprecationWarning: invalid escape sequence \l
+    """ Karatsuba's algorithm.
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+--------------------------------- JSON report ----------------------------------
+report saved to: report.json
+=========================== short test summary info ============================
+FAILED tests/test_PC_tree.py::Test_PC_tree::test_80 - tryalgo.PC_tree.Infeasi...
+FAILED tests/test_PC_tree.py::Test_PC_tree::test_Degree3Node - AssertionError...
+FAILED tests/test_PC_tree.py::Test_PC_tree::test_Fink_Pfretzschner_Rutter_Appendix_B1
+FAILED tests/test_PC_tree.py::Test_PC_tree::test_OK - AssertionError: None is...
+FAILED tests/test_PC_tree.py::Test_PC_tree::test_TerminalPathNotSplittable - ...
+FAILED tests/test_PC_tree.py::Test_PC_tree::test_UniqueCNode - AssertionError...
+FAILED tests/test_PC_tree.py::Test_PC_tree::test_represent - AssertionError: ...
+FAILED tests/test_tryalgo.py::TestTryalgo::test_SortedSet - IndexError: list ...
+FAILED tests/test_tryalgo.py::TestTryalgo::test_graph - KeyError: 'a'
+FAILED tests/test_tryalgo.py::TestTryalgo::test_kuhn_munkres - AssertionError
+FAILED tests/test_tryalgo.py::TestTryalgo::test_partition_refinement - Assert...
+================== 11 failed, 112 passed, 1 warning in 2.00s ===================

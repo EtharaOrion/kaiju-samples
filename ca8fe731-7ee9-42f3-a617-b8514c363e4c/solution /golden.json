@@ -1,0 +1,9 @@
+{
+  "kind": "commit0-golden-ref",
+  "repo": "Shivansh9411/goleak",
+  "base_commit": "c9075a466fdfdef715e02e92d958967cf1a40edd",
+  "reference_commit": "5f791e3ef83b35d32b262466250507c2f20fea3c",
+  "src_dir": ".",
+  "language": "go",
+  "note": "Golden solution = the repo at reference_commit; solve.sh fetches+resets to it."
+}

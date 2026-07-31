@@ -1,0 +1,32 @@
+{
+  "instance_id": "commit-0/SpectralCluster",
+  "id": "01c3b086-bed0-480d-a9a3-f90525b842e9",
+  "repo": "Zahgon/SpectralCluster",
+  "base_commit": "91210be045717ad3614f1ec8ddc0c92b8c7cc01e",
+  "reference_commit": "f00d5d7ee6aa3e61b18922597010595c32ca0dea",
+  "setup": {
+    "install": "pip install -e \".\"",
+    "packages": "",
+    "pip_packages": [
+      "numpy",
+      "pytest",
+      "pytest-json-report",
+      "scikit-learn",
+      "scipy"
+    ],
+    "pre_install": [
+      "apt-get install -y gfortran libopenblas-dev"
+    ],
+    "python": "3.8",
+    "specification": "https://pypi.python.org/pypi/spectralcluster",
+    "version_source": ".github/workflows/*.yml[matrix.python-version]",
+    "version_conflicts": [],
+    "system_deps_hint": []
+  },
+  "test": {
+    "test_cmd": "pytest",
+    "test_dir": "tests"
+  },
+  "src_dir": "spectralcluster",
+  "base_compiles": true
+}

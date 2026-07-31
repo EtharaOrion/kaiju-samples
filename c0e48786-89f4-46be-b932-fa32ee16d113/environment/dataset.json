@@ -1,0 +1,26 @@
+{
+  "instance_id": "commit-0/viper",
+  "id": "c0e48786-89f4-46be-b932-fa32ee16d113",
+  "repo": "Zahgon/viper",
+  "base_commit": "4aa475c1c8cfe41938452783b8cb34a40b5cc78f",
+  "reference_commit": "528f7416c4b56a4948673984b190bf8713f0c3c4",
+  "setup": {
+    "install": "go mod download && go build ./...",
+    "packages": "",
+    "pip_packages": "",
+    "pre_install": [],
+    "go_version": "1.23.0",
+    "specification": "https://pkg.go.dev/github.com/spf13/viper",
+    "version_source": "go.mod[go]",
+    "version_conflicts": [
+      ".github/workflows/*.yml[matrix.go-version](1.25)"
+    ]
+  },
+  "test": {
+    "test_cmd": "go test -json -count=1 ./...",
+    "test_dir": "."
+  },
+  "src_dir": ".",
+  "language": "go",
+  "base_compiles": true
+}

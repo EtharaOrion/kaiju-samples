@@ -1,0 +1,6 @@
+{
+  "model": "claude-opus-4.8",
+  "harness": "kaiju/commit0",
+  "run": "run_1",
+  "language": "python"
+}

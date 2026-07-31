@@ -1,0 +1,313 @@
+{
+  "model": "openai/gpt-5.5-2026-04-23",
+  "ok": true,
+  "verdicts": [
+    {
+      "criterion_id": "bb.reasoning_faithfulness",
+      "passed": false,
+      "evidence": "Final diff only modifies oauthlib/common.py, while the trajectory claims many edits such as \u201coauthlib/oauth2/rfc6749/request_validator.py has been edited\u201d and many endpoint/grant/client implementations.",
+      "justification": "The stated broad restoration work is inconsistent with the actual cumulative diff shown."
+    },
+    {
+      "criterion_id": "bb.stage_legitimacy",
+      "passed": false,
+      "evidence": "The lint-refine stage contains many formatting/no-op discussions across files, but the final diff contains only oauthlib/common.py changes.",
+      "justification": "The refinement stages do not show reliable feedback-responsive work that is reflected in the final solution."
+    },
+    {
+      "criterion_id": "ts.uri-query-empty-shortcircuit",
+      "passed": true,
+      "evidence": "def uri_query_params(self):\n+        if not self.uri_query:\n+            return []\n+        return urlparse.parse_qsl(self.uri_query, keep_blank_values=True,\n+                                  strict_parsing=True)",
+      "justification": "The implementation short-circuits to an empty list when no query exists and uses strict parsing when present."
+    },
+    {
+      "criterion_id": "ts.duplicate-params-across-both",
+      "passed": false,
+      "evidence": "def duplicate_params(self):\n+        seen_data = collections.defaultdict(int)\n+        for k, v in self.uri_query_params:\n+            seen_data[k] += 1",
+      "justification": "The final diff counts only URI query parameters and ignores decoded body parameters, so duplicates across both sources are missed."
+    },
+    {
+      "criterion_id": "ts.signed-token-jwt",
+      "passed": true,
+      "evidence": "claims = {\n+        'scope': request.scope,\n+        'exp': now + datetime.timedelta(seconds=request.expires_in)\n+    }\n+\n+    claims.update(request.claims)\n+\n+    token = jwt.encode(claims, private_pem, 'RS256')",
+      "justification": "The token functions create an RS256 JWT with scope and expiry merged with request claims, and verify it with RS256 decoding."
+    }
+  ],
+  "anchors": {
+    "golden": {
+      "model": "openai/gpt-5.5-2026-04-23",
+      "reasoning_effort": "high",
+      "ok": true,
+      "raw_verdicts": 18,
+      "response_chars": 6324,
+      "thinking": "",
+      "raw_response": "[\n  {\n    \"criterion_id\": \"bb.intent_fidelity\",\n    \"verdict\": \"fail\",\n    \"evidence\": \"The provided solution code stops in oauthlib/oauth1/rfc5849/__init__.py after comments and does not include implementations for OAuth1 signatures/endpoints or OAuth2 clients/endpoints/errors.\",\n    \"justification\": \"The trajectory is incomplete relative to the broad restoration task and cannot be shown to genuinely implement the required behavior.\"\n  },\n  {\n    \"criterion_id\": \"bb.oracle_strength\",\n    \"verdict\": \"fail\",\n    \"evidence\": \"Only common.py and partial package initialization code are shown; no general OAuth1/OAuth2 implementation is provided.\",\n    \"justification\": \"There is insufficient evidence of a general spec implementation beyond a small subset of helpers.\"\n  },\n  {\n    \"criterion_id\": \"ts.shared-primitives-restored\",\n    \"verdict\": \"fail\",\n    \"evidence\": \"def to_unicode(...): ... except ValueError: ... return (to_unicode(i, encoding) for i in data)\",\n    \"justification\": \"Although several primitives are implemented, to_unicode returns a generator for list-like structures rather than preserving a recursive list-like unicodeized structure.\"\n  },\n  {\n    \"criterion_id\": \"ts.urldecode-rejects-malformed\",\n    \"verdict\": \"fail\",\n    \"evidence\": \"# We want to allow queries such as \\\"c2\\\" whereas urlparse.parse_qsl\\n    # with the strict_parsing flag will not.\\n    params = urlparse.parse_qsl(query, keep_blank_values=True)\",\n    \"justification\": \"urldecode explicitly allows a non key-value encoded string such as c2 instead of rejecting malformed/non-url-encoded input.\"\n  },\n  {\n    \"criterion_id\": \"ts.uri-query-empty-shortcircuit\",\n    \"verdict\": \"pass\",\n    \"evidence\": \"if not self.uri_query:\\n            return []\\n        return urlparse.parse_qsl(self.uri_query, keep_blank_values=True,\\n                                  strict_parsing=True)\",\n    \"justification\": \"uri_query_params short-circuits to an empty list when there is no query and uses strict parsing when present.\"\n  },\n  {\n    \"criterion_id\": \"ts.duplicate-params-across-both\",\n    \"verdict\": \"pass\",\n    \"evidence\": \"for p in (self.decoded_body or []) + self.uri_query_params\",\n    \"justification\": \"duplicate_params combines decoded body parameters, guarding None with an empty list, and URI query params before counting repeated keys.\"\n  },\n  {\n    \"criterion_id\": \"ts.signed-token-jwt\",\n    \"verdict\": \"pass\",\n    \"evidence\": \"claims = {\\n        'scope': request.scope,\\n        'exp': now + datetime.timedelta(seconds=request.expires_in)\\n    }\\n\\n    claims.update(request.claims)\\n\\n    token = jwt.encode(claims, private_pem, 'RS256')\",\n    \"justification\": \"generate_signed_token creates RS256 JWT claims with scope, exp derived from expires_in, merged request claims, and verify_signed_token decodes with RS256.\"\n  },\n  {\n    \"criterion_id\": \"ts.oauth1-utils-filtering\",\n    \"verdict\": \"fail\",\n    \"evidence\": \"The provided code does not include oauthlib/oauth1/rfc5849/utils.py or implementations of escape, filter_oauth_params, or parse_authorization_header.\",\n    \"justification\": \"There is no evidence that the OAuth1 utility functions are implemented.\"\n  },\n  {\n    \"criterion_id\": \"ts.base-string-normalization\",\n    \"verdict\": \"fail\",\n    \"evidence\": \"The provided code imports `.signature` but does not show oauthlib/oauth1/rfc5849/signature.py or any base-string normalization implementation.\",\n    \"justification\": \"There is no evidence of signature base string normalization behavior.\"\n  },\n  {\n    \"criterion_id\": \"ts.signature-methods-implemented\",\n    \"verdict\": \"fail\",\n    \"evidence\": \"No HMAC, RSA, PLAINTEXT signing or verification functions are present in the provided solution code.\",\n    \"justification\": \"The required signature methods cannot be verified from the trajectory.\"\n  },\n  {\n    \"criterion_id\": \"ts.client-method-dispatch\",\n    \"verdict\": \"fail\",\n    \"evidence\": \"The provided code only imports Client from .rfc5849 and does not include the Client class implementation.\",\n    \"justification\": \"There is no evidence that OAuth1 Client credential normalization, dispatch, RSA enforcement, or signature placement is implemented.\"\n  },\n  {\n    \"criterion_id\": \"ts.validator-abstract-vs-concrete\",\n    \"verdict\": \"fail\",\n    \"evidence\": \"The provided code imports RequestValidator but does not include oauthlib/oauth1/rfc5849/request_validator.py.\",\n    \"justification\": \"There is no evidence that abstract validator methods raise NotImplementedError or concrete check helpers return booleans.\"\n  },\n  {\n    \"criterion_id\": \"ts.endpoint-validation-flows\",\n    \"verdict\": \"fail\",\n    \"evidence\": \"The provided code imports endpoint classes but does not include any endpoint validation implementations.\",\n    \"justification\": \"OAuth1 endpoint validation flows are absent from the shown trajectory.\"\n  },\n  {\n    \"criterion_id\": \"ts.endpoint-response-tuples\",\n    \"verdict\": \"fail\",\n    \"evidence\": \"No OAuth1 endpoint response builder code is included in the provided solution.\",\n    \"justification\": \"There is no evidence that endpoint response tuples, bodies, or status codes are implemented correctly.\"\n  },\n  {\n    \"criterion_id\": \"ts.pkce-code-challenge\",\n    \"verdict\": \"fail\",\n    \"evidence\": \"No OAuth2 tokens or PKCE code verifier/challenge implementation is present in the provided code.\",\n    \"justification\": \"The PKCE behavior cannot be verified.\"\n  },\n  {\n    \"criterion_id\": \"ts.token-response-coercion\",\n    \"verdict\": \"fail\",\n    \"evidence\": \"No OAuth2 authorization/token response parsing implementation is present in the provided code.\",\n    \"justification\": \"There is no evidence that expires_in coercion, expires_at derivation, or scope-change warnings are implemented.\"\n  },\n  {\n    \"criterion_id\": \"ts.oauth2-clients-request-builders\",\n    \"verdict\": \"fail\",\n    \"evidence\": \"The provided solution contains no oauthlib/oauth2 client classes or request builder implementations.\",\n    \"justification\": \"OAuth2 client request builders and response parsing are not evidenced.\"\n  },\n  {\n    \"criterion_id\": \"ts.errors-serialization\",\n    \"verdict\": \"fail\",\n    \"evidence\": \"No OAuth2 error or exception class implementations are shown.\",\n    \"justification\": \"The required error identifiers, status codes, descriptions, and serialization behavior cannot be verified.\"\n  }\n]",
+      "verdicts": [
+        {
+          "criterion_id": "bb.intent_fidelity",
+          "passed": false,
+          "evidence": "The provided solution code stops in oauthlib/oauth1/rfc5849/__init__.py after comments and does not include implementations for OAuth1 signatures/endpoints or OAuth2 clients/endpoints/errors.",
+          "justification": "The trajectory is incomplete relative to the broad restoration task and cannot be shown to genuinely implement the required behavior."
+        },
+        {
+          "criterion_id": "bb.oracle_strength",
+          "passed": false,
+          "evidence": "Only common.py and partial package initialization code are shown; no general OAuth1/OAuth2 implementation is provided.",
+          "justification": "There is insufficient evidence of a general spec implementation beyond a small subset of helpers."
+        },
+        {
+          "criterion_id": "ts.shared-primitives-restored",
+          "passed": false,
+          "evidence": "def to_unicode(...): ... except ValueError: ... return (to_unicode(i, encoding) for i in data)",
+          "justification": "Although several primitives are implemented, to_unicode returns a generator for list-like structures rather than preserving a recursive list-like unicodeized structure."
+        },
+        {
+          "criterion_id": "ts.urldecode-rejects-malformed",
+          "passed": false,
+          "evidence": "# We want to allow queries such as \"c2\" whereas urlparse.parse_qsl\n    # with the strict_parsing flag will not.\n    params = urlparse.parse_qsl(query, keep_blank_values=True)",
+          "justification": "urldecode explicitly allows a non key-value encoded string such as c2 instead of rejecting malformed/non-url-encoded input."
+        },
+        {
+          "criterion_id": "ts.uri-query-empty-shortcircuit",
+          "passed": true,
+          "evidence": "if not self.uri_query:\n            return []\n        return urlparse.parse_qsl(self.uri_query, keep_blank_values=True,\n                                  strict_parsing=True)",
+          "justification": "uri_query_params short-circuits to an empty list when there is no query and uses strict parsing when present."
+        },
+        {
+          "criterion_id": "ts.duplicate-params-across-both",
+          "passed": true,
+          "evidence": "for p in (self.decoded_body or []) + self.uri_query_params",
+          "justification": "duplicate_params combines decoded body parameters, guarding None with an empty list, and URI query params before counting repeated keys."
+        },
+        {
+          "criterion_id": "ts.signed-token-jwt",
+          "passed": true,
+          "evidence": "claims = {\n        'scope': request.scope,\n        'exp': now + datetime.timedelta(seconds=request.expires_in)\n    }\n\n    claims.update(request.claims)\n\n    token = jwt.encode(claims, private_pem, 'RS256')",
+          "justification": "generate_signed_token creates RS256 JWT claims with scope, exp derived from expires_in, merged request claims, and verify_signed_token decodes with RS256."
+        },
+        {
+          "criterion_id": "ts.oauth1-utils-filtering",
+          "passed": false,
+          "evidence": "The provided code does not include oauthlib/oauth1/rfc5849/utils.py or implementations of escape, filter_oauth_params, or parse_authorization_header.",
+          "justification": "There is no evidence that the OAuth1 utility functions are implemented."
+        },
+        {
+          "criterion_id": "ts.base-string-normalization",
+          "passed": false,
+          "evidence": "The provided code imports `.signature` but does not show oauthlib/oauth1/rfc5849/signature.py or any base-string normalization implementation.",
+          "justification": "There is no evidence of signature base string normalization behavior."
+        },
+        {
+          "criterion_id": "ts.signature-methods-implemented",
+          "passed": false,
+          "evidence": "No HMAC, RSA, PLAINTEXT signing or verification functions are present in the provided solution code.",
+          "justification": "The required signature methods cannot be verified from the trajectory."
+        },
+        {
+          "criterion_id": "ts.client-method-dispatch",
+          "passed": false,
+          "evidence": "The provided code only imports Client from .rfc5849 and does not include the Client class implementation.",
+          "justification": "There is no evidence that OAuth1 Client credential normalization, dispatch, RSA enforcement, or signature placement is implemented."
+        },
+        {
+          "criterion_id": "ts.validator-abstract-vs-concrete",
+          "passed": false,
+          "evidence": "The provided code imports RequestValidator but does not include oauthlib/oauth1/rfc5849/request_validator.py.",
+          "justification": "There is no evidence that abstract validator methods raise NotImplementedError or concrete check helpers return booleans."
+        },
+        {
+          "criterion_id": "ts.endpoint-validation-flows",
+          "passed": false,
+          "evidence": "The provided code imports endpoint classes but does not include any endpoint validation implementations.",
+          "justification": "OAuth1 endpoint validation flows are absent from the shown trajectory."
+        },
+        {
+          "criterion_id": "ts.endpoint-response-tuples",
+          "passed": false,
+          "evidence": "No OAuth1 endpoint response builder code is included in the provided solution.",
+          "justification": "There is no evidence that endpoint response tuples, bodies, or status codes are implemented correctly."
+        },
+        {
+          "criterion_id": "ts.pkce-code-challenge",
+          "passed": false,
+          "evidence": "No OAuth2 tokens or PKCE code verifier/challenge implementation is present in the provided code.",
+          "justification": "The PKCE behavior cannot be verified."
+        },
+        {
+          "criterion_id": "ts.token-response-coercion",
+          "passed": false,
+          "evidence": "No OAuth2 authorization/token response parsing implementation is present in the provided code.",
+          "justification": "There is no evidence that expires_in coercion, expires_at derivation, or scope-change warnings are implemented."
+        },
+        {
+          "criterion_id": "ts.oauth2-clients-request-builders",
+          "passed": false,
+          "evidence": "The provided solution contains no oauthlib/oauth2 client classes or request builder implementations.",
+          "justification": "OAuth2 client request builders and response parsing are not evidenced."
+        },
+        {
+          "criterion_id": "ts.errors-serialization",
+          "passed": false,
+          "evidence": "No OAuth2 error or exception class implementations are shown.",
+          "justification": "The required error identifiers, status codes, descriptions, and serialization behavior cannot be verified."
+        }
+      ]
+    },
+    "stub": {
+      "model": "openai/gpt-5.5-2026-04-23",
+      "reasoning_effort": "high",
+      "ok": true,
+      "raw_verdicts": 18,
+      "response_chars": 6473,
+      "thinking": "",
+      "raw_response": "[\n  {\n    \"criterion_id\": \"bb.intent_fidelity\",\n    \"verdict\": \"fail\",\n    \"evidence\": \"def generate_signed_token(private_pem, request):\\n    pass\\n\\n\\ndef verify_signed_token(public_pem, token):\\n    pass\",\n    \"justification\": \"The trajectory leaves core required behavior as pass stubs, so it does not genuinely restore the library.\"\n  },\n  {\n    \"criterion_id\": \"bb.oracle_strength\",\n    \"verdict\": \"fail\",\n    \"evidence\": \"@property\\n    def uri_query(self):\\n        pass\\n\\n    @property\\n    def uri_query_params(self):\\n        pass\\n\\n    @property\\n    def duplicate_params(self):\\n        pass\",\n    \"justification\": \"Leaving fundamental accessors unimplemented is not a general spec implementation beyond tests.\"\n  },\n  {\n    \"criterion_id\": \"ts.shared-primitives-restored\",\n    \"verdict\": \"fail\",\n    \"evidence\": \"@property\\n    def uri_query(self):\\n        pass\\n\\n    @property\\n    def uri_query_params(self):\\n        pass\\n\\n    @property\\n    def duplicate_params(self):\\n        pass\",\n    \"justification\": \"Although quote, unquote, urldecode, and to_unicode have bodies, the required Request accessors are still pass stubs.\"\n  },\n  {\n    \"criterion_id\": \"ts.urldecode-rejects-malformed\",\n    \"verdict\": \"pass\",\n    \"evidence\": \"if query and not set(query) <= urlencoded:\\n        ...\\n        raise ValueError(error % (set(query) - urlencoded, query))\\n\\n    if INVALID_HEX_PATTERN.search(query):\\n        raise ValueError('Invalid hex encoding in query string.')\\n\\n    params = urlparse.parse_qsl(query, keep_blank_values=True)\\n\\n    return decode_params_utf8(params)\",\n    \"justification\": \"urldecode validates invalid characters and malformed percent escapes, preserves blank values, and returns decoded tuple pairs.\"\n  },\n  {\n    \"criterion_id\": \"ts.uri-query-empty-shortcircuit\",\n    \"verdict\": \"fail\",\n    \"evidence\": \"@property\\n    def uri_query_params(self):\\n        pass\",\n    \"justification\": \"uri_query_params is unimplemented, so there is no empty-query short-circuit or strict parsing.\"\n  },\n  {\n    \"criterion_id\": \"ts.duplicate-params-across-both\",\n    \"verdict\": \"fail\",\n    \"evidence\": \"@property\\n    def duplicate_params(self):\\n        pass\",\n    \"justification\": \"duplicate_params is unimplemented and cannot count duplicates across body and query.\"\n  },\n  {\n    \"criterion_id\": \"ts.signed-token-jwt\",\n    \"verdict\": \"fail\",\n    \"evidence\": \"def generate_signed_token(private_pem, request):\\n    pass\\n\\n\\ndef verify_signed_token(public_pem, token):\\n    pass\",\n    \"justification\": \"JWT generation and verification are left as pass stubs.\"\n  },\n  {\n    \"criterion_id\": \"ts.oauth1-utils-filtering\",\n    \"verdict\": \"fail\",\n    \"evidence\": \"The provided trajectory includes no implementation code for oauthlib/oauth1/rfc5849/utils.py.\",\n    \"justification\": \"There is insufficient evidence that OAuth1 escape/filter/header parsing utilities are implemented.\"\n  },\n  {\n    \"criterion_id\": \"ts.base-string-normalization\",\n    \"verdict\": \"fail\",\n    \"evidence\": \"from . import parameters, signature\",\n    \"justification\": \"The trajectory imports signature but does not show implemented base-string URI or parameter normalization logic.\"\n  },\n  {\n    \"criterion_id\": \"ts.signature-methods-implemented\",\n    \"verdict\": \"fail\",\n    \"evidence\": \"SIGNATURE_METHODS = {\\n        SIGNATURE_HMAC_SHA1: signature.sign_hmac_sha1_with_client,\\n        ...\\n        SIGNATURE_PLAINTEXT: signature.sign_plaintext_with_client\\n    }\",\n    \"justification\": \"Only dispatch references are shown, with no evidence that the underlying signing and verification functions genuinely compute signatures.\"\n  },\n  {\n    \"criterion_id\": \"ts.client-method-dispatch\",\n    \"verdict\": \"fail\",\n    \"evidence\": \"def __init__(self, client_key,\\n                 client_secret=None,\\n                 ...\\n                 nonce=None, timestamp=None):\\n        \\\"\\\"\\\"Create an OAuth 1 client.\\\"\\\"\\\"\",\n    \"justification\": \"The Client implementation is truncated at the constructor docstring, so required normalization, validation, and signing dispatch are not evidenced.\"\n  },\n  {\n    \"criterion_id\": \"ts.validator-abstract-vs-concrete\",\n    \"verdict\": \"fail\",\n    \"evidence\": \"The provided trajectory includes no implementation code for oauthlib/oauth1/rfc5849/request_validator.py.\",\n    \"justification\": \"There is no evidence that abstract methods raise NotImplementedError or concrete helpers return booleans.\"\n  },\n  {\n    \"criterion_id\": \"ts.endpoint-validation-flows\",\n    \"verdict\": \"fail\",\n    \"evidence\": \"from .rfc5849.endpoints import (\\n    AccessTokenEndpoint, AuthorizationEndpoint, RequestTokenEndpoint,\\n    ResourceEndpoint, SignatureOnlyEndpoint, WebApplicationServer,\\n)\",\n    \"justification\": \"Endpoint classes are merely imported, with no implementation evidence for required validation flows.\"\n  },\n  {\n    \"criterion_id\": \"ts.endpoint-response-tuples\",\n    \"verdict\": \"fail\",\n    \"evidence\": \"from .rfc5849.endpoints import (\\n    AccessTokenEndpoint, AuthorizationEndpoint, RequestTokenEndpoint,\\n    ResourceEndpoint, SignatureOnlyEndpoint, WebApplicationServer,\\n)\",\n    \"justification\": \"No endpoint response builder code is provided to show correct tuple ordering, bodies, or status codes.\"\n  },\n  {\n    \"criterion_id\": \"ts.pkce-code-challenge\",\n    \"verdict\": \"fail\",\n    \"evidence\": \"The provided trajectory includes no implementation code for OAuth2 token or PKCE helpers.\",\n    \"justification\": \"There is no evidence of verifier length enforcement or S256 base64url challenge generation.\"\n  },\n  {\n    \"criterion_id\": \"ts.token-response-coercion\",\n    \"verdict\": \"fail\",\n    \"evidence\": \"The provided trajectory includes no OAuth2 response parsing implementation.\",\n    \"justification\": \"No code demonstrates expires_in coercion, expires_at derivation, or scope-change warnings.\"\n  },\n  {\n    \"criterion_id\": \"ts.oauth2-clients-request-builders\",\n    \"verdict\": \"fail\",\n    \"evidence\": \"The provided trajectory includes no implementation code for OAuth2 client request builders.\",\n    \"justification\": \"There is no evidence that OAuth2 clients build requests or parse responses to populate token attributes.\"\n  },\n  {\n    \"criterion_id\": \"ts.errors-serialization\",\n    \"verdict\": \"fail\",\n    \"evidence\": \"The provided trajectory includes no implementation code for OAuth2 error/exception classes.\",\n    \"justification\": \"There is no evidence that errors carry required identifiers/status/descriptions or serialize correctly.\"\n  }\n]",
+      "verdicts": [
+        {
+          "criterion_id": "bb.intent_fidelity",
+          "passed": false,
+          "evidence": "def generate_signed_token(private_pem, request):\n    pass\n\n\ndef verify_signed_token(public_pem, token):\n    pass",
+          "justification": "The trajectory leaves core required behavior as pass stubs, so it does not genuinely restore the library."
+        },
+        {
+          "criterion_id": "bb.oracle_strength",
+          "passed": false,
+          "evidence": "@property\n    def uri_query(self):\n        pass\n\n    @property\n    def uri_query_params(self):\n        pass\n\n    @property\n    def duplicate_params(self):\n        pass",
+          "justification": "Leaving fundamental accessors unimplemented is not a general spec implementation beyond tests."
+        },
+        {
+          "criterion_id": "ts.shared-primitives-restored",
+          "passed": false,
+          "evidence": "@property\n    def uri_query(self):\n        pass\n\n    @property\n    def uri_query_params(self):\n        pass\n\n    @property\n    def duplicate_params(self):\n        pass",
+          "justification": "Although quote, unquote, urldecode, and to_unicode have bodies, the required Request accessors are still pass stubs."
+        },
+        {
+          "criterion_id": "ts.urldecode-rejects-malformed",
+          "passed": true,
+          "evidence": "if query and not set(query) <= urlencoded:\n        ...\n        raise ValueError(error % (set(query) - urlencoded, query))\n\n    if INVALID_HEX_PATTERN.search(query):\n        raise ValueError('Invalid hex encoding in query string.')\n\n    params = urlparse.parse_qsl(query, keep_blank_values=True)\n\n    return decode_params_utf8(params)",
+          "justification": "urldecode validates invalid characters and malformed percent escapes, preserves blank values, and returns decoded tuple pairs."
+        },
+        {
+          "criterion_id": "ts.uri-query-empty-shortcircuit",
+          "passed": false,
+          "evidence": "@property\n    def uri_query_params(self):\n        pass",
+          "justification": "uri_query_params is unimplemented, so there is no empty-query short-circuit or strict parsing."
+        },
+        {
+          "criterion_id": "ts.duplicate-params-across-both",
+          "passed": false,
+          "evidence": "@property\n    def duplicate_params(self):\n        pass",
+          "justification": "duplicate_params is unimplemented and cannot count duplicates across body and query."
+        },
+        {
+          "criterion_id": "ts.signed-token-jwt",
+          "passed": false,
+          "evidence": "def generate_signed_token(private_pem, request):\n    pass\n\n\ndef verify_signed_token(public_pem, token):\n    pass",
+          "justification": "JWT generation and verification are left as pass stubs."
+        },
+        {
+          "criterion_id": "ts.oauth1-utils-filtering",
+          "passed": false,
+          "evidence": "The provided trajectory includes no implementation code for oauthlib/oauth1/rfc5849/utils.py.",
+          "justification": "There is insufficient evidence that OAuth1 escape/filter/header parsing utilities are implemented."
+        },
+        {
+          "criterion_id": "ts.base-string-normalization",
+          "passed": false,
+          "evidence": "from . import parameters, signature",
+          "justification": "The trajectory imports signature but does not show implemented base-string URI or parameter normalization logic."
+        },
+        {
+          "criterion_id": "ts.signature-methods-implemented",
+          "passed": false,
+          "evidence": "SIGNATURE_METHODS = {\n        SIGNATURE_HMAC_SHA1: signature.sign_hmac_sha1_with_client,\n        ...\n        SIGNATURE_PLAINTEXT: signature.sign_plaintext_with_client\n    }",
+          "justification": "Only dispatch references are shown, with no evidence that the underlying signing and verification functions genuinely compute signatures."
+        },
+        {
+          "criterion_id": "ts.client-method-dispatch",
+          "passed": false,
+          "evidence": "def __init__(self, client_key,\n                 client_secret=None,\n                 ...\n                 nonce=None, timestamp=None):\n        \"\"\"Create an OAuth 1 client.\"\"\"",
+          "justification": "The Client implementation is truncated at the constructor docstring, so required normalization, validation, and signing dispatch are not evidenced."
+        },
+        {
+          "criterion_id": "ts.validator-abstract-vs-concrete",
+          "passed": false,
+          "evidence": "The provided trajectory includes no implementation code for oauthlib/oauth1/rfc5849/request_validator.py.",
+          "justification": "There is no evidence that abstract methods raise NotImplementedError or concrete helpers return booleans."
+        },
+        {
+          "criterion_id": "ts.endpoint-validation-flows",
+          "passed": false,
+          "evidence": "from .rfc5849.endpoints import (\n    AccessTokenEndpoint, AuthorizationEndpoint, RequestTokenEndpoint,\n    ResourceEndpoint, SignatureOnlyEndpoint, WebApplicationServer,\n)",
+          "justification": "Endpoint classes are merely imported, with no implementation evidence for required validation flows."
+        },
+        {
+          "criterion_id": "ts.endpoint-response-tuples",
+          "passed": false,
+          "evidence": "from .rfc5849.endpoints import (\n    AccessTokenEndpoint, AuthorizationEndpoint, RequestTokenEndpoint,\n    ResourceEndpoint, SignatureOnlyEndpoint, WebApplicationServer,\n)",
+          "justification": "No endpoint response builder code is provided to show correct tuple ordering, bodies, or status codes."
+        },
+        {
+          "criterion_id": "ts.pkce-code-challenge",
+          "passed": false,
+          "evidence": "The provided trajectory includes no implementation code for OAuth2 token or PKCE helpers.",
+          "justification": "There is no evidence of verifier length enforcement or S256 base64url challenge generation."
+        },
+        {
+          "criterion_id": "ts.token-response-coercion",
+          "passed": false,
+          "evidence": "The provided trajectory includes no OAuth2 response parsing implementation.",
+          "justification": "No code demonstrates expires_in coercion, expires_at derivation, or scope-change warnings."
+        },
+        {
+          "criterion_id": "ts.oauth2-clients-request-builders",
+          "passed": false,
+          "evidence": "The provided trajectory includes no implementation code for OAuth2 client request builders.",
+          "justification": "There is no evidence that OAuth2 clients build requests or parse responses to populate token attributes."
+        },
+        {
+          "criterion_id": "ts.errors-serialization",
+          "passed": false,
+          "evidence": "The provided trajectory includes no implementation code for OAuth2 error/exception classes.",
+          "justification": "There is no evidence that errors carry required identifiers/status/descriptions or serialize correctly."
+        }
+      ]
+    }
+  },
+  "criteria": [
+    {
+      "id": "bb.reasoning_faithfulness",
+      "text": "Is the agent's stated reasoning consistent with the edits it actually made and the feedback it received (no post-hoc rationalization, no lucky guess)?",
+      "contract_ref": "(backbone)",
+      "concern": "L2.REASONING_FAITHFULNESS",
+      "anchorable": false
+    },
+    {
+      "id": "bb.stage_legitimacy",
+      "text": "Did each refinement stage (lint, test) do real, feedback-responsive work toward the solution rather than cosmetic or no-op changes?",
+      "contract_ref": "(backbone)",
+      "concern": "L2.STAGE_LEGITIMACY",
+      "anchorable": false
+    },
+    {
+      "id": "ts.uri-query-empty-shortcircuit",
+      "text": "uri_query_params returns an empty list when the URI has no query string (short-circuits before strict parsing), and uses strict parsing when a query is present.",
+      "contract_ref": "Known pitfalls: uri_query_params empty case",
+      "concern": null,
+      "anchorable": true
+    },
+    {
+      "id": "ts.duplicate-params-across-both",
+      "text": "duplicate_params counts keys appearing more than once across BOTH decoded body and query params and guards against a None body without erroring.",
+      "contract_ref": "Known pitfalls: duplicate_params",
+      "concern": null,
+      "anchorable": true
+    },
+    {
+      "id": "ts.signed-token-jwt",
+      "text": "generate_signed_token builds an RS256 JWT whose claims include scope and an exp derived from request.expires_in merged with request.claims, and verify_signed_token decodes/verifies it returning the claims dict (sign/verify round-trips).",
+      "contract_ref": "Shared: generate_signed_token/verify_signed_token",
+      "concern": null,
+      "anchorable": true
+    }
+  ]
+}

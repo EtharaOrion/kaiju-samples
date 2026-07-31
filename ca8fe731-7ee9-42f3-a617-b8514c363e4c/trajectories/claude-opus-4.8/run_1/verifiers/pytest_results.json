@@ -1,0 +1,66 @@
+{
+  "solution": {
+    "passed": 0,
+    "failed": 9,
+    "errors": 0,
+    "skipped": 0,
+    "collected": 9,
+    "status": "OK",
+    "detail": "============================== 9 failed in 0.49s ===============================",
+    "total": 9,
+    "pass_rate": 0.0,
+    "log": ""
+  },
+  "anchors": {
+    "golden": {
+      "passed": 9,
+      "failed": 0,
+      "errors": 0,
+      "skipped": 0,
+      "collected": 9,
+      "status": "OK",
+      "detail": "============================== 9 passed in 0.55s ===============================",
+      "total": 9,
+      "pass_rate": 1.0,
+      "log": ""
+    },
+    "stub": {
+      "passed": 0,
+      "failed": 9,
+      "errors": 0,
+      "skipped": 0,
+      "collected": 9,
+      "status": "OK",
+      "detail": "============================== 9 failed in 0.55s ===============================",
+      "total": 9,
+      "pass_rate": 0.0,
+      "log": ""
+    }
+  },
+  "analysis": {
+    "n_total": 9,
+    "n_sound": 9,
+    "sound_subset": [
+      "test_find_detects_leak_with_prefix",
+      "test_find_rejects_cleanup_option",
+      "test_find_rejects_run_on_failure_option",
+      "test_retry_boundary_behavior",
+      "test_verify_none_clean_runs_cleanup_and_helper",
+      "test_verify_none_reports_leak",
+      "test_verify_test_main_clean_pass",
+      "test_verify_test_main_failed_run_skips_check",
+      "test_verify_test_main_leak_rewrites_exit_code"
+    ],
+    "wrong_oracle_dropped": [],
+    "non_discriminating_dropped": [],
+    "inconclusive_on_stub": [],
+    "solution_pass_on_sound": 0.0,
+    "gap_vs_golden": 1.0,
+    "golden_status": "OK",
+    "stub_status": "OK",
+    "solution_status": "OK",
+    "infra_failures": [],
+    "stub_import_broken": false,
+    "stub_note": ""
+  }
+}

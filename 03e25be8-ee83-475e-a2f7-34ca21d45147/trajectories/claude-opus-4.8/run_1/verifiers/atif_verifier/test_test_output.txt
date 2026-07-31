@@ -1,0 +1,307 @@
+============================= test session starts ==============================
+platform linux -- Python 3.8.20, pytest-8.3.5, pluggy-1.5.0
+rootdir: /tmp/commit0-inplace-tncuw735/tree
+plugins: cov-5.0.0, json-report-1.5.0, metadata-3.1.1
+collected 123 items
+
+tests/test_PC_tree.py FF.FFF.                                            [  5%]
+tests/test_arithm.py ....                                                [  8%]
+tests/test_freivalds.py ....                                             [ 12%]
+tests/test_interval_cover.py ..                                          [ 13%]
+tests/test_next_permutation.py ..                                        [ 15%]
+tests/test_our_std.py ....                                               [ 18%]
+tests/test_tryalgo.py .....F...............................F............ [ 59%]
+.....................F............................                       [100%]
+
+=================================== FAILURES ===================================
+_____________________________ Test_PC_tree.test_80 _____________________________
+
+self = <tests.test_PC_tree.Test_PC_tree testMethod=test_80>
+
+    def test_80(self):
+        # this generates a spider graph with 4 legs
+        tmp = PC_tree(80)
+        for d in range(0, 80, 20):
+            for i in range(0, 20, 2):
+                tmp.restrict(range(d + i, d + 20 - i))
+        tmp.restrict({6, 7, 8})
+>       tmp.restrict({4,6,7})
+
+tests/test_PC_tree.py:210: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+tryalgo/PC_tree.py:264: in restrict
+    path = self._terminal_path(partial)
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = <tryalgo.PC_tree.PC_tree object at 0xffff8cf6abb0>
+partial_nodes = {281473044288512: <tryalgo.PC_tree.C_node object at 0xffff8cd19400>, 281473044289472: <tryalgo.PC_tree.P_node object at 0xffff8cd197c0>}
+
+    def _terminal_path(self, partial_nodes: Dict[int, Node]):
+        nodes = list(partial_nodes.values())
+        if not nodes:
+            return []
+        adj = {}
+        for n in nodes:
+            adj[id(n)] = [
+                x for x in self._iter(n) if not isinstance(x, Leaf) and x.is_partial()
+            ]
+        if len(nodes) == 1:
+            nodes[0].is_terminal = True
+            return nodes
+        ends = [n for n in nodes if len(adj[id(n)]) <= 1]
+        if len(ends) != 2:
+            raise Infeasible("terminal path is not a simple path")
+        prev = None
+        cur = ends[0]
+        path = [cur]
+        while True:
+            nxts = [x for x in adj[id(cur)] if x is not prev]
+            if not nxts:
+                break
+            if len(nxts) > 1:
+                raise Infeasible("terminal path branches")
+            prev, cur = cur, nxts[0]
+            path.append(cur)
+        if len(path) != len(nodes):
+>           raise Infeasible("terminal path is disconnected")
+E           tryalgo.PC_tree.Infeasible: Impossible restriction because : terminal path is disconnected
+
+tryalgo/PC_tree.py:317: Infeasible
+________________________ Test_PC_tree.test_Degree3Node _________________________
+
+self = <tests.test_PC_tree.Test_PC_tree testMethod=test_Degree3Node>
+
+    def test_Degree3Node(self):
+        # PARTIAL
+    
+        tmp = PC_tree(20)
+        self.assertTrue(tmp.restrict({9, 17}))
+        self.assertEqual(tmp.represent(), [['P', 20, [0, 1, 2, 3, 4, 5, 6, 7, 8, 10, 11, 12, 13, 14, 15, 16, 18, 19, 21]], ['P', 21, [9, 17, 20]]])
+        self.assertTrue(tmp.restrict({1, 19, 17, 7}))
+>       self.assertEqual(tmp.represent(),  [['P', 20, [0, 2, 3, 4, 5, 6, 8, 10, 11, 12, 13, 14, 15, 16, 18, 22]], ['P', 21, [1, 7, 19, 22]], ['C', 22, [9, 17, 21, 20]]])
+E       AssertionError: Lists differ: [['P'[56 chars]18, 21]], ['C', 21, [22, 17, 9, 20]], ['P', 22[13 chars]21]]] != [['P'[56 chars]18, 22]], ['P', 21, [1, 7, 19, 22]], ['C', 22,[13 chars]20]]]
+E       
+E       First differing element 0:
+E       ['P', 20, [0, 2, 3, 4, 5, 6, 8, 10, 11, 12, 13, 14, 15, 16, 18, 21]]
+E       ['P', 20, [0, 2, 3, 4, 5, 6, 8, 10, 11, 12, 13, 14, 15, 16, 18, 22]]
+E       
+E       - [['P', 20, [0, 2, 3, 4, 5, 6, 8, 10, 11, 12, 13, 14, 15, 16, 18, 21]],
+E       ?                                                                   ^
+E       
+E       + [['P', 20, [0, 2, 3, 4, 5, 6, 8, 10, 11, 12, 13, 14, 15, 16, 18, 22]],
+E       ?                                                                   ^
+E       
+E       -  ['C', 21, [22, 17, 9, 20]],
+E       -  ['P', 22, [1, 7, 19, 21]]]
+E       ?         ^              ^  ^
+E       
+E       +  ['P', 21, [1, 7, 19, 22]],
+E       ?         ^              ^  ^
+E       
+E       +  ['C', 22, [9, 17, 21, 20]]]
+
+tests/test_PC_tree.py:102: AssertionError
+_____________________________ Test_PC_tree.test_OK _____________________________
+
+self = <tests.test_PC_tree.Test_PC_tree testMethod=test_OK>
+
+    def test_OK(self):
+        # we don't allow less than 3 leafs, by the invariant that every inner node has degree at least 3
+    
+        # Minus one
+        tmp = T_prime = PC_tree(10)
+        self.init_assertTrue()
+        self.my_assertTrue(tmp, {1, 2, 3, 4, 5, 6, 7, 8})
+        self.assertEqual(tmp, T_prime)
+    
+        # One permutation
+        tmp = PC_tree(10)
+        self.init_assertTrue()
+        for i in range(9):
+>           self.my_assertTrue(tmp, {i, (i+1) % 10 })
+
+tests/test_PC_tree.py:52: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+tests/test_PC_tree.py:28: in my_assertTrue
+    self.assertTrue(tmp.restrict(R))
+tryalgo/PC_tree.py:266: in restrict
+    self._remodel(path)
+tryalgo/PC_tree.py:352: in _remodel
+    path[i].detach_bilateral([path[i + 1]])
+tryalgo/PC_tree.py:41: in detach_bilateral
+    x.detach(self)
+tryalgo/PC_tree.py:240: in detach
+    self.neighbors._first = id(self.neighbors.successor(old))
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = Sequence([<tryalgo.PC_tree.C_node object at 0xffff8cc0c280>,<tryalgo.PC_tree.Leaf object at 0xffff8cc0c880>])
+x = 281473043187216
+
+    def successor(self, x):
+        """Find the next element in the sequence."""
+        x = self.key(x)
+>       next = self._next[x]
+E       KeyError: 281473043187216
+
+tryalgo/Sequence.py:112: KeyError
+_________________ Test_PC_tree.test_TerminalPathNotSplittable __________________
+
+self = <tests.test_PC_tree.Test_PC_tree testMethod=test_TerminalPathNotSplittable>
+
+    def test_TerminalPathNotSplittable(self):
+        tmp = PC_tree(9)
+        self.init_assertTrue()
+        self.my_assertTrue(tmp, {3, 7})
+        self.assertEqual(tmp.represent(), [['P', 9, [0, 1, 2, 4, 5, 6, 8, 10]], ['P', 10, [3, 7, 9]]])
+        self.my_assertTrue(tmp, {1, 7})
+        self.assertEqual(tmp.represent(), [['P', 9, [0, 2, 4, 5, 6, 8, 10]], ['C', 10, [1, 7, 3, 9]]])
+        self.my_assertTrue(tmp, {1})
+        self.assertEqual(tmp.represent(), [['P', 9, [0, 2, 4, 5, 6, 8, 10]], ['C', 10, [1, 7, 3, 9]]])
+>       self.my_assertFalse(tmp, {5, 7})
+
+tests/test_PC_tree.py:68: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+tests/test_PC_tree.py:35: in my_assertFalse
+    self.assertFalse(tmp.restrict(R))
+tryalgo/PC_tree.py:265: in restrict
+    self._splittable(path)
+tryalgo/PC_tree.py:326: in _splittable
+    node._splittable(left, right)
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = <tryalgo.PC_tree.C_node object at 0xffff8cc220a0>
+left_terminal = <tryalgo.PC_tree.P_node object at 0xffff8cc22070>
+right_terminal = None
+
+    def _splittable(
+        self, left_terminal: Optional[Node], right_terminal: Optional[Node]
+    ) -> None:
+        if self.first_full is None:
+            return
+        x = self.first_full
+        cnt = 0
+        while x.is_full():
+            cnt += 1
+            x = self.neighbors.successor(x)
+        if cnt != self.full_counter:
+            raise Infeasible("full neighbors of a C-node are not consecutive")
+        after = x
+        before = self.neighbors.predecessor(self.first_full)
+        boundary = (id(before), id(after))
+        for term in (left_terminal, right_terminal):
+            if term is not None and id(term) not in boundary:
+>               raise Infeasible("terminal path enters C-node outside the full block")
+E               tryalgo.PC_tree.Infeasible: Impossible restriction because : terminal path enters C-node outside the full block
+
+tryalgo/PC_tree.py:172: Infeasible
+________________________ Test_PC_tree.test_UniqueCNode _________________________
+
+self = <tests.test_PC_tree.Test_PC_tree testMethod=test_UniqueCNode>
+
+    def test_UniqueCNode(self):
+        tmp = PC_tree(9)
+        self.assertTrue(tmp.restrict({0,1}))
+        self.assertEqual(tmp.represent(), [['P', 9, [0, 1, 10]], ['P', 10, [2, 3, 4, 5, 6, 7, 8, 9]]])
+        self.assertTrue(tmp.restrict({0,2}))
+>       self.assertEqual(tmp.represent(), [['C', 9, [0, 1, 10, 2]], ['P', 10, [3, 4, 5, 6, 7, 8, 9]]])
+E       AssertionError: Lists differ: [['C', 9, [0, 2, 10, 1]], ['P', 10, [3, 4, 5, 6, 7, 8, 9]]] != [['C', 9, [0, 1, 10, 2]], ['P', 10, [3, 4, 5, 6, 7, 8, 9]]]
+E       
+E       First differing element 0:
+E       ['C', 9, [0, 2, 10, 1]]
+E       ['C', 9, [0, 1, 10, 2]]
+E       
+E       - [['C', 9, [0, 2, 10, 1]], ['P', 10, [3, 4, 5, 6, 7, 8, 9]]]
+E       ?               ^      ^
+E       
+E       + [['C', 9, [0, 1, 10, 2]], ['P', 10, [3, 4, 5, 6, 7, 8, 9]]]
+E       ?               ^      ^
+
+tests/test_PC_tree.py:180: AssertionError
+__________________________ TestTryalgo.test_SortedSet __________________________
+
+self = <tests.test_tryalgo.TestTryalgo testMethod=test_SortedSet>
+
+    def test_SortedSet(self):
+        s1 = set()
+        s2 = SortedSet()
+        for _ in range(50):
+            i = random.randint(0, 20)
+            try:
+                nK = next(k for k in sorted(s1) if k >= i)
+            except StopIteration:
+                nK = None
+>           self.assertEqual(s2.nextKey(i), nK)
+
+tests/test_tryalgo.py:2001: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = {}, key = 6
+
+    def nextKey(self, key):
+        """Returns the smallest key strictly greater than key, or None."""
+        update = self._updateList(key)[0]
+>       node = update[0].next[0]
+E       IndexError: list index out of range
+
+tryalgo/skip_list.py:72: IndexError
+____________________________ TestTryalgo.test_graph ____________________________
+
+self = <tests.test_tryalgo.TestTryalgo testMethod=test_graph>
+
+    def test_graph(self):
+        G = GraphNamedVertices()
+        G.add_node("A")
+        G.add_node("B")
+        G.add_node("C")
+        G.add_edge("A", "B", 4)
+        G.add_arc("A", "C", 1)
+        G.add_arc("C", "B", -2)
+        G.add_arc("B", "C", 0)
+        self.assertEqual(G.node2name, ['A', 'B', 'C'])
+        self.assertEqual(G.name2node, {'A': 0, 'B': 1, 'C': 2})
+        self.assertEqual(G.neighbors, [[1, 2], [0, 2], [1]])
+        self.assertEqual(G.weight, [{1: 4, 2: 1}, {0: 4, 2: 0}, {1: -2}])
+        self.assertEqual(len(G), 3)
+        self.assertEqual(G[0], [1, 2])
+        G = GraphNamedVertices()
+        G.add_arc("a", "b", 2)
+>       a = G.add_node("a")
+
+tests/test_tryalgo.py:902: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = <tryalgo.graph.GraphNamedVertices object at 0xffff8ce340d0>, name = 'a'
+
+    def add_node(self, name):
+>       assert name not in self.name2node
+E       AssertionError
+
+tryalgo/graph.py:327: AssertionError
+____________________ TestTryalgo.test_partition_refinement _____________________
+
+self = <tests.test_tryalgo.TestTryalgo testMethod=test_partition_refinement>
+
+    def test_partition_refinement(self):
+        P = PartitionRefinement(10)
+        self.assertEqual(P.tolist(), [[0, 1, 2, 3, 4, 5, 6, 7, 8, 9]])
+        P.refine([3, 4, 5])
+        P.refine([2, 3])
+        P.refine([-1, 2, 3, 10])
+        self.assertEqual(P.tolist(), [[3], [4, 5], [2], [0, 1, 6, 7, 8, 9]])
+        flattened = [val for sublist in P.tolist() for val in sublist]
+>       self.assertEqual(flattened, P.order())
+E       AssertionError: [3, 4, 5, 2, 0, 1, 6, 7, 8, 9] != {3: 0, 4: 1, 5: 1, 2: 2, 0: 3, 1: 3, 6: 3, 7: 3, 8: 3, 9: 3}
+
+tests/test_tryalgo.py:1358: AssertionError
+--------------------------------- JSON report ----------------------------------
+report saved to: report.json
+=========================== short test summary info ============================
+FAILED tests/test_PC_tree.py::Test_PC_tree::test_80 - tryalgo.PC_tree.Infeasi...
+FAILED tests/test_PC_tree.py::Test_PC_tree::test_Degree3Node - AssertionError...
+FAILED tests/test_PC_tree.py::Test_PC_tree::test_OK - KeyError: 281473043187216
+FAILED tests/test_PC_tree.py::Test_PC_tree::test_TerminalPathNotSplittable - ...
+FAILED tests/test_PC_tree.py::Test_PC_tree::test_UniqueCNode - AssertionError...
+FAILED tests/test_tryalgo.py::TestTryalgo::test_SortedSet - IndexError: list ...
+FAILED tests/test_tryalgo.py::TestTryalgo::test_graph - AssertionError
+FAILED tests/test_tryalgo.py::TestTryalgo::test_partition_refinement - Assert...
+======================== 8 failed, 115 passed in 1.96s =========================

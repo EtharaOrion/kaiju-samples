@@ -1,0 +1,6 @@
+{
+  "repo": "Zahgon/neat-python",
+  "base_commit": "c59d829cb32a41f06bfae8591be76048640e2d8a",
+  "reference_commit": "043cddfcb83012d145095915d903790c556dda2a",
+  "docker_image": "426628337772.dkr.ecr.ap-south-1.amazonaws.com/kaiju_q2:python_codereclaimers_neat_python"
+}

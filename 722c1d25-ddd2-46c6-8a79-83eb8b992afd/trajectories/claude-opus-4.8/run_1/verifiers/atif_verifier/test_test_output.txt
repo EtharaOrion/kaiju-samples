@@ -1,0 +1,246 @@
+    Updating crates.io index
+     Locking 84 packages to latest compatible versions
+      Adding criterion v0.4.0 (available: v0.8.2)
+   Compiling futures-signals v0.3.34 (/tmp/commit0-inplace-wu4r7dpt/tree)
+warning: calls to `std::mem::drop` with a value that implements `Copy` does nothing
+   --> tests/mutable_vec.rs:305:31
+    |
+305 |     is_eq(vec![], vec![], |v| drop(v.truncate(0)), vec![
+    |                               ^^^^^-------------^
+    |                                    |
+    |                                    argument has type `()`
+    |
+    = note: use `let _ = ...` to ignore the expression or result
+    = note: `#[warn(dropping_copy_types)]` on by default
+
+warning: calls to `std::mem::drop` with a value that implements `Copy` does nothing
+   --> tests/mutable_vec.rs:310:31
+    |
+310 |     is_eq(vec![], vec![], |v| drop(v.truncate(10)), vec![
+    |                               ^^^^^--------------^
+    |                                    |
+    |                                    argument has type `()`
+    |
+    = note: use `let _ = ...` to ignore the expression or result
+
+warning: calls to `std::mem::drop` with a value that implements `Copy` does nothing
+   --> tests/mutable_vec.rs:315:49
+    |
+315 |     is_eq(vec![5, 10, 15], vec![5, 10, 15], |v| drop(v.truncate(3)), vec![
+    |                                                 ^^^^^-------------^
+    |                                                      |
+    |                                                      argument has type `()`
+    |
+    = note: use `let _ = ...` to ignore the expression or result
+
+warning: calls to `std::mem::drop` with a value that implements `Copy` does nothing
+   --> tests/mutable_vec.rs:321:49
+    |
+321 |     is_eq(vec![5, 10, 15], vec![5, 10, 15], |v| drop(v.truncate(10)), vec![
+    |                                                 ^^^^^--------------^
+    |                                                      |
+    |                                                      argument has type `()`
+    |
+    = note: use `let _ = ...` to ignore the expression or result
+
+warning: calls to `std::mem::drop` with a value that implements `Copy` does nothing
+   --> tests/mutable_vec.rs:327:45
+    |
+327 |     is_eq(vec![5, 10, 15], vec![5, 10], |v| drop(v.truncate(2)), vec![
+    |                                             ^^^^^-------------^
+    |                                                  |
+    |                                                  argument has type `()`
+    |
+    = note: use `let _ = ...` to ignore the expression or result
+
+warning: calls to `std::mem::drop` with a value that implements `Copy` does nothing
+   --> tests/mutable_vec.rs:334:41
+    |
+334 |     is_eq(vec![5, 10, 15], vec![5], |v| drop(v.truncate(1)), vec![
+    |                                         ^^^^^-------------^
+    |                                              |
+    |                                              argument has type `()`
+    |
+    = note: use `let _ = ...` to ignore the expression or result
+
+warning: calls to `std::mem::drop` with a value that implements `Copy` does nothing
+   --> tests/mutable_vec.rs:342:40
+    |
+342 |     is_eq(vec![5, 10, 15], vec![], |v| drop(v.truncate(0)), vec![
+    |                                        ^^^^^-------------^
+    |                                             |
+    |                                             argument has type `()`
+    |
+    = note: use `let _ = ...` to ignore the expression or result
+
+warning: calls to `std::mem::drop` with a value that implements `Copy` does nothing
+   --> tests/mutable_vec.rs:353:31
+    |
+353 |     is_eq(vec![], vec![], |v| drop(v.extend(0..0)), vec![
+    |                               ^^^^^--------------^
+    |                                    |
+    |                                    argument has type `()`
+    |
+    = note: use `let _ = ...` to ignore the expression or result
+
+warning: calls to `std::mem::drop` with a value that implements `Copy` does nothing
+   --> tests/mutable_vec.rs:358:38
+    |
+358 |     is_eq(vec![], vec![0, 1, 2], |v| drop(v.extend(0..3)), vec![
+    |                                      ^^^^^--------------^
+    |                                           |
+    |                                           argument has type `()`
+    |
+    = note: use `let _ = ...` to ignore the expression or result
+
+warning: calls to `std::mem::drop` with a value that implements `Copy` does nothing
+   --> tests/mutable_vec.rs:366:54
+    |
+366 |     is_eq(vec![0, 1, 2], vec![0, 1, 2, 3, 4, 5], |v| drop(v.extend(3..6)), vec![
+    |                                                      ^^^^^--------------^
+    |                                                           |
+    |                                                           argument has type `()`
+    |
+    = note: use `let _ = ...` to ignore the expression or result
+
+warning: calls to `std::mem::drop` with a value that implements `Copy` does nothing
+   --> tests/mutable_vec.rs:375:45
+    |
+375 |     is_eq(vec![0, 1, 2], vec![0, 1, 2], |v| drop(v.extend(0..0)), vec![
+    |                                             ^^^^^--------------^
+    |                                                  |
+    |                                                  argument has type `()`
+    |
+    = note: use `let _ = ...` to ignore the expression or result
+
+warning: `futures-signals` (test "mutable_vec") generated 11 warnings
+    Finished `test` profile [unoptimized + debuginfo] target(s) in 4.70s
+     Running unittests src/lib.rs (target/debug/deps/futures_signals-745861dfc788d144)
+
+running 0 tests
+
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running tests/broadcaster.rs (target/debug/deps/broadcaster-5d013bb3e2dca2ea)
+
+running 8 tests
+test test_block_on_stream ... ok
+test test_block_on_stream_wrapper ... ok
+test test_broadcaster ... ok
+test test_broadcaster_always ... ok
+test test_broadcaster_drop ... ok
+test test_broadcaster_multiple ... ok
+test test_broadcaster_signal_ref ... ok
+test test_polls ... ok
+
+test result: ok. 8 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running tests/debug.rs (target/debug/deps/debug-0ccc7755437a10c8)
+
+running 1 test
+test test_debug_signal_vec ... ok
+
+test result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running tests/future.rs (target/debug/deps/future-8be0155eefdf8bb8)
+
+running 1 test
+test test_cancelable_future ... ok
+
+test result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running tests/map_macro.rs (target/debug/deps/map_macro-93bebd9031ccf706)
+
+running 40 tests
+test map_mut::clone ... ok
+test map_mut::foo ... ok
+test map_mut::ident_1 ... ok
+test map_mut::ident_2 ... ok
+test map_mut::ident_3 ... ok
+test map_mut::ident_4 ... ok
+test map_mut::ident_5 ... ok
+test map_mut::let_1 ... ok
+test map_mut::let_2 ... ok
+test map_mut::let_3 ... ok
+test map_mut::let_4 ... ok
+test map_mut::let_5 ... ok
+test map_mut::let_pat_1 ... ok
+test map_mut::let_pat_2 ... ok
+test map_mut::let_pat_3 ... ok
+test map_mut::let_pat_4 ... ok
+test map_mut::let_pat_5 ... ok
+test map_mut::send_sync ... ok
+test map_mut::test_move ... ok
+test map_mut::test_no_move ... ok
+test map_ref::clone ... ok
+test map_ref::foo ... ok
+test map_ref::ident_1 ... ok
+test map_ref::ident_2 ... ok
+test map_ref::ident_3 ... ok
+test map_ref::ident_4 ... ok
+test map_ref::ident_5 ... ok
+test map_ref::let_1 ... ok
+test map_ref::let_2 ... ok
+test map_ref::let_3 ... ok
+test map_ref::let_4 ... ok
+test map_ref::let_5 ... ok
+test map_ref::let_pat_1 ... ok
+test map_ref::let_pat_2 ... ok
+test map_ref::let_pat_3 ... ok
+test map_ref::let_pat_4 ... ok
+test map_ref::let_pat_5 ... ok
+test map_ref::send_sync ... ok
+test map_ref::test_move ... ok
+test map_ref::test_no_move ... ok
+
+test result: ok. 40 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running tests/mod.rs (target/debug/deps/mod-14aeaa84422bf97d)
+
+running 20 tests
+test signal::always::test_always ... ok
+test signal::eq::test_eq ... ok
+test signal::map::test_map ... ok
+test signal::map_future::test_map_future ... ok
+test signal::mutable::is_from_t ... ok
+test signal::mutable::test_lock_mut ... ok
+test signal::mutable::test_mutable ... ok
+test signal::mutable::test_mutable_drop ... ok
+test signal::mutable::test_send_sync ... ok
+test signal::neq::test_neq ... ok
+test signal::option::test_option ... ok
+test signal::option::test_option_signal ... ok
+test signal::result::test_result ... ok
+test signal::result::test_result_signal ... ok
+test signal::sample_stream_cloned::test_eq ... ok
+test signal::stop_if::test_stop_if ... ok
+test signal::switch_signal_vec::test_switch_signal_vec ... ok
+test signal::switch_signal_vec::test_switch_signal_vec_bug ... ok
+test signal::throttle::test_throttle ... FAILED
+test signal::throttle::test_throttle_timing ... FAILED
+
+failures:
+
+---- signal::throttle::test_throttle stdout ----
+
+thread 'signal::throttle::test_throttle' (55876) panicked at tests/signal/throttle.rs:45:5:
+assertion `left == right` failed
+  left: [Ready(Some(true)), Pending, Pending, Ready(Some(false)), Pending, Ready(Some(false)), Pending, Pending, Pending, Pending, Pending, Ready(Some(false)), Pending, Ready(Some(true)), Ready(None)]
+ right: [Ready(Some(true)), Pending, Pending, Ready(Some(false)), Ready(Some(false)), Pending, Pending, Pending, Pending, Pending, Pending, Ready(Some(false)), Ready(Some(true)), Pending, Ready(None)]
+note: run with `RUST_BACKTRACE=1` environment variable to display a backtrace
+
+---- signal::throttle::test_throttle_timing stdout ----
+
+thread 'signal::throttle::test_throttle_timing' (55877) panicked at tests/signal/throttle.rs:112:9:
+assertion `left == right` failed
+  left: 0
+ right: 1
+
+
+failures:
+    signal::throttle::test_throttle
+    signal::throttle::test_throttle_timing
+
+test result: FAILED. 18 passed; 2 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+error: test failed, to rerun pass `--test mod`

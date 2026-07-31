@@ -1,0 +1,9 @@
+{
+  "kind": "commit0-golden-ref",
+  "repo": "Zahgon/oauthlib",
+  "base_commit": "228f9d3cce7b32099972e39639f2d5369cf07628",
+  "reference_commit": "a2779c65b3e961f1b49c05a2417c0ae819f3f8c4",
+  "src_dir": "oauthlib",
+  "language": "python",
+  "note": "Golden solution = the repo at reference_commit; solve.sh fetches+resets to it."
+}
