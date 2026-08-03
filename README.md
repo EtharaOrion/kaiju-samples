@@ -1,424 +1,180 @@
-<p align="center">
-  <img src="images/hero.png" alt="Kaiju: library generation from scratch — 3-stage pipeline (draft, lint, and test), Claude Opus 4.8" width="880">
-</p>
+# Kaiju
 
-<p align="center">
-  <strong>From-scratch library implementation tasks in Harbor format, with the complete Claude Opus 4.8 agent trajectories for every pipeline stage.</strong>
-</p>
+Kaiju is a reinforcement learning environment for training and evaluating agents on hard, from-scratch library implementation. It is built on the [commit0](https://commit-0.github.io/) methodology.
 
-<p align="center">
-  <a href="#summary"><img alt="Built by Ethara.AI" src="https://img.shields.io/badge/built%20by-Ethara.AI-ee00ee.svg"></a>
-  <a href="#scoring-methodology"><img alt="Scoring: continuous, passed/total" src="https://img.shields.io/badge/scoring-continuous_·_passed%2Ftotal-35d0ba.svg"></a>
-  <a href="#three-stage-evaluation-pipeline"><img alt="Pipeline: draft, lint, test" src="https://img.shields.io/badge/pipeline-draft_·_lint_·_test-845EF7.svg"></a>
-  <a href="#verification-and-quality-assurance"><img alt="Oracle ceiling: reference commit" src="https://img.shields.io/badge/oracle_ceiling-reference_commit-ff6b6b.svg"></a>
-</p>
+[![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE)
 
-<p align="center"><sub>
-  <a href="#summary">Summary</a> · <a href="#repository-layout">Layout</a> · <a href="#task-inventory">Inventory</a> · <a href="#task-design">Task design</a> · <a href="#three-stage-evaluation-pipeline">Pipeline</a> · <a href="#dataset-structure">Dataset</a> · <a href="#trajectory-structure">Trajectories</a> · <a href="#scoring-methodology">Scoring</a> · <a href="#usage-notes">Usage</a> · <a href="#verification-and-quality-assurance">Verification</a>
-</sub></p>
+![Kaiju](images/hero.png)
 
-# Kaiju: Library Generation from Scratch
+Each task drops an agent into a containerized checkout of a real open-source repository at `/testbed`, reset to a *skeleton commit* — every function body in the source directory has been replaced by a stub that raises on call. The agent must implement the full library and is graded against the repository's official test suite, an LLM-judged rubric of task-specific correctness criteria, and a multi-layer concern report that also checks pipeline legitimacy. Where SWE-style benchmarks localize a fix inside a working codebase, Kaiju starts from an empty shell and demands the whole organism.
 
-**Kaiju measures whether an agent can implement an entire library from a stubbed skeleton, not
-just patch an isolated bug.** Each task drops the agent into a containerized checkout of a real
-open-source repository at `/testbed`, reset to a *skeleton commit*: every function body in the
-source directory has been replaced with a stub that raises/throws on call. The agent must
-implement the full library — architecture, multi-file coordination, project conventions — and is
-graded on the fraction of the repository's *official test IDs* that pass. Where SWE-style
-benchmarks localize a fix inside a working codebase, Kaiju starts from an empty shell and demands
-the whole organism.
+The bar is high by construction. Signatures, class definitions, and exported symbols are pinned by the skeleton and must not be renamed. The upstream test suite is fixed at commit time and is the same suite the reference implementation must pass, so passing partial credit within a test does not exist and there is no room to overfit a bespoke checker.
 
-Every instance is evaluated through a **three-stage sequential pipeline** (Draft → Lint refine →
-Test refine). This release ships **20 tasks** across **4 languages (Rust, Go, Python, TypeScript)** in
-[Harbor](https://github.com/laude-institute/harbor) task format (schema 1.3), together with the
-**complete agent trajectories of Claude Opus 4.8** — one ATIF v1.7 trace per pipeline stage per
-module, **1,278 traces** in total.
+> **Note:** This release ships 30 tasks with the complete Claude Opus 4.8 agent trajectories — one ATIF v1.7 trace per pipeline stage per module, 1,622 traces in total. Every instance passed a 24-criterion quality-assurance protocol prior to inclusion. Task and trajectory formats are identical to the production deliveries (Harbor `task.toml` schema 1.3, ATIF v1.7).
 
-> **This is a quality-controlled release of the Kaiju corpus.** The task format (Harbor
-> `task.toml` schema 1.3), the trajectory format (ATIF v1.7), and the scoring harness are
-> identical to the production deliveries. All instances passed a 24-criterion quality-assurance
-> protocol prior to inclusion.
+## Task formulation
 
-## Summary
+A Kaiju task consists of an instruction, a stubbed source tree, the repository's own test suite, a hand-authored ground-truth guide, and a Docker image. The instruction is written the way an engineer would receive the assignment: a task brief plus the embedded specification, not a step-by-step spec of the expected output. The agent must read the skeleton, decide how to decompose the problem across modules, and produce the reasoning.
 
-| Property            | Value                                                                              |
-| :------------------ | :--------------------------------------------------------------------------------- |
-| Tasks               | **20** from-scratch library implementation instances                               |
-| Languages           | **Rust (10) · Go (3) · Python (6) · TypeScript (1)**                                                 |
-| Difficulty          | All **Hard** (20 tasks)                                                             |
-| Model evaluated     | **Claude Opus 4.8** (`claude-opus-4.8`)                                            |
-| Pipeline            | 3 sequential stages — Draft (no feedback) → Lint refine → Test refine              |
-| Agent traces        | **1,278** ATIF v1.7 trajectories (per stage × module), 8–240 per task            |
-| Held-out tests      | **11,189** official test IDs total (2–3,191 per task )                                    |
-| Reward              | continuous `passed / total ∈ [0, 1]`, written by `tests/test.sh` at grading time   |
-| Task format         | [Harbor](https://github.com/laude-institute/harbor) `task.toml` schema 1.3         |
-| Execution           | pre-built per-task Docker images, 2 CPUs / 4 GB, `workdir /testbed`                |
+Each instance is a real open-source library pinned at two commits. The `base_commit` is the skeleton: every function body under `src_dir` has been replaced by a stub, but names, signatures, class and enum definitions, and exported symbols are preserved. The `reference_commit` is the upstream working implementation and is used as the oracle ceiling — `solution/solve.sh` restores it, at which point the full official test suite passes by construction.
 
-## Repository layout
+Every task is evaluated through a three-stage sequential pipeline. **Stage 1 — Draft** hands the agent the instruction and skeleton with no external feedback; the agent writes the entire library. **Stage 2 — Lint refine** re-runs the agent with the output of an automated linter. **Stage 3 — Test refine** re-runs it with the output of the official test suite. Stage 3 is the primary evaluation point, but every stage is scored, so per-stage deltas (S1 → S2 → S3) measure exactly what lint and test feedback buy. Agent traces are captured per stage and per module, so a task whose source tree spans `k` modules yields up to `3 × k` trajectory files.
 
-```
-kaiju-samples/
-├── README.md                          # this document
-├── images/
-│   └── hero.png                       # README banner
-├── datasets/                          # task definitions, one directory per UUID (20)
-│   └── <uuid>/
-│       ├── task.toml                  # Harbor schema 1.3 metadata
-│       ├── instruction.md             # the prompt presented to the agent
-│       ├── solution/
-│       │   └── solve.sh               # oracle: fetch + hard-reset to the reference commit
-│       └── tests/
-│           ├── test_ids.txt           # official test IDs, one per line
-│           └── test.sh                # verifier entrypoint: run suite, score IDs, write reward
-└── trajectory/                        # Claude Opus 4.8 runs, one directory per UUID (20)
-    └── <uuid>/
-        ├── results.json               # per-stage run metrics (model, timing, cost, pass rates)
-        ├── verifier/
-        │   └── reward.json            # per-stage verifier scores
-        └── agent/
-            └── <stage>__<repo>__<module>/  # stage ∈ {draft, lint, test}
-                └── trajectory.json    # ATIF v1.7 structured trace of that agent session
+Each task also ships a `TRUTH.md`: a hand-authored ground-truth guide covering the problem and the modules under stubbing, the behavioral contract for each public entry point, a suggested solution decomposition in dependency order, the space of equivalent implementation choices that must not be penalized, and known pitfalls. `TRUTH.md` is not shown to the agent — it is a curator artifact used to author rubrics, calibrate the LLM judge, and give downstream users a single-file picture of what "correct" means on that task.
+
+## Reward
+
+Kaiju grades three complementary axes and exposes them independently rather than collapsing them into a single number.
+
+1. **Pass rate.** The verifier runs the task's official test suite against the agent's output, normalizes the framework-native report (pytest, `cargo test`, `go test`, vitest) into an ID-level pass/fail table, and writes `atif_verifier/reward.json` with `stage_pass_rate` and `resolved` (`1` iff every expected ID passes) per stage. The denominator is the pinned official ID set from `task.toml`'s `n_test_ids`; no partial credit within a test, no credit for skipped or deselected tests. The runner's exit code is never the grading channel — the reward file is.
+2. **Rubric.** An LLM judge scores the final Stage-3 implementation against `tests/rubrics.json`, which holds task-specific behavioral criteria (`ts.*`, derived from `TRUTH.md`) and backbone pipeline criteria (`bb.*`). Each verdict pins its evidence to concrete anchors — source spans, trajectory steps, feedback lines — so a rejected verdict is auditable without re-running the pipeline. Results land in `rubric_results.json`.
+3. **Concerns.** A layered concern report grades pipeline legitimacy alongside outcome: L0 (deterministic — signal trustworthiness, pipeline completeness), L1 (deterministic — coverage, e.g. draft modules addressed), L2 (LLM-judged — reasoning faithfulness, stage legitimacy, rolled-up rubric verdicts). Every concern has a `status`, a `gating` flag, and a `weight`; a gating failure at any layer flips the report's `gate` from `pass` to `quarantine`. `report.json` exposes the rolled-up `graded_score`, the final `gate`, and the list of `gating_failures`.
+
+The concern gate is the primary "did this run count" signal: a quarantined run cannot be trusted as an outcome measurement even if the pass rate is high. Use `stage_pass_rate` for reward shaping during training; use `resolved` (strict) or `graded_score` (weighted) for evaluation.
+
+## Task format
+
+Environments use the [Harbor](https://github.com/laude-institute/harbor) task format, schema 1.3:
+
+```text
+task.toml       Metadata: pinned commits, test IDs, verifier config, resource limits, docker_image
+instruction.md  The open-ended prompt the agent sees
+TRUTH.md        Curator ground-truth guide (not shown to the agent)
+environment/    Dockerfiles (base + repo) and the commit0 dataset entry
+solution/       Oracle: solve.sh, golden.json (rubric verdicts under the reference), metadata.json
+tests/          Verifier: test.sh (entry point), test_outputs.py (normalizer), rubrics.json
+trajectories/   Per-model, per-run agent and verifier artifacts
 ```
 
-Task UUIDs map **1:1** between `datasets/` and `trajectory/` (20 each). A task's repository,
-language, and difficulty are recorded in its `task.toml` (`[metadata]` and `[task].keywords`).
-One-liners to list tasks by language:
+`task.toml` pins the runtime environment (`docker_image`, `cpus=2`, `memory_mb=4096`, `workdir="/testbed"`), the source layout (`original_repo`, `base_commit`, `reference_commit`, `src_dir`), the graded ID set (`test_mode="official_test_ids"`, `n_test_ids`), and per-stage budgets (`[agent].timeout_sec=1800`, `[verifier].timeout_sec=1800`). Every task in this release has `[metadata].category="code-generation"` and `[metadata].difficulty="hard"`.
+
+## Quickstart
+
+Prerequisites:
+
+- Docker running
+- `python3` (3.11+) for reading `task.toml` via `tomllib`
 
 ```bash
-grep -l '"rust"'   datasets/*/task.toml | xargs -n1 dirname | xargs -n1 basename   # 10 Rust
-grep -l '"go"'     datasets/*/task.toml | xargs -n1 dirname | xargs -n1 basename   # 3 Go
-grep -l '"python"' datasets/*/task.toml | xargs -n1 dirname | xargs -n1 basename   # 6 Python
-```
+git clone https://github.com/Ethara-Ai/kaiju-samples
+cd kaiju-samples
 
-## Task inventory
-
-| Task (UUID prefix) | Upstream project | Language | Test IDs | Agent traces |
-|---|---|---|---:|---:|
-| `36e9ad11` | pytransitions/transitions                | Python | 3,191 |    29 |
-| `70e7561f` | go-acme/lego                             | Go     | 2,155 |   103 |
-| `061e0bde` | pipefunc/pipefunc                        | Python | 1,441 |   132 |
-| `712a3f90` | JulianSchmid/etherparse                  | Rust   | 1,123 |   212 |
-| `6ce3f6af` | orion-rs/orion                           | Rust   |   836 |    63 |
-| `70967708` | ZcashFoundation/frost                    | Rust   |   577 |    78 |
-| `117c2b9a` | jurismarches/luqum                       | Python |   385 |    35 |
-| `96fc09ec` | distribution/distribution                | Go     |   309 |    11 |
-| `22975479` | erg-lang/erg                             | Rust   |   215 |   150 |
-| `ba9106bd` | remoc-rs/remoc                           | Rust   |   200 |     9 |
-| `6ceca035` | oxfordcontrol/Clarabel.rs                | Rust   |   178 |   240 |
-| `acb7e739` | asynchronics/nexosim                     | Rust   |   161 |    23 |
-| `5dcec30e` | isidentical/refactor                     | Python |   139 |    17 |
-| `01c3b086` | wq2012/SpectralCluster                   | Python |    77 |    25 |
-| `2bfb26d0` | grpc/grpc-go                             | Go     |    68 |    47 |
-| `4ed62c04` | szimek/signature_pad                     | Typescript |    60 |    14 |
-| `cce1e47b` | paritytech/jsonrpc                       | Rust   |    32 |    18 |
-| `8e56d356` | airbus-cert/etl-parser                   | Python |    23 |    32 |
-| `a702d200` | b23r0/rust-raknet                        | Rust   |    17 |    32 |
-| `b193a4d1` | andreev-io/little-raft                   | Rust   |     2 |     8 |
-
-
-Trace counts scale with the number of modules in the source directory, not with test count — a
-task with a wide module tree (e.g. `Clarabel.rs`, `etherparse`) yields a draft and lint trace
-for nearly every module, while a compact crate (e.g. `little-raft`, `remoc`) needs only a
-handful of sessions per stage.
-
-<p align="center">
-  <picture>
-    <source media="(prefers-color-scheme: dark)" srcset="images/kaiju_tasks_by_language-dark.png">
-    <img src="images/kaiju_tasks_by_language-light.png" alt="Task distribution by language" width="880">
-  </picture>
-</p>
-
-## Task design
-
-Existing code-generation evaluations predominantly test function-level synthesis (HumanEval,
-MBPP) or isolated bug-fixing (SWE-bench). Neither captures the complexity of building an entire
-software library: architectural reasoning, multi-file coordination, dependency management, and
-adherence to project-wide conventions. Kaiju targets exactly that gap.
-
-Each instance is:
-
-- **A real open-source library** with an established, commit-pinned test suite.
-- **Reset to a skeleton commit** (`base_commit`): every function body in the source directory
-  (`src_dir`) is replaced by a stub that throws on call. Names, signatures, and exported symbols
-  are preserved; the agent must not rename them.
-- **Paired with a reference commit** (`reference_commit`): the upstream working implementation,
-  used as the oracle ceiling (`solution/solve.sh` restores it).
-- **Containerized**: a pre-built Docker image per task pins the language toolchain, dependencies,
-  and test runner (`[environment]` in `task.toml`).
-- **Graded against official test IDs**: the exact file-level or assertion-level test identifiers
-  in `tests/test_ids.txt` — the agent never sees the verifier.
-
-The agent receives `instruction.md` (task brief + repository details + embedded specification)
-and works inside `/testbed`. It must implement only the library source under `src_dir` and must
-not modify test files. Tasks span five measured difficulty tiers (Trivial → Expert) and
-non-trivial domain logic: cryptography, network protocols, numeric solvers, state machines,
-and parsers.
-
-## Three-stage evaluation pipeline
-
-Each task is evaluated through three sequential stages; each stage's output is the next stage's
-input, and each stage is scored by the same verifier:
-
-1. **Stage 1 — Draft (no feedback).** The agent receives `instruction.md` and generates an
-   initial implementation of the complete library. No external feedback.
-2. **Stage 2 — Lint refine.** The generated code is passed through automated linting; the agent
-   revises its output in response to lint diagnostics.
-3. **Stage 3 — Test refine.** The revised code runs against the official test suite; the agent
-   iterates on failures. The Stage 3 pass rate is the primary metric.
-
-```mermaid
-%%{init: {'theme':'base','themeVariables':{'primaryColor':'#2b3352','primaryTextColor':'#ffffff','primaryBorderColor':'#7a99d1','lineColor':'#7a99d1','fontFamily':'DM Sans, Roboto, Segoe UI, sans-serif'}}}%%
-flowchart LR
-  A["Task<br/>instruction.md + skeleton repo"] --> B["Stage 1 · Draft<br/>no feedback"]
-  B --> C["Stage 2 · Lint refine"]
-  C --> D["Stage 3 · Test refine"]
-  D --> E["Verifier<br/>official test IDs"]
-  E --> F["Reward<br/>passed / total per stage"]
-  classDef node fill:#2b3352,stroke:#ee00ee,color:#ffffff;
-  classDef sealed fill:#3a4360,stroke:#ee00ee,color:#ffffff;
-  class A,B,C,D,F node;
-  class E sealed;
-```
-
-Agent traces are captured **per stage and per module**: a task whose source directory spans `k`
-modules yields up to `3 × k` trajectory files (`draft__*`, `lint__*`, `test__*`), each a complete
-ATIF v1.7 record of that stage's agent session. Test-refine traces can be very large (up to
-~430 MB for the `erg` task) because they embed full test-run feedback.
-
-## Results
-
-Mean Stage-3 pass rate for Claude Opus 4.8 across the corpus, by difficulty tier and by
-language. All 20 tasks share the Hard difficulty tier; language is the primary performance
-differentiator across the corpus.
-
-<p align="center">
-  <picture>
-    <source media="(prefers-color-scheme: dark)" srcset="images/kaiju_pass_rate_per_tier-dark.png">
-    <img src="images/kaiju_pass_rate_per_tier-light.png" alt="Pass rate by difficulty tier" width="880">
-  </picture>
-</p>
-
-<p align="center">
-  <picture>
-    <source media="(prefers-color-scheme: dark)" srcset="images/kaiju_pass_rate_per_language-dark.png">
-    <img src="images/kaiju_pass_rate_per_language-light.png" alt="Pass rate by language" width="880">
-  </picture>
-</p>
-
-## Dataset structure
-
-Each task lives under `datasets/<uuid>/` and is fully self-contained:
-
-```
-datasets/<uuid>/
-├── task.toml                 # Harbor schema 1.3: task, metadata, agent, verifier, environment
-├── instruction.md            # the prompt presented to the agent (brief + spec)
-├── solution/
-│   └── solve.sh              # oracle: fetch + hard-reset to the reference commit
-└── tests/
-    ├── test_ids.txt          # official test IDs (file-level or assertion-level), one per line
-    └── test.sh               # verifier entrypoint: run suite, score IDs, write reward.json
-```
-
-### `task.toml` fields
-
-| Section         | Field                              | Description                                                        |
-| :-------------- | :--------------------------------- | :----------------------------------------------------------------- |
-| *(root)*        | `schema_version`                   | Harbor task schema (`"1.3"`)                                       |
-| *(root)*        | `source`                           | Task provenance (`"commit0"`)                                      |
-| `[task]`        | `name`, `description`, `keywords`  | Human-readable identity + tags (language, `swe`, `code-generation`) |
-| `[metadata]`    | `uuid`                             | Task UUID; matches the directory name                              |
-| `[metadata]`    | `category` / `difficulty`          | `"code-generation"` / `"hard"` (all tasks in this release)         |
-| `[metadata]`    | `original_repo` / `instance_id`    | Upstream GitHub repo / instance identifier                         |
-| `[metadata]`    | `base_commit`                      | 40-char SHA of the skeleton (stubbed) commit                       |
-| `[metadata]`    | `reference_commit`                 | 40-char SHA of the working reference implementation                |
-| `[metadata]`    | `src_dir`                          | Source directory the agent must implement                          |
-| `[metadata]`    | *(runtime pin)*                    | Language-specific runtime version key                              |
-| `[metadata]`    | `test_mode` / `n_test_ids`         | `"official_test_ids"` / size of the graded ID set                  |
-| `[agent]`       | `timeout_sec`                      | Per-stage agent budget                                             |
-| `[verifier]`    | `timeout_sec`                      | Verifier budget                                                    |
-| `[environment]` | `docker_image`                     | Pre-built per-task image URI                                       |
-| `[environment]` | `cpus` / `memory_mb`               | Container resources (2 / 4096)                                     |
-| `[environment]` | `network_mode` / `workdir`         | Network policy / `"/testbed"`                                      |
-
-### Verifier contract
-
-`tests/test.sh` runs the task's official test command with a machine-readable reporter, scores
-the expected IDs from `tests/test_ids.txt` against the report, and writes:
-
-```json
-// /logs/verifier/reward.json (produced at grading time)
-{"reward": 0.4857, "resolved": 0, "passed": 17, "total": 35}
-```
-
-- IDs are **file-level** (`path/to/foo_test.go`) or **assertion-level**
-  (`path/to/foo.test.ts > <full name>`), matching commit0 conventions.
-- `reward = passed / total`; `resolved = 1` iff every expected ID passes.
-- The runner's exit code is never the grading channel — the reward file is.
-
-## Trajectory structure
-
-Each task's Claude Opus 4.8 run lives under `trajectory/<uuid>/`:
-
-```
-trajectory/<uuid>/
-├── results.json                       # per-stage run metrics (model, timing, cost, pass rates)
-├── verifier/
-│   └── reward.json                    # per-stage verifier scores (pass_rate, num_passed, num_tests)
-└── agent/
-    ├── draft__<repo>__<module>/
-    │   └── trajectory.json            # Stage 1 session for that module
-    ├── lint__<repo>__<module>/
-    │   └── trajectory.json            # Stage 2 session for that module
-    └── test__<repo>__<module>/
-        └── trajectory.json            # Stage 3 session for that module
-```
-
-### `agent/*/trajectory.json` (ATIF v1.7)
-
-Each trace is a self-contained record of one agent session (one pipeline stage on one module):
-
-| Field           | Description                                                                  |
-| :-------------- | :---------------------------------------------------------------------------- |
-| `schema_version`| `"ATIF-v1.7"`                                                                 |
-| `session_id`    | `<instance>__<model>`                                                         |
-| `trajectory_id` | `<instance>__<model>__<stage>__<module>`                                      |
-| `agent`         | Harness identity: name, version, `model_name`, full `tool_definitions`        |
-| `steps`         | Ordered `system` / `user` / `assistant` messages with tool calls and edits    |
-| `final_metrics` | Token usage and session-level counters                                        |
-| `extra`         | Provenance: pipeline stage, module, source log, cross-check file              |
-
-### `results.json`
-
-Per-task run summary with model metadata and per-stage performance:
-
-| Field                          | Description                                                                         |
-| :----------------------------- | :---------------------------------------------------------------------------------- |
-| `model` / `language`           | Model evaluated / task language                                                     |
-| `start_time` / `end_time`      | Wall-clock run window                                                               |
-| `stage1` / `stage2` / `stage3` | Per-stage metrics: `elapsed_s`, `cost_usd`, `num_passed`, `num_tests`, `pass_rate`  |
-
-### `verifier/reward.json`
-
-Per-stage verifier scores produced at grading time:
-
-| Field                          | Description                                              |
-| :----------------------------- | :------------------------------------------------------- |
-| `stage1` / `stage2` / `stage3` | `pass_rate`, `num_passed`, `num_tests`, `eval_status`    |
-| `final_pass_rate`              | Stage 3 pass rate (primary metric)                       |
-
-## Scoring methodology
-
-The primary metric is the **Stage 3 pass rate** — the proportion of official test IDs passing
-after the full Draft → Lint → Test pipeline:
-
-```
-pass_rate = passed / total          # continuous, ∈ [0, 1]
-resolved  = 1  iff  passed == total # strict, binary
-```
-
-- **Numerator:** expected test IDs that pass on the agent's implementation.
-- **Denominator:** all IDs in `tests/test_ids.txt` (`n_test_ids` in `task.toml`); no partial
-  credit within a test, no credit for skipped/deselected tests.
-- **Floor.** A skeleton left unimplemented throws on call, so an untouched submission scores ~0.
-- **Ceiling.** `solution/solve.sh` restores the reference commit, which passes the full ID set by
-  construction — `reward = 1.0` is attainable on every task.
-- **Stage-wise.** The same verifier grades the output of each stage, so per-stage deltas
-  (S1 → S2 → S3) measure exactly what lint and test feedback buy.
-
-## Usage notes
-
-### Evaluating a model on a task
-
-1. Pull the task image from `task.toml [environment] docker_image` (or rebuild an equivalent);
-   the repo ships inside at `/testbed`, reset to `base_commit`.
-2. Present `instruction.md` to your agent; let it implement `src_dir` (edits to test files are
-   out of contract).
-3. Run the verifier and read the reward:
-
-```bash
-UUID=<task-uuid>
-TASK="$PWD/datasets/$UUID"
+UUID=01c3b086-bed0-480d-a9a3-f90525b842e9    # SpectralCluster (Python), 77 tests
+TASK="$PWD/$UUID"
 IMG=$(python3 -c "import tomllib;print(tomllib.load(open('$TASK/task.toml','rb'))['environment']['docker_image'])")
 
 docker run --rm \
   -v "$TASK/tests:/tests:ro" \
+  -v "$TASK/solution:/task/solution:ro" \
   -v "$PWD/logs/$UUID:/logs" \
   "$IMG" bash -c "bash /tests/test.sh; cat /logs/verifier/reward.json"
 ```
 
-4. To verify the ceiling first, run `bash /task/solution/solve.sh` inside the container (mount
-   the task dir at `/task`) before invoking the verifier — it must score `1.0`.
+The task image already contains the repository at `base_commit` under `/testbed`. To confirm the oracle ceiling before invoking the verifier, run `bash /task/solution/solve.sh` inside the container — it hard-resets `/testbed` to `reference_commit` and must then score `pass_rate = 1.0`.
 
-### Inspecting trajectories
+## Environment structure
 
-```python
-import json, glob
-
-uuid = "ba9106bd-c175-4506-86d5-2412127c8a4e"   # any of the 20 task UUIDs
-traces = glob.glob(f"trajectory/{uuid}/agent/*/trajectory.json")
-print(len(traces), "agent sessions")
-
-t = json.load(open(traces[0]))
-print(t["schema_version"], "|", t["trajectory_id"])
-for step in t["steps"][:5]:
-    print(step["step_id"], step["source"], str(step.get("message", ""))[:80])
+```text
+<uuid>/
+  task.toml                       # Harbor schema 1.3 metadata
+  instruction.md                  # Task shown to the agent
+  TRUTH.md                        # Curator ground-truth guide (not shown to the agent)
+  environment/
+    dataset.json                  # commit0 single-instance dataset entry
+    base_image/Dockerfile         # Language toolchain image
+    repo_image/Dockerfile         # Repo at base_commit, layered on the base image
+  solution/
+    solve.sh                      # Fetch + hard-reset /testbed to reference_commit
+    golden.json                   # Rubric verdicts under the reference implementation
+    metadata.json                 # {instance_id, uuid, task, language, repo}
+  tests/
+    test.sh                       # Verifier entry point; writes /logs/verifier/reward.json
+    test_outputs.py               # Framework-native → ID-level pass/fail normalizer
+    rubrics.json                  # Backbone (bb.*) and task-specific (ts.*) criteria
+  trajectories/claude-opus-4.8/run_1/
+    agent/
+      config.json                 # {model, harness, run, language}
+      pipeline_results.json       # Per-stage elapsed, cost, pass_rate, eval_status
+      tool_calls.jsonl            # Flat log of every tool call across the run
+      draft__<repo>__<module>/    # Stage 1 session per module (ATIF v1.7 trajectory.json)
+      lint__<repo>__<module>/     # Stage 2 session per module
+      test__<repo>__<tests>/      # Stage 3 session per test module
+    verifiers/
+      atif_verifier/reward.json   # stage_pass_rate + resolved; plus raw stage test outputs
+      pytest_results.json         # Framework-native raw report (per-ID pass/fail)
+      rubric_results.json         # LLM-judge verdicts against tests/rubrics.json
+      report.json                 # Multi-layer concern report + graded_score + gate
+      reexec.json                 # Deterministic re-execution audit
 ```
 
-Stage and module are encoded in each trace directory name (`<stage>__<repo>__<module>`), and in
-the trace's `extra.pipeline_stage` / `extra.module` fields.
+Each `trajectory.json` is one agent session in ATIF v1.7: `schema_version`, `session_id = <instance>__<model>`, `trajectory_id = <instance>__<model>__<stage>__<repo>__<module>`, agent identity and tool definitions, ordered messages with tool calls and edits, and per-session final metrics. Test-stage traces embed full test-run feedback and can grow to hundreds of megabytes on the largest tasks — plan storage accordingly and prefer Git LFS.
 
-### Corpus statistics
+## Composition
 
-```python
-import json, glob, tomllib, collections
+The current library contains 30 tasks, all Hard difficulty, spanning 10,406 pinned official test IDs and 1,622 agent trajectories. Trace counts scale with the number of modules in the source directory rather than with test count: a task with a wide module tree yields more `draft__*` and `lint__*` traces than a deep, narrow one.
 
-langs, tests = collections.Counter(), 0
-for p in glob.glob("datasets/*/task.toml"):
-    m = tomllib.load(open(p, "rb"))
-    kw = [k for k in m["task"]["keywords"] if k in ("rust", "go", "python", "typescript")]
-    langs[kw[0]] += 1
-    tests += int(m["metadata"]["n_test_ids"])
+- **Python (12):** transitions, BlackSheep, oauthlib, neat-python, btclib, datasketch, pymonad, jsons, tryalgo, kui, SpectralCluster, etl-parser.
+- **Rust (8):** etherparse, erg, nexosim, rust-signals, async-h1, riker, concurrent-map, little-raft.
+- **Go (6):** viper, bigcache, colly, uuid, goleak, promptui.
+- **TypeScript (4):** graphql-jit, css-select, signature_pad, rollup-plugin-typescript2.
 
-traces = len(glob.glob("trajectory/*/agent/*/trajectory.json"))
-print(dict(langs), "| test IDs:", tests, "| traces:", traces)
-# -> {'rust': 10, 'go': 3, 'python': 6, 'typescript': 1} | test IDs: 11189 | traces: 1278
+To enumerate tasks by language (each `task.toml` carries exactly one language keyword):
+
+```bash
+grep -l '"python"'     */task.toml | xargs -n1 dirname   # 12 Python
+grep -l '"rust"'       */task.toml | xargs -n1 dirname   #  8 Rust
+grep -l '"go"'         */task.toml | xargs -n1 dirname   #  6 Go
+grep -l '"typescript"' */task.toml | xargs -n1 dirname   #  4 TypeScript
 ```
 
-## Verification and quality assurance
+## Results
 
-Every instance passed a 24-criterion QC protocol prior to inclusion:
+All 30 tasks were run through the full three-stage pipeline with Claude Opus 4.8. Stage 3 is the primary evaluation point; the two views below summarize how reward accrues across stages and how outcomes vary by language. Figures adapt to light and dark themes.
 
-- **Structure.** `datasets/` and `trajectory/` match **1:1 by UUID** (20 each); `task.toml`,
-  `instruction.md`, `solution/solve.sh`, `tests/test.sh`, `tests/test_ids.txt` present in every
-  task; every trajectory directory carries its `results.json`, `verifier/reward.json`, and
-  per-module ATIF traces under `agent/`.
-- **Trace fidelity.** All 1,278 agent sessions are present across 20 tasks, with `results.json`
-  recording per-stage pass rates, elapsed time, and cost for each run.
-- **Oracle ceiling.** `solution/solve.sh` restores `reference_commit`, which passes the full
-  official ID set — `reward = 1.0` is attainable on every task.
-- **Hermetic grading.** The verifier scores only the pinned official ID set with a deterministic
-  reporter; the runner's exit code is ignored and the reward file is the sole grading channel.
-- **Exclusions.** Instances with pipeline execution failures, telemetry discrepancies, or
-  sentinel values were excluded during curation.
-- **Limitations.**
-  - **Single-model release.** Trajectories cover Claude Opus 4.8 only; no second model for
-    tier calibration.
-  - **Trace size skew.** Test-stage traces embed full test feedback and can reach ~430 MB
-    (`erg`); plan storage accordingly (~32 GB for the full clone via Git LFS).
-  - **Contamination.** The underlying repositories are public; whether specific code appeared in
-    a model's training data is unknown.
+**Reward across stages (per task).** Because every task is scored at all three stages, the S1 → S2 → S3 curve shows exactly what lint and test feedback buy. Tasks are sorted by final pass rate. Stage 3 (magenta) is non-decreasing across the sorted axis; the Stage 1/2 dips mark tasks the agent only resolves once it sees linter or test-suite feedback — for example repositories that draft to a near-zero pass rate but recover to a high final score after test refinement.
+
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="images/kaiju_reward_monotonic-dark.png">
+  <img alt="Per-task pass rate across the three pipeline stages, sorted by final Stage-3 pass rate" src="images/kaiju_reward_monotonic-light.png">
+</picture>
+
+**Stage-3 pass rate by language.** Mean final pass rate for each language; bar labels give the task count (`n`). The spread reflects both language maturity in the model and the difficulty of the specific repositories sampled, not an intrinsic ranking of the languages.
+
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="images/kaiju_pass_rate_per_language-dark.png">
+  <img alt="Mean Stage-3 pass rate per language across the 30 tasks" src="images/kaiju_pass_rate_per_language-light.png">
+</picture>
+
+## Inspecting a run
+
+```python
+import json
+
+uuid = "01c3b086-bed0-480d-a9a3-f90525b842e9"
+base = f"{uuid}/trajectories/claude-opus-4.8/run_1/verifiers"
+
+reward = json.load(open(f"{base}/atif_verifier/reward.json"))
+rubric = json.load(open(f"{base}/rubric_results.json"))
+report = json.load(open(f"{base}/report.json"))
+
+print("pass_rate stage3:", reward["stage_pass_rate"]["stage3"])
+print("rubric verdicts :", sum(v["passed"] for v in rubric["verdicts"]), "/", len(rubric["verdicts"]))
+print("graded_score    :", report["graded_score"], "| gate:", report["gate"])
+```
+
+## Limitations
+
+- **Single-model release.** Trajectories cover Claude Opus 4.8 only; there is no second model in this release for tier calibration.
+- **Trace size skew.** Test-stage traces embed full test feedback and can grow to hundreds of megabytes on the largest tasks.
+- **Contamination.** The underlying repositories are public. Whether specific code appeared in a model's training data is unknown, and no attempt has been made to construct a decontaminated split.
 
 ## Data availability
 
-- **Hugging Face**: [`ethara/kaiju-samples`](https://huggingface.co/datasets/ethara/kaiju-samples)
-- **Format**: Harbor task directories (`datasets/`) + ATIF v1.7 trajectories (`trajectory/`),
-  large files via Git LFS
-- **License**: MIT
+- **Hugging Face:** [`ethara/kaiju-samples`](https://huggingface.co/datasets/ethara/kaiju-samples)
+- **Format:** per-UUID Harbor task directories with embedded ATIF v1.7 trajectories and verifier reports; large files via Git LFS.
 
 ## License
 
-Released under the **MIT License**, copyright Ethara.AI 2026.
+Released under the MIT License. Copyright (c) 2026 Ethara.AI. See [LICENSE](LICENSE).
 
-The underlying open-source repositories retain their original licenses; the MIT grant covers the
-task curation, harness scripts, trajectories, and associated metadata in this repository only.
+The underlying open-source repositories retain their original licenses; the MIT grant covers the task curation, harness scripts, trajectories, verifier reports, `TRUTH.md` files, and associated metadata in this repository only.
