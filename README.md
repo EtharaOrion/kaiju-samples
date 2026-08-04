@@ -139,8 +139,8 @@ All 30 tasks were run through the full three-stage pipeline with Claude Opus 4.8
 **Stage-3 pass rate by difficulty tier.** The 30 tasks are ranked by Stage-3 pass rate and grouped into five difficulty tiers; bar labels give the mean pass rate and task count (`n`). Pass rate falls steeply from Trivial (97.0%, n=9) to Expert (1.8%, n=4), reflecting the wide spread of implementation complexity across the library set.
 
 <picture>
-  <source media="(prefers-color-scheme: dark)" srcset="images/kaiju_pass_rate_per_tier_line_30final.png">
-  <img alt="Mean Stage-3 pass rate per difficulty tier across the 30 tasks" src="images/kaiju_pass_rate_per_tier_line_30final.png">
+  <source media="(prefers-color-scheme: dark)" srcset="images/kaiju_pass_rate_per_tier_line_30final_dark.png">
+  <img alt="Mean Stage-3 pass rate per difficulty tier across the 30 tasks" src="images/kaiju_pass_rate_per_tier_line_30final_dark.png">
 </picture>
 
 ## Inspecting a run
