@@ -140,7 +140,7 @@ All 30 tasks were run through the full three-stage pipeline with Claude Opus 4.8
 
 <picture>
   <source media="(prefers-color-scheme: dark)" srcset="images/kaiju_pass_rate_per_tier-dark.png">
-  <img alt="Mean Stage-3 pass rate per difficulty tier across the 30 tasks" src="images/kaiju_pass_rate_per_tier-light.png">
+  <img alt="Mean Stage-3 pass rate per difficulty tier across the 30 tasks" src="images/kaiju_pass_rate_per_tier_line_30final.png">
 </picture>
 
 ## Inspecting a run
