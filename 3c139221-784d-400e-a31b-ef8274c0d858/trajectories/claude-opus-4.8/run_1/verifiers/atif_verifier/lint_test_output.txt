@@ -99,7 +99,7 @@
    Compiling async-io v2.6.0
    Compiling async-global-executor v2.4.1
    Compiling async-std v1.13.2
-   Compiling async-h1 v2.3.3 (/tmp/commit0-inplace-iv8ipfj5/tree)
+   Compiling async-h1 v2.3.3 (/tmp/kaiju-inplace-iv8ipfj5/tree)
     Finished `test` profile [unoptimized + debuginfo] target(s) in 6.94s
      Running unittests src/lib.rs (target/debug/deps/async_h1-c4aa0d56dd53ef25)
 

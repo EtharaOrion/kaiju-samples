@@ -66,7 +66,7 @@
    Compiling pin-project v1.1.13
    Compiling tinytemplate v1.2.1
    Compiling futures-executor v0.3.33
-   Compiling futures-signals v0.3.34 (/tmp/commit0-inplace-y29dli1_/tree)
+   Compiling futures-signals v0.3.34 (/tmp/kaiju-inplace-y29dli1_/tree)
 error: unused import: `futures_util::stream::StreamExt`
   --> src/signal_vec.rs:10:5
    |

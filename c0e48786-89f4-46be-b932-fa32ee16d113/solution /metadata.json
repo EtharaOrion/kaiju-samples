@@ -1,5 +1,5 @@
 {
-  "instance_id": "commit-0/viper",
+  "instance_id": "kaiju/viper",
   "uuid": "c0e48786-89f4-46be-b932-fa32ee16d113",
   "task": "viper",
   "language": "go",

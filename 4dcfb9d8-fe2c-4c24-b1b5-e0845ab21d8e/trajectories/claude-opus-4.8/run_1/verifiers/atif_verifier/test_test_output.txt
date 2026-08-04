@@ -1,6 +1,6 @@
 ============================= test session starts ==============================
 platform linux -- Python 3.7.17, pytest-7.4.4, pluggy-1.2.0
-rootdir: /tmp/commit0-inplace-q6qppfcm/tree
+rootdir: /tmp/kaiju-inplace-q6qppfcm/tree
 plugins: cov-4.1.0, json-report-1.5.0, metadata-3.0.0
 collected 239 items
 
@@ -53,15 +53,15 @@ tests/test_version.py .                                                  [100%]
 tests/test_datetime.py::TestDatetime::test_dump_datetime_utcnow
 tests/test_datetime.py::TestDatetime::test_dump_naive_datetime
 tests/test_object.py::TestObject::test_dump_load_object_deep
-  /tmp/commit0-inplace-q6qppfcm/tree/jsons/_common_impl.py:34: UserWarning: The use of datetimes without timezone is dangerous and can lead to undesired results. Use suppress_warning(datetime-without-tz) or suppress_warnings(True) to turn off this message.
+  /tmp/kaiju-inplace-q6qppfcm/tree/jsons/_common_impl.py:34: UserWarning: The use of datetimes without timezone is dangerous and can lead to undesired results. Use suppress_warning(datetime-without-tz) or suppress_warnings(True) to turn off this message.
     warnings.warn(msg_, *args, **kwargs)
 
 tests/test_decorator.py::TestDecorator::test_dumped_decorator_on_method
-  /tmp/commit0-inplace-q6qppfcm/tree/jsons/_common_impl.py:34: UserWarning: You cannot decorate a static- or classmethod. You can still obtain the desired behavior by decorating your method first and then place @staticmethod/@classmethod on top (switching the order). Use suppress_warning(decorated-static) or suppress_warnings(True) to turn off this message.
+  /tmp/kaiju-inplace-q6qppfcm/tree/jsons/_common_impl.py:34: UserWarning: You cannot decorate a static- or classmethod. You can still obtain the desired behavior by decorating your method first and then place @staticmethod/@classmethod on top (switching the order). Use suppress_warning(decorated-static) or suppress_warnings(True) to turn off this message.
     warnings.warn(msg_, *args, **kwargs)
 
 tests/test_various.py::TestVarious::test_dump_load_endless_recursion
-  /tmp/commit0-inplace-q6qppfcm/tree/jsons/_common_impl.py:34: UserWarning: Failed to dump attribute "<tests.test_various.TestVarious.test_dump_load_endless_recursion.<locals>.Narcissus object at 0xffff9388af10>" of object of type "Narcissus". Reason: maximum recursion depth exceeded in comparison. Ignoring the attribute. Use suppress_warning(attribute-not-serialized) or suppress_warnings(True) to turn off this message.
+  /tmp/kaiju-inplace-q6qppfcm/tree/jsons/_common_impl.py:34: UserWarning: Failed to dump attribute "<tests.test_various.TestVarious.test_dump_load_endless_recursion.<locals>.Narcissus object at 0xffff9388af10>" of object of type "Narcissus". Reason: maximum recursion depth exceeded in comparison. Ignoring the attribute. Use suppress_warning(attribute-not-serialized) or suppress_warnings(True) to turn off this message.
     warnings.warn(msg_, *args, **kwargs)
 
 -- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html

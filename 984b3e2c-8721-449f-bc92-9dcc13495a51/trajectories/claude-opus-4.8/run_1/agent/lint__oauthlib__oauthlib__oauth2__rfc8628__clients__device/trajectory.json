@@ -1,7 +1,7 @@
 {
   "schema_version": "ATIF-v1.7",
-  "session_id": "commit-0/oauthlib__claude-opus-4.8",
-  "trajectory_id": "commit-0/oauthlib__claude-opus-4.8__lint__oauthlib__oauthlib__oauth2__rfc8628__clients__device",
+  "session_id": "kaiju/oauthlib__claude-opus-4.8",
+  "trajectory_id": "kaiju/oauthlib__claude-opus-4.8__lint__oauthlib__oauthlib__oauth2__rfc8628__clients__device",
   "agent": {
     "name": "aider",
     "version": "0.1.dev13122+gafca02447",
@@ -42,7 +42,7 @@
     "extra": {
       "log_format": "aider-native-llm-history",
       "converted_from": "aider",
-      "harness": "commit0-aider-pipeline",
+      "harness": "kaiju-aider-pipeline",
       "pipeline_stage": "lint",
       "module": "oauthlib__oauthlib__oauth2__rfc8628__clients__device",
       "source_file": "llm_history.txt",
@@ -276,7 +276,7 @@
     }
   },
   "extra": {
-    "instance_id": "commit-0/oauthlib__claude-opus-4.8__lint__oauthlib__oauthlib__oauth2__rfc8628__clients__device",
+    "instance_id": "kaiju/oauthlib__claude-opus-4.8__lint__oauthlib__oauthlib__oauth2__rfc8628__clients__device",
     "stage": "lint",
     "module": "oauthlib__oauthlib__oauth2__rfc8628__clients__device",
     "session_timestamps": [

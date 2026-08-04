@@ -1,6 +1,6 @@
 ============================= test session starts ==============================
 platform linux -- Python 3.10.20, pytest-9.1.1, pluggy-1.6.0
-rootdir: /tmp/commit0-inplace-mfir01sn/tree
+rootdir: /tmp/kaiju-inplace-mfir01sn/tree
 configfile: pytest.ini
 plugins: cov-7.1.0, anyio-4.14.2, asyncio-1.2.0, json-report-1.5.0, metadata-3.1.1
 asyncio: mode=auto, debug=False, asyncio_default_fixture_loop_scope=session, asyncio_default_test_loop_scope=session

@@ -1,7 +1,7 @@
 {
   "schema_version": "ATIF-v1.7",
-  "session_id": "commit-0/riker__claude-opus-4.8",
-  "trajectory_id": "commit-0/riker__claude-opus-4.8__test__riker__src__system__logger",
+  "session_id": "kaiju/riker__claude-opus-4.8",
+  "trajectory_id": "kaiju/riker__claude-opus-4.8__test__riker__src__system__logger",
   "agent": {
     "name": "aider",
     "version": "0.1.dev13122+gafca02447",
@@ -42,7 +42,7 @@
     "extra": {
       "log_format": "aider-native-llm-history",
       "converted_from": "aider",
-      "harness": "commit0-aider-pipeline",
+      "harness": "kaiju-aider-pipeline",
       "pipeline_stage": "test",
       "module": "riker__src__system__logger",
       "source_file": "llm_history.txt",
@@ -128,7 +128,7 @@
     }
   },
   "extra": {
-    "instance_id": "commit-0/riker__claude-opus-4.8__test__riker__src__system__logger",
+    "instance_id": "kaiju/riker__claude-opus-4.8__test__riker__src__system__logger",
     "stage": "test",
     "module": "riker__src__system__logger",
     "session_timestamps": [

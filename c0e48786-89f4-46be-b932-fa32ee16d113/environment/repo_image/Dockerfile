@@ -1,4 +1,4 @@
-FROM commit0.base.go:1.25.0
+FROM kaiju.base.go:1.25.0
 
 ARG http_proxy=""
 ARG https_proxy=""

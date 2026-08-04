@@ -8,7 +8,7 @@
    Compiling parking_lot v0.12.5
    Compiling shared-local-state v0.1.4
    Compiling ebr v0.2.13
-   Compiling concurrent-map v5.0.37 (/tmp/commit0-inplace-clk_kpiw/tree)
+   Compiling concurrent-map v5.0.37 (/tmp/kaiju-inplace-clk_kpiw/tree)
 warning: value assigned to `left` is never read
     --> src/lib.rs:1225:21
      |

@@ -1,5 +1,5 @@
 {
-  "kind": "commit0-golden-ref",
+  "kind": "kaiju-golden-ref",
   "repo": "zahgon/little-raft",
   "base_commit": "6e9ecf33d67fd608927146eec062ce72dd374ac5",
   "reference_commit": "15371d5a3a0ce19572d5a5a647a936eb190cac06",

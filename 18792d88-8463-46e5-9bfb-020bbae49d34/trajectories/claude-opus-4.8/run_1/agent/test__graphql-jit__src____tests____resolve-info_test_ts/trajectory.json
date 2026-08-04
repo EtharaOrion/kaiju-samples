@@ -1,7 +1,7 @@
 {
   "schema_version": "ATIF-v1.7",
-  "session_id": "commit-0/graphql-jit__claude-opus-4.8",
-  "trajectory_id": "commit-0/graphql-jit__claude-opus-4.8__test__graphql-jit__src____tests____resolve-info_test_ts",
+  "session_id": "kaiju/graphql-jit__claude-opus-4.8",
+  "trajectory_id": "kaiju/graphql-jit__claude-opus-4.8__test__graphql-jit__src____tests____resolve-info_test_ts",
   "agent": {
     "name": "aider",
     "version": "0.1.dev13122+gafca02447",
@@ -42,7 +42,7 @@
     "extra": {
       "log_format": "aider-native-llm-history",
       "converted_from": "aider",
-      "harness": "commit0-aider-pipeline",
+      "harness": "kaiju-aider-pipeline",
       "pipeline_stage": "test",
       "module": "graphql-jit__src____tests____resolve-info_test_ts",
       "source_file": "llm_history.txt",
@@ -187,7 +187,7 @@
     }
   },
   "extra": {
-    "instance_id": "commit-0/graphql-jit__claude-opus-4.8__test__graphql-jit__src____tests____resolve-info_test_ts",
+    "instance_id": "kaiju/graphql-jit__claude-opus-4.8__test__graphql-jit__src____tests____resolve-info_test_ts",
     "stage": "test",
     "module": "graphql-jit__src____tests____resolve-info_test_ts",
     "session_timestamps": [

@@ -1,5 +1,5 @@
 {
-  "kind": "commit0-golden-ref",
+  "kind": "kaiju-golden-ref",
   "repo": "Zahgon/transitions",
   "base_commit": "2760aec4a20f42b0e3b80f28524b6da0a8f516fd",
   "reference_commit": "bd42b38f3627e6bca7274fb4d9af2e105f75da7c",

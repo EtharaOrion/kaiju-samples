@@ -39,7 +39,7 @@
    Compiling regex-syntax v0.8.11
    Compiling virtue v0.0.18
    Compiling dyn-clone v1.0.20
-   Compiling nexosim v1.0.0 (/tmp/commit0-inplace-mv5inzf2/tree/nexosim)
+   Compiling nexosim v1.0.0 (/tmp/kaiju-inplace-mv5inzf2/tree/nexosim)
    Compiling unty v0.0.4
    Compiling log v0.4.33
    Compiling tower-layer v0.3.3
@@ -81,7 +81,7 @@
    Compiling serde_derive v1.0.228
    Compiling ref-cast-impl v1.0.25
    Compiling pin-project-internal v1.1.13
-   Compiling nexosim-macros v1.0.0 (/tmp/commit0-inplace-mv5inzf2/tree/nexosim-macros)
+   Compiling nexosim-macros v1.0.0 (/tmp/kaiju-inplace-mv5inzf2/tree/nexosim-macros)
    Compiling schemars_derive v1.2.1
    Compiling tokio-util v0.7.18
    Compiling tokio-stream v0.1.18

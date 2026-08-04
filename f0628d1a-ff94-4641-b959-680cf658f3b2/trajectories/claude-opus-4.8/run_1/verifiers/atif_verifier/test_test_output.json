@@ -60,9 +60,9 @@
 {"Time":"2026-07-28T16:00:18.690506551Z","Action":"output","Package":"github.com/google/uuid","Test":"TestNullUUIDMarshalJSON","Output":"panic({0x1d8620?, 0x40000229d0?})\n"}
 {"Time":"2026-07-28T16:00:18.690509379Z","Action":"output","Package":"github.com/google/uuid","Test":"TestNullUUIDMarshalJSON","Output":"\t/usr/local/go/src/runtime/panic.go:783 +0x120\n"}
 {"Time":"2026-07-28T16:00:18.690511504Z","Action":"output","Package":"github.com/google/uuid","Test":"TestNullUUIDMarshalJSON","Output":"github.com/google/uuid.MustParse({0x400001c390, 0x26})\n"}
-{"Time":"2026-07-28T16:00:18.690514928Z","Action":"output","Package":"github.com/google/uuid","Test":"TestNullUUIDMarshalJSON","Output":"\t/tmp/commit0-inplace-3qugg0cg/tree/uuid.go:176 +0xa0\n"}
+{"Time":"2026-07-28T16:00:18.690514928Z","Action":"output","Package":"github.com/google/uuid","Test":"TestNullUUIDMarshalJSON","Output":"\t/tmp/kaiju-inplace-3qugg0cg/tree/uuid.go:176 +0xa0\n"}
 {"Time":"2026-07-28T16:00:18.690517146Z","Action":"output","Package":"github.com/google/uuid","Test":"TestNullUUIDMarshalJSON","Output":"github.com/google/uuid.TestNullUUIDMarshalJSON(0x40000d9a40)\n"}
-{"Time":"2026-07-28T16:00:18.690519118Z","Action":"output","Package":"github.com/google/uuid","Test":"TestNullUUIDMarshalJSON","Output":"\t/tmp/commit0-inplace-3qugg0cg/tree/null_test.go:183 +0x88\n"}
+{"Time":"2026-07-28T16:00:18.690519118Z","Action":"output","Package":"github.com/google/uuid","Test":"TestNullUUIDMarshalJSON","Output":"\t/tmp/kaiju-inplace-3qugg0cg/tree/null_test.go:183 +0x88\n"}
 {"Time":"2026-07-28T16:00:18.690521794Z","Action":"output","Package":"github.com/google/uuid","Test":"TestNullUUIDMarshalJSON","Output":"testing.tRunner(0x40000d9a40, 0x236d50)\n"}
 {"Time":"2026-07-28T16:00:18.690523777Z","Action":"output","Package":"github.com/google/uuid","Test":"TestNullUUIDMarshalJSON","Output":"\t/usr/local/go/src/testing/testing.go:1934 +0xc8\n"}
 {"Time":"2026-07-28T16:00:18.690526255Z","Action":"output","Package":"github.com/google/uuid","Test":"TestNullUUIDMarshalJSON","Output":"created by testing.(*T).Run in goroutine 1\n"}

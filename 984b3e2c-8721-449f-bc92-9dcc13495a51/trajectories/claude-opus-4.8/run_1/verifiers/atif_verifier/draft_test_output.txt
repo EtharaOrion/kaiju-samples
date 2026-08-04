@@ -1,6 +1,6 @@
 ============================= test session starts ==============================
 platform linux -- Python 3.9.25, pytest-8.4.2, pluggy-1.6.0
-rootdir: /tmp/commit0-inplace-h2xxeb5i/tree
+rootdir: /tmp/kaiju-inplace-h2xxeb5i/tree
 plugins: cov-7.1.0, json-report-1.5.0, metadata-3.1.1, subtests-0.15.0
 collected 683 items
 

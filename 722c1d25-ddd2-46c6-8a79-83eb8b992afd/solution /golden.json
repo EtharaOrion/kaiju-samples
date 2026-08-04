@@ -1,5 +1,5 @@
 {
-  "kind": "commit0-golden-ref",
+  "kind": "kaiju-golden-ref",
   "repo": "Zahgon/rust-signals",
   "base_commit": "8734fef3f84a5ef33003d92fa8c902ca8eb77633",
   "reference_commit": "006adaf5b13870c6cec71a2f00fda0d12f1e3b5d",

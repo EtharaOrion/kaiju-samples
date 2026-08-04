@@ -1,7 +1,7 @@
 {
   "schema_version": "ATIF-v1.7",
-  "session_id": "commit-0/bigcache__claude-opus-4.8",
-  "trajectory_id": "commit-0/bigcache__claude-opus-4.8__draft__bigcache__iterator",
+  "session_id": "kaiju/bigcache__claude-opus-4.8",
+  "trajectory_id": "kaiju/bigcache__claude-opus-4.8__draft__bigcache__iterator",
   "agent": {
     "name": "aider",
     "version": "0.1.dev13122+gafca02447",
@@ -42,7 +42,7 @@
     "extra": {
       "log_format": "aider-native-llm-history",
       "converted_from": "aider",
-      "harness": "commit0-aider-pipeline",
+      "harness": "kaiju-aider-pipeline",
       "pipeline_stage": "draft",
       "module": "bigcache__iterator",
       "source_file": "llm_history.txt",
@@ -135,7 +135,7 @@
     }
   },
   "extra": {
-    "instance_id": "commit-0/bigcache__claude-opus-4.8__draft__bigcache__iterator",
+    "instance_id": "kaiju/bigcache__claude-opus-4.8__draft__bigcache__iterator",
     "stage": "draft",
     "module": "bigcache__iterator",
     "session_timestamps": [

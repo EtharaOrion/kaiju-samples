@@ -1,16 +1,16 @@
 schema_version = "1.3"
-source = "commit0"
+source = "kaiju"
 
 [task]
-name = "commit-0/graphql-jit"
-description = "commit0 from-scratch implementation task for zalando-incubator/graphql-jit."
-keywords = ["commit0", "code-generation", "typescript", "swe"]
+name = "kaiju/graphql-jit"
+description = "kaiju from-scratch implementation task for zalando-incubator/graphql-jit."
+keywords = ["kaiju", "code-generation", "typescript", "swe"]
 
 [metadata]
 category = "code-generation"
 difficulty = "hard"
 original_repo = "Zahgon/graphql-jit"
-instance_id = "commit-0/graphql-jit"
+instance_id = "kaiju/graphql-jit"
 base_commit = "4289f484cd98e0cb569db43c1b9a4372108a0a3d"
 reference_commit = "61e5a006156f6c95e9a3246715a135da93216342"
 src_dir = "src"

@@ -1,5 +1,5 @@
 {
-  "instance_id": "commit-0/signature_pad",
+  "instance_id": "kaiju/signature_pad",
   "uuid": "4ed62c04-52fd-4f17-b0a9-c72363d0ffcb",
   "task": "signature_pad",
   "language": "typescript",

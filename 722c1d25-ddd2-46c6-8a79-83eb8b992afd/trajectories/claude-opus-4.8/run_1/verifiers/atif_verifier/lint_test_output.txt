@@ -51,7 +51,7 @@
    Compiling futures-executor v0.3.33
    Compiling serde v1.0.229
    Compiling serde_json v1.0.151
-   Compiling futures-signals v0.3.34 (/tmp/commit0-inplace-rhwq65t5/tree)
+   Compiling futures-signals v0.3.34 (/tmp/kaiju-inplace-rhwq65t5/tree)
    Compiling regex v1.13.1
    Compiling tinytemplate v1.2.1
    Compiling half v2.7.1

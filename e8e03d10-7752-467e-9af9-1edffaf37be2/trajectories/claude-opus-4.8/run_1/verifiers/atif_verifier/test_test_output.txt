@@ -4,8 +4,8 @@
       Adding dashmap v3.11.10 (available: v6.2.1)
       Adding rand v0.7.3 (available: v0.10.2)
       Adding uuid v0.8.2 (available: v1.24.0)
-   Compiling riker-macros v0.2.0 (/tmp/commit0-inplace-kqkja9ew/tree/riker-macros)
-   Compiling riker v0.4.2 (/tmp/commit0-inplace-kqkja9ew/tree)
+   Compiling riker-macros v0.2.0 (/tmp/kaiju-inplace-kqkja9ew/tree/riker-macros)
+   Compiling riker v0.4.2 (/tmp/kaiju-inplace-kqkja9ew/tree)
 warning: struct `SysEvent` is never constructed
    --> tests/channels.rs:189:8
     |

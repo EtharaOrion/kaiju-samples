@@ -1,5 +1,5 @@
 {
-  "kind": "commit0-golden-ref",
+  "kind": "kaiju-golden-ref",
   "repo": "Zahgon/neat-python",
   "base_commit": "c59d829cb32a41f06bfae8591be76048640e2d8a",
   "reference_commit": "043cddfcb83012d145095915d903790c556dda2a",

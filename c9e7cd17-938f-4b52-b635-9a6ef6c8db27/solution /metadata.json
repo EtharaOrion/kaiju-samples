@@ -1,5 +1,5 @@
 {
-  "instance_id": "commit-0/bigcache",
+  "instance_id": "kaiju/bigcache",
   "uuid": "c9e7cd17-938f-4b52-b635-9a6ef6c8db27",
   "task": "bigcache",
   "language": "go",

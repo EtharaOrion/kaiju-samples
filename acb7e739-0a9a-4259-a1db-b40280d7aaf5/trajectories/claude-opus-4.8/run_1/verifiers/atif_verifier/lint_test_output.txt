@@ -29,7 +29,7 @@
    Compiling sync_wrapper v1.0.2
    Compiling tower-layer v0.3.3
    Compiling log v0.4.33
-   Compiling nexosim v1.0.0 (/tmp/commit0-inplace-bynsi7uc/tree/nexosim)
+   Compiling nexosim v1.0.0 (/tmp/kaiju-inplace-bynsi7uc/tree/nexosim)
    Compiling unty v0.0.4
    Compiling pollster v0.4.0
    Compiling diatomic-waker v0.2.3
@@ -44,7 +44,7 @@
    Compiling libc v0.2.186
    Compiling httparse v1.10.1
    Compiling zmij v1.0.21
-   Compiling nexosim-macros v1.0.0 (/tmp/commit0-inplace-bynsi7uc/tree/nexosim-macros)
+   Compiling nexosim-macros v1.0.0 (/tmp/kaiju-inplace-bynsi7uc/tree/nexosim-macros)
    Compiling ref-cast v1.0.25
    Compiling pin-project v1.1.13
    Compiling futures-channel v0.3.32

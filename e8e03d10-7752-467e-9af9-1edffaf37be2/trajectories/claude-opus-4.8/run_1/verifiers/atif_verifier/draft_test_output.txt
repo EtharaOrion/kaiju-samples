@@ -74,14 +74,14 @@
    Compiling regex v1.13.1
    Compiling rand_chacha v0.2.2
    Compiling rand v0.7.3
-   Compiling riker-macros v0.2.0 (/tmp/commit0-inplace-h8l4e27p/tree/riker-macros)
+   Compiling riker-macros v0.2.0 (/tmp/kaiju-inplace-h8l4e27p/tree/riker-macros)
    Compiling serde-hjson v0.9.1
    Compiling futures-macro v0.3.33
    Compiling config v0.10.1
    Compiling futures-util v0.3.33
    Compiling futures-executor v0.3.33
    Compiling futures v0.3.33
-   Compiling riker v0.4.2 (/tmp/commit0-inplace-h8l4e27p/tree)
+   Compiling riker v0.4.2 (/tmp/kaiju-inplace-h8l4e27p/tree)
 error[E0425]: cannot find type `DeadLetters` in this scope
    --> src/system.rs:738:39
     |

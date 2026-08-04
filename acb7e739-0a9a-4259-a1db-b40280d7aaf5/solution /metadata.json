@@ -1,5 +1,5 @@
 {
-  "instance_id": "commit-0/nexosim",
+  "instance_id": "kaiju/nexosim",
   "uuid": "acb7e739-0a9a-4259-a1db-b40280d7aaf5",
   "task": "nexosim",
   "language": "rust",

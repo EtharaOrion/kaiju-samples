@@ -1,5 +1,5 @@
 {
-  "instance_id": "commit-0/promptui",
+  "instance_id": "kaiju/promptui",
   "uuid": "f6db632b-08ba-43f8-86cd-b95d3a6a4880",
   "task": "promptui",
   "language": "go",

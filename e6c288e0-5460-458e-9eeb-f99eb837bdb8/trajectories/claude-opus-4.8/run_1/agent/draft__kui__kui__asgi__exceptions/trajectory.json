@@ -1,7 +1,7 @@
 {
   "schema_version": "ATIF-v1.7",
-  "session_id": "commit-0/kui__claude-opus-4.8",
-  "trajectory_id": "commit-0/kui__claude-opus-4.8__draft__kui__kui__asgi__exceptions",
+  "session_id": "kaiju/kui__claude-opus-4.8",
+  "trajectory_id": "kaiju/kui__claude-opus-4.8__draft__kui__kui__asgi__exceptions",
   "agent": {
     "name": "aider",
     "version": "0.1.dev13122+gafca02447",
@@ -42,7 +42,7 @@
     "extra": {
       "log_format": "aider-native-llm-history",
       "converted_from": "aider",
-      "harness": "commit0-aider-pipeline",
+      "harness": "kaiju-aider-pipeline",
       "pipeline_stage": "draft",
       "module": "kui__kui__asgi__exceptions",
       "source_file": "llm_history.txt",
@@ -103,7 +103,7 @@
     }
   },
   "extra": {
-    "instance_id": "commit-0/kui__claude-opus-4.8__draft__kui__kui__asgi__exceptions",
+    "instance_id": "kaiju/kui__claude-opus-4.8__draft__kui__kui__asgi__exceptions",
     "stage": "draft",
     "module": "kui__kui__asgi__exceptions",
     "session_timestamps": [

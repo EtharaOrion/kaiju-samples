@@ -1,5 +1,5 @@
 {
-  "kind": "commit0-golden-ref",
+  "kind": "kaiju-golden-ref",
   "repo": "Zahgon/colly",
   "base_commit": "810062294df6df6389d1b46ece236a77b2b00ef7",
   "reference_commit": "20d31482af5f754832a753f88517f3dfa61d921f",

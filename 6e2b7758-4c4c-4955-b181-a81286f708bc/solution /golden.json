@@ -1,5 +1,5 @@
 {
-  "kind": "commit0-golden-ref",
+  "kind": "kaiju-golden-ref",
   "repo": "Zahgon/BlackSheep",
   "base_commit": "5cb9476fe374b49f2835c86cece5f07b61af074b",
   "reference_commit": "b5d548b345fe800269cbbbf21126ba1f3a2426a0",

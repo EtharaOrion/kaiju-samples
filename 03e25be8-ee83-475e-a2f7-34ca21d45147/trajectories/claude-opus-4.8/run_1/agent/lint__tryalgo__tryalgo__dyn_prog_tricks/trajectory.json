@@ -1,7 +1,7 @@
 {
   "schema_version": "ATIF-v1.7",
-  "session_id": "commit-0/tryalgo__claude-opus-4.8",
-  "trajectory_id": "commit-0/tryalgo__claude-opus-4.8__lint__tryalgo__tryalgo__dyn_prog_tricks",
+  "session_id": "kaiju/tryalgo__claude-opus-4.8",
+  "trajectory_id": "kaiju/tryalgo__claude-opus-4.8__lint__tryalgo__tryalgo__dyn_prog_tricks",
   "agent": {
     "name": "aider",
     "version": "0.1.dev13122+gafca02447",
@@ -42,7 +42,7 @@
     "extra": {
       "log_format": "aider-native-llm-history",
       "converted_from": "aider",
-      "harness": "commit0-aider-pipeline",
+      "harness": "kaiju-aider-pipeline",
       "pipeline_stage": "lint",
       "module": "tryalgo__tryalgo__dyn_prog_tricks",
       "source_file": "llm_history.txt",
@@ -125,7 +125,7 @@
     }
   },
   "extra": {
-    "instance_id": "commit-0/tryalgo__claude-opus-4.8__lint__tryalgo__tryalgo__dyn_prog_tricks",
+    "instance_id": "kaiju/tryalgo__claude-opus-4.8__lint__tryalgo__tryalgo__dyn_prog_tricks",
     "stage": "lint",
     "module": "tryalgo__tryalgo__dyn_prog_tricks",
     "session_timestamps": [

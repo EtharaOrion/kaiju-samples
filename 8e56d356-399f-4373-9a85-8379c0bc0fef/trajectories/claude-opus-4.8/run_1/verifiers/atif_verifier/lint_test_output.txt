@@ -1,6 +1,6 @@
 ============================= test session starts ==============================
 platform linux -- Python 3.9.25, pytest-8.4.2, pluggy-1.6.0
-rootdir: /tmp/commit0-inplace-vocknc73/tree
+rootdir: /tmp/kaiju-inplace-vocknc73/tree
 plugins: cov-7.1.0, metadata-3.1.1, json-report-1.5.0
 collected 22 items / 1 error
 

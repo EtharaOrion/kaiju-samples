@@ -1,7 +1,7 @@
 {
   "schema_version": "ATIF-v1.7",
-  "session_id": "commit-0/rust-signals__claude-opus-4.8",
-  "trajectory_id": "commit-0/rust-signals__claude-opus-4.8__test__rust-signals__src__internal",
+  "session_id": "kaiju/rust-signals__claude-opus-4.8",
+  "trajectory_id": "kaiju/rust-signals__claude-opus-4.8__test__rust-signals__src__internal",
   "agent": {
     "name": "aider",
     "version": "0.1.dev13122+gafca02447",
@@ -42,7 +42,7 @@
     "extra": {
       "log_format": "aider-native-llm-history",
       "converted_from": "aider",
-      "harness": "commit0-aider-pipeline",
+      "harness": "kaiju-aider-pipeline",
       "pipeline_stage": "test",
       "module": "rust-signals__src__internal",
       "source_file": "llm_history.txt",
@@ -150,7 +150,7 @@
     }
   },
   "extra": {
-    "instance_id": "commit-0/rust-signals__claude-opus-4.8__test__rust-signals__src__internal",
+    "instance_id": "kaiju/rust-signals__claude-opus-4.8__test__rust-signals__src__internal",
     "stage": "test",
     "module": "rust-signals__src__internal",
     "session_timestamps": [

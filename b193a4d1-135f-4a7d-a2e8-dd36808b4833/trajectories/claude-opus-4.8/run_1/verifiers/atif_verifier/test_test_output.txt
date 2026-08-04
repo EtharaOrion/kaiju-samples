@@ -1,4 +1,4 @@
-   Compiling little_raft v0.2.0 (/tmp/commit0-inplace-chldpkxv/tree/little_raft)
+   Compiling little_raft v0.2.0 (/tmp/kaiju-inplace-chldpkxv/tree/little_raft)
     Finished `test` profile [unoptimized + debuginfo] target(s) in 0.80s
      Running unittests src/lib.rs (target/debug/deps/little_raft-274bad427e06f557)
 

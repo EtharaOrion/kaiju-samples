@@ -35,7 +35,7 @@ FAIL __tests__/integration/errors.spec.ts (5.411 s)
         return a + b;
     }·
     export { sum };
-    ", "dynamicImports": [], "exports": ["sum"], "facadeModuleId": "/tmp/commit0-inplace-8q2_czii/tree/__tests__/integration/fixtures/errors/import-type-error.ts", "fileName": "index.js", "implicitlyLoadedBefore": [], "importedBindings": {}, "imports": [], "isDynamicEntry": false, "isEntry": true, "isImplicitEntry": false, "map": null, "modules": {"/tmp/commit0-inplace-8q2_czii/tree/__tests__/integration/fixtures/errors/import-type-error.ts": {"code": "// this file has no errors itself; it is used an entry file to test an error in a type-only import
+    ", "dynamicImports": [], "exports": ["sum"], "facadeModuleId": "/tmp/kaiju-inplace-8q2_czii/tree/__tests__/integration/fixtures/errors/import-type-error.ts", "fileName": "index.js", "implicitlyLoadedBefore": [], "importedBindings": {}, "imports": [], "isDynamicEntry": false, "isEntry": true, "isImplicitEntry": false, "map": null, "modules": {"/tmp/kaiju-inplace-8q2_czii/tree/__tests__/integration/fixtures/errors/import-type-error.ts": {"code": "// this file has no errors itself; it is used an entry file to test an error in a type-only import
     // some code so this file isn't empty
     function sum(a, b) {
         return a + b;

@@ -1,7 +1,7 @@
 {
   "schema_version": "ATIF-v1.7",
-  "session_id": "commit-0/kui__claude-opus-4.8",
-  "trajectory_id": "commit-0/kui__claude-opus-4.8__lint__kui__kui__wsgi__parameters",
+  "session_id": "kaiju/kui__claude-opus-4.8",
+  "trajectory_id": "kaiju/kui__claude-opus-4.8__lint__kui__kui__wsgi__parameters",
   "agent": {
     "name": "aider",
     "version": "0.1.dev13122+gafca02447",
@@ -42,7 +42,7 @@
     "extra": {
       "log_format": "aider-native-llm-history",
       "converted_from": "aider",
-      "harness": "commit0-aider-pipeline",
+      "harness": "kaiju-aider-pipeline",
       "pipeline_stage": "lint",
       "module": "kui__kui__wsgi__parameters",
       "source_file": "llm_history.txt",
@@ -115,7 +115,7 @@
     }
   },
   "extra": {
-    "instance_id": "commit-0/kui__claude-opus-4.8__lint__kui__kui__wsgi__parameters",
+    "instance_id": "kaiju/kui__claude-opus-4.8__lint__kui__kui__wsgi__parameters",
     "stage": "lint",
     "module": "kui__kui__wsgi__parameters",
     "session_timestamps": [

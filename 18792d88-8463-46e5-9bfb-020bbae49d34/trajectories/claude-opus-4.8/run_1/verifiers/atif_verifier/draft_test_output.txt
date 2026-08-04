@@ -3342,11 +3342,11 @@ FAIL src/__tests__/mutations.test.ts (10.072 s)
 PASS src/__tests__/alias.test.ts
 PASS src/__tests__/inspect.test.ts
 PASS src/__tests__/json.test.ts
-/tmp/commit0-inplace-1ngo4fnc/tree/src/execution.ts:181
+/tmp/kaiju-inplace-1ngo4fnc/tree/src/execution.ts:181
 function postProcessResult({ data, nullErrors, errors, trimmer }) {
                              ^
 
 TypeError: Cannot destructure property 'data' of 'undefined' as it is undefined.
-    at data (/tmp/commit0-inplace-1ngo4fnc/tree/src/execution.ts:415:3)
+    at data (/tmp/kaiju-inplace-1ngo4fnc/tree/src/execution.ts:415:3)
 
 Node.js v22.23.1

@@ -25,7 +25,7 @@
    Compiling num v0.1.42
    Compiling chrono v0.2.25
    Compiling timer v0.1.6
-   Compiling little_raft v0.2.0 (/tmp/commit0-inplace-j3m6qi2d/tree/little_raft)
+   Compiling little_raft v0.2.0 (/tmp/kaiju-inplace-j3m6qi2d/tree/little_raft)
     Finished `test` profile [unoptimized + debuginfo] target(s) in 2.20s
      Running unittests src/lib.rs (target/debug/deps/little_raft-274bad427e06f557)
 

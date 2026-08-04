@@ -1,5 +1,5 @@
 {
-  "kind": "commit0-golden-ref",
+  "kind": "kaiju-golden-ref",
   "repo": "Zahgon/SpectralCluster",
   "base_commit": "91210be045717ad3614f1ec8ddc0c92b8c7cc01e",
   "reference_commit": "f00d5d7ee6aa3e61b18922597010595c32ca0dea",

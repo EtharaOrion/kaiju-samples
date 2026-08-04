@@ -2,7 +2,7 @@
 platform linux -- Python 3.8.20, pytest-8.3.5, pluggy-1.5.0 -- /usr/local/bin/python
 cachedir: .pytest_cache
 metadata: {'Python': '3.8.20', 'Platform': 'Linux-6.1.166-197.305.amzn2023.aarch64-aarch64-with-glibc2.34', 'Packages': {'pytest': '8.3.5', 'pluggy': '1.5.0'}, 'Plugins': {'cov': '5.0.0', 'json-report': '1.5.0', 'metadata': '3.1.1'}, 'AWS_REGION': 'us-east-1'}
-rootdir: /tmp/commit0-inplace-2burpyqv/tree
+rootdir: /tmp/kaiju-inplace-2burpyqv/tree
 configfile: pyproject.toml
 plugins: cov-5.0.0, json-report-1.5.0, metadata-3.1.1
 collecting ... collected 513 items

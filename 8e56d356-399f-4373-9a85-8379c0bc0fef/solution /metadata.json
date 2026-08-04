@@ -1,5 +1,5 @@
 {
-  "instance_id": "commit-0/etl-parser",
+  "instance_id": "kaiju/etl-parser",
   "uuid": "8e56d356-399f-4373-9a85-8379c0bc0fef",
   "task": "etl-parser",
   "language": "python",

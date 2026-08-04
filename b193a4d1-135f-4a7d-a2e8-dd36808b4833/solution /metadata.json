@@ -1,5 +1,5 @@
 {
-  "instance_id": "commit-0/little_raft",
+  "instance_id": "kaiju/little_raft",
   "uuid": "b193a4d1-135f-4a7d-a2e8-dd36808b4833",
   "task": "little_raft",
   "language": "rust",

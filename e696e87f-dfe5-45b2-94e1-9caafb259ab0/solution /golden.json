@@ -1,5 +1,5 @@
 {
-  "kind": "commit0-golden-ref",
+  "kind": "kaiju-golden-ref",
   "repo": "Zahgon/datasketch",
   "base_commit": "b97eb128d016f10e3164857a16179f51720b2308",
   "reference_commit": "3da96a591c954952c9dd367567db720cfdc151e0",

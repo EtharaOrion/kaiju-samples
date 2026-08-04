@@ -1,5 +1,5 @@
 {
-  "kind": "commit0-golden-ref",
+  "kind": "kaiju-golden-ref",
   "repo": "Zahgon/rollup-plugin-typescript2",
   "base_commit": "f451cc6769cb9d400d1e3de1c9eab444e0ec77c4",
   "reference_commit": "60793113fcd326ab9e45b4f46b2956be0b2ab4b1",

@@ -1,7 +1,7 @@
 {
   "schema_version": "ATIF-v1.7",
-  "session_id": "commit-0/btclib__claude-opus-4.8",
-  "trajectory_id": "commit-0/btclib__claude-opus-4.8__lint__btclib__btclib__tx__tx",
+  "session_id": "kaiju/btclib__claude-opus-4.8",
+  "trajectory_id": "kaiju/btclib__claude-opus-4.8__lint__btclib__btclib__tx__tx",
   "agent": {
     "name": "aider",
     "version": "0.1.dev13122+gafca02447",
@@ -42,7 +42,7 @@
     "extra": {
       "log_format": "aider-native-llm-history",
       "converted_from": "aider",
-      "harness": "commit0-aider-pipeline",
+      "harness": "kaiju-aider-pipeline",
       "pipeline_stage": "lint",
       "module": "btclib__btclib__tx__tx",
       "source_file": "llm_history.txt",
@@ -115,7 +115,7 @@
     }
   },
   "extra": {
-    "instance_id": "commit-0/btclib__claude-opus-4.8__lint__btclib__btclib__tx__tx",
+    "instance_id": "kaiju/btclib__claude-opus-4.8__lint__btclib__btclib__tx__tx",
     "stage": "lint",
     "module": "btclib__btclib__tx__tx",
     "session_timestamps": [

@@ -1,5 +1,5 @@
 {
-  "kind": "commit0-golden-ref",
+  "kind": "kaiju-golden-ref",
   "repo": "Shivansh9411/promptui",
   "base_commit": "4752994aea2818e348f0a7a879ac532cb27ce79c",
   "reference_commit": "c2e487d3597f59bcf76b24c9e80679740a72212b",

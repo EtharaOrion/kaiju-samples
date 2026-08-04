@@ -1,16 +1,16 @@
    Compiling proc-macro2 v1.0.103
    Compiling libc v0.2.178
    Compiling smallvec v1.15.1
-   Compiling erg_common v0.6.53 (/tmp/commit0-inplace-edqlvcdi/tree/crates/erg_common)
+   Compiling erg_common v0.6.53 (/tmp/kaiju-inplace-edqlvcdi/tree/crates/erg_common)
    Compiling quote v1.0.42
    Compiling syn v1.0.109
    Compiling parking_lot_core v0.9.12
    Compiling parking_lot v0.12.5
-   Compiling erg_proc_macros v0.6.53 (/tmp/commit0-inplace-edqlvcdi/tree/crates/erg_proc_macros)
-   Compiling erg_compiler v0.6.53 (/tmp/commit0-inplace-edqlvcdi/tree/crates/erg_compiler)
-   Compiling erg_parser v0.6.53 (/tmp/commit0-inplace-edqlvcdi/tree/crates/erg_parser)
-   Compiling erg v0.6.53 (/tmp/commit0-inplace-edqlvcdi/tree)
-   Compiling erg_linter v0.6.53 (/tmp/commit0-inplace-edqlvcdi/tree/crates/erg_linter)
+   Compiling erg_proc_macros v0.6.53 (/tmp/kaiju-inplace-edqlvcdi/tree/crates/erg_proc_macros)
+   Compiling erg_compiler v0.6.53 (/tmp/kaiju-inplace-edqlvcdi/tree/crates/erg_compiler)
+   Compiling erg_parser v0.6.53 (/tmp/kaiju-inplace-edqlvcdi/tree/crates/erg_parser)
+   Compiling erg v0.6.53 (/tmp/kaiju-inplace-edqlvcdi/tree)
+   Compiling erg_linter v0.6.53 (/tmp/kaiju-inplace-edqlvcdi/tree/crates/erg_linter)
     Finished `test` profile [unoptimized + debuginfo] target(s) in 26.76s
      Running unittests src/lib.rs (target/debug/deps/erg-315b8404bb3b336d)
 

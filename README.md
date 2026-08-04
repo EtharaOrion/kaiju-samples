@@ -1,6 +1,6 @@
 # Kaiju
 
-Kaiju is a reinforcement learning environment for training and evaluating agents on hard, from-scratch library implementation. It is built on the [commit0](https://commit-0.github.io/) methodology.
+Kaiju is a reinforcement learning environment for training and evaluating agents on hard, from-scratch library implementation.
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE)
 
@@ -39,7 +39,7 @@ Environments use the [Harbor](https://github.com/laude-institute/harbor) task fo
 task.toml       Metadata: pinned commits, test IDs, verifier config, resource limits, docker_image
 instruction.md  The open-ended prompt the agent sees
 TRUTH.md        Curator ground-truth guide (not shown to the agent)
-environment/    Dockerfiles (base + repo) and the commit0 dataset entry
+environment/    Dockerfiles (base + repo) and the dataset entry
 solution/       Oracle: solve.sh, golden.json (rubric verdicts under the reference), metadata.json
 tests/          Verifier: test.sh (entry point), test_outputs.py (normalizer), rubrics.json
 trajectories/   Per-model, per-run agent and verifier artifacts
@@ -79,7 +79,7 @@ The task image already contains the repository at `base_commit` under `/testbed`
   instruction.md                  # Task shown to the agent
   TRUTH.md                        # Curator ground-truth guide (not shown to the agent)
   environment/
-    dataset.json                  # commit0 single-instance dataset entry
+    dataset.json                  # Single-instance dataset entry
     base_image/Dockerfile         # Language toolchain image
     repo_image/Dockerfile         # Repo at base_commit, layered on the base image
   solution/

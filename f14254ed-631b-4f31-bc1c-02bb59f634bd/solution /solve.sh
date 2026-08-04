@@ -1,5 +1,5 @@
 #!/bin/bash
-# Oracle solution for a commit0 task. The image ships the repo at the BASE (stubbed)
+# Oracle solution for the task. The image ships the repo at the BASE (stubbed)
 # commit only; the reference (solved) commit is fetched from the fork by SHA, then the
 # working tree is reset to it. Needs internet access (the task sets allow_internet=true).
 set -euo pipefail

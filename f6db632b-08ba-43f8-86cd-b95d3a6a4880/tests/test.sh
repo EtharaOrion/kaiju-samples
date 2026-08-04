@@ -1,8 +1,8 @@
 #!/bin/bash
-# Harbor verifier for a commit0 Go task (runs inside the pre-built image).
-# Scope: the official commit0 test-id set (line-separated full IDs of the form
+# Harbor verifier for a kaiju Go task (runs inside the pre-built image).
+# Scope: the official test-id set (line-separated full IDs of the form
 # `<package_path>/<TestName>`). Writes reward.json (fraction of expected IDs
-# that passed). Run command mirrors commit0's Go evaluator: `go test -json
+# that passed). Run command mirrors kaiju's Go evaluator: `go test -json
 # -count=1 ./...`. We parse the JSONL action events, attribute pass/fail per
 # test ID, and intersect against the expected set.
 set -uo pipefail

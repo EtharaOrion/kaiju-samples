@@ -11,7 +11,7 @@
    Compiling parking_lot v0.12.5
    Compiling shared-local-state v0.1.4
    Compiling ebr v0.2.13
-   Compiling concurrent-map v5.0.37 (/tmp/commit0-inplace-h2dj3w5y/tree)
+   Compiling concurrent-map v5.0.37 (/tmp/kaiju-inplace-h2dj3w5y/tree)
 warning: unused import: `std::mem::size_of`
   --> src/lib.rs:93:5
    |

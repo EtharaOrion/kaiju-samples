@@ -1,4 +1,4 @@
-FROM commit0.base.rust:latest
+FROM kaiju.base.rust:latest
 
 ARG http_proxy=""
 ARG https_proxy=""

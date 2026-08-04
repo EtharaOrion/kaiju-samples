@@ -1,6 +1,6 @@
 #!/bin/bash
-# Harbor verifier for a commit0 TypeScript task (runs inside the pre-built image).
-# Scope: the official commit0 test-id set (line-separated ids of the form
+# Harbor verifier for a kaiju TypeScript task (runs inside the pre-built image).
+# Scope: the official test-id set (line-separated ids of the form
 # `<relative_spec_file> > <jest fullName>`). Runs the repo's jest suite with the
 # machine-readable --json reporter and scores reward.json as the fraction of
 # expected IDs that passed — same philosophy as the Go/Rust verifiers.

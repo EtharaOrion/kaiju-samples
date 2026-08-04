@@ -1,6 +1,6 @@
 #!/bin/bash
-# Harbor verifier for a commit0 Rust task (runs inside the pre-built image).
-# Scope: the official commit0 test-id set (line-separated cargo test names of
+# Harbor verifier for a kaiju Rust task (runs inside the pre-built image).
+# Scope: the official test-id set (line-separated cargo test names of
 # the form `<module_path>::<test_name>`). Writes reward.json (fraction of
 # expected IDs that passed). Run command uses libtest's JSON formatter, which
 # is unstable and requires `-Z unstable-options` under nightly. To stay on

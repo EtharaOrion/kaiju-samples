@@ -115,7 +115,7 @@
    Compiling idna_adapter v1.2.2
    Compiling idna v1.1.0
    Compiling url v2.5.8
-   Compiling async-h1 v2.3.3 (/tmp/commit0-inplace-71rjwc3i/tree)
+   Compiling async-h1 v2.3.3 (/tmp/kaiju-inplace-71rjwc3i/tree)
 warning: unused import: `crate::read_to_end`
   --> src/client/encode.rs:10:5
    |

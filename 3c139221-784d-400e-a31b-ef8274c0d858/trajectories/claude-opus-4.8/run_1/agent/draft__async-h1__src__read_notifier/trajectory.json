@@ -1,7 +1,7 @@
 {
   "schema_version": "ATIF-v1.7",
-  "session_id": "commit-0/async-h1__claude-opus-4.8",
-  "trajectory_id": "commit-0/async-h1__claude-opus-4.8__draft__async-h1__src__read_notifier",
+  "session_id": "kaiju/async-h1__claude-opus-4.8",
+  "trajectory_id": "kaiju/async-h1__claude-opus-4.8__draft__async-h1__src__read_notifier",
   "agent": {
     "name": "aider",
     "version": "0.1.dev13122+gafca02447",
@@ -42,7 +42,7 @@
     "extra": {
       "log_format": "aider-native-llm-history",
       "converted_from": "aider",
-      "harness": "commit0-aider-pipeline",
+      "harness": "kaiju-aider-pipeline",
       "pipeline_stage": "draft",
       "module": "async-h1__src__read_notifier",
       "source_file": "llm_history.txt",
@@ -115,7 +115,7 @@
     }
   },
   "extra": {
-    "instance_id": "commit-0/async-h1__claude-opus-4.8__draft__async-h1__src__read_notifier",
+    "instance_id": "kaiju/async-h1__claude-opus-4.8__draft__async-h1__src__read_notifier",
     "stage": "draft",
     "module": "async-h1__src__read_notifier",
     "session_timestamps": [

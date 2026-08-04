@@ -2,7 +2,7 @@
 platform linux -- Python 3.8.20, pytest-8.3.5, pluggy-1.5.0 -- /usr/local/bin/python
 cachedir: .pytest_cache
 metadata: {'Python': '3.8.20', 'Platform': 'Linux-6.1.166-197.305.amzn2023.aarch64-aarch64-with-glibc2.34', 'Packages': {'pytest': '8.3.5', 'pluggy': '1.5.0'}, 'Plugins': {'cov': '5.0.0', 'json-report': '1.5.0', 'metadata': '3.1.1'}, 'AWS_REGION': 'us-east-1'}
-rootdir: /tmp/commit0-inplace-quk4mqvg/tree
+rootdir: /tmp/kaiju-inplace-quk4mqvg/tree
 configfile: pyproject.toml
 plugins: cov-5.0.0, json-report-1.5.0, metadata-3.1.1
 collecting ... collected 513 items
@@ -2534,7 +2534,7 @@ Traceback (most recent call last):
     result = (True, func(*args, **kwds))
   File "/testbed/neat/parallel.py", line 18, in _eval_wrapper
     return eval_function(genome, config)
-  File "/tmp/commit0-inplace-quk4mqvg/tree/tests/test_parallel_evaluator.py", line 10, in eval_dummy_genome
+  File "/tmp/kaiju-inplace-quk4mqvg/tree/tests/test_parallel_evaluator.py", line 10, in eval_dummy_genome
     net = neat.nn.FeedForwardNetwork.create(genome, config)
   File "/testbed/neat/nn/feed_forward.py", line 54, in create
     ng = genome.nodes[node]
@@ -2593,7 +2593,7 @@ Traceback (most recent call last):
     result = (True, func(*args, **kwds))
   File "/testbed/neat/parallel.py", line 18, in _eval_wrapper
     return eval_function(genome, config)
-  File "/tmp/commit0-inplace-quk4mqvg/tree/tests/test_parallel_evaluator.py", line 10, in eval_dummy_genome
+  File "/tmp/kaiju-inplace-quk4mqvg/tree/tests/test_parallel_evaluator.py", line 10, in eval_dummy_genome
     net = neat.nn.FeedForwardNetwork.create(genome, config)
   File "/testbed/neat/nn/feed_forward.py", line 54, in create
     ng = genome.nodes[node]
@@ -2652,7 +2652,7 @@ Traceback (most recent call last):
     result = (True, func(*args, **kwds))
   File "/testbed/neat/parallel.py", line 18, in _eval_wrapper
     return eval_function(genome, config)
-  File "/tmp/commit0-inplace-quk4mqvg/tree/tests/test_parallel_evaluator.py", line 10, in eval_dummy_genome
+  File "/tmp/kaiju-inplace-quk4mqvg/tree/tests/test_parallel_evaluator.py", line 10, in eval_dummy_genome
     net = neat.nn.FeedForwardNetwork.create(genome, config)
   File "/testbed/neat/nn/feed_forward.py", line 54, in create
     ng = genome.nodes[node]
@@ -2795,7 +2795,7 @@ Traceback (most recent call last):
     result = (True, func(*args, **kwds))
   File "/testbed/neat/parallel.py", line 18, in _eval_wrapper
     return eval_function(genome, config)
-  File "/tmp/commit0-inplace-quk4mqvg/tree/tests/test_reproducibility.py", line 267, in eval_genome_with_random_parallel
+  File "/tmp/kaiju-inplace-quk4mqvg/tree/tests/test_reproducibility.py", line 267, in eval_genome_with_random_parallel
     net = neat.nn.FeedForwardNetwork.create(genome, config)
   File "/testbed/neat/nn/feed_forward.py", line 54, in create
     ng = genome.nodes[node]
@@ -2847,7 +2847,7 @@ Traceback (most recent call last):
     result = (True, func(*args, **kwds))
   File "/testbed/neat/parallel.py", line 18, in _eval_wrapper
     return eval_function(genome, config)
-  File "/tmp/commit0-inplace-quk4mqvg/tree/tests/test_reproducibility.py", line 267, in eval_genome_with_random_parallel
+  File "/tmp/kaiju-inplace-quk4mqvg/tree/tests/test_reproducibility.py", line 267, in eval_genome_with_random_parallel
     net = neat.nn.FeedForwardNetwork.create(genome, config)
   File "/testbed/neat/nn/feed_forward.py", line 54, in create
     ng = genome.nodes[node]
@@ -3320,7 +3320,7 @@ Traceback (most recent call last):
     result = (True, func(*args, **kwds))
   File "/testbed/neat/parallel.py", line 18, in _eval_wrapper
     return eval_function(genome, config)
-  File "/tmp/commit0-inplace-quk4mqvg/tree/tests/test_simple_run.py", line 10, in eval_dummy_genome_nn
+  File "/tmp/kaiju-inplace-quk4mqvg/tree/tests/test_simple_run.py", line 10, in eval_dummy_genome_nn
     net = neat.nn.FeedForwardNetwork.create(genome, config)
   File "/testbed/neat/nn/feed_forward.py", line 54, in create
     ng = genome.nodes[node]

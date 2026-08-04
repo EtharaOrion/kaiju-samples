@@ -1,5 +1,5 @@
 {
-  "instance_id": "commit-0/graphql-jit",
+  "instance_id": "kaiju/graphql-jit",
   "uuid": "18792d88-8463-46e5-9bfb-020bbae49d34",
   "task": "graphql-jit",
   "language": "typescript",

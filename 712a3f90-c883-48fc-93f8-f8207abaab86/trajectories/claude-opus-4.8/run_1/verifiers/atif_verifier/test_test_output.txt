@@ -1,6 +1,6 @@
     Updating crates.io index
      Locking 40 packages to latest compatible versions
-   Compiling etherparse v0.20.2 (/tmp/commit0-inplace-0v3o52zh/tree/etherparse)
+   Compiling etherparse v0.20.2 (/tmp/kaiju-inplace-0v3o52zh/tree/etherparse)
 warning: unused imports: `Layer` and `LenError`
  --> etherparse/src/link/macsec_header_slice.rs:2:11
   |
@@ -10303,7 +10303,7 @@ STUB: not implemented
 
 thread 'link::linux_sll_header::test::read' (654524) panicked at etherparse/src/err/read_error.rs:81:9:
 STUB: not implemented
-proptest: Saving this and future failures in /tmp/commit0-inplace-0v3o52zh/tree/etherparse/proptest-regressions/link/linux_sll_header.txt
+proptest: Saving this and future failures in /tmp/kaiju-inplace-0v3o52zh/tree/etherparse/proptest-regressions/link/linux_sll_header.txt
 proptest: If this test was run on a CI system, you may wish to add the following line to your copy of the file. (You may need to create it.)
 cc bf794419e2a5a42b1ce120bf91c61bdb7d1691d83aff20d903d3efe6a05de916
 
@@ -19625,7 +19625,7 @@ attempt to add with overflow
 thread 'net::ip_headers::test::set_payload_len' (654680) panicked at etherparse/src/net/ip_headers.rs:689:43:
 attempt to add with overflow
 proptest: Aborting shrinking after the PROPTEST_MAX_SHRINK_ITERS environment variable or ProptestConfig.max_shrink_iters iterations (set 1024 to a large(r) value to shrink more; current configuration: 1024 iterations)
-proptest: Saving this and future failures in /tmp/commit0-inplace-0v3o52zh/tree/etherparse/proptest-regressions/net/ip_headers.txt
+proptest: Saving this and future failures in /tmp/kaiju-inplace-0v3o52zh/tree/etherparse/proptest-regressions/net/ip_headers.txt
 proptest: If this test was run on a CI system, you may wish to add the following line to your copy of the file. (You may need to create it.)
 cc 36d67256c84f2fd9b898d60315b819ade24b4ee740cc94f97d80c1d238e34dac
 
@@ -20997,7 +20997,7 @@ thread 'net::ipv6_exts::test::from_slice' (654790) panicked at etherparse/src/ne
 assertion `left == right` failed
   left: Len(LenError { required_len: 8, len: 7, len_source: Slice, layer: Ipv6ExtHeader, layer_start_offset: 0 })
  right: Len(LenError { required_len: 8, len: 7, len_source: Slice, layer: Ipv6ExtHeader, layer_start_offset: 12 })
-proptest: Saving this and future failures in /tmp/commit0-inplace-0v3o52zh/tree/etherparse/proptest-regressions/net/ipv6_exts.txt
+proptest: Saving this and future failures in /tmp/kaiju-inplace-0v3o52zh/tree/etherparse/proptest-regressions/net/ipv6_exts.txt
 proptest: If this test was run on a CI system, you may wish to add the following line to your copy of the file. (You may need to create it.)
 cc 1dccb060faef86b31d76710755fad40be7b6eb1b761cf6758208c08923ca8725
 
@@ -21272,7 +21272,7 @@ thread 'net::ipv6_exts_slice::test::from_slice' (654803) panicked at etherparse/
 assertion `left == right` failed
   left: Len(LenError { required_len: 12, len: 11, len_source: Slice, layer: IpAuthHeader, layer_start_offset: 0 })
  right: Len(LenError { required_len: 12, len: 11, len_source: Slice, layer: IpAuthHeader, layer_start_offset: 12 })
-proptest: Saving this and future failures in /tmp/commit0-inplace-0v3o52zh/tree/etherparse/proptest-regressions/net/ipv6_exts_slice.txt
+proptest: Saving this and future failures in /tmp/kaiju-inplace-0v3o52zh/tree/etherparse/proptest-regressions/net/ipv6_exts_slice.txt
 proptest: If this test was run on a CI system, you may wish to add the following line to your copy of the file. (You may need to create it.)
 cc 10bedbd0dcf58b583fbd3953fc6db12c534e8bebf445ff4ab5696ad7d6c0bd2c
 
@@ -24460,7 +24460,7 @@ assertion failed: Ipv6Header::skip_all_header_extensions(&mut cursor, IPV6_HOP_B
 thread 'net::ipv6_header::test::skip_all_header_extensions' (654841) panicked at etherparse/src/net/ipv6_header.rs:594:9:
 assertion failed: Ipv6Header::skip_all_header_extensions(&mut cursor, IPV6_HOP_BY_HOP).is_err()
 proptest: Aborting shrinking after the PROPTEST_MAX_SHRINK_ITERS environment variable or ProptestConfig.max_shrink_iters iterations (set 1024 to a large(r) value to shrink more; current configuration: 1024 iterations)
-proptest: Saving this and future failures in /tmp/commit0-inplace-0v3o52zh/tree/etherparse/proptest-regressions/net/ipv6_header.txt
+proptest: Saving this and future failures in /tmp/kaiju-inplace-0v3o52zh/tree/etherparse/proptest-regressions/net/ipv6_header.txt
 proptest: If this test was run on a CI system, you may wish to add the following line to your copy of the file. (You may need to create it.)
 cc d4586985dc9848fc65ddd34ac9fe9e1a7fab4830bff694f33908e133a3c8a9c2
 
@@ -36390,7 +36390,7 @@ assertion `left == right` failed
   left: Some((Len(LenError { required_len: 8, len: 1, len_source: Slice, layer: Ipv6HopByHopHeader, layer_start_offset: 40 }), Ipv6HopByHopHeader))
  right: Some((Len(LenError { required_len: 8, len: 1, len_source: Slice, layer: Ipv6ExtHeader, layer_start_offset: 40 }), Ipv6HopByHopHeader))
 proptest: Aborting shrinking after the PROPTEST_MAX_SHRINK_ITERS environment variable or ProptestConfig.max_shrink_iters iterations (set 1024 to a large(r) value to shrink more; current configuration: 1024 iterations)
-proptest: Saving this and future failures in /tmp/commit0-inplace-0v3o52zh/tree/etherparse/proptest-regressions/net/lax_ip_slice.txt
+proptest: Saving this and future failures in /tmp/kaiju-inplace-0v3o52zh/tree/etherparse/proptest-regressions/net/lax_ip_slice.txt
 proptest: If this test was run on a CI system, you may wish to add the following line to your copy of the file. (You may need to create it.)
 cc c63b9762fa862d7db5a397b6b2fc7a85b7965b5ebd27f9d700bf32f27af36dab
 
@@ -39137,7 +39137,7 @@ STUB: not implemented
 
 thread 'packet_builder::test::ipv4_icmpv4' (654922) panicked at etherparse/src/transport/icmpv4_header.rs:108:9:
 STUB: not implemented
-proptest: Saving this and future failures in /tmp/commit0-inplace-0v3o52zh/tree/etherparse/proptest-regressions/packet_builder.txt
+proptest: Saving this and future failures in /tmp/kaiju-inplace-0v3o52zh/tree/etherparse/proptest-regressions/packet_builder.txt
 proptest: If this test was run on a CI system, you may wish to add the following line to your copy of the file. (You may need to create it.)
 cc ab75bf489612bf5f0222e97c82a5ff37d25a023a50fb6fdae6966c7ffb1763ec
 
@@ -53181,7 +53181,7 @@ STUB: not implemented
 
 thread 'transport::icmpv4_slice::test::payload' (655005) panicked at etherparse/src/transport/icmpv4_header.rs:108:9:
 STUB: not implemented
-proptest: Saving this and future failures in /tmp/commit0-inplace-0v3o52zh/tree/etherparse/proptest-regressions/transport/icmpv4_slice.txt
+proptest: Saving this and future failures in /tmp/kaiju-inplace-0v3o52zh/tree/etherparse/proptest-regressions/transport/icmpv4_slice.txt
 proptest: If this test was run on a CI system, you may wish to add the following line to your copy of the file. (You may need to create it.)
 cc a20ad58c9df54f3996effa3a92f33bdf27a266904499193e5c2b7be78ec5e8f3
 
@@ -54427,7 +54427,7 @@ STUB: not implemented
 
 thread 'transport::icmpv4_type::test::calc_checksum' (655008) panicked at etherparse/src/transport/icmpv4/time_exceeded_code.rs:16:9:
 STUB: not implemented
-proptest: Saving this and future failures in /tmp/commit0-inplace-0v3o52zh/tree/etherparse/proptest-regressions/transport/icmpv4_type.txt
+proptest: Saving this and future failures in /tmp/kaiju-inplace-0v3o52zh/tree/etherparse/proptest-regressions/transport/icmpv4_type.txt
 proptest: If this test was run on a CI system, you may wish to add the following line to your copy of the file. (You may need to create it.)
 cc 3645ea906a0679d6df99b360d25eb3c0249b7ff3be05cb7758d2ab7da3c4fbda
 
@@ -54532,7 +54532,7 @@ STUB: not implemented
 
 thread 'transport::icmpv6::router_advertisement_header::test::to_and_from_bytes' (655058) panicked at etherparse/src/transport/icmpv6/router_advertisement_header.rs:54:9:
 STUB: not implemented
-proptest: Saving this and future failures in /tmp/commit0-inplace-0v3o52zh/tree/etherparse/proptest-regressions/transport/icmpv6/router_advertisement_header.txt
+proptest: Saving this and future failures in /tmp/kaiju-inplace-0v3o52zh/tree/etherparse/proptest-regressions/transport/icmpv6/router_advertisement_header.txt
 proptest: If this test was run on a CI system, you may wish to add the following line to your copy of the file. (You may need to create it.)
 cc deaf60ac827777b8b3e0fe785470af784b20e4d352e6614ef65fc65e4c6bbf5f
 
@@ -55026,7 +55026,7 @@ STUB: not implemented
 
 thread 'transport::icmpv6_slice::test::bytes5to8' (655075) panicked at etherparse/src/transport/icmpv6_slice.rs:20:9:
 STUB: not implemented
-proptest: Saving this and future failures in /tmp/commit0-inplace-0v3o52zh/tree/etherparse/proptest-regressions/transport/icmpv6_slice.txt
+proptest: Saving this and future failures in /tmp/kaiju-inplace-0v3o52zh/tree/etherparse/proptest-regressions/transport/icmpv6_slice.txt
 proptest: If this test was run on a CI system, you may wish to add the following line to your copy of the file. (You may need to create it.)
 cc 3bd7c559876d444591c64ed0fd96995596c9c05e3f7abd8a0d5b4339d0c3b724
 
@@ -58721,7 +58721,7 @@ STUB: not implemented
 
 thread 'transport::icmpv6_type::test::code_u8' (655092) panicked at etherparse/src/transport/icmpv6/router_advertisement_header.rs:50:9:
 STUB: not implemented
-proptest: Saving this and future failures in /tmp/commit0-inplace-0v3o52zh/tree/etherparse/proptest-regressions/transport/icmpv6_type.txt
+proptest: Saving this and future failures in /tmp/kaiju-inplace-0v3o52zh/tree/etherparse/proptest-regressions/transport/icmpv6_type.txt
 proptest: If this test was run on a CI system, you may wish to add the following line to your copy of the file. (You may need to create it.)
 cc 84d39e6c2723fd20e2a38323f0f891fe41200602f7f256808c3c20a6d56afb6b
 
@@ -59178,7 +59178,7 @@ STUB: not implemented
 
 thread 'transport::igmp::group_address::test::from_array_to_group_address_roundtrip' (655099) panicked at etherparse/src/transport/igmp/group_address.rs:21:9:
 STUB: not implemented
-proptest: Saving this and future failures in /tmp/commit0-inplace-0v3o52zh/tree/etherparse/proptest-regressions/transport/igmp/group_address.txt
+proptest: Saving this and future failures in /tmp/kaiju-inplace-0v3o52zh/tree/etherparse/proptest-regressions/transport/igmp/group_address.txt
 proptest: If this test was run on a CI system, you may wish to add the following line to your copy of the file. (You may need to create it.)
 cc e8c3d545b5eaf04e54e43ec18c84cc17737106895a9a99085595b59c58855b86
 
@@ -59435,7 +59435,7 @@ STUB: not implemented
 
 thread 'transport::igmp::max_response_code::tests::as_10th_secs_exponential_range' (655103) panicked at etherparse/src/transport/igmp/max_response_code.rs:32:9:
 STUB: not implemented
-proptest: Saving this and future failures in /tmp/commit0-inplace-0v3o52zh/tree/etherparse/proptest-regressions/transport/igmp/max_response_code.txt
+proptest: Saving this and future failures in /tmp/kaiju-inplace-0v3o52zh/tree/etherparse/proptest-regressions/transport/igmp/max_response_code.txt
 proptest: If this test was run on a CI system, you may wish to add the following line to your copy of the file. (You may need to create it.)
 cc b26814d8cc6ea3d9ce90c5017f8582c491f5d33af2b93430f6a8a153e3ea580e
 
@@ -59506,7 +59506,7 @@ STUB: not implemented
 
 thread 'transport::igmp::membership_query_with_sources_header::test::flags_get' (655105) panicked at etherparse/src/transport/igmp/group_address.rs:8:9:
 STUB: not implemented
-proptest: Saving this and future failures in /tmp/commit0-inplace-0v3o52zh/tree/etherparse/proptest-regressions/transport/igmp/membership_query_with_sources_header.txt
+proptest: Saving this and future failures in /tmp/kaiju-inplace-0v3o52zh/tree/etherparse/proptest-regressions/transport/igmp/membership_query_with_sources_header.txt
 proptest: If this test was run on a CI system, you may wish to add the following line to your copy of the file. (You may need to create it.)
 cc 32a46423d49c49b8f136c4e140b6b6d8b00902ecb127731bc87cddb1f6e5ec2a
 
@@ -59786,7 +59786,7 @@ minimal failing input: raw_byte_8 = 0, value = false
 
 thread 'transport::igmp::qrv::test::fmt' (655113) panicked at etherparse/src/transport/igmp/qrv.rs:87:9:
 STUB: not implemented
-proptest: Saving this and future failures in /tmp/commit0-inplace-0v3o52zh/tree/etherparse/proptest-regressions/transport/igmp/qrv.txt
+proptest: Saving this and future failures in /tmp/kaiju-inplace-0v3o52zh/tree/etherparse/proptest-regressions/transport/igmp/qrv.txt
 proptest: If this test was run on a CI system, you may wish to add the following line to your copy of the file. (You may need to create it.)
 cc 6c7175d64d9647055b4b0675c6d5290f34b523ed3f8ca1182fc6366d89979ffc
 
@@ -60707,7 +60707,7 @@ STUB: not implemented
 
 thread 'transport::igmp::report_group_record_v3_header::test::from_slice' (655119) panicked at etherparse/src/transport/igmp/report_group_record_v3_header.rs:62:9:
 STUB: not implemented
-proptest: Saving this and future failures in /tmp/commit0-inplace-0v3o52zh/tree/etherparse/proptest-regressions/transport/igmp/report_group_record_v3_header.txt
+proptest: Saving this and future failures in /tmp/kaiju-inplace-0v3o52zh/tree/etherparse/proptest-regressions/transport/igmp/report_group_record_v3_header.txt
 proptest: If this test was run on a CI system, you may wish to add the following line to your copy of the file. (You may need to create it.)
 cc e533b7415f25e9bc3c70cdca7d4c7a294b91c26ad82d792556efc74dc174710a
 
@@ -62651,7 +62651,7 @@ STUB: not implemented
 
 thread 'transport::igmp_header::test::calc_checksum' (655123) panicked at etherparse/src/transport/igmp/group_address.rs:21:9:
 STUB: not implemented
-proptest: Saving this and future failures in /tmp/commit0-inplace-0v3o52zh/tree/etherparse/proptest-regressions/transport/igmp_header.txt
+proptest: Saving this and future failures in /tmp/kaiju-inplace-0v3o52zh/tree/etherparse/proptest-regressions/transport/igmp_header.txt
 proptest: If this test was run on a CI system, you may wish to add the following line to your copy of the file. (You may need to create it.)
 cc 0b2e7f5157bd08ba4fb19960ff6abe8312e596e9f32d6f079d4bd8f9e5d45af0
 
@@ -64981,7 +64981,7 @@ STUB: not implemented
 
 thread 'transport::tcp_option_read_error::test::fmt' (655163) panicked at etherparse/src/transport/tcp_option_read_error.rs:20:9:
 STUB: not implemented
-proptest: Saving this and future failures in /tmp/commit0-inplace-0v3o52zh/tree/etherparse/proptest-regressions/transport/tcp_option_read_error.txt
+proptest: Saving this and future failures in /tmp/kaiju-inplace-0v3o52zh/tree/etherparse/proptest-regressions/transport/tcp_option_read_error.txt
 proptest: If this test was run on a CI system, you may wish to add the following line to your copy of the file. (You may need to create it.)
 cc ad06d58f7a2cd0cbb92ff97cdba9abddd7ccb37d5a7e6d467bf7c2b67c2f85b7
 
@@ -65430,7 +65430,7 @@ STUB: not implemented
 
 thread 'transport::tcp_option_write_error::test::fmt' (655167) panicked at etherparse/src/transport/tcp_option_write_error.rs:18:9:
 STUB: not implemented
-proptest: Saving this and future failures in /tmp/commit0-inplace-0v3o52zh/tree/etherparse/proptest-regressions/transport/tcp_option_write_error.txt
+proptest: Saving this and future failures in /tmp/kaiju-inplace-0v3o52zh/tree/etherparse/proptest-regressions/transport/tcp_option_write_error.txt
 proptest: If this test was run on a CI system, you may wish to add the following line to your copy of the file. (You may need to create it.)
 cc 27b2126d0d8df6e96dddbb2282d14ae1313e1975f3944a975539d40ca2313694
 
@@ -83834,7 +83834,7 @@ STUB: not implemented
 
 thread 'transport::udp_header_slice::test::clone_eq' (655226) panicked at etherparse/src/transport/udp_header.rs:159:9:
 STUB: not implemented
-proptest: Saving this and future failures in /tmp/commit0-inplace-0v3o52zh/tree/etherparse/proptest-regressions/transport/udp_header_slice.txt
+proptest: Saving this and future failures in /tmp/kaiju-inplace-0v3o52zh/tree/etherparse/proptest-regressions/transport/udp_header_slice.txt
 proptest: If this test was run on a CI system, you may wish to add the following line to your copy of the file. (You may need to create it.)
 cc 8765902dfe877e35d51a774e5014fe6d186c4ac976f73b817e7846cfb1f2478e
 

@@ -1,5 +1,5 @@
 {
-  "kind": "commit0-golden-ref",
+  "kind": "kaiju-golden-ref",
   "repo": "Zahgon/css-select",
   "base_commit": "c5b5062737a4ef564f752ae1e74313065f230e30",
   "reference_commit": "b20cf8def741d8a6064cecbad7b1dcf3099a72f6",

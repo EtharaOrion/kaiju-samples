@@ -1,5 +1,5 @@
 {
-  "kind": "commit0-golden-ref",
+  "kind": "kaiju-golden-ref",
   "repo": "Zahgon/tryalgo",
   "base_commit": "ee032b235e7af28b6cc56b95c0aa093551353d9d",
   "reference_commit": "79adeb9983ae784b73ef9dea10aa0c852fc39718",

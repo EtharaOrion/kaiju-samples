@@ -1,6 +1,6 @@
 [1m============================= test session starts ==============================[0m
 platform linux -- Python 3.9.25, pytest-8.4.2, pluggy-1.6.0
-rootdir: /tmp/commit0-inplace-27hf8dkt/tree
+rootdir: /tmp/kaiju-inplace-27hf8dkt/tree
 configfile: pyproject.toml
 plugins: asyncio-1.2.0, cov-7.1.0, json-report-1.5.0, metadata-3.1.1, rerunfailures-16.0.1
 asyncio: mode=auto, debug=False, asyncio_default_fixture_loop_scope=None, asyncio_default_test_loop_scope=function

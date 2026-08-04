@@ -1,12 +1,12 @@
 #!/bin/bash
-# Harbor verifier for a commit0 task (runs inside the pre-built ECR image).
-# Scope: the official commit0 test-id set (parity with pipeline_results).
+# Harbor verifier for the task (runs inside the pre-built ECR image).
+# Scope: the official test-id set (parity with pipeline_results).
 # Writes a continuous reward (fraction passed) to /logs/verifier/reward.json.
 #
-# Lineage-defensive: commit0 images come in two flavors — an ubuntu image with the repo
+# Lineage-defensive: images come in two flavors — an ubuntu image with the repo
 # venv at /testbed/.venv, and a python-slim image using system site-packages. We activate
 # the venv if it exists, else fall back to system python. We run pytest IN PLACE on the
-# agent-edited tree (NOT commit0's reset+/patch.diff model — Harbor agents edit in place).
+# agent-edited tree (NOT reset+/patch.diff model — Harbor agents edit in place).
 set -uo pipefail
 mkdir -p /logs/verifier
 cd /testbed

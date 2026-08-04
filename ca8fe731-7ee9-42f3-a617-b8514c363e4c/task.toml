@@ -1,16 +1,16 @@
 schema_version = "1.3"
-source = "commit0"
+source = "kaiju"
 
 [task]
-name = "commit-0/goleak"
-description = "commit0 from-scratch implementation task for uber-go/goleak."
-keywords = ["commit0", "code-generation", "go", "swe"]
+name = "kaiju/goleak"
+description = "kaiju from-scratch implementation task for uber-go/goleak."
+keywords = ["kaiju", "code-generation", "go", "swe"]
 
 [metadata]
 category = "code-generation"
 difficulty = "hard"
 original_repo = "Shivansh9411/goleak"
-instance_id = "commit-0/goleak"
+instance_id = "kaiju/goleak"
 base_commit = "c9075a466fdfdef715e02e92d958967cf1a40edd"
 reference_commit = "5f791e3ef83b35d32b262466250507c2f20fea3c"
 src_dir = "."

@@ -1,5 +1,5 @@
 {
-  "kind": "commit0-golden-ref",
+  "kind": "kaiju-golden-ref",
   "repo": "Zahgon/async-h1",
   "base_commit": "5054a44f41a6341c3962e692f9a8cca934a7e4a0",
   "reference_commit": "4de64c18de36d63e3f422e0c88187534a7e11e2e",

@@ -1,6 +1,6 @@
 ============================= test session starts ==============================
 platform linux -- Python 3.8.20, pytest-8.3.5, pluggy-1.5.0
-rootdir: /tmp/commit0-inplace-l5ylllkh/tree
+rootdir: /tmp/kaiju-inplace-l5ylllkh/tree
 plugins: cov-5.0.0, json-report-1.5.0, metadata-3.1.1
 collected 123 items
 
@@ -305,7 +305,7 @@ E       + [[3], [4, 5], [2], [0, 1, 6, 7, 8, 9]]
 tests/test_tryalgo.py:1356: AssertionError
 =============================== warnings summary ===============================
 tryalgo/karatsuba.py:40
-  /tmp/commit0-inplace-l5ylllkh/tree/tryalgo/karatsuba.py:40: DeprecationWarning: invalid escape sequence \l
+  /tmp/kaiju-inplace-l5ylllkh/tree/tryalgo/karatsuba.py:40: DeprecationWarning: invalid escape sequence \l
     """ Karatsuba's algorithm.
 
 -- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html

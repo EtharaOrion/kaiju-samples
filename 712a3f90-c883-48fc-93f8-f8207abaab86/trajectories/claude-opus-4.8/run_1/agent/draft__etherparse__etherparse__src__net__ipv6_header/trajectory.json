@@ -1,7 +1,7 @@
 {
   "schema_version": "ATIF-v1.7",
-  "session_id": "commit-0/etherparse__claude-opus-4.8",
-  "trajectory_id": "commit-0/etherparse__claude-opus-4.8__draft__etherparse__etherparse__src__net__ipv6_header",
+  "session_id": "kaiju/etherparse__claude-opus-4.8",
+  "trajectory_id": "kaiju/etherparse__claude-opus-4.8__draft__etherparse__etherparse__src__net__ipv6_header",
   "agent": {
     "name": "aider",
     "version": "0.1.dev13122+gafca02447",
@@ -42,7 +42,7 @@
     "extra": {
       "log_format": "aider-native-llm-history",
       "converted_from": "aider",
-      "harness": "commit0-aider-pipeline",
+      "harness": "kaiju-aider-pipeline",
       "pipeline_stage": "draft",
       "module": "etherparse__etherparse__src__net__ipv6_header",
       "source_file": "llm_history.txt",
@@ -300,7 +300,7 @@
     }
   },
   "extra": {
-    "instance_id": "commit-0/etherparse__claude-opus-4.8__draft__etherparse__etherparse__src__net__ipv6_header",
+    "instance_id": "kaiju/etherparse__claude-opus-4.8__draft__etherparse__etherparse__src__net__ipv6_header",
     "stage": "draft",
     "module": "etherparse__etherparse__src__net__ipv6_header",
     "session_timestamps": [

@@ -11,7 +11,7 @@
    Compiling parking_lot v0.12.5
    Compiling shared-local-state v0.1.4
    Compiling ebr v0.2.13
-   Compiling concurrent-map v5.0.37 (/tmp/commit0-inplace-1a5roh18/tree)
+   Compiling concurrent-map v5.0.37 (/tmp/kaiju-inplace-1a5roh18/tree)
 warning: function `debug_delay` is never used
   --> src/lib.rs:82:10
    |

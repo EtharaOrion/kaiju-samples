@@ -1,5 +1,5 @@
 {
-  "instance_id": "commit-0/concurrent-map",
+  "instance_id": "kaiju/concurrent-map",
   "id": "aca29d1a-42a1-44a4-9ca4-6e98094b1878",
   "repo": "Zahgon/concurrent-map",
   "base_commit": "12ae13f021197636754401eba4628ed8bf4d1601",

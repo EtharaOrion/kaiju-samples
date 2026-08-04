@@ -1,4 +1,4 @@
-FROM commit0.base.python3.10:latest
+FROM kaiju.base.python3.10:latest
 
 ARG http_proxy=""
 ARG https_proxy=""

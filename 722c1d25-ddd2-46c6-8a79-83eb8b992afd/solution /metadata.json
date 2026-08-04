@@ -1,5 +1,5 @@
 {
-  "instance_id": "commit-0/futures-signals",
+  "instance_id": "kaiju/futures-signals",
   "uuid": "722c1d25-ddd2-46c6-8a79-83eb8b992afd",
   "task": "rust-signals",
   "language": "rust",

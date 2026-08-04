@@ -1,6 +1,6 @@
 ============================= test session starts ==============================
 platform linux -- Python 3.10.20, pytest-9.1.1, pluggy-1.6.0
-rootdir: /tmp/commit0-inplace-i7xr5bvw/tree
+rootdir: /tmp/kaiju-inplace-i7xr5bvw/tree
 configfile: pytest.ini
 plugins: cov-7.1.0, anyio-4.14.2, asyncio-1.2.0, json-report-1.5.0, metadata-3.1.1
 asyncio: mode=auto, debug=False, asyncio_default_fixture_loop_scope=session, asyncio_default_test_loop_scope=session
@@ -1812,13 +1812,13 @@ tests/test_application.py:3630: AssertionError
 ------------------------------ Captured log call -------------------------------
 ERROR    blacksheep.server:application.py:710 Application startup failed.
 Traceback (most recent call last):
-  File "/tmp/commit0-inplace-i7xr5bvw/tree/blacksheep/server/application.py", line 708, in _handle_lifespan
+  File "/tmp/kaiju-inplace-i7xr5bvw/tree/blacksheep/server/application.py", line 708, in _handle_lifespan
     await self.start()
-  File "/tmp/commit0-inplace-i7xr5bvw/tree/blacksheep/server/application.py", line 678, in start
+  File "/tmp/kaiju-inplace-i7xr5bvw/tree/blacksheep/server/application.py", line 678, in start
     await self.on_start.fire()
-  File "/tmp/commit0-inplace-i7xr5bvw/tree/blacksheep/server/application.py", line 121, in fire
+  File "/tmp/kaiju-inplace-i7xr5bvw/tree/blacksheep/server/application.py", line 121, in fire
     await handler(self.context, *args, **kwargs)
-  File "/tmp/commit0-inplace-i7xr5bvw/tree/tests/test_application.py", line 3613, in before_start
+  File "/tmp/kaiju-inplace-i7xr5bvw/tree/tests/test_application.py", line 3613, in before_start
     raise RuntimeError("Crash!")
 RuntimeError: Crash!
 __________ test_app_with_mounts_handles_on_start_error_asgi_lifespan ___________
@@ -1859,13 +1859,13 @@ tests/test_application.py:3655: AssertionError
 ------------------------------ Captured log call -------------------------------
 ERROR    blacksheep.server:application.py:710 Application startup failed.
 Traceback (most recent call last):
-  File "/tmp/commit0-inplace-i7xr5bvw/tree/blacksheep/server/application.py", line 708, in _handle_lifespan
+  File "/tmp/kaiju-inplace-i7xr5bvw/tree/blacksheep/server/application.py", line 708, in _handle_lifespan
     await self.start()
-  File "/tmp/commit0-inplace-i7xr5bvw/tree/blacksheep/server/application.py", line 678, in start
+  File "/tmp/kaiju-inplace-i7xr5bvw/tree/blacksheep/server/application.py", line 678, in start
     await self.on_start.fire()
-  File "/tmp/commit0-inplace-i7xr5bvw/tree/blacksheep/server/application.py", line 121, in fire
+  File "/tmp/kaiju-inplace-i7xr5bvw/tree/blacksheep/server/application.py", line 121, in fire
     await handler(self.context, *args, **kwargs)
-  File "/tmp/commit0-inplace-i7xr5bvw/tree/tests/test_application.py", line 3635, in before_start
+  File "/tmp/kaiju-inplace-i7xr5bvw/tree/tests/test_application.py", line 3635, in before_start
     raise RuntimeError("Crash!")
 RuntimeError: Crash!
 _____ test_mounted_app_without_trailing_slash_browser_navigation_redirects _____
@@ -2746,15 +2746,15 @@ tests/test_file_buffer.py:113: AssertionError
 ------------------------------ Captured log call -------------------------------
 ERROR    blacksheep.server:baseapp.py:94 Unhandled exception - "POST /upload"
 Traceback (most recent call last):
-  File "/tmp/commit0-inplace-i7xr5bvw/tree/blacksheep/baseapp.py", line 130, in handle
+  File "/tmp/kaiju-inplace-i7xr5bvw/tree/blacksheep/baseapp.py", line 130, in handle
     response = await route.handler(request)
-  File "/tmp/commit0-inplace-i7xr5bvw/tree/blacksheep/server/normalization.py", line 671, in handler
+  File "/tmp/kaiju-inplace-i7xr5bvw/tree/blacksheep/server/normalization.py", line 671, in handler
     return ensure_response(await method(request))
-  File "/tmp/commit0-inplace-i7xr5bvw/tree/blacksheep/server/normalization.py", line 671, in handler
+  File "/tmp/kaiju-inplace-i7xr5bvw/tree/blacksheep/server/normalization.py", line 671, in handler
     return ensure_response(await method(request))
-  File "/tmp/commit0-inplace-i7xr5bvw/tree/blacksheep/server/normalization.py", line 616, in handler
+  File "/tmp/kaiju-inplace-i7xr5bvw/tree/blacksheep/server/normalization.py", line 616, in handler
     return await method(*values)
-  File "/tmp/commit0-inplace-i7xr5bvw/tree/tests/test_file_buffer.py", line 55, in upload_handler
+  File "/tmp/kaiju-inplace-i7xr5bvw/tree/tests/test_file_buffer.py", line 55, in upload_handler
     assert isinstance(doc, FileBuffer)
 AssertionError: assert False
  +  where False = isinstance(<FormPart b'documents' - at 281472862080064>, FileBuffer)
@@ -2905,15 +2905,15 @@ tests/test_forwarding.py:649: AssertionError
 ------------------------------ Captured log call -------------------------------
 ERROR    blacksheep.server:baseapp.py:94 Unhandled exception - "GET /"
 Traceback (most recent call last):
-  File "/tmp/commit0-inplace-i7xr5bvw/tree/blacksheep/baseapp.py", line 130, in handle
+  File "/tmp/kaiju-inplace-i7xr5bvw/tree/blacksheep/baseapp.py", line 130, in handle
     response = await route.handler(request)
-  File "/tmp/commit0-inplace-i7xr5bvw/tree/blacksheep/middlewares.py", line 10, in middleware_wrapper
+  File "/tmp/kaiju-inplace-i7xr5bvw/tree/blacksheep/middlewares.py", line 10, in middleware_wrapper
     return await handler(request, next_handler)
-  File "/tmp/commit0-inplace-i7xr5bvw/tree/blacksheep/server/remotes/forwarding.py", line 180, in __call__
+  File "/tmp/kaiju-inplace-i7xr5bvw/tree/blacksheep/server/remotes/forwarding.py", line 180, in __call__
     self.validate_forwarded_entries(forwarded_entries)
-  File "/tmp/commit0-inplace-i7xr5bvw/tree/blacksheep/server/remotes/forwarding.py", line 171, in validate_forwarded_entries
+  File "/tmp/kaiju-inplace-i7xr5bvw/tree/blacksheep/server/remotes/forwarding.py", line 171, in validate_forwarded_entries
     self.validate_proxy_ip(self.parse_ip(entry.forwarded_by))
-  File "/tmp/commit0-inplace-i7xr5bvw/tree/blacksheep/server/remotes/forwarding.py", line 51, in parse_ip
+  File "/tmp/kaiju-inplace-i7xr5bvw/tree/blacksheep/server/remotes/forwarding.py", line 51, in parse_ip
     return ip_address(value.strip())
   File "/usr/local/lib/python3.10/ipaddress.py", line 54, in ip_address
     raise ValueError(f'{address!r} does not appear to be an IPv4 or IPv6 address')
@@ -7228,15 +7228,15 @@ tests/test_sessions.py:219: AssertionError
 ------------------------------ Captured log call -------------------------------
 ERROR    blacksheep.server:baseapp.py:94 Unhandled exception - "GET /"
 Traceback (most recent call last):
-  File "/tmp/commit0-inplace-i7xr5bvw/tree/blacksheep/baseapp.py", line 130, in handle
+  File "/tmp/kaiju-inplace-i7xr5bvw/tree/blacksheep/baseapp.py", line 130, in handle
     response = await route.handler(request)
-  File "/tmp/commit0-inplace-i7xr5bvw/tree/blacksheep/middlewares.py", line 10, in middleware_wrapper
+  File "/tmp/kaiju-inplace-i7xr5bvw/tree/blacksheep/middlewares.py", line 10, in middleware_wrapper
     return await handler(request, next_handler)
-  File "/tmp/commit0-inplace-i7xr5bvw/tree/blacksheep/sessions/__init__.py", line 133, in __call__
+  File "/tmp/kaiju-inplace-i7xr5bvw/tree/blacksheep/sessions/__init__.py", line 133, in __call__
     await self._store.save(request, response, session)
-  File "/tmp/commit0-inplace-i7xr5bvw/tree/blacksheep/sessions/__init__.py", line 75, in save
+  File "/tmp/kaiju-inplace-i7xr5bvw/tree/blacksheep/sessions/__init__.py", line 75, in save
     value = self._serializer.write(session)
-  File "/tmp/commit0-inplace-i7xr5bvw/tree/blacksheep/sessions/__init__.py", line 28, in write
+  File "/tmp/kaiju-inplace-i7xr5bvw/tree/blacksheep/sessions/__init__.py", line 28, in write
     return json.dumps(session.to_dict())
 AttributeError: module 'blacksheep.sessions.json' has no attribute 'dumps'
 ______________________ test_session_middleware_use_method ______________________
@@ -7284,15 +7284,15 @@ tests/test_sessions.py:272: AssertionError
 ------------------------------ Captured log call -------------------------------
 ERROR    blacksheep.server:baseapp.py:94 Unhandled exception - "GET /"
 Traceback (most recent call last):
-  File "/tmp/commit0-inplace-i7xr5bvw/tree/blacksheep/baseapp.py", line 130, in handle
+  File "/tmp/kaiju-inplace-i7xr5bvw/tree/blacksheep/baseapp.py", line 130, in handle
     response = await route.handler(request)
-  File "/tmp/commit0-inplace-i7xr5bvw/tree/blacksheep/middlewares.py", line 10, in middleware_wrapper
+  File "/tmp/kaiju-inplace-i7xr5bvw/tree/blacksheep/middlewares.py", line 10, in middleware_wrapper
     return await handler(request, next_handler)
-  File "/tmp/commit0-inplace-i7xr5bvw/tree/blacksheep/sessions/__init__.py", line 133, in __call__
+  File "/tmp/kaiju-inplace-i7xr5bvw/tree/blacksheep/sessions/__init__.py", line 133, in __call__
     await self._store.save(request, response, session)
-  File "/tmp/commit0-inplace-i7xr5bvw/tree/blacksheep/sessions/__init__.py", line 75, in save
+  File "/tmp/kaiju-inplace-i7xr5bvw/tree/blacksheep/sessions/__init__.py", line 75, in save
     value = self._serializer.write(session)
-  File "/tmp/commit0-inplace-i7xr5bvw/tree/blacksheep/sessions/__init__.py", line 28, in write
+  File "/tmp/kaiju-inplace-i7xr5bvw/tree/blacksheep/sessions/__init__.py", line 28, in write
     return json.dumps(session.to_dict())
 AttributeError: module 'blacksheep.sessions.json' has no attribute 'dumps'
 ____________ test_session_middleware_handling_of_expired_signature _____________
@@ -7339,15 +7339,15 @@ tests/test_sessions.py:410: AssertionError
 ------------------------------ Captured log call -------------------------------
 ERROR    blacksheep.server:baseapp.py:94 Unhandled exception - "GET /"
 Traceback (most recent call last):
-  File "/tmp/commit0-inplace-i7xr5bvw/tree/blacksheep/baseapp.py", line 130, in handle
+  File "/tmp/kaiju-inplace-i7xr5bvw/tree/blacksheep/baseapp.py", line 130, in handle
     response = await route.handler(request)
-  File "/tmp/commit0-inplace-i7xr5bvw/tree/blacksheep/middlewares.py", line 10, in middleware_wrapper
+  File "/tmp/kaiju-inplace-i7xr5bvw/tree/blacksheep/middlewares.py", line 10, in middleware_wrapper
     return await handler(request, next_handler)
-  File "/tmp/commit0-inplace-i7xr5bvw/tree/blacksheep/sessions/__init__.py", line 133, in __call__
+  File "/tmp/kaiju-inplace-i7xr5bvw/tree/blacksheep/sessions/__init__.py", line 133, in __call__
     await self._store.save(request, response, session)
-  File "/tmp/commit0-inplace-i7xr5bvw/tree/blacksheep/sessions/__init__.py", line 75, in save
+  File "/tmp/kaiju-inplace-i7xr5bvw/tree/blacksheep/sessions/__init__.py", line 75, in save
     value = self._serializer.write(session)
-  File "/tmp/commit0-inplace-i7xr5bvw/tree/blacksheep/sessions/__init__.py", line 28, in write
+  File "/tmp/kaiju-inplace-i7xr5bvw/tree/blacksheep/sessions/__init__.py", line 28, in write
     return json.dumps(session.to_dict())
 AttributeError: module 'blacksheep.sessions.json' has no attribute 'dumps'
 __________________ test_client_application_not_started_error ___________________

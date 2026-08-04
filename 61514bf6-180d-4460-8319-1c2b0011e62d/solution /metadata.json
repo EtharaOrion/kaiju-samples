@@ -1,5 +1,5 @@
 {
-  "instance_id": "commit-0/rollup-plugin-typescript2",
+  "instance_id": "kaiju/rollup-plugin-typescript2",
   "uuid": "61514bf6-180d-4460-8319-1c2b0011e62d",
   "task": "rollup-plugin-typescript2",
   "language": "typescript",

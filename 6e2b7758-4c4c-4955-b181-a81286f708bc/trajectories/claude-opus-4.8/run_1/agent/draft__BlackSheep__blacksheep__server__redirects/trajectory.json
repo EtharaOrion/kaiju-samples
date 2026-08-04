@@ -1,7 +1,7 @@
 {
   "schema_version": "ATIF-v1.7",
-  "session_id": "commit-0/BlackSheep__claude-opus-4.8",
-  "trajectory_id": "commit-0/BlackSheep__claude-opus-4.8__draft__BlackSheep__blacksheep__server__redirects",
+  "session_id": "kaiju/BlackSheep__claude-opus-4.8",
+  "trajectory_id": "kaiju/BlackSheep__claude-opus-4.8__draft__BlackSheep__blacksheep__server__redirects",
   "agent": {
     "name": "aider",
     "version": "0.1.dev13122+gafca02447",
@@ -42,7 +42,7 @@
     "extra": {
       "log_format": "aider-native-llm-history",
       "converted_from": "aider",
-      "harness": "commit0-aider-pipeline",
+      "harness": "kaiju-aider-pipeline",
       "pipeline_stage": "draft",
       "module": "BlackSheep__blacksheep__server__redirects",
       "source_file": "llm_history.txt",
@@ -115,7 +115,7 @@
     }
   },
   "extra": {
-    "instance_id": "commit-0/BlackSheep__claude-opus-4.8__draft__BlackSheep__blacksheep__server__redirects",
+    "instance_id": "kaiju/BlackSheep__claude-opus-4.8__draft__BlackSheep__blacksheep__server__redirects",
     "stage": "draft",
     "module": "BlackSheep__blacksheep__server__redirects",
     "session_timestamps": [

@@ -1,5 +1,5 @@
 {
-  "instance_id": "commit-0/colly",
+  "instance_id": "kaiju/colly",
   "uuid": "f14254ed-631b-4f31-bc1c-02bb59f634bd",
   "task": "colly",
   "language": "go",

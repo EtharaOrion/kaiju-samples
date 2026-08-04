@@ -3,7 +3,7 @@
    Compiling cfg-if v1.0.4
    Compiling scopeguard v1.2.0
    Compiling smallvec v1.15.1
-   Compiling erg_common v0.6.53 (/tmp/commit0-inplace-fdeh_pdp/tree/crates/erg_common)
+   Compiling erg_common v0.6.53 (/tmp/kaiju-inplace-fdeh_pdp/tree/crates/erg_common)
    Compiling unicode-xid v0.2.6
    Compiling thread_local v1.1.9
    Compiling lock_api v0.4.14
@@ -11,11 +11,11 @@
    Compiling syn v1.0.109
    Compiling parking_lot_core v0.9.12
    Compiling parking_lot v0.12.5
-   Compiling erg_proc_macros v0.6.53 (/tmp/commit0-inplace-fdeh_pdp/tree/crates/erg_proc_macros)
-   Compiling erg_compiler v0.6.53 (/tmp/commit0-inplace-fdeh_pdp/tree/crates/erg_compiler)
-   Compiling erg_parser v0.6.53 (/tmp/commit0-inplace-fdeh_pdp/tree/crates/erg_parser)
-   Compiling erg v0.6.53 (/tmp/commit0-inplace-fdeh_pdp/tree)
-   Compiling erg_linter v0.6.53 (/tmp/commit0-inplace-fdeh_pdp/tree/crates/erg_linter)
+   Compiling erg_proc_macros v0.6.53 (/tmp/kaiju-inplace-fdeh_pdp/tree/crates/erg_proc_macros)
+   Compiling erg_compiler v0.6.53 (/tmp/kaiju-inplace-fdeh_pdp/tree/crates/erg_compiler)
+   Compiling erg_parser v0.6.53 (/tmp/kaiju-inplace-fdeh_pdp/tree/crates/erg_parser)
+   Compiling erg v0.6.53 (/tmp/kaiju-inplace-fdeh_pdp/tree)
+   Compiling erg_linter v0.6.53 (/tmp/kaiju-inplace-fdeh_pdp/tree/crates/erg_linter)
 error[E0432]: unresolved imports `dummy::DummyVM`, `dummy::PackageManagerRunner`
  --> src/lib.rs:4:17
   |

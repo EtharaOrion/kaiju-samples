@@ -1,5 +1,5 @@
 {
-  "instance_id": "commit-0/futures-signals",
+  "instance_id": "kaiju/futures-signals",
   "id": "722c1d25-ddd2-46c6-8a79-83eb8b992afd",
   "repo": "Zahgon/rust-signals",
   "base_commit": "8734fef3f84a5ef33003d92fa8c902ca8eb77633",

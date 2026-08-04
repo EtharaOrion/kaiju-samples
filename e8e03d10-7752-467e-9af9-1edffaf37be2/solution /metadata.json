@@ -1,5 +1,5 @@
 {
-  "instance_id": "commit-0/riker",
+  "instance_id": "kaiju/riker",
   "uuid": "e8e03d10-7752-467e-9af9-1edffaf37be2",
   "task": "riker",
   "language": "rust",

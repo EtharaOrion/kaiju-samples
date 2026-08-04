@@ -1,7 +1,7 @@
     Updating crates.io index
      Locking 84 packages to latest compatible versions
       Adding criterion v0.4.0 (available: v0.8.2)
-   Compiling futures-signals v0.3.34 (/tmp/commit0-inplace-wu4r7dpt/tree)
+   Compiling futures-signals v0.3.34 (/tmp/kaiju-inplace-wu4r7dpt/tree)
 warning: calls to `std::mem::drop` with a value that implements `Copy` does nothing
    --> tests/mutable_vec.rs:305:31
     |

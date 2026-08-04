@@ -1,5 +1,5 @@
 {
-  "instance_id": "commit-0/async-h1",
+  "instance_id": "kaiju/async-h1",
   "uuid": "3c139221-784d-400e-a31b-ef8274c0d858",
   "task": "async-h1",
   "language": "rust",

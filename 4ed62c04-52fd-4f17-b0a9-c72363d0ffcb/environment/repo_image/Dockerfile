@@ -1,4 +1,4 @@
-FROM commit0.base.node20:latest
+FROM kaiju.base.node20:latest
 
 ARG http_proxy=""
 ARG https_proxy=""

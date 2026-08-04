@@ -1,7 +1,7 @@
 {
   "schema_version": "ATIF-v1.7",
-  "session_id": "commit-0/concurrent-map__claude-opus-4.8",
-  "trajectory_id": "commit-0/concurrent-map__claude-opus-4.8__test__concurrent-map__src__serde",
+  "session_id": "kaiju/concurrent-map__claude-opus-4.8",
+  "trajectory_id": "kaiju/concurrent-map__claude-opus-4.8__test__concurrent-map__src__serde",
   "agent": {
     "name": "aider",
     "version": "0.1.dev13122+gafca02447",
@@ -42,7 +42,7 @@
     "extra": {
       "log_format": "aider-native-llm-history",
       "converted_from": "aider",
-      "harness": "commit0-aider-pipeline",
+      "harness": "kaiju-aider-pipeline",
       "pipeline_stage": "test",
       "module": "concurrent-map__src__serde",
       "source_file": "llm_history.txt",
@@ -140,7 +140,7 @@
     }
   },
   "extra": {
-    "instance_id": "commit-0/concurrent-map__claude-opus-4.8__test__concurrent-map__src__serde",
+    "instance_id": "kaiju/concurrent-map__claude-opus-4.8__test__concurrent-map__src__serde",
     "stage": "test",
     "module": "concurrent-map__src__serde",
     "session_timestamps": [

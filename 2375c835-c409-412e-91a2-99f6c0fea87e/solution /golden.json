@@ -1,5 +1,5 @@
 {
-  "kind": "commit0-golden-ref",
+  "kind": "kaiju-golden-ref",
   "repo": "Shivansh9411/pymonad",
   "base_commit": "f76f7e5f6dbeac2fec463ff6b36870544fbae3ba",
   "reference_commit": "9681c15da2321dc29d093d796b8f5c7a85153339",

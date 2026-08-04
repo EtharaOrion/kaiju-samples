@@ -1,6 +1,6 @@
 ============================= test session starts ==============================
 platform linux -- Python 3.11.15, pytest-9.1.1, pluggy-1.6.0
-rootdir: /tmp/commit0-inplace-eoh9k3br/tree
+rootdir: /tmp/kaiju-inplace-eoh9k3br/tree
 configfile: pyproject.toml
 plugins: cov-7.1.0, json-report-1.5.0, metadata-3.1.1, xdist-3.8.0
 created: 16/16 workers
