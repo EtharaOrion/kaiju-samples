@@ -127,13 +127,20 @@ grep -l '"typescript"' */task.toml | xargs -n1 dirname   #  4 TypeScript
 
 ## Results
 
-All 30 tasks were run through the full three-stage pipeline with Claude Opus 4.8. Stage 3 is the primary evaluation point. The figure below shows how outcomes vary by language and adapts to light and dark themes.
+All 30 tasks were run through the full three-stage pipeline with Claude Opus 4.8. Stage 3 is the primary evaluation point. The figures below show how outcomes vary by language and by difficulty tier.
 
 **Stage-3 pass rate by language.** Mean final pass rate for each language; bar labels give the task count (`n`). The spread reflects both language maturity in the model and the difficulty of the specific repositories sampled, not an intrinsic ranking of the languages.
 
 <picture>
   <source media="(prefers-color-scheme: dark)" srcset="images/kaiju_pass_rate_per_language-dark.png">
   <img alt="Mean Stage-3 pass rate per language across the 30 tasks" src="images/kaiju_pass_rate_per_language-light.png">
+</picture>
+
+**Stage-3 pass rate by difficulty tier.** The 30 tasks are ranked by Stage-3 pass rate and grouped into five difficulty tiers; bar labels give the mean pass rate and task count (`n`). Pass rate falls steeply from Trivial (97.0%, n=9) to Expert (1.8%, n=4), reflecting the wide spread of implementation complexity across the library set.
+
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="images/kaiju_pass_rate_per_tier-dark.png">
+  <img alt="Mean Stage-3 pass rate per difficulty tier across the 30 tasks" src="images/kaiju_pass_rate_per_tier-light.png">
 </picture>
 
 ## Inspecting a run
