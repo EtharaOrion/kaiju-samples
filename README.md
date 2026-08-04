@@ -6,7 +6,7 @@ Kaiju is a reinforcement learning environment for training and evaluating agents
 
 ![Kaiju](images/hero.png)
 
-Each task drops an agent into a containerized checkout of a real open-source repository at `/testbed`, reset to a *skeleton commit* — every function body in the source directory has been replaced by a stub that raises on call. The agent must implement the full library and is graded against the repository's official test suite, an LLM-judged rubric of task-specific correctness criteria, and a multi-layer concern report that also checks pipeline legitimacy. Where SWE-style benchmarks localize a fix inside a working codebase, Kaiju starts from an empty shell and demands the whole organism.
+Each task drops an agent into a containerized checkout of a real open-source repository at `/testbed`, reset to a *skeleton commit* — every function body in the source directory has been replaced by a stub that raises on call. The agent must implement the full library and is graded against the repository's official test suite and an LLM-judged rubric of task-specific correctness criteria. Where SWE-style benchmarks localize a fix inside a working codebase, Kaiju starts from an empty shell and demands the whole organism.
 
 The bar is high by construction. Signatures, class definitions, and exported symbols are pinned by the skeleton and must not be renamed. The upstream test suite is fixed at commit time and is the same suite the reference implementation must pass, so passing partial credit within a test does not exist and there is no room to overfit a bespoke checker.
 
@@ -22,15 +22,14 @@ Every task is evaluated through a three-stage sequential pipeline. **Stage 1 —
 
 Each task also ships a `TRUTH.md`: a hand-authored ground-truth guide covering the problem and the modules under stubbing, the behavioral contract for each public entry point, a suggested solution decomposition in dependency order, the space of equivalent implementation choices that must not be penalized, and known pitfalls. `TRUTH.md` is not shown to the agent — it is a curator artifact used to author rubrics, calibrate the LLM judge, and give downstream users a single-file picture of what "correct" means on that task.
 
-## Reward
+## Score
 
-Kaiju grades three complementary axes and exposes them independently rather than collapsing them into a single number.
+Kaiju grades two complementary axes and exposes them independently rather than collapsing them into a single number.
 
 1. **Pass rate.** The verifier runs the task's official test suite against the agent's output, normalizes the framework-native report (pytest, `cargo test`, `go test`, vitest) into an ID-level pass/fail table, and writes `atif_verifier/reward.json` with `stage_pass_rate` and `resolved` (`1` iff every expected ID passes) per stage. The denominator is the pinned official ID set from `task.toml`'s `n_test_ids`; no partial credit within a test, no credit for skipped or deselected tests. The runner's exit code is never the grading channel — the reward file is.
 2. **Rubric.** An LLM judge scores the final Stage-3 implementation against `tests/rubrics.json`, which holds task-specific behavioral criteria (`ts.*`, derived from `TRUTH.md`) and backbone pipeline criteria (`bb.*`). Each verdict pins its evidence to concrete anchors — source spans, trajectory steps, feedback lines — so a rejected verdict is auditable without re-running the pipeline. Results land in `rubric_results.json`.
-3. **Concerns.** A layered concern report grades pipeline legitimacy alongside outcome: L0 (deterministic — signal trustworthiness, pipeline completeness), L1 (deterministic — coverage, e.g. draft modules addressed), L2 (LLM-judged — reasoning faithfulness, stage legitimacy, rolled-up rubric verdicts). Every concern has a `status`, a `gating` flag, and a `weight`; a gating failure at any layer flips the report's `gate` from `pass` to `quarantine`. `report.json` exposes the rolled-up `graded_score`, the final `gate`, and the list of `gating_failures`.
 
-The concern gate is the primary "did this run count" signal: a quarantined run cannot be trusted as an outcome measurement even if the pass rate is high. Use `stage_pass_rate` for reward shaping during training; use `resolved` (strict) or `graded_score` (weighted) for evaluation.
+Use `stage_pass_rate` for reward shaping during training; use `resolved` (strict) for evaluation.
 
 ## Task format
 
@@ -103,7 +102,6 @@ The task image already contains the repository at `base_commit` under `/testbed`
       atif_verifier/reward.json   # stage_pass_rate + resolved; plus raw stage test outputs
       pytest_results.json         # Framework-native raw report (per-ID pass/fail)
       rubric_results.json         # LLM-judge verdicts against tests/rubrics.json
-      report.json                 # Multi-layer concern report + graded_score + gate
       reexec.json                 # Deterministic re-execution audit
 ```
 
@@ -129,14 +127,7 @@ grep -l '"typescript"' */task.toml | xargs -n1 dirname   #  4 TypeScript
 
 ## Results
 
-All 30 tasks were run through the full three-stage pipeline with Claude Opus 4.8. Stage 3 is the primary evaluation point; the two views below summarize how reward accrues across stages and how outcomes vary by language. Figures adapt to light and dark themes.
-
-**Reward across stages (per task).** Because every task is scored at all three stages, the S1 → S2 → S3 curve shows exactly what lint and test feedback buy. Tasks are sorted by final pass rate. Stage 3 (magenta) is non-decreasing across the sorted axis; the Stage 1/2 dips mark tasks the agent only resolves once it sees linter or test-suite feedback — for example repositories that draft to a near-zero pass rate but recover to a high final score after test refinement.
-
-<picture>
-  <source media="(prefers-color-scheme: dark)" srcset="images/kaiju_reward_monotonic-dark.png">
-  <img alt="Per-task pass rate across the three pipeline stages, sorted by final Stage-3 pass rate" src="images/kaiju_reward_monotonic-light.png">
-</picture>
+All 30 tasks were run through the full three-stage pipeline with Claude Opus 4.8. Stage 3 is the primary evaluation point. The figure below shows how outcomes vary by language and adapts to light and dark themes.
 
 **Stage-3 pass rate by language.** Mean final pass rate for each language; bar labels give the task count (`n`). The spread reflects both language maturity in the model and the difficulty of the specific repositories sampled, not an intrinsic ranking of the languages.
 
@@ -155,18 +146,9 @@ base = f"{uuid}/trajectories/claude-opus-4.8/run_1/verifiers"
 
 reward = json.load(open(f"{base}/atif_verifier/reward.json"))
 rubric = json.load(open(f"{base}/rubric_results.json"))
-report = json.load(open(f"{base}/report.json"))
-
 print("pass_rate stage3:", reward["stage_pass_rate"]["stage3"])
 print("rubric verdicts :", sum(v["passed"] for v in rubric["verdicts"]), "/", len(rubric["verdicts"]))
-print("graded_score    :", report["graded_score"], "| gate:", report["gate"])
 ```
-
-## Limitations
-
-- **Single-model release.** Trajectories cover Claude Opus 4.8 only; there is no second model in this release for tier calibration.
-- **Trace size skew.** Test-stage traces embed full test feedback and can grow to hundreds of megabytes on the largest tasks.
-- **Contamination.** The underlying repositories are public. Whether specific code appeared in a model's training data is unknown, and no attempt has been made to construct a decontaminated split.
 
 ## Data availability
 
